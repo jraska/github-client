@@ -15,6 +15,7 @@ import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.perf.metrics.Trace;
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.R;
+import com.jraska.github.client.analytics.EventReporter;
 import com.jraska.github.client.rx.AppSchedulers;
 import com.jraska.github.client.users.UserDetail;
 import com.jraska.github.client.users.UserDetailPresenter;
@@ -39,6 +40,7 @@ public class UserDetailActivity extends BaseActivity implements UserDetailView {
   @Inject AppSchedulers schedulers;
   @Inject Navigator navigator;
   @Inject FirebasePerformance performance;
+  @Inject EventReporter eventReporter;
 
   private UserDetailPresenter userDetailPresenter;
   private Trace loadTrace;
@@ -62,7 +64,7 @@ public class UserDetailActivity extends BaseActivity implements UserDetailView {
 
     setTitle(login());
 
-    userDetailPresenter = new UserDetailPresenter(this, usersRepository, schedulers, navigator);
+    userDetailPresenter = new UserDetailPresenter(this, usersRepository, schedulers, navigator, eventReporter);
     userDetailPresenter.onCreate(login());
   }
 

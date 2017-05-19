@@ -2,6 +2,8 @@ package com.jraska.github.client.users;
 
 import com.jraska.github.client.Urls;
 import com.jraska.github.client.Navigator;
+import com.jraska.github.client.analytics.AnalyticsEvent;
+import com.jraska.github.client.analytics.EventReporter;
 import com.jraska.github.client.rx.AppSchedulers;
 
 import java.util.List;
@@ -13,14 +15,16 @@ public class UsersPresenter implements UsersViewEvents {
   private final UsersRepository usersRepository;
   private final AppSchedulers schedulers;
   private final Navigator navigator;
+  private final EventReporter eventReporter;
   private Disposable subscription;
 
   public UsersPresenter(UsersView view, UsersRepository usersRepository,
-                        AppSchedulers schedulers, Navigator navigator) {
+                        AppSchedulers schedulers, Navigator navigator, EventReporter eventReporter) {
     this.view = view;
     this.usersRepository = usersRepository;
     this.schedulers = schedulers;
     this.navigator = navigator;
+    this.eventReporter = eventReporter;
   }
 
   public void onCreate() {
@@ -47,15 +51,22 @@ public class UsersPresenter implements UsersViewEvents {
   }
 
   @Override public void onUserItemClick(User user) {
+    AnalyticsEvent event = AnalyticsEvent.builder("open_user_detail")
+        .addProperty("login", user.login)
+        .build();
+
+    eventReporter.report(event);
+
     navigator.startUserDetail(user.login);
   }
 
   @Override public void onUserGitHubIconClick(User user) {
-    // TODO(josef):  
-//    Bundle parameters = new Bundle();
-//    parameters.putString("login", login);
-//    analytics.logEvent("open_github_from_list", parameters);
-    
+    AnalyticsEvent event = AnalyticsEvent.builder("open_github_from_list")
+        .addProperty("login", user.login)
+        .build();
+
+    eventReporter.report(event);
+
     navigator.launchOnWeb(Urls.user(user.login));
   }
 

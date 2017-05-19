@@ -8,8 +8,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.perf.metrics.AddTrace;
 import com.jakewharton.threetenabp.AndroidThreeTen;
-import com.jraska.github.client.analytics.ActivityViewCallbacks;
-import com.jraska.github.client.analytics.ActivityViewReporter;
 import com.jraska.github.client.common.AppBuildConfig;
 import com.jraska.github.client.http.DaggerHttpComponent;
 import com.jraska.github.client.http.HttpComponent;
@@ -31,7 +29,6 @@ public class GitHubClientApp extends Application {
   @Inject FirebaseAnalytics analytics;
   @Inject FirebasePerformance performance;
   @Inject ErrorReportTree errorReportTree;
-  @Inject ActivityViewReporter viewReporter;
   @Inject Config config;
 
   public AppComponent component() {
@@ -56,8 +53,6 @@ public class GitHubClientApp extends Application {
 
     setupAnalytics();
     setupPerformanceCollection();
-
-    registerActivityLifecycleCallbacks(new ActivityViewCallbacks(viewReporter));
 
     logAppCreateEvent();
   }
