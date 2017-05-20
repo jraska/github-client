@@ -42,30 +42,33 @@ public class RealDeepLinkLauncherTest {
     deepLinkLauncher.launch(HttpUrl.parse("https://jraska.com/users"));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void whenUnsupportedUrl_thenException() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska/repos"));
+  @Test
+  public void whenUnsupportedUrl_thenFalse() {
+    boolean launch = deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska/repos"));
+    assertThat(launch).isFalse();
   }
 
   @Test
   public void whenUsersUrl_thenUsersActivityStarts() {
     RealDeepLinkLauncher deepLinkLauncher = new RealDeepLinkLauncher(activity);
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/users"));
+    boolean launch = deepLinkLauncher.launch(HttpUrl.parse("https://github.com/users"));
 
+    assertThat(launch).isTrue();
     verify(activity).startActivity(intentCaptor.capture());
     assertThat(intentCaptor.getValue().getComponent().getClassName())
-        .isEqualTo(UsersActivity.class.getName());
+      .isEqualTo(UsersActivity.class.getName());
   }
 
   @Test
   public void whenUserDetailUrl_thenUsersActivityStarts() {
     RealDeepLinkLauncher deepLinkLauncher = new RealDeepLinkLauncher(activity);
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska"));
+    boolean launch = deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska"));
 
+    assertThat(launch).isTrue();
     verify(activity).startActivity(intentCaptor.capture());
     Intent intent = intentCaptor.getValue();
     assertThat(intent.getComponent().getClassName())
-        .isEqualTo(UserDetailActivity.class.getName());
+      .isEqualTo(UserDetailActivity.class.getName());
     Set<String> keySet = intent.getExtras().keySet();
     for (String key : keySet) {
       assertThat(intent.getStringExtra(key)).isEqualTo("jraska");
