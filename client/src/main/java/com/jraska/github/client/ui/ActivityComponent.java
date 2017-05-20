@@ -6,6 +6,8 @@ import dagger.Subcomponent;
 
 @Subcomponent(modules = {ActivityModule.class, NavigationModule.class})
 public interface ActivityComponent {
+  void inject(UriHandlerActivity uriHandlerActivity);
+
   void inject(UsersActivity usersActivity);
 
   void inject(UserDetailActivity userDetailActivity);

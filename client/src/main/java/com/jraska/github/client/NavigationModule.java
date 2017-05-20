@@ -8,7 +8,17 @@ import dagger.Provides;
 @Module
 public abstract class NavigationModule {
   @Provides
-  public static Navigator provideNavigator(Activity activity) {
-    return new DeepLinkNavigator(new RealDeepLinkLauncher(activity), new RealWebLinkLauncher(activity));
+  public static Navigator provideNavigator(WebLinkLauncher webLinkLauncher, DeepLinkLauncher deepLinkLauncher) {
+    return new DeepLinkNavigator(deepLinkLauncher, webLinkLauncher);
+  }
+
+  @Provides
+  public static DeepLinkLauncher provideDeepLinkLauncher(Activity activity) {
+    return new RealDeepLinkLauncher(activity);
+  }
+
+  @Provides
+  public static WebLinkLauncher webLinkLauncher(Activity activity) {
+    return new RealWebLinkLauncher(activity);
   }
 }

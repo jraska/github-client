@@ -21,7 +21,7 @@ public final class AnalyticsEvent {
     return new Builder(name);
   }
 
-  public static class Builder {
+  public static final class Builder {
     private final String name;
     private final Map<String, String> properties = new HashMap<>();
 
