@@ -19,6 +19,6 @@ public abstract class NavigationModule {
 
   @Provides
   public static WebLinkLauncher webLinkLauncher(Activity activity) {
-    return new RealWebLinkLauncher(activity);
+    return new ChromeCustomTabsLauncher(activity);
   }
 }
