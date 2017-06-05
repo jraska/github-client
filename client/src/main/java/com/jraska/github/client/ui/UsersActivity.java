@@ -1,6 +1,7 @@
 package com.jraska.github.client.ui;
 
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,14 +12,11 @@ import android.widget.Toast;
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.R;
+import com.jraska.github.client.Urls;
+import com.jraska.github.client.analytics.AnalyticsEvent;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.common.Lists;
-import com.jraska.github.client.rx.AppSchedulers;
 import com.jraska.github.client.users.User;
-import com.jraska.github.client.users.UsersPresenter;
-import com.jraska.github.client.users.UsersRepository;
-import com.jraska.github.client.users.UsersView;
-import com.jraska.github.client.users.UsersViewEvents;
 
 import java.util.List;
 
@@ -26,17 +24,14 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class UsersActivity extends BaseActivity implements UserModel.UserListener, UsersView {
-  @Inject UsersRepository repository;
-  @Inject AppSchedulers schedulers;
+public class UsersActivity extends BaseActivity implements UserModel.UserListener {
   @Inject Navigator navigator;
   @Inject EventAnalytics eventAnalytics;
 
+  private UsersViewModel usersViewModel;
+
   @BindView(R.id.users_refresh_swipe_layout) SwipeRefreshLayout swipeRefreshLayout;
   @BindView(R.id.users_recycler) RecyclerView usersRecyclerView;
-
-  private UsersPresenter presenter;
-  private UsersViewEvents events;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -49,33 +44,41 @@ public class UsersActivity extends BaseActivity implements UserModel.UserListene
 
     swipeRefreshLayout.setOnRefreshListener(this::refresh);
 
-    presenter = new UsersPresenter(this, repository, schedulers, navigator, eventAnalytics);
-    events = presenter;
+    showProgressIndicator();
 
-    presenter.onCreate();
-  }
-
-  @Override protected void onDestroy() {
-    presenter.onDestroy();
-
-    super.onDestroy();
+    usersViewModel = ViewModelProviders.of(this).get(UsersViewModel.class);
+    usersViewModel.users().observe(this, this::setUsers);
   }
 
   @Override
   public void onUserClicked(User user) {
-    events.onUserItemClick(user);
+    AnalyticsEvent event = AnalyticsEvent.builder("open_user_detail")
+      .addProperty("login", user.login)
+      .build();
+
+    eventAnalytics.report(event);
+
+    navigator.startUserDetail(user.login);
   }
 
   @Override
   public void onUserGitHubIconClicked(User user) {
-    events.onUserGitHubIconClick(user);
+    AnalyticsEvent event = AnalyticsEvent.builder("open_github_from_list")
+      .addProperty("login", user.login)
+      .build();
+
+    eventAnalytics.report(event);
+
+    navigator.launchOnWeb(Urls.user(user.login));
   }
 
   void refresh() {
-    events.onRefresh();
+    // TODO(josef):  
   }
 
-  @Override public void setUsers(List<User> users) {
+  public void setUsers(List<User> users) {
+    hideProgressIndicator();
+
     SimpleEpoxyAdapter adapter = new SimpleEpoxyAdapter();
     List<UserModel> models = Lists.transform(users,
       user -> new UserModel(user, this));
@@ -84,25 +87,17 @@ public class UsersActivity extends BaseActivity implements UserModel.UserListene
     usersRecyclerView.setAdapter(adapter);
   }
 
-  @Override public void startDisplayProgress() {
-    showProgressIndicator();
+  private void showErrorMessage(Throwable error) {
+    Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
   }
 
-  @Override public void stopDisplayProgress() {
-    hideProgressIndicator();
-  }
-
-  @Override public void showMessage(String message) {
-    Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-  }
-
-  void showProgressIndicator() {
+  private void showProgressIndicator() {
     ensureProgressIndicatorVisible();
 
     swipeRefreshLayout.setRefreshing(true);
   }
 
-  void hideProgressIndicator() {
+  private void hideProgressIndicator() {
     swipeRefreshLayout.setRefreshing(false);
   }
 
