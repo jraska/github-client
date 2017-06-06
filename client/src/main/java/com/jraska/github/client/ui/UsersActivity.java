@@ -8,26 +8,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
-
+import butterknife.BindView;
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
-import com.jraska.github.client.Navigator;
 import com.jraska.github.client.R;
-import com.jraska.github.client.Urls;
-import com.jraska.github.client.analytics.AnalyticsEvent;
-import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.common.Lists;
 import com.jraska.github.client.users.User;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
-import butterknife.BindView;
-
 public class UsersActivity extends BaseActivity implements UserModel.UserListener {
-  @Inject Navigator navigator;
-  @Inject EventAnalytics eventAnalytics;
-
   private UsersViewModel usersViewModel;
 
   @BindView(R.id.users_refresh_swipe_layout) SwipeRefreshLayout swipeRefreshLayout;
@@ -35,45 +24,27 @@ public class UsersActivity extends BaseActivity implements UserModel.UserListene
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    component().inject(this);
-
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_users_list);
 
-    usersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    usersViewModel = viewModel(UsersViewModel.class);
 
-    swipeRefreshLayout.setOnRefreshListener(this::refresh);
+    usersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    swipeRefreshLayout.setOnRefreshListener(usersViewModel::onRefresh);
 
     showProgressIndicator();
 
-    usersViewModel = ViewModelProviders.of(this).get(UsersViewModel.class);
     usersViewModel.users().observe(this, this::setUsers);
   }
 
   @Override
   public void onUserClicked(User user) {
-    AnalyticsEvent event = AnalyticsEvent.builder("open_user_detail")
-      .addProperty("login", user.login)
-      .build();
-
-    eventAnalytics.report(event);
-
-    navigator.startUserDetail(user.login);
+    usersViewModel.onUserClicked(user);
   }
 
   @Override
   public void onUserGitHubIconClicked(User user) {
-    AnalyticsEvent event = AnalyticsEvent.builder("open_github_from_list")
-      .addProperty("login", user.login)
-      .build();
-
-    eventAnalytics.report(event);
-
-    navigator.launchOnWeb(Urls.user(user.login));
-  }
-
-  void refresh() {
-    // TODO(josef):  
+    usersViewModel.onUserGitHubIconClicked(user);
   }
 
   public void setUsers(List<User> users) {

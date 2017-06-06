@@ -21,9 +21,15 @@ public class GitHubClientApp extends Application {
 
   @Inject EventAnalytics eventAnalytics;
   @Inject ErrorReportTree errorReportTree;
+  @Inject TopActivityProvider topActivityProvider;
+  @Inject ViewModelFactory viewModelFactory;
 
   public AppComponent component() {
     return appComponent;
+  }
+
+  public ViewModelFactory viewModelFactory() {
+    return viewModelFactory;
   }
 
   @AddTrace(name = "App.onCreate")
@@ -42,6 +48,7 @@ public class GitHubClientApp extends Application {
       Timber.plant(new Timber.DebugTree());
     }
 
+    registerActivityLifecycleCallbacks(topActivityProvider.callbacks);
     logAppCreateEvent();
   }
 

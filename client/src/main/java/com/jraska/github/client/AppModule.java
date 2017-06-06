@@ -35,7 +35,11 @@ public class AppModule {
 
   @Provides @PerApp AppSchedulers schedulers() {
     return new AppSchedulers(AndroidSchedulers.mainThread(),
-        Schedulers.io(), Schedulers.computation());
+      Schedulers.io(), Schedulers.computation());
+  }
+
+  @Provides @PerApp TopActivityProvider topActivityProvider() {
+    return new TopActivityProvider();
   }
 
   @Provides @PerApp LayoutInflater provideLayoutInflater(Context context) {

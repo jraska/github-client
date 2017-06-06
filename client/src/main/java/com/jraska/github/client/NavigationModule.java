@@ -1,7 +1,5 @@
 package com.jraska.github.client;
 
-import android.app.Activity;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -13,12 +11,12 @@ public abstract class NavigationModule {
   }
 
   @Provides
-  public static DeepLinkLauncher provideDeepLinkLauncher(Activity activity) {
-    return new RealDeepLinkLauncher(activity);
+  public static DeepLinkLauncher provideDeepLinkLauncher(TopActivityProvider provider) {
+    return new RealDeepLinkLauncher(provider);
   }
 
   @Provides
-  public static WebLinkLauncher webLinkLauncher(Activity activity) {
-    return new ChromeCustomTabsLauncher(activity);
+  public static WebLinkLauncher webLinkLauncher(TopActivityProvider provider) {
+    return new ChromeCustomTabsLauncher(provider);
   }
 }

@@ -2,17 +2,17 @@ package com.jraska.github.client.ui;
 
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
-import android.support.v4.app.Fragment;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.jraska.github.client.GitHubClientApp;
-import com.jraska.github.client.R;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.jraska.github.client.GitHubClientApp;
+import com.jraska.github.client.R;
+import com.jraska.github.client.ViewModelFactory;
 
 public abstract class BaseActivity extends AppCompatActivity implements LifecycleRegistryOwner {
 
@@ -47,15 +47,16 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     setSupportActionBar(toolbar);
   }
 
-  protected Fragment findFragmentById(int id) {
-    return getSupportFragmentManager().findFragmentById(id);
-  }
-
-  protected GitHubClientApp app() {
+  protected final GitHubClientApp app() {
     return (GitHubClientApp) getApplication();
   }
 
-  protected ActivityComponent component() {
+  protected final ActivityComponent component() {
     return app().component().activityComponent(new ActivityModule(this));
+  }
+
+  protected final <T extends ViewModel> T viewModel(Class<T> modelClass) {
+    ViewModelFactory factory = app().viewModelFactory();
+    return ViewModelProviders.of(this, factory).get(modelClass);
   }
 }
