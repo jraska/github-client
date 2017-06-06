@@ -47,10 +47,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     return (GitHubClientApp) getApplication();
   }
 
-  protected final ActivityComponent component() {
-    return app().component().activityComponent(new ActivityModule(this));
-  }
-
   protected final <T extends ViewModel> T viewModel(Class<T> modelClass) {
     ViewModelProvider.Factory factory = app().viewModelFactory();
     return ViewModelProviders.of(this, factory).get(modelClass);
