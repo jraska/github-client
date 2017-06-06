@@ -14,7 +14,7 @@ public class RxLiveData<T> {
     return new ObservableAdapter<>(observable);
   }
 
-  public static class SingleAdapter<T> extends LiveData<T> {
+  public static final class SingleAdapter<T> extends LiveData<T> {
     private final Single<T> single;
     private Disposable subscription;
 
@@ -54,7 +54,7 @@ public class RxLiveData<T> {
     }
   }
 
-  public static class ObservableAdapter<T> extends LiveData<T> {
+  public static final class ObservableAdapter<T> extends LiveData<T> {
     private final Observable<T> observable;
     private Disposable subscription;
 

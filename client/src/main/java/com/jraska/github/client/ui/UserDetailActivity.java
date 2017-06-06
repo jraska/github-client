@@ -1,48 +1,33 @@
 package com.jraska.github.client.ui;
 
 import android.app.Activity;
+import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
-
+import butterknife.BindView;
+import butterknife.OnClick;
 import com.airbnb.epoxy.EpoxyModel;
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.perf.metrics.Trace;
-import com.jraska.github.client.Navigator;
 import com.jraska.github.client.R;
-import com.jraska.github.client.analytics.EventAnalytics;
-import com.jraska.github.client.rx.AppSchedulers;
 import com.jraska.github.client.users.UserDetail;
-import com.jraska.github.client.users.UserDetailPresenter;
-import com.jraska.github.client.users.UserDetailView;
-import com.jraska.github.client.users.UsersRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.OnClick;
-
-public class UserDetailActivity extends BaseActivity implements UserDetailView {
+public class UserDetailActivity extends BaseActivity {
   static final String EXTRA_USER_LOGIN = "login";
 
   @BindView(R.id.user_detail_avatar) SimpleDraweeView avatarView;
   @BindView(R.id.user_detail_recycler) RecyclerView recyclerView;
 
-  @Inject UsersRepository usersRepository;
-  @Inject AppSchedulers schedulers;
-  @Inject Navigator navigator;
-  @Inject FirebasePerformance performance;
-  @Inject EventAnalytics eventAnalytics;
-
-  private UserDetailPresenter userDetailPresenter;
+  private UserDetailViewModel userDetailViewModel;
   private Trace loadTrace;
 
   public String login() {
@@ -51,9 +36,7 @@ public class UserDetailActivity extends BaseActivity implements UserDetailView {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    component().inject(this);
-
-    loadTrace = performance.newTrace("user_detail_load");
+    loadTrace = FirebasePerformance.getInstance().newTrace("user_detail_load");
     loadTrace.start();
 
     super.onCreate(savedInstanceState);
@@ -64,22 +47,17 @@ public class UserDetailActivity extends BaseActivity implements UserDetailView {
 
     setTitle(login());
 
-    userDetailPresenter = new UserDetailPresenter(this, usersRepository, schedulers, navigator, eventAnalytics);
-    userDetailPresenter.onCreate(login());
-  }
+    userDetailViewModel = viewModel(UserDetailViewModel.class);
 
-  @Override protected void onDestroy() {
-    userDetailPresenter.onDestroy();
-
-    super.onDestroy();
+    LiveData<UserDetail> detailLiveData = userDetailViewModel.userDetail(login());
+    detailLiveData.observe(this, this::setUser);
   }
 
   @OnClick(R.id.user_detail_github_fab) void gitHubFabClicked() {
-    userDetailPresenter.onUserGitHubIconClick(login());
+    userDetailViewModel.onUserGitHubIconClick(login());
   }
 
-  @Override
-  public void setUser(UserDetail userDetail) {
+  void setUser(UserDetail userDetail) {
     loadTrace.incrementCounter("set_user_detail");
     avatarView.setImageURI(userDetail.user.avatarUrl);
 
@@ -107,7 +85,7 @@ public class UserDetailActivity extends BaseActivity implements UserDetailView {
     loadTrace.stop();
   }
 
-  @Override public void showMessage(String message) {
+  public void showMessage(String message) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show();
   }
 
