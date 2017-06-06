@@ -1,20 +1,28 @@
 package com.jraska.github.client.rx;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 public abstract class RxLiveData<T> extends LiveData<T> {
-  public static <T> RxLiveData<T> adapt(Single<T> single) {
+  public static <T> RxLiveData<T> from(Single<T> single) {
     return new SingleAdapter<>(single);
   }
 
-  public static <T> RxLiveData<T> adapt(Observable<T> observable) {
+  public static <T> RxLiveData<T> from(Observable<T> observable) {
     return new ObservableAdapter<>(observable);
   }
 
-  private Disposable subscription;
+  protected Consumer<? super Throwable> onError;
+  @Nullable private Disposable subscription;
+
+  RxLiveData() {
+  }
 
   @Override protected void onActive() {
     super.onActive();
@@ -26,19 +34,32 @@ public abstract class RxLiveData<T> extends LiveData<T> {
     super.onInactive();
   }
 
-  private void dispose() {
-    subscription.dispose();
-    subscription = null;
-  }
-
-  public void resubscribe() {
+  public RxLiveData<T> resubscribe() {
     if (subscription != null) {
       dispose();
       subscribe();
     }
+
+    return this;
   }
 
-  protected abstract Disposable subscribe();
+  // TODO: 07/06/17 Error handling exposes RxLiveData everywhere. Too invasive
+  // Solution is to make LiveData never fail -> LiveData<ViewState>
+  public RxLiveData<T> observe(LifecycleOwner owner, Observer<T> observer,
+                               Consumer<? super Throwable> onError) {
+    this.onError = onError;
+    super.observe(owner, observer);
+    return this;
+  }
+
+  private void dispose() {
+    if (subscription != null) {
+      subscription.dispose();
+      subscription = null;
+    }
+  }
+
+  abstract Disposable subscribe();
 
   void setValueInternal(T value) {
     setValue(value);
@@ -52,9 +73,12 @@ public abstract class RxLiveData<T> extends LiveData<T> {
     }
 
     @Override
-    public Disposable subscribe() {
-      // No error handling since LiveData do not support that. Error handling needs to be done elsewhere
-      return single.subscribe(SingleAdapter.this::setValueInternal);
+    Disposable subscribe() {
+      if (onError == null) {
+        return single.subscribe(this::setValueInternal);
+      } else {
+        return single.subscribe(this::setValueInternal, onError);
+      }
     }
   }
 
@@ -65,8 +89,12 @@ public abstract class RxLiveData<T> extends LiveData<T> {
       this.observable = observable;
     }
 
-    @Override protected Disposable subscribe() {
-      return observable.subscribe(ObservableAdapter.this::setValueInternal);
+    @Override Disposable subscribe() {
+      if (onError == null) {
+        return observable.subscribe(this::setValueInternal);
+      } else {
+        return observable.subscribe(this::setValueInternal, onError);
+      }
     }
   }
 }

@@ -20,6 +20,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     return registry;
   }
 
+  protected final GitHubClientApp app() {
+    return (GitHubClientApp) getApplication();
+  }
+
+  protected final <T extends ViewModel> T viewModel(Class<T> modelClass) {
+    ViewModelProvider.Factory factory = app().viewModelFactory();
+    return ViewModelProviders.of(this, factory).get(modelClass);
+  }
+
   @Override
   public void setContentView(int layoutResID) {
     super.setContentView(layoutResID);
@@ -41,14 +50,5 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
   protected void onSetContentView() {
     ButterKnife.bind(this);
     setSupportActionBar(toolbar);
-  }
-
-  protected final GitHubClientApp app() {
-    return (GitHubClientApp) getApplication();
-  }
-
-  protected final <T extends ViewModel> T viewModel(Class<T> modelClass) {
-    ViewModelProvider.Factory factory = app().viewModelFactory();
-    return ViewModelProviders.of(this, factory).get(modelClass);
   }
 }

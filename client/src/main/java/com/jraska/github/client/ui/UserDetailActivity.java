@@ -1,7 +1,6 @@
 package com.jraska.github.client.ui;
 
 import android.app.Activity;
-import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.perf.metrics.Trace;
 import com.jraska.github.client.R;
+import com.jraska.github.client.rx.RxLiveData;
 import com.jraska.github.client.users.UserDetail;
 import com.jraska.github.client.users.UserDetailViewModel;
 
@@ -50,8 +50,8 @@ public class UserDetailActivity extends BaseActivity {
 
     userDetailViewModel = viewModel(UserDetailViewModel.class);
 
-    LiveData<UserDetail> detailLiveData = userDetailViewModel.userDetail(login());
-    detailLiveData.observe(this, this::setUser);
+    RxLiveData<UserDetail> detailLiveData = userDetailViewModel.userDetail(login());
+    detailLiveData.observe(this, this::setUser, this::onError);
   }
 
   @OnClick(R.id.user_detail_github_fab) void gitHubFabClicked() {
@@ -86,8 +86,8 @@ public class UserDetailActivity extends BaseActivity {
     loadTrace.stop();
   }
 
-  public void showMessage(String message) {
-    Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+  public void onError(Throwable error) {
+    Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
   }
 
   public static void start(Activity inActivity, @NonNull String login) {

@@ -34,7 +34,7 @@ public class UsersActivity extends BaseActivity implements UserModel.UserListene
 
     showProgressIndicator();
 
-    usersViewModel.users().observe(this, this::setUsers);
+    usersViewModel.users().observe(this, this::setUsers, this::onError);
   }
 
   @Override
@@ -58,7 +58,8 @@ public class UsersActivity extends BaseActivity implements UserModel.UserListene
     usersRecyclerView.setAdapter(adapter);
   }
 
-  private void showErrorMessage(Throwable error) {
+  private void onError(Throwable error) {
+    hideProgressIndicator();
     Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
   }
 

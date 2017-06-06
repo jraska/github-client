@@ -1,6 +1,5 @@
 package com.jraska.github.client.users;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.Urls;
@@ -8,8 +7,6 @@ import com.jraska.github.client.analytics.AnalyticsEvent;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.rx.AppSchedulers;
 import com.jraska.github.client.rx.RxLiveData;
-import com.jraska.github.client.users.User;
-import com.jraska.github.client.users.UsersRepository;
 import io.reactivex.Single;
 
 import java.util.List;
@@ -30,10 +27,10 @@ public class UsersViewModel extends ViewModel{
     this.navigator = navigator;
     this.eventAnalytics = eventAnalytics;
 
-    users = RxLiveData.adapt(usersInternal());
+    users = RxLiveData.from(usersInternal());
   }
 
-  public LiveData<List<User>> users() {
+  public RxLiveData<List<User>> users() {
     return users;
   }
 

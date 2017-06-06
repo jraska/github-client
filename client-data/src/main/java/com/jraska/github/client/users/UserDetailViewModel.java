@@ -1,6 +1,5 @@
 package com.jraska.github.client.users;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.Urls;
@@ -19,7 +18,7 @@ public class UserDetailViewModel extends ViewModel {
   private final Navigator navigator;
   private final EventAnalytics eventAnalytics;
 
-  private final Map<String, LiveData<UserDetail>> liveDataMapping = new HashMap<>();
+  private final Map<String, RxLiveData<UserDetail>> liveDataMapping = new HashMap<>();
 
   UserDetailViewModel(UsersRepository usersRepository, AppSchedulers schedulers,
                       Navigator navigator, EventAnalytics eventAnalytics) {
@@ -29,8 +28,8 @@ public class UserDetailViewModel extends ViewModel {
     this.eventAnalytics = eventAnalytics;
   }
 
-  public LiveData<UserDetail> userDetail(String login) {
-    LiveData<UserDetail> liveData = liveDataMapping.get(login);
+  public RxLiveData<UserDetail> userDetail(String login) {
+    RxLiveData<UserDetail> liveData = liveDataMapping.get(login);
     if (liveData == null) {
       liveData = newUserLiveData(login);
       liveDataMapping.put(login, liveData);
@@ -39,12 +38,12 @@ public class UserDetailViewModel extends ViewModel {
     return liveData;
   }
 
-  private LiveData<UserDetail> newUserLiveData(String login) {
+  private RxLiveData<UserDetail> newUserLiveData(String login) {
     Observable<UserDetail> detailObservable = usersRepository.getUserDetail(login)
       .subscribeOn(schedulers.io())
       .observeOn(schedulers.mainThread());
 
-    return RxLiveData.adapt(detailObservable);
+    return RxLiveData.from(detailObservable);
   }
 
   public void onUserGitHubIconClick(String login) {
