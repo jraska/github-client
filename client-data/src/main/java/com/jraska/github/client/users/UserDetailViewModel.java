@@ -8,9 +8,10 @@ import com.jraska.github.client.analytics.AnalyticsEvent;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.rx.AppSchedulers;
 import com.jraska.github.client.rx.RxLiveData;
-import com.jraska.github.client.users.UserDetail;
-import com.jraska.github.client.users.UsersRepository;
 import io.reactivex.Observable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserDetailViewModel extends ViewModel {
   private final UsersRepository usersRepository;
@@ -18,16 +19,27 @@ public class UserDetailViewModel extends ViewModel {
   private final Navigator navigator;
   private final EventAnalytics eventAnalytics;
 
+  private final Map<String, LiveData<UserDetail>> liveDataMapping = new HashMap<>();
+
   UserDetailViewModel(UsersRepository usersRepository, AppSchedulers schedulers,
-                             Navigator navigator, EventAnalytics eventAnalytics) {
+                      Navigator navigator, EventAnalytics eventAnalytics) {
     this.usersRepository = usersRepository;
     this.schedulers = schedulers;
     this.navigator = navigator;
     this.eventAnalytics = eventAnalytics;
   }
 
-  // TODO: 06/06/17 Cache observable for same login
   public LiveData<UserDetail> userDetail(String login) {
+    LiveData<UserDetail> liveData = liveDataMapping.get(login);
+    if (liveData == null) {
+      liveData = newUserLiveData(login);
+      liveDataMapping.put(login, liveData);
+    }
+
+    return liveData;
+  }
+
+  private LiveData<UserDetail> newUserLiveData(String login) {
     Observable<UserDetail> detailObservable = usersRepository.getUserDetail(login)
       .subscribeOn(schedulers.io())
       .observeOn(schedulers.mainThread());

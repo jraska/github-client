@@ -21,7 +21,7 @@ public class UsersViewModel extends ViewModel{
   private final Navigator navigator;
   private final EventAnalytics eventAnalytics;
 
-  private final RxLiveData.SingleAdapter<List<User>> users;
+  private final RxLiveData<List<User>> users;
 
   UsersViewModel(UsersRepository usersRepository, AppSchedulers appSchedulers,
                         Navigator navigator, EventAnalytics eventAnalytics) {
