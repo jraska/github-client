@@ -1,4 +1,4 @@
-package com.jraska.github.client.data.users;
+package com.jraska.github.client.users.data;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;

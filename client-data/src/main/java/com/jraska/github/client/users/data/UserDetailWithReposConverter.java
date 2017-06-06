@@ -1,4 +1,4 @@
-package com.jraska.github.client.data.users;
+package com.jraska.github.client.users.data;
 
 import com.jraska.github.client.common.Pair;
 import com.jraska.github.client.users.Repo;

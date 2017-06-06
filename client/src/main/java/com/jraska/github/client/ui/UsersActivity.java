@@ -1,7 +1,6 @@
 package com.jraska.github.client.ui;
 
 import android.app.Activity;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +12,7 @@ import com.airbnb.epoxy.SimpleEpoxyAdapter;
 import com.jraska.github.client.R;
 import com.jraska.github.client.common.Lists;
 import com.jraska.github.client.users.User;
+import com.jraska.github.client.users.UsersViewModel;
 
 import java.util.List;
 

@@ -48,12 +48,6 @@ dependencies {
   compile 'com.android.support:cardview-v7:25.3.1'
   compile 'com.android.support:customtabs:25.3.1'
 
-  compile "android.arch.lifecycle:runtime:1.0.0-alpha1"
-  compile "android.arch.lifecycle:extensions:1.0.0-alpha1"
-  annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha1"
-  compile "android.arch.persistence.room:runtime:1.0.0-alpha1"
-  annotationProcessor "android.arch.persistence.room:compiler:1.0.0-alpha1"
-
   compile 'com.google.firebase:firebase-core:10.2.6'
   compile 'com.google.firebase:firebase-crash:10.2.6'
   compile 'com.google.firebase:firebase-config:10.2.6'
@@ -73,7 +67,6 @@ dependencies {
 
   compile 'com.jakewharton.timber:timber:4.5.1'
 
-  testCompile "android.arch.persistence.room:testing:1.0.0-alpha1"
   testCompile 'com.google.code.gson:gson:2.8.1'
 
   testCompile 'junit:junit:4.12'

@@ -1,4 +1,4 @@
-package com.jraska.github.client.data.users;
+package com.jraska.github.client.users.data;
 
 import com.jraska.github.client.PerApp;
 import com.jraska.github.client.users.UsersRepository;
@@ -8,7 +8,7 @@ import dagger.Provides;
 import retrofit2.Retrofit;
 
 @Module
-public abstract class UsersModule {
+public abstract class UsersDataModule {
   @Provides
   @PerApp
   public static UsersRepository provideUsersRepository(Retrofit retrofit) {

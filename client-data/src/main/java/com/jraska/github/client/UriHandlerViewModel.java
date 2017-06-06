@@ -6,7 +6,7 @@ import okhttp3.HttpUrl;
 public final class UriHandlerViewModel extends ViewModel {
   private final DeepLinkHandler deepLinkHandler;
 
-  public UriHandlerViewModel(DeepLinkHandler deepLinkHandler) {
+  UriHandlerViewModel(DeepLinkHandler deepLinkHandler) {
     this.deepLinkHandler = deepLinkHandler;
   }
 

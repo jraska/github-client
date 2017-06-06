@@ -1,4 +1,4 @@
-package com.jraska.github.client.ui;
+package com.jraska.github.client.users;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
@@ -18,7 +18,7 @@ public class UserDetailViewModel extends ViewModel {
   private final Navigator navigator;
   private final EventAnalytics eventAnalytics;
 
-  public UserDetailViewModel(UsersRepository usersRepository, AppSchedulers schedulers,
+  UserDetailViewModel(UsersRepository usersRepository, AppSchedulers schedulers,
                              Navigator navigator, EventAnalytics eventAnalytics) {
     this.usersRepository = usersRepository;
     this.schedulers = schedulers;

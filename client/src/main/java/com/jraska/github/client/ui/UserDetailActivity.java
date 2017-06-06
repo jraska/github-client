@@ -17,6 +17,7 @@ import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.perf.metrics.Trace;
 import com.jraska.github.client.R;
 import com.jraska.github.client.users.UserDetail;
+import com.jraska.github.client.users.UserDetailViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

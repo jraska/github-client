@@ -1,15 +1,15 @@
 package com.jraska.github.client;
 
-import com.jraska.github.client.data.users.UsersModule;
+import com.jraska.github.client.users.data.UsersDataModule;
 import com.jraska.github.client.http.HttpComponent;
-import com.jraska.github.client.ui.UserModelModule;
+import com.jraska.github.client.users.UserViewModelModule;
 import dagger.Component;
 
 @PerApp
 @Component(dependencies = HttpComponent.class,
   modules = {
-    UsersModule.class,
-    UserModelModule.class,
+    UsersDataModule.class,
+    UserViewModelModule.class,
     FirebaseModule.class,
     NavigationModule.class,
     AppModule.class

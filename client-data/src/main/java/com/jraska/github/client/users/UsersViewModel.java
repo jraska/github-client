@@ -1,4 +1,4 @@
-package com.jraska.github.client.ui;
+package com.jraska.github.client.users;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
@@ -23,7 +23,7 @@ public class UsersViewModel extends ViewModel{
 
   private final RxLiveData.SingleAdapter<List<User>> users;
 
-  public UsersViewModel(UsersRepository usersRepository, AppSchedulers appSchedulers,
+  UsersViewModel(UsersRepository usersRepository, AppSchedulers appSchedulers,
                         Navigator navigator, EventAnalytics eventAnalytics) {
     this.usersRepository = usersRepository;
     this.appSchedulers = appSchedulers;
@@ -33,7 +33,7 @@ public class UsersViewModel extends ViewModel{
     users = RxLiveData.adapt(usersInternal());
   }
 
-  LiveData<List<User>> users() {
+  public LiveData<List<User>> users() {
     return users;
   }
 

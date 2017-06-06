@@ -1,9 +1,9 @@
-package com.jraska.github.client.data.users;
+package com.jraska.github.client.users.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-final class GitHubUser {
+final class GitHubUserDetail {
 
   @SerializedName("login")
   @Expose
@@ -56,5 +56,44 @@ final class GitHubUser {
   @SerializedName("site_admin")
   @Expose
   public Boolean siteAdmin;
+  @SerializedName("name")
+  @Expose
+  public String name;
+  @SerializedName("company")
+  @Expose
+  public Object company;
+  @SerializedName("blog")
+  @Expose
+  public String blog;
+  @SerializedName("location")
+  @Expose
+  public String location;
+  @SerializedName("email")
+  @Expose
+  public String email;
+  @SerializedName("hireable")
+  @Expose
+  public Object hireable;
+  @SerializedName("bio")
+  @Expose
+  public Object bio;
+  @SerializedName("public_repos")
+  @Expose
+  public Integer publicRepos;
+  @SerializedName("public_gists")
+  @Expose
+  public Integer publicGists;
+  @SerializedName("followers")
+  @Expose
+  public Integer followers;
+  @SerializedName("following")
+  @Expose
+  public Integer following;
+  @SerializedName("created_at")
+  @Expose
+  public String createdAt;
+  @SerializedName("updated_at")
+  @Expose
+  public String updatedAt;
 
 }
