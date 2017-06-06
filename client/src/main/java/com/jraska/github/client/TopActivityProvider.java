@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import com.jraska.github.client.ui.BaseActivity;
 
-public class TopActivityProvider {
+import javax.inject.Provider;
+
+public class TopActivityProvider implements Provider<BaseActivity> {
   private BaseActivity topActivity;
 
   final Application.ActivityLifecycleCallbacks callbacks = new Application.ActivityLifecycleCallbacks() {
@@ -38,7 +40,8 @@ public class TopActivityProvider {
   }
 
   @NonNull
-  public BaseActivity top() {
+  @Override
+  public BaseActivity get() {
     if (topActivity == null) {
       throw new IllegalStateException("No activity");
     }

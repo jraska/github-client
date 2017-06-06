@@ -1,13 +1,16 @@
 package com.jraska.github.client;
 
+import com.jraska.github.client.ui.BaseActivity;
 import com.jraska.github.client.ui.UserDetailActivity;
 import com.jraska.github.client.ui.UsersActivity;
 import okhttp3.HttpUrl;
 
-final class RealDeepLinkLauncher implements DeepLinkLauncher {
-  private final TopActivityProvider topActivityProvider;
+import javax.inject.Provider;
 
-  RealDeepLinkLauncher(TopActivityProvider topActivityProvider) {
+final class RealDeepLinkLauncher implements DeepLinkLauncher {
+  private final Provider<BaseActivity> topActivityProvider;
+
+  RealDeepLinkLauncher(Provider<BaseActivity> topActivityProvider) {
     this.topActivityProvider = topActivityProvider;
   }
 
@@ -17,13 +20,13 @@ final class RealDeepLinkLauncher implements DeepLinkLauncher {
     }
 
     if ("/users".equals(deepLink.encodedPath())) {
-      UsersActivity.start(topActivityProvider.top());
+      UsersActivity.start(topActivityProvider.get());
       return;
     }
 
     if (deepLink.pathSize() == 1) {
       String login = deepLink.pathSegments().get(0);
-      UserDetailActivity.start(topActivityProvider.top(), login);
+      UserDetailActivity.start(topActivityProvider.get(), login);
       return;
     }
 

@@ -1,9 +1,6 @@
 package com.jraska.github.client.ui;
 
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.LifecycleRegistryOwner;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.*;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,7 +9,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.jraska.github.client.GitHubClientApp;
 import com.jraska.github.client.R;
-import com.jraska.github.client.ViewModelFactory;
 
 public abstract class BaseActivity extends AppCompatActivity implements LifecycleRegistryOwner {
 
@@ -56,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
   }
 
   protected final <T extends ViewModel> T viewModel(Class<T> modelClass) {
-    ViewModelFactory factory = app().viewModelFactory();
+    ViewModelProvider.Factory factory = app().viewModelFactory();
     return ViewModelProviders.of(this, factory).get(modelClass);
   }
 }

@@ -13,9 +13,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Config(constants = BuildConfig.class, sdk = 21)
 public class UsersActivityTest {
   @Test
-  public void whenCreated_thenUsersRepositoryInjected() throws Exception {
+  public void whenCreated_thenUsersRecyclerSetUp() throws Exception {
     UsersActivity usersActivity = Robolectric.setupActivity(UsersActivity.class);
 
-    assertThat(usersActivity.repository).isNotNull();
+    assertThat(usersActivity.usersRecyclerView).isNotNull();
   }
 }

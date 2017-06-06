@@ -1,11 +1,10 @@
 package com.jraska.github.client;
 
-import android.app.Activity;
 import android.content.Intent;
-
+import com.jraska.github.client.ui.BaseActivity;
 import com.jraska.github.client.ui.UserDetailActivity;
 import com.jraska.github.client.ui.UsersActivity;
-
+import okhttp3.HttpUrl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +16,6 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.Set;
 
-import okhttp3.HttpUrl;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
@@ -26,7 +23,7 @@ import static org.mockito.Mockito.verify;
 @org.robolectric.annotation.Config(constants = BuildConfig.class, sdk = 21)
 public class RealDeepLinkLauncherTest {
   @Captor ArgumentCaptor<Intent> intentCaptor;
-  @Mock Activity activity;
+  @Mock BaseActivity activity;
 
   RealDeepLinkLauncher deepLinkLauncher;
 
@@ -34,7 +31,7 @@ public class RealDeepLinkLauncherTest {
   public void before() {
     MockitoAnnotations.initMocks(this);
 
-    deepLinkLauncher = new RealDeepLinkLauncher(activity);
+    deepLinkLauncher = new RealDeepLinkLauncher(() -> activity);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -49,7 +46,6 @@ public class RealDeepLinkLauncherTest {
 
   @Test
   public void whenUsersUrl_thenUsersActivityStarts() {
-    RealDeepLinkLauncher deepLinkLauncher = new RealDeepLinkLauncher(activity);
     deepLinkLauncher.launch(HttpUrl.parse("https://github.com/users"));
 
     verify(activity).startActivity(intentCaptor.capture());
@@ -59,7 +55,6 @@ public class RealDeepLinkLauncherTest {
 
   @Test
   public void whenUserDetailUrl_thenUsersActivityStarts() {
-    RealDeepLinkLauncher deepLinkLauncher = new RealDeepLinkLauncher(activity);
     deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska"));
 
     verify(activity).startActivity(intentCaptor.capture());
