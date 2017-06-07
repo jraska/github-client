@@ -25,18 +25,16 @@ public abstract class RxLiveData<T> extends LiveData<T> {
   RxLiveData() {
   }
 
-  @Override public void observe(LifecycleOwner owner, Observer<T> observer) {
-    super.observe(owner, observer);
+  @Override protected void onActive() {
+    super.onActive();
     if (subscription == null) {
       subscription = subscribe();
     }
   }
 
-  @Override public void removeObserver(Observer<T> observer) {
-    super.removeObserver(observer);
-    if (!hasObservers()) {
-      dispose();
-    }
+  @Override protected void onInactive() {
+    super.onInactive();
+    dispose();
   }
 
   public RxLiveData<T> resubscribe() {
