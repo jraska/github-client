@@ -7,7 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
-import butterknife.BindView;
+
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
 import com.jraska.github.client.R;
 import com.jraska.github.client.common.Lists;
@@ -15,6 +15,8 @@ import com.jraska.github.client.users.User;
 import com.jraska.github.client.users.UsersViewModel;
 
 import java.util.List;
+
+import butterknife.BindView;
 
 public class UsersActivity extends BaseActivity implements UserModel.UserListener {
   private UsersViewModel usersViewModel;
@@ -34,7 +36,7 @@ public class UsersActivity extends BaseActivity implements UserModel.UserListene
 
     showProgressIndicator();
 
-    usersViewModel.users().observe(this, this::setUsers, this::onError);
+    usersViewModel.users().observe(this, this::setState);
   }
 
   @Override
@@ -47,9 +49,21 @@ public class UsersActivity extends BaseActivity implements UserModel.UserListene
     usersViewModel.onUserGitHubIconClicked(user);
   }
 
-  public void setUsers(List<User> users) {
-    hideProgressIndicator();
+  void setState(UsersViewModel.ViewState state) {
+    if (state.isLoading()) {
+      showProgressIndicator();
+    } else {
+      hideProgressIndicator();
+    }
 
+    if (state.error() != null) {
+      showError(state.error());
+    } else if (state.result() != null) {
+      setUsers(state.result());
+    }
+  }
+
+  void setUsers(List<User> users) {
     SimpleEpoxyAdapter adapter = new SimpleEpoxyAdapter();
     List<UserModel> models = Lists.transform(users,
       user -> new UserModel(user, this));
@@ -58,8 +72,7 @@ public class UsersActivity extends BaseActivity implements UserModel.UserListene
     usersRecyclerView.setAdapter(adapter);
   }
 
-  private void onError(Throwable error) {
-    hideProgressIndicator();
+  private void showError(Throwable error) {
     Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
   }
 

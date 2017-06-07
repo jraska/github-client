@@ -7,8 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
-import butterknife.BindView;
-import butterknife.OnClick;
+
 import com.airbnb.epoxy.EpoxyModel;
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -21,6 +20,9 @@ import com.jraska.github.client.users.UserDetailViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 public class UserDetailActivity extends BaseActivity {
   static final String EXTRA_USER_LOGIN = "login";
@@ -50,12 +52,26 @@ public class UserDetailActivity extends BaseActivity {
 
     userDetailViewModel = viewModel(UserDetailViewModel.class);
 
-    RxLiveData<UserDetail> detailLiveData = userDetailViewModel.userDetail(login());
-    detailLiveData.observe(this, this::setUser, this::onError);
+    RxLiveData<UserDetailViewModel.ViewState> detailLiveData = userDetailViewModel.userDetail(login());
+    detailLiveData.observe(this, this::setState);
   }
 
   @OnClick(R.id.user_detail_github_fab) void gitHubFabClicked() {
     userDetailViewModel.onUserGitHubIconClick(login());
+  }
+
+  private void setState(UserDetailViewModel.ViewState viewState) {
+    if (viewState.isLoading()) {
+      // TODO(josef): Show some progress
+    }
+
+    if (viewState.result() != null) {
+      setUser(viewState.result());
+    }
+
+    if (viewState.error() != null) {
+      showError(viewState.error());
+    }
   }
 
   void setUser(UserDetail userDetail) {
@@ -86,7 +102,7 @@ public class UserDetailActivity extends BaseActivity {
     loadTrace.stop();
   }
 
-  public void onError(Throwable error) {
+  public void showError(Throwable error) {
     Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
   }
 

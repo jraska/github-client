@@ -1,16 +1,18 @@
 package com.jraska.github.client.users;
 
 import android.arch.lifecycle.ViewModel;
+
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.Urls;
 import com.jraska.github.client.analytics.AnalyticsEvent;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.rx.AppSchedulers;
 import com.jraska.github.client.rx.RxLiveData;
-import io.reactivex.Observable;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import io.reactivex.Observable;
 
 public class UserDetailViewModel extends ViewModel {
   private final UsersRepository usersRepository;
@@ -18,7 +20,7 @@ public class UserDetailViewModel extends ViewModel {
   private final Navigator navigator;
   private final EventAnalytics eventAnalytics;
 
-  private final Map<String, RxLiveData<UserDetail>> liveDataMapping = new HashMap<>();
+  private final Map<String, RxLiveData<ViewState>> liveDataMapping = new HashMap<>();
 
   UserDetailViewModel(UsersRepository usersRepository, AppSchedulers schedulers,
                       Navigator navigator, EventAnalytics eventAnalytics) {
@@ -28,8 +30,8 @@ public class UserDetailViewModel extends ViewModel {
     this.eventAnalytics = eventAnalytics;
   }
 
-  public RxLiveData<UserDetail> userDetail(String login) {
-    RxLiveData<UserDetail> liveData = liveDataMapping.get(login);
+  public RxLiveData<ViewState> userDetail(String login) {
+    RxLiveData<ViewState> liveData = liveDataMapping.get(login);
     if (liveData == null) {
       liveData = newUserLiveData(login);
       liveDataMapping.put(login, liveData);
@@ -38,12 +40,15 @@ public class UserDetailViewModel extends ViewModel {
     return liveData;
   }
 
-  private RxLiveData<UserDetail> newUserLiveData(String login) {
-    Observable<UserDetail> detailObservable = usersRepository.getUserDetail(login)
+  private RxLiveData<ViewState> newUserLiveData(String login) {
+    Observable<ViewState> viewStateObservable = usersRepository.getUserDetail(login)
       .subscribeOn(schedulers.io())
-      .observeOn(schedulers.mainThread());
+      .observeOn(schedulers.mainThread())
+      .map((userDetail -> new ViewState(null, userDetail)))
+      .onErrorReturn((error) -> new ViewState(error, null))
+      .startWith(new ViewState(null, null));
 
-    return RxLiveData.from(detailObservable);
+    return RxLiveData.from(viewStateObservable);
   }
 
   public void onUserGitHubIconClick(String login) {
@@ -54,5 +59,27 @@ public class UserDetailViewModel extends ViewModel {
     eventAnalytics.report(event);
 
     navigator.launchOnWeb(Urls.user(login));
+  }
+
+  public static class ViewState {
+    private final Throwable error;
+    private final UserDetail result;
+
+    public ViewState(Throwable error, UserDetail result) {
+      this.error = error;
+      this.result = result;
+    }
+
+    public boolean isLoading() {
+      return (result == null || result.basicStats == null) && error == null;
+    }
+
+    public Throwable error() {
+      return error;
+    }
+
+    public UserDetail result() {
+      return result;
+    }
   }
 }
