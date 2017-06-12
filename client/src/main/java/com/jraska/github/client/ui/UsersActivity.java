@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
 import com.jraska.github.client.R;
@@ -73,7 +72,7 @@ public class UsersActivity extends BaseActivity implements UserModel.UserListene
   }
 
   private void showError(Throwable error) {
-    Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
+    ErrorHandler.displayError(error, usersRecyclerView);
   }
 
   private void showProgressIndicator() {

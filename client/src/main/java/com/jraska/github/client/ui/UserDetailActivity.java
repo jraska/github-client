@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.airbnb.epoxy.EpoxyModel;
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
@@ -103,7 +102,7 @@ public class UserDetailActivity extends BaseActivity {
   }
 
   public void showError(Throwable error) {
-    Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
+    ErrorHandler.displayError(error, recyclerView);
   }
 
   public static void start(Activity inActivity, @NonNull String login) {
