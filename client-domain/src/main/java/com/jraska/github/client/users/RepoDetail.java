@@ -17,16 +17,16 @@ public class RepoDetail {
 
   public static class Data {
     public final LocalDateTime created;
-    public final String description;
     public final int issuesCount;
     public final String language;
+    public final int subscribersCount;
     public final LocalDateTime pushedAt;
 
-    public Data(LocalDateTime created, String description, int issuesCount, String language, LocalDateTime pushedAt) {
+    public Data(LocalDateTime created, int issuesCount, String language, int subscribersCount, LocalDateTime pushedAt) {
       this.created = created;
-      this.description = description;
       this.issuesCount = issuesCount;
       this.language = language;
+      this.subscribersCount = subscribersCount;
       this.pushedAt = pushedAt;
     }
   }

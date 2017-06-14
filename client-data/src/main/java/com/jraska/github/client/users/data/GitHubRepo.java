@@ -209,4 +209,7 @@ final class GitHubRepo {
   @SerializedName("default_branch")
   @Expose
   public String defaultBranch;
+  @SerializedName("subscribers_count")
+  @Expose
+  public Integer subscribersCount;
 }
