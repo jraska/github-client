@@ -10,16 +10,16 @@ import com.airbnb.epoxy.EpoxyModelWithHolder;
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
 import com.jraska.github.client.R;
 import com.jraska.github.client.common.Lists;
-import com.jraska.github.client.users.Repo;
+import com.jraska.github.client.users.RepoHeader;
 import com.jraska.github.client.widget.RepeaterLayout;
 
 import java.util.List;
 
 public final class ReposSectionModel extends EpoxyModelWithHolder<ReposSectionModel.ReposHolder> {
   private final String title;
-  private final List<Repo> repos;
+  private final List<RepoHeader> repos;
 
-  public ReposSectionModel(String title, List<Repo> repos) {
+  public ReposSectionModel(String title, List<RepoHeader> repos) {
     this.title = title;
     this.repos = repos;
   }

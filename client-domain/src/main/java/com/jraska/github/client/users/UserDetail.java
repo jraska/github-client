@@ -11,11 +11,11 @@ public class UserDetail {
   @Nullable
   public final UserStats basicStats;
 
-  public final List<Repo> popularRepos;
-  public final List<Repo> contributedRepos;
+  public final List<RepoHeader> popularRepos;
+  public final List<RepoHeader> contributedRepos;
 
-  public UserDetail(User user, UserStats basicStats, List<Repo> popularRepos,
-                    List<Repo> contributedRepos) {
+  public UserDetail(User user, UserStats basicStats, List<RepoHeader> popularRepos,
+                    List<RepoHeader> contributedRepos) {
     this.user = user;
     this.basicStats = basicStats;
     this.popularRepos = Collections.unmodifiableList(popularRepos);

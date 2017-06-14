@@ -1,7 +1,7 @@
 package com.jraska.github.client.users.data;
 
 import com.jraska.github.client.common.Pair;
-import com.jraska.github.client.users.Repo;
+import com.jraska.github.client.users.RepoHeader;
 import com.jraska.github.client.users.User;
 import com.jraska.github.client.users.UserDetail;
 import com.jraska.github.client.users.UserStats;
@@ -37,15 +37,15 @@ final class UserDetailWithReposConverter
 
     Collections.sort(gitHubRepos, BY_STARS_REPO_COMPARATOR);
 
-    List<Repo> usersRepos = new ArrayList<>();
-    List<Repo> contributedRepos = new ArrayList<>();
+    List<RepoHeader> usersRepos = new ArrayList<>();
+    List<RepoHeader> contributedRepos = new ArrayList<>();
 
     for (GitHubRepo gitHubRepo : gitHubRepos) {
       if (usersRepos.size() < MAX_REPOS_TO_DISPLAY && gitHubUserDetail.login.equals(gitHubRepo.owner.login)) {
-        Repo repo = convert(gitHubRepo);
+        RepoHeader repo = convert(gitHubRepo);
         usersRepos.add(repo);
       } else if (contributedRepos.size() < MAX_REPOS_TO_DISPLAY) {
-        Repo repo = convert(gitHubRepo);
+        RepoHeader repo = convert(gitHubRepo);
         contributedRepos.add(repo);
       }
     }
@@ -54,8 +54,8 @@ final class UserDetailWithReposConverter
     return new UserDetail(user, stats, usersRepos, contributedRepos);
   }
 
-  Repo convert(GitHubRepo gitHubRepo) {
-    return new Repo(gitHubRepo.name, gitHubRepo.description, gitHubRepo.watchersCount,
+  RepoHeader convert(GitHubRepo gitHubRepo) {
+    return new RepoHeader(gitHubRepo.name, gitHubRepo.description,
         gitHubRepo.stargazersCount, gitHubRepo.forks, gitHubRepo.size);
   }
 

@@ -34,19 +34,7 @@
       android:layout_alignParentEnd="true"
 
       android:orientation="horizontal">
-
-    <TextView
-        android:id="@+id/repo_item_watchers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginEnd="@dimen/padding_small"
-        android:gravity="center"
-        android:drawableTop="@drawable/ic_visibility_black_24dp"
-        android:textColor="@color/textMain"
-        android:textSize="@dimen/textSubtitle"
-        tools:text="1125" />
-
+    
     <TextView
         android:id="@+id/repo_item_stars"
         android:layout_width="wrap_content"
