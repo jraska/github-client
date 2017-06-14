@@ -1,6 +1,7 @@
 package com.jraska.github.client.ui;
 
 import android.app.Activity;
+import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,7 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.perf.metrics.Trace;
 import com.jraska.github.client.R;
-import com.jraska.github.client.rx.RxLiveData;
+import com.jraska.github.client.users.RepoHeader;
 import com.jraska.github.client.users.UserDetail;
 import com.jraska.github.client.users.UserDetailViewModel;
 
@@ -23,7 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class UserDetailActivity extends BaseActivity {
+public class UserDetailActivity extends BaseActivity implements RepoHeaderModel.RepoListener {
   static final String EXTRA_USER_LOGIN = "login";
 
   @BindView(R.id.user_detail_avatar) SimpleDraweeView avatarView;
@@ -51,7 +52,7 @@ public class UserDetailActivity extends BaseActivity {
 
     userDetailViewModel = viewModel(UserDetailViewModel.class);
 
-    RxLiveData<UserDetailViewModel.ViewState> detailLiveData = userDetailViewModel.userDetail(login());
+    LiveData<UserDetailViewModel.ViewState> detailLiveData = userDetailViewModel.userDetail(login());
     detailLiveData.observe(this, this::setState);
   }
 
@@ -88,11 +89,11 @@ public class UserDetailActivity extends BaseActivity {
     models.add(new UserHeaderModel(userDetail.basicStats));
 
     if (!userDetail.popularRepos.isEmpty()) {
-      models.add(new ReposSectionModel(getString(R.string.repos_popular), userDetail.popularRepos));
+      models.add(new ReposSectionModel(getString(R.string.repos_popular), userDetail.popularRepos, this));
     }
 
     if (!userDetail.contributedRepos.isEmpty()) {
-      models.add(new ReposSectionModel(getString(R.string.repos_contributed), userDetail.contributedRepos));
+      models.add(new ReposSectionModel(getString(R.string.repos_contributed), userDetail.contributedRepos, this));
     }
 
     adapter.addModels(models);
@@ -103,6 +104,10 @@ public class UserDetailActivity extends BaseActivity {
 
   public void showError(Throwable error) {
     ErrorHandler.displayError(error, recyclerView);
+  }
+
+  @Override public void onRepoClicked(RepoHeader header) {
+    userDetailViewModel.onRepoClicked(header);
   }
 
   public static void start(Activity inActivity, @NonNull String login) {

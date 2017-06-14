@@ -3,8 +3,7 @@ package com.jraska.github.client.ui;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.airbnb.epoxy.EpoxyHolder;
 import com.airbnb.epoxy.EpoxyModelWithHolder;
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
@@ -15,13 +14,19 @@ import com.jraska.github.client.widget.RepeaterLayout;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public final class ReposSectionModel extends EpoxyModelWithHolder<ReposSectionModel.ReposHolder> {
   private final String title;
   private final List<RepoHeader> repos;
+  private final RepoHeaderModel.RepoListener repoListener;
 
-  public ReposSectionModel(String title, List<RepoHeader> repos) {
+  public ReposSectionModel(String title, List<RepoHeader> repos,
+                           RepoHeaderModel.RepoListener repoListener) {
     this.title = title;
     this.repos = repos;
+    this.repoListener = repoListener;
   }
 
   @Override protected ReposHolder createNewHolder() {
@@ -36,7 +41,7 @@ public final class ReposSectionModel extends EpoxyModelWithHolder<ReposSectionMo
     holder.reposTitle.setText(title);
 
     SimpleEpoxyAdapter adapter = new SimpleEpoxyAdapter();
-    adapter.addModels(Lists.transform(repos, RepoModel::new));
+    adapter.addModels(Lists.transform(repos, repo -> new RepoHeaderModel(repo, repoListener)));
 
     holder.reposRepeater.setAdapter(adapter);
   }

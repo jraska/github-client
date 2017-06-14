@@ -1,6 +1,5 @@
 <resources>
   <string name="app_name">github-client</string>
-  <string name="title_activity_user_detail">UserDetailActivity</string>
   <string name="user_detail_joined_template">  Joined on %s</string>
   <string name="repos_popular">Popular repositories</string>
   <string name="repos_contributed">Contributed repositories</string>

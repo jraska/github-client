@@ -8,4 +8,6 @@ public interface Navigator {
   void startUsersList();
 
   void startUserDetail(String login);
+
+  void startRepoDetail(String fullPath);
 }

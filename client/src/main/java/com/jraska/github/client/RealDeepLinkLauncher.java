@@ -1,11 +1,13 @@
 package com.jraska.github.client;
 
 import com.jraska.github.client.ui.BaseActivity;
+import com.jraska.github.client.ui.RepoDetailActivity;
 import com.jraska.github.client.ui.UserDetailActivity;
 import com.jraska.github.client.ui.UsersActivity;
-import okhttp3.HttpUrl;
 
 import javax.inject.Provider;
+
+import okhttp3.HttpUrl;
 
 final class RealDeepLinkLauncher implements DeepLinkLauncher {
   private final Provider<BaseActivity> topActivityProvider;
@@ -21,6 +23,12 @@ final class RealDeepLinkLauncher implements DeepLinkLauncher {
 
     if ("/users".equals(deepLink.encodedPath())) {
       UsersActivity.start(topActivityProvider.get());
+      return;
+    }
+
+    if (deepLink.pathSize() == 2) {
+      String fullRepoPath = deepLink.pathSegments().get(0) + "/" + deepLink.pathSegments().get(1);
+      RepoDetailActivity.start(topActivityProvider.get(), fullRepoPath);
       return;
     }
 

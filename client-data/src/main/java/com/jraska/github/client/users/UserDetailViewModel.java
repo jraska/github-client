@@ -1,5 +1,6 @@
 package com.jraska.github.client.users;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.jraska.github.client.Navigator;
@@ -30,7 +31,7 @@ public class UserDetailViewModel extends ViewModel {
     this.eventAnalytics = eventAnalytics;
   }
 
-  public RxLiveData<ViewState> userDetail(String login) {
+  public LiveData<ViewState> userDetail(String login) {
     RxLiveData<ViewState> liveData = liveDataMapping.get(login);
     if (liveData == null) {
       liveData = newUserLiveData(login);
@@ -61,11 +62,15 @@ public class UserDetailViewModel extends ViewModel {
     navigator.launchOnWeb(Urls.user(login));
   }
 
+  public void onRepoClicked(RepoHeader header) {
+    navigator.startRepoDetail(header.fullName());
+  }
+
   public static class ViewState {
     private final Throwable error;
     private final UserDetail result;
 
-    public ViewState(Throwable error, UserDetail result) {
+    ViewState(Throwable error, UserDetail result) {
       this.error = error;
       this.result = result;
     }

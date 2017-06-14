@@ -3,6 +3,7 @@ package com.jraska.github.client.users.data;
 import android.support.annotation.NonNull;
 
 import com.jraska.github.client.common.Pair;
+import com.jraska.github.client.users.RepoDetail;
 import com.jraska.github.client.users.User;
 import com.jraska.github.client.users.UserDetail;
 import com.jraska.github.client.users.UsersRepository;
@@ -31,17 +32,23 @@ final class GitHubApiUsersRepository implements UsersRepository {
 
   @Override public Single<List<User>> getUsers(int since) {
     return gitHubUsersApi.getUsers(since)
-        .map(this::translateUsers)
-        .doOnSuccess(users -> lastUsers = users);
+      .map(this::translateUsers)
+      .doOnSuccess(users -> lastUsers = users);
   }
 
   @Override public Observable<UserDetail> getUserDetail(String login) {
     return gitHubUserDetailApi.getUserDetail(login)
-        .subscribeOn(Schedulers.io()) //this has to be here now to run requests in parallel
-        .zipWith(gitHubUserDetailApi.getRepos(login), Pair::new)
-        .compose(UserDetailWithReposConverter.INSTANCE)
-        .toObservable()
-        .startWith(cachedUser(login));
+      .subscribeOn(Schedulers.io()) //this has to be here now to run requests in parallel
+      .zipWith(gitHubUserDetailApi.getRepos(login), Pair::new)
+      .compose(UserDetailWithReposConverter.INSTANCE)
+      .toObservable()
+      .startWith(cachedUser(login));
+  }
+
+  @Override public Observable<RepoDetail> getRepoDetail(String owner, String repoName) {
+    return gitHubUsersApi.getRepo(owner, repoName)
+      .toObservable()
+      .map(RepoConverter.INSTANCE::convertToDetail);
   }
 
   private Observable<UserDetail> cachedUser(String login) {

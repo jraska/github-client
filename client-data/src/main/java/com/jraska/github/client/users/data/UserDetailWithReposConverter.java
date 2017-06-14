@@ -18,7 +18,7 @@ import io.reactivex.Single;
 import io.reactivex.SingleTransformer;
 
 final class UserDetailWithReposConverter
-    implements SingleTransformer<Pair<GitHubUserDetail, List<GitHubRepo>>, UserDetail> {
+  implements SingleTransformer<Pair<GitHubUserDetail, List<GitHubRepo>>, UserDetail> {
   static final Comparator<GitHubRepo> BY_STARS_REPO_COMPARATOR = (lhs, rhs) -> rhs.stargazersCount.compareTo(lhs.stargazersCount);
   static final int MAX_REPOS_TO_DISPLAY = 5;
 
@@ -33,7 +33,7 @@ final class UserDetailWithReposConverter
     LocalDateTime joined = LocalDateTime.parse(gitHubUserDetail.createdAt, DateTimeFormatter.ISO_DATE_TIME);
 
     UserStats stats = new UserStats(gitHubUserDetail.followers, gitHubUserDetail.following,
-        gitHubUserDetail.publicRepos, joined);
+      gitHubUserDetail.publicRepos, joined);
 
     Collections.sort(gitHubRepos, BY_STARS_REPO_COMPARATOR);
 
@@ -55,8 +55,7 @@ final class UserDetailWithReposConverter
   }
 
   RepoHeader convert(GitHubRepo gitHubRepo) {
-    return new RepoHeader(gitHubRepo.name, gitHubRepo.description,
-        gitHubRepo.stargazersCount, gitHubRepo.forks, gitHubRepo.size);
+    return RepoConverter.INSTANCE.convert(gitHubRepo);
   }
 
   private User convert(GitHubUserDetail gitHubUser) {

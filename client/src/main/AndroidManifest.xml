@@ -23,7 +23,9 @@
     </activity>
     <activity
       android:name=".ui.UserDetailActivity"
-      android:label="@string/title_activity_user_detail"
+      android:theme="@style/AppTheme.NoActionBar"/>
+    <activity
+      android:name=".ui.RepoDetailActivity"
       android:theme="@style/AppTheme.NoActionBar"/>
     <activity android:name=".ui.UriHandlerActivity">
       <intent-filter android:label="@string/app_name">

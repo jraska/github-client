@@ -9,4 +9,6 @@ public interface UsersRepository {
   Single<List<User>> getUsers(int since);
 
   Observable<UserDetail> getUserDetail(String login);
+
+  Observable<RepoDetail> getRepoDetail(String owner, String repoName);
 }

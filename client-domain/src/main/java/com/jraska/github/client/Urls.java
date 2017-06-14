@@ -9,6 +9,10 @@ public final class Urls {
     return HttpUrl.parse("https://github.com/" + login);
   }
 
+  public static HttpUrl repo(String fullPath) {
+    return HttpUrl.parse("https://github.com/" + fullPath);
+  }
+
   private Urls() {
     Preconditions.throwNoInstances();
   }

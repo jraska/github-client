@@ -22,8 +22,16 @@ public abstract class UserViewModelModule {
   @Provides
   @IntoMap
   @ClassKey(UserDetailViewModel.class)
-  public static ViewModel provideDetailModel(UsersRepository repository, AppSchedulers schedulers,
+  public static ViewModel provideUserDetailModel(UsersRepository repository, AppSchedulers schedulers,
                                              Navigator navigator, EventAnalytics analytics) {
     return new UserDetailViewModel(repository, schedulers, navigator, analytics);
+  }
+
+  @Provides
+  @IntoMap
+  @ClassKey(RepoDetailViewModel.class)
+  public static ViewModel provideRepoDetailModel(UsersRepository repository, AppSchedulers schedulers,
+                                             Navigator navigator, EventAnalytics analytics) {
+    return new RepoDetailViewModel(repository, schedulers);
   }
 }

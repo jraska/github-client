@@ -31,7 +31,11 @@ final class DeepLinkNavigator implements Navigator {
 
   @Override public void startUserDetail(String login) {
     HttpUrl url = Urls.user(login);
+    launch(url);
+  }
 
+  @Override public void startRepoDetail(String fullPath) {
+    HttpUrl url = Urls.repo(fullPath);
     launch(url);
   }
 }
