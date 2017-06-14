@@ -1,10 +1,12 @@
 package com.jraska.github.client;
 
 import android.content.Intent;
+
 import com.jraska.github.client.ui.BaseActivity;
+import com.jraska.github.client.ui.RepoDetailActivity;
 import com.jraska.github.client.ui.UserDetailActivity;
 import com.jraska.github.client.ui.UsersActivity;
-import okhttp3.HttpUrl;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.Set;
+
+import okhttp3.HttpUrl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -41,7 +45,7 @@ public class RealDeepLinkLauncherTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void whenUnsupportedUrl_thenIllegalStateException() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska/repos"));
+    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska/repos/johny"));
   }
 
   @Test
@@ -51,6 +55,15 @@ public class RealDeepLinkLauncherTest {
     verify(activity).startActivity(intentCaptor.capture());
     assertThat(intentCaptor.getValue().getComponent().getClassName())
       .isEqualTo(UsersActivity.class.getName());
+  }
+
+  @Test
+  public void whenRepoUrl_thenUsersActivityStarts() {
+    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska/Falcon"));
+
+    verify(activity).startActivity(intentCaptor.capture());
+    assertThat(intentCaptor.getValue().getComponent().getClassName())
+      .isEqualTo(RepoDetailActivity.class.getName());
   }
 
   @Test
