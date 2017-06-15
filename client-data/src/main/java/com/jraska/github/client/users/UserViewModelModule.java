@@ -32,6 +32,6 @@ public abstract class UserViewModelModule {
   @ClassKey(RepoDetailViewModel.class)
   public static ViewModel provideRepoDetailModel(UsersRepository repository, AppSchedulers schedulers,
                                              Navigator navigator, EventAnalytics analytics) {
-    return new RepoDetailViewModel(repository, schedulers);
+    return new RepoDetailViewModel(repository, schedulers, navigator, analytics);
   }
 }

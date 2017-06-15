@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import butterknife.BindView;
+import butterknife.OnClick;
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
 import com.jraska.github.client.R;
 import com.jraska.github.client.users.RepoDetail;
@@ -35,6 +36,10 @@ public class RepoDetailActivity extends BaseActivity {
     viewModel = viewModel(RepoDetailViewModel.class);
     LiveData<RepoDetailViewModel.ViewState> liveData = viewModel.repoDetail(fullRepoName());
     liveData.observe(this, this::setState);
+  }
+
+  @OnClick(R.id.repo_detail_github_fab) void onFitHubIconClicked(){
+    viewModel.onFitHubIconClicked(fullRepoName());
   }
 
   void setState(RepoDetailViewModel.ViewState viewState) {
