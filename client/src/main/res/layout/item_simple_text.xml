@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/repo_detail_created"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:drawablePadding="@dimen/padding_medium"
+  android:gravity="start|center_vertical"
+  android:paddingBottom="@dimen/padding_medium"
+  android:paddingLeft="@dimen/text_margin"
+  android:paddingRight="@dimen/text_margin"
+  android:paddingTop="@dimen/padding_medium"
+  android:textSize="@dimen/textMain"
+  tools:text="Joined on Dec 28, 2013" />
+

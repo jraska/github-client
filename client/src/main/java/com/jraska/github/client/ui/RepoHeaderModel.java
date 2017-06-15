@@ -2,32 +2,24 @@ package com.jraska.github.client.ui;
 
 import android.view.View;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.airbnb.epoxy.EpoxyHolder;
 import com.airbnb.epoxy.EpoxyModelWithHolder;
 import com.jraska.github.client.R;
+import com.jraska.github.client.common.Preconditions;
 import com.jraska.github.client.users.RepoHeader;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.annotations.Nullable;
 
 public class RepoHeaderModel extends EpoxyModelWithHolder<RepoHeaderModel.RepoHolder> {
   private final RepoHeader repo;
-
-  @Nullable
   private final View.OnClickListener itemClickListener;
 
-  public RepoHeaderModel(RepoHeader repo) {
-    this(repo, null);
-  }
+  public RepoHeaderModel(RepoHeader repo, RepoListener repoListener) {
+    Preconditions.argNotNull(repoListener);
 
-  public RepoHeaderModel(RepoHeader repo, @Nullable RepoListener repoListener) {
-    this.repo = repo;
-    if (repoListener == null) {
-      this.itemClickListener = null;
-    } else
-      this.itemClickListener = (v) -> repoListener.onRepoClicked(repo);
+    this.repo = Preconditions.argNotNull(repo);
+    this.itemClickListener = (v) -> repoListener.onRepoClicked(repo);
   }
 
   @Override protected RepoHolder createNewHolder() {

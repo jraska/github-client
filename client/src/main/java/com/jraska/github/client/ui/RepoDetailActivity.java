@@ -7,13 +7,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
+import butterknife.BindView;
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
 import com.jraska.github.client.R;
 import com.jraska.github.client.users.RepoDetail;
 import com.jraska.github.client.users.RepoDetailViewModel;
-
-import butterknife.BindView;
 
 public class RepoDetailActivity extends BaseActivity {
   private static final String EXTRA_FULL_REPO_NAME = "fullRepoName";
@@ -55,7 +53,15 @@ public class RepoDetailActivity extends BaseActivity {
 
   void setRepoDetail(RepoDetail repoDetail) {
     SimpleEpoxyAdapter adapter = new SimpleEpoxyAdapter();
-    adapter.addModels(new RepoHeaderModel(repoDetail.header));
+    adapter.addModels(new RepoDetailHeaderModel(repoDetail));
+
+    String languageText = getString(R.string.repo_detail_language_used_template,
+      repoDetail.data.language);
+    adapter.addModels(new SimpleTextModel(languageText));
+
+    String issuesText = getString(R.string.repo_detail_issues_template,
+      String.valueOf(repoDetail.data.issuesCount));
+    adapter.addModels(new SimpleTextModel(issuesText));
 
     recyclerView.setAdapter(adapter);
   }

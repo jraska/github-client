@@ -2,12 +2,8 @@ package com.jraska.github.client.users;
 
 import org.threeten.bp.LocalDateTime;
 
-import io.reactivex.annotations.Nullable;
-
 public class RepoDetail {
   public final RepoHeader header;
-
-  @Nullable
   public final Data data;
 
   public RepoDetail(RepoHeader header, Data data) {
