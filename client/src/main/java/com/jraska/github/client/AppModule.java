@@ -1,5 +1,6 @@
 package com.jraska.github.client;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -44,5 +45,9 @@ public class AppModule {
 
   @Provides @PerApp LayoutInflater provideLayoutInflater(Context context) {
     return LayoutInflater.from(context);
+  }
+
+  @Provides ViewModelProvider.Factory provideViewModelFactory(ViewModelFactory factory) {
+    return factory;
   }
 }

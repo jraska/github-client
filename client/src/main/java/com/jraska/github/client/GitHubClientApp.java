@@ -25,7 +25,7 @@ public class GitHubClientApp extends Application {
   @Inject EventAnalytics eventAnalytics;
   @Inject ErrorReportTree errorReportTree;
   @Inject TopActivityProvider topActivityProvider;
-  @Inject ViewModelFactory viewModelFactory;
+  @Inject ViewModelProvider.Factory viewModelFactory;
 
   public ViewModelProvider.Factory viewModelFactory() {
     return viewModelFactory;
