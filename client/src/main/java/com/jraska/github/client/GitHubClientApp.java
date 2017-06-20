@@ -2,7 +2,6 @@ package com.jraska.github.client;
 
 import android.app.Application;
 import android.arch.lifecycle.ViewModelProvider;
-
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.firebase.perf.metrics.AddTrace;
 import com.jakewharton.threetenabp.AndroidThreeTen;
@@ -13,12 +12,13 @@ import com.jraska.github.client.http.DaggerHttpComponent;
 import com.jraska.github.client.http.HttpComponent;
 import com.jraska.github.client.http.HttpDependenciesModule;
 import com.jraska.github.client.logging.ErrorReportTree;
-
-import java.io.File;
+import com.jraska.github.client.push.PushCallbacks;
+import com.jraska.github.client.push.PushHandler;
+import com.jraska.github.client.push.PushIntentObserver;
+import timber.log.Timber;
 
 import javax.inject.Inject;
-
-import timber.log.Timber;
+import java.io.File;
 
 public class GitHubClientApp extends Application {
 
@@ -26,12 +26,17 @@ public class GitHubClientApp extends Application {
   @Inject ErrorReportTree errorReportTree;
   @Inject TopActivityProvider topActivityProvider;
   @Inject ViewModelProvider.Factory viewModelFactory;
+  @Inject PushHandler pushHandler;
 
   public ViewModelProvider.Factory viewModelFactory() {
     return viewModelFactory;
   }
 
-  @AddTrace(name = "App.userDetail")
+  public PushHandler pushHandler() {
+    return pushHandler;
+  }
+
+  @AddTrace(name = "App.onCreate")
   @Override
   public void onCreate() {
     super.onCreate();
@@ -48,6 +53,9 @@ public class GitHubClientApp extends Application {
     }
 
     registerActivityLifecycleCallbacks(topActivityProvider.callbacks);
+
+    registerActivityLifecycleCallbacks(new PushCallbacks(new PushIntentObserver(pushHandler())));
+
     logAppCreateEvent();
   }
 
