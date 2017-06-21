@@ -12,6 +12,8 @@ android {
     targetSdkVersion rootProject.ext.targetSdkVersion
     versionName rootProject.ext.version
     versionCode rootProject.ext.versionCode
+
+    testInstrumentationRunner "com.jraska.github.client.TestRunner"
   }
 
   compileOptions {
@@ -79,6 +81,12 @@ dependencies {
 
   testCompile 'com.squareup.assertj:assertj-android:1.1.1'
   testCompile 'com.android.support:support-annotations:25.3.1' //to fix dependency conflicts
+
+  androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+  androidTestCompile 'com.android.support.test:runner:0.5'
+  androidTestCompile 'com.android.support:support-annotations:25.3.1' //to fix dependency conflicts
+  androidTestCompile 'org.mockito:mockito-core:2.8.9'
+  androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
