@@ -24,7 +24,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
-@org.robolectric.annotation.Config(constants = BuildConfig.class, sdk = 21)
 public class RealDeepLinkLauncherTest {
   @Captor ArgumentCaptor<Intent> intentCaptor;
   @Mock BaseActivity activity;

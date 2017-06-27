@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.arch.lifecycle.ViewModel;
 import android.content.Intent;
 
-import com.jraska.github.client.BuildConfig;
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.R;
 import com.jraska.github.client.ViewModelFactoryDecorator;
@@ -23,7 +22,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -34,7 +32,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
 public class RepoDetailActivityTest {
 
   @Captor ArgumentCaptor<Intent> intentCaptor;
