@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+  <shortcut
+    android:shortcutId="users"
+    android:enabled="true"
+    android:icon="@drawable/ic_github_48dp"
+    android:shortcutShortLabel="@string/shortcut_users_short_label"
+    android:shortcutLongLabel="@string/shortcut_users_long_label"
+    android:shortcutDisabledMessage="@string/shortcut_users_disabled_message">
+    <!-- TODO(josef): It is working now only for development app, this will probably stay development app  -->
+    <intent
+      android:action="android.intent.action.VIEW"
+      android:data="https://github.com/users"
+      android:targetPackage="com.jraska.github.client.dev"
+      android:targetClass="com.jraska.github.client.ui.ShortcutHandlerActivity" />
+    <categories android:name="android.shortcut.conversation" />
+  </shortcut>
+  <shortcut
+    android:shortcutId="users/jraska"
+    android:enabled="true"
+    android:icon="@drawable/ic_watchers_black_48dp"
+    android:shortcutShortLabel="@string/shortcut_jraska_short_label"
+    android:shortcutLongLabel="@string/shortcut_jraska_long_label"
+    android:shortcutDisabledMessage="@string/shortcut_jraska_disabled_message">
+    <intent
+      android:action="android.intent.action.VIEW"
+      android:data="https://github.com/jraska"
+      android:targetPackage="com.jraska.github.client.dev"
+      android:targetClass="com.jraska.github.client.ui.ShortcutHandlerActivity" />
+    <categories android:name="android.shortcut.conversation" />
+  </shortcut>
+  <shortcut
+    android:shortcutId="users/JakeWharton"
+    android:enabled="true"
+    android:icon="@drawable/ic_admin_24dp"
+    android:shortcutShortLabel="@string/shortcut_jake_short_label"
+    android:shortcutLongLabel="@string/shortcut_jake_long_label"
+    android:shortcutDisabledMessage="@string/shortcut_jake_disabled_message">
+    <intent
+      android:action="android.intent.action.VIEW"
+      android:data="https://github.com/JakeWharton"
+      android:targetPackage="com.jraska.github.client.dev"
+      android:targetClass="com.jraska.github.client.ui.ShortcutHandlerActivity" />
+    <categories android:name="android.shortcut.conversation" />
+  </shortcut>
+</shortcuts>
+
+
