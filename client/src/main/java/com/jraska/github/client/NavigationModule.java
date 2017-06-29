@@ -1,6 +1,10 @@
 package com.jraska.github.client;
 
 import android.arch.lifecycle.ViewModel;
+
+import com.jraska.github.client.analytics.EventAnalytics;
+import com.jraska.github.client.ui.ShortcutHandlerModel;
+
 import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.ClassKey;
@@ -28,5 +32,13 @@ public abstract class NavigationModule {
   @ClassKey(UriHandlerViewModel.class)
   public static ViewModel uriHandlerViewModel(DeepLinkHandler deepLinkHandler) {
     return new UriHandlerViewModel(deepLinkHandler);
+  }
+
+  @Provides
+  @IntoMap
+  @ClassKey(ShortcutHandlerModel.class)
+  public static ViewModel uriShortcutViewModel(DeepLinkLauncher deepLinkHandler,
+                                               EventAnalytics eventAnalytics) {
+    return new ShortcutHandlerModel(deepLinkHandler, eventAnalytics);
   }
 }
