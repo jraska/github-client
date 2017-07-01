@@ -21,13 +21,15 @@ import static java.util.Collections.emptyList;
 final class GitHubApiUsersRepository implements UsersRepository {
   private final GitHubUsersApi gitHubUsersApi;
   private final GitHubUserDetailApi gitHubUserDetailApi;
+  private final UserDetailWithReposConverter converter;
 
   private List<User> lastUsers;
 
-  public GitHubApiUsersRepository(@NonNull GitHubUsersApi gitHubUsersApi,
+  GitHubApiUsersRepository(@NonNull GitHubUsersApi gitHubUsersApi,
                                   @NonNull GitHubUserDetailApi gitHubUserDetailApi) {
     this.gitHubUsersApi = gitHubUsersApi;
     this.gitHubUserDetailApi = gitHubUserDetailApi;
+    this.converter = UserDetailWithReposConverter.INSTANCE;
   }
 
   @Override public Single<List<User>> getUsers(int since) {
@@ -36,11 +38,11 @@ final class GitHubApiUsersRepository implements UsersRepository {
       .doOnSuccess(users -> lastUsers = users);
   }
 
-  @Override public Observable<UserDetail> getUserDetail(String login) {
+  @Override public Observable<UserDetail> getUserDetail(String login, int reposInSection) {
     return gitHubUserDetailApi.getUserDetail(login)
       .subscribeOn(Schedulers.io()) //this has to be here now to run requests in parallel
       .zipWith(gitHubUserDetailApi.getRepos(login), Pair::new)
-      .compose(UserDetailWithReposConverter.INSTANCE)
+      .map(result -> converter.translateUserDetail(result.first, result.second, reposInSection))
       .toObservable()
       .startWith(cachedUser(login));
   }

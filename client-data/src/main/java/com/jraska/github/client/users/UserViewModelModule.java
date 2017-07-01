@@ -1,9 +1,12 @@
 package com.jraska.github.client.users;
 
 import android.arch.lifecycle.ViewModel;
+
+import com.jraska.github.client.Config;
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.rx.AppSchedulers;
+
 import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.ClassKey;
@@ -23,15 +26,16 @@ public abstract class UserViewModelModule {
   @IntoMap
   @ClassKey(UserDetailViewModel.class)
   public static ViewModel provideUserDetailModel(UsersRepository repository, AppSchedulers schedulers,
-                                             Navigator navigator, EventAnalytics analytics) {
-    return new UserDetailViewModel(repository, schedulers, navigator, analytics);
+                                                 Navigator navigator, EventAnalytics analytics,
+                                                 Config config) {
+    return new UserDetailViewModel(repository, schedulers, navigator, analytics, config);
   }
 
   @Provides
   @IntoMap
   @ClassKey(RepoDetailViewModel.class)
   public static ViewModel provideRepoDetailModel(UsersRepository repository, AppSchedulers schedulers,
-                                             Navigator navigator, EventAnalytics analytics) {
+                                                 Navigator navigator, EventAnalytics analytics) {
     return new RepoDetailViewModel(repository, schedulers, navigator, analytics);
   }
 }

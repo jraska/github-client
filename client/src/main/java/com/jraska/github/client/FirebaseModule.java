@@ -35,7 +35,7 @@ public class FirebaseModule {
   @Provides @PerApp Config config() {
     FirebaseConfigProxy configProxy = new FirebaseConfigProxy(FirebaseRemoteConfig.getInstance());
 
-    configProxy.fetch();
+    configProxy.setupDefaults().fetch();
 
     return configProxy;
   }

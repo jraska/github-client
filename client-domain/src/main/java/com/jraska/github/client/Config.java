@@ -4,4 +4,6 @@ public interface Config {
   void triggerRefresh();
 
   boolean getBoolean(String key);
+
+  long getLong(String key);
 }
