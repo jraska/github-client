@@ -13,12 +13,12 @@ public final class PushHandler {
   private static final String ACTION_REFRESH_CONFIG = "refresh_config";
 
   private final EventAnalytics eventAnalytics;
-  private final TokenSynchronizer tokenSynchronizer;
+  private final PushTokenSynchronizer tokenSynchronizer;
   private final Lazy<Config> config;
 
-  @Inject PushHandler(EventAnalytics eventAnalytics, TokenSynchronizer tokenSynchronizer, Lazy<Config> config) {
+  @Inject PushHandler(EventAnalytics eventAnalytics, PushTokenSynchronizer pushTokenSynchronizer, Lazy<Config> config) {
     this.eventAnalytics = eventAnalytics;
-    this.tokenSynchronizer = tokenSynchronizer;
+    this.tokenSynchronizer = pushTokenSynchronizer;
     this.config = config;
   }
 
@@ -51,7 +51,7 @@ public final class PushHandler {
     }
   }
 
-  void onTokenRefresh() {
+  public void onTokenRefresh() {
     tokenSynchronizer.synchronizeToken();
 
     AnalyticsEvent tokenEvent = AnalyticsEvent.create("push_token_refresh");

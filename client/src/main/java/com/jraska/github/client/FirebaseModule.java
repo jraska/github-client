@@ -1,12 +1,15 @@
 package com.jraska.github.client;
 
 import android.content.Context;
+
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.logging.CrashReporter;
 import com.jraska.github.client.logging.FirebaseCrashReporter;
+
 import dagger.Module;
 import dagger.Provides;
 import timber.log.Timber;
@@ -52,5 +55,9 @@ public class FirebaseModule {
     }
 
     return performance;
+  }
+
+  @Provides @PerApp FirebaseDatabase firebaseDatabase() {
+    return FirebaseDatabase.getInstance();
   }
 }
