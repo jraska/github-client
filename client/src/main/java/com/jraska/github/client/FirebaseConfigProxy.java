@@ -31,6 +31,10 @@ final class FirebaseConfigProxy implements Config {
     return config.getLong(key);
   }
 
+  @Override public String getString(String key) {
+    return config.getString(key);
+  }
+
   @Override public void triggerRefresh() {
     config.fetch(IGNORE_CACHE).addOnCompleteListener(onFetchCompleteListener);
   }

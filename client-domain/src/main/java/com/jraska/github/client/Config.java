@@ -6,4 +6,6 @@ public interface Config {
   boolean getBoolean(String key);
 
   long getLong(String key);
+
+  String getString(String key);
 }

@@ -4,9 +4,13 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
+
 import com.jraska.github.client.common.AppBuildConfig;
 import com.jraska.github.client.logging.VerboseLogger;
 import com.jraska.github.client.rx.AppSchedulers;
+import com.jraska.github.client.time.DateTimeProvider;
+import com.jraska.github.client.time.RealDateTimeProvider;
+
 import dagger.Module;
 import dagger.Provides;
 import dagger.Reusable;
@@ -49,5 +53,9 @@ public class AppModule {
 
   @Provides ViewModelProvider.Factory provideViewModelFactory(ViewModelFactory factory) {
     return factory;
+  }
+
+  @Provides @PerApp DateTimeProvider dateTimeProvider() {
+    return new RealDateTimeProvider();
   }
 }
