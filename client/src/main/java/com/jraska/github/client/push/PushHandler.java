@@ -91,7 +91,7 @@ public final class PushHandler {
     return true;
   }
 
-  public void onTokenRefresh() {
+  void onTokenRefresh() {
     tokenSynchronizer.synchronizeToken();
 
     AnalyticsEvent tokenEvent = AnalyticsEvent.create("push_token_refresh");
