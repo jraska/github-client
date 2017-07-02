@@ -1,11 +1,13 @@
 package com.jraska.github.client;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.jraska.github.client.analytics.AnalyticsProperty;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.logging.CrashReporter;
 import com.jraska.github.client.logging.FirebaseCrashReporter;
@@ -14,6 +16,7 @@ import dagger.Module;
 import dagger.Provides;
 import timber.log.Timber;
 
+@SuppressLint("MissingPermission")
 @Module
 public class FirebaseModule {
 
@@ -29,6 +32,11 @@ public class FirebaseModule {
       Timber.d("Analytics enabled");
       return new FirebaseEventAnalytics(firebaseAnalytics);
     }
+  }
+
+  @Provides @PerApp AnalyticsProperty analyticsProperty(Context context, Config config) {
+    FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+    return new FirebaseEventAnalytics(firebaseAnalytics);
   }
 
   @Provides @PerApp CrashReporter firebaseCrash() {

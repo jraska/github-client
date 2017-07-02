@@ -4,16 +4,21 @@ import android.os.Bundle;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.jraska.github.client.analytics.AnalyticsEvent;
+import com.jraska.github.client.analytics.AnalyticsProperty;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.common.Preconditions;
 
 import java.util.Map;
 
-final class FirebaseEventAnalytics implements EventAnalytics {
+final class FirebaseEventAnalytics implements EventAnalytics, AnalyticsProperty {
   private final FirebaseAnalytics analytics;
 
   FirebaseEventAnalytics(FirebaseAnalytics analytics) {
     this.analytics = Preconditions.argNotNull(analytics);
+  }
+
+  @Override public void setUserProperty(String key, String value) {
+    analytics.setUserProperty(key, value);
   }
 
   @Override public void report(AnalyticsEvent event) {

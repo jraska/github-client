@@ -1,11 +1,10 @@
 package com.jraska.github.client.common;
 
 
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.functions.Function;
 
 public final class Lists {
   private Lists() {
@@ -17,22 +16,6 @@ public final class Lists {
     for (T item : list) {
       try {
         newList.add(transform.apply(item));
-      } catch (Exception e) {
-        throw new RuntimeException(e);
-      }
-    }
-
-    return newList;
-  }
-
-  public static <T> List<T> filter(List<T> list, Predicate<T> predicate) {
-    List<T> newList = new ArrayList<>();
-
-    for (T item : list) {
-      try {
-        if (predicate.test(item)) {
-          newList.add(item);
-        }
       } catch (Exception e) {
         throw new RuntimeException(e);
       }

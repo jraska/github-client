@@ -1,7 +1,8 @@
 package com.jraska.github.client;
 
+import com.jraska.github.client.common.Maps;
+
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public final class FakeConfig implements Config {
@@ -16,10 +17,7 @@ public final class FakeConfig implements Config {
   }
 
   public static FakeConfig create(String key, Object value) {
-    Map<String, Object> map = new HashMap<>();
-    map.put(key, value);
-
-    return create(map);
+    return create(Maps.newHashMap(key, value));
   }
 
   private FakeConfig(Map<String, Object> values) {
@@ -33,6 +31,15 @@ public final class FakeConfig implements Config {
   @Override public boolean getBoolean(String key) {
     Object value = values.get(key);
     return value != null && (boolean) value;
+  }
+
+  @Override public String getString(String key) {
+    Object value = values.get(key);
+    if (value != null) {
+      return (String) value;
+    }
+
+    return "";
   }
 
   @Override public long getLong(String key) {
