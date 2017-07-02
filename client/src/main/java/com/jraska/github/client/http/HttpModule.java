@@ -1,8 +1,10 @@
 package com.jraska.github.client.http;
 
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.jraska.github.client.common.AppBuildConfig;
 import com.jraska.github.client.logging.VerboseLogger;
+
+import java.io.File;
+
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
@@ -10,23 +12,20 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import java.io.File;
 
 @Module
 public abstract class HttpModule {
   @Provides @Http
   public static Retrofit provideRetrofit(OkHttpClient okHttpClient, AppBuildConfig config) {
-    Retrofit retrofit = new Retrofit.Builder()
+    return new Retrofit.Builder()
         .baseUrl("https://api.github.com")
         .validateEagerly(config.debug)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build();
-
-    return retrofit;
   }
 
   @Provides @Http

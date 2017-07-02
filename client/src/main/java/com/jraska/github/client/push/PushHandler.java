@@ -3,19 +3,22 @@ package com.jraska.github.client.push;
 import com.jraska.github.client.Config;
 import com.jraska.github.client.analytics.AnalyticsEvent;
 import com.jraska.github.client.analytics.EventAnalytics;
-import dagger.Lazy;
-import timber.log.Timber;
 
 import javax.inject.Inject;
+
+import dagger.Lazy;
+import timber.log.Timber;
 
 public final class PushHandler {
   private static final String ACTION_REFRESH_CONFIG = "refresh_config";
 
   private final EventAnalytics eventAnalytics;
+  private final PushTokenSynchronizer tokenSynchronizer;
   private final Lazy<Config> config;
 
-  @Inject PushHandler(EventAnalytics eventAnalytics, Lazy<Config> config) {
+  @Inject PushHandler(EventAnalytics eventAnalytics, PushTokenSynchronizer pushTokenSynchronizer, Lazy<Config> config) {
     this.eventAnalytics = eventAnalytics;
+    this.tokenSynchronizer = pushTokenSynchronizer;
     this.config = config;
   }
 
@@ -46,5 +49,12 @@ public final class PushHandler {
       default:
         return false;
     }
+  }
+
+  public void onTokenRefresh() {
+    tokenSynchronizer.synchronizeToken();
+
+    AnalyticsEvent tokenEvent = AnalyticsEvent.create("push_token_refresh");
+    eventAnalytics.report(tokenEvent);
   }
 }
