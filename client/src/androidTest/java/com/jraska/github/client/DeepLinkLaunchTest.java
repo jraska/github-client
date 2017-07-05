@@ -41,6 +41,7 @@ public class DeepLinkLaunchTest {
     Context targetContext = InstrumentationRegistry.getTargetContext();
 
     Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     intent.setPackage(targetContext.getPackageName());
     intent.setData(Uri.parse(deepLink));
     targetContext.startActivity(intent);
