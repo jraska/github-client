@@ -34,9 +34,7 @@ final class PushTokenSynchronizer {
       return;
     }
 
-    DatabaseReference tokenReference = database.getReference("devices/" + id);
     Map<String, Object> map = new HashMap<>();
-
     map.put("date", dateTimeProvider.now().toString());
 
     map.put("push_token", token);
@@ -44,6 +42,7 @@ final class PushTokenSynchronizer {
     map.put("manufacturer", Build.BRAND);
     map.put("model", Build.MODEL);
 
+    DatabaseReference tokenReference = database.getReference("devices/" + id);
     tokenReference.setValue(map);
   }
 }

@@ -25,7 +25,6 @@ public class UsersActivityFlowTest {
     activityRule.getActivity();
 
     onView(withText("defunkt")).perform(click());
-    Thread.sleep(1000);
     onView(withText("dotjs")).check(matches(isDisplayed()));
   }
 }

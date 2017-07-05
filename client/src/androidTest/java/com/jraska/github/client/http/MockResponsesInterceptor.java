@@ -32,7 +32,7 @@ final class MockResponsesInterceptor implements Interceptor {
 
   private void sleepToSimulateLatency() {
     try {
-      Thread.sleep(200 + random.nextInt(600));
+      Thread.sleep(100 + random.nextInt(300));
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }

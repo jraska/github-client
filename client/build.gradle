@@ -78,12 +78,11 @@ dependencies {
   testCompile 'com.google.code.gson:gson:2.8.1'
 
   testCompile 'junit:junit:4.12'
-  testCompile 'org.robolectric:robolectric:3.4-rc3'
   testCompile 'org.mockito:mockito-core:2.8.47'
-
-  testCompile 'com.squareup.assertj:assertj-android:1.1.1'
+  testCompile 'org.assertj:assertj-core:3.8.0'
   testCompile 'com.android.support:support-annotations:25.4.0' //to fix dependency conflicts
 
+  androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
   androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
   androidTestCompile 'com.android.support.test:runner:0.5'
   androidTestCompile 'com.android.support:support-annotations:25.4.0' //to fix dependency conflicts

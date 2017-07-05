@@ -50,11 +50,104 @@ final class MockedResponses {
     map.put(HttpUrl.parse("https://api.github.com/users/mojombo"), JsonResponses.USER_MOJOMBO);
     map.put(HttpUrl.parse("https://api.github.com/users/defunkt"), JsonResponses.USER_DEFUNKT);
     map.put(HttpUrl.parse("https://api.github.com/users/defunkt/repos?type=all"), JsonResponses.REPOS_DEFUNKT);
+    map.put(HttpUrl.parse("https://api.github.com/repos/jraska/Falcon"), JsonResponses.FALCON_RESPONSE);
 
     return map;
   }
 
   static class JsonResponses {
+    static final String FALCON_RESPONSE = "{\n" +
+      "  \"id\": 42816069,\n" +
+      "  \"name\": \"Falcon\",\n" +
+      "  \"full_name\": \"jraska/Falcon\",\n" +
+      "  \"owner\": {\n" +
+      "    \"login\": \"jraska\",\n" +
+      "    \"id\": 6277721,\n" +
+      "    \"avatar_url\": \"https://avatars3.githubusercontent.com/u/6277721?v=3\",\n" +
+      "    \"gravatar_id\": \"\",\n" +
+      "    \"url\": \"https://api.github.com/users/jraska\",\n" +
+      "    \"html_url\": \"https://github.com/jraska\",\n" +
+      "    \"followers_url\": \"https://api.github.com/users/jraska/followers\",\n" +
+      "    \"following_url\": \"https://api.github.com/users/jraska/following{/other_user}\",\n" +
+      "    \"gists_url\": \"https://api.github.com/users/jraska/gists{/gist_id}\",\n" +
+      "    \"starred_url\": \"https://api.github.com/users/jraska/starred{/owner}{/repo}\",\n" +
+      "    \"subscriptions_url\": \"https://api.github.com/users/jraska/subscriptions\",\n" +
+      "    \"organizations_url\": \"https://api.github.com/users/jraska/orgs\",\n" +
+      "    \"repos_url\": \"https://api.github.com/users/jraska/repos\",\n" +
+      "    \"events_url\": \"https://api.github.com/users/jraska/events{/privacy}\",\n" +
+      "    \"received_events_url\": \"https://api.github.com/users/jraska/received_events\",\n" +
+      "    \"type\": \"User\",\n" +
+      "    \"site_admin\": false\n" +
+      "  },\n" +
+      "  \"private\": false,\n" +
+      "  \"html_url\": \"https://github.com/jraska/Falcon\",\n" +
+      "  \"description\": \"Take Android screenshots with Falcons bright eye!\",\n" +
+      "  \"fork\": false,\n" +
+      "  \"url\": \"https://api.github.com/repos/jraska/Falcon\",\n" +
+      "  \"forks_url\": \"https://api.github.com/repos/jraska/Falcon/forks\",\n" +
+      "  \"keys_url\": \"https://api.github.com/repos/jraska/Falcon/keys{/key_id}\",\n" +
+      "  \"collaborators_url\": \"https://api.github.com/repos/jraska/Falcon/collaborators{/collaborator}\",\n" +
+      "  \"teams_url\": \"https://api.github.com/repos/jraska/Falcon/teams\",\n" +
+      "  \"hooks_url\": \"https://api.github.com/repos/jraska/Falcon/hooks\",\n" +
+      "  \"issue_events_url\": \"https://api.github.com/repos/jraska/Falcon/issues/events{/number}\",\n" +
+      "  \"events_url\": \"https://api.github.com/repos/jraska/Falcon/events\",\n" +
+      "  \"assignees_url\": \"https://api.github.com/repos/jraska/Falcon/assignees{/user}\",\n" +
+      "  \"branches_url\": \"https://api.github.com/repos/jraska/Falcon/branches{/branch}\",\n" +
+      "  \"tags_url\": \"https://api.github.com/repos/jraska/Falcon/tags\",\n" +
+      "  \"blobs_url\": \"https://api.github.com/repos/jraska/Falcon/git/blobs{/sha}\",\n" +
+      "  \"git_tags_url\": \"https://api.github.com/repos/jraska/Falcon/git/tags{/sha}\",\n" +
+      "  \"git_refs_url\": \"https://api.github.com/repos/jraska/Falcon/git/refs{/sha}\",\n" +
+      "  \"trees_url\": \"https://api.github.com/repos/jraska/Falcon/git/trees{/sha}\",\n" +
+      "  \"statuses_url\": \"https://api.github.com/repos/jraska/Falcon/statuses/{sha}\",\n" +
+      "  \"languages_url\": \"https://api.github.com/repos/jraska/Falcon/languages\",\n" +
+      "  \"stargazers_url\": \"https://api.github.com/repos/jraska/Falcon/stargazers\",\n" +
+      "  \"contributors_url\": \"https://api.github.com/repos/jraska/Falcon/contributors\",\n" +
+      "  \"subscribers_url\": \"https://api.github.com/repos/jraska/Falcon/subscribers\",\n" +
+      "  \"subscription_url\": \"https://api.github.com/repos/jraska/Falcon/subscription\",\n" +
+      "  \"commits_url\": \"https://api.github.com/repos/jraska/Falcon/commits{/sha}\",\n" +
+      "  \"git_commits_url\": \"https://api.github.com/repos/jraska/Falcon/git/commits{/sha}\",\n" +
+      "  \"comments_url\": \"https://api.github.com/repos/jraska/Falcon/comments{/number}\",\n" +
+      "  \"issue_comment_url\": \"https://api.github.com/repos/jraska/Falcon/issues/comments{/number}\",\n" +
+      "  \"contents_url\": \"https://api.github.com/repos/jraska/Falcon/contents/{+path}\",\n" +
+      "  \"compare_url\": \"https://api.github.com/repos/jraska/Falcon/compare/{base}...{head}\",\n" +
+      "  \"merges_url\": \"https://api.github.com/repos/jraska/Falcon/merges\",\n" +
+      "  \"archive_url\": \"https://api.github.com/repos/jraska/Falcon/{archive_format}{/ref}\",\n" +
+      "  \"downloads_url\": \"https://api.github.com/repos/jraska/Falcon/downloads\",\n" +
+      "  \"issues_url\": \"https://api.github.com/repos/jraska/Falcon/issues{/number}\",\n" +
+      "  \"pulls_url\": \"https://api.github.com/repos/jraska/Falcon/pulls{/number}\",\n" +
+      "  \"milestones_url\": \"https://api.github.com/repos/jraska/Falcon/milestones{/number}\",\n" +
+      "  \"notifications_url\": \"https://api.github.com/repos/jraska/Falcon/notifications{?since,all,participating}\",\n" +
+      "  \"labels_url\": \"https://api.github.com/repos/jraska/Falcon/labels{/name}\",\n" +
+      "  \"releases_url\": \"https://api.github.com/repos/jraska/Falcon/releases{/id}\",\n" +
+      "  \"deployments_url\": \"https://api.github.com/repos/jraska/Falcon/deployments\",\n" +
+      "  \"created_at\": \"2015-09-20T14:31:21Z\",\n" +
+      "  \"updated_at\": \"2017-07-02T18:07:37Z\",\n" +
+      "  \"pushed_at\": \"2017-02-08T20:26:27Z\",\n" +
+      "  \"git_url\": \"git://github.com/jraska/Falcon.git\",\n" +
+      "  \"ssh_url\": \"git@github.com:jraska/Falcon.git\",\n" +
+      "  \"clone_url\": \"https://github.com/jraska/Falcon.git\",\n" +
+      "  \"svn_url\": \"https://github.com/jraska/Falcon\",\n" +
+      "  \"homepage\": \"\",\n" +
+      "  \"size\": 271,\n" +
+      "  \"stargazers_count\": 207,\n" +
+      "  \"watchers_count\": 207,\n" +
+      "  \"language\": \"Java\",\n" +
+      "  \"has_issues\": true,\n" +
+      "  \"has_projects\": true,\n" +
+      "  \"has_downloads\": true,\n" +
+      "  \"has_wiki\": true,\n" +
+      "  \"has_pages\": false,\n" +
+      "  \"forks_count\": 24,\n" +
+      "  \"mirror_url\": null,\n" +
+      "  \"open_issues_count\": 0,\n" +
+      "  \"forks\": 24,\n" +
+      "  \"open_issues\": 0,\n" +
+      "  \"watchers\": 207,\n" +
+      "  \"default_branch\": \"master\",\n" +
+      "  \"network_count\": 24,\n" +
+      "  \"subscribers_count\": 13\n" +
+      "}";
+
     static final String REPOS_DEFUNKT = "[\n" +
       "  {\n" +
       "    \"id\": 1861402,\n" +
