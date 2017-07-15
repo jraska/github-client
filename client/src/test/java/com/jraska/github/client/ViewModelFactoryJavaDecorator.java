@@ -3,21 +3,22 @@ package com.jraska.github.client;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
 
 import com.jraska.github.client.common.Preconditions;
+
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Provider;
 
-public class ViewModelFactoryDecorator implements ViewModelProvider.Factory {
+public class ViewModelFactoryJavaDecorator implements ViewModelProvider.Factory {
   private final ViewModelProvider.Factory decoratedFactory;
   private final Map<Class, Provider<ViewModel>> providersMap;
 
-  public ViewModelFactoryDecorator(ViewModelProvider.Factory decoratedFactory,
-                                   Map<Class, Provider<ViewModel>> providersMap) {
+  public ViewModelFactoryJavaDecorator(ViewModelProvider.Factory decoratedFactory,
+                                       Map<Class, Provider<ViewModel>> providersMap) {
     this.decoratedFactory = Preconditions.argNotNull(decoratedFactory);
     this.providersMap = providersMap;
   }
@@ -37,16 +38,16 @@ public class ViewModelFactoryDecorator implements ViewModelProvider.Factory {
   }
 
   public static void setToApp(Class<? extends ViewModel> viewModelClass,
-                                                   ViewModel implementation) {
-    Context applicationContext = InstrumentationRegistry.getTargetContext().getApplicationContext();
+                              ViewModel implementation) {
+    Context applicationContext = RuntimeEnvironment.application;
     setToApp((GitHubClientApp) applicationContext, viewModelClass, implementation);
   }
 
   static void setToApp(GitHubClientApp app,
-                                            Class<? extends ViewModel> viewModelClass, ViewModel implementation) {
+                       Class<? extends ViewModel> viewModelClass, ViewModel implementation) {
     HashMap<Class, Provider<ViewModel>> map = new HashMap<>();
     map.put(viewModelClass, () -> implementation);
 
-    app.viewModelFactory = new ViewModelFactoryDecorator(app.viewModelFactory, map);
+    app.viewModelFactory = new ViewModelFactoryJavaDecorator(app.viewModelFactory, map);
   }
 }

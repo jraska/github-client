@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.R;
-import com.jraska.github.client.ViewModelFactoryDecorator;
+import com.jraska.github.client.ViewModelFactoryJavaDecorator;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.rx.AppSchedulers;
 import com.jraska.github.client.users.RepoDetailViewModel;
@@ -48,7 +48,7 @@ public class RepoDetailActivityTest {
     ViewModel viewModel = UserViewModelModule.provideRepoDetailModel(repositoryMock, trampoline(),
       navigatorMock, EventAnalytics.EMPTY);
 
-    ViewModelFactoryDecorator.setToApp(RepoDetailViewModel.class, viewModel);
+    ViewModelFactoryJavaDecorator.setToApp(RepoDetailViewModel.class, viewModel);
   }
 
   @Test
