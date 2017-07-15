@@ -23,7 +23,7 @@ public final class TestGitHubClientApp extends GitHubClientApp {
   @Override public void onCreate() {
     super.onCreate();
 
-    assumeNoCI();
+//    assumeNoCI();
   }
 
   /**
