@@ -17,6 +17,9 @@ public final class TestGitHubClientApp extends GitHubClientApp {
       .firebaseModule(new FakeFirebaseModule());
   }
 
+  @Override void initThreeTen() {
+  }
+
   @Override public void onCreate() {
     super.onCreate();
 
