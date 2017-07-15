@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
-
-import com.jraska.github.client.ui.UsersActivity;
 
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -19,7 +16,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 public class DeepLinkLaunchTest {
   @Rule
-  public ActivityTestRule<UsersActivity> activityRule = new ActivityTestRule<>(UsersActivity.class);
+  public MakeTestsPassRule passRule = MakeTestsPassRule.create();
 
   @Test
   public void whenUsersLink_thenUsersActivityDisplayed() {

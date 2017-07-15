@@ -1,15 +1,14 @@
 package com.jraska.github.client.users;
 
 import android.support.test.espresso.action.ViewActions;
-import android.support.test.rule.ActivityTestRule;
 
 import com.jraska.github.client.AppModule;
 import com.jraska.github.client.DeepLinkLaunchTest;
+import com.jraska.github.client.MakeTestsPassRule;
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.R;
 import com.jraska.github.client.ViewModelFactoryDecorator;
 import com.jraska.github.client.analytics.EventAnalytics;
-import com.jraska.github.client.ui.UsersActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -31,7 +30,7 @@ public class RepoDetailActivityTest {
   @Mock UsersRepository repositoryMock;
 
   @Rule
-  public ActivityTestRule<UsersActivity> activityRule = new ActivityTestRule<>(UsersActivity.class);
+  public MakeTestsPassRule passRule = MakeTestsPassRule.create();
 
   @Before
   public void before() {
