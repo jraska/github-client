@@ -6,6 +6,9 @@ import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.rx.AppSchedulers;
 
 import org.junit.Test;
+import org.threeten.bp.LocalDateTime;
+
+import java.util.Collections;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -23,8 +26,8 @@ public class UserDetailViewModelTest {
   public void whenSameLoginMultipleTimes_thenOnlyOneObservableCreated() {
     UsersRepository usersRepository = mock(UsersRepository.class);
 
-    // mock returning mock! Fairy dies! Too lazy now...
-    Observable<UserDetail> detailObservable = Observable.just(mock(UserDetail.class));
+
+    Observable<UserDetail> detailObservable = Observable.just(testDetail());
     when(usersRepository.getUserDetail(any(), anyInt())).thenReturn(detailObservable);
 
     FakeConfig config = FakeConfig.create("user_detail_section_size", 3L);
@@ -47,5 +50,11 @@ public class UserDetailViewModelTest {
   public static AppSchedulers trampoline() {
     return new AppSchedulers(Schedulers.trampoline(), Schedulers.trampoline(),
       Schedulers.trampoline());
+  }
+
+  static UserDetail testDetail() {
+    User user = new User("login", "url", true, "url");
+    UserStats stats = new UserStats(0, 0, 0, LocalDateTime.MIN);
+    return new UserDetail(user, stats, Collections.emptyList(), Collections.emptyList());
   }
 }
