@@ -2,7 +2,7 @@ package com.jraska.github.client.users;
 
 import org.threeten.bp.LocalDateTime;
 
-public class RepoDetail {
+public final class RepoDetail {
   public final RepoHeader header;
   public final Data data;
 
@@ -16,14 +16,12 @@ public class RepoDetail {
     public final int issuesCount;
     public final String language;
     public final int subscribersCount;
-    public final LocalDateTime pushedAt;
 
-    public Data(LocalDateTime created, int issuesCount, String language, int subscribersCount, LocalDateTime pushedAt) {
+    public Data(LocalDateTime created, int issuesCount, String language, int subscribersCount) {
       this.created = created;
       this.issuesCount = issuesCount;
       this.language = language;
       this.subscribersCount = subscribersCount;
-      this.pushedAt = pushedAt;
     }
   }
 }

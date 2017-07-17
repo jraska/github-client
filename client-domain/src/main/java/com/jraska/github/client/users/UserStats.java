@@ -2,7 +2,7 @@ package com.jraska.github.client.users;
 
 import org.threeten.bp.LocalDateTime;
 
-public class UserStats {
+public final class UserStats {
   public final int followers;
   public final int following;
   public final int publicRepos;

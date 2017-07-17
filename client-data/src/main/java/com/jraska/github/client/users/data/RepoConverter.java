@@ -18,9 +18,8 @@ class RepoConverter {
     RepoHeader header = convert(repo);
 
     LocalDateTime created = LocalDateTime.parse(repo.createdAt, DateTimeFormatter.ISO_DATE_TIME);
-    LocalDateTime pushed = LocalDateTime.parse(repo.pushedAt, DateTimeFormatter.ISO_DATE_TIME);
-    RepoDetail.Data data = new RepoDetail.Data(created, repo.openIssuesCount, repo.language,
-      repo.subscribersCount, pushed);
+RepoDetail.Data data = new RepoDetail.Data(created, repo.openIssuesCount, repo.language,
+      repo.subscribersCount);
 
     return new RepoDetail(header, data);
   }

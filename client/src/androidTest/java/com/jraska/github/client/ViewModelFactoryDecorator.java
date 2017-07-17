@@ -22,10 +22,6 @@ public class ViewModelFactoryDecorator implements ViewModelProvider.Factory {
     this.providersMap = providersMap;
   }
 
-  public ViewModelProvider.Factory decoratedFactory() {
-    return decoratedFactory;
-  }
-
   @Override @SuppressWarnings("unchecked")
   public <T extends ViewModel> T create(Class<T> aClass) {
     Provider<ViewModel> viewModelProvider = providersMap.get(aClass);

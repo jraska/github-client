@@ -26,8 +26,4 @@ public final class Pair<F, S> {
   public int hashCode() {
     return (first == null ? 0 : first.hashCode()) ^ (second == null ? 0 : second.hashCode());
   }
-
-  public static <A, B> Pair<A, B> create(A a, B b) {
-    return new Pair<>(a, b);
-  }
 }
