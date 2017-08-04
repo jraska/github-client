@@ -38,6 +38,10 @@ android {
       keyPassword "github-client"
     }
   }
+
+  testOptions {
+    unitTests.returnDefaultValues = true
+  }
 }
 
 dependencies {
@@ -81,7 +85,6 @@ dependencies {
   testCompile 'com.google.code.gson:gson:2.8.1'
 
   testCompile 'junit:junit:4.12'
-  testCompile 'org.robolectric:robolectric:3.4'
   testCompile 'javax.inject:javax.inject:1'
   testCompile 'org.mockito:mockito-core:2.8.47'
   testCompile 'org.assertj:assertj-core:3.8.0'
