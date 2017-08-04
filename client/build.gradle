@@ -43,6 +43,8 @@ android {
 dependencies {
   retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.5.1'
 
+  compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
   compile project(':client-domain')
   compile project(':client-data')
 
@@ -88,10 +90,9 @@ dependencies {
 
   androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
   androidTestCompile 'com.android.support.test:runner:0.5'
-  androidTestCompile 'com.android.support:support-annotations:25.4.0' //to fix dependency conflicts
+  androidTestCompile 'com.android.support:support-annotations:26.0.0' //to fix dependency conflicts
   androidTestCompile 'org.mockito:mockito-core:2.8.47'
   androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
-  compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
 apply plugin: 'com.google.gms.google-services'
