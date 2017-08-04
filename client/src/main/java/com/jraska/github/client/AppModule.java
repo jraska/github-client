@@ -38,7 +38,7 @@ public class AppModule {
     return new AppBuildConfig(BuildConfig.DEBUG);
   }
 
-  @Provides @PerApp AppSchedulers schedulers() {
+  @Provides @PerApp public static AppSchedulers schedulers() {
     return new AppSchedulers(AndroidSchedulers.mainThread(),
       Schedulers.io(), Schedulers.computation());
   }

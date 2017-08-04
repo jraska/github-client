@@ -20,23 +20,26 @@ import timber.log.Timber;
 @Module
 public class FirebaseModule {
 
-  @Provides @PerApp EventAnalytics eventAnalytics(Context context, Config config) {
+  @Provides @PerApp FirebaseEventAnalytics firebaseAnalytics(Context context, Config config) {
     FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
 
     if (config.getBoolean("analytics_disabled")) {
       firebaseAnalytics.setAnalyticsCollectionEnabled(false);
       Timber.d("Analytics disabled");
-      return EventAnalytics.EMPTY;
     } else {
       firebaseAnalytics.setAnalyticsCollectionEnabled(true);
       Timber.d("Analytics enabled");
-      return new FirebaseEventAnalytics(firebaseAnalytics);
     }
+
+    return new FirebaseEventAnalytics(firebaseAnalytics);
   }
 
-  @Provides @PerApp AnalyticsProperty analyticsProperty(Context context, Config config) {
-    FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
-    return new FirebaseEventAnalytics(firebaseAnalytics);
+  @Provides EventAnalytics eventAnalytics(FirebaseEventAnalytics analytics) {
+    return analytics;
+  }
+
+  @Provides AnalyticsProperty analyticsProperty(FirebaseEventAnalytics analytics) {
+    return analytics;
   }
 
   @Provides @PerApp CrashReporter firebaseCrash() {

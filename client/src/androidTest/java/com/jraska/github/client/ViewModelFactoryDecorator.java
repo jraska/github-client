@@ -2,12 +2,15 @@ package com.jraska.github.client;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
-import com.jraska.github.client.common.Preconditions;
-import org.robolectric.RuntimeEnvironment;
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 
-import javax.inject.Provider;
+import com.jraska.github.client.common.Preconditions;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.inject.Provider;
 
 public class ViewModelFactoryDecorator implements ViewModelProvider.Factory {
   private final ViewModelProvider.Factory decoratedFactory;
@@ -29,16 +32,17 @@ public class ViewModelFactoryDecorator implements ViewModelProvider.Factory {
     return decoratedFactory.create(aClass);
   }
 
-  public static void setToApp(Class<? extends ViewModel> viewModelClass, ViewModel implementation) {
-    setToApp((GitHubClientApp) RuntimeEnvironment.application, viewModelClass, implementation);
+  public static void setToApp(Class<? extends ViewModel> viewModelClass,
+                                                   ViewModel implementation) {
+    Context applicationContext = InstrumentationRegistry.getTargetContext().getApplicationContext();
+    setToApp((GitHubClientApp) applicationContext, viewModelClass, implementation);
   }
 
   static void setToApp(GitHubClientApp app,
-                       Class<? extends ViewModel> viewModelClass, ViewModel implementation) {
+                                            Class<? extends ViewModel> viewModelClass, ViewModel implementation) {
     HashMap<Class, Provider<ViewModel>> map = new HashMap<>();
     map.put(viewModelClass, () -> implementation);
 
-    ViewModelFactoryDecorator decorator = new ViewModelFactoryDecorator(app.viewModelFactory, map);
-    app.viewModelFactory = decorator;
+    app.viewModelFactory = new ViewModelFactoryDecorator(app.viewModelFactory, map);
   }
 }

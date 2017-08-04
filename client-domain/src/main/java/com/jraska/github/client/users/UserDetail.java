@@ -5,7 +5,7 @@ import java.util.List;
 
 import io.reactivex.annotations.Nullable;
 
-public class UserDetail {
+public final class UserDetail {
   public final User user;
 
   @Nullable

@@ -2,6 +2,7 @@ package com.jraska.github.client;
 
 import android.app.Application;
 import android.arch.lifecycle.ViewModelProvider;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.firebase.perf.metrics.AddTrace;
 import com.jakewharton.threetenabp.AndroidThreeTen;
@@ -15,10 +16,12 @@ import com.jraska.github.client.logging.ErrorReportTree;
 import com.jraska.github.client.push.PushCallbacks;
 import com.jraska.github.client.push.PushHandler;
 import com.jraska.github.client.push.PushIntentObserver;
-import timber.log.Timber;
+
+import java.io.File;
 
 import javax.inject.Inject;
-import java.io.File;
+
+import timber.log.Timber;
 
 public class GitHubClientApp extends Application {
 
@@ -45,7 +48,7 @@ public class GitHubClientApp extends Application {
     appComponent.inject(this);
 
     Fresco.initialize(this);
-    AndroidThreeTen.init(this);
+    initThreeTen();
 
     Timber.plant(errorReportTree);
     if (BuildConfig.DEBUG) {
@@ -57,6 +60,10 @@ public class GitHubClientApp extends Application {
     registerActivityLifecycleCallbacks(new PushCallbacks(new PushIntentObserver(pushHandler())));
 
     logAppCreateEvent();
+  }
+
+  void initThreeTen() {
+    AndroidThreeTen.init(this);
   }
 
   protected DaggerAppComponent.Builder componentBuilder() {

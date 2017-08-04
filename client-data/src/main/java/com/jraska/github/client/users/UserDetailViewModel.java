@@ -46,6 +46,9 @@ public class UserDetailViewModel extends ViewModel {
 
   private RxLiveData<ViewState> newUserLiveData(String login) {
     int reposInSection = (int) config.getLong("user_detail_section_size");
+    if (reposInSection <= 0) {
+      reposInSection = 5;
+    }
 
     Observable<ViewState> viewStateObservable = usersRepository.getUserDetail(login, reposInSection)
       .subscribeOn(schedulers.io())
