@@ -1,24 +1,22 @@
 package com.jraska.github.client.ui;
 
-import android.arch.lifecycle.*;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.jraska.github.client.GitHubClientApp;
 import com.jraska.github.client.R;
 
-public abstract class BaseActivity extends AppCompatActivity implements LifecycleRegistryOwner {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-  private final LifecycleRegistry registry = new LifecycleRegistry(this);
+public abstract class BaseActivity extends AppCompatActivity {
 
   @BindView(R.id.toolbar) Toolbar toolbar;
-
-  @Override public LifecycleRegistry getLifecycle() {
-    return registry;
-  }
 
   protected final GitHubClientApp app() {
     return (GitHubClientApp) getApplication();
