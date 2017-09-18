@@ -1,6 +1,4 @@
 apply plugin: 'java'
-apply plugin: 'me.tatarka.retrolambda'
-
 
 configurations {
   provided
@@ -13,8 +11,6 @@ sourceSets {
 }
 
 dependencies {
-  retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.5.1'
-
   compile 'com.google.dagger:dagger:2.11'
   provided 'com.google.dagger:dagger-compiler:2.11'
 

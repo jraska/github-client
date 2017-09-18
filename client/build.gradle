@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
@@ -45,8 +44,6 @@ android {
 }
 
 dependencies {
-  retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.5.1'
-
   compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
   compile project(':client-domain')
