@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'kotlin'
 
 configurations {
   provided
@@ -11,6 +12,8 @@ sourceSets {
 }
 
 dependencies {
+  compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
   compile 'com.google.dagger:dagger:2.11'
   provided 'com.google.dagger:dagger-compiler:2.11'
 
