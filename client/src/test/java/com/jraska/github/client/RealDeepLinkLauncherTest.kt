@@ -9,6 +9,7 @@ import org.mockito.ArgumentMatchers.any
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
+import javax.inject.Provider
 
 class RealDeepLinkLauncherTest {
   @Mock private lateinit var activity: BaseActivity
@@ -18,36 +19,36 @@ class RealDeepLinkLauncherTest {
   fun before() {
     MockitoAnnotations.initMocks(this)
 
-    deepLinkLauncher = RealDeepLinkLauncher { activity }
+    deepLinkLauncher = RealDeepLinkLauncher(Provider { activity })
   }
 
   @Test(expected = IllegalArgumentException::class)
   fun whenUnknownHostUrl_thenException() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://jraska.com/users"))
+    deepLinkLauncher.launch(HttpUrl.parse("https://jraska.com/users")!!)
   }
 
   @Test(expected = IllegalArgumentException::class)
   fun whenUnsupportedUrl_thenIllegalStateException() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska/repos/johny"))
+    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska/repos/johny")!!)
   }
 
   @Test
   fun whenUsersUrl_thenPasses() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/users"))
+    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/users")!!)
 
     verify<BaseActivity>(activity).startActivity(any<Intent>())
   }
 
   @Test
   fun whenRepoUrl_thenPasses() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska/Falcon"))
+    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska/Falcon")!!)
 
     verify<BaseActivity>(activity).startActivity(any<Intent>())
   }
 
   @Test
   fun whenUserDetailUrl_thenUsersActivityStarts() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska"))
+    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska")!!)
 
     verify<BaseActivity>(activity).startActivity(any<Intent>())
   }

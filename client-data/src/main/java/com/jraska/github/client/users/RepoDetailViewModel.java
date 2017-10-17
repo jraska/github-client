@@ -2,16 +2,18 @@ package com.jraska.github.client.users;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
+
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.Urls;
 import com.jraska.github.client.analytics.AnalyticsEvent;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.rx.AppSchedulers;
 import com.jraska.github.client.rx.RxLiveData;
-import io.reactivex.Observable;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import io.reactivex.Observable;
 
 public class RepoDetailViewModel extends ViewModel {
   private final UsersRepository usersRepository;
@@ -58,7 +60,7 @@ public class RepoDetailViewModel extends ViewModel {
 
     eventAnalytics.report(event);
 
-    navigator.launchOnWeb(Urls.repo(fullRepoName));
+    navigator.launchOnWeb(Urls.Companion.repo(fullRepoName));
   }
 
   public static class ViewState {

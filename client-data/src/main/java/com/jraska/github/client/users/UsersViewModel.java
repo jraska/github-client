@@ -80,7 +80,7 @@ public class UsersViewModel extends ViewModel {
 
     eventAnalytics.report(event);
 
-    navigator.launchOnWeb(Urls.user(user.login));
+    navigator.launchOnWeb(Urls.Companion.user(user.login));
   }
 
   public static final class ViewState {

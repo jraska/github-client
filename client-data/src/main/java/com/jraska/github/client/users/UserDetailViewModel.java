@@ -67,7 +67,7 @@ public class UserDetailViewModel extends ViewModel {
 
     eventAnalytics.report(event);
 
-    navigator.launchOnWeb(Urls.user(login));
+    navigator.launchOnWeb(Urls.Companion.user(login));
   }
 
   public void onRepoClicked(RepoHeader header) {
