@@ -58,7 +58,7 @@ final class GitHubApiUsersRepository implements UsersRepository {
     }
 
     for (User lastUser : lastUsers) {
-      if (login.equals(lastUser.login)) {
+      if (login.equals(lastUser.getLogin())) {
         return Observable.just(new UserDetail(lastUser, null, emptyList(), emptyList()));
       }
     }

@@ -2,21 +2,19 @@ package com.jraska.github.client.users;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.Urls;
 import com.jraska.github.client.analytics.AnalyticsEvent;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.rx.AppSchedulers;
 import com.jraska.github.client.rx.RxLiveData;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleOnSubscribe;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class UsersViewModel extends ViewModel {
 
@@ -65,22 +63,22 @@ public class UsersViewModel extends ViewModel {
 
   public void onUserClicked(User user) {
     AnalyticsEvent event = AnalyticsEvent.builder("open_user_detail")
-      .addProperty("login", user.login)
+      .addProperty("login", user.getLogin())
       .build();
 
     eventAnalytics.report(event);
 
-    navigator.startUserDetail(user.login);
+    navigator.startUserDetail(user.getLogin());
   }
 
   public void onUserGitHubIconClicked(User user) {
     AnalyticsEvent event = AnalyticsEvent.builder("open_github_from_list")
-      .addProperty("login", user.login)
+      .addProperty("login", user.getLogin())
       .build();
 
     eventAnalytics.report(event);
 
-    navigator.launchOnWeb(Urls.Companion.user(user.login));
+    navigator.launchOnWeb(Urls.Companion.user(user.getLogin()));
   }
 
   public static final class ViewState {

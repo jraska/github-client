@@ -54,8 +54,8 @@ public class RepoDetailViewModel extends ViewModel {
 
   public void onFitHubIconClicked(String fullRepoName) {
     AnalyticsEvent event = AnalyticsEvent.builder("open_repo_from_detail")
-      .addProperty("owner", RepoHeader.owner(fullRepoName))
-      .addProperty("name", RepoHeader.name(fullRepoName))
+      .addProperty("owner", RepoHeader.Companion.name(fullRepoName))
+      .addProperty("name", RepoHeader.Companion.name(fullRepoName))
       .build();
 
     eventAnalytics.report(event);

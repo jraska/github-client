@@ -2,15 +2,13 @@ package com.jraska.github.client.ui;
 
 import android.view.View;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.airbnb.epoxy.EpoxyHolder;
 import com.airbnb.epoxy.EpoxyModelWithHolder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jraska.github.client.R;
 import com.jraska.github.client.users.User;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 class UserModel extends EpoxyModelWithHolder<UserModel.UserHolder> {
   private final User user;
@@ -26,11 +24,11 @@ class UserModel extends EpoxyModelWithHolder<UserModel.UserHolder> {
   }
 
   @Override public void bind(UserHolder holder) {
-    holder.loginTextView.setText(user.login);
+    holder.loginTextView.setText(user.getLogin());
 //    holder.avatarView.setImageDrawable(null);
-    holder.avatarView.setImageURI(user.avatarUrl);
+    holder.avatarView.setImageURI(user.getAvatarUrl());
 
-    if (user.isAdmin) {
+    if (user.isAdmin()) {
       holder.adminView.setVisibility(View.VISIBLE);
     } else {
       holder.adminView.setVisibility(View.GONE);

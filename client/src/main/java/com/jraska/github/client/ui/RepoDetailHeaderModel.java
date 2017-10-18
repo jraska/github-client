@@ -28,12 +28,12 @@ final class RepoDetailHeaderModel extends EpoxyModelWithHolder<RepoDetailHeaderM
   }
 
   @Override public void bind(Holder holder) {
-    String createdText = CREATED_DATE_FORMAT.format(repoDetail.data.created);
+    String createdText = CREATED_DATE_FORMAT.format(repoDetail.getData().getCreated());
     holder.createdTextView.setText(createdText);
 
-    holder.subscribersTextView.setText(String.valueOf(repoDetail.data.subscribersCount));
-    holder.forksTextView.setText(String.valueOf(repoDetail.header.forks));
-    holder.starsTextView.setText(String.valueOf(repoDetail.header.stars));
+    holder.subscribersTextView.setText(String.valueOf(repoDetail.getData().getSubscribersCount()));
+    holder.forksTextView.setText(String.valueOf(repoDetail.getHeader().getForks()));
+    holder.starsTextView.setText(String.valueOf(repoDetail.getHeader().getStars()));
   }
 
   static class Holder extends EpoxyHolder {

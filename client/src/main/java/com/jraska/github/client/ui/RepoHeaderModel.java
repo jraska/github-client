@@ -31,10 +31,10 @@ public class RepoHeaderModel extends EpoxyModelWithHolder<RepoHeaderModel.RepoHo
   }
 
   @Override public void bind(RepoHolder holder) {
-    holder.titleTextView.setText(repo.name);
-    holder.descriptionTextView.setText(repo.description);
-    holder.starsTextView.setText(String.valueOf(repo.stars));
-    holder.forksTextView.setText(String.valueOf(repo.forks));
+    holder.titleTextView.setText(repo.getName());
+    holder.descriptionTextView.setText(repo.getDescription());
+    holder.starsTextView.setText(String.valueOf(repo.getStars()));
+    holder.forksTextView.setText(String.valueOf(repo.getForks()));
 
     holder.itemView.setOnClickListener(itemClickListener);
 

@@ -76,9 +76,9 @@ public class UserDetailActivity extends BaseActivity implements RepoHeaderModel.
 
   void setUser(UserDetail userDetail) {
     loadTrace.incrementCounter("set_user_detail");
-    avatarView.setImageURI(userDetail.user.avatarUrl);
+    avatarView.setImageURI(userDetail.getUser().getAvatarUrl());
 
-    if (userDetail.basicStats == null) {
+    if (userDetail.getBasicStats() == null) {
       loadTrace.incrementCounter("set_user_detail_incomplete");
       return;
     }
@@ -86,14 +86,14 @@ public class UserDetailActivity extends BaseActivity implements RepoHeaderModel.
     SimpleEpoxyAdapter adapter = new SimpleEpoxyAdapter();
 
     List<EpoxyModel<?>> models = new ArrayList<>();
-    models.add(new UserHeaderModel(userDetail.basicStats));
+    models.add(new UserHeaderModel(userDetail.getBasicStats()));
 
-    if (!userDetail.popularRepos.isEmpty()) {
-      models.add(new ReposSectionModel(getString(R.string.repos_popular), userDetail.popularRepos, this));
+    if (!userDetail.getPopularRepos().isEmpty()) {
+      models.add(new ReposSectionModel(getString(R.string.repos_popular), userDetail.getPopularRepos(), this));
     }
 
-    if (!userDetail.contributedRepos.isEmpty()) {
-      models.add(new ReposSectionModel(getString(R.string.repos_contributed), userDetail.contributedRepos, this));
+    if (!userDetail.getContributedRepos().isEmpty()) {
+      models.add(new ReposSectionModel(getString(R.string.repos_contributed), userDetail.getContributedRepos(), this));
     }
 
     adapter.addModels(models);

@@ -31,11 +31,11 @@ public class UserHeaderModel extends EpoxyModelWithHolder<UserHeaderModel.Header
   }
 
   @Override public void bind(HeaderHolder holder) {
-    holder.followersTextView.setText(String.valueOf(basicStats.followers));
-    holder.followingTextView.setText(String.valueOf(basicStats.following));
-    holder.reposCountTextView.setText(String.valueOf(basicStats.publicRepos));
+    holder.followersTextView.setText(String.valueOf(basicStats.getFollowers()));
+    holder.followingTextView.setText(String.valueOf(basicStats.getFollowing()));
+    holder.reposCountTextView.setText(String.valueOf(basicStats.getPublicRepos()));
 
-    String joinedDateText = JOINED_FORMAT.format(basicStats.joined);
+    String joinedDateText = JOINED_FORMAT.format(basicStats.getJoined());
     String joinedText = holder.joinedTextView.getContext()
         .getString(R.string.user_detail_joined_template, joinedDateText);
     holder.joinedTextView.setText(joinedText);

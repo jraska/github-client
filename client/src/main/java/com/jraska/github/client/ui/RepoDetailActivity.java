@@ -38,7 +38,7 @@ public class RepoDetailActivity extends BaseActivity {
     liveData.observe(this, this::setState);
   }
 
-  @OnClick(R.id.repo_detail_github_fab) void onFitHubIconClicked(){
+  @OnClick(R.id.repo_detail_github_fab) void onFitHubIconClicked() {
     viewModel.onFitHubIconClicked(fullRepoName());
   }
 
@@ -61,11 +61,11 @@ public class RepoDetailActivity extends BaseActivity {
     adapter.addModels(new RepoDetailHeaderModel(repoDetail));
 
     String languageText = getString(R.string.repo_detail_language_used_template,
-      repoDetail.data.language);
+      repoDetail.getData().getLanguage());
     adapter.addModels(new SimpleTextModel(languageText));
 
     String issuesText = getString(R.string.repo_detail_issues_template,
-      String.valueOf(repoDetail.data.issuesCount));
+      String.valueOf(repoDetail.getData().getIssuesCount()));
     adapter.addModels(new SimpleTextModel(issuesText));
 
     recyclerView.setAdapter(adapter);
