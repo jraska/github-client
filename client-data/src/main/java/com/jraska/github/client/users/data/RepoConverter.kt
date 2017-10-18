@@ -9,7 +9,8 @@ import org.threeten.bp.format.DateTimeFormatter
 internal class RepoConverter {
 
   fun convert(gitHubRepo: GitHubRepo): RepoHeader {
-    return RepoHeader(gitHubRepo.owner!!.login!!, gitHubRepo.name!!, gitHubRepo.description!!,
+    return RepoHeader(gitHubRepo.owner!!.login!!,
+      gitHubRepo.name!!, gitHubRepo.description ?: "",
       gitHubRepo.stargazersCount!!, gitHubRepo.forks!!)
   }
 
