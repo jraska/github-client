@@ -1,23 +1,15 @@
 package com.jraska.github.client.users;
 
 import android.support.test.espresso.action.ViewActions;
-
-import com.jraska.github.client.AppModule;
-import com.jraska.github.client.DeepLinkLaunchTest;
-import com.jraska.github.client.MakeTestsPassRule;
-import com.jraska.github.client.Navigator;
-import com.jraska.github.client.R;
-import com.jraska.github.client.ViewModelFactoryDecorator;
+import com.jraska.github.client.*;
 import com.jraska.github.client.analytics.EventAnalytics;
-
+import io.reactivex.Observable;
+import okhttp3.HttpUrl;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import io.reactivex.Observable;
-import okhttp3.HttpUrl;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
