@@ -1,15 +1,8 @@
 package com.jraska.github.client
 
-import com.jraska.github.client.common.Preconditions
-
 import okhttp3.HttpUrl
 
 class Urls private constructor() {
-
-  init {
-    Preconditions.throwNoInstances()
-  }
-
   companion object {
     fun user(login: String): HttpUrl {
       return HttpUrl.parse("https://github.com/" + login) as HttpUrl

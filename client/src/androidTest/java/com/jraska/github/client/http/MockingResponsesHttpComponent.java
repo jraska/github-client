@@ -1,7 +1,6 @@
 package com.jraska.github.client.http;
 
-import android.support.test.espresso.Espresso;
-
+import android.support.test.espresso.IdlingRegistry;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -22,7 +21,7 @@ public final class MockingResponsesHttpComponent implements HttpComponent {
 
   public static MockingResponsesHttpComponent create() {
     RxHttpIdlingResourceFactory idlingResourceFactory = RxHttpIdlingResourceFactory.create();
-    Espresso.registerIdlingResources(idlingResourceFactory.idlingResource());
+    IdlingRegistry.getInstance().register(idlingResourceFactory.idlingResource());
 
     Retrofit retrofit = new Retrofit.Builder()
       .baseUrl("https://api.github.com")

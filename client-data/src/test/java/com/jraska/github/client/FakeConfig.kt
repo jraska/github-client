@@ -3,6 +3,7 @@ package com.jraska.github.client
 import com.jraska.github.client.common.Maps
 import java.util.*
 
+
 class FakeConfig private constructor(private val values: Map<String, Any>) : Config {
 
   override fun triggerRefresh() {
