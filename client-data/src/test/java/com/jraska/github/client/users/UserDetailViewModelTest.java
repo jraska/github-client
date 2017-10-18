@@ -30,7 +30,7 @@ public class UserDetailViewModelTest {
     Observable<UserDetail> detailObservable = Observable.just(testDetail());
     when(usersRepository.getUserDetail(any(), anyInt())).thenReturn(detailObservable);
 
-    FakeConfig config = FakeConfig.create("user_detail_section_size", 3L);
+    FakeConfig config = FakeConfig.Companion.create("user_detail_section_size", 3L);
 
     UserDetailViewModel viewModel = new UserDetailViewModel(usersRepository,
       trampoline(), mock(Navigator.class), EventAnalytics.EMPTY, config);
