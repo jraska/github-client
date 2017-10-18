@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
+import butterknife.BindView;
+import butterknife.OnClick;
 import com.airbnb.epoxy.EpoxyModel;
 import com.airbnb.epoxy.SimpleEpoxyAdapter;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -20,9 +21,6 @@ import com.jraska.github.client.users.UserDetailViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 public class UserDetailActivity extends BaseActivity implements RepoHeaderModel.RepoListener {
   static final String EXTRA_USER_LOGIN = "login";

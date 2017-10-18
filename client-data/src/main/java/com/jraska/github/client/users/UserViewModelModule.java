@@ -1,12 +1,10 @@
 package com.jraska.github.client.users;
 
 import android.arch.lifecycle.ViewModel;
-
 import com.jraska.github.client.Config;
 import com.jraska.github.client.Navigator;
 import com.jraska.github.client.analytics.EventAnalytics;
 import com.jraska.github.client.rx.AppSchedulers;
-
 import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.ClassKey;
