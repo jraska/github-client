@@ -21,7 +21,7 @@ public abstract class HttpModule {
   public static Retrofit provideRetrofit(OkHttpClient okHttpClient, AppBuildConfig config) {
     return new Retrofit.Builder()
         .baseUrl("https://api.github.com")
-        .validateEagerly(config.debug)
+        .validateEagerly(config.getDebug())
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -32,7 +32,7 @@ public abstract class HttpModule {
   public static OkHttpClient provideOkHttpClient(@Http File cacheDir, @Http VerboseLogger logger, AppBuildConfig config) {
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-    if (config.debug) {
+    if (config.getDebug()) {
       HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(logger::v)
           .setLevel(Level.BASIC);
       builder.addInterceptor(loggingInterceptor);
