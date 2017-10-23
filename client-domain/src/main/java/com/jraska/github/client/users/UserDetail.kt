@@ -1,6 +1,5 @@
 package com.jraska.github.client.users
 
-import io.reactivex.annotations.Nullable
 import java.util.*
 
 class UserDetail(val user: User, val basicStats: UserStats?,

@@ -49,7 +49,7 @@ class UsersActivity : BaseActivity(), UserModel.UserListener {
     }
 
     if (state.error() != null) {
-      showError(state.error())
+      showError(state.error()!!)
     } else if (state.result() != null) {
       setUsers(state.result()!!)
     }
@@ -63,7 +63,7 @@ class UsersActivity : BaseActivity(), UserModel.UserListener {
     usersRecyclerView.adapter = adapter
   }
 
-  private fun showError(error: Throwable?) {
+  private fun showError(error: Throwable) {
     ErrorHandler.displayError(error, usersRecyclerView)
   }
 
