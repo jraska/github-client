@@ -7,9 +7,6 @@ import com.jraska.github.client.rx.AppSchedulers
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import org.junit.Test
-import org.mockito.ArgumentMatchers
-import org.mockito.ArgumentMatchers.any
-import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mockito.*
 import org.threeten.bp.LocalDateTime
 
@@ -20,7 +17,8 @@ class UserDetailViewModelTest {
 
 
     val detailObservable = Observable.just(testDetail())
-    `when`(usersRepository.getUserDetail(any<String>(), anyInt())).thenReturn(detailObservable)
+    `when`(usersRepository.getUserDetail("someLogin", 3)).thenReturn(detailObservable)
+    `when`(usersRepository.getUserDetail("different", 3)).thenReturn(detailObservable)
 
     val config = FakeConfig.create("user_detail_section_size", 3L)
 
@@ -30,13 +28,13 @@ class UserDetailViewModelTest {
     val login = "someLogin"
 
     viewModel.userDetail(login)
-    verify(usersRepository).getUserDetail(any<String>(), ArgumentMatchers.eq(3))
+    verify(usersRepository).getUserDetail("someLogin", 3)
 
     viewModel.userDetail(login)
-    verify(usersRepository).getUserDetail(any<String>(), anyInt())
+    verify(usersRepository).getUserDetail("someLogin", 3)
 
-    viewModel.userDetail("different" + login)
-    verify(usersRepository, times(2)).getUserDetail(any<String>(), ArgumentMatchers.eq(3))
+    viewModel.userDetail("different")
+    verify(usersRepository).getUserDetail("different", 3)
   }
 
   companion object {
