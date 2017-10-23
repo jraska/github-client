@@ -8,11 +8,7 @@ import com.jraska.github.client.ui.UsersActivity;
  * Currently we have to always start activity first
  */
 public class MakeTestsPassRule extends ActivityTestRule<UsersActivity> {
-  private MakeTestsPassRule() {
+  public MakeTestsPassRule() {
     super(UsersActivity.class);
-  }
-
-  public static MakeTestsPassRule create(){
-    return new MakeTestsPassRule();
   }
 }

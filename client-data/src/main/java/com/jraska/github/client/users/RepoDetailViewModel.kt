@@ -10,8 +10,11 @@ import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.rx.RxLiveData
 import java.util.*
 
-class RepoDetailViewModel internal constructor(private val usersRepository: UsersRepository, private val appSchedulers: AppSchedulers,
-                                               private val navigator: Navigator, private val eventAnalytics: EventAnalytics) : ViewModel() {
+class RepoDetailViewModel constructor(
+  private val usersRepository: UsersRepository,
+  private val appSchedulers: AppSchedulers,
+  private val navigator: Navigator,
+  private val eventAnalytics: EventAnalytics) : ViewModel() {
 
   private val repoDetailLiveDataMap = HashMap<String, LiveData<ViewState>>()
 

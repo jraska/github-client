@@ -1,6 +1,5 @@
 package com.jraska.github.client.push
 
-import com.jraska.github.client.common.Maps
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import java.util.*
@@ -15,7 +14,7 @@ class RemoteMessageToActionConverterTest {
 
   @Test
   fun whenRemoteMessageWithAction_thenActionReturned() {
-    val action = RemoteMessageToActionConverter.convert(Maps.newHashMap("action", "heeeya"))
+    val action = RemoteMessageToActionConverter.convert(mapOf("action" to "heeeya"))
 
     assertThat(action.name).isEqualTo("heeeya")
     assertThat(action.parameters).isEmpty()

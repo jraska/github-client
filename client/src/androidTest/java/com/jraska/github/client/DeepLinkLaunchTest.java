@@ -16,7 +16,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 public class DeepLinkLaunchTest {
   @Rule
-  public MakeTestsPassRule passRule = MakeTestsPassRule.create();
+  public MakeTestsPassRule passRule = new MakeTestsPassRule();
 
   @Test
   public void whenUsersLink_thenUsersActivityDisplayed() {
