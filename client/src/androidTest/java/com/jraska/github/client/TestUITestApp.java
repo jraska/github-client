@@ -5,7 +5,7 @@ import com.jraska.github.client.http.HttpComponent;
 
 public class TestUITestApp extends GitHubClientApp {
   @Override protected HttpComponent httpComponent() {
-    return MockingResponsesHttpComponent.create();
+    return MockingResponsesHttpComponent.Companion.create();
   }
 
   @Override protected DaggerAppComponent.Builder componentBuilder() {
