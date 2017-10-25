@@ -1,7 +1,6 @@
 package com.jraska.github.client.ui
 
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -36,8 +35,6 @@ internal class ReposSectionModel(
   internal class ReposHolder : EpoxyHolder() {
     @BindView(R.id.repos_repeater)
     lateinit var reposRepeater: RepeaterLayout
-    @BindView(R.id.repos_container)
-    lateinit var reposContainer: ViewGroup
     @BindView(R.id.repos_title)
     lateinit var reposTitle: TextView
 

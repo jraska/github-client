@@ -29,25 +29,25 @@ public final class PushHandler {
   }
 
   void handlePush(PushAction action) {
-    Timber.v("Push received action: %s", action.name);
+    Timber.v("Push received action: %s", action.getName());
 
     boolean handled = handleInternal(action);
 
     if (handled) {
       AnalyticsEvent pushHandled = AnalyticsEvent.Companion.builder("push_handled")
-        .addProperty("push_action", action.name)
+        .addProperty("push_action", action.getName())
         .build();
       eventAnalytics.report(pushHandled);
     } else {
       AnalyticsEvent pushHandled = AnalyticsEvent.Companion.builder("push_not_handled")
-        .addProperty("push_action", action.name)
+        .addProperty("push_action", action.getName())
         .build();
       eventAnalytics.report(pushHandled);
     }
   }
 
   boolean handleInternal(PushAction action) {
-    switch (action.name) {
+    switch (action.getName()) {
       case ACTION_REFRESH_CONFIG:
         return refreshConfig();
       case ACTION_CONFIG_VALUE_AS_PROPERTY:
@@ -61,12 +61,12 @@ public final class PushHandler {
   }
 
   private boolean setAnalyticsProperty(PushAction action) {
-    String key = action.parameters.get("property_key");
+    String key = action.getParameters().get("property_key");
     if (key == null) {
       return false;
     }
 
-    String value = action.parameters.get("property_value");
+    String value = action.getParameters().get("property_value");
     if (value == null) {
       return false;
     }
@@ -76,7 +76,7 @@ public final class PushHandler {
   }
 
   private boolean configAsProperty(PushAction action) {
-    String key = action.parameters.get("config_key");
+    String key = action.getParameters().get("config_key");
     if (key == null) {
       return false;
     }

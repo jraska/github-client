@@ -7,7 +7,7 @@ import com.jraska.github.client.GitHubClientApp;
 public final class PushHandleService extends FirebaseMessagingService {
   @Override public void onMessageReceived(RemoteMessage remoteMessage) {
     GitHubClientApp app = ((GitHubClientApp) getApplication());
-    PushAction action = RemoteMessageToActionConverter.convert(remoteMessage);
+    PushAction action = RemoteMessageToActionConverter.INSTANCE.convert(remoteMessage);
 
     app.pushHandler().handlePush(action);
   }

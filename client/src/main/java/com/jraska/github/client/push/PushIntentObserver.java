@@ -9,13 +9,12 @@ import android.content.Intent;
 
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.messaging.RemoteMessageBridge;
-import com.jraska.github.client.common.Preconditions;
 
 public final class PushIntentObserver implements LifecycleObserver {
   private final PushHandler pushHandler;
 
   public PushIntentObserver(PushHandler pushHandler) {
-    this.pushHandler = Preconditions.argNotNull(pushHandler);
+    this.pushHandler = pushHandler;
   }
 
   @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -27,8 +26,8 @@ public final class PushIntentObserver implements LifecycleObserver {
     Activity activity = (Activity) owner;
     Intent intent = activity.getIntent();
     if (isPush(intent)) {
-      RemoteMessage message = RemoteMessageBridge.create(intent.getExtras());
-      PushAction action = RemoteMessageToActionConverter.convert(message);
+      RemoteMessage message = RemoteMessageBridge.INSTANCE.create(intent.getExtras());
+      PushAction action = RemoteMessageToActionConverter.INSTANCE.convert(message);
 
       pushHandler.handlePush(action);
     }
