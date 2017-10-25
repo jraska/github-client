@@ -7,19 +7,14 @@ import butterknife.ButterKnife
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.jraska.github.client.R
-import com.jraska.github.client.common.Preconditions
 import com.jraska.github.client.users.RepoHeader
 
-internal class RepoHeaderModel(repo: RepoHeader, repoListener: RepoListener)
+internal class RepoHeaderModel(private val repo: RepoHeader, repoListener: RepoListener)
   : EpoxyModelWithHolder<RepoHeaderModel.RepoHolder>() {
-  private val repo: RepoHeader
   private val itemClickListener: View.OnClickListener
 
   init {
-    Preconditions.argNotNull(repoListener)
-
-    this.repo = Preconditions.argNotNull(repo)
-    this.itemClickListener = View.OnClickListener { v -> repoListener.onRepoClicked(repo) }
+    this.itemClickListener = View.OnClickListener { repoListener.onRepoClicked(repo) }
   }
 
   override fun createNewHolder(): RepoHolder {

@@ -34,12 +34,12 @@ public final class PushHandler {
     boolean handled = handleInternal(action);
 
     if (handled) {
-      AnalyticsEvent pushHandled = AnalyticsEvent.builder("push_handled")
+      AnalyticsEvent pushHandled = AnalyticsEvent.Companion.builder("push_handled")
         .addProperty("push_action", action.name)
         .build();
       eventAnalytics.report(pushHandled);
     } else {
-      AnalyticsEvent pushHandled = AnalyticsEvent.builder("push_not_handled")
+      AnalyticsEvent pushHandled = AnalyticsEvent.Companion.builder("push_not_handled")
         .addProperty("push_action", action.name)
         .build();
       eventAnalytics.report(pushHandled);
@@ -94,7 +94,7 @@ public final class PushHandler {
   void onTokenRefresh() {
     tokenSynchronizer.synchronizeToken();
 
-    AnalyticsEvent tokenEvent = AnalyticsEvent.create("push_token_refresh");
+    AnalyticsEvent tokenEvent = AnalyticsEvent.Companion.create("push_token_refresh");
     eventAnalytics.report(tokenEvent);
   }
 }

@@ -27,8 +27,8 @@ internal class UserModel(private val user: User, private val userListener: UserL
       holder.adminView.visibility = View.GONE
     }
 
-    holder.iconView.setOnClickListener { v -> userListener.onUserGitHubIconClicked(user) }
-    holder.containerView.setOnClickListener { v -> userListener.onUserClicked(user) }
+    holder.iconView.setOnClickListener { userListener.onUserGitHubIconClicked(user) }
+    holder.containerView.setOnClickListener { userListener.onUserClicked(user) }
   }
 
   override fun getDefaultLayout(): Int {

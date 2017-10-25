@@ -47,7 +47,7 @@ public class GitHubClientApp extends Application {
     AppComponent appComponent = componentBuilder().build();
     appComponent.inject(this);
 
-    Fresco.initialize(this);
+    initFresco();
     initThreeTen();
 
     Timber.plant(errorReportTree);
@@ -55,11 +55,15 @@ public class GitHubClientApp extends Application {
       Timber.plant(new Timber.DebugTree());
     }
 
-    registerActivityLifecycleCallbacks(topActivityProvider.callbacks);
+    registerActivityLifecycleCallbacks(topActivityProvider.getCallbacks());
 
     registerActivityLifecycleCallbacks(new PushCallbacks(new PushIntentObserver(pushHandler())));
 
     logAppCreateEvent();
+  }
+
+  protected void initFresco() {
+    Fresco.initialize(this);
   }
 
   void initThreeTen() {
@@ -82,7 +86,7 @@ public class GitHubClientApp extends Application {
   }
 
   private void logAppCreateEvent() {
-    AnalyticsEvent createEvent = AnalyticsEvent.create("app_create");
+    AnalyticsEvent createEvent = AnalyticsEvent.Companion.create("app_create");
     eventAnalytics.report(createEvent);
   }
 }
