@@ -16,7 +16,11 @@ class HttpDependenciesModule(private val config: AppBuildConfig, private val cac
   }
 
   @Provides internal fun timberLogger(): VerboseLogger {
-    return { message: String -> Timber.tag("Network").v(message) } as VerboseLogger
+    return object : VerboseLogger {
+      override fun v(message: String) {
+        Timber.tag("Network").v(message)
+      }
+    }
   }
 
   @Provides internal fun cacheDir(): File {
