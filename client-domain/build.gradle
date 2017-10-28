@@ -14,8 +14,8 @@ sourceSets {
 dependencies {
   compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-  compile 'com.google.dagger:dagger:2.11'
-  provided 'com.google.dagger:dagger-compiler:2.11'
+  compile 'com.google.dagger:dagger:2.12'
+  provided 'com.google.dagger:dagger-compiler:2.12'
 
   compile 'io.reactivex.rxjava2:rxjava:2.1.5'
   compile 'com.squareup.okhttp3:okhttp:3.9.0'
@@ -25,5 +25,5 @@ dependencies {
 
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:3.8.0'
-  testCompile 'org.mockito:mockito-core:2.10.0'
+  testCompile 'org.mockito:mockito-core:2.11.0'
 }

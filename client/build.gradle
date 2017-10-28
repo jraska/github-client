@@ -64,28 +64,27 @@ dependencies {
   compile 'com.google.firebase:firebase-messaging:11.4.2'
   compile 'com.google.firebase:firebase-database:11.4.2'
 
-  compile "android.arch.lifecycle:runtime:1.0.0"
+  compile "android.arch.lifecycle:runtime:1.0.3"
 
   compile 'com.facebook.fresco:fresco:1.5.0'
 
   compile 'com.jakewharton:butterknife:8.8.1'
-  annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
   kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
-  compile 'com.airbnb.android:epoxy:2.5.0'
+  compile 'com.airbnb.android:epoxy:2.7.1'
 
-  kapt 'com.google.dagger:dagger-compiler:2.11'
+  kapt 'com.google.dagger:dagger-compiler:2.12'
 
   compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
   compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
 
   compile 'com.jakewharton.timber:timber:4.5.1'
 
-  testCompile 'com.google.code.gson:gson:2.8.1'
+  testCompile 'com.google.code.gson:gson:2.8.2'
 
   testCompile 'junit:junit:4.12'
   testCompile 'javax.inject:javax.inject:1'
-  testCompile 'org.mockito:mockito-core:2.10.0'
+  testCompile 'org.mockito:mockito-core:2.11.0'
   testCompile 'org.assertj:assertj-core:3.8.0'
   testCompile 'org.threeten:threetenbp:1.3.6' // to fix failures with three ten db
   testCompile 'com.android.support:support-annotations:26.1.0' //to fix dependency conflicts
@@ -93,7 +92,7 @@ dependencies {
   androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
   androidTestCompile 'com.android.support.test:runner:1.0.1'
   androidTestCompile 'com.android.support:support-annotations:26.1.0' //to fix dependency conflicts
-  androidTestCompile 'org.mockito:mockito-core:2.9.0'
+  androidTestCompile 'org.mockito:mockito-core:2.9.0' // now freezed at 2.9.0, higher version crash the UI tests
   androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
 }
 
