@@ -17,7 +17,6 @@ import com.jraska.github.client.R
 import com.jraska.github.client.users.RepoHeader
 import com.jraska.github.client.users.UserDetail
 import com.jraska.github.client.users.UserDetailViewModel
-import com.jraska.github.client.viewModel
 import java.util.*
 
 class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {

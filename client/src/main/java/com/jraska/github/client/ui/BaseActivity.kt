@@ -15,6 +15,15 @@ abstract class BaseActivity : AppCompatActivity() {
 
   @BindView(R.id.toolbar) lateinit var toolbar: Toolbar
 
+  protected fun app(): GitHubClientApp {
+    return application as GitHubClientApp
+  }
+
+  protected fun <T : ViewModel> viewModel(modelClass: Class<T>): T {
+    val factory = app().viewModelFactory()
+    return ViewModelProviders.of(this, factory).get(modelClass)
+  }
+
   override fun setContentView(layoutResID: Int) {
     super.setContentView(layoutResID)
     onSetContentView()

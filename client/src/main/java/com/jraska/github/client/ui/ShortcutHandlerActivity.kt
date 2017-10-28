@@ -1,7 +1,6 @@
 package com.jraska.github.client.ui
 
 import android.os.Bundle
-import com.jraska.github.client.viewModel
 
 import okhttp3.HttpUrl
 
