@@ -5,7 +5,10 @@ import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import com.jraska.github.client.*
 import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.rx.AppSchedulers
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import okhttp3.HttpUrl
 import org.junit.Before
 import org.junit.Rule
@@ -32,7 +35,8 @@ class RepoDetailActivityTest {
   @Test
   fun whenFabClicked_thenNavigatesToGitHub() {
     val detailViewModel = RepoDetailViewModel(repositoryMock,
-      AppModule.schedulers(), navigatorMock, EventAnalytics.EMPTY)
+      AppSchedulers(AndroidSchedulers.mainThread(),
+        Schedulers.io(), Schedulers.computation()), navigatorMock, EventAnalytics.EMPTY)
     ViewModelFactoryDecorator.setToApp(RepoDetailViewModel::class.java, detailViewModel)
 
     val deepLink = "https://github.com/jraska/Falcon"
