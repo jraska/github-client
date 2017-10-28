@@ -12,6 +12,7 @@ import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.R
 import com.jraska.github.client.users.User
 import com.jraska.github.client.users.UsersViewModel
+import com.jraska.github.client.viewModel
 
 class UsersActivity : BaseActivity(), UserModel.UserListener {
   private lateinit var usersViewModel: UsersViewModel
