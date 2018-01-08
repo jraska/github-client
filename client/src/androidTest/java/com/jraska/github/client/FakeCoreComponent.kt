@@ -9,17 +9,21 @@ import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 
-class FakeFirebaseModule : FirebaseModule() {
-  override fun eventAnalytics(analytics: FirebaseEventAnalytics): EventAnalytics {
+class FakeCoreComponent : CoreComponent {
+  override fun analytics(): EventAnalytics {
     return EventAnalytics.EMPTY
   }
 
-  override fun analyticsProperty(analytics: FirebaseEventAnalytics): AnalyticsProperty {
+  override fun analyticsProperty(): AnalyticsProperty {
     return mock(AnalyticsProperty::class.java)
   }
 
-  override fun firebaseCrash(): CrashReporter {
+  override fun crashReporter(): CrashReporter {
     return mock(CrashReporter::class.java)
+  }
+
+  override fun config(): Config {
+    return mock(Config::class.java)
   }
 
   override fun firebaseDatabase(): FirebaseDatabase {

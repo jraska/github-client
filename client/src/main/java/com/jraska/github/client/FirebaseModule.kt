@@ -1,6 +1,7 @@
 package com.jraska.github.client
 
 import android.content.Context
+import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -11,13 +12,14 @@ import com.jraska.github.client.logging.FirebaseCrashReporter
 import dagger.Module
 import dagger.Provides
 import timber.log.Timber
+import javax.inject.Singleton
 
 @Module
 open class FirebaseModule {
 
   @Provides
-  @PerApp internal fun firebaseAnalytics(context: Context, config: Config): FirebaseEventAnalytics {
-    val firebaseAnalytics = FirebaseAnalytics.getInstance(context)
+  @Singleton internal fun firebaseAnalytics(config: Config): FirebaseEventAnalytics {
+    val firebaseAnalytics = FirebaseAnalytics.getInstance(FirebaseApp.getInstance()!!.applicationContext)
 
     if (config.getBoolean("analytics_disabled")) {
       firebaseAnalytics.setAnalyticsCollectionEnabled(false)
@@ -39,12 +41,13 @@ open class FirebaseModule {
   }
 
   @Provides
-  @PerApp internal open fun firebaseCrash(): CrashReporter {
+  @Singleton
+  internal open fun firebaseCrash(): CrashReporter {
     return FirebaseCrashReporter()
   }
 
   @Provides
-  @PerApp internal fun config(): Config {
+  @Singleton internal fun config(): Config {
     val configProxy = FirebaseConfigProxy(FirebaseRemoteConfig.getInstance())
 
     configProxy.setupDefaults().fetch()
@@ -53,7 +56,8 @@ open class FirebaseModule {
   }
 
   @Provides
-  @PerApp internal open fun firebaseDatabase(): FirebaseDatabase {
+  @Singleton
+  internal open fun firebaseDatabase(): FirebaseDatabase {
     return FirebaseDatabase.getInstance()
   }
 }

@@ -8,8 +8,7 @@ class TestUITestApp : GitHubClientApp() {
     return MockingResponsesHttpComponent.create()
   }
 
-  override fun componentBuilder(): DaggerAppComponent.Builder {
-    return super.componentBuilder()
-      .firebaseModule(FakeFirebaseModule())
+  override fun coreComponent(): CoreComponent {
+    return FakeCoreComponent()
   }
 }

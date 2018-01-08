@@ -57,18 +57,23 @@ open class GitHubClientApp : Application() {
     logAppCreateEvent()
   }
 
-  protected fun initFresco() {
+  private fun initFresco() {
     Fresco.initialize(this)
   }
 
-  internal fun initThreeTen() {
+  private fun initThreeTen() {
     AndroidThreeTen.init(this)
   }
 
-  protected open fun componentBuilder(): DaggerAppComponent.Builder {
+  private fun componentBuilder(): DaggerAppComponent.Builder {
     return DaggerAppComponent.builder()
       .appModule(AppModule(this))
-      .httpComponent(httpComponent())
+      .httpComponentModule(HttpComponentModule(httpComponent()))
+      .coreComponentModule(CoreComponentModule(coreComponent()))
+  }
+
+  protected open fun coreComponent(): CoreComponent {
+    return DaggerCoreComponent.builder().build()
   }
 
   protected open fun httpComponent(): HttpComponent {
