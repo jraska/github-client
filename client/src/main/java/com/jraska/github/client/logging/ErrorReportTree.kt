@@ -12,7 +12,7 @@ class ErrorReportTree @Inject internal constructor(private val crashReporter: Cr
     return priority >= Log.ERROR
   }
 
-  override fun log(priority: Int, tagParam: String?, message: String?, errorParam: Throwable?) {
+  override fun log(priority: Int, tagParam: String?, message: String, errorParam: Throwable?) {
     var tag = tagParam
     var error = errorParam
     if (tag == null) {
@@ -23,10 +23,10 @@ class ErrorReportTree @Inject internal constructor(private val crashReporter: Cr
       error = DeveloperError("Error without exception")
     }
 
-    if (tag != null || message != null) {
+    if (tag != null) {
       crashReporter.report(error, tag + "/" + message)
     } else {
-      crashReporter.report(error)
+      crashReporter.report(error, message)
     }
   }
 
