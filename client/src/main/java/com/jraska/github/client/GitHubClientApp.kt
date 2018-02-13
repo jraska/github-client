@@ -26,6 +26,7 @@ open class GitHubClientApp : Application() {
   @Inject internal lateinit var topActivityProvider: TopActivityProvider
   @Inject internal lateinit var viewModelFactory: ViewModelProvider.Factory
   @Inject internal lateinit var pushHandler: PushHandler
+  @Inject internal lateinit var notificationSetup: NotificationSetup
 
   fun viewModelFactory(): ViewModelProvider.Factory {
     return viewModelFactory
@@ -49,6 +50,8 @@ open class GitHubClientApp : Application() {
     if (BuildConfig.DEBUG) {
       Timber.plant(Timber.DebugTree())
     }
+
+    notificationSetup.setupChannels()
 
     registerActivityLifecycleCallbacks(topActivityProvider.callbacks)
 

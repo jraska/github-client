@@ -1,5 +1,6 @@
 package com.jraska.github.client
 
+import android.app.NotificationManager
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.view.LayoutInflater
@@ -42,6 +43,10 @@ class AppModule(private val app: GitHubClientApp) {
   @Provides
   @PerApp internal fun dateTimeProvider(): DateTimeProvider {
     return RealDateTimeProvider()
+  }
+
+  @Provides internal fun notificationManager(): NotificationManager {
+    return app.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
   }
 
   @Provides

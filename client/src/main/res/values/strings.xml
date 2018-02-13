@@ -17,4 +17,6 @@
   <string name="shortcut_jake_short_label">Jake</string>
   <string name="shortcut_jake_long_label">Jake Wharton</string>
   <string name="shortcut_jake_disabled_message">No longer available :(</string>
+  <string name="channel_name_push">Notifications</string>
+  <string name="channel_description_push">Notifications about everything new</string>
 </resources>
