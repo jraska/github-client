@@ -4,13 +4,12 @@ import com.jraska.github.client.users.RepoHeader
 import com.jraska.github.client.users.User
 import com.jraska.github.client.users.UserDetail
 import com.jraska.github.client.users.UserStats
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.Instant
 
 internal class UserDetailWithReposConverter {
 
   fun translateUserDetail(gitHubUserDetail: GitHubUserDetail, gitHubRepos: List<GitHubRepo>, reposToDisplay: Int): UserDetail {
-    val joined = LocalDateTime.parse(gitHubUserDetail.createdAt, DateTimeFormatter.ISO_DATE_TIME)
+    val joined = Instant.parse(gitHubUserDetail.createdAt)
 
     val stats = UserStats(gitHubUserDetail.followers!!, gitHubUserDetail.following!!,
       gitHubUserDetail.publicRepos!!, joined)

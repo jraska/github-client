@@ -8,7 +8,7 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import org.junit.Test
 import org.mockito.Mockito.*
-import org.threeten.bp.LocalDateTime
+import org.threeten.bp.Instant
 
 class UserDetailViewModelTest {
   @Test
@@ -40,7 +40,7 @@ class UserDetailViewModelTest {
   companion object {
     internal fun testDetail(): UserDetail {
       val user = User("login", "url", true, "url")
-      val stats = UserStats(0, 0, 0, LocalDateTime.MIN)
+      val stats = UserStats(0, 0, 0, Instant.MIN)
       return UserDetail(user, stats, emptyList<RepoHeader>(), emptyList<RepoHeader>())
     }
   }

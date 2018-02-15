@@ -43,6 +43,6 @@ internal class UserHeaderModel(private val basicStats: UserStats) : EpoxyModelWi
   }
 
   companion object {
-    internal val JOINED_FORMAT = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+    internal val JOINED_FORMAT = DateTimeFormatter.ISO_INSTANT
   }
 }

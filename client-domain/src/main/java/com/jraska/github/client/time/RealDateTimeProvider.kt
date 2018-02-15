@@ -1,9 +1,9 @@
 package com.jraska.github.client.time
 
-import org.threeten.bp.LocalDateTime
+import org.threeten.bp.Instant
 
 class RealDateTimeProvider : DateTimeProvider {
-  override fun now(): LocalDateTime {
-    return LocalDateTime.now()
+  override fun now(): Instant {
+    return Instant.now()
   }
 }

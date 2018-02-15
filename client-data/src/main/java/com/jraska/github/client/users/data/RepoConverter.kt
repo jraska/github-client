@@ -2,9 +2,7 @@ package com.jraska.github.client.users.data
 
 import com.jraska.github.client.users.RepoDetail
 import com.jraska.github.client.users.RepoHeader
-
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.Instant
 
 internal class RepoConverter {
 
@@ -17,7 +15,7 @@ internal class RepoConverter {
   fun convertToDetail(repo: GitHubRepo): RepoDetail {
     val header = convert(repo)
 
-    val created = LocalDateTime.parse(repo.createdAt, DateTimeFormatter.ISO_DATE_TIME)
+    val created = Instant.parse(repo.createdAt)
     val data = RepoDetail.Data(created, repo.openIssuesCount!!, repo.language!!,
       repo.subscribersCount!!)
 
