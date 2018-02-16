@@ -65,9 +65,9 @@ dependencies {
   compile 'com.google.firebase:firebase-perf:11.8.0'
   compile 'com.google.firebase:firebase-messaging:11.8.0'
   compile 'com.google.firebase:firebase-database:11.8.0'
-  compile 'com.crashlytics.sdk.android:crashlytics:2.8.0'
+  compile 'com.crashlytics.sdk.android:crashlytics:2.9.0'
 
-  compile "android.arch.lifecycle:runtime:1.0.3"
+  compile "android.arch.lifecycle:runtime:1.1.0"
 
   compile 'com.facebook.fresco:fresco:1.8.0'
 
@@ -80,8 +80,6 @@ dependencies {
 
   compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
   compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
-
-  compile 'com.jakewharton.timber:timber:4.6.0'
 
   testCompile 'com.google.code.gson:gson:2.8.2'
 

@@ -12,6 +12,10 @@ class AnalyticsEvent private constructor(val name: String, val properties: Map<S
       return this
     }
 
+    fun addProperty(name: String, value: Any): Builder {
+      return addProperty(name, value.toString())
+    }
+
     fun build(): AnalyticsEvent {
       return AnalyticsEvent(name, Collections.unmodifiableMap(properties))
     }

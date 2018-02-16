@@ -1,6 +1,5 @@
 package com.jraska.github.client
 
-import android.content.Context
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.FirebaseDatabase

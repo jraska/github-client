@@ -15,6 +15,7 @@ import com.jraska.github.client.logging.ErrorReportTree
 import com.jraska.github.client.push.PushCallbacks
 import com.jraska.github.client.push.PushHandler
 import com.jraska.github.client.push.PushIntentObserver
+import dagger.Lazy
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
@@ -23,6 +24,7 @@ open class GitHubClientApp : Application() {
 
   @Inject internal lateinit var eventAnalytics: EventAnalytics
   @Inject internal lateinit var errorReportTree: ErrorReportTree
+  @Inject internal lateinit var analyticsTree: Lazy<AnalyticsLoggingTree>
   @Inject internal lateinit var topActivityProvider: TopActivityProvider
   @Inject internal lateinit var viewModelFactory: ViewModelProvider.Factory
   @Inject internal lateinit var pushHandler: PushHandler
@@ -49,6 +51,7 @@ open class GitHubClientApp : Application() {
     Timber.plant(errorReportTree)
     if (BuildConfig.DEBUG) {
       Timber.plant(Timber.DebugTree())
+      Timber.plant(analyticsTree.get())
     }
 
     notificationSetup.setupChannels()
