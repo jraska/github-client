@@ -60,12 +60,11 @@ dependencies {
   compile 'com.android.support:animated-vector-drawable:27.0.2'
 
   compile 'com.google.firebase:firebase-core:11.8.0'
-  compile 'com.google.firebase:firebase-crash:11.8.0'
   compile 'com.google.firebase:firebase-config:11.8.0'
   compile 'com.google.firebase:firebase-perf:11.8.0'
   compile 'com.google.firebase:firebase-messaging:11.8.0'
   compile 'com.google.firebase:firebase-database:11.8.0'
-  compile 'com.crashlytics.sdk.android:crashlytics:2.9.0'
+  compile 'com.crashlytics.sdk.android:crashlytics:2.9.1'
 
   compile "android.arch.lifecycle:runtime:1.1.0"
 

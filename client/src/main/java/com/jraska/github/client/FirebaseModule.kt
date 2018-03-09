@@ -7,7 +7,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.logging.CrashReporter
-import com.jraska.github.client.logging.FirebaseCrashReporter
+import com.jraska.github.client.logging.FirebaseCrashlyticsReporter
 import dagger.Module
 import dagger.Provides
 import timber.log.Timber
@@ -42,7 +42,7 @@ open class FirebaseModule {
   @Provides
   @Singleton
   internal open fun firebaseCrash(): CrashReporter {
-    return FirebaseCrashReporter()
+    return FirebaseCrashlyticsReporter()
   }
 
   @Provides
