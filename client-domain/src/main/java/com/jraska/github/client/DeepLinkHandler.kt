@@ -2,6 +2,7 @@ package com.jraska.github.client
 
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.common.toAnalyticsString
 import com.jraska.github.client.logging.CrashReporter
 
 import okhttp3.HttpUrl
@@ -14,7 +15,7 @@ class DeepLinkHandler @Inject constructor(private val linkLauncher: DeepLinkLaun
 
   fun handleDeepLink(deepLink: HttpUrl) {
     val event = AnalyticsEvent.builder("deep_link_received")
-      .addProperty("deep_link", deepLink.toString())
+      .addProperty("deep_link", deepLink.toAnalyticsString())
       .build()
     eventAnalytics.report(event)
 

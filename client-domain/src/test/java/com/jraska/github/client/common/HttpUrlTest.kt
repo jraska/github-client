@@ -1,0 +1,16 @@
+package com.jraska.github.client.common
+
+import okhttp3.HttpUrl
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
+
+class HttpUrlTest {
+  @Test
+  fun toAnalyticsStringRemovesParameters() {
+    val url = HttpUrl.parse("https://github.com/jraska/Falcon?param=johny&pii=johny@domain.com&id=xxx")!!;
+
+    val toAnalyticsString = url.toAnalyticsString()
+
+    assertThat(toAnalyticsString).isEqualTo("https://github.com/jraska/Falcon")
+  }
+}
