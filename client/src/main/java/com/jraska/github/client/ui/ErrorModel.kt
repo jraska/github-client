@@ -13,8 +13,8 @@ class ErrorModel(@DrawableRes private val icon: Int) : EpoxyModel<View>() {
     return R.layout.item_generic_error
   }
 
-  override fun bind(view: View?) {
-    (view!!.findViewById<View>(R.id.image) as ImageView).setImageResource(icon)
+  override fun bind(view: View) {
+    (view.findViewById<View>(R.id.image) as ImageView).setImageResource(icon)
   }
 
   companion object {
