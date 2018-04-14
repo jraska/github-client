@@ -7,15 +7,18 @@ import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withText
+import com.jraska.github.client.http.ReplayHttpComponent
+import okreplay.OkReplay
 import org.hamcrest.Matchers
 import org.junit.Rule
 import org.junit.Test
 
 class DeepLinkLaunchTest {
   @get:Rule
-  var passRule = MakeTestsPassRule()
+  val testRule = ReplayHttpComponent.okReplayRule()
 
   @Test
+  @OkReplay
   fun whenUsersLink_thenUsersActivityDisplayed() {
     launchDeepLink("https://github.com/users")
 
@@ -24,6 +27,7 @@ class DeepLinkLaunchTest {
   }
 
   @Test
+  @OkReplay
   fun whenDetailLink_thenUserDetailActivityDisplayed() {
     launchDeepLink("https://github.com/defunkt")
 
@@ -31,6 +35,7 @@ class DeepLinkLaunchTest {
   }
 
   @Test
+  @OkReplay
   fun whenRepoLink_thenRepoActivityDisplayed() {
     launchDeepLink("https://github.com/jraska/Falcon")
 

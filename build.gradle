@@ -5,6 +5,7 @@ buildscript {
   repositories {
     google()
     maven { url 'https://maven.fabric.io/public' }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     jcenter()
   }
   dependencies {
@@ -13,6 +14,7 @@ buildscript {
     classpath 'com.google.firebase:firebase-plugins:1.1.1'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath 'io.fabric.tools:gradle:1.24.4'
+    classpath 'com.airbnb.okreplay:gradle-plugin:1.4.0'
   }
 }
 
