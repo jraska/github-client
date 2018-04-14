@@ -22,10 +22,10 @@ dependencies {
 
   compile project(':client-domain')
 
-  compile 'com.android.support:appcompat-v7:27.0.2'
-  compile 'com.android.support:support-annotations:27.0.2'
+  compile 'com.android.support:appcompat-v7:27.1.1'
+  compile 'com.android.support:support-annotations:27.1.1'
 
-  compile "android.arch.lifecycle:extensions:1.1.0"
+  compile 'android.arch.lifecycle:extensions:1.1.1'
 
   compile 'com.squareup.retrofit2:retrofit:2.4.0'
   compile 'com.squareup.retrofit2:converter-gson:2.4.0'
@@ -37,6 +37,6 @@ dependencies {
 
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:3.9.1'
-  testCompile 'org.mockito:mockito-core:2.17.0'
-  testCompile 'com.android.support:support-annotations:27.0.2'
+  testCompile 'org.mockito:mockito-core:2.18.0'
+  testCompile 'com.android.support:support-annotations:27.1.1'
 }
