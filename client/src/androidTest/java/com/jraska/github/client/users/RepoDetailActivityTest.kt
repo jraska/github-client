@@ -10,6 +10,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.HttpUrl
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -44,5 +45,10 @@ class RepoDetailActivityTest {
 
     onView(withId(R.id.repo_detail_github_fab)).perform(ViewActions.click())
     verify<Navigator>(navigatorMock).launchOnWeb(HttpUrl.parse(deepLink)!!)
+  }
+
+  @After
+  fun after() {
+    ViewModelFactoryDecorator.removeDecorations()
   }
 }
