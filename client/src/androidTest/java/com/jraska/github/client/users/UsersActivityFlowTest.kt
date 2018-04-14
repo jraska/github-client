@@ -26,5 +26,7 @@ class UsersActivityFlowTest {
   fun whenStarts_thenDisplaysUsers() {
     onView(withText("defunkt")).perform(click())
     onView(withText("dotjs")).check(matches(isDisplayed()))
+    onView(withText("facebox")).perform(click())
+    onView(withText("1941")).check(matches(isDisplayed()))
   }
 }
