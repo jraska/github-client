@@ -43,7 +43,6 @@ class RepoDetailActivity : BaseActivity() {
   internal fun setState(viewState: RepoDetailViewModel.ViewState) {
     if (viewState.repoDetail != null) {
       setRepoDetail(viewState.repoDetail!!)
-      throw RuntimeException("Error beer")
     }
 
     if (viewState.error != null) {
