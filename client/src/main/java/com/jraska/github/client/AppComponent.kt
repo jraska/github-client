@@ -5,6 +5,7 @@ import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.logging.CrashReporter
+import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.users.UserViewModelModule
 import com.jraska.github.client.users.data.UsersDataModule
 import dagger.Component
@@ -14,7 +15,7 @@ import retrofit2.Retrofit
 
 @PerApp
 @Component(modules = arrayOf(UsersDataModule::class, UserViewModelModule::class,
-  NavigationModule::class, AppModule::class, HttpComponentModule::class, CoreComponentModule::class))
+  NavigationModule::class, PushModule::class, AppModule::class, HttpComponentModule::class, CoreComponentModule::class))
 interface AppComponent {
   fun inject(app: GitHubClientApp)
 }

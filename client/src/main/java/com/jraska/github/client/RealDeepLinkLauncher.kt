@@ -12,7 +12,7 @@ import javax.inject.Provider
 internal class RealDeepLinkLauncher(private val topActivityProvider: Provider<BaseActivity>) : DeepLinkLauncher {
   override fun launch(deepLink: HttpUrl) {
     if (deepLink.host() != "github.com") {
-      throw IllegalArgumentException("We handle only GitHub deep links, not: " + deepLink)
+      throw IllegalArgumentException("We execute only GitHub deep links, not: " + deepLink)
     }
 
     Timber.i("Launching %s", deepLink)
