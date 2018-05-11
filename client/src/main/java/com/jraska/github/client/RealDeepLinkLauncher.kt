@@ -1,6 +1,5 @@
 package com.jraska.github.client
 
-import com.jraska.github.client.common.DeveloperError
 import com.jraska.github.client.ui.BaseActivity
 import com.jraska.github.client.ui.RepoDetailActivity
 import com.jraska.github.client.ui.UserDetailActivity
@@ -12,7 +11,7 @@ import javax.inject.Provider
 internal class RealDeepLinkLauncher(private val topActivityProvider: Provider<BaseActivity>) : DeepLinkLauncher {
   override fun launch(deepLink: HttpUrl) {
     if (deepLink.host() != "github.com") {
-      throw IllegalArgumentException("We execute only GitHub deep links, not: " + deepLink)
+      throw IllegalArgumentException("We handle only GitHub deep links, not: " + deepLink)
     }
 
     Timber.i("Launching %s", deepLink)
