@@ -6,7 +6,7 @@ import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Intent
-import com.google.firebase.messaging.RemoteMessageBridge
+import com.google.firebase.messaging.RemoteMessage
 
 class PushIntentObserver(private val pushHandler: PushHandler) : LifecycleObserver {
 
@@ -19,7 +19,7 @@ class PushIntentObserver(private val pushHandler: PushHandler) : LifecycleObserv
     val activity = owner as Activity
     val intent = activity.intent
     if (isPush(intent)) {
-      val message = RemoteMessageBridge.create(intent.extras!!)
+      val message = RemoteMessage(intent.extras!!)
       val action = RemoteMessageToActionConverter.convert(message)
 
       pushHandler.handlePush(action)
