@@ -2,18 +2,34 @@ package com.jraska.github.client.analytics
 
 import java.util.*
 
-class AnalyticsEvent private constructor(val name: String, val properties: Map<String, String>) {
+class AnalyticsEvent private constructor(val name: String, val properties: Map<String, Any>) {
 
   class Builder internal constructor(private val name: String) {
-    private val properties = HashMap<String, String>()
+    private val properties = HashMap<String, Any>()
 
-    fun addProperty(name: String, value: String): Builder {
+    private fun addAny(name: String, value: Any): Builder {
       properties.put(name, value)
       return this
     }
 
-    fun addProperty(name: String, value: Any): Builder {
-      return addProperty(name, value.toString())
+    fun addProperty(name: String, value: String): Builder {
+      return addAny(name, value)
+    }
+
+    fun addProperty(name: String, value: Double): Builder {
+      return addAny(name, value)
+    }
+
+    fun addProperty(name: String, value: Boolean): Builder {
+      return addAny(name, value)
+    }
+
+    fun addProperty(name: String, value: Int): Builder {
+      return addAny(name, value)
+    }
+
+    fun addProperty(name: String, value: Long): Builder {
+      return addAny(name, value)
     }
 
     fun build(): AnalyticsEvent {

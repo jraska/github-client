@@ -1,6 +1,5 @@
 package com.jraska.github.client
 
-import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.AnalyticsProperty
@@ -13,20 +12,7 @@ internal class FirebaseEventAnalytics(private val analytics: FirebaseAnalytics) 
   }
 
   override fun report(event: AnalyticsEvent) {
-    val parameters = propertiesBundle(event.properties)
+    val parameters = FirebaseEventConverter.firebaseBundle(event.properties)
     analytics.logEvent(event.name, parameters)
-  }
-
-  private fun propertiesBundle(properties: Map<String, String>): Bundle? {
-    if (properties.isEmpty()) {
-      return null
-    }
-
-    val parameters = Bundle()
-    for ((key, value) in properties) {
-      parameters.putString(key, value)
-    }
-
-    return parameters
   }
 }

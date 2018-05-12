@@ -14,16 +14,20 @@ class DeepLinkHandler @Inject constructor(private val linkLauncher: DeepLinkLaun
                                           private val eventAnalytics: EventAnalytics) {
 
   fun handleDeepLink(deepLink: HttpUrl) {
-    val event = AnalyticsEvent.builder("deep_link_received")
-      .addProperty("deep_link", deepLink.toAnalyticsString())
-      .build()
-    eventAnalytics.report(event)
+    var success = false
 
     try {
       linkLauncher.launch(deepLink)
+      success = true
     } catch (ex: IllegalArgumentException) {
       crashReporter.report(ex, "Invalid deep link", deepLink.toString())
       fallbackLauncher.launch(deepLink)
     }
+
+    val event = AnalyticsEvent.builder("deep_link_received")
+      .addProperty("deep_link", deepLink.toAnalyticsString())
+      .addProperty("success", success)
+      .build()
+    eventAnalytics.report(event)
   }
 }

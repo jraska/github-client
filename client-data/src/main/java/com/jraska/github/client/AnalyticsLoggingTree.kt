@@ -22,7 +22,7 @@ class AnalyticsLoggingTree @Inject constructor(private val config: Config,
     val eventBuilder = AnalyticsEvent.builder(analyticsName)
       .addProperty("tag", maxString(tag))
       .addProperty("message", maxString(message))
-      .addProperty("time", dateTimeProvider.now())
+      .addProperty("time", dateTimeProvider.now().toString())
 
     if (error != null) {
       eventBuilder.addProperty("error", maxString(error.javaClass.name))
