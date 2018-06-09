@@ -48,18 +48,19 @@
 
     <service android:name=".push.PushHandleService">
       <intent-filter>
-        <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
       </intent-filter>
     </service>
-    <service
-      android:name=".push.PushTokenService">
+    <service android:name=".push.PushTokenService">
       <intent-filter>
-        <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+        <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
       </intent-filter>
     </service>
 
-
-    <activity android:name=".ui.ShortcutHandlerActivity"/>
+    <activity android:name=".ui.ShortcutHandlerActivity" />
+    <activity
+      android:name=".settings.SettingsActivity"
+      android:theme="@style/AppTheme.NoActionBar" />
   </application>
 
 </manifest>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/user_container"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/list_item_height"
+  android:orientation="horizontal"
+  android:weightSum="10"
+  tools:background="#bbbbbb">
+
+  <EditText
+    android:id="@+id/settings_purchase_input"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="5"
+    android:inputType="numberDecimal|numberSigned"
+    android:maxLines="1"
+    android:textColor="@color/textMain"
+    android:textSize="@dimen/textTitle"
+    tools:text="34.4" />
+
+  <TextView
+    android:id="@+id/settings_purchase_input_currency"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:maxLines="1"
+    android:text="@string/dollar_sign"
+    android:textColor="@color/textMain"
+    android:textSize="@dimen/textTitle" />
+
+  <Button
+    android:id="@+id/settings_purchase_submit_button"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:layout_weight="4"
+    android:text="@string/settings_button_purchase" />
+
+</LinearLayout>

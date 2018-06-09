@@ -1,5 +1,6 @@
 package com.jraska.github.client
 
+import com.jraska.github.client.settings.SettingsActivity
 import com.jraska.github.client.ui.BaseActivity
 import com.jraska.github.client.ui.RepoDetailActivity
 import com.jraska.github.client.ui.UserDetailActivity
@@ -11,13 +12,18 @@ import javax.inject.Provider
 internal class RealDeepLinkLauncher(private val topActivityProvider: Provider<BaseActivity>) : DeepLinkLauncher {
   override fun launch(deepLink: HttpUrl) {
     if (deepLink.host() != "github.com") {
-      throw IllegalArgumentException("We handle only GitHub deep links, not: " + deepLink)
+      throw IllegalArgumentException("We handle only GitHub deep links, not: $deepLink")
     }
 
     Timber.i("Launching %s", deepLink)
 
     if ("/users" == deepLink.encodedPath()) {
       UsersActivity.start(topActivityProvider.get())
+      return
+    }
+
+    if ("/settings" == deepLink.encodedPath()) {
+      SettingsActivity.start(topActivityProvider.get())
       return
     }
 
@@ -33,6 +39,6 @@ internal class RealDeepLinkLauncher(private val topActivityProvider: Provider<Ba
       return
     }
 
-    throw IllegalArgumentException("Unexpected deep link: " + deepLink)
+    throw IllegalArgumentException("Unexpected deep link: $deepLink")
   }
 }

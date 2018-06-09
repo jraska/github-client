@@ -8,4 +8,6 @@ interface Navigator {
   fun startUserDetail(login: String)
 
   fun startRepoDetail(fullPath: String)
+
+  fun showSettings()
 }

@@ -13,8 +13,8 @@ android {
     applicationId "com.jraska.github.client"
     minSdkVersion 21
     targetSdkVersion 27
-    versionName '0.6.0'
-    versionCode 6
+    versionName '0.7.0'
+    versionCode 7
     multiDexEnabled true
 
     testInstrumentationRunner "com.jraska.github.client.TestRunner"
@@ -103,6 +103,7 @@ dependencies {
   androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
   androidTestCompile 'com.airbnb.okreplay:okreplay:1.4.0'
   androidTestCompile 'com.airbnb.okreplay:espresso:1.4.0'
+  androidTestCompile 'org.assertj:assertj-core:3.9.1'
 
 }
 

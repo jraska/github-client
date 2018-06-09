@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuItem
 import butterknife.BindView
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.R
@@ -31,6 +33,22 @@ class UsersActivity : BaseActivity(), UserModel.UserListener {
     showProgressIndicator()
 
     usersViewModel.users().observe(this, Observer { this.setState(it!!) })
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    menuInflater.inflate(R.menu.users_menu, menu)
+    return true
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    return when (item.itemId) {
+      R.id.action_settings -> {
+        usersViewModel.onSettingsIconClicked()
+        return true
+      }
+
+      else -> super.onOptionsItemSelected(item)
+    }
   }
 
   override fun onUserClicked(user: User) {

@@ -10,8 +10,10 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 
 class FakeCoreComponent : CoreComponent {
+  val eventAnalytics: RecordingEventAnalytics = RecordingEventAnalytics()
+
   override fun analytics(): EventAnalytics {
-    return EventAnalytics.EMPTY
+    return eventAnalytics
   }
 
   override fun analyticsProperty(): AnalyticsProperty {

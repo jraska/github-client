@@ -69,6 +69,12 @@ class UsersViewModel internal constructor(
     navigator.launchOnWeb(Urls.user(user.login))
   }
 
+  fun onSettingsIconClicked() {
+    eventAnalytics.report(AnalyticsEvent.create("open_settings_from_list"))
+
+    navigator.showSettings()
+  }
+
   class ViewState(private val error: Throwable?, private val result: List<User>?) {
 
     val isLoading: Boolean

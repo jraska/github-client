@@ -27,4 +27,8 @@ class DeepLinkNavigator(private val deepLinkLauncher: DeepLinkLauncher,
     val url = Urls.repo(fullPath)
     launch(url)
   }
+
+  override fun showSettings() {
+    launch(Urls.settings())
+  }
 }
