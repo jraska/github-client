@@ -25,9 +25,5 @@ class FakeConfig private constructor(private val values: Map<String, Any>) : Con
     fun create(values: Map<String, Any> = emptyMap()): FakeConfig {
       return FakeConfig(Collections.unmodifiableMap(values))
     }
-
-    fun create(key: String, value: Any): FakeConfig {
-      return create(mapOf(key to value))
-    }
   }
 }

@@ -8,7 +8,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(FirebaseModule::class))
+@Component(modules = [FirebaseModule::class])
 interface CoreComponent {
   fun crashReporter(): CrashReporter
 

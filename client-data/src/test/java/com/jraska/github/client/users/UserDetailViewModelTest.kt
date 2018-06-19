@@ -20,7 +20,7 @@ class UserDetailViewModelTest {
     `when`(usersRepository.getUserDetail("someLogin", 3)).thenReturn(detailObservable)
     `when`(usersRepository.getUserDetail("different", 3)).thenReturn(detailObservable)
 
-    val config = FakeConfig.create("user_detail_section_size", 3L)
+    val config = FakeConfig.create(mapOf("user_detail_section_size" to 3L))
 
     val viewModel = UserDetailViewModel(usersRepository,
       trampoline(), mock(Navigator::class.java), EventAnalytics.EMPTY, config)
@@ -39,7 +39,7 @@ class UserDetailViewModelTest {
 
   companion object {
     internal fun testDetail(): UserDetail {
-      val user = User("login", "url", true, "url")
+      val user = User("login", "url", true)
       val stats = UserStats(0, 0, 0, Instant.MIN)
       return UserDetail(user, stats, emptyList(), emptyList())
     }

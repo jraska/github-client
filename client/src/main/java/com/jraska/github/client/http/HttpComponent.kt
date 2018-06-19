@@ -4,7 +4,7 @@ import dagger.Component
 import retrofit2.Retrofit
 
 @Http
-@Component(modules = arrayOf(HttpDependenciesModule::class, HttpModule::class))
+@Component(modules = [HttpDependenciesModule::class, HttpModule::class])
 interface HttpComponent {
   fun retrofit(): Retrofit
 }

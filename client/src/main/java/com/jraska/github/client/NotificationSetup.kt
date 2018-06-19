@@ -26,6 +26,6 @@ class NotificationSetup @Inject internal constructor(
   }
 
   companion object {
-    val PUSH_CHANNEL_ID = "push_notifications"
+    const val PUSH_CHANNEL_ID = "push_notifications"
   }
 }

@@ -8,7 +8,7 @@ class AnalyticsEvent private constructor(val name: String, val properties: Map<S
     private val properties = HashMap<String, Any>()
 
     private fun addAny(name: String, value: Any): Builder {
-      properties.put(name, value)
+      properties[name] = value
       return this
     }
 

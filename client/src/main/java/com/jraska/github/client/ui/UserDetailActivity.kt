@@ -104,7 +104,7 @@ class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
   }
 
   companion object {
-    internal val EXTRA_USER_LOGIN = "login"
+    internal const val EXTRA_USER_LOGIN = "login"
 
     fun start(inActivity: Activity, login: String) {
       val intent = Intent(inActivity, UserDetailActivity::class.java)

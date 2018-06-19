@@ -40,7 +40,7 @@ class RepoDetailActivity : BaseActivity() {
     viewModel.onFitHubIconClicked(fullRepoName())
   }
 
-  internal fun setState(viewState: RepoDetailViewModel.ViewState) {
+  private fun setState(viewState: RepoDetailViewModel.ViewState) {
     if (viewState.repoDetail != null) {
       setRepoDetail(viewState.repoDetail!!)
     }
@@ -50,11 +50,11 @@ class RepoDetailActivity : BaseActivity() {
     }
   }
 
-  internal fun setError(error: Throwable) {
+  private fun setError(error: Throwable) {
     ErrorHandler.displayError(error, recyclerView)
   }
 
-  internal fun setRepoDetail(repoDetail: RepoDetail) {
+  private fun setRepoDetail(repoDetail: RepoDetail) {
     val adapter = SimpleEpoxyAdapter()
     adapter.addModels(RepoDetailHeaderModel(repoDetail))
 
@@ -70,7 +70,7 @@ class RepoDetailActivity : BaseActivity() {
   }
 
   companion object {
-    private val EXTRA_FULL_REPO_NAME = "fullRepoName"
+    private const val EXTRA_FULL_REPO_NAME = "fullRepoName"
 
     fun start(from: Activity, fullRepoName: String) {
       val intent = Intent(from, RepoDetailActivity::class.java)

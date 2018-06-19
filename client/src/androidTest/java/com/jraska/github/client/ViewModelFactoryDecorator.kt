@@ -31,7 +31,7 @@ class ViewModelFactoryDecorator(
 
     private fun setToApp(app: GitHubClientApp, viewModelClass: Class<out ViewModel>, implementation: ViewModel) {
       val map = HashMap<Class<*>, Provider<ViewModel>>()
-      map.put(viewModelClass, Provider { implementation })
+      map[viewModelClass] = Provider { implementation }
 
       app.viewModelFactory = ViewModelFactoryDecorator(app.viewModelFactory, map)
     }

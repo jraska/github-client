@@ -15,9 +15,9 @@ import dagger.Provides
 import retrofit2.Retrofit
 
 @PerApp
-@Component(modules = arrayOf(UsersDataModule::class, UserViewModelModule::class,
-  NavigationModule::class, PushModule::class, AppModule::class, SettingsModule::class,
-  HttpComponentModule::class, CoreComponentModule::class))
+@Component(modules = [UsersDataModule::class, UserViewModelModule::class, NavigationModule::class,
+  PushModule::class, AppModule::class, SettingsModule::class,
+  HttpComponentModule::class, CoreComponentModule::class])
 interface AppComponent {
   fun inject(app: GitHubClientApp)
 }

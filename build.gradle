@@ -32,8 +32,8 @@ task clean(type: Delete) {
 subprojects {
 
   project.plugins.whenPluginAdded { plugin ->
-    if ('com.android.build.gradle.AppPlugin'.equals(plugin.class.name)
-        || 'com.android.build.gradle.LibraryPlugin'.equals(plugin.class.name)) {
+    if ('com.android.build.gradle.AppPlugin' == plugin.class.name
+        || 'com.android.build.gradle.LibraryPlugin' == plugin.class.name) {
 
       project.android.testOptions.unitTests.all {
         testLogging {

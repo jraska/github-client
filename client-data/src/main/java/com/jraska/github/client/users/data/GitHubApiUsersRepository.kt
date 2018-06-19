@@ -55,6 +55,6 @@ internal class GitHubApiUsersRepository(
 
   private fun convert(gitHubUser: GitHubUser): User {
     val isAdmin = gitHubUser.siteAdmin ?: false
-    return User(gitHubUser.login!!, gitHubUser.avatarUrl!!, isAdmin, gitHubUser.htmlUrl!!)
+    return User(gitHubUser.login!!, gitHubUser.avatarUrl!!, isAdmin)
   }
 }

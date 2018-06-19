@@ -54,7 +54,7 @@ class Stopwatch(private val timeProvider: TimeProvider) {
   }
 
   companion object {
-    private val NOT_SET: Long = -1
+    private const val NOT_SET: Long = -1
 
     fun create(): Stopwatch {
       return Stopwatch(RealTimeProvider.INSTANCE)

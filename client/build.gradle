@@ -78,7 +78,7 @@ dependencies {
   compile 'com.jakewharton:butterknife:8.8.1'
   kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
-  compile 'com.airbnb.android:epoxy:2.12.0'
+  compile 'com.airbnb.android:epoxy:2.13.0'
 
   kapt 'com.google.dagger:dagger-compiler:2.16'
 

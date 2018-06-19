@@ -24,14 +24,14 @@ internal class PushTokenSynchronizer @Inject constructor(
     }
 
     val map = HashMap<String, Any>()
-    map.put("date", dateTimeProvider.now().toString())
+    map["date"] = dateTimeProvider.now().toString()
 
-    map.put("push_token", token)
-    map.put("android_os", Build.VERSION.RELEASE)
-    map.put("manufacturer", Build.BRAND)
-    map.put("model", Build.MODEL)
+    map["push_token"] = token
+    map["android_os"] = Build.VERSION.RELEASE
+    map["manufacturer"] = Build.BRAND
+    map["model"] = Build.MODEL
 
-    val tokenReference = database.getReference("devices/" + id)
+    val tokenReference = database.getReference("devices/$id")
     tokenReference.setValue(map)
   }
 }

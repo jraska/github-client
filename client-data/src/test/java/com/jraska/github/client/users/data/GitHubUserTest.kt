@@ -17,7 +17,7 @@ class GitHubUserTest {
   }
 
   companion object {
-    internal val JSON = "[\n" +
+    internal const val JSON = "[\n" +
       "  {\n" +
       "    \"login\": \"mojombo\",\n" +
       "    \"id\": 1,\n" +

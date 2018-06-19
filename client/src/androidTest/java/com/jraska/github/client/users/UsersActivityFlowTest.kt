@@ -22,6 +22,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class UsersActivityFlowTest {
 
+  @Suppress("unused")
   @get:Rule
   val testRule = ReplayHttpComponent.okReplayRule(UsersActivity::class.java)
 

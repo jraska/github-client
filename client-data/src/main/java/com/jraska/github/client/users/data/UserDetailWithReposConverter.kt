@@ -33,13 +33,13 @@ internal class UserDetailWithReposConverter {
     return UserDetail(user, stats, usersRepos, contributedRepos)
   }
 
-  fun convert(gitHubRepo: GitHubRepo): RepoHeader {
+  private fun convert(gitHubRepo: GitHubRepo): RepoHeader {
     return RepoConverter.INSTANCE.convert(gitHubRepo)
   }
 
   private fun convert(gitHubUser: GitHubUserDetail): User {
     val isAdmin = gitHubUser.siteAdmin ?: false
-    return User(gitHubUser.login!!, gitHubUser.avatarUrl!!, isAdmin, gitHubUser.htmlUrl!!)
+    return User(gitHubUser.login!!, gitHubUser.avatarUrl!!, isAdmin)
   }
 
   companion object {

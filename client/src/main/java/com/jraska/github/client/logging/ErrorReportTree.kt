@@ -24,7 +24,7 @@ class ErrorReportTree @Inject internal constructor(private val crashReporter: Cr
     }
 
     if (tag != null) {
-      crashReporter.report(error, tag + "/" + message)
+      crashReporter.report(error, "$tag/$message")
     } else {
       crashReporter.report(error, message)
     }
@@ -48,6 +48,6 @@ class ErrorReportTree @Inject internal constructor(private val crashReporter: Cr
 
   companion object {
     private val ANONYMOUS_CLASS = Pattern.compile("(\\$\\d+)+$")
-    private val CALL_STACK_INDEX = 6
+    private const val CALL_STACK_INDEX = 6
   }
 }

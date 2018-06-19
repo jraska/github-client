@@ -74,7 +74,7 @@ class RxHttpIdlingResourceFactory private constructor(private val decoratedFacto
           .doAfterTerminate({ resource.decrement() })
       }
 
-      throw UnsupportedOperationException("Sorry, I can't deal with: " + adapted)
+      throw UnsupportedOperationException("Sorry, I can't deal with: $adapted")
     }
   }
 

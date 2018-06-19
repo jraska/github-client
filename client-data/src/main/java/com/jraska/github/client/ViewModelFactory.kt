@@ -11,7 +11,7 @@ class ViewModelFactory @Inject internal constructor(
 
   @Suppress("UNCHECKED_CAST")
   override fun <T : ViewModel> create(aClass: Class<T>): T {
-    val provider = providersMap[aClass] ?: throw IllegalArgumentException("There is no provider registered for " + aClass)
+    val provider = providersMap[aClass] ?: throw IllegalArgumentException("There is no provider registered for $aClass")
 
     return provider.get() as T
   }

@@ -14,6 +14,7 @@ class RepeaterLayout : LinearLayout {
 
   constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
+  @Suppress("unused")
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int)
     : super(context, attrs, defStyleAttr, defStyleRes)

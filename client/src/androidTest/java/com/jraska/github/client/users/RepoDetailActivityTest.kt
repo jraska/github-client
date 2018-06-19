@@ -3,7 +3,10 @@ package com.jraska.github.client.users
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.matcher.ViewMatchers.withId
-import com.jraska.github.client.*
+import com.jraska.github.client.DeepLinkLaunchTest
+import com.jraska.github.client.Navigator
+import com.jraska.github.client.R
+import com.jraska.github.client.ViewModelFactoryDecorator
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.rx.AppSchedulers
 import io.reactivex.Observable
@@ -12,7 +15,6 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.HttpUrl
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
@@ -22,9 +24,6 @@ import org.mockito.MockitoAnnotations
 class RepoDetailActivityTest {
   @Mock lateinit var navigatorMock: Navigator
   @Mock lateinit var repositoryMock: UsersRepository
-
-  @get:Rule
-  var passRule = MakeTestsPassRule()
 
   @Before
   fun before() {

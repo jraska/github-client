@@ -4,7 +4,7 @@ class RepoHeader(val owner: String, val name: String, val description: String,
                  val stars: Int, val forks: Int) {
 
   fun fullName(): String {
-    return owner + "/" + name
+    return "$owner/$name"
   }
 
   companion object {

@@ -19,9 +19,8 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
   }
 
   companion object {
-
-    val REPLAY_INTERCEPTOR = OkReplayInterceptor()
-    private val NETWORK_ERROR_MESSAGE = "You are trying to do network requests in tests you naughty developer!"
+    private val REPLAY_INTERCEPTOR = OkReplayInterceptor()
+    private const val NETWORK_ERROR_MESSAGE = "You are trying to do network requests in tests you naughty developer!"
 
     fun create(): ReplayHttpComponent {
       val idlingResourceFactory = RxHttpIdlingResourceFactory.create()
