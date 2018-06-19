@@ -52,7 +52,7 @@ android {
 }
 
 dependencies {
-  compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+  compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
   compile project(':client-domain')
   compile project(':client-data')
