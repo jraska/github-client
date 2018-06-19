@@ -94,8 +94,9 @@ dependencies {
   testCompile 'org.threeten:threetenbp:1.3.6' // to fix failures with three ten db
   testCompile 'com.android.support:support-annotations:27.1.1' //to fix dependency conflicts
 
-  androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
-  androidTestCompile 'com.android.support.test:runner:1.0.1'
+  androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.2'
+  androidTestCompile 'com.android.support.test:runner:1.0.2'
+  androidTestCompile 'com.android.support.test:rules:1.0.2'
   androidTestCompile 'org.assertj:assertj-core:3.10.0'
   androidTestCompile 'com.android.support:support-annotations:27.1.1' //to fix dependency conflicts
   androidTestCompile 'org.mockito:mockito-core:2.9.0'
