@@ -38,10 +38,12 @@
       android:layout_toStartOf="@+id/user_item_gitHub_icon"
       android:background="@android:drawable/list_selector_background"
       android:clickable="true"
+      android:focusable="true"
       android:padding="@dimen/padding_small"
       android:src="@drawable/ic_admin_24dp"
       android:visibility="gone"
-      tools:visibility="visible" />
+      tools:visibility="visible"
+      android:contentDescription="@string/administrator_icon" />
 
   <ImageView
       android:id="@+id/user_item_gitHub_icon"
@@ -50,6 +52,7 @@
       android:layout_alignParentEnd="true"
       android:layout_marginTop="@dimen/list_item_vertical_margin"
       android:background="@android:drawable/list_selector_background"
-      android:src="@drawable/ic_github_48dp" />
+      android:src="@drawable/ic_github_48dp"
+      android:contentDescription="@string/github_clickable_icon" />
 
 </RelativeLayout>

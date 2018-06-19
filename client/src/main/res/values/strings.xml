@@ -22,4 +22,7 @@
   <string name="settings">Settings</string>
   <string name="settings_button_purchase">Purchase</string>
   <string name="dollar_sign">$</string>
+  <string name="settings_purchase_value_hint">Value</string>
+  <string name="github_clickable_icon">GitHub clickable icon</string>
+  <string name="administrator_icon">Administrator icon</string>
 </resources>

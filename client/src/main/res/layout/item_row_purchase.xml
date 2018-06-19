@@ -18,6 +18,7 @@
     android:maxLines="1"
     android:textColor="@color/textMain"
     android:textSize="@dimen/textTitle"
+    android:hint="@string/settings_purchase_value_hint"
     tools:text="34.4" />
 
   <TextView
