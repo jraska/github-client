@@ -7,7 +7,7 @@ fun HttpUrl.toAnalyticsString(): String {
 
   val builder = newBuilder()
   for (parameterName in queryNames) {
-    builder.removeAllQueryParameters(parameterName);
+    builder.removeAllQueryParameters(parameterName)
   }
 
   return builder.build().toString()

@@ -41,7 +41,7 @@ class UserDetailViewModelTest {
     internal fun testDetail(): UserDetail {
       val user = User("login", "url", true, "url")
       val stats = UserStats(0, 0, 0, Instant.MIN)
-      return UserDetail(user, stats, emptyList<RepoHeader>(), emptyList<RepoHeader>())
+      return UserDetail(user, stats, emptyList(), emptyList())
     }
   }
 }

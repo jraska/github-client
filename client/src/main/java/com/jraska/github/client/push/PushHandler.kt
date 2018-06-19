@@ -31,7 +31,7 @@ class PushHandler @Inject internal constructor(
   }
 
   private fun handleInternal(action: PushAction): Boolean {
-    val actionCommand = pushCommands.get(action.name) ?: return false
+    val actionCommand = pushCommands[action.name] ?: return false
 
     return actionCommand.get().execute(action)
   }

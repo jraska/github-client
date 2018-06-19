@@ -22,9 +22,7 @@ class RemoteMessageToActionConverterTest {
 
   @Test
   fun whenRemoteMessageWithParameters_thenActionReturned() {
-    val map = HashMap<String, String>()
-    map.put("action", "heeeya")
-    map.put("parameter", "true")
+    val map = mapOf("action" to "heeeya", "parameter" to "true")
 
     val action = RemoteMessageToActionConverter.convert(map)
 

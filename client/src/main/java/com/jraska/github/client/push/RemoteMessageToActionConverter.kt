@@ -13,7 +13,7 @@ internal object RemoteMessageToActionConverter {
 
     val properties: Map<String, String>
     if (remoteMessageData.size == 1) {
-      properties = emptyMap<String, String>()
+      properties = emptyMap()
     } else {
       properties = HashMap(remoteMessageData)
       properties.remove(PushAction.KEY_ACTION)

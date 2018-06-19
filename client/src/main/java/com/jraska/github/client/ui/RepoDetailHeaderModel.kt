@@ -42,6 +42,6 @@ internal class RepoDetailHeaderModel(private val repoDetail: RepoDetail)
   }
 
   companion object {
-    val CREATED_DATE_FORMAT = DateTimeFormatter.ISO_INSTANT
+    val CREATED_DATE_FORMAT = DateTimeFormatter.ISO_INSTANT!!
   }
 }

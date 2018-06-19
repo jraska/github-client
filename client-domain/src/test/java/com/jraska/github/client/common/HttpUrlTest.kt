@@ -7,7 +7,7 @@ import org.junit.Test
 class HttpUrlTest {
   @Test
   fun toAnalyticsStringRemovesParameters() {
-    val url = HttpUrl.parse("https://github.com/jraska/Falcon?param=johny&pii=johny@domain.com&id=xxx")!!;
+    val url = HttpUrl.parse("https://github.com/jraska/Falcon?param=johny&pii=johny@domain.com&id=xxx")!!
 
     val toAnalyticsString = url.toAnalyticsString()
 

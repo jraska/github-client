@@ -53,7 +53,7 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
         .defaultMode(TapeMode.READ_ONLY)
         .sslEnabled(true)
         .interceptor(REPLAY_INTERCEPTOR)
-        .build();
+        .build()
 
       return OkReplayRuleChain(configuration, rule).get()
     }
@@ -72,7 +72,7 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
       return OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
         .addInterceptor(REPLAY_INTERCEPTOR)
-        .addNetworkInterceptor() { _ -> throw UnsupportedOperationException(NETWORK_ERROR_MESSAGE) }
+        .addNetworkInterceptor { _ -> throw UnsupportedOperationException(NETWORK_ERROR_MESSAGE) }
         .build()
     }
 

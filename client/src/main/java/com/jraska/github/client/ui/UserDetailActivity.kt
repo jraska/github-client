@@ -68,11 +68,11 @@ class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
   }
 
   internal fun setUser(userDetail: UserDetail) {
-    loadTrace.incrementCounter("set_user_detail")
+    loadTrace.incrementMetric("set_user_detail", 1)
     avatarView.setImageURI(userDetail.user.avatarUrl)
 
     if (userDetail.basicStats == null) {
-      loadTrace.incrementCounter("set_user_detail_incomplete")
+      loadTrace.incrementMetric("set_user_detail_incomplete", 1)
       return
     }
 
