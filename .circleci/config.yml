@@ -31,4 +31,8 @@ jobs:
           destination: client-data/reports
       - store_test_results:
           path: client/build/test-results
+      - store_test_results:
+          path: client-data/build/test-results
+      - store_test_results:
+          path: client-domain/build/test-results
 
