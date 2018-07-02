@@ -1,4 +1,4 @@
-package com.jraska.github.client.users.data
+package com.jraska.github.client.users
 
 import io.reactivex.Single
 import retrofit2.http.GET

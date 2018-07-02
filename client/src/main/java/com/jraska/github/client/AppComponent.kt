@@ -8,7 +8,7 @@ import com.jraska.github.client.logging.CrashReporter
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.settings.SettingsModule
 import com.jraska.github.client.users.UserViewModelModule
-import com.jraska.github.client.users.data.UsersDataModule
+import com.jraska.github.client.users.UsersDataModule
 import dagger.Component
 import dagger.Module
 import dagger.Provides

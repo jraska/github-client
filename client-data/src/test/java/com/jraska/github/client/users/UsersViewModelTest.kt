@@ -4,10 +4,6 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.test
-import com.jraska.github.client.users.data.GitHubApiUsersRepository
-import com.jraska.github.client.users.data.GitHubUser
-import com.jraska.github.client.users.data.GitHubUserDetailApi
-import com.jraska.github.client.users.data.GitHubUsersApi
 import io.reactivex.Single
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before

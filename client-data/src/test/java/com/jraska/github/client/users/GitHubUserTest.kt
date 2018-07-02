@@ -1,4 +1,4 @@
-package com.jraska.github.client.users.data
+package com.jraska.github.client.users
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

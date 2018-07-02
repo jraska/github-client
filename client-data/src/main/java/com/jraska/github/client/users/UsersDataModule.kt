@@ -1,4 +1,4 @@
-package com.jraska.github.client.users.data
+package com.jraska.github.client.users
 
 import com.jraska.github.client.PerApp
 import com.jraska.github.client.users.UsersRepository

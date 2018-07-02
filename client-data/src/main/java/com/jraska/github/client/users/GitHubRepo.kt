@@ -1,4 +1,4 @@
-package com.jraska.github.client.users.data
+package com.jraska.github.client.users
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

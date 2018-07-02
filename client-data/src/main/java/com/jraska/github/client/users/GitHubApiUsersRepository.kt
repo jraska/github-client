@@ -1,9 +1,5 @@
-package com.jraska.github.client.users.data
+package com.jraska.github.client.users
 
-import com.jraska.github.client.users.RepoDetail
-import com.jraska.github.client.users.User
-import com.jraska.github.client.users.UserDetail
-import com.jraska.github.client.users.UsersRepository
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
