@@ -27,7 +27,7 @@ jobs:
           path: client-domain/build/reports
           destination: client-domain/reports
       - store_artifacts:
-          path: client-dara/build/reports
+          path: client-data/build/reports
           destination: client-data/reports
       - store_test_results:
           path: client/build/test-results
