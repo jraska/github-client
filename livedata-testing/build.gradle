@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion 27
+  buildToolsVersion '27.0.3'
+  defaultConfig {
+    minSdkVersion 21
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+dependencies {
+  implementation 'com.android.support:support-annotations:27.1.1'
+  implementation 'android.arch.lifecycle:runtime:1.1.1'
+  implementation 'android.arch.lifecycle:livedata-core:1.1.1'
+
+  testImplementation 'junit:junit:4.12'
+  testImplementation 'android.arch.core:core-testing:1.1.1'
+}

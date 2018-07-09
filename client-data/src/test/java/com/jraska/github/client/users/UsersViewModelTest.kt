@@ -1,9 +1,11 @@
 package com.jraska.github.client.users
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
+import android.arch.lifecycle.LiveData
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.test
+import com.jraska.livedata.TestLiveDataObserver
 import io.reactivex.Single
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before

@@ -1,1 +1,1 @@
-include ':client', ':client-domain', ':client-data'
+include ':client', ':client-domain', ':client-data', ':livedata-testing'
