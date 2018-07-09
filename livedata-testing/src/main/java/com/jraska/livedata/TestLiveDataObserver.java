@@ -1,8 +1,9 @@
 package com.jraska.livedata;
 
 import android.arch.core.util.Function;
-import android.arch.lifecycle.*;
-import android.support.annotation.NonNull;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -10,33 +11,15 @@ import java.util.Collections;
 import java.util.List;
 
 public final class TestLiveDataObserver<T> implements Observer<T> {
-  private static final Observer<Object> EMPTY_OBSERVER = t -> {
-  };
-
-  private final FakeOwner fakeOwner = new FakeOwner();
   private final List<T> valuesHistory = new ArrayList<>();
-  private final Observer<? super T> delegate;
+  private final LiveData<T> observedLiveData;
 
-  private TestLiveDataObserver() {
-    this(EMPTY_OBSERVER);
-  }
-
-  private TestLiveDataObserver(Observer<? super T> delegate) {
-    this.delegate = delegate;
+  private TestLiveDataObserver(LiveData<T> observedLiveData) {
+    this.observedLiveData = observedLiveData;
   }
 
   @Override public void onChanged(@Nullable T value) {
     valuesHistory.add(value);
-    delegate.onChanged(value);
-  }
-
-  @NonNull public LifecycleOwner lifecycleOwner() {
-    return fakeOwner;
-  }
-
-  public TestLiveDataObserver<T> markState(Lifecycle.State state) {
-    fakeOwner.fakeRegistry.markState(state);
-    return this;
   }
 
   public T value() {
@@ -50,7 +33,8 @@ public final class TestLiveDataObserver<T> implements Observer<T> {
 
   public TestLiveDataObserver<T> dispose() {
     valuesHistory.clear();
-    return markState(Lifecycle.State.DESTROYED);
+    observedLiveData.removeObserver(this);
+    return this;
   }
 
   public TestLiveDataObserver<T> assertHasValue() {
@@ -122,32 +106,12 @@ public final class TestLiveDataObserver<T> implements Observer<T> {
   }
 
   public static <T> TestLiveDataObserver<T> create() {
-    return new TestLiveDataObserver<>();
-  }
-
-  public static <T> TestLiveDataObserver<T> create(Observer<T> delegate) {
-    return new TestLiveDataObserver<>(delegate);
+    return new TestLiveDataObserver<>(new MutableLiveData<>());
   }
 
   public static <T> TestLiveDataObserver<T> test(LiveData<T> liveData) {
-    TestLiveDataObserver<T> observer = create();
-    liveData.observe(observer.lifecycleOwner(), observer);
-    return observer.markState(Lifecycle.State.STARTED);
-  }
-
-  public static <T> TestLiveDataObserver<T> test(LiveData<T> liveData, Observer<T> delegate) {
-    TestLiveDataObserver<T> observer = create(delegate);
-    liveData.observe(observer.lifecycleOwner(), observer);
-    return observer.markState(Lifecycle.State.STARTED);
-  }
-
-  static final class FakeOwner implements LifecycleOwner {
-    private final LifecycleRegistry fakeRegistry = new LifecycleRegistry(this);
-
-    @NonNull
-    @Override
-    public Lifecycle getLifecycle() {
-      return fakeRegistry;
-    }
+    TestLiveDataObserver<T> observer = new TestLiveDataObserver<>(liveData);
+    liveData.observeForever(observer);
+    return observer;
   }
 }
