@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public final class TestLiveDataObserver<T> implements Observer<T> {
+public final class TestObserver<T> implements Observer<T> {
   private final List<T> valuesHistory = new ArrayList<>();
   private final LiveData<T> observedLiveData;
 
-  private TestLiveDataObserver(LiveData<T> observedLiveData) {
+  private TestObserver(LiveData<T> observedLiveData) {
     this.observedLiveData = observedLiveData;
   }
 
@@ -31,13 +31,13 @@ public final class TestLiveDataObserver<T> implements Observer<T> {
     return Collections.unmodifiableList(new ArrayList<>(valuesHistory));
   }
 
-  public TestLiveDataObserver<T> dispose() {
+  public TestObserver<T> dispose() {
     valuesHistory.clear();
     observedLiveData.removeObserver(this);
     return this;
   }
 
-  public TestLiveDataObserver<T> assertHasValue() {
+  public TestObserver<T> assertHasValue() {
     if (valuesHistory.isEmpty()) {
       throw fail("Observer never received any value");
     }
@@ -45,11 +45,11 @@ public final class TestLiveDataObserver<T> implements Observer<T> {
     return this;
   }
 
-  public TestLiveDataObserver<T> assertNoValues() {
+  public TestObserver<T> assertNoValues() {
     return assertValueCount(0);
   }
 
-  public TestLiveDataObserver<T> assertValueCount(int count) {
+  public TestObserver<T> assertValueCount(int count) {
     int size = valuesHistory.size();
     if (size != count) {
       throw fail("Value counts differ; Expected: " + count + ", Actual: " + size);
@@ -57,7 +57,7 @@ public final class TestLiveDataObserver<T> implements Observer<T> {
     return this;
   }
 
-  public TestLiveDataObserver<T> assertValue(T expected) {
+  public TestObserver<T> assertValue(T expected) {
     T value = value();
 
     if (expected == null && value == null) {
@@ -71,7 +71,7 @@ public final class TestLiveDataObserver<T> implements Observer<T> {
     return this;
   }
 
-  public TestLiveDataObserver<T> assertValue(Function<T, Boolean> valuePredicate) {
+  public TestObserver<T> assertValue(Function<T, Boolean> valuePredicate) {
     T value = value();
 
     if (!valuePredicate.apply(value)) {
@@ -81,7 +81,7 @@ public final class TestLiveDataObserver<T> implements Observer<T> {
     return this;
   }
 
-  public TestLiveDataObserver<T> assertNever(Function<T, Boolean> valuePredicate) {
+  public TestObserver<T> assertNever(Function<T, Boolean> valuePredicate) {
     int size = valuesHistory.size();
     for (int valueIndex = 0; valueIndex < size; valueIndex++) {
       T value = this.valuesHistory.get(valueIndex);
@@ -105,12 +105,12 @@ public final class TestLiveDataObserver<T> implements Observer<T> {
     return "null";
   }
 
-  public static <T> TestLiveDataObserver<T> create() {
-    return new TestLiveDataObserver<>(new MutableLiveData<>());
+  public static <T> TestObserver<T> create() {
+    return new TestObserver<>(new MutableLiveData<>());
   }
 
-  public static <T> TestLiveDataObserver<T> test(LiveData<T> liveData) {
-    TestLiveDataObserver<T> observer = new TestLiveDataObserver<>(liveData);
+  public static <T> TestObserver<T> test(LiveData<T> liveData) {
+    TestObserver<T> observer = new TestObserver<>(liveData);
     liveData.observeForever(observer);
     return observer;
   }
