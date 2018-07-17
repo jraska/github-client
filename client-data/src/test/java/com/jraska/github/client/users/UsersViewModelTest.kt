@@ -3,7 +3,7 @@ package com.jraska.github.client.users
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.livedata.ex.test
+import com.jraska.livedata.test
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Rule
