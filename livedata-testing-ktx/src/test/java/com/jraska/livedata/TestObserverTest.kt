@@ -3,6 +3,7 @@ package com.jraska.livedata
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import org.assertj.core.api.Assertions.assertThat
+import com.jraska.livedata.test
 import org.junit.Rule
 import org.junit.Test
 
