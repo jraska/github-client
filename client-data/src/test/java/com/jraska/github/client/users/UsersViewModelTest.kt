@@ -37,7 +37,7 @@ class UsersViewModelTest {
     val testObserver = viewModel.users()
       .test()
       .assertValue { it.result()!!.isEmpty() }
-      .assertValueCount(2)
+      .assertHistorySize(2)
 
     users.add(GitHubUser().apply {
       login = "jraska"
@@ -51,6 +51,6 @@ class UsersViewModelTest {
 
     testObserver.assertNever { it == null }
       .assertValue { it.result()!!.first().login == "jraska" }
-      .assertValueCount(4)
+      .assertHistorySize(4)
   }
 }

@@ -35,8 +35,8 @@ dependencies {
 
   compile 'com.jakewharton.timber:timber:4.7.0'
 
-  testImplementation project(':livedata-testing-ktx')
-  testImplementation project(':livedata-testing')
+  testImplementation 'com.jraska.livedata:testing:0.2.0'
+  testImplementation 'com.jraska.livedata:testing-ktx:0.2.0'
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:3.10.0'
   testCompile 'org.mockito:mockito-core:2.19.0'
