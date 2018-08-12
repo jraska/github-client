@@ -4,10 +4,13 @@ import android.app.Activity
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.IdlingRegistry
 import android.support.test.rule.ActivityTestRule
-import com.jraska.github.client.MakeTestsPassRule
+import com.jraska.github.client.ui.UsersActivity
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import okreplay.*
+import okreplay.AndroidTapeRoot
+import okreplay.OkReplayConfig
+import okreplay.OkReplayRuleChain
+import okreplay.TapeMode
 import org.junit.rules.TestRule
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,7 +22,7 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
   }
 
   companion object {
-    private val REPLAY_INTERCEPTOR = OkReplayInterceptor()
+    private val REPLAY_INTERCEPTOR = CustomOkReplayInterceptor()
     private const val NETWORK_ERROR_MESSAGE = "You are trying to do network requests in tests you naughty developer!"
 
     fun create(): ReplayHttpComponent {
@@ -37,24 +40,24 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
     }
 
     fun okReplayRule(): TestRule {
-      return okReplayRule(MakeTestsPassRule())
+      return okReplayRule(TapeMode.READ_ONLY)
     }
 
-    fun <T : Activity> okReplayRule(activityClass: Class<T>): TestRule {
-      return okReplayRule(ActivityTestRule(activityClass))
+    fun okReplayRule(tapeMode: TapeMode): TestRule {
+      return okReplayRule(UsersActivity::class.java, tapeMode)
     }
 
-    fun <T : Activity> okReplayRule(rule: ActivityTestRule<T>): TestRule {
+    fun <T : Activity> okReplayRule(activityClass: Class<T>, tapeMode: TapeMode): TestRule {
       val testClass = findTestClassInStack()
 
       val configuration = OkReplayConfig.Builder()
         .tapeRoot(AndroidTapeRoot(InstrumentationRegistry.getContext(), testClass))
-        .defaultMode(TapeMode.READ_ONLY)
+        .defaultMode(tapeMode)
         .sslEnabled(true)
         .interceptor(REPLAY_INTERCEPTOR)
         .build()
 
-      return OkReplayRuleChain(configuration, rule).get()
+      return OkReplayRuleChain(configuration, ActivityTestRule(activityClass)).get()
     }
 
     private fun findTestClassInStack(): Class<*> {
@@ -68,11 +71,13 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
     }
 
     private fun okReplayClient(): OkHttpClient {
-      return OkHttpClient.Builder()
+      val builder = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
-        .addInterceptor(REPLAY_INTERCEPTOR)
-        .addNetworkInterceptor { _ -> throw UnsupportedOperationException(NETWORK_ERROR_MESSAGE) }
-        .build()
+
+      REPLAY_INTERCEPTOR.interceptorsToRegister().forEach { builder.addInterceptor(it) }
+
+      builder.addNetworkInterceptor { _ -> throw UnsupportedOperationException(NETWORK_ERROR_MESSAGE) }
+      return builder.build()
     }
 
 

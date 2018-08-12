@@ -4,6 +4,8 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.action.ViewActions.click
+import android.support.test.espresso.action.ViewActions.swipeDown
+import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.runner.AndroidJUnit4
@@ -11,7 +13,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.jraska.github.client.R
 import com.jraska.github.client.TestUITestApp
 import com.jraska.github.client.http.ReplayHttpComponent
-import com.jraska.github.client.ui.UsersActivity
 import okreplay.OkReplay
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
@@ -24,7 +25,7 @@ class UsersActivityFlowTest {
 
   @Suppress("unused")
   @get:Rule
-  val testRule = ReplayHttpComponent.okReplayRule(UsersActivity::class.java)
+  val testRule = ReplayHttpComponent.okReplayRule()
 
   @Test
   @OkReplay
@@ -46,5 +47,13 @@ class UsersActivityFlowTest {
     val event = testUITestApp.coreComponent.eventAnalytics.events().findLast { event -> event.name == FirebaseAnalytics.Event.ECOMMERCE_PURCHASE }
     assertThat(event).isNotNull
     assertThat(event!!.properties[FirebaseAnalytics.Param.VALUE]).isEqualTo(0.01)
+  }
+
+  @Test
+  @OkReplay
+  fun whenRefreshes_thenDisplaysOtherUsers() {
+    onView(withText("defunkt")).check(matches(isDisplayed()))
+    onView(withId(R.id.users_refresh_swipe_layout)).perform(swipeDown())
+    onView(withText("defunkt")).check(doesNotExist())
   }
 }
