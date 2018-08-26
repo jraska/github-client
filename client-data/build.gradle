@@ -16,30 +16,30 @@ android {
 }
 
 dependencies {
-  compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
   kapt 'com.google.dagger:dagger-compiler:2.17'
 
-  compile project(':client-domain')
+  api project(':client-domain')
 
-  compile 'com.android.support:appcompat-v7:27.1.1'
-  compile 'com.android.support:support-annotations:27.1.1'
+  api 'com.android.support:appcompat-v7:27.1.1'
+  api 'com.android.support:support-annotations:27.1.1'
 
-  compile 'android.arch.lifecycle:extensions:1.1.1'
+  api 'android.arch.lifecycle:extensions:1.1.1'
 
-  compile 'com.squareup.retrofit2:retrofit:2.4.0'
-  compile 'com.squareup.retrofit2:converter-gson:2.4.0'
-  compile 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-  compile 'com.google.code.gson:gson:2.8.5'
-  compile 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+  api 'com.squareup.retrofit2:retrofit:2.4.0'
+  api 'com.squareup.retrofit2:converter-gson:2.4.0'
+  api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+  api 'com.google.code.gson:gson:2.8.5'
+  api 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
-  compile 'com.jakewharton.timber:timber:4.7.1'
+  api 'com.jakewharton.timber:timber:4.7.1'
 
   testImplementation 'com.jraska.livedata:testing:0.2.0'
   testImplementation 'com.jraska.livedata:testing-ktx:0.2.0'
-  testCompile 'junit:junit:4.12'
-  testCompile 'org.assertj:assertj-core:3.11.0'
-  testCompile 'org.mockito:mockito-core:2.21.0'
-  testCompile 'android.arch.core:core-testing:1.1.1'
-  testCompile 'com.android.support:support-annotations:27.1.1'
+  testImplementation 'junit:junit:4.12'
+  testImplementation 'org.assertj:assertj-core:3.11.0'
+  testImplementation 'org.mockito:mockito-core:2.21.0'
+  testImplementation 'android.arch.core:core-testing:1.1.1'
+  testImplementation 'com.android.support:support-annotations:27.1.1'
 }
