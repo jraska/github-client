@@ -5,15 +5,15 @@ import okhttp3.HttpUrl
 class Urls private constructor() {
   companion object {
     fun user(login: String): HttpUrl {
-      return HttpUrl.parse("https://github.com/$login")!!
+      return HttpUrl.get("https://github.com/$login")
     }
 
     fun repo(fullPath: String): HttpUrl {
-      return HttpUrl.parse("https://github.com/$fullPath")!!
+      return HttpUrl.get("https://github.com/$fullPath")
     }
 
     fun settings(): HttpUrl {
-      return HttpUrl.parse("https://github.com/settings")!!
+      return HttpUrl.get("https://github.com/settings")
     }
   }
 }

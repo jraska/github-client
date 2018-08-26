@@ -14,6 +14,6 @@ class DeepLinkNavigatorTest {
 
     navigator.startUserDetail("johny")
 
-    verify(deepLinkLauncher).launch(HttpUrl.parse("https://github.com/johny")!!)
+    verify(deepLinkLauncher).launch(HttpUrl.get("https://github.com/johny"))
   }
 }

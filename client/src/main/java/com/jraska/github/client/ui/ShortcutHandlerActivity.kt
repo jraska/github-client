@@ -11,7 +11,7 @@ class ShortcutHandlerActivity : BaseActivity() {
 
     val handlerModel = viewModel(ShortcutHandlerModel::class.java)
 
-    val httpUrl = HttpUrl.parse(intent.data.toString())!!
+    val httpUrl = HttpUrl.get(intent.data.toString())
     handlerModel.handleDeepLink(httpUrl)
 
     finish()

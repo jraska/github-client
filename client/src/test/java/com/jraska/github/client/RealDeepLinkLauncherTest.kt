@@ -24,31 +24,31 @@ class RealDeepLinkLauncherTest {
 
   @Test(expected = IllegalArgumentException::class)
   fun whenUnknownHostUrl_thenException() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://jraska.com/users")!!)
+    deepLinkLauncher.launch(HttpUrl.get("https://jraska.com/users"))
   }
 
   @Test(expected = IllegalArgumentException::class)
   fun whenUnsupportedUrl_thenIllegalStateException() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska/repos/johny")!!)
+    deepLinkLauncher.launch(HttpUrl.get("https://github.com/jraska/repos/johny"))
   }
 
   @Test
   fun whenUsersUrl_thenPasses() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/users")!!)
+    deepLinkLauncher.launch(HttpUrl.get("https://github.com/users"))
 
     verify<BaseActivity>(activity).startActivity(any<Intent>())
   }
 
   @Test
   fun whenRepoUrl_thenPasses() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska/Falcon")!!)
+    deepLinkLauncher.launch(HttpUrl.get("https://github.com/jraska/Falcon"))
 
     verify<BaseActivity>(activity).startActivity(any<Intent>())
   }
 
   @Test
   fun whenUserDetailUrl_thenUsersActivityStarts() {
-    deepLinkLauncher.launch(HttpUrl.parse("https://github.com/jraska")!!)
+    deepLinkLauncher.launch(HttpUrl.get("https://github.com/jraska"))
 
     verify<BaseActivity>(activity).startActivity(any<Intent>())
   }

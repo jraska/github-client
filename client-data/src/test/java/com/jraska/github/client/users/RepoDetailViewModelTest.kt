@@ -17,6 +17,6 @@ class RepoDetailViewModelTest {
 
     viewModel.onFitHubIconClicked("jraska/Falcon")
 
-    verify(navigatorMock).launchOnWeb(HttpUrl.parse("https://github.com/jraska/Falcon")!!)
+    verify(navigatorMock).launchOnWeb(HttpUrl.get("https://github.com/jraska/Falcon"))
   }
 }

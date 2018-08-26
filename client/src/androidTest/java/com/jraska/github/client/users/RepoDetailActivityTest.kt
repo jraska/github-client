@@ -43,7 +43,7 @@ class RepoDetailActivityTest {
     DeepLinkLaunchTest.launchDeepLink(deepLink)
 
     onView(withId(R.id.repo_detail_github_fab)).perform(ViewActions.click())
-    verify<Navigator>(navigatorMock).launchOnWeb(HttpUrl.parse(deepLink)!!)
+    verify<Navigator>(navigatorMock).launchOnWeb(HttpUrl.get(deepLink))
   }
 
   @After
