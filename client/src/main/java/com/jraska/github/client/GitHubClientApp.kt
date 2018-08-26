@@ -2,6 +2,7 @@ package com.jraska.github.client
 
 import android.app.Application
 import android.arch.lifecycle.ViewModelProvider
+import android.os.Looper
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.firebase.perf.metrics.AddTrace
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -16,6 +17,8 @@ import com.jraska.github.client.push.PushCallbacks
 import com.jraska.github.client.push.PushHandler
 import com.jraska.github.client.push.PushIntentObserver
 import dagger.Lazy
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
@@ -42,6 +45,8 @@ open class GitHubClientApp : Application() {
   override fun onCreate() {
     super.onCreate()
 
+    initRxAndroidMainThread()
+
     val appComponent = componentBuilder().build()
     appComponent.inject(this)
 
@@ -61,6 +66,12 @@ open class GitHubClientApp : Application() {
     registerActivityLifecycleCallbacks(PushCallbacks(PushIntentObserver(pushHandler())))
 
     logAppCreateEvent()
+  }
+
+  private fun initRxAndroidMainThread() {
+    RxAndroidPlugins.setInitMainThreadSchedulerHandler {
+      AndroidSchedulers.from(Looper.getMainLooper(), true)
+    }
   }
 
   private fun initFresco() {
