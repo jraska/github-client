@@ -56,5 +56,4 @@ internal class GitHubUser {
     @SerializedName("site_admin")
     @Expose
     var siteAdmin: Boolean? = null
-
 }

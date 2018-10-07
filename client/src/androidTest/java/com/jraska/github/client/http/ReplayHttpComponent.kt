@@ -79,9 +79,5 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
       builder.addNetworkInterceptor { _ -> throw UnsupportedOperationException(NETWORK_ERROR_MESSAGE) }
       return builder.build()
     }
-
-
   }
 }
-
-

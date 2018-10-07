@@ -4,25 +4,25 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
-import java.util.*
-import java.util.Collections.emptyList
+import java.util.Collections
 
 internal class GitHubApiUsersRepository(
   private val gitHubUsersApi: GitHubUsersApi,
-  private val gitHubUserDetailApi: GitHubUserDetailApi) : UsersRepository {
+  private val gitHubUserDetailApi: GitHubUserDetailApi
+) : UsersRepository {
   private val converter: UserDetailWithReposConverter = UserDetailWithReposConverter.INSTANCE
 
   private var lastUsers: List<User>? = null
 
   override fun getUsers(since: Int): Single<List<User>> {
     return gitHubUsersApi.getUsers(since)
-      .map({ this.translateUsers(it) })
+      .map { this.translateUsers(it) }
       .doOnSuccess { users -> lastUsers = users }
   }
 
   override fun getUserDetail(login: String, reposInSection: Int): Observable<UserDetail> {
     return gitHubUserDetailApi.getUserDetail(login)
-      .subscribeOn(Schedulers.io()) //this has to be here now to run requests in parallel
+      .subscribeOn(Schedulers.io()) // this has to be here now to run requests in parallel
       .zipWith(gitHubUserDetailApi.getRepos(login), BiFunction { a: GitHubUserDetail, b: List<GitHubRepo> -> Pair(a, b) })
       .map { result -> converter.translateUserDetail(result.component1(), result.component2(), reposInSection) }
       .toObservable()
@@ -32,7 +32,7 @@ internal class GitHubApiUsersRepository(
   override fun getRepoDetail(owner: String, repoName: String): Observable<RepoDetail> {
     return gitHubUsersApi.getRepo(owner, repoName)
       .toObservable()
-      .map({ RepoConverter.INSTANCE.convertToDetail(it) })
+      .map { RepoConverter.INSTANCE.convertToDetail(it) }
   }
 
   private fun cachedUser(login: String): Observable<UserDetail> {

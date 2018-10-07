@@ -2,7 +2,11 @@ package com.jraska.github.client.http
 
 import android.support.test.espresso.IdlingResource
 import android.support.test.espresso.idling.CountingIdlingResource
-import io.reactivex.*
+import io.reactivex.Completable
+import io.reactivex.Flowable
+import io.reactivex.Maybe
+import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
@@ -34,8 +38,10 @@ class RxHttpIdlingResourceFactory private constructor(private val decoratedFacto
     return IdlingResourceAdapter(callAdapter as CallAdapter<Any, Any>, countingIdlingResource)
   }
 
-  internal class IdlingResourceAdapter(private val decoratedAdapter: CallAdapter<Any, Any>,
-                                       private val resource: CountingIdlingResource) : CallAdapter<Any, Any> {
+  internal class IdlingResourceAdapter(
+    private val decoratedAdapter: CallAdapter<Any, Any>,
+    private val resource: CountingIdlingResource
+  ) : CallAdapter<Any, Any> {
 
     override fun responseType(): Type {
       return decoratedAdapter.responseType()
@@ -44,34 +50,31 @@ class RxHttpIdlingResourceFactory private constructor(private val decoratedFacto
     override fun adapt(call: Call<Any>): Any {
       val adapted = decoratedAdapter.adapt(call)
 
-      if (adapted is Single<*>) {
-
-        return adapted.doOnSubscribe { _ -> resource.increment() }
-          .doAfterTerminate({ resource.decrement() })
-      }
+      if (adapted is Single<*>) return adapted.doOnSubscribe { _ -> resource.increment() }
+        .doAfterTerminate { resource.decrement() }
 
       if (adapted is Observable<*>) {
 
         return adapted.doOnSubscribe { _ -> resource.increment() }
-          .doAfterTerminate({ resource.decrement() })
+          .doAfterTerminate { resource.decrement() }
       }
 
       if (adapted is Completable) {
 
         return adapted.doOnSubscribe { _ -> resource.increment() }
-          .doAfterTerminate({ resource.decrement() })
+          .doAfterTerminate { resource.decrement() }
       }
 
       if (adapted is Flowable<*>) {
 
         return adapted.doOnSubscribe { _ -> resource.increment() }
-          .doAfterTerminate({ resource.decrement() })
+          .doAfterTerminate { resource.decrement() }
       }
 
       if (adapted is Maybe<*>) {
 
         return adapted.doOnSubscribe { _ -> resource.increment() }
-          .doAfterTerminate({ resource.decrement() })
+          .doAfterTerminate { resource.decrement() }
       }
 
       throw UnsupportedOperationException("Sorry, I can't deal with: $adapted")

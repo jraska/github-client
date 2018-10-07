@@ -1,7 +1,7 @@
 package com.jraska.github.client.push
 
 import com.google.firebase.messaging.RemoteMessage
-import java.util.*
+import java.util.HashMap
 
 internal object RemoteMessageToActionConverter {
   fun convert(remoteMessage: RemoteMessage): PushAction {

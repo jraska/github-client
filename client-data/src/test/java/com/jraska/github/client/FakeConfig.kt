@@ -1,7 +1,6 @@
 package com.jraska.github.client
 
-import java.util.*
-
+import java.util.Collections
 
 class FakeConfig private constructor(private val values: Map<String, Any>) : Config {
 

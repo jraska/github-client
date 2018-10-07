@@ -1,7 +1,5 @@
 package com.jraska.github.client.users
 
-import com.jraska.github.client.users.RepoDetail
-import com.jraska.github.client.users.RepoHeader
 import org.threeten.bp.Instant
 
 internal class RepoConverter {

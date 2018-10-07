@@ -1,9 +1,5 @@
 package com.jraska.github.client.users
 
-import com.jraska.github.client.users.RepoHeader
-import com.jraska.github.client.users.User
-import com.jraska.github.client.users.UserDetail
-import com.jraska.github.client.users.UserStats
 import org.threeten.bp.Instant
 
 internal class UserDetailWithReposConverter {

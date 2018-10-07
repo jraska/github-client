@@ -1,6 +1,6 @@
 package com.jraska.github.client.analytics
 
-import java.util.*
+import java.util.Collections
 
 class AnalyticsEvent private constructor(val name: String, val properties: Map<String, Any>) {
 

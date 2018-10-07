@@ -44,7 +44,8 @@ object NavigationModule {
   @ClassKey(ShortcutHandlerModel::class)
   fun uriShortcutViewModel(
     deepLinkHandler: DeepLinkLauncher,
-    eventAnalytics: EventAnalytics): ViewModel {
+    eventAnalytics: EventAnalytics
+  ): ViewModel {
     return ShortcutHandlerModel(deepLinkHandler, eventAnalytics)
   }
 }

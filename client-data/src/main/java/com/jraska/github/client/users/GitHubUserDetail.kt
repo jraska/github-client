@@ -95,5 +95,4 @@ internal class GitHubUserDetail {
     @SerializedName("updated_at")
     @Expose
     var updatedAt: String? = null
-
 }

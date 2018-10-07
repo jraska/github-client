@@ -1,7 +1,6 @@
 package com.jraska.github.client.users
 
 import com.jraska.github.client.PerApp
-import com.jraska.github.client.users.UsersRepository
 
 import dagger.Module
 import dagger.Provides

@@ -5,12 +5,13 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
 import com.jraska.github.client.time.DateTimeProvider
 import timber.log.Timber
-import java.util.*
+import java.util.HashMap
 import javax.inject.Inject
 
 internal class PushTokenSynchronizer @Inject constructor(
   private val database: FirebaseDatabase,
-  private val dateTimeProvider: DateTimeProvider) {
+  private val dateTimeProvider: DateTimeProvider
+) {
 
   fun synchronizeToken() {
     val instanceId = FirebaseInstanceId.getInstance()

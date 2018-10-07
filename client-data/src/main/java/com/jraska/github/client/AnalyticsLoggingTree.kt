@@ -7,10 +7,11 @@ import com.jraska.github.client.time.DateTimeProvider
 import timber.log.Timber
 import javax.inject.Inject
 
-class AnalyticsLoggingTree @Inject constructor(private val config: Config,
-                                               private val eventAnalytics: EventAnalytics,
-                                               private val dateTimeProvider: DateTimeProvider) : Timber.DebugTree() {
-
+class AnalyticsLoggingTree @Inject constructor(
+  private val config: Config,
+  private val eventAnalytics: EventAnalytics,
+  private val dateTimeProvider: DateTimeProvider
+) : Timber.DebugTree() {
 
   override fun isLoggable(tag: String?, priority: Int): Boolean {
     val priorityToLog = config.getLong("logging_analytics_priority")

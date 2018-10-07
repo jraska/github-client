@@ -6,6 +6,7 @@ buildscript {
     google()
     maven { url 'https://maven.fabric.io/public' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url "https://plugins.gradle.org/m2/" }
     jcenter()
   }
   dependencies {
@@ -15,6 +16,7 @@ buildscript {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath 'io.fabric.tools:gradle:1.26.0'
     classpath 'com.airbnb.okreplay:gradle-plugin:1.4.0'
+    classpath 'gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:6.1.0'
   }
 }
 
@@ -30,10 +32,10 @@ task clean(type: Delete) {
 }
 
 subprojects {
-
+  apply plugin: "org.jlleitschuh.gradle.ktlint"
   project.plugins.whenPluginAdded { plugin ->
     if ('com.android.build.gradle.AppPlugin' == plugin.class.name
-        || 'com.android.build.gradle.LibraryPlugin' == plugin.class.name) {
+      || 'com.android.build.gradle.LibraryPlugin' == plugin.class.name) {
 
       project.android.testOptions.unitTests.all {
         testLogging {

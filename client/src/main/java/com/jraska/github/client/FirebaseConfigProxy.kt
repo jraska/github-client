@@ -3,7 +3,7 @@ package com.jraska.github.client
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import timber.log.Timber
-import java.util.*
+import java.util.Date
 
 internal class FirebaseConfigProxy(private val config: FirebaseRemoteConfig) : Config {
   private val onFetchCompleteListener: OnCompleteListener<Void> = OnCompleteListener {

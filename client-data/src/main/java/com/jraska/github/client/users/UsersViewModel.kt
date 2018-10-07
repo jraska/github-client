@@ -14,8 +14,11 @@ import io.reactivex.SingleOnSubscribe
 import java.util.concurrent.atomic.AtomicBoolean
 
 class UsersViewModel internal constructor(
-  private val usersRepository: UsersRepository, private val appSchedulers: AppSchedulers,
-  private val navigator: Navigator, private val eventAnalytics: EventAnalytics) : ViewModel() {
+  private val usersRepository: UsersRepository,
+  private val appSchedulers: AppSchedulers,
+  private val navigator: Navigator,
+  private val eventAnalytics: EventAnalytics
+) : ViewModel() {
 
   private val users: RxLiveData<ViewState>
   private var refreshingCache: OnSubscribeRefreshingCache<List<User>>? = null

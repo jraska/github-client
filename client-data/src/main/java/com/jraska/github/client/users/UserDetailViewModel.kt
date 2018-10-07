@@ -9,74 +9,75 @@ import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.rx.RxLiveData
-import java.util.*
 
-class UserDetailViewModel internal constructor(private val usersRepository: UsersRepository,
-                                               private val schedulers: AppSchedulers,
-                                               private val navigator: Navigator,
-                                               private val eventAnalytics: EventAnalytics,
-                                               private val config: Config) : ViewModel() {
+class UserDetailViewModel internal constructor(
+  private val usersRepository: UsersRepository,
+  private val schedulers: AppSchedulers,
+  private val navigator: Navigator,
+  private val eventAnalytics: EventAnalytics,
+  private val config: Config
+) : ViewModel() {
 
-    private val liveDataMapping = HashMap<String, RxLiveData<ViewState>>()
+  private val liveDataMapping = HashMap<String, RxLiveData<ViewState>>()
 
-    fun userDetail(login: String): LiveData<ViewState> {
-        var liveData: RxLiveData<ViewState>? = liveDataMapping[login]
-        if (liveData == null) {
-            liveData = newUserLiveData(login)
-            liveDataMapping[login] = liveData
-        }
-
-        return liveData
+  fun userDetail(login: String): LiveData<ViewState> {
+    var liveData: RxLiveData<ViewState>? = liveDataMapping[login]
+    if (liveData == null) {
+      liveData = newUserLiveData(login)
+      liveDataMapping[login] = liveData
     }
 
-    private fun newUserLiveData(login: String): RxLiveData<ViewState> {
-        var reposInSection = config.getLong("user_detail_section_size").toInt()
-        if (reposInSection <= 0) {
-            reposInSection = 5
-        }
+    return liveData
+  }
 
-        val viewStateObservable = usersRepository.getUserDetail(login, reposInSection)
-                .subscribeOn(schedulers.io())
-                .observeOn(schedulers.mainThread())
-                .map { userDetail -> ViewState(null, userDetail) }
-                .onErrorReturn { error -> ViewState(error, null) }
-                .startWith(ViewState(null, null))
-
-        return RxLiveData.from(viewStateObservable)
+  private fun newUserLiveData(login: String): RxLiveData<ViewState> {
+    var reposInSection = config.getLong("user_detail_section_size").toInt()
+    if (reposInSection <= 0) {
+      reposInSection = 5
     }
 
-    fun onUserGitHubIconClick(login: String) {
-        val event = AnalyticsEvent.builder("open_github_from_detail")
-                .addProperty("login", login)
-                .build()
+    val viewStateObservable = usersRepository.getUserDetail(login, reposInSection)
+      .subscribeOn(schedulers.io())
+      .observeOn(schedulers.mainThread())
+      .map { userDetail -> ViewState(null, userDetail) }
+      .onErrorReturn { error -> ViewState(error, null) }
+      .startWith(ViewState(null, null))
 
-        eventAnalytics.report(event)
+    return RxLiveData.from(viewStateObservable)
+  }
 
-        navigator.launchOnWeb(Urls.user(login))
+  fun onUserGitHubIconClick(login: String) {
+    val event = AnalyticsEvent.builder("open_github_from_detail")
+      .addProperty("login", login)
+      .build()
+
+    eventAnalytics.report(event)
+
+    navigator.launchOnWeb(Urls.user(login))
+  }
+
+  fun onRepoClicked(header: RepoHeader) {
+    val event = AnalyticsEvent.builder("open_repo_from_detail")
+      .addProperty("owner", header.owner)
+      .addProperty("name", header.name)
+      .build()
+
+    eventAnalytics.report(event)
+
+    navigator.startRepoDetail(header.fullName())
+  }
+
+  class ViewState internal constructor(private val error: Throwable?, private val result: UserDetail?) {
+
+    val isLoading: Boolean
+      get() = (result == null || result.basicStats == null) && error == null
+
+    fun error(): Throwable? {
+      return error
     }
 
-    fun onRepoClicked(header: RepoHeader) {
-        val event = AnalyticsEvent.builder("open_repo_from_detail")
-                .addProperty("owner", header.owner)
-                .addProperty("name", header.name)
-                .build()
-
-        eventAnalytics.report(event)
-
-        navigator.startRepoDetail(header.fullName())
+    fun result(): UserDetail? {
+      return result
     }
-
-    class ViewState internal constructor(private val error: Throwable?, private val result: UserDetail?) {
-
-        val isLoading: Boolean
-            get() = (result == null || result.basicStats == null) && error == null
-
-        fun error(): Throwable? {
-            return error
-        }
-
-        fun result(): UserDetail? {
-            return result
-        }
-    }
+  }
 }

@@ -12,4 +12,3 @@ fun HttpUrl.toAnalyticsString(): String {
 
   return builder.build().toString()
 }
-

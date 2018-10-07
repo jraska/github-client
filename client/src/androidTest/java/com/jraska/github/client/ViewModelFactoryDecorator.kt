@@ -3,12 +3,12 @@ package com.jraska.github.client
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.support.test.InstrumentationRegistry
-import java.util.*
 import javax.inject.Provider
 
 class ViewModelFactoryDecorator(
   private val decoratedFactory: ViewModelProvider.Factory,
-  private val providersMap: Map<Class<*>, Provider<ViewModel>>) : ViewModelProvider.Factory {
+  private val providersMap: Map<Class<*>, Provider<ViewModel>>
+) : ViewModelProvider.Factory {
 
   @Suppress("UNCHECKED_CAST")
   override fun <T : ViewModel> create(aClass: Class<T>): T {
@@ -18,13 +18,13 @@ class ViewModelFactoryDecorator(
     } else {
       decoratedFactory.create(aClass)
     }
-
   }
 
   companion object {
     fun setToApp(
       viewModelClass: Class<out ViewModel>,
-      implementation: ViewModel) {
+      implementation: ViewModel
+    ) {
       val applicationContext = InstrumentationRegistry.getTargetContext().applicationContext
       setToApp(applicationContext as GitHubClientApp, viewModelClass, implementation)
     }

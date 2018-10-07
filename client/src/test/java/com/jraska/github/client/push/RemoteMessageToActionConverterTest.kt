@@ -2,7 +2,7 @@ package com.jraska.github.client.push
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import java.util.*
+import java.util.Collections
 
 class RemoteMessageToActionConverterTest {
   @Test

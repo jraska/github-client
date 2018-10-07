@@ -17,8 +17,11 @@ object UserViewModelModule {
   @IntoMap
   @ClassKey(UsersViewModel::class)
   fun provideUsersModel(
-    repository: UsersRepository, schedulers: AppSchedulers,
-    navigator: Navigator, analytics: EventAnalytics): ViewModel {
+    repository: UsersRepository,
+    schedulers: AppSchedulers,
+    navigator: Navigator,
+    analytics: EventAnalytics
+  ): ViewModel {
     return UsersViewModel(repository, schedulers, navigator, analytics)
   }
 
@@ -27,9 +30,12 @@ object UserViewModelModule {
   @IntoMap
   @ClassKey(UserDetailViewModel::class)
   fun provideUserDetailModel(
-    repository: UsersRepository, schedulers: AppSchedulers,
-    navigator: Navigator, analytics: EventAnalytics,
-    config: Config): ViewModel {
+    repository: UsersRepository,
+    schedulers: AppSchedulers,
+    navigator: Navigator,
+    analytics: EventAnalytics,
+    config: Config
+  ): ViewModel {
     return UserDetailViewModel(repository, schedulers, navigator, analytics, config)
   }
 
@@ -38,8 +44,11 @@ object UserViewModelModule {
   @IntoMap
   @ClassKey(RepoDetailViewModel::class)
   fun provideRepoDetailModel(
-    repository: UsersRepository, schedulers: AppSchedulers,
-    navigator: Navigator, analytics: EventAnalytics): ViewModel {
+    repository: UsersRepository,
+    schedulers: AppSchedulers,
+    navigator: Navigator,
+    analytics: EventAnalytics
+  ): ViewModel {
     return RepoDetailViewModel(repository, schedulers, navigator, analytics)
   }
 }

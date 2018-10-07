@@ -7,8 +7,10 @@ import okhttp3.HttpUrl
  * even the internal one to avoid two different
  * ways how to handle activity start.
  */
-class DeepLinkNavigator(private val deepLinkLauncher: DeepLinkLauncher,
-                        private val webLinkLauncher: WebLinkLauncher) : Navigator {
+class DeepLinkNavigator(
+  private val deepLinkLauncher: DeepLinkLauncher,
+  private val webLinkLauncher: WebLinkLauncher
+) : Navigator {
 
   private fun launch(url: HttpUrl) {
     deepLinkLauncher.launch(url)

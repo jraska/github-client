@@ -10,8 +10,10 @@ import com.jraska.github.client.NotificationSetup
 import com.jraska.github.client.R
 import com.jraska.github.client.ui.UriHandlerActivity
 
-class ShowNotificationPushCommand constructor(private val context: Context,
-                                              private val notificationManager: NotificationManager) : PushActionCommand {
+class ShowNotificationPushCommand constructor(
+  private val context: Context,
+  private val notificationManager: NotificationManager
+) : PushActionCommand {
   override fun execute(action: PushAction): Boolean {
     val title = action.parameters["title"] ?: return false
     val message = action.parameters["message"] ?: return false

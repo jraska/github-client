@@ -9,8 +9,8 @@ import javax.inject.Provider
 class PushHandler @Inject internal constructor(
   private val eventAnalytics: EventAnalytics,
   private val tokenSynchronizer: PushTokenSynchronizer,
-  private val pushCommands: Map<String, @JvmSuppressWildcards Provider<PushActionCommand>>) {
-
+  private val pushCommands: Map<String, @JvmSuppressWildcards Provider<PushActionCommand>>
+) {
 
   internal fun handlePush(action: PushAction) {
     Timber.v("Push received action: %s", action.name)

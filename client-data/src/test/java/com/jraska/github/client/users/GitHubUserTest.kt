@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.assertj.core.api.Assertions
 import org.junit.Test
-import java.util.*
+import java.util.ArrayList
 
 class GitHubUserTest {
   @Test

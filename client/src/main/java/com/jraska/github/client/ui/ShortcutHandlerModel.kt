@@ -8,8 +8,10 @@ import com.jraska.github.client.analytics.EventAnalytics
 
 import okhttp3.HttpUrl
 
-class ShortcutHandlerModel(private val deepLinkLauncher: DeepLinkLauncher,
-                           private val eventAnalytics: EventAnalytics) : ViewModel() {
+class ShortcutHandlerModel(
+  private val deepLinkLauncher: DeepLinkLauncher,
+  private val eventAnalytics: EventAnalytics
+) : ViewModel() {
 
   internal fun handleDeepLink(url: HttpUrl) {
     val event = AnalyticsEvent.builder("shortcut_clicked")

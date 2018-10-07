@@ -12,8 +12,10 @@ import com.jraska.github.client.users.RepoHeader
 import com.jraska.github.client.widget.RepeaterLayout
 
 internal class ReposSectionModel(
-  private val title: String, private val repos: List<RepoHeader>,
-  private val repoListener: RepoHeaderModel.RepoListener) : EpoxyModelWithHolder<ReposSectionModel.ReposHolder>() {
+  private val title: String,
+  private val repos: List<RepoHeader>,
+  private val repoListener: RepoHeaderModel.RepoListener
+) : EpoxyModelWithHolder<ReposSectionModel.ReposHolder>() {
 
   override fun createNewHolder(): ReposHolder {
     return ReposHolder()

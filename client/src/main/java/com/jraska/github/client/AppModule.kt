@@ -54,6 +54,5 @@ class AppModule(private val app: GitHubClientApp) {
   fun schedulers(): AppSchedulers {
     return AppSchedulers(AndroidSchedulers.mainThread(),
       Schedulers.io(), Schedulers.computation())
-
   }
 }

@@ -1,6 +1,6 @@
 package com.jraska.github.client.push
 
-import java.util.*
+import java.util.Collections
 
 class PushAction private constructor(val name: String, val parameters: Map<String, String>) {
   companion object {

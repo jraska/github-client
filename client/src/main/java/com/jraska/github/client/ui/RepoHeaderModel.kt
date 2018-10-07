@@ -32,7 +32,6 @@ internal class RepoHeaderModel(private val repo: RepoHeader, repoListener: RepoL
     holder.forksTextView.text = repo.forks.toString()
 
     holder.itemView.setOnClickListener(itemClickListener)
-
   }
 
   internal class RepoHolder : EpoxyHolder() {

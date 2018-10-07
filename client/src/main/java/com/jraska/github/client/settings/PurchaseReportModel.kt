@@ -38,4 +38,3 @@ internal class PurchaseReportModel(private val listener: PurchaseListener)
     fun onPurchaseButtonClicked(value: String)
   }
 }
-

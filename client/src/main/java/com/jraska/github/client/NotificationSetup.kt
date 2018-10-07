@@ -9,7 +9,8 @@ import javax.inject.Inject
 
 class NotificationSetup @Inject internal constructor(
   private val notificationManager: NotificationManager,
-  private val context: Context) {
+  private val context: Context
+) {
 
   internal fun setupChannels() {
     if (Build.VERSION.SDK_INT < 26) {

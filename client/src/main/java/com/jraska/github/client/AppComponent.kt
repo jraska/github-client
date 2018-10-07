@@ -57,7 +57,3 @@ class CoreComponentModule(private val coreComponent: CoreComponent) {
     return coreComponent.firebaseDatabase()
   }
 }
-
-
-
-

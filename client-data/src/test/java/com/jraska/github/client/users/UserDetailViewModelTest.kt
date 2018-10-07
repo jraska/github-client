@@ -11,7 +11,9 @@ import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 import org.threeten.bp.Instant
 
 class UserDetailViewModelTest {
@@ -70,4 +72,3 @@ fun trampoline(): AppSchedulers {
   return AppSchedulers(Schedulers.trampoline(), Schedulers.trampoline(),
     Schedulers.trampoline())
 }
-
