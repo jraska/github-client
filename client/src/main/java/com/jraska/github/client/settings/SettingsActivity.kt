@@ -24,6 +24,7 @@ class SettingsActivity : BaseActivity(), PurchaseReportModel.PurchaseListener {
     recyclerView.layoutManager = LinearLayoutManager(this)
     val adapter = SimpleEpoxyAdapter()
     adapter.addModels(PurchaseReportModel(this))
+    adapter.addModels(ConsoleModel())
     recyclerView.adapter = adapter
   }
 

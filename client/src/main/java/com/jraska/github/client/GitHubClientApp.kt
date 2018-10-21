@@ -6,6 +6,7 @@ import android.os.Looper
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.firebase.perf.metrics.AddTrace
 import com.jakewharton.threetenabp.AndroidThreeTen
+import com.jraska.console.timber.ConsoleTree
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.AppBuildConfig
@@ -57,6 +58,7 @@ open class GitHubClientApp : Application() {
     if (BuildConfig.DEBUG) {
       Timber.plant(Timber.DebugTree())
       Timber.plant(analyticsTree.get())
+      Timber.plant(ConsoleTree.create())
     }
 
     notificationSetup.setupChannels()
