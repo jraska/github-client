@@ -1,4 +1,5 @@
 apply plugin: 'java-library'
+apply plugin: 'com.android.lint'
 apply plugin: 'kotlin'
 
 configurations {
@@ -14,8 +15,8 @@ sourceSets {
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-  api 'com.google.dagger:dagger:2.17'
-  provided 'com.google.dagger:dagger-compiler:2.17'
+  api 'com.google.dagger:dagger:2.18'
+  provided 'com.google.dagger:dagger-compiler:2.18'
 
   api 'io.reactivex.rxjava2:rxjava:2.2.2'
   api 'com.squareup.okhttp3:okhttp:3.11.0'
