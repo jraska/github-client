@@ -68,9 +68,9 @@ dependencies {
 
   implementation 'com.google.firebase:firebase-core:16.0.4'
   implementation 'com.google.firebase:firebase-config:16.1.0'
-  implementation 'com.google.firebase:firebase-perf:16.1.0'
+  implementation 'com.google.firebase:firebase-perf:16.1.2'
   implementation 'com.google.firebase:firebase-messaging:17.3.4'
-  implementation 'com.google.firebase:firebase-database:16.0.2'
+  implementation 'com.google.firebase:firebase-database:16.0.3'
   implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
 
   implementation 'android.arch.lifecycle:runtime:1.1.1'
