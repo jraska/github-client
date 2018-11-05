@@ -4,6 +4,7 @@ import android.app.Activity
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.IdlingRegistry
 import android.support.test.rule.ActivityTestRule
+import com.jraska.espresso.RxHttpIdlingResourceFactory
 import com.jraska.github.client.ui.UsersActivity
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

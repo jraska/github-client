@@ -1,4 +1,4 @@
-package com.jraska.github.client.http
+package com.jraska.espresso
 
 import android.support.test.espresso.IdlingResource
 import android.support.test.espresso.idling.CountingIdlingResource
