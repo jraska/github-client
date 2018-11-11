@@ -15,10 +15,10 @@ sourceSets {
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-  api 'com.google.dagger:dagger:2.18'
-  provided 'com.google.dagger:dagger-compiler:2.18'
+  api 'com.google.dagger:dagger:2.19'
+  provided 'com.google.dagger:dagger-compiler:2.19'
 
-  api 'io.reactivex.rxjava2:rxjava:2.2.2'
+  api 'io.reactivex.rxjava2:rxjava:2.2.3'
   api 'com.squareup.okhttp3:okhttp:3.11.0'
   api 'com.squareup.okio:okio:2.1.0'
 
