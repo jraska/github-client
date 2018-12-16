@@ -5,6 +5,7 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.jraska.github.client.DeepLinkLaunchTest
 import com.jraska.github.client.Navigator
+import com.jraska.github.client.R
 import com.jraska.github.client.ViewModelFactoryDecorator
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.rx.AppSchedulers

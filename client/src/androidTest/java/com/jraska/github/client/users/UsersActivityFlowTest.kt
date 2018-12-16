@@ -11,6 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.jraska.github.client.R
 import com.jraska.github.client.TestUITestApp
 import com.jraska.github.client.http.ReplayHttpComponent
 import okreplay.OkReplay
