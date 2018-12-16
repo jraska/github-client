@@ -2,11 +2,11 @@ package com.jraska.github.client
 
 import android.content.Intent
 import android.net.Uri
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.platform.app.InstrumentationRegistry
 import com.jraska.github.client.http.ReplayHttpComponent
 import okreplay.OkReplay
 import org.hamcrest.Matchers
@@ -45,7 +45,7 @@ class DeepLinkLaunchTest {
 
   companion object {
     fun launchDeepLink(deepLink: String) {
-      val targetContext = InstrumentationRegistry.getTargetContext()
+      val targetContext = InstrumentationRegistry.getInstrumentation().targetContext
 
       val intent = Intent(Intent.ACTION_VIEW)
       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

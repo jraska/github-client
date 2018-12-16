@@ -1,9 +1,9 @@
 package com.jraska.github.client.http
 
 import android.app.Activity
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.IdlingRegistry
-import android.support.test.rule.ActivityTestRule
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
 import com.jraska.espresso.RxHttpIdlingResourceFactory
 import com.jraska.github.client.ui.UsersActivity
 import okhttp3.OkHttpClient
@@ -52,7 +52,7 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
       val testClass = findTestClassInStack()
 
       val configuration = OkReplayConfig.Builder()
-        .tapeRoot(AndroidTapeRoot(InstrumentationRegistry.getContext(), testClass))
+        .tapeRoot(AndroidTapeRoot(InstrumentationRegistry.getInstrumentation().context, testClass))
         .defaultMode(tapeMode)
         .sslEnabled(true)
         .interceptor(REPLAY_INTERCEPTOR)

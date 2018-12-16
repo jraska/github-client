@@ -1,16 +1,13 @@
 package com.jraska.github.client.users
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.action.ViewActions.swipeDown
-import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.espresso.matcher.ViewMatchers.withText
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.swipeDown
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.platform.app.InstrumentationRegistry
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.jraska.github.client.R
 import com.jraska.github.client.TestUITestApp
@@ -19,9 +16,7 @@ import okreplay.OkReplay
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class UsersActivityFlowTest {
 
   @Suppress("unused")
@@ -44,7 +39,7 @@ class UsersActivityFlowTest {
     onView(withId(R.id.settings_purchase_input)).perform(ViewActions.typeText("0.01"))
     onView(withId(R.id.settings_purchase_submit_button)).perform(click())
 
-    val testUITestApp = InstrumentationRegistry.getTargetContext().applicationContext as TestUITestApp
+    val testUITestApp = InstrumentationRegistry.getInstrumentation().getTargetContext().applicationContext as TestUITestApp
     val event = testUITestApp.coreComponent.eventAnalytics.events().findLast { event -> event.name == FirebaseAnalytics.Event.ECOMMERCE_PURCHASE }
     assertThat(event).isNotNull
     assertThat(event!!.properties[FirebaseAnalytics.Param.VALUE]).isEqualTo(0.01)

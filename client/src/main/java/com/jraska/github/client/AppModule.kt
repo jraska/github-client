@@ -1,7 +1,7 @@
 package com.jraska.github.client
 
 import android.app.NotificationManager
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider
 import android.content.Context
 import android.view.LayoutInflater
 import com.jraska.github.client.common.AppBuildConfig

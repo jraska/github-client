@@ -3,9 +3,9 @@ package com.jraska.github.client.widget
 import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 
 class RepeaterLayout : LinearLayout {
   constructor(context: Context) : super(context)

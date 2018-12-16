@@ -1,6 +1,6 @@
 package com.jraska.github.client.users
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.livedata.test

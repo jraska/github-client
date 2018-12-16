@@ -1,6 +1,6 @@
 package com.jraska.github.client.settings
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.jraska.github.client.analytics.EventAnalytics
 import dagger.Module
 import dagger.Provides

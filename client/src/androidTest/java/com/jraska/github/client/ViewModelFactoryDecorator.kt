@@ -1,8 +1,8 @@
 package com.jraska.github.client
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.support.test.InstrumentationRegistry
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.test.platform.app.InstrumentationRegistry
 import javax.inject.Provider
 
 class ViewModelFactoryDecorator(
@@ -25,7 +25,7 @@ class ViewModelFactoryDecorator(
       viewModelClass: Class<out ViewModel>,
       implementation: ViewModel
     ) {
-      val applicationContext = InstrumentationRegistry.getTargetContext().applicationContext
+      val applicationContext = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
       setToApp(applicationContext as GitHubClientApp, viewModelClass, implementation)
     }
 
@@ -37,7 +37,7 @@ class ViewModelFactoryDecorator(
     }
 
     fun removeDecorations() {
-      val app = InstrumentationRegistry.getTargetContext().applicationContext as GitHubClientApp
+      val app = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as GitHubClientApp
 
       while (app.viewModelFactory is ViewModelFactoryDecorator) {
         val decorator = app.viewModelFactory as ViewModelFactoryDecorator

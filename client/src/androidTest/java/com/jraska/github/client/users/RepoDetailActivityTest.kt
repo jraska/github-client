@@ -1,8 +1,8 @@
 package com.jraska.github.client.users
 
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions
-import android.support.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.jraska.github.client.DeepLinkLaunchTest
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.R
@@ -42,7 +42,7 @@ class RepoDetailActivityTest {
     val deepLink = "https://github.com/jraska/Falcon"
     DeepLinkLaunchTest.launchDeepLink(deepLink)
 
-    onView(withId(R.id.repo_detail_github_fab)).perform(ViewActions.click())
+    onView(withId(R.id.repo_detail_github_fab)).perform(click())
     verify<Navigator>(navigatorMock).launchOnWeb(HttpUrl.get(deepLink))
   }
 

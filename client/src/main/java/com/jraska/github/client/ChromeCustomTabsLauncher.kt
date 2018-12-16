@@ -1,7 +1,7 @@
 package com.jraska.github.client
 
 import android.net.Uri
-import android.support.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsIntent
 import com.jraska.github.client.ui.BaseActivity
 import okhttp3.HttpUrl
 

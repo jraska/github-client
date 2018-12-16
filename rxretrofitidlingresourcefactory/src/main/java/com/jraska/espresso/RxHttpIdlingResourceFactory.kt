@@ -1,7 +1,7 @@
 package com.jraska.espresso
 
-import android.support.test.espresso.IdlingResource
-import android.support.test.espresso.idling.CountingIdlingResource
+import androidx.test.espresso.IdlingResource
+import androidx.test.espresso.idling.CountingIdlingResource
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Maybe
@@ -51,30 +51,30 @@ class RxHttpIdlingResourceFactory private constructor(private val decoratedFacto
       val adapted = decoratedAdapter.adapt(call)
 
       if (adapted is Single<*>) return adapted.doOnSubscribe { _ -> resource.increment() }
-        .doAfterTerminate { resource.decrement() }
+        .doFinally { resource.decrement() }
 
       if (adapted is Observable<*>) {
 
         return adapted.doOnSubscribe { _ -> resource.increment() }
-          .doAfterTerminate { resource.decrement() }
+          .doFinally { resource.decrement() }
       }
 
       if (adapted is Completable) {
 
         return adapted.doOnSubscribe { _ -> resource.increment() }
-          .doAfterTerminate { resource.decrement() }
+          .doFinally { resource.decrement() }
       }
 
       if (adapted is Flowable<*>) {
 
         return adapted.doOnSubscribe { _ -> resource.increment() }
-          .doAfterTerminate { resource.decrement() }
+          .doFinally { resource.decrement() }
       }
 
       if (adapted is Maybe<*>) {
 
         return adapted.doOnSubscribe { _ -> resource.increment() }
-          .doAfterTerminate { resource.decrement() }
+          .doFinally { resource.decrement() }
       }
 
       throw UnsupportedOperationException("Sorry, I can't deal with: $adapted")

@@ -1,6 +1,6 @@
 package com.jraska.github.client.rx
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single

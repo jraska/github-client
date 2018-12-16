@@ -1,6 +1,6 @@
 package com.jraska.github.client.users
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.jraska.github.client.Config
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.EventAnalytics

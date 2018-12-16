@@ -1,7 +1,7 @@
 package com.jraska.github.client
 
 import android.app.Application
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider
 import android.os.Looper
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.firebase.perf.metrics.AddTrace

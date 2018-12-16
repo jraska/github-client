@@ -1,6 +1,6 @@
 package com.jraska.github.client.users
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.jraska.github.client.FakeConfig
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.EventAnalytics
@@ -49,13 +49,13 @@ class UserDetailViewModelTest {
   fun whenSameLoginMultipleTimes_thenOnlyOneObservableCreated() {
     val login = "someLogin"
 
-    viewModel.userDetail(login).test().dispose()
+    viewModel.userDetail(login).test()
     verify(usersRepository).getUserDetail("someLogin", 3)
 
-    viewModel.userDetail(login).test().dispose()
+    viewModel.userDetail(login).test()
     verify(usersRepository).getUserDetail("someLogin", 3)
 
-    viewModel.userDetail("different").test().dispose()
+    viewModel.userDetail("different").test()
     verify(usersRepository).getUserDetail("different", 3)
   }
 

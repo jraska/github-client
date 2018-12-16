@@ -1,7 +1,8 @@
 package com.jraska.github.client.users
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.ViewModel
+import android.annotation.SuppressLint
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.Urls
 import com.jraska.github.client.analytics.AnalyticsEvent
@@ -105,6 +106,7 @@ class UsersViewModel internal constructor(
       refresh.set(true)
     }
 
+    @SuppressLint("CheckResult")
     @Throws(Exception::class)
     override fun subscribe(e: SingleEmitter<T>) {
       if (refresh.compareAndSet(true, false)) {

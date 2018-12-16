@@ -2,7 +2,7 @@ package com.jraska.github.client.push
 
 import android.app.Activity
 import android.app.Application
-import android.arch.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleOwner
 import android.os.Bundle
 
 class PushCallbacks(private val intentObserver: PushIntentObserver) : Application.ActivityLifecycleCallbacks {

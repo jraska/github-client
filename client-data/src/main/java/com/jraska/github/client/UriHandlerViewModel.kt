@@ -1,6 +1,6 @@
 package com.jraska.github.client
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import okhttp3.HttpUrl
 
 class UriHandlerViewModel constructor(private val deepLinkHandler: DeepLinkHandler) : ViewModel() {
