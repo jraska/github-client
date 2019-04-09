@@ -27,8 +27,6 @@ import javax.inject.Inject
 open class GitHubClientApp : Application(), HasViewModelFactory {
 
   @Inject internal lateinit var eventAnalytics: EventAnalytics
-  @Inject internal lateinit var errorReportTree: ErrorReportTree
-  @Inject internal lateinit var analyticsTree: Lazy<AnalyticsLoggingTree>
   @Inject internal lateinit var topActivityProvider: TopActivityProvider
   @Inject internal lateinit var pushHandler: PushHandler
   @Inject internal lateinit var notificationSetup: NotificationSetup
@@ -50,16 +48,12 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
     initRxAndroidMainThread()
 
     appComponent.inject(this)
+    appComponent.onAppCreateActions().get().forEach {
+      it.onCreate(this)
+    }
 
     initFresco()
     initThreeTen()
-
-    Timber.plant(errorReportTree)
-    if (BuildConfig.DEBUG) {
-      Timber.plant(Timber.DebugTree())
-      Timber.plant(analyticsTree.get())
-      Timber.plant(ConsoleTree.create())
-    }
 
     notificationSetup.setupChannels()
 

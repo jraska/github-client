@@ -1,18 +1,23 @@
 package com.jraska.github.client
 
 import android.app.NotificationManager
-import androidx.lifecycle.ViewModelProvider
 import android.content.Context
 import android.view.LayoutInflater
+import androidx.lifecycle.ViewModelProvider
+import com.jraska.console.timber.ConsoleTree
 import com.jraska.github.client.common.AppBuildConfig
+import com.jraska.github.client.logging.ErrorReportTree
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import dagger.multibindings.IntoSet
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
+import javax.inject.Provider
 
 @Module
 class AppModule(private val app: GitHubClientApp) {
@@ -36,7 +41,8 @@ class AppModule(private val app: GitHubClientApp) {
     return LayoutInflater.from(context)
   }
 
-  @Provides internal fun provideViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory {
+  @Provides
+  internal fun provideViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory {
     return factory
   }
 
@@ -47,6 +53,12 @@ class AppModule(private val app: GitHubClientApp) {
 
   @Provides internal fun notificationManager(): NotificationManager {
     return app.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+  }
+
+  @Provides
+  @IntoSet
+  internal fun setupLoggingOnCreate(setupLogging: SetupLogging): OnAppCreate {
+    return setupLogging
   }
 
   @Provides

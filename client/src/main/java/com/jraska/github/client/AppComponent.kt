@@ -14,6 +14,7 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import javax.inject.Provider
 
 @PerApp
 @Component(modules = [UsersDataModule::class, UserViewModelModule::class, NavigationModule::class,
@@ -21,10 +22,12 @@ import retrofit2.Retrofit
   HttpComponentModule::class, CoreComponentModule::class])
 interface AppComponent {
 
+  fun onAppCreateActions(): Provider<Set<OnAppCreate>>
+
   @Deprecated("Field injection should die")
   fun inject(app: GitHubClientApp)
 
-  fun viewModelFactory() : ViewModelProvider.Factory
+  fun viewModelFactory(): ViewModelProvider.Factory
 }
 
 @Module
