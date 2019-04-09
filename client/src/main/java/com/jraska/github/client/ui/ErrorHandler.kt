@@ -5,8 +5,8 @@ import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import java.net.UnknownHostException
 
-class ErrorHandler {
-  internal fun modelsForError(error: Throwable): List<EpoxyModel<*>> {
+object ErrorHandler {
+  fun modelsForError(error: Throwable): List<EpoxyModel<*>> {
     if (error is UnknownHostException) {
       return listOf(ErrorModel.networkError())
     }
@@ -14,14 +14,11 @@ class ErrorHandler {
     return listOf(ErrorModel.genericError())
   }
 
-  companion object {
-    internal fun displayError(throwable: Throwable, toView: RecyclerView) {
-      val errorHandler = ErrorHandler()
-      val models = errorHandler.modelsForError(throwable)
+  fun displayError(throwable: Throwable, toView: RecyclerView) {
+    val models = modelsForError(throwable)
 
-      val epoxyAdapter = SimpleEpoxyAdapter()
-      epoxyAdapter.addModels(models)
-      toView.adapter = epoxyAdapter
-    }
+    val epoxyAdapter = SimpleEpoxyAdapter()
+    epoxyAdapter.addModels(models)
+    toView.adapter = epoxyAdapter
   }
 }

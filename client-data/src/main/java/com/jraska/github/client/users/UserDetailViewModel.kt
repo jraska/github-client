@@ -39,9 +39,9 @@ class UserDetailViewModel internal constructor(
     val viewStateObservable = usersRepository.getUserDetail(login, reposInSection)
       .subscribeOn(schedulers.io())
       .observeOn(schedulers.mainThread())
-      .map { userDetail -> ViewState(null, userDetail) }
-      .onErrorReturn { error -> ViewState(error, null) }
-      .startWith(ViewState(null, null))
+      .map { userDetail -> ViewState.DisplayUser(userDetail) as ViewState }
+      .onErrorReturn { ViewState.Error(it) }
+      .startWith(ViewState.Loading)
 
     return RxLiveData.from(viewStateObservable)
   }
@@ -67,17 +67,9 @@ class UserDetailViewModel internal constructor(
     navigator.startRepoDetail(header.fullName())
   }
 
-  class ViewState internal constructor(private val error: Throwable?, private val result: UserDetail?) {
-
-    val isLoading: Boolean
-      get() = (result == null || result.basicStats == null) && error == null
-
-    fun error(): Throwable? {
-      return error
-    }
-
-    fun result(): UserDetail? {
-      return result
-    }
+  sealed class ViewState {
+    object Loading : ViewState()
+    class Error(val error: Throwable) : ViewState()
+    class DisplayUser(val user: UserDetail) : ViewState()
   }
 }
