@@ -36,7 +36,7 @@ class UsersViewModelTest {
   fun refreshesProperly() {
     val testObserver = viewModel.users()
       .test()
-      .assertValue { it.result()!!.isEmpty() }
+      .assertValue { it is UsersViewModel.ViewState.ShowUsers }
       .assertHistorySize(2)
 
     users.add(GitHubUser().apply {
@@ -45,12 +45,16 @@ class UsersViewModelTest {
       htmlUrl = "https://github.com/jraska"
     })
 
-    testObserver.assertValue { it.result()!!.isEmpty() }
+    testObserver.assertValue { it is UsersViewModel.ViewState.ShowUsers }
 
     viewModel.onRefresh()
 
-    testObserver.assertNever { it == null }
-      .assertValue { it.result()!!.first().login == "jraska" }
-      .assertHistorySize(4)
+    testObserver.assertHistorySize(4)
+
+    viewModel.users()
+      .test()
+      .assertNever { it == null }
+      .map { it as UsersViewModel.ViewState.ShowUsers }
+      .assertValue { it.users.first().login == "jraska" }
   }
 }

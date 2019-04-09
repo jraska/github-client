@@ -27,10 +27,10 @@ class UsersViewModel internal constructor(
   init {
 
     val viewStateObservable = usersInternal()
-      .map { data -> ViewState(null, data) }
-      .onErrorReturn { error -> ViewState(error, null) }
+      .map { users -> ViewState.ShowUsers(users) as ViewState }
+      .onErrorReturn { ViewState.Error(it) }
       .toObservable()
-      .startWith(ViewState(null, null))
+      .startWith(ViewState.Loading)
 
     users = RxLiveData.from(viewStateObservable)
   }
@@ -79,18 +79,10 @@ class UsersViewModel internal constructor(
     navigator.showSettings()
   }
 
-  class ViewState(private val error: Throwable?, private val result: List<User>?) {
-
-    val isLoading: Boolean
-      get() = result == null && error == null
-
-    fun error(): Throwable? {
-      return error
-    }
-
-    fun result(): List<User>? {
-      return result
-    }
+  sealed class ViewState {
+    object Loading : ViewState()
+    class Error(val error: Throwable): ViewState()
+    class ShowUsers(val users: List<User>) : ViewState()
   }
 
   class OnSubscribeRefreshingCache<T>(private val source: Single<T>) : SingleOnSubscribe<T> {

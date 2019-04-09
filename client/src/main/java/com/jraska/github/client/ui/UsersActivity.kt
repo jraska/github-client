@@ -33,7 +33,7 @@ class UsersActivity : BaseActivity(), UserModel.UserListener {
 
     showProgressIndicator()
 
-    usersViewModel.users().observe(this, Observer { this.setState(it!!) })
+    usersViewModel.users().observe(this, Observer { this.setState(it) })
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -61,16 +61,14 @@ class UsersActivity : BaseActivity(), UserModel.UserListener {
   }
 
   private fun setState(state: UsersViewModel.ViewState) {
-    if (state.isLoading) {
-      showProgressIndicator()
-    } else {
-      hideProgressIndicator()
+    when(state) {
+      is UsersViewModel.ViewState.Loading -> showProgressIndicator()
+      else -> hideProgressIndicator()
     }
 
-    if (state.error() != null) {
-      showError(state.error()!!)
-    } else if (state.result() != null) {
-      setUsers(state.result()!!)
+    when(state) {
+      is UsersViewModel.ViewState.Error -> showError(state.error)
+      is UsersViewModel.ViewState.ShowUsers -> setUsers(state.users)
     }
   }
 
