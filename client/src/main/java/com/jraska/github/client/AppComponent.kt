@@ -1,5 +1,6 @@
 package com.jraska.github.client
 
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
@@ -19,7 +20,11 @@ import retrofit2.Retrofit
   PushModule::class, AppModule::class, SettingsModule::class,
   HttpComponentModule::class, CoreComponentModule::class])
 interface AppComponent {
+
+  @Deprecated("Field injection should die")
   fun inject(app: GitHubClientApp)
+
+  fun viewModelFactory() : ViewModelProvider.Factory
 }
 
 @Module

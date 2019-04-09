@@ -30,12 +30,13 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
   @Inject internal lateinit var errorReportTree: ErrorReportTree
   @Inject internal lateinit var analyticsTree: Lazy<AnalyticsLoggingTree>
   @Inject internal lateinit var topActivityProvider: TopActivityProvider
-  @Inject internal lateinit var viewModelFactory: ViewModelProvider.Factory
   @Inject internal lateinit var pushHandler: PushHandler
   @Inject internal lateinit var notificationSetup: NotificationSetup
 
+  private val appComponent: AppComponent by lazy { componentBuilder().build() }
+
   override fun factory(): ViewModelProvider.Factory {
-    return viewModelFactory
+    return appComponent.viewModelFactory()
   }
 
   fun pushHandler(): PushHandler {
@@ -48,7 +49,6 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
 
     initRxAndroidMainThread()
 
-    val appComponent = componentBuilder().build()
     appComponent.inject(this)
 
     initFresco()
