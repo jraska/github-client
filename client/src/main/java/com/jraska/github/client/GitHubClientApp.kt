@@ -3,9 +3,7 @@ package com.jraska.github.client
 import android.app.Application
 import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
-import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.firebase.perf.metrics.AddTrace
-import com.jakewharton.threetenabp.AndroidThreeTen
 import com.jraska.github.client.common.AppBuildConfig
 import com.jraska.github.client.http.DaggerHttpComponent
 import com.jraska.github.client.http.HttpComponent
@@ -32,10 +30,6 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
     super.onCreate()
 
     initRxAndroidMainThread()
-
-    initFresco()
-    initThreeTen()
-
     appComponent.onAppCreateActions().get().forEach {
       it.onCreate(this)
     }
@@ -45,14 +39,6 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
     RxAndroidPlugins.setInitMainThreadSchedulerHandler {
       AndroidSchedulers.from(Looper.getMainLooper(), true)
     }
-  }
-
-  private fun initFresco() {
-    Fresco.initialize(this)
-  }
-
-  private fun initThreeTen() {
-    AndroidThreeTen.init(this)
   }
 
   private fun componentBuilder(): DaggerAppComponent.Builder {

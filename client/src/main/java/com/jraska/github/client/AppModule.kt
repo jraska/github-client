@@ -5,6 +5,8 @@ import android.app.NotificationManager
 import android.content.Context
 import android.view.LayoutInflater
 import androidx.lifecycle.ViewModelProvider
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.AppBuildConfig
@@ -76,7 +78,7 @@ class AppModule(private val app: GitHubClientApp) {
   @Provides
   @IntoSet
   fun reportAppCreateEvent(eventAnalytics: EventAnalytics): OnAppCreate {
-    return object: OnAppCreate {
+    return object : OnAppCreate {
       override fun onCreate(app: Application) {
         val createEvent = AnalyticsEvent.create("app_create")
         eventAnalytics.report(createEvent)
@@ -86,7 +88,23 @@ class AppModule(private val app: GitHubClientApp) {
 
   @Provides
   @IntoSet
-  internal fun setupNotificationsOnCreate(notificationSetup: NotificationSetup): OnAppCreate {
+  fun setupNotificationsOnCreate(notificationSetup: NotificationSetup): OnAppCreate {
     return notificationSetup
+  }
+
+  @Provides
+  @IntoSet
+  fun setupFresco(): OnAppCreate {
+    return object : OnAppCreate {
+      override fun onCreate(app: Application) = Fresco.initialize(app)
+    }
+  }
+
+  @Provides
+  @IntoSet
+  fun setupThreeTen(): OnAppCreate {
+    return object : OnAppCreate {
+      override fun onCreate(app: Application) = AndroidThreeTen.init(app)
+    }
   }
 }
