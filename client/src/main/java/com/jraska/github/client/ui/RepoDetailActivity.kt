@@ -35,7 +35,7 @@ class RepoDetailActivity : BaseActivity() {
 
     viewModel = viewModel(RepoDetailViewModel::class.java)
     val liveData = viewModel.repoDetail(fullRepoName())
-    liveData.observe(this, Observer { this.setState(it!!) })
+    liveData.observe(this, Observer { this.setState(it) })
   }
 
   @OnClick(R.id.repo_detail_github_fab) internal fun onFitHubIconClicked() {

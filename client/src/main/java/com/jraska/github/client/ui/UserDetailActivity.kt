@@ -42,7 +42,7 @@ class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
     userDetailViewModel = viewModel(UserDetailViewModel::class.java)
 
     val detailLiveData = userDetailViewModel.userDetail(login())
-    detailLiveData.observe(this, Observer { this.setState(it!!) })
+    detailLiveData.observe(this, Observer { this.setState(it) })
   }
 
   @OnClick(R.id.user_detail_github_fab) internal fun gitHubFabClicked() {
