@@ -9,6 +9,7 @@ import butterknife.BindView
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.R
 import com.jraska.github.client.ui.BaseActivity
+import com.jraska.github.client.viewModel
 
 class SettingsActivity : BaseActivity(), PurchaseReportModel.PurchaseListener {
   @BindView(R.id.settings_recycler) lateinit var recyclerView: RecyclerView

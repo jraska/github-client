@@ -1,8 +1,8 @@
 package com.jraska.github.client
 
 import android.app.Application
-import androidx.lifecycle.ViewModelProvider
 import android.os.Looper
+import androidx.lifecycle.ViewModelProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.firebase.perf.metrics.AddTrace
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -24,7 +24,7 @@ import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
-open class GitHubClientApp : Application() {
+open class GitHubClientApp : Application(), HasViewModelFactory {
 
   @Inject internal lateinit var eventAnalytics: EventAnalytics
   @Inject internal lateinit var errorReportTree: ErrorReportTree
@@ -34,7 +34,7 @@ open class GitHubClientApp : Application() {
   @Inject internal lateinit var pushHandler: PushHandler
   @Inject internal lateinit var notificationSetup: NotificationSetup
 
-  fun viewModelFactory(): ViewModelProvider.Factory {
+  override fun factory(): ViewModelProvider.Factory {
     return viewModelFactory
   }
 

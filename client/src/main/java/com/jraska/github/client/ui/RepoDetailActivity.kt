@@ -12,6 +12,7 @@ import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.R
 import com.jraska.github.client.users.RepoDetail
 import com.jraska.github.client.users.RepoDetailViewModel
+import com.jraska.github.client.viewModel
 
 class RepoDetailActivity : BaseActivity() {
 

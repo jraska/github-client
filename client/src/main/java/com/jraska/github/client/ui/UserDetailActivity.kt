@@ -1,9 +1,9 @@
 package com.jraska.github.client.ui
 
 import android.app.Activity
-import androidx.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
@@ -17,6 +17,7 @@ import com.jraska.github.client.R
 import com.jraska.github.client.users.RepoHeader
 import com.jraska.github.client.users.UserDetail
 import com.jraska.github.client.users.UserDetailViewModel
+import com.jraska.github.client.viewModel
 import java.util.ArrayList
 
 class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {

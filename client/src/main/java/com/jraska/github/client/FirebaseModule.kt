@@ -18,7 +18,7 @@ open class FirebaseModule {
 
   @Provides
   @Singleton internal fun firebaseAnalytics(config: Config): FirebaseEventAnalytics {
-    val firebaseAnalytics = FirebaseAnalytics.getInstance(FirebaseApp.getInstance()!!.applicationContext)
+    val firebaseAnalytics = FirebaseAnalytics.getInstance(FirebaseApp.getInstance().applicationContext)
 
     if (config.getBoolean("analytics_disabled")) {
       firebaseAnalytics.setAnalyticsCollectionEnabled(false)

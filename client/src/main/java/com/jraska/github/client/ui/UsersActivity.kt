@@ -1,11 +1,11 @@
 package com.jraska.github.client.ui
 
 import android.app.Activity
-import androidx.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -14,6 +14,7 @@ import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.R
 import com.jraska.github.client.users.User
 import com.jraska.github.client.users.UsersViewModel
+import com.jraska.github.client.viewModel
 
 class UsersActivity : BaseActivity(), UserModel.UserListener {
   private lateinit var usersViewModel: UsersViewModel
@@ -28,7 +29,7 @@ class UsersActivity : BaseActivity(), UserModel.UserListener {
     usersViewModel = viewModel(UsersViewModel::class.java)
 
     usersRecyclerView.layoutManager = LinearLayoutManager(this)
-    swipeRefreshLayout.setOnRefreshListener({ usersViewModel.onRefresh() })
+    swipeRefreshLayout.setOnRefreshListener { usersViewModel.onRefresh() }
 
     showProgressIndicator()
 
