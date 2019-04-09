@@ -1,12 +1,15 @@
 package com.jraska.github.client.push
 
 import android.app.Activity
+import android.app.Application
+import android.content.Intent
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
-import android.content.Intent
 import com.google.firebase.messaging.RemoteMessage
+import com.jraska.github.client.OnAppCreate
+import javax.inject.Inject
 
 class PushIntentObserver(private val pushHandler: PushHandler) : LifecycleObserver {
 
@@ -46,5 +49,14 @@ class PushIntentObserver(private val pushHandler: PushHandler) : LifecycleObserv
     }
 
     return false
+  }
+
+  class CallbacksSetup @Inject constructor(
+    private val pushHandler: PushHandler
+  ) : OnAppCreate {
+
+    override fun onCreate(app: Application) {
+      app.registerActivityLifecycleCallbacks(PushCallbacks(PushIntentObserver(pushHandler)))
+    }
   }
 }

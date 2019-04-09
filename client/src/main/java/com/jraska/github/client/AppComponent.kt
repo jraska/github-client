@@ -6,6 +6,7 @@ import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.logging.CrashReporter
+import com.jraska.github.client.push.PushHandler
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.settings.SettingsModule
 import com.jraska.github.client.users.UserViewModelModule
@@ -24,8 +25,7 @@ interface AppComponent {
 
   fun onAppCreateActions(): Provider<Set<OnAppCreate>>
 
-  @Deprecated("Field injection should die")
-  fun inject(app: GitHubClientApp)
+  fun pushHandler() : PushHandler
 
   fun viewModelFactory(): ViewModelProvider.Factory
 }

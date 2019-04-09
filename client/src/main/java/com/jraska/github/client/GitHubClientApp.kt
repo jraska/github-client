@@ -6,23 +6,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.firebase.perf.metrics.AddTrace
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.jraska.github.client.analytics.AnalyticsEvent
-import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.AppBuildConfig
 import com.jraska.github.client.http.DaggerHttpComponent
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.http.HttpDependenciesModule
-import com.jraska.github.client.push.PushCallbacks
 import com.jraska.github.client.push.PushHandler
-import com.jraska.github.client.push.PushIntentObserver
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.io.File
-import javax.inject.Inject
 
 open class GitHubClientApp : Application(), HasViewModelFactory {
-
-  @Inject internal lateinit var pushHandler: PushHandler
 
   private val appComponent: AppComponent by lazy { componentBuilder().build() }
 
@@ -31,7 +24,7 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
   }
 
   fun pushHandler(): PushHandler {
-    return pushHandler
+    return appComponent.pushHandler()
   }
 
   @AddTrace(name = "App.onCreate")
@@ -40,15 +33,12 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
 
     initRxAndroidMainThread()
 
-    appComponent.inject(this)
-    appComponent.onAppCreateActions().get().forEach {
-      it.onCreate(this)
-    }
-
     initFresco()
     initThreeTen()
 
-    registerActivityLifecycleCallbacks(PushCallbacks(PushIntentObserver(pushHandler())))
+    appComponent.onAppCreateActions().get().forEach {
+      it.onCreate(this)
+    }
   }
 
   private fun initRxAndroidMainThread() {
