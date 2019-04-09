@@ -19,7 +19,7 @@ dependencies {
   implementation 'androidx.test.espresso:espresso-idling-resource:3.1.1'
   implementation 'com.squareup.retrofit2:retrofit:2.5.0'
   implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
-  implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
+  implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
 
   testImplementation 'junit:junit:4.12'
 }

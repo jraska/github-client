@@ -58,35 +58,35 @@ dependencies {
   api project(':client-domain')
   api project(':client-data')
 
-  implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+  implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-  implementation 'com.google.android.material:material:1.1.0-alpha02'
+  implementation 'com.google.android.material:material:1.1.0-alpha05'
   implementation 'androidx.cardview:cardview:1.0.0'
   implementation 'androidx.browser:browser:1.0.0'
-  implementation 'androidx.core:core:1.1.0-alpha03'
+  implementation 'androidx.core:core:1.1.0-alpha05'
   implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0-alpha01'
-  implementation 'androidx.media:media:1.1.0-alpha01'
+  implementation 'androidx.media:media:1.1.0-alpha04'
 
-  implementation 'com.google.firebase:firebase-core:16.0.6'
-  implementation 'com.google.firebase:firebase-config:16.1.3'
-  implementation 'com.google.firebase:firebase-perf:16.2.3'
-  implementation 'com.google.firebase:firebase-messaging:17.3.4'
-  implementation 'com.google.firebase:firebase-database:16.0.5'
-  implementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
+  implementation 'com.google.firebase:firebase-core:16.0.8'
+  implementation 'com.google.firebase:firebase-config:16.4.1'
+  implementation 'com.google.firebase:firebase-perf:16.2.4'
+  implementation 'com.google.firebase:firebase-messaging:17.5.0'
+  implementation 'com.google.firebase:firebase-database:16.1.0'
+  implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
 
   implementation 'androidx.lifecycle:lifecycle-runtime:2.0.0'
 
   implementation 'com.facebook.fresco:fresco:1.11.0'
 
-  implementation 'com.jakewharton:butterknife:10.0.0'
-  kapt 'com.jakewharton:butterknife-compiler:10.0.0'
+  implementation 'com.jakewharton:butterknife:10.1.0'
+  kapt 'com.jakewharton:butterknife-compiler:10.1.0'
 
-  implementation 'com.airbnb.android:epoxy:3.1.0'
+  implementation 'com.airbnb.android:epoxy:3.3.0'
 
   kapt 'com.google.dagger:dagger-compiler:2.21'
 
-  implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-  implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
+  implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+  implementation 'com.jakewharton.threetenabp:threetenabp:1.1.2'
 
   implementation 'com.jraska:console:1.0.0'
   implementation 'com.jraska:console-timber-tree:1.0.0'
@@ -98,14 +98,12 @@ dependencies {
   testImplementation 'org.mockito:mockito-core:2.23.4'
   testImplementation 'org.assertj:assertj-core:3.11.1'
   testImplementation 'org.threeten:threetenbp:1.3.8' // to fix failures with three ten db
-  testImplementation 'androidx.annotation:annotation:1.0.1' //to fix dependency conflicts
 
   androidTestImplementation project(':rxretrofitidlingresourcefactory')
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
   androidTestImplementation 'androidx.test:runner:1.1.1'
   androidTestImplementation 'androidx.test:rules:1.1.1'
   androidTestImplementation 'org.assertj:assertj-core:3.11.1'
-  androidTestImplementation 'androidx.annotation:annotation:1.0.1' //to fix dependency conflicts
   androidTestImplementation 'org.mockito:mockito-core:2.23.4'
   androidTestImplementation 'org.mockito:mockito-android:2.23.4'
   androidTestImplementation 'com.airbnb.okreplay:okreplay:1.4.0'

@@ -21,8 +21,8 @@ dependencies {
 
   api project(':client-domain')
 
-  api 'androidx.appcompat:appcompat:1.1.0-alpha01'
-  api 'androidx.annotation:annotation:1.0.1'
+  api 'androidx.appcompat:appcompat:1.1.0-alpha04'
+  api 'androidx.annotation:annotation:1.0.2'
 
   api 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
@@ -30,15 +30,15 @@ dependencies {
   api 'com.squareup.retrofit2:converter-gson:2.5.0'
   api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
   api 'com.google.code.gson:gson:2.8.5'
-  api 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+  api 'com.squareup.okhttp3:logging-interceptor:3.13.1'
 
   api 'com.jakewharton.timber:timber:4.7.1'
 
-  testImplementation 'com.jraska.livedata:testing:0.6.0'
-  testImplementation 'com.jraska.livedata:testing-ktx:0.6.0'
+  testImplementation 'com.jraska.livedata:testing:1.1.0'
+  testImplementation 'com.jraska.livedata:testing-ktx:1.1.0'
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.assertj:assertj-core:3.11.1'
   testImplementation 'org.mockito:mockito-core:2.23.4'
-  testImplementation 'androidx.arch.core:core-testing:2.0.0'
-  testImplementation 'androidx.annotation:annotation:1.0.1'
+  testImplementation 'androidx.arch.core:core-testing:2.0.1'
+  testImplementation 'androidx.annotation:annotation:1.0.2'
 }
