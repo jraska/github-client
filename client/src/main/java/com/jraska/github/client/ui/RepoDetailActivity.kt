@@ -1,14 +1,15 @@
 package com.jraska.github.client.ui
 
 import android.app.Activity
-import androidx.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.OnClick
 import com.airbnb.epoxy.SimpleEpoxyAdapter
+import com.airbnb.epoxy.SimpleEpoxyModel
 import com.jraska.github.client.R
 import com.jraska.github.client.users.RepoDetail
 import com.jraska.github.client.users.RepoDetailViewModel
@@ -41,14 +42,16 @@ class RepoDetailActivity : BaseActivity() {
     viewModel.onFitHubIconClicked(fullRepoName())
   }
 
-  private fun setState(viewState: RepoDetailViewModel.ViewState) {
-    if (viewState.repoDetail != null) {
-      setRepoDetail(viewState.repoDetail!!)
+  private fun setState(state: RepoDetailViewModel.ViewState) {
+    when (state) {
+      is RepoDetailViewModel.ViewState.Loading -> showLoading()
+      is RepoDetailViewModel.ViewState.Error -> setError(state.error)
+      is RepoDetailViewModel.ViewState.ShowRepo -> setRepoDetail(state.repo)
     }
+  }
 
-    if (viewState.error != null) {
-      setError(viewState.error!!)
-    }
+  private fun showLoading() {
+    recyclerView.adapter = SimpleEpoxyAdapter().apply { addModels(SimpleEpoxyModel(R.layout.item_loading)) }
   }
 
   private fun setError(error: Throwable) {
@@ -59,12 +62,16 @@ class RepoDetailActivity : BaseActivity() {
     val adapter = SimpleEpoxyAdapter()
     adapter.addModels(RepoDetailHeaderModel(repoDetail))
 
-    val languageText = getString(R.string.repo_detail_language_used_template,
-      repoDetail.data.language)
+    val languageText = getString(
+      R.string.repo_detail_language_used_template,
+      repoDetail.data.language
+    )
     adapter.addModels(SimpleTextModel(languageText))
 
-    val issuesText = getString(R.string.repo_detail_issues_template,
-      repoDetail.data.issuesCount.toString())
+    val issuesText = getString(
+      R.string.repo_detail_issues_template,
+      repoDetail.data.issuesCount.toString()
+    )
     adapter.addModels(SimpleTextModel(issuesText))
 
     recyclerView.adapter = adapter

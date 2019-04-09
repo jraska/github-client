@@ -1,7 +1,6 @@
 package com.jraska.github.client.settings
 
 import androidx.lifecycle.ViewModel
-import com.jraska.github.client.analytics.EventAnalytics
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
@@ -13,7 +12,7 @@ object SettingsModule {
   @Provides
   @IntoMap
   @ClassKey(SettingsViewModel::class)
-  fun provideUserDetailModel(analytics: EventAnalytics): ViewModel {
-    return SettingsViewModel(analytics)
+  fun provideUserDetailModel(viewModel: SettingsViewModel): ViewModel {
+    return viewModel
   }
 }

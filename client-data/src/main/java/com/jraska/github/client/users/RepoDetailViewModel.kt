@@ -33,8 +33,9 @@ class RepoDetailViewModel constructor(
     val stateObservable = usersRepository.getRepoDetail(parts[0], parts[1])
       .subscribeOn(appSchedulers.io())
       .observeOn(appSchedulers.mainThread())
-      .map { detail -> ViewState(detail, null) }
-      .onErrorReturn { throwable -> ViewState(null, throwable) }
+      .map { detail -> ViewState.ShowRepo(detail) as ViewState }
+      .onErrorReturn { ViewState.Error(it) }
+      .startWith(ViewState.Loading)
 
     return RxLiveData.from(stateObservable)
   }
@@ -50,5 +51,9 @@ class RepoDetailViewModel constructor(
     navigator.launchOnWeb(Urls.repo(fullRepoName))
   }
 
-  class ViewState internal constructor(val repoDetail: RepoDetail?, val error: Throwable?)
+  sealed class ViewState {
+    object Loading : ViewState()
+    class Error(val error: Throwable): ViewState()
+    class ShowRepo(val repo: RepoDetail) : ViewState()
+  }
 }
