@@ -1,10 +1,8 @@
 package com.jraska.github.client.http
 
 import android.app.Activity
-import androidx.test.espresso.IdlingRegistry
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
-import com.jraska.espresso.RxHttpIdlingResourceFactory
 import com.jraska.github.client.ui.UsersActivity
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,6 +12,7 @@ import okreplay.OkReplayRuleChain
 import okreplay.TapeMode
 import org.junit.rules.TestRule
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : HttpComponent {
@@ -27,12 +26,9 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
     private const val NETWORK_ERROR_MESSAGE = "You are trying to do network requests in tests you naughty developer!"
 
     fun create(): ReplayHttpComponent {
-      val idlingResourceFactory = RxHttpIdlingResourceFactory.create()
-      IdlingRegistry.getInstance().register(idlingResourceFactory.idlingResource())
-
       val retrofit = Retrofit.Builder()
         .baseUrl("https://api.github.com")
-        .addCallAdapterFactory(idlingResourceFactory)
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .client(okReplayClient())
         .build()

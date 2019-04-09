@@ -1,1 +1,1 @@
-include ':client', ':client-domain', ':client-data', ':rxretrofitidlingresourcefactory'
+include ':client', ':client-domain', ':client-data'
