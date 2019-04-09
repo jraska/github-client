@@ -6,28 +6,23 @@ import androidx.lifecycle.ViewModelProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.firebase.perf.metrics.AddTrace
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.jraska.console.timber.ConsoleTree
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.AppBuildConfig
 import com.jraska.github.client.http.DaggerHttpComponent
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.http.HttpDependenciesModule
-import com.jraska.github.client.logging.ErrorReportTree
 import com.jraska.github.client.push.PushCallbacks
 import com.jraska.github.client.push.PushHandler
 import com.jraska.github.client.push.PushIntentObserver
-import dagger.Lazy
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.android.schedulers.AndroidSchedulers
-import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
 open class GitHubClientApp : Application(), HasViewModelFactory {
 
   @Inject internal lateinit var eventAnalytics: EventAnalytics
-  @Inject internal lateinit var topActivityProvider: TopActivityProvider
   @Inject internal lateinit var pushHandler: PushHandler
   @Inject internal lateinit var notificationSetup: NotificationSetup
 
@@ -56,8 +51,6 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
     initThreeTen()
 
     notificationSetup.setupChannels()
-
-    registerActivityLifecycleCallbacks(topActivityProvider.callbacks)
 
     registerActivityLifecycleCallbacks(PushCallbacks(PushIntentObserver(pushHandler())))
 

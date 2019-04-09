@@ -4,9 +4,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.view.LayoutInflater
 import androidx.lifecycle.ViewModelProvider
-import com.jraska.console.timber.ConsoleTree
 import com.jraska.github.client.common.AppBuildConfig
-import com.jraska.github.client.logging.ErrorReportTree
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
@@ -16,8 +14,6 @@ import dagger.Reusable
 import dagger.multibindings.IntoSet
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
-import javax.inject.Provider
 
 @Module
 class AppModule(private val app: GitHubClientApp) {
@@ -34,6 +30,12 @@ class AppModule(private val app: GitHubClientApp) {
   @Provides
   @PerApp internal fun topActivityProvider(): TopActivityProvider {
     return TopActivityProvider()
+  }
+
+  @Provides
+  @IntoSet
+  fun topActivityOnCreate(setup: TopActivityProvider.OnCreateSetup): OnAppCreate {
+    return setup
   }
 
   @Provides
