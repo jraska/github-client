@@ -23,7 +23,6 @@ import javax.inject.Inject
 open class GitHubClientApp : Application(), HasViewModelFactory {
 
   @Inject internal lateinit var pushHandler: PushHandler
-  @Inject internal lateinit var notificationSetup: NotificationSetup
 
   private val appComponent: AppComponent by lazy { componentBuilder().build() }
 
@@ -48,8 +47,6 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
 
     initFresco()
     initThreeTen()
-
-    notificationSetup.setupChannels()
 
     registerActivityLifecycleCallbacks(PushCallbacks(PushIntentObserver(pushHandler())))
   }

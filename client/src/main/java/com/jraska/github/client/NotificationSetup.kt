@@ -1,5 +1,6 @@
 package com.jraska.github.client
 
+import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -7,12 +8,16 @@ import android.os.Build
 
 import javax.inject.Inject
 
-class NotificationSetup @Inject internal constructor(
+class NotificationSetup @Inject constructor(
   private val notificationManager: NotificationManager,
   private val context: Context
-) {
+) : OnAppCreate {
 
-  internal fun setupChannels() {
+  override fun onCreate(app: Application) {
+    setupChannels()
+  }
+
+  private fun setupChannels() {
     if (Build.VERSION.SDK_INT < 26) {
       return
     }

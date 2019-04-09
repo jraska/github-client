@@ -84,4 +84,9 @@ class AppModule(private val app: GitHubClientApp) {
     }
   }
 
+  @Provides
+  @IntoSet
+  internal fun setupNotificationsOnCreate(notificationSetup: NotificationSetup): OnAppCreate {
+    return notificationSetup
+  }
 }
