@@ -22,7 +22,6 @@ import javax.inject.Inject
 
 open class GitHubClientApp : Application(), HasViewModelFactory {
 
-  @Inject internal lateinit var eventAnalytics: EventAnalytics
   @Inject internal lateinit var pushHandler: PushHandler
   @Inject internal lateinit var notificationSetup: NotificationSetup
 
@@ -53,8 +52,6 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
     notificationSetup.setupChannels()
 
     registerActivityLifecycleCallbacks(PushCallbacks(PushIntentObserver(pushHandler())))
-
-    logAppCreateEvent()
   }
 
   private fun initRxAndroidMainThread() {
@@ -89,10 +86,5 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
     return DaggerHttpComponent.builder()
       .httpDependenciesModule(dependenciesModule)
       .build()
-  }
-
-  private fun logAppCreateEvent() {
-    val createEvent = AnalyticsEvent.create("app_create")
-    eventAnalytics.report(createEvent)
   }
 }

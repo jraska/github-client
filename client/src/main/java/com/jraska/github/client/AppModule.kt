@@ -1,9 +1,12 @@
 package com.jraska.github.client
 
+import android.app.Application
 import android.app.NotificationManager
 import android.content.Context
 import android.view.LayoutInflater
 import androidx.lifecycle.ViewModelProvider
+import com.jraska.github.client.analytics.AnalyticsEvent
+import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.AppBuildConfig
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.time.DateTimeProvider
@@ -58,15 +61,27 @@ class AppModule(private val app: GitHubClientApp) {
   }
 
   @Provides
+  @PerApp
+  fun schedulers(): AppSchedulers {
+    return AppSchedulers(AndroidSchedulers.mainThread(),
+      Schedulers.io(), Schedulers.computation())
+  }
+
+  @Provides
   @IntoSet
   internal fun setupLoggingOnCreate(setupLogging: SetupLogging): OnAppCreate {
     return setupLogging
   }
 
   @Provides
-  @PerApp
-  fun schedulers(): AppSchedulers {
-    return AppSchedulers(AndroidSchedulers.mainThread(),
-      Schedulers.io(), Schedulers.computation())
+  @IntoSet
+  fun reportAppCreateEvent(eventAnalytics: EventAnalytics): OnAppCreate {
+    return object: OnAppCreate {
+      override fun onCreate(app: Application) {
+        val createEvent = AnalyticsEvent.create("app_create")
+        eventAnalytics.report(createEvent)
+      }
+    }
   }
+
 }
