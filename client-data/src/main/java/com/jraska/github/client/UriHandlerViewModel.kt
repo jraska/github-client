@@ -4,8 +4,7 @@ import androidx.lifecycle.ViewModel
 import okhttp3.HttpUrl
 
 class UriHandlerViewModel constructor(private val deepLinkHandler: DeepLinkHandler) : ViewModel() {
-  fun handleDeepLink(deepLinkText: String) {
-    val deepLink = HttpUrl.get(deepLinkText)
+  fun handleDeepLink(deepLink: HttpUrl) {
     deepLinkHandler.handleDeepLink(deepLink)
   }
 }

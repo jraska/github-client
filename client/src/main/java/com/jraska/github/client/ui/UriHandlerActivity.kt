@@ -2,6 +2,7 @@ package com.jraska.github.client.ui
 
 import android.os.Bundle
 import com.jraska.github.client.UriHandlerViewModel
+import com.jraska.github.client.inputUrl
 import com.jraska.github.client.viewModel
 
 class UriHandlerActivity : BaseActivity() {
@@ -9,7 +10,7 @@ class UriHandlerActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
 
     val viewModel = viewModel(UriHandlerViewModel::class.java)
-    viewModel.handleDeepLink(intent.data.toString())
+    viewModel.handleDeepLink(inputUrl())
     finish()
   }
 }

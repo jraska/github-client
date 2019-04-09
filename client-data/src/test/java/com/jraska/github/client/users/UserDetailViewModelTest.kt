@@ -41,8 +41,7 @@ class UserDetailViewModelTest {
     viewModel.userDetail("someLogin")
       .test()
       .assertHasValue()
-      .assertValue { it.isLoading.not() }
-      .assertValue { it.error() == null }
+      .assertValue { it is UserDetailViewModel.ViewState.DisplayUser }
   }
 
   @Test
