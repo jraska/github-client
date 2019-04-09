@@ -23,7 +23,7 @@ import javax.inject.Provider
   HttpComponentModule::class, CoreComponentModule::class])
 interface AppComponent {
 
-  fun onAppCreateActions(): Provider<Set<OnAppCreate>>
+  fun onAppCreateActions(): Set<OnAppCreate>
 
   fun pushHandler() : PushHandler
 

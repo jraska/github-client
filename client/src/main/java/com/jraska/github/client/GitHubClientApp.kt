@@ -30,7 +30,7 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
     super.onCreate()
 
     initRxAndroidMainThread()
-    appComponent.onAppCreateActions().get().forEach {
+    appComponent.onAppCreateActions().forEach {
       it.onCreate(this)
     }
   }
