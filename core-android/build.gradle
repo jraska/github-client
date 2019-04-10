@@ -14,7 +14,7 @@ android {
 }
 
 dependencies {
-  project(':core')
+  api project(':core')
 
   testImplementation 'junit:junit:4.12'
 }
