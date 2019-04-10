@@ -24,8 +24,8 @@ jobs:
           path: client/build/reports
           destination: client/reports
       - store_artifacts:
-          path: client-domain/build/reports
-          destination: client-domain/reports
+          path: core/build/reports
+          destination: core/reports
       - store_artifacts:
           path: client-data/build/reports
           destination: client-data/reports
@@ -34,5 +34,5 @@ jobs:
       - store_test_results:
           path: client-data/build/test-results
       - store_test_results:
-          path: client-domain/build/test-results
+          path: core/build/test-results
 
