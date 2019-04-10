@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import butterknife.OnClick
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.airbnb.epoxy.SimpleEpoxyModel
@@ -36,10 +35,8 @@ class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
 
     val detailLiveData = userDetailViewModel.userDetail(login())
     detailLiveData.observe(this, Observer { this.setState(it) })
-  }
 
-  @OnClick(R.id.user_detail_github_fab) internal fun gitHubFabClicked() {
-    userDetailViewModel.onUserGitHubIconClick(login())
+    user_detail_github_fab.setOnClickListener { userDetailViewModel.onUserGitHubIconClick(login()) }
   }
 
   private fun setState(state: UserDetailViewModel.ViewState) {
