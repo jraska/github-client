@@ -1,26 +1,24 @@
-package com.jraska.github.client
+package com.jraska.github.client.core.android
 
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import com.jraska.github.client.core.android.OnAppCreate
-import com.jraska.github.client.ui.BaseActivity
 import javax.inject.Inject
 
 import javax.inject.Provider
 
-class TopActivityProvider internal constructor() : Provider<BaseActivity> {
-  private var topActivity: BaseActivity? = null
+class TopActivityProvider : Provider<Activity> {
+  private var topActivity: Activity? = null
 
   private val callbacks: Application.ActivityLifecycleCallbacks = object : Application.ActivityLifecycleCallbacks {
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-      topActivity = activity as BaseActivity
+      topActivity = activity
     }
 
     override fun onActivityStarted(activity: Activity) {}
 
     override fun onActivityResumed(activity: Activity) {
-      topActivity = activity as BaseActivity
+      topActivity = activity
     }
 
     override fun onActivityPaused(activity: Activity) {}
@@ -32,7 +30,7 @@ class TopActivityProvider internal constructor() : Provider<BaseActivity> {
     override fun onActivityDestroyed(activity: Activity) {}
   }
 
-  override fun get(): BaseActivity {
+  override fun get(): Activity {
     if (topActivity == null) {
       throw IllegalStateException("No activity")
     }
