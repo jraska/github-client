@@ -1,45 +1,27 @@
 package com.jraska.github.client.ui
 
 import android.view.View
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
-import com.airbnb.epoxy.EpoxyHolder
-import com.airbnb.epoxy.EpoxyModelWithHolder
+import com.airbnb.epoxy.EpoxyModel
 import com.jraska.github.client.R
 import com.jraska.github.client.users.UserStats
+import kotlinx.android.synthetic.main.item_user_stats.view.*
 import org.threeten.bp.format.DateTimeFormatter
 
-internal class UserHeaderModel(private val basicStats: UserStats) : EpoxyModelWithHolder<UserHeaderModel.HeaderHolder>() {
-
-  override fun createNewHolder(): HeaderHolder {
-    return HeaderHolder()
-  }
+internal class UserHeaderModel(private val basicStats: UserStats) : EpoxyModel<View>() {
 
   override fun getDefaultLayout(): Int {
     return R.layout.item_user_stats
   }
 
-  override fun bind(holder: HeaderHolder) {
-    holder.followersTextView.text = basicStats.followers.toString()
-    holder.followingTextView.text = basicStats.following.toString()
-    holder.reposCountTextView.text = basicStats.publicRepos.toString()
+  override fun bind(itemView: View) {
+    itemView.user_detail_followers_count.text = basicStats.followers.toString()
+    itemView.user_detail_following_count.text = basicStats.following.toString()
+    itemView.user_detail_repos_count.text = basicStats.publicRepos.toString()
 
     val joinedDateText = JOINED_FORMAT.format(basicStats.joined)
-    val joinedText = holder.joinedTextView.context
+    val joinedText = itemView.context
       .getString(R.string.user_detail_joined_template, joinedDateText)
-    holder.joinedTextView.text = joinedText
-  }
-
-  internal class HeaderHolder : EpoxyHolder() {
-    @BindView(R.id.user_detail_repos_count) lateinit var reposCountTextView: TextView
-    @BindView(R.id.user_detail_following_count) lateinit var followingTextView: TextView
-    @BindView(R.id.user_detail_followers_count) lateinit var followersTextView: TextView
-    @BindView(R.id.user_detail_joined) lateinit var joinedTextView: TextView
-
-    override fun bindView(itemView: View) {
-      ButterKnife.bind(this, itemView)
-    }
+    itemView.user_detail_joined.text = joinedText
   }
 
   companion object {

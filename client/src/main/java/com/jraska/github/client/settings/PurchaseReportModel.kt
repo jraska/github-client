@@ -1,36 +1,20 @@
 package com.jraska.github.client.settings
 
 import android.view.View
-import android.widget.EditText
-import butterknife.BindView
-import butterknife.ButterKnife
-import com.airbnb.epoxy.EpoxyHolder
-import com.airbnb.epoxy.EpoxyModelWithHolder
+import com.airbnb.epoxy.EpoxyModel
 import com.jraska.github.client.R
+import kotlinx.android.synthetic.main.item_row_purchase.view.*
 
 internal class PurchaseReportModel(private val listener: PurchaseListener)
-  : EpoxyModelWithHolder<PurchaseReportModel.PurchaseHolder>() {
+  : EpoxyModel<View>() {
   override fun getDefaultLayout(): Int {
     return R.layout.item_row_purchase
   }
 
-  override fun createNewHolder(): PurchaseHolder {
-    return PurchaseHolder()
-  }
-
-  override fun bind(holder: PurchaseHolder) {
-    holder.submitButton.setOnClickListener({
-      val valueEntered = holder.inputView.text.toString()
+  override fun bind(itemView: View) {
+    itemView.settings_purchase_submit_button.setOnClickListener {
+      val valueEntered = itemView.settings_purchase_input.text.toString()
       listener.onPurchaseButtonClicked(valueEntered)
-    })
-  }
-
-  class PurchaseHolder : EpoxyHolder() {
-    @BindView(R.id.settings_purchase_input) lateinit var inputView: EditText
-    @BindView(R.id.settings_purchase_submit_button) lateinit var submitButton: View
-
-    override fun bindView(itemView: View) {
-      ButterKnife.bind(this, itemView)
     }
   }
 
