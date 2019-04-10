@@ -2,21 +2,10 @@ apply plugin: 'java-library'
 apply plugin: 'com.android.lint'
 apply plugin: 'kotlin'
 
-configurations {
-  provided
-}
-
-sourceSets {
-  main {
-    compileClasspath += configurations.provided
-  }
-}
-
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
   api 'com.google.dagger:dagger:2.21'
-  provided 'com.google.dagger:dagger-compiler:2.21'
 
   api 'io.reactivex.rxjava2:rxjava:2.2.7'
   api 'com.squareup.okhttp3:okhttp:3.13.1'
