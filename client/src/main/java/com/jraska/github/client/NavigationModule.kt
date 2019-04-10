@@ -3,6 +3,8 @@ package com.jraska.github.client
 import android.app.Activity
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.core.android.LinkLauncher
+import com.jraska.github.client.core.android.UriHandlerViewModel
 import com.jraska.github.client.ui.ShortcutHandlerModel
 import com.jraska.github.client.ui.UsersActivity
 import dagger.Module

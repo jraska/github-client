@@ -2,6 +2,7 @@ package com.jraska.github.client
 
 import android.app.Application
 import com.jraska.console.timber.ConsoleTree
+import com.jraska.github.client.core.android.AnalyticsLoggingTree
 import com.jraska.github.client.logging.ErrorReportTree
 import timber.log.Timber
 import javax.inject.Inject

@@ -8,7 +8,7 @@ import com.jraska.github.client.Urls
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.rx.AppSchedulers
-import com.jraska.github.client.rx.RxLiveData
+import com.jraska.github.client.core.android.rx.RxLiveData
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
 import io.reactivex.SingleOnSubscribe

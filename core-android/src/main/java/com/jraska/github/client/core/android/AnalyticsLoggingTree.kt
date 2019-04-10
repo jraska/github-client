@@ -1,6 +1,7 @@
-package com.jraska.github.client
+package com.jraska.github.client.core.android
 
 import android.util.Log
+import com.jraska.github.client.Config
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.time.DateTimeProvider

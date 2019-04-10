@@ -1,9 +1,7 @@
 package com.jraska.github.client
 
+import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.ui.BaseActivity
-import com.jraska.github.client.ui.RepoDetailActivity
-import com.jraska.github.client.ui.UserDetailActivity
-import com.jraska.github.client.ui.UsersActivity
 import okhttp3.HttpUrl
 import timber.log.Timber
 import javax.inject.Provider

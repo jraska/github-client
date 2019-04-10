@@ -1,4 +1,4 @@
-package com.jraska.github.client.rx
+package com.jraska.github.client.core.android.rx
 
 import androidx.lifecycle.LiveData
 import io.reactivex.Maybe

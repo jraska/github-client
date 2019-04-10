@@ -2,7 +2,7 @@ package com.jraska.github.client.settings
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel
-import com.jraska.github.client.LinkLauncher
+import com.jraska.github.client.core.android.LinkLauncher
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey

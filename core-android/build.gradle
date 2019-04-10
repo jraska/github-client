@@ -16,5 +16,10 @@ android {
 dependencies {
   api project(':core')
 
+  api 'androidx.appcompat:appcompat:1.1.0-alpha04'
+  api 'androidx.annotation:annotation:1.0.2'
+
+  api 'com.jakewharton.timber:timber:4.7.1'
+
   testImplementation 'junit:junit:4.12'
 }

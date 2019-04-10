@@ -1,6 +1,7 @@
 package com.jraska.github.client
 
 import android.app.Activity
+import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.ui.RepoDetailActivity
 import com.jraska.github.client.ui.UserDetailActivity
 import okhttp3.HttpUrl

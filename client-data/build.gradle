@@ -22,8 +22,6 @@ dependencies {
   api project(':core')
   api project(':core-android')
 
-  api 'androidx.appcompat:appcompat:1.1.0-alpha04'
-  api 'androidx.annotation:annotation:1.0.2'
   api 'com.google.dagger:dagger:2.21'
 
   api 'androidx.lifecycle:lifecycle-extensions:2.0.0'
@@ -33,8 +31,6 @@ dependencies {
   api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
   api 'com.google.code.gson:gson:2.8.5'
   api 'com.squareup.okhttp3:logging-interceptor:3.13.1'
-
-  api 'com.jakewharton.timber:timber:4.7.1'
 
   testImplementation 'com.jraska.livedata:testing:1.1.0'
   testImplementation 'com.jraska.livedata:testing-ktx:1.1.0'
