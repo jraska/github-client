@@ -5,8 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
 import butterknife.OnClick
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.airbnb.epoxy.SimpleEpoxyModel
@@ -14,12 +12,12 @@ import com.jraska.github.client.R
 import com.jraska.github.client.users.RepoDetail
 import com.jraska.github.client.users.RepoDetailViewModel
 import com.jraska.github.client.viewModel
+import kotlinx.android.synthetic.main.activity_repo_detail.*
+import kotlinx.android.synthetic.main.content_repo_detail.*
 
 class RepoDetailActivity : BaseActivity() {
 
-  @BindView(R.id.repo_detail_recycler) internal lateinit var recyclerView: RecyclerView
-
-  private lateinit var viewModel: RepoDetailViewModel
+  private val viewModel: RepoDetailViewModel by lazy { viewModel(RepoDetailViewModel::class.java) }
 
   private fun fullRepoName(): String {
     return intent.getStringExtra(EXTRA_FULL_REPO_NAME)
@@ -29,17 +27,14 @@ class RepoDetailActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
 
     setContentView(R.layout.activity_repo_detail)
-    recyclerView.layoutManager = LinearLayoutManager(this)
+    repo_detail_recycler.layoutManager = LinearLayoutManager(this)
 
     title = fullRepoName()
 
-    viewModel = viewModel(RepoDetailViewModel::class.java)
     val liveData = viewModel.repoDetail(fullRepoName())
     liveData.observe(this, Observer { this.setState(it) })
-  }
 
-  @OnClick(R.id.repo_detail_github_fab) internal fun onFitHubIconClicked() {
-    viewModel.onFitHubIconClicked(fullRepoName())
+    repo_detail_github_fab.setOnClickListener { viewModel.onFitHubIconClicked(fullRepoName()) }
   }
 
   private fun setState(state: RepoDetailViewModel.ViewState) {
@@ -51,11 +46,11 @@ class RepoDetailActivity : BaseActivity() {
   }
 
   private fun showLoading() {
-    recyclerView.adapter = SimpleEpoxyAdapter().apply { addModels(SimpleEpoxyModel(R.layout.item_loading)) }
+    repo_detail_recycler.adapter = SimpleEpoxyAdapter().apply { addModels(SimpleEpoxyModel(R.layout.item_loading)) }
   }
 
   private fun setError(error: Throwable) {
-    ErrorHandler.displayError(error, recyclerView)
+    ErrorHandler.displayError(error, repo_detail_recycler)
   }
 
   private fun setRepoDetail(repoDetail: RepoDetail) {
@@ -74,7 +69,7 @@ class RepoDetailActivity : BaseActivity() {
     )
     adapter.addModels(SimpleTextModel(issuesText))
 
-    recyclerView.adapter = adapter
+    repo_detail_recycler.adapter = adapter
   }
 
   companion object {

@@ -3,14 +3,9 @@ package com.jraska.github.client.ui
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import butterknife.BindView
-import butterknife.ButterKnife
-import com.jraska.github.client.R
+import kotlinx.android.synthetic.main.activity_settings.*
 
 abstract class BaseActivity : AppCompatActivity() {
-
-  @BindView(R.id.toolbar) lateinit var toolbar: Toolbar
 
   override fun setContentView(layoutResID: Int) {
     super.setContentView(layoutResID)
@@ -28,7 +23,6 @@ abstract class BaseActivity : AppCompatActivity() {
   }
 
   protected fun onSetContentView() {
-    ButterKnife.bind(this)
     setSupportActionBar(toolbar)
   }
 }

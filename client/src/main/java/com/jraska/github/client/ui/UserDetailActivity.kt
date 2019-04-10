@@ -5,26 +5,21 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
 import butterknife.OnClick
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.airbnb.epoxy.SimpleEpoxyModel
-import com.facebook.drawee.view.SimpleDraweeView
 import com.jraska.github.client.R
 import com.jraska.github.client.users.RepoHeader
 import com.jraska.github.client.users.UserDetail
 import com.jraska.github.client.users.UserDetailViewModel
 import com.jraska.github.client.viewModel
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.activity_user_detail.*
+import kotlinx.android.synthetic.main.content_user_detail.*
 
 class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
 
-  @BindView(R.id.user_detail_avatar) lateinit var avatarView: SimpleDraweeView
-  @BindView(R.id.user_detail_recycler) lateinit var recyclerView: RecyclerView
-
-  private lateinit var userDetailViewModel: UserDetailViewModel
+  private val userDetailViewModel: UserDetailViewModel by lazy { viewModel(UserDetailViewModel::class.java) }
 
   fun login(): String {
     return intent.getStringExtra(EXTRA_USER_LOGIN)
@@ -34,12 +29,10 @@ class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_user_detail)
 
-    recyclerView.layoutManager = LinearLayoutManager(this)
-    recyclerView.isNestedScrollingEnabled = false
+    user_detail_recycler.layoutManager = LinearLayoutManager(this)
+    user_detail_recycler.isNestedScrollingEnabled = false
 
     title = login()
-
-    userDetailViewModel = viewModel(UserDetailViewModel::class.java)
 
     val detailLiveData = userDetailViewModel.userDetail(login())
     detailLiveData.observe(this, Observer { this.setState(it) })
@@ -58,7 +51,7 @@ class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
   }
 
   private fun setUser(userDetail: UserDetail) {
-    avatarView.setImageURI(userDetail.user.avatarUrl)
+    user_detail_avatar.setImageURI(userDetail.user.avatarUrl)
 
     if (userDetail.basicStats == null) {
       return
@@ -79,15 +72,15 @@ class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
 
     adapter.addModels(models)
 
-    recyclerView.adapter = adapter
+    user_detail_recycler.adapter = adapter
   }
 
   private fun showLoading() {
-    recyclerView.adapter = SimpleEpoxyAdapter().apply { addModels(SimpleEpoxyModel(R.layout.item_loading)) }
+    user_detail_recycler.adapter = SimpleEpoxyAdapter().apply { addModels(SimpleEpoxyModel(R.layout.item_loading)) }
   }
 
   private fun showError(error: Throwable) {
-    ErrorHandler.displayError(error, recyclerView)
+    ErrorHandler.displayError(error, user_detail_recycler)
   }
 
   override fun onRepoClicked(header: RepoHeader) {
