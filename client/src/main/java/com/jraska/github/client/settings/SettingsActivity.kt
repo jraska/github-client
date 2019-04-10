@@ -8,6 +8,7 @@ import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.R
 import com.jraska.github.client.ui.BaseActivity
 import com.jraska.github.client.core.android.viewModel
+import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.content_settings.*
 
 class SettingsActivity : BaseActivity(), PurchaseReportModel.PurchaseListener {
@@ -16,6 +17,7 @@ class SettingsActivity : BaseActivity(), PurchaseReportModel.PurchaseListener {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_settings)
+    setSupportActionBar(toolbar)
 
     settings_recycler.layoutManager = LinearLayoutManager(this)
     val adapter = SimpleEpoxyAdapter()

@@ -10,22 +10,21 @@ import com.jraska.github.client.logging.CrashReporter
 import com.jraska.github.client.push.PushHandler
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.settings.SettingsModule
-import com.jraska.github.client.users.UserViewModelModule
-import com.jraska.github.client.users.UsersDataModule
+import com.jraska.github.client.users.UsersModule
 import dagger.Component
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 
 @PerApp
-@Component(modules = [UsersDataModule::class, UserViewModelModule::class, NavigationModule::class,
+@Component(modules = [UsersModule::class, NavigationModule::class,
   PushModule::class, AppModule::class, SettingsModule::class,
   HttpComponentModule::class, CoreComponentModule::class])
 interface AppComponent {
 
   fun onAppCreateActions(): Set<OnAppCreate>
 
-  fun pushHandler() : PushHandler
+  fun pushHandler(): PushHandler
 
   fun viewModelFactory(): ViewModelProvider.Factory
 }

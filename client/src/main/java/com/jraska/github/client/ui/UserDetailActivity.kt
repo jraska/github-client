@@ -9,10 +9,10 @@ import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.airbnb.epoxy.SimpleEpoxyModel
 import com.jraska.github.client.R
+import com.jraska.github.client.core.android.viewModel
 import com.jraska.github.client.users.RepoHeader
 import com.jraska.github.client.users.UserDetail
 import com.jraska.github.client.users.UserDetailViewModel
-import com.jraska.github.client.core.android.viewModel
 import kotlinx.android.synthetic.main.activity_user_detail.*
 import kotlinx.android.synthetic.main.content_user_detail.*
 
@@ -27,6 +27,7 @@ class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_user_detail)
+    setSupportActionBar(toolbar)
 
     user_detail_recycler.layoutManager = LinearLayoutManager(this)
     user_detail_recycler.isNestedScrollingEnabled = false

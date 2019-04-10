@@ -12,6 +12,7 @@ import com.jraska.github.client.R
 import com.jraska.github.client.users.User
 import com.jraska.github.client.users.UsersViewModel
 import com.jraska.github.client.core.android.viewModel
+import kotlinx.android.synthetic.main.activity_users_list.*
 import kotlinx.android.synthetic.main.content_users_list.*
 
 class UsersActivity : BaseActivity(), UserModel.UserListener {
@@ -20,6 +21,7 @@ class UsersActivity : BaseActivity(), UserModel.UserListener {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_users_list)
+    setSupportActionBar(toolbar)
 
     users_recycler.layoutManager = LinearLayoutManager(this)
     users_refresh_swipe_layout.setOnRefreshListener { usersViewModel.onRefresh() }

@@ -26,6 +26,7 @@ class RepoDetailActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
 
     setContentView(R.layout.activity_repo_detail)
+    setSupportActionBar(toolbar)
     repo_detail_recycler.layoutManager = LinearLayoutManager(this)
 
     title = fullRepoName()
