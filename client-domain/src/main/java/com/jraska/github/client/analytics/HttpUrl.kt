@@ -1,4 +1,4 @@
-package com.jraska.github.client.common
+package com.jraska.github.client.analytics
 
 import okhttp3.HttpUrl
 

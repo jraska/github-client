@@ -2,7 +2,7 @@ package com.jraska.github.client
 
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.common.toAnalyticsString
+import com.jraska.github.client.analytics.toAnalyticsString
 import com.jraska.github.client.logging.CrashReporter
 
 import okhttp3.HttpUrl

@@ -1,5 +1,6 @@
 package com.jraska.github.client.common
 
+import com.jraska.github.client.analytics.toAnalyticsString
 import okhttp3.HttpUrl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
