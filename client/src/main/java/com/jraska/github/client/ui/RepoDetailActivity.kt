@@ -10,7 +10,7 @@ import com.airbnb.epoxy.SimpleEpoxyModel
 import com.jraska.github.client.R
 import com.jraska.github.client.users.RepoDetail
 import com.jraska.github.client.users.RepoDetailViewModel
-import com.jraska.github.client.viewModel
+import com.jraska.github.client.core.android.viewModel
 import kotlinx.android.synthetic.main.activity_repo_detail.*
 import kotlinx.android.synthetic.main.content_repo_detail.*
 

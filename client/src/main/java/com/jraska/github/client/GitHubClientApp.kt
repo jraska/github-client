@@ -5,6 +5,7 @@ import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.perf.metrics.AddTrace
 import com.jraska.github.client.common.AppBuildConfig
+import com.jraska.github.client.core.android.HasViewModelFactory
 import com.jraska.github.client.http.DaggerHttpComponent
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.http.HttpDependenciesModule

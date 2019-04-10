@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.logging.CrashReporter
 import com.jraska.github.client.push.PushHandler
@@ -15,7 +16,6 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
-import javax.inject.Provider
 
 @PerApp
 @Component(modules = [UsersDataModule::class, UserViewModelModule::class, NavigationModule::class,

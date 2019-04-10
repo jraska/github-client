@@ -1,4 +1,4 @@
-package com.jraska.github.client
+package com.jraska.github.client.core.android
 
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel

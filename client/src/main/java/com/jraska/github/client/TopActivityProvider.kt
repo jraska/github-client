@@ -3,6 +3,7 @@ package com.jraska.github.client
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.ui.BaseActivity
 import javax.inject.Inject
 

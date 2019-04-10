@@ -1,7 +1,8 @@
-package com.jraska.github.client.logging
+package com.jraska.github.client.core.android.logging
 
 import android.util.Log
 import com.jraska.github.client.common.DeveloperError
+import com.jraska.github.client.logging.CrashReporter
 import timber.log.Timber
 import java.util.regex.Pattern
 import javax.inject.Inject

@@ -3,7 +3,7 @@ package com.jraska.github.client.push
 import android.app.NotificationManager
 import android.content.Context
 import com.jraska.github.client.Config
-import com.jraska.github.client.OnAppCreate
+import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.analytics.AnalyticsProperty
 import dagger.Module
 import dagger.Provides

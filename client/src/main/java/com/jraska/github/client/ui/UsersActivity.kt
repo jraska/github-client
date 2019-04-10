@@ -11,7 +11,7 @@ import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.R
 import com.jraska.github.client.users.User
 import com.jraska.github.client.users.UsersViewModel
-import com.jraska.github.client.viewModel
+import com.jraska.github.client.core.android.viewModel
 import kotlinx.android.synthetic.main.content_users_list.*
 
 class UsersActivity : BaseActivity(), UserModel.UserListener {

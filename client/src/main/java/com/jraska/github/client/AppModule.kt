@@ -10,6 +10,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.AppBuildConfig
+import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ViewModelFactory
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.time.DateTimeProvider

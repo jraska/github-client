@@ -2,7 +2,7 @@ package com.jraska.github.client.ui
 
 import android.os.Bundle
 import com.jraska.github.client.inputUrl
-import com.jraska.github.client.viewModel
+import com.jraska.github.client.core.android.viewModel
 
 class ShortcutHandlerActivity : BaseActivity() {
 
