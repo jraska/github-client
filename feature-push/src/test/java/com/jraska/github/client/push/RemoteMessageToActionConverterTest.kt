@@ -7,7 +7,8 @@ import java.util.Collections
 class RemoteMessageToActionConverterTest {
   @Test
   fun whenRemoteMessageWithoutAction_thenDefaultReturned() {
-    val action = RemoteMessageToActionConverter.convert(Collections.emptyMap<String, String>())
+    val action =
+      RemoteMessageToActionConverter.convert(Collections.emptyMap<String, String>())
 
     assertThat(action.name).isEqualTo(PushAction.DEFAULT.name)
   }
