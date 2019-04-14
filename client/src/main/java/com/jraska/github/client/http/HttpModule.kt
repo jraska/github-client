@@ -1,7 +1,6 @@
 package com.jraska.github.client.http
 
 import com.jraska.github.client.BuildConfig
-import com.jraska.github.client.logging.VerboseLogger
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -29,11 +28,11 @@ class HttpModule {
 
   @Provides
   @Http
-  fun provideOkHttpClient(@Http cacheDir: File, @Http logger: VerboseLogger): OkHttpClient {
+  fun provideOkHttpClient(@Http cacheDir: File, logger: HttpLoggingInterceptor.Logger): OkHttpClient {
     val builder = OkHttpClient.Builder()
 
     if (BuildConfig.DEBUG) {
-      val loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { logger.v(it) })
+      val loggingInterceptor = HttpLoggingInterceptor(logger)
         .setLevel(Level.BASIC)
       builder.addInterceptor(loggingInterceptor)
     }

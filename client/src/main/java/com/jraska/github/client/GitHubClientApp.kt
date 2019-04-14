@@ -7,11 +7,12 @@ import com.google.firebase.perf.metrics.AddTrace
 import com.jraska.github.client.core.android.HasViewModelFactory
 import com.jraska.github.client.http.DaggerHttpComponent
 import com.jraska.github.client.http.HttpComponent
-import com.jraska.github.client.http.HttpDependenciesModule
 import com.jraska.github.client.push.HasPushHandler
 import com.jraska.github.client.push.PushHandler
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.android.schedulers.AndroidSchedulers
+import okhttp3.logging.HttpLoggingInterceptor
+import timber.log.Timber
 import java.io.File
 
 open class GitHubClientApp : Application(), HasViewModelFactory, HasPushHandler {
@@ -54,10 +55,9 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasPushHandler 
   }
 
   protected open fun httpComponent(): HttpComponent {
-    val dependenciesModule = HttpDependenciesModule(File(cacheDir, "network"))
-
     return DaggerHttpComponent.builder()
-      .httpDependenciesModule(dependenciesModule)
+      .cacheDir(File(cacheDir, "network"))
+      .logger(HttpLoggingInterceptor.Logger { Timber.tag("Network").v(it) })
       .build()
   }
 }
