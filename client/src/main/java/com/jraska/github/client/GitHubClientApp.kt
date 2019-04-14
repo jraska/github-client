@@ -4,7 +4,6 @@ import android.app.Application
 import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.perf.metrics.AddTrace
-import com.jraska.github.client.common.AppBuildConfig
 import com.jraska.github.client.core.android.HasViewModelFactory
 import com.jraska.github.client.http.DaggerHttpComponent
 import com.jraska.github.client.http.HttpComponent
@@ -55,9 +54,7 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasPushHandler 
   }
 
   protected open fun httpComponent(): HttpComponent {
-    val dependenciesModule = HttpDependenciesModule(
-      AppBuildConfig(BuildConfig.DEBUG), File(cacheDir, "network")
-    )
+    val dependenciesModule = HttpDependenciesModule(File(cacheDir, "network"))
 
     return DaggerHttpComponent.builder()
       .httpDependenciesModule(dependenciesModule)

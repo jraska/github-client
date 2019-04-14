@@ -9,7 +9,6 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.common.AppBuildConfig
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.TopActivityProvider
 import com.jraska.github.client.core.android.ViewModelFactory
@@ -18,7 +17,6 @@ import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
 import dagger.Module
 import dagger.Provides
-import dagger.Reusable
 import dagger.multibindings.IntoSet
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -28,11 +26,6 @@ class AppModule(private val app: GitHubClientApp) {
 
   @Provides internal fun provideContext(): Context {
     return app
-  }
-
-  @Provides
-  @Reusable internal fun provideConfig(): AppBuildConfig {
-    return AppBuildConfig(BuildConfig.DEBUG)
   }
 
   @Provides

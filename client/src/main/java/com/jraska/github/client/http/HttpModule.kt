@@ -1,6 +1,6 @@
 package com.jraska.github.client.http
 
-import com.jraska.github.client.common.AppBuildConfig
+import com.jraska.github.client.BuildConfig
 import com.jraska.github.client.logging.VerboseLogger
 import dagger.Module
 import dagger.Provides
@@ -17,10 +17,10 @@ import java.io.File
 class HttpModule {
   @Provides
   @Http
-  fun provideRetrofit(okHttpClient: OkHttpClient, config: AppBuildConfig): Retrofit {
+  fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
       .baseUrl("https://api.github.com")
-      .validateEagerly(config.debug)
+      .validateEagerly(BuildConfig.DEBUG)
       .client(okHttpClient)
       .addConverterFactory(GsonConverterFactory.create())
       .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -29,10 +29,10 @@ class HttpModule {
 
   @Provides
   @Http
-  fun provideOkHttpClient(@Http cacheDir: File, @Http logger: VerboseLogger, config: AppBuildConfig): OkHttpClient {
+  fun provideOkHttpClient(@Http cacheDir: File, @Http logger: VerboseLogger): OkHttpClient {
     val builder = OkHttpClient.Builder()
 
-    if (config.debug) {
+    if (BuildConfig.DEBUG) {
       val loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { logger.v(it) })
         .setLevel(Level.BASIC)
       builder.addInterceptor(loggingInterceptor)
