@@ -1,4 +1,4 @@
-package com.jraska.github.client.ui
+package com.jraska.github.client.core.android
 
 import android.view.View
 

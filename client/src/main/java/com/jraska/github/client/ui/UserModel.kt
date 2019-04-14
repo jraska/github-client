@@ -3,6 +3,7 @@ package com.jraska.github.client.ui
 import android.view.View
 import com.airbnb.epoxy.EpoxyModel
 import com.jraska.github.client.R
+import com.jraska.github.client.core.android.visible
 import com.jraska.github.client.users.User
 import kotlinx.android.synthetic.main.item_row_user.view.*
 
