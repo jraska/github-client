@@ -27,12 +27,18 @@ jobs:
           path: core/build/reports
           destination: core/reports
       - store_artifacts:
-          path: client-data/build/reports
-          destination: client-data/reports
+          path: feature-users/build/reports
+          destination: feature-users/reports
+      - store_artifacts:
+          path: feature-push/build/reports
+          destination: feature-push/reports
       - store_test_results:
           path: client/build/test-results
       - store_test_results:
-          path: client-data/build/test-results
-      - store_test_results:
           path: core/build/test-results
+      - store_test_results:
+          path: feature-users/build/test-results
+      - store_test_results:
+          path: feature-push/build/test-results
+
 
