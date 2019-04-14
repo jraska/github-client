@@ -23,6 +23,7 @@ class ShowNotificationPushCommand constructor(
     val linkContentIntent = PendingIntent.getActivity(context, 0, intent, 0)
 
     val notification = NotificationCompat.Builder(context, NotificationSetup.PUSH_CHANNEL_ID)
+      .setSmallIcon(android.R.drawable.ic_dialog_info)
       .setContentTitle(title)
       .setContentText(message)
       .setContentIntent(linkContentIntent)
