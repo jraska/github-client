@@ -9,6 +9,7 @@ import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.airbnb.epoxy.SimpleEpoxyModel
 import com.jraska.github.client.R
+import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 import com.jraska.github.client.users.RepoHeader
 import com.jraska.github.client.users.UserDetail

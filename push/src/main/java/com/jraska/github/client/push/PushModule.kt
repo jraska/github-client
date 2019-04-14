@@ -3,8 +3,8 @@ package com.jraska.github.client.push
 import android.app.NotificationManager
 import android.content.Context
 import com.jraska.github.client.Config
-import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.analytics.AnalyticsProperty
+import com.jraska.github.client.core.android.OnAppCreate
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
@@ -13,6 +13,20 @@ import dagger.multibindings.StringKey
 
 @Module
 object PushModule {
+  @JvmStatic
+  @Provides
+  @IntoSet
+  fun bindObserverSetup(observerSetup: PushIntentObserver.CallbacksSetup): OnAppCreate {
+    return observerSetup
+  }
+
+  @Provides
+  @JvmStatic
+  @IntoSet
+  fun setupNotificationsOnCreate(notificationSetup: NotificationSetup): OnAppCreate {
+    return notificationSetup
+  }
+
   @JvmStatic
   @Provides
   @IntoMap
@@ -43,12 +57,5 @@ object PushModule {
   @StringKey("notification")
   fun notificationCommand(context: Context, notificationManager: NotificationManager): PushActionCommand {
     return ShowNotificationPushCommand(context, notificationManager)
-  }
-
-  @JvmStatic
-  @Provides
-  @IntoSet
-  fun bindObserverSetup(observerSetup: PushIntentObserver.CallbacksSetup): OnAppCreate {
-    return observerSetup
   }
 }

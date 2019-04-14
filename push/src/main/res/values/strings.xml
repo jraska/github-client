@@ -1,0 +1,4 @@
+<resources>
+  <string name="channel_name_push">Notifications</string>
+  <string name="channel_description_push">Notifications about everything new</string>
+</resources>

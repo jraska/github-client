@@ -9,12 +9,13 @@ import com.jraska.github.client.core.android.HasViewModelFactory
 import com.jraska.github.client.http.DaggerHttpComponent
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.http.HttpDependenciesModule
+import com.jraska.github.client.push.HasPushHandler
 import com.jraska.github.client.push.PushHandler
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.io.File
 
-open class GitHubClientApp : Application(), HasViewModelFactory {
+open class GitHubClientApp : Application(), HasViewModelFactory, HasPushHandler {
 
   private val appComponent: AppComponent by lazy { componentBuilder().build() }
 
@@ -22,7 +23,7 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
     return appComponent.viewModelFactory()
   }
 
-  fun pushHandler(): PushHandler {
+  override fun pushHandler(): PushHandler {
     return appComponent.pushHandler()
   }
 
@@ -55,7 +56,8 @@ open class GitHubClientApp : Application(), HasViewModelFactory {
 
   protected open fun httpComponent(): HttpComponent {
     val dependenciesModule = HttpDependenciesModule(
-      AppBuildConfig(BuildConfig.DEBUG), File(cacheDir, "network"))
+      AppBuildConfig(BuildConfig.DEBUG), File(cacheDir, "network")
+    )
 
     return DaggerHttpComponent.builder()
       .httpDependenciesModule(dependenciesModule)

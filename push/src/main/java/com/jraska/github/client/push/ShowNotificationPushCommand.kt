@@ -6,9 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.core.app.NotificationCompat
-import com.jraska.github.client.NotificationSetup
-import com.jraska.github.client.R
-import com.jraska.github.client.ui.UriHandlerActivity
+import com.jraska.github.client.core.android.UriHandlerActivity
 
 class ShowNotificationPushCommand constructor(
   private val context: Context,
@@ -25,7 +23,6 @@ class ShowNotificationPushCommand constructor(
     val linkContentIntent = PendingIntent.getActivity(context, 0, intent, 0)
 
     val notification = NotificationCompat.Builder(context, NotificationSetup.PUSH_CHANNEL_ID)
-      .setSmallIcon(R.mipmap.ic_launcher)
       .setContentTitle(title)
       .setContentText(message)
       .setContentIntent(linkContentIntent)

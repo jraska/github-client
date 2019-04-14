@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.jraska.github.client">
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.jraska.github.client">
 
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.INTERNET"/>
@@ -11,7 +12,8 @@
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
     android:supportsRtl="true"
-    android:theme="@style/AppTheme">
+    android:theme="@style/AppTheme"
+    tools:ignore="GoogleAppIndexingWarning">
     <activity
       android:name=".ui.UsersActivity"
       android:label="@string/app_name"
@@ -32,30 +34,11 @@
     <activity
       android:name=".ui.RepoDetailActivity"
       android:theme="@style/AppTheme.NoActionBar"/>
-    <activity android:name=".ui.UriHandlerActivity">
-      <intent-filter android:label="@string/app_name">
-        <action android:name="android.intent.action.VIEW"/>
 
-        <category android:name="android.intent.category.DEFAULT"/>
-        <category android:name="android.intent.category.BROWSABLE"/>
-
-        <data
-          android:host="github.com"
-          android:pathPattern="/.*"
-          android:scheme="https"/>
-      </intent-filter>
-    </activity>
-
-    <service android:name=".push.PushHandleService">
-      <intent-filter>
-        <action android:name="com.google.firebase.MESSAGING_EVENT" />
-      </intent-filter>
-    </service>
-
-    <activity android:name=".ui.ShortcutHandlerActivity" />
+    <activity android:name=".ui.ShortcutHandlerActivity"/>
     <activity
       android:name=".settings.SettingsActivity"
-      android:theme="@style/AppTheme.NoActionBar" />
+      android:theme="@style/AppTheme.NoActionBar"/>
   </application>
 
 </manifest>

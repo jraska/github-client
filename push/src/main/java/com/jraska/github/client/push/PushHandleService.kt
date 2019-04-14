@@ -2,7 +2,6 @@ package com.jraska.github.client.push
 
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.jraska.github.client.GitHubClientApp
 
 class PushHandleService : FirebaseMessagingService() {
   override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -16,7 +15,7 @@ class PushHandleService : FirebaseMessagingService() {
   }
 
   fun pushHandler(): PushHandler {
-    val app = application as GitHubClientApp
+    val app = application as HasPushHandler
     return app.pushHandler()
   }
 }

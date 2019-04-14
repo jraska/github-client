@@ -91,12 +91,6 @@ class AppModule(private val app: GitHubClientApp) {
 
   @Provides
   @IntoSet
-  fun setupNotificationsOnCreate(notificationSetup: NotificationSetup): OnAppCreate {
-    return notificationSetup
-  }
-
-  @Provides
-  @IntoSet
   fun setupFresco(): OnAppCreate {
     return object : OnAppCreate {
       override fun onCreate(app: Application) = Fresco.initialize(app)

@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.R
+import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.users.User
 import com.jraska.github.client.users.UsersViewModel
 import com.jraska.github.client.core.android.viewModel

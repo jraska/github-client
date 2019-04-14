@@ -1,4 +1,4 @@
-package com.jraska.github.client
+package com.jraska.github.client.push
 
 import android.app.Application
 import android.app.NotificationChannel
