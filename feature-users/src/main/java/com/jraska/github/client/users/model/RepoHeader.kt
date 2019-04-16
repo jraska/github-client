@@ -1,4 +1,4 @@
-package com.jraska.github.client.users
+package com.jraska.github.client.users.model
 
 internal class RepoHeader(
   val owner: String,

@@ -4,7 +4,7 @@ import android.view.View
 import com.airbnb.epoxy.EpoxyModel
 import com.jraska.github.client.core.android.visible
 import com.jraska.github.client.users.R
-import com.jraska.github.client.users.User
+import com.jraska.github.client.users.model.User
 import kotlinx.android.synthetic.main.item_row_user.view.user_admin_image
 import kotlinx.android.synthetic.main.item_row_user.view.user_avatar
 import kotlinx.android.synthetic.main.item_row_user.view.user_container

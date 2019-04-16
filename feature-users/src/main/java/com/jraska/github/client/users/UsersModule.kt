@@ -8,6 +8,11 @@ import com.jraska.github.client.PerApp
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.rx.AppSchedulers
+import com.jraska.github.client.users.model.GitHubApiUsersRepository
+import com.jraska.github.client.users.model.GitHubUserDetailApi
+import com.jraska.github.client.users.model.GitHubUsersApi
+import com.jraska.github.client.users.model.RepoDetailViewModel
+import com.jraska.github.client.users.model.UsersRepository
 import com.jraska.github.client.users.ui.UsersActivity
 
 import dagger.Module

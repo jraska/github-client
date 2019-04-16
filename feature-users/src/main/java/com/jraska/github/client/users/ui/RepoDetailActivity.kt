@@ -10,8 +10,8 @@ import com.airbnb.epoxy.SimpleEpoxyModel
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 import com.jraska.github.client.users.R
-import com.jraska.github.client.users.RepoDetail
-import com.jraska.github.client.users.RepoDetailViewModel
+import com.jraska.github.client.users.model.RepoDetail
+import com.jraska.github.client.users.model.RepoDetailViewModel
 import kotlinx.android.synthetic.main.activity_repo_detail.repo_detail_github_fab
 import kotlinx.android.synthetic.main.activity_repo_detail.toolbar
 import kotlinx.android.synthetic.main.content_repo_detail.repo_detail_recycler

@@ -3,6 +3,10 @@ package com.jraska.github.client.users
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.users.model.GitHubApiUsersRepository
+import com.jraska.github.client.users.model.GitHubUser
+import com.jraska.github.client.users.model.GitHubUserDetailApi
+import com.jraska.github.client.users.model.GitHubUsersApi
 import com.jraska.livedata.test
 import io.reactivex.Single
 import org.junit.Before

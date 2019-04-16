@@ -4,7 +4,7 @@ import android.view.View
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.users.R
-import com.jraska.github.client.users.RepoHeader
+import com.jraska.github.client.users.model.RepoHeader
 import kotlinx.android.synthetic.main.item_repos_section.view.repos_repeater
 import kotlinx.android.synthetic.main.item_repos_section.view.repos_title
 

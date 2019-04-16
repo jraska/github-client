@@ -9,6 +9,9 @@ import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.rx.RxLiveData
 import com.jraska.github.client.rx.AppSchedulers
+import com.jraska.github.client.users.model.RepoHeader
+import com.jraska.github.client.users.model.UserDetail
+import com.jraska.github.client.users.model.UsersRepository
 
 internal class UserDetailViewModel internal constructor(
   private val usersRepository: UsersRepository,

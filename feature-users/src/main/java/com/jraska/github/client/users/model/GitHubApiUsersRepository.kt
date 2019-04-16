@@ -1,4 +1,4 @@
-package com.jraska.github.client.users
+package com.jraska.github.client.users.model
 
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -10,7 +10,8 @@ internal class GitHubApiUsersRepository(
   private val gitHubUsersApi: GitHubUsersApi,
   private val gitHubUserDetailApi: GitHubUserDetailApi
 ) : UsersRepository {
-  private val converter: UserDetailWithReposConverter = UserDetailWithReposConverter.INSTANCE
+  private val converter: UserDetailWithReposConverter =
+    UserDetailWithReposConverter.INSTANCE
 
   private var lastUsers: List<User>? = null
 

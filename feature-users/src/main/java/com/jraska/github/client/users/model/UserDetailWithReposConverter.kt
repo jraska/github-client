@@ -1,4 +1,4 @@
-package com.jraska.github.client.users
+package com.jraska.github.client.users.model
 
 import org.threeten.bp.Instant
 
@@ -7,8 +7,10 @@ internal class UserDetailWithReposConverter {
   fun translateUserDetail(gitHubUserDetail: GitHubUserDetail, gitHubRepos: List<GitHubRepo>, reposToDisplay: Int): UserDetail {
     val joined = Instant.parse(gitHubUserDetail.createdAt)
 
-    val stats = UserStats(gitHubUserDetail.followers!!, gitHubUserDetail.following!!,
-      gitHubUserDetail.publicRepos!!, joined)
+    val stats = UserStats(
+      gitHubUserDetail.followers!!, gitHubUserDetail.following!!,
+      gitHubUserDetail.publicRepos!!, joined
+    )
 
     val sortedRepos = gitHubRepos.sortedWith(compareByDescending { it.stargazersCount })
 

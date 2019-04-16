@@ -11,8 +11,8 @@ import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 import com.jraska.github.client.users.R
-import com.jraska.github.client.users.User
 import com.jraska.github.client.users.UsersViewModel
+import com.jraska.github.client.users.model.User
 import kotlinx.android.synthetic.main.activity_users_list.toolbar
 import kotlinx.android.synthetic.main.content_users_list.users_recycler
 import kotlinx.android.synthetic.main.content_users_list.users_refresh_swipe_layout

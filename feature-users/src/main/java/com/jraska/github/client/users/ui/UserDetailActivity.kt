@@ -11,8 +11,8 @@ import com.airbnb.epoxy.SimpleEpoxyModel
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 import com.jraska.github.client.users.R
-import com.jraska.github.client.users.RepoHeader
-import com.jraska.github.client.users.UserDetail
+import com.jraska.github.client.users.model.RepoHeader
+import com.jraska.github.client.users.model.UserDetail
 import com.jraska.github.client.users.UserDetailViewModel
 import kotlinx.android.synthetic.main.activity_user_detail.toolbar
 import kotlinx.android.synthetic.main.activity_user_detail.user_detail_avatar

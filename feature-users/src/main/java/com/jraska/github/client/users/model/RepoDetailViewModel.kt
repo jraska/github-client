@@ -1,4 +1,4 @@
-package com.jraska.github.client.users
+package com.jraska.github.client.users.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

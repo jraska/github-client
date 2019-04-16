@@ -3,7 +3,7 @@ package com.jraska.github.client.users.ui
 import android.view.View
 import com.airbnb.epoxy.EpoxyModel
 import com.jraska.github.client.users.R
-import com.jraska.github.client.users.RepoHeader
+import com.jraska.github.client.users.model.RepoHeader
 import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_description
 import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_forks
 import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_stars

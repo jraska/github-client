@@ -5,6 +5,10 @@ import com.jraska.github.client.FakeConfig
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.rx.AppSchedulers
+import com.jraska.github.client.users.model.User
+import com.jraska.github.client.users.model.UserDetail
+import com.jraska.github.client.users.model.UserStats
+import com.jraska.github.client.users.model.UsersRepository
 import com.jraska.livedata.test
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -19,8 +23,7 @@ import org.threeten.bp.Instant
 class UserDetailViewModelTest {
   @get:Rule val testRule = InstantTaskExecutorRule()
 
-  lateinit var usersRepository: UsersRepository
-
+  private lateinit var usersRepository: UsersRepository
   private lateinit var viewModel: UserDetailViewModel
 
   @Before
