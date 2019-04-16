@@ -6,7 +6,7 @@ import androidx.annotation.DrawableRes
 import com.airbnb.epoxy.EpoxyModel
 import com.jraska.github.client.users.R
 
-class ErrorModel(@DrawableRes private val icon: Int) : EpoxyModel<View>() {
+internal class ErrorModel(@DrawableRes private val icon: Int) : EpoxyModel<View>() {
 
   override fun getDefaultLayout(): Int {
     return R.layout.item_generic_error

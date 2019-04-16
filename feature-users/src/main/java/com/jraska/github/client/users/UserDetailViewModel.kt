@@ -7,10 +7,10 @@ import com.jraska.github.client.Navigator
 import com.jraska.github.client.Urls
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.core.android.rx.RxLiveData
+import com.jraska.github.client.rx.AppSchedulers
 
-class UserDetailViewModel internal constructor(
+internal class UserDetailViewModel internal constructor(
   private val usersRepository: UsersRepository,
   private val schedulers: AppSchedulers,
   private val navigator: Navigator,

@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_repo_detail.repo_detail_github_fa
 import kotlinx.android.synthetic.main.activity_repo_detail.toolbar
 import kotlinx.android.synthetic.main.content_repo_detail.repo_detail_recycler
 
-class RepoDetailActivity : BaseActivity() {
+internal class RepoDetailActivity : BaseActivity() {
 
   private val viewModel: RepoDetailViewModel by lazy { viewModel(RepoDetailViewModel::class.java) }
 

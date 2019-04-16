@@ -2,7 +2,7 @@ package com.jraska.github.client.users
 
 import java.util.Collections
 
-class UserDetail(
+internal class UserDetail(
   val user: User,
   val basicStats: UserStats?,
   popularRepos: List<RepoHeader>,

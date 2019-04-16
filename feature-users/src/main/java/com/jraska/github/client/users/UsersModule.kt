@@ -23,7 +23,7 @@ object UsersModule {
   @JvmStatic
   @Provides
   @PerApp
-  fun provideUsersRepository(retrofit: Retrofit): UsersRepository {
+  internal fun provideUsersRepository(retrofit: Retrofit): UsersRepository {
     val usersApi = retrofit.create(GitHubUsersApi::class.java)
     val detailApi = retrofit.create(GitHubUserDetailApi::class.java)
 
@@ -34,7 +34,7 @@ object UsersModule {
   @Provides
   @IntoMap
   @ClassKey(UsersViewModel::class)
-  fun provideUsersModel(
+  internal fun provideUsersModel(
     repository: UsersRepository,
     schedulers: AppSchedulers,
     navigator: Navigator,
@@ -47,7 +47,7 @@ object UsersModule {
   @Provides
   @IntoMap
   @ClassKey(UserDetailViewModel::class)
-  fun provideUserDetailModel(
+  internal fun provideUserDetailModel(
     repository: UsersRepository,
     schedulers: AppSchedulers,
     navigator: Navigator,
@@ -61,7 +61,7 @@ object UsersModule {
   @Provides
   @IntoMap
   @ClassKey(RepoDetailViewModel::class)
-  fun provideRepoDetailModel(
+  internal fun provideRepoDetailModel(
     repository: UsersRepository,
     schedulers: AppSchedulers,
     navigator: Navigator,
@@ -73,14 +73,14 @@ object UsersModule {
   @JvmStatic
   @Provides
   @IntoSet
-  fun provideUsersPathLauncher(): LinkLauncher {
+  internal fun provideUsersPathLauncher(): LinkLauncher {
     return UsersPathLauncher()
   }
 
   @JvmStatic
   @Provides
   @IntoSet
-  fun provideUsersListLauncher(): LinkLauncher {
+  internal fun provideUsersListLauncher(): LinkLauncher {
     return object : LinkLauncher {
       override fun launch(inActivity: Activity, deepLink: HttpUrl): LinkLauncher.Result {
         return if ("/users" == deepLink.encodedPath()) {

@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 
-class RepeaterLayout : LinearLayout {
+internal class RepeaterLayout : LinearLayout {
   constructor(context: Context) : super(context)
 
   constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

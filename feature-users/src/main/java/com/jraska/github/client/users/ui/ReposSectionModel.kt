@@ -5,12 +5,13 @@ import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.users.R
 import com.jraska.github.client.users.RepoHeader
-import kotlinx.android.synthetic.main.item_repos_section.view.*
+import kotlinx.android.synthetic.main.item_repos_section.view.repos_repeater
+import kotlinx.android.synthetic.main.item_repos_section.view.repos_title
 
 internal class ReposSectionModel(
   private val title: String,
   private val repos: List<RepoHeader>,
-  private val repoListener: RepoHeaderModel.RepoListener
+  private val repoListener: (RepoHeader) -> Unit
 ) : EpoxyModel<View>() {
 
   override fun getDefaultLayout(): Int {

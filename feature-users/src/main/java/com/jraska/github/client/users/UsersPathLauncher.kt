@@ -6,7 +6,7 @@ import com.jraska.github.client.users.ui.RepoDetailActivity
 import com.jraska.github.client.users.ui.UserDetailActivity
 import okhttp3.HttpUrl
 
-class UsersPathLauncher : LinkLauncher {
+internal class UsersPathLauncher : LinkLauncher {
   override fun launch(inActivity: Activity, deepLink: HttpUrl): LinkLauncher.Result {
     if (deepLink.pathSize() == 2) {
       val fullRepoPath = deepLink.pathSegments()[0] + "/" + deepLink.pathSegments()[1]

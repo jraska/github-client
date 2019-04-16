@@ -9,7 +9,7 @@ import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.rx.RxLiveData
 import com.jraska.github.client.rx.AppSchedulers
 
-class RepoDetailViewModel constructor(
+internal class RepoDetailViewModel constructor(
   private val usersRepository: UsersRepository,
   private val appSchedulers: AppSchedulers,
   private val navigator: Navigator,

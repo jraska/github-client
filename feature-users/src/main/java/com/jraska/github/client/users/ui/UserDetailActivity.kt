@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_user_detail.user_detail_avatar
 import kotlinx.android.synthetic.main.activity_user_detail.user_detail_github_fab
 import kotlinx.android.synthetic.main.content_user_detail.user_detail_recycler
 
-class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
+internal class UserDetailActivity : BaseActivity() {
 
   private val userDetailViewModel: UserDetailViewModel by lazy { viewModel(UserDetailViewModel::class.java) }
 
@@ -64,11 +64,17 @@ class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
     models.add(UserHeaderModel(userDetail.basicStats))
 
     if (!userDetail.popularRepos.isEmpty()) {
-      models.add(ReposSectionModel(getString(R.string.repos_popular), userDetail.popularRepos, this))
+      models.add(ReposSectionModel(getString(R.string.repos_popular), userDetail.popularRepos, this::onRepoClicked))
     }
 
     if (!userDetail.contributedRepos.isEmpty()) {
-      models.add(ReposSectionModel(getString(R.string.repos_contributed), userDetail.contributedRepos, this))
+      models.add(
+        ReposSectionModel(
+          getString(R.string.repos_contributed),
+          userDetail.contributedRepos,
+          this::onRepoClicked
+        )
+      )
     }
 
     adapter.addModels(models)
@@ -84,7 +90,7 @@ class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
     ErrorHandler.displayError(error, user_detail_recycler)
   }
 
-  override fun onRepoClicked(header: RepoHeader) {
+  private fun onRepoClicked(header: RepoHeader) {
     userDetailViewModel.onRepoClicked(header)
   }
 

@@ -14,7 +14,7 @@ import io.reactivex.SingleEmitter
 import io.reactivex.SingleOnSubscribe
 import java.util.concurrent.atomic.AtomicBoolean
 
-class UsersViewModel internal constructor(
+internal class UsersViewModel internal constructor(
   private val usersRepository: UsersRepository,
   private val appSchedulers: AppSchedulers,
   private val navigator: Navigator,

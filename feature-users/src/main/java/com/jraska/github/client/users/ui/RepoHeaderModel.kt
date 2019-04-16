@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_t
 
 internal class RepoHeaderModel(
   private val repo: RepoHeader,
-  private val repoListener: RepoListener
+  private val repoListener: (RepoHeader) -> Unit
 ) : EpoxyModel<View>() {
   override fun getDefaultLayout(): Int {
     return R.layout.item_row_user_detail_repo
@@ -23,10 +23,7 @@ internal class RepoHeaderModel(
     itemView.repo_item_stars.text = repo.stars.toString()
     itemView.repo_item_forks.text = repo.forks.toString()
 
-    itemView.setOnClickListener { repoListener.onRepoClicked(repo) }
+    itemView.setOnClickListener { repoListener(repo) }
   }
 
-  internal interface RepoListener {
-    fun onRepoClicked(header: RepoHeader)
-  }
 }
