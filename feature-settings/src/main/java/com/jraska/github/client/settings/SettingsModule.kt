@@ -17,21 +17,21 @@ object SettingsModule {
   @Provides
   @IntoMap
   @ClassKey(SettingsViewModel::class)
-  fun provideUserDetailModel(viewModel: SettingsViewModel): ViewModel {
+  internal fun provideUserDetailModel(viewModel: SettingsViewModel): ViewModel {
     return viewModel
   }
 
   @JvmStatic
   @Provides
   @IntoSet
-  fun consoleLoggingSetup(): OnAppCreate {
+  internal fun consoleLoggingSetup(): OnAppCreate {
     return SetupConsoleLogging()
   }
 
   @JvmStatic
   @Provides
   @IntoSet
-  fun provideSettingsLauncher(): LinkLauncher {
+  internal fun provideSettingsLauncher(): LinkLauncher {
     return object : LinkLauncher {
       override fun launch(inActivity: Activity, deepLink: HttpUrl): LinkLauncher.Result {
         return if ("/settings" == deepLink.encodedPath()) {

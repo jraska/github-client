@@ -5,7 +5,7 @@ import com.jraska.console.timber.ConsoleTree
 import com.jraska.github.client.core.android.OnAppCreate
 import timber.log.Timber
 
-class SetupConsoleLogging : OnAppCreate {
+internal class SetupConsoleLogging : OnAppCreate {
   override fun onCreate(app: Application) {
     if (BuildConfig.DEBUG) {
       Timber.plant(ConsoleTree.create())

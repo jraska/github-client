@@ -10,7 +10,7 @@ import com.jraska.github.client.core.android.viewModel
 import kotlinx.android.synthetic.main.activity_settings.toolbar
 import kotlinx.android.synthetic.main.content_settings.settings_recycler
 
-class SettingsActivity : BaseActivity(), PurchaseReportModel.PurchaseListener {
+internal class SettingsActivity : BaseActivity(), PurchaseReportModel.PurchaseListener {
   private val viewModel: SettingsViewModel by lazy { viewModel(SettingsViewModel::class.java) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
