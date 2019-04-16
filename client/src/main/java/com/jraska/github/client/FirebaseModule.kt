@@ -14,7 +14,7 @@ import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
-open class FirebaseModule {
+class FirebaseModule {
 
   @Provides
   @Singleton internal fun firebaseAnalytics(config: Config): FirebaseEventAnalytics {
@@ -31,17 +31,17 @@ open class FirebaseModule {
     return FirebaseEventAnalytics(firebaseAnalytics)
   }
 
-  @Provides internal open fun eventAnalytics(analytics: FirebaseEventAnalytics): EventAnalytics {
+  @Provides internal fun eventAnalytics(analytics: FirebaseEventAnalytics): EventAnalytics {
     return analytics
   }
 
-  @Provides internal open fun analyticsProperty(analytics: FirebaseEventAnalytics): AnalyticsProperty {
+  @Provides internal fun analyticsProperty(analytics: FirebaseEventAnalytics): AnalyticsProperty {
     return analytics
   }
 
   @Provides
   @Singleton
-  internal open fun firebaseCrash(): CrashReporter {
+  internal fun firebaseCrash(): CrashReporter {
     return FirebaseCrashlyticsReporter()
   }
 
@@ -56,7 +56,7 @@ open class FirebaseModule {
 
   @Provides
   @Singleton
-  internal open fun firebaseDatabase(): FirebaseDatabase {
+  internal fun firebaseDatabase(): FirebaseDatabase {
     return FirebaseDatabase.getInstance()
   }
 }
