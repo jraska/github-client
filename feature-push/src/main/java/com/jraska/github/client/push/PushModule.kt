@@ -16,14 +16,14 @@ object PushModule {
   @JvmStatic
   @Provides
   @IntoSet
-  fun bindObserverSetup(observerSetup: PushIntentObserver.CallbacksSetup): OnAppCreate {
+  internal fun bindObserverSetup(observerSetup: PushIntentObserver.CallbacksSetup): OnAppCreate {
     return observerSetup
   }
 
   @Provides
   @JvmStatic
   @IntoSet
-  fun setupNotificationsOnCreate(notificationSetup: NotificationSetup): OnAppCreate {
+  internal fun setupNotificationsOnCreate(notificationSetup: NotificationSetup): OnAppCreate {
     return notificationSetup
   }
 
@@ -31,7 +31,7 @@ object PushModule {
   @Provides
   @IntoMap
   @StringKey("refresh_config")
-  fun refreshConfigCommand(config: Config): PushActionCommand {
+  internal fun refreshConfigCommand(config: Config): PushActionCommand {
     return RefreshConfigCommand(config)
   }
 
@@ -39,7 +39,7 @@ object PushModule {
   @Provides
   @IntoMap
   @StringKey("set_config_as_property")
-  fun configAsPropertyCommand(config: Config, analyticsProperty: AnalyticsProperty): PushActionCommand {
+  internal fun configAsPropertyCommand(config: Config, analyticsProperty: AnalyticsProperty): PushActionCommand {
     return ConfigAsPropertyCommand(config, analyticsProperty)
   }
 
@@ -47,7 +47,7 @@ object PushModule {
   @Provides
   @IntoMap
   @StringKey("set_analytics_property")
-  fun setAnalyticsProperty(analyticsProperty: AnalyticsProperty): PushActionCommand {
+  internal fun setAnalyticsProperty(analyticsProperty: AnalyticsProperty): PushActionCommand {
     return SetAnalyticsPropertyPushCommand(analyticsProperty)
   }
 
@@ -55,7 +55,7 @@ object PushModule {
   @Provides
   @IntoMap
   @StringKey("notification")
-  fun notificationCommand(context: Context, notificationManager: NotificationManager): PushActionCommand {
+  internal fun notificationCommand(context: Context, notificationManager: NotificationManager): PushActionCommand {
     return ShowNotificationPushCommand(context, notificationManager)
   }
 }

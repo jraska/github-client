@@ -5,7 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import androidx.lifecycle.LifecycleOwner
 
-class PushCallbacks(private val intentObserver: PushIntentObserver) : Application.ActivityLifecycleCallbacks {
+internal class PushCallbacks(private val intentObserver: PushIntentObserver) : Application.ActivityLifecycleCallbacks {
 
   override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
     if (activity is LifecycleOwner) {

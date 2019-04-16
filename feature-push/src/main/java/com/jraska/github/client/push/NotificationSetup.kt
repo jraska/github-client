@@ -9,7 +9,7 @@ import com.jraska.github.client.core.android.OnAppCreate
 
 import javax.inject.Inject
 
-class NotificationSetup @Inject constructor(
+internal class NotificationSetup @Inject constructor(
   private val notificationManager: NotificationManager,
   private val context: Context
 ) : OnAppCreate {

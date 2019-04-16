@@ -3,7 +3,7 @@ package com.jraska.github.client.push
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
-class PushHandleService : FirebaseMessagingService() {
+internal class PushHandleService : FirebaseMessagingService() {
   override fun onMessageReceived(remoteMessage: RemoteMessage) {
     val action = RemoteMessageToActionConverter.convert(remoteMessage)
 

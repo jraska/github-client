@@ -11,7 +11,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.jraska.github.client.core.android.OnAppCreate
 import javax.inject.Inject
 
-class PushIntentObserver(private val pushHandler: PushHandler) : LifecycleObserver {
+internal class PushIntentObserver(private val pushHandler: PushHandler) : LifecycleObserver {
 
   @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
   fun onCreate(owner: LifecycleOwner) {

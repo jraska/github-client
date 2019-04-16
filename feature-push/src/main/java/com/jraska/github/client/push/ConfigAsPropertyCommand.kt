@@ -3,7 +3,7 @@ package com.jraska.github.client.push
 import com.jraska.github.client.Config
 import com.jraska.github.client.analytics.AnalyticsProperty
 
-class ConfigAsPropertyCommand constructor(
+internal class ConfigAsPropertyCommand constructor(
   private val config: Config,
   private val analyticsProperty: AnalyticsProperty
 ) : PushActionCommand {

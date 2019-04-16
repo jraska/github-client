@@ -8,7 +8,7 @@ import android.net.Uri
 import androidx.core.app.NotificationCompat
 import com.jraska.github.client.core.android.UriHandlerActivity
 
-class ShowNotificationPushCommand constructor(
+internal class ShowNotificationPushCommand constructor(
   private val context: Context,
   private val notificationManager: NotificationManager
 ) : PushActionCommand {
