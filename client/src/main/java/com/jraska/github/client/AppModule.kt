@@ -22,42 +22,45 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 @Module
-class AppModule(private val app: GitHubClientApp) {
-
-  @Provides internal fun provideContext(): Context {
-    return app
-  }
+object AppModule {
 
   @Provides
+  @JvmStatic
   @PerApp internal fun topActivityProvider(): TopActivityProvider {
     return TopActivityProvider()
   }
 
   @Provides
   @IntoSet
+  @JvmStatic
   fun topActivityOnCreate(setup: TopActivityProvider.OnCreateSetup): OnAppCreate {
     return setup
   }
 
   @Provides
+  @JvmStatic
   @PerApp internal fun provideLayoutInflater(context: Context): LayoutInflater {
     return LayoutInflater.from(context)
   }
 
   @Provides
+  @JvmStatic
   internal fun provideViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory {
     return factory
   }
 
+  @JvmStatic
   @Provides
   @PerApp internal fun dateTimeProvider(): DateTimeProvider {
     return RealDateTimeProvider()
   }
 
-  @Provides internal fun notificationManager(): NotificationManager {
-    return app.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+  @JvmStatic
+  @Provides internal fun notificationManager(context: Context): NotificationManager {
+    return context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
   }
 
+  @JvmStatic
   @Provides
   @PerApp
   fun schedulers(): AppSchedulers {
@@ -65,12 +68,14 @@ class AppModule(private val app: GitHubClientApp) {
       Schedulers.io(), Schedulers.computation())
   }
 
+  @JvmStatic
   @Provides
   @IntoSet
   internal fun setupLoggingOnCreate(setupLogging: SetupLogging): OnAppCreate {
     return setupLogging
   }
 
+  @JvmStatic
   @Provides
   @IntoSet
   fun reportAppCreateEvent(eventAnalytics: EventAnalytics): OnAppCreate {
@@ -82,6 +87,7 @@ class AppModule(private val app: GitHubClientApp) {
     }
   }
 
+  @JvmStatic
   @Provides
   @IntoSet
   fun setupFresco(): OnAppCreate {
@@ -90,6 +96,7 @@ class AppModule(private val app: GitHubClientApp) {
     }
   }
 
+  @JvmStatic
   @Provides
   @IntoSet
   fun setupThreeTen(): OnAppCreate {

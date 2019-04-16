@@ -43,9 +43,9 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasPushHandler 
     }
   }
 
-  private fun componentBuilder(): DaggerAppComponent.Builder {
+  private fun componentBuilder(): AppComponent.Builder {
     return DaggerAppComponent.builder()
-      .appModule(AppModule(this))
+      .appContext(this)
       .httpComponentModule(HttpComponentModule(httpComponent()))
       .coreComponentModule(CoreComponentModule(coreComponent()))
   }

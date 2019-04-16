@@ -1,5 +1,6 @@
 package com.jraska.github.client
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.jraska.github.client.analytics.AnalyticsProperty
@@ -11,15 +12,18 @@ import com.jraska.github.client.push.PushHandler
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.settings.SettingsModule
 import com.jraska.github.client.users.UsersModule
+import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 
 @PerApp
-@Component(modules = [UsersModule::class, NavigationModule::class,
-  PushModule::class, AppModule::class, SettingsModule::class,
-  HttpComponentModule::class, CoreComponentModule::class])
+@Component(
+  modules = [UsersModule::class, NavigationModule::class,
+    PushModule::class, AppModule::class, SettingsModule::class,
+    HttpComponentModule::class, CoreComponentModule::class]
+)
 interface AppComponent {
 
   fun onAppCreateActions(): Set<OnAppCreate>
@@ -27,6 +31,16 @@ interface AppComponent {
   fun pushHandler(): PushHandler
 
   fun viewModelFactory(): ViewModelProvider.Factory
+
+  @Component.Builder
+  interface Builder {
+    fun build(): AppComponent
+
+    fun coreComponentModule(module: CoreComponentModule): Builder
+    fun httpComponentModule(module: HttpComponentModule): Builder
+
+    @BindsInstance fun appContext(context: Context): Builder
+  }
 }
 
 @Module
