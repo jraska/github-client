@@ -1,10 +1,13 @@
-package com.jraska.github.client.ui
+package com.jraska.github.client.users.ui
 
 import android.view.View
 import com.airbnb.epoxy.EpoxyModel
-import com.jraska.github.client.R
+import com.jraska.github.client.users.R
 import com.jraska.github.client.users.RepoDetail
-import kotlinx.android.synthetic.main.item_repo_detail_stats.view.*
+import kotlinx.android.synthetic.main.item_repo_detail_stats.view.repo_detail_created
+import kotlinx.android.synthetic.main.item_repo_detail_stats.view.repo_detail_forks_count
+import kotlinx.android.synthetic.main.item_repo_detail_stats.view.repo_detail_stars_count
+import kotlinx.android.synthetic.main.item_repo_detail_stats.view.repo_detail_subscribers_count
 import org.threeten.bp.format.DateTimeFormatter
 
 internal class RepoDetailHeaderModel(private val repoDetail: RepoDetail)

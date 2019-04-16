@@ -1,11 +1,15 @@
-package com.jraska.github.client.ui
+package com.jraska.github.client.users.ui
 
 import android.view.View
 import com.airbnb.epoxy.EpoxyModel
-import com.jraska.github.client.R
 import com.jraska.github.client.core.android.visible
+import com.jraska.github.client.users.R
 import com.jraska.github.client.users.User
-import kotlinx.android.synthetic.main.item_row_user.view.*
+import kotlinx.android.synthetic.main.item_row_user.view.user_admin_image
+import kotlinx.android.synthetic.main.item_row_user.view.user_avatar
+import kotlinx.android.synthetic.main.item_row_user.view.user_container
+import kotlinx.android.synthetic.main.item_row_user.view.user_item_gitHub_icon
+import kotlinx.android.synthetic.main.item_row_user.view.user_login
 
 internal class UserModel(private val user: User, private val userListener: UserListener) : EpoxyModel<View>() {
 

@@ -1,8 +1,8 @@
-package com.jraska.github.client.ui
+package com.jraska.github.client.users.ui
 
 import android.widget.TextView
 import com.airbnb.epoxy.EpoxyModel
-import com.jraska.github.client.R
+import com.jraska.github.client.users.R
 
 internal class SimpleTextModel(private val text: String) : EpoxyModel<TextView>() {
 

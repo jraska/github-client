@@ -1,9 +1,9 @@
-package com.jraska.github.client
+package com.jraska.github.client.users
 
 import android.app.Activity
 import com.jraska.github.client.core.android.LinkLauncher
-import com.jraska.github.client.ui.RepoDetailActivity
-import com.jraska.github.client.ui.UserDetailActivity
+import com.jraska.github.client.users.ui.RepoDetailActivity
+import com.jraska.github.client.users.ui.UserDetailActivity
 import okhttp3.HttpUrl
 
 class UsersPathLauncher : LinkLauncher {

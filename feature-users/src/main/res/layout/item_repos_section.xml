@@ -26,10 +26,10 @@
         android:ellipsize="end"
         android:textSize="@dimen/textTitle"
         android:textColor="@color/textMain"
-        android:background="@color/colorAccent"
+        android:background="#FF4081"
         tools:text="Popular" />
 
-    <com.jraska.github.client.widget.RepeaterLayout
+    <com.jraska.github.client.users.widget.RepeaterLayout
         android:id="@+id/repos_repeater"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

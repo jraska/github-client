@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -26,6 +27,9 @@ dependencies {
   api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
   api 'com.google.code.gson:gson:2.8.5'
   api 'com.squareup.okhttp3:logging-interceptor:3.13.1'
+
+  implementation 'com.airbnb.android:epoxy:3.3.0'
+  implementation 'com.facebook.fresco:drawee:1.11.0'
 
   testImplementation 'com.jraska.livedata:testing:1.1.0'
   testImplementation 'com.jraska.livedata:testing-ktx:1.1.0'

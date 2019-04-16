@@ -1,4 +1,4 @@
-package com.jraska.github.client.ui
+package com.jraska.github.client.users.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -8,14 +8,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.airbnb.epoxy.SimpleEpoxyModel
-import com.jraska.github.client.R
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
+import com.jraska.github.client.users.R
 import com.jraska.github.client.users.RepoHeader
 import com.jraska.github.client.users.UserDetail
 import com.jraska.github.client.users.UserDetailViewModel
-import kotlinx.android.synthetic.main.activity_user_detail.*
-import kotlinx.android.synthetic.main.content_user_detail.*
+import kotlinx.android.synthetic.main.activity_user_detail.toolbar
+import kotlinx.android.synthetic.main.activity_user_detail.user_detail_avatar
+import kotlinx.android.synthetic.main.activity_user_detail.user_detail_github_fab
+import kotlinx.android.synthetic.main.content_user_detail.user_detail_recycler
 
 class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
 
@@ -59,7 +61,7 @@ class UserDetailActivity : BaseActivity(), RepoHeaderModel.RepoListener {
     val adapter = SimpleEpoxyAdapter()
 
     val models = ArrayList<EpoxyModel<*>>()
-    models.add(UserHeaderModel(userDetail.basicStats!!))
+    models.add(UserHeaderModel(userDetail.basicStats))
 
     if (!userDetail.popularRepos.isEmpty()) {
       models.add(ReposSectionModel(getString(R.string.repos_popular), userDetail.popularRepos, this))

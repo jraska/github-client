@@ -1,10 +1,13 @@
-package com.jraska.github.client.ui
+package com.jraska.github.client.users.ui
 
 import android.view.View
 import com.airbnb.epoxy.EpoxyModel
-import com.jraska.github.client.R
+import com.jraska.github.client.users.R
 import com.jraska.github.client.users.UserStats
-import kotlinx.android.synthetic.main.item_user_stats.view.*
+import kotlinx.android.synthetic.main.item_user_stats.view.user_detail_followers_count
+import kotlinx.android.synthetic.main.item_user_stats.view.user_detail_following_count
+import kotlinx.android.synthetic.main.item_user_stats.view.user_detail_joined
+import kotlinx.android.synthetic.main.item_user_stats.view.user_detail_repos_count
 import org.threeten.bp.format.DateTimeFormatter
 
 internal class UserHeaderModel(private val basicStats: UserStats) : EpoxyModel<View>() {

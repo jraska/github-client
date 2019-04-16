@@ -1,4 +1,4 @@
-package com.jraska.github.client.widget
+package com.jraska.github.client.users.widget
 
 import android.annotation.TargetApi
 import android.content.Context

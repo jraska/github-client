@@ -1,11 +1,10 @@
-package com.jraska.github.client.ui
+package com.jraska.github.client.users.ui
 
-import androidx.annotation.DrawableRes
 import android.view.View
 import android.widget.ImageView
-
+import androidx.annotation.DrawableRes
 import com.airbnb.epoxy.EpoxyModel
-import com.jraska.github.client.R
+import com.jraska.github.client.users.R
 
 class ErrorModel(@DrawableRes private val icon: Int) : EpoxyModel<View>() {
 

@@ -1,10 +1,5 @@
 <resources>
   <string name="app_name">github-client</string>
-  <string name="user_detail_joined_template">  Joined on %s</string>
-  <string name="repos_popular">Popular repositories</string>
-  <string name="repos_contributed">Contributed repositories</string>
-  <string name="repo_detail_language_used_template">Language: %s</string>
-  <string name="repo_detail_issues_template">Issues Count: %s</string>
 
   <string name="shortcut_users_short_label">Users</string>
   <string name="shortcut_users_long_label">Browse Users</string>
@@ -17,7 +12,4 @@
   <string name="shortcut_jake_short_label">Jake</string>
   <string name="shortcut_jake_long_label">Jake Wharton</string>
   <string name="shortcut_jake_disabled_message">No longer available :(</string>
-  <string name="settings">Settings</string>
-  <string name="github_clickable_icon">GitHub clickable icon</string>
-  <string name="administrator_icon">Administrator icon</string>
 </resources>

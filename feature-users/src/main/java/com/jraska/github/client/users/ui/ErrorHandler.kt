@@ -1,4 +1,4 @@
-package com.jraska.github.client.ui
+package com.jraska.github.client.users.ui
 
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyModel
@@ -6,7 +6,7 @@ import com.airbnb.epoxy.SimpleEpoxyAdapter
 import java.net.UnknownHostException
 
 object ErrorHandler {
-  fun modelsForError(error: Throwable): List<EpoxyModel<*>> {
+  private fun modelsForError(error: Throwable): List<EpoxyModel<*>> {
     if (error is UnknownHostException) {
       return listOf(ErrorModel.networkError())
     }

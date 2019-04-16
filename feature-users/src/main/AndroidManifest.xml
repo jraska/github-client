@@ -1,1 +1,8 @@
-<manifest package="com.jraska.github.client.data"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.jraska.github.client.users">
+
+  <application>
+    <activity android:name=".ui.UserDetailActivity"/>
+    <activity android:name=".ui.RepoDetailActivity"/>
+  </application>
+</manifest>

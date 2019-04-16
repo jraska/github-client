@@ -3,7 +3,7 @@ package com.jraska.github.client.http
 import android.app.Activity
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
-import com.jraska.github.client.ui.UsersActivity
+import com.jraska.github.client.users.ui.UsersActivity
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okreplay.AndroidTapeRoot

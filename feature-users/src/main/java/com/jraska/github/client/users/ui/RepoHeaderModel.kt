@@ -1,10 +1,13 @@
-package com.jraska.github.client.ui
+package com.jraska.github.client.users.ui
 
 import android.view.View
 import com.airbnb.epoxy.EpoxyModel
-import com.jraska.github.client.R
+import com.jraska.github.client.users.R
 import com.jraska.github.client.users.RepoHeader
-import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.*
+import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_description
+import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_forks
+import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_stars
+import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_title
 
 internal class RepoHeaderModel(
   private val repo: RepoHeader,

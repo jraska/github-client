@@ -1,4 +1,4 @@
-package com.jraska.github.client.ui
+package com.jraska.github.client.users.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -8,13 +8,14 @@ import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.SimpleEpoxyAdapter
-import com.jraska.github.client.R
 import com.jraska.github.client.core.android.BaseActivity
+import com.jraska.github.client.core.android.viewModel
+import com.jraska.github.client.users.R
 import com.jraska.github.client.users.User
 import com.jraska.github.client.users.UsersViewModel
-import com.jraska.github.client.core.android.viewModel
-import kotlinx.android.synthetic.main.activity_users_list.*
-import kotlinx.android.synthetic.main.content_users_list.*
+import kotlinx.android.synthetic.main.activity_users_list.toolbar
+import kotlinx.android.synthetic.main.content_users_list.users_recycler
+import kotlinx.android.synthetic.main.content_users_list.users_refresh_swipe_layout
 
 class UsersActivity : BaseActivity(), UserModel.UserListener {
   private val usersViewModel: UsersViewModel by lazy { viewModel(UsersViewModel::class.java) }

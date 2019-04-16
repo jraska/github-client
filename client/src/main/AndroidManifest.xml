@@ -15,11 +15,10 @@
     android:theme="@style/AppTheme.NoActionBar"
     tools:ignore="GoogleAppIndexingWarning">
     <activity
-      android:name=".ui.UsersActivity"
+      android:name=".users.ui.UsersActivity"
       android:label="@string/app_name">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
-
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
 
@@ -27,8 +26,6 @@
         android:name="android.app.shortcuts"
         android:resource="@xml/shortcuts"/>
     </activity>
-    <activity android:name=".ui.UserDetailActivity"/>
-    <activity android:name=".ui.RepoDetailActivity"/>
     <activity android:name=".ui.ShortcutHandlerActivity"/>
   </application>
 
