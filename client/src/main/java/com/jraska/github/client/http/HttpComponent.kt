@@ -15,7 +15,7 @@ interface HttpComponent {
   interface Builder {
     fun build(): HttpComponent
 
-    @BindsInstance fun cacheDir(cacheDir: File) : Builder
-    @BindsInstance fun logger(logger: HttpLoggingInterceptor.Logger) : Builder
+    @BindsInstance fun cacheDir(cacheDir: File): Builder
+    @BindsInstance fun logger(logger: HttpLoggingInterceptor.Logger): Builder
   }
 }

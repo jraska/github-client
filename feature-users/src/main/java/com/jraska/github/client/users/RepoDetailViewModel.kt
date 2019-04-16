@@ -6,8 +6,8 @@ import com.jraska.github.client.Navigator
 import com.jraska.github.client.Urls
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.core.android.rx.RxLiveData
+import com.jraska.github.client.rx.AppSchedulers
 
 class RepoDetailViewModel constructor(
   private val usersRepository: UsersRepository,
@@ -53,7 +53,7 @@ class RepoDetailViewModel constructor(
 
   sealed class ViewState {
     object Loading : ViewState()
-    class Error(val error: Throwable): ViewState()
+    class Error(val error: Throwable) : ViewState()
     class ShowRepo(val repo: RepoDetail) : ViewState()
   }
 }

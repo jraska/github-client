@@ -28,7 +28,8 @@ object NavigationModule {
   @Provides
   fun bindDeepLinkLauncher(
     topActivityProvider: TopActivityProvider,
-    launchers: @JvmSuppressWildcards Set<LinkLauncher>): DeepLinkLauncher {
+    launchers: @JvmSuppressWildcards Set<LinkLauncher>
+  ): DeepLinkLauncher {
     return RealDeepLinkLauncher.create(topActivityProvider, launchers)
   }
 

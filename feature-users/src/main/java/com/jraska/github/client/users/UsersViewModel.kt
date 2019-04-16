@@ -7,8 +7,8 @@ import com.jraska.github.client.Navigator
 import com.jraska.github.client.Urls
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.core.android.rx.RxLiveData
+import com.jraska.github.client.rx.AppSchedulers
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
 import io.reactivex.SingleOnSubscribe
@@ -81,7 +81,7 @@ class UsersViewModel internal constructor(
 
   sealed class ViewState {
     object Loading : ViewState()
-    class Error(val error: Throwable): ViewState()
+    class Error(val error: Throwable) : ViewState()
     class ShowUsers(val users: List<User>) : ViewState()
   }
 
