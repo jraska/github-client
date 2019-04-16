@@ -5,11 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.SimpleEpoxyAdapter
-import com.jraska.github.client.R
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
-import kotlinx.android.synthetic.main.activity_settings.*
-import kotlinx.android.synthetic.main.content_settings.*
+import kotlinx.android.synthetic.main.activity_settings.toolbar
+import kotlinx.android.synthetic.main.content_settings.settings_recycler
 
 class SettingsActivity : BaseActivity(), PurchaseReportModel.PurchaseListener {
   private val viewModel: SettingsViewModel by lazy { viewModel(SettingsViewModel::class.java) }

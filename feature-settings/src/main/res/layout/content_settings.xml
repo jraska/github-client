@@ -10,7 +10,7 @@
   android:paddingLeft="@dimen/activity_horizontal_margin"
   android:paddingRight="@dimen/activity_horizontal_margin"
   app:layout_behavior="@string/appbar_scrolling_view_behavior"
-  tools:context=".settings.SettingsActivity"
+  tools:context=".SettingsActivity"
   tools:showIn="@layout/activity_settings">
 
 </androidx.recyclerview.widget.RecyclerView>

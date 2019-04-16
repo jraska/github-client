@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
   compileSdkVersion 28
@@ -17,6 +18,10 @@ android {
 dependencies {
   api project(':core')
   api project(':core-android')
+
+  api 'com.airbnb.android:epoxy:3.3.0'
+  api 'com.jraska:console:1.0.0'
+  api 'com.jraska:console-timber-tree:1.0.0'
 
   implementation 'com.google.dagger:dagger:2.21'
   kapt 'com.google.dagger:dagger-compiler:2.21'

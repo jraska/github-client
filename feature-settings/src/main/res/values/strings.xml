@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="settings_button_purchase">Purchase</string>
+  <string name="dollar_sign">$</string>
+  <string name="settings_purchase_value_hint">Value</string>
+</resources>

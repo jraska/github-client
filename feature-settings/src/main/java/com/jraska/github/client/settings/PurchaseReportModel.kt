@@ -2,8 +2,8 @@ package com.jraska.github.client.settings
 
 import android.view.View
 import com.airbnb.epoxy.EpoxyModel
-import com.jraska.github.client.R
-import kotlinx.android.synthetic.main.item_row_purchase.view.*
+import kotlinx.android.synthetic.main.item_row_purchase.view.settings_purchase_input
+import kotlinx.android.synthetic.main.item_row_purchase.view.settings_purchase_submit_button
 
 internal class PurchaseReportModel(private val listener: PurchaseListener)
   : EpoxyModel<View>() {

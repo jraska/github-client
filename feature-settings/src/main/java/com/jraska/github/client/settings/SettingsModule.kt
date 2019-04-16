@@ -3,6 +3,7 @@ package com.jraska.github.client.settings
 import android.app.Activity
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.core.android.LinkLauncher
+import com.jraska.github.client.core.android.OnAppCreate
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
@@ -18,6 +19,13 @@ object SettingsModule {
   @ClassKey(SettingsViewModel::class)
   fun provideUserDetailModel(viewModel: SettingsViewModel): ViewModel {
     return viewModel
+  }
+
+  @JvmStatic
+  @Provides
+  @IntoSet
+  fun consoleLoggingSetup(): OnAppCreate {
+    return SetupConsoleLogging()
   }
 
   @JvmStatic

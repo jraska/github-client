@@ -12,12 +12,11 @@
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
     android:supportsRtl="true"
-    android:theme="@style/AppTheme"
+    android:theme="@style/AppTheme.NoActionBar"
     tools:ignore="GoogleAppIndexingWarning">
     <activity
       android:name=".ui.UsersActivity"
-      android:label="@string/app_name"
-      android:theme="@style/AppTheme.NoActionBar">
+      android:label="@string/app_name">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -28,17 +27,9 @@
         android:name="android.app.shortcuts"
         android:resource="@xml/shortcuts"/>
     </activity>
-    <activity
-      android:name=".ui.UserDetailActivity"
-      android:theme="@style/AppTheme.NoActionBar"/>
-    <activity
-      android:name=".ui.RepoDetailActivity"
-      android:theme="@style/AppTheme.NoActionBar"/>
-
+    <activity android:name=".ui.UserDetailActivity"/>
+    <activity android:name=".ui.RepoDetailActivity"/>
     <activity android:name=".ui.ShortcutHandlerActivity"/>
-    <activity
-      android:name=".settings.SettingsActivity"
-      android:theme="@style/AppTheme.NoActionBar"/>
   </application>
 
 </manifest>
