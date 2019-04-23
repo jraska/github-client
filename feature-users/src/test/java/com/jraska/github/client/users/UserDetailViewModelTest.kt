@@ -1,7 +1,6 @@
 package com.jraska.github.client.users
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.jraska.github.client.FakeConfig
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.rx.AppSchedulers
@@ -33,7 +32,7 @@ class UserDetailViewModelTest {
     val detailObservable = Observable.just(testDetail())
     `when`(usersRepository.getUserDetail("someLogin", 3)).thenReturn(detailObservable)
     `when`(usersRepository.getUserDetail("different", 3)).thenReturn(detailObservable)
-    val config = FakeConfig.create(mapOf("user_detail_section_size" to 3L))
+    val config = com.jraska.github.client.FakeConfig.create(mapOf("user_detail_section_size" to 3L))
 
     viewModel = UserDetailViewModel(usersRepository,
       trampoline(), mock(Navigator::class.java), EventAnalytics.EMPTY, config)

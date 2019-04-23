@@ -1,0 +1,9 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    api project(':core')
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"

@@ -1,6 +1,9 @@
-package com.jraska.github.client.time
+package com.jraska.github.client
 
-class TestTimeProvider @JvmOverloads constructor(private var elapsed: Long = 0) : TimeProvider {
+import com.jraska.github.client.time.TimeProvider
+
+class TestTimeProvider @JvmOverloads constructor(private var elapsed: Long = 0) :
+  TimeProvider {
 
   override fun elapsed(): Long {
     return elapsed

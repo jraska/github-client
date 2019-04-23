@@ -102,6 +102,7 @@ dependencies {
   androidTestImplementation 'org.mockito:mockito-android:2.23.4'
   androidTestImplementation 'com.airbnb.okreplay:okreplay:1.4.0'
   androidTestImplementation 'com.airbnb.okreplay:espresso:1.4.0'
+  androidTestImplementation project(':core-testing')
 }
 
 apply plugin: 'com.google.gms.google-services'
