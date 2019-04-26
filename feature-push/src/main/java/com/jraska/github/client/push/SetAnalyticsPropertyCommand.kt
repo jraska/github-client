@@ -3,7 +3,7 @@ package com.jraska.github.client.push
 import com.jraska.github.client.analytics.AnalyticsProperty
 import javax.inject.Inject
 
-internal class SetAnalyticsPropertyPushCommand @Inject constructor(
+internal class SetAnalyticsPropertyCommand @Inject constructor(
   private val analyticsProperty: AnalyticsProperty
 ) : PushActionCommand {
   override fun execute(action: PushAction): Boolean {

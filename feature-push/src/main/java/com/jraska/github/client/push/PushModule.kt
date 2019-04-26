@@ -53,7 +53,7 @@ object PushModule {
   @Provides
   @IntoMap
   @StringKey("set_analytics_property")
-  internal fun setAnalyticsProperty(command: SetAnalyticsPropertyPushCommand): PushActionCommand {
+  internal fun setAnalyticsProperty(command: SetAnalyticsPropertyCommand): PushActionCommand {
     return command
   }
 
@@ -61,7 +61,7 @@ object PushModule {
   @Provides
   @IntoMap
   @StringKey("notification")
-  internal fun notificationCommand(command: ShowNotificationPushCommand): PushActionCommand {
+  internal fun notificationCommand(command: ShowNotificationCommand): PushActionCommand {
     return command
   }
 
@@ -69,7 +69,7 @@ object PushModule {
   @Provides
   @IntoMap
   @StringKey("launch_deep_link")
-  internal fun deepLinkCommand(command: LaunchDeepLinkPushCommand): PushActionCommand {
+  internal fun deepLinkCommand(command: LaunchDeepLinkCommand): PushActionCommand {
     return command
   }
 }

@@ -5,7 +5,7 @@ import com.jraska.github.client.logging.CrashReporter
 import okhttp3.HttpUrl
 import javax.inject.Inject
 
-internal class LaunchDeepLinkPushCommand @Inject constructor(
+internal class LaunchDeepLinkCommand @Inject constructor(
   private val deepLinkHandler: DeepLinkHandler,
   private val crashReporter: CrashReporter
 ) : PushActionCommand {

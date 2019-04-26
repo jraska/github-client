@@ -9,7 +9,7 @@ import androidx.core.app.NotificationCompat
 import com.jraska.github.client.core.android.UriHandlerActivity
 import javax.inject.Inject
 
-internal class ShowNotificationPushCommand @Inject constructor(
+internal class ShowNotificationCommand @Inject constructor(
   private val context: Context,
   private val notificationManager: NotificationManager
 ) : PushActionCommand {
