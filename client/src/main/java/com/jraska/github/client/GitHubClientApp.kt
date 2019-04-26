@@ -4,18 +4,18 @@ import android.app.Application
 import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.perf.metrics.AddTrace
+import com.jraska.github.client.core.android.HasServiceModelFactory
 import com.jraska.github.client.core.android.HasViewModelFactory
+import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.DaggerHttpComponent
 import com.jraska.github.client.http.HttpComponent
-import com.jraska.github.client.push.HasPushHandler
-import com.jraska.github.client.push.PushHandler
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.android.schedulers.AndroidSchedulers
 import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
 import java.io.File
 
-open class GitHubClientApp : Application(), HasViewModelFactory, HasPushHandler {
+open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModelFactory {
 
   private val appComponent: AppComponent by lazy { componentBuilder().build() }
 
@@ -23,8 +23,8 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasPushHandler 
     return appComponent.viewModelFactory()
   }
 
-  override fun pushHandler(): PushHandler {
-    return appComponent.pushHandler()
+  override fun serviceModelFactory(): ServiceModel.Factory {
+    return appComponent.serviceModelFactory()
   }
 
   @AddTrace(name = "App.onCreate")

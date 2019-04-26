@@ -2,11 +2,23 @@ package com.jraska.github.client.core.android
 
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.DeepLinkHandler
+import com.jraska.github.client.analytics.AnalyticsEvent
+import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.analytics.toAnalyticsString
 import okhttp3.HttpUrl
 import javax.inject.Inject
 
-class UriHandlerViewModel @Inject constructor(private val deepLinkHandler: DeepLinkHandler) : ViewModel() {
+class UriHandlerViewModel @Inject constructor(
+  private val deepLinkHandler: DeepLinkHandler,
+  private val eventAnalytics: EventAnalytics
+) : ViewModel() {
   fun handleDeepLink(deepLink: HttpUrl) {
-    deepLinkHandler.handleDeepLink(deepLink)
+    val success = deepLinkHandler.handleDeepLink(deepLink)
+
+    val event = AnalyticsEvent.builder("deep_link_received")
+      .addProperty("deep_link", deepLink.toAnalyticsString())
+      .addProperty("success", success)
+      .build()
+    eventAnalytics.report(event)
   }
 }

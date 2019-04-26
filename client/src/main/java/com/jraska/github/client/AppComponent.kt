@@ -6,9 +6,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.OnAppCreate
+import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.logging.CrashReporter
-import com.jraska.github.client.push.PushHandler
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.settings.SettingsModule
 import com.jraska.github.client.users.UsersModule
@@ -28,7 +28,7 @@ interface AppComponent {
 
   fun onAppCreateActions(): Set<OnAppCreate>
 
-  fun pushHandler(): PushHandler
+  fun serviceModelFactory(): ServiceModel.Factory
 
   fun viewModelFactory(): ViewModelProvider.Factory
 

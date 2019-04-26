@@ -3,5 +3,7 @@ package com.jraska.github.client
 import okhttp3.HttpUrl
 
 interface DeepLinkLauncher {
-    fun launch(deepLink: HttpUrl)
+
+  @Throws(IllegalArgumentException::class)
+  fun launch(deepLink: HttpUrl)
 }

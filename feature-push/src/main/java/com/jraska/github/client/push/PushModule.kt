@@ -1,8 +1,10 @@
 package com.jraska.github.client.push
 
 import com.jraska.github.client.core.android.OnAppCreate
+import com.jraska.github.client.core.android.ServiceModel
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import dagger.multibindings.StringKey
@@ -21,6 +23,14 @@ object PushModule {
   @IntoSet
   internal fun setupNotificationsOnCreate(notificationSetup: NotificationSetup): OnAppCreate {
     return notificationSetup
+  }
+
+  @JvmStatic
+  @Provides
+  @IntoMap
+  @ClassKey(PushHandleModel::class)
+  internal fun bindServiceModel(pushHandleModel: PushHandleModel): ServiceModel {
+    return pushHandleModel
   }
 
   @JvmStatic
@@ -52,6 +62,14 @@ object PushModule {
   @IntoMap
   @StringKey("notification")
   internal fun notificationCommand(command: ShowNotificationPushCommand): PushActionCommand {
+    return command
+  }
+
+  @JvmStatic
+  @Provides
+  @IntoMap
+  @StringKey("launch_deep_link")
+  internal fun deepLinkCommand(command: LaunchDeepLinkPushCommand): PushActionCommand {
     return command
   }
 }

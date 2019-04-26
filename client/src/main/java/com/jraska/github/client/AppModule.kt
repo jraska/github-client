@@ -10,6 +10,8 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.OnAppCreate
+import com.jraska.github.client.core.android.ServiceModel
+import com.jraska.github.client.core.android.ServiceModelFactory
 import com.jraska.github.client.core.android.TopActivityProvider
 import com.jraska.github.client.core.android.ViewModelFactory
 import com.jraska.github.client.rx.AppSchedulers
@@ -44,8 +46,16 @@ object AppModule {
   }
 
   @Provides
+  @PerApp
   @JvmStatic
   internal fun provideViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory {
+    return factory
+  }
+
+  @Provides
+  @PerApp
+  @JvmStatic
+  internal fun provideServiceModelFactory(factory: ServiceModelFactory): ServiceModel.Factory {
     return factory
   }
 
@@ -64,8 +74,10 @@ object AppModule {
   @Provides
   @PerApp
   fun schedulers(): AppSchedulers {
-    return AppSchedulers(AndroidSchedulers.mainThread(),
-      Schedulers.io(), Schedulers.computation())
+    return AppSchedulers(
+      AndroidSchedulers.mainThread(),
+      Schedulers.io(), Schedulers.computation()
+    )
   }
 
   @JvmStatic
