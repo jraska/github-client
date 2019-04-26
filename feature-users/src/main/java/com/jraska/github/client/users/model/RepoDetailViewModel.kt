@@ -8,8 +8,9 @@ import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.rx.RxLiveData
 import com.jraska.github.client.rx.AppSchedulers
+import javax.inject.Inject
 
-internal class RepoDetailViewModel constructor(
+internal class RepoDetailViewModel @Inject constructor(
   private val usersRepository: UsersRepository,
   private val appSchedulers: AppSchedulers,
   private val navigator: Navigator,
@@ -31,8 +32,8 @@ internal class RepoDetailViewModel constructor(
   private fun newRepoDetailLiveData(fullRepoName: String): LiveData<ViewState> {
     val parts = fullRepoName.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
     val stateObservable = usersRepository.getRepoDetail(parts[0], parts[1])
-      .subscribeOn(appSchedulers.io())
-      .observeOn(appSchedulers.mainThread())
+      .subscribeOn(appSchedulers.io)
+      .observeOn(appSchedulers.mainThread)
       .map { detail -> ViewState.ShowRepo(detail) as ViewState }
       .onErrorReturn { ViewState.Error(it) }
       .startWith(ViewState.Loading)

@@ -1,7 +1,6 @@
 package com.jraska.github.client
 
 import androidx.lifecycle.ViewModel
-import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.core.android.RealDeepLinkLauncher
 import com.jraska.github.client.core.android.TopActivityProvider
@@ -39,18 +38,15 @@ object NavigationModule {
   @Provides
   @IntoMap
   @ClassKey(UriHandlerViewModel::class)
-  fun uriHandlerViewModel(deepLinkHandler: DeepLinkHandler): ViewModel {
-    return UriHandlerViewModel(deepLinkHandler)
+  fun uriHandlerViewModel(viewModel: UriHandlerViewModel): ViewModel {
+    return viewModel
   }
 
   @JvmStatic
   @Provides
   @IntoMap
   @ClassKey(ShortcutHandlerModel::class)
-  fun uriShortcutViewModel(
-    deepLinkHandler: DeepLinkLauncher,
-    eventAnalytics: EventAnalytics
-  ): ViewModel {
-    return ShortcutHandlerModel(deepLinkHandler, eventAnalytics)
+  fun uriShortcutViewModel(viewModel: ShortcutHandlerModel): ViewModel {
+    return viewModel
   }
 }

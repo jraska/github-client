@@ -1,8 +1,8 @@
 package com.jraska.github.client.users
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.jraska.github.client.Fakes
 import com.jraska.github.client.Navigator
-import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
 import com.jraska.github.client.users.model.GitHubUser
 import com.jraska.github.client.users.model.GitHubUserDetailApi
@@ -30,10 +30,10 @@ class UsersViewModelTest {
   fun setUp() {
     MockitoAnnotations.initMocks(this)
 
-    Mockito.`when`(usersApi.getUsers(0)).thenReturn(Single.fromCallable({ users }))
+    Mockito.`when`(usersApi.getUsers(0)).thenReturn(Single.fromCallable { users })
 
     val usersRepository = GitHubApiUsersRepository(usersApi, detailApi)
-    viewModel = UsersViewModel(usersRepository, trampoline(), navigator, EventAnalytics.EMPTY)
+    viewModel = UsersViewModel(usersRepository, Fakes.trampoline(), navigator, Fakes.emptyAnalytics())
   }
 
   @Test

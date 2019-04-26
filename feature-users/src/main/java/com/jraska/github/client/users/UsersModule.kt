@@ -2,19 +2,14 @@ package com.jraska.github.client.users
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel
-import com.jraska.github.client.Config
-import com.jraska.github.client.Navigator
 import com.jraska.github.client.PerApp
-import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.LinkLauncher
-import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
 import com.jraska.github.client.users.model.GitHubUserDetailApi
 import com.jraska.github.client.users.model.GitHubUsersApi
 import com.jraska.github.client.users.model.RepoDetailViewModel
 import com.jraska.github.client.users.model.UsersRepository
 import com.jraska.github.client.users.ui.UsersActivity
-
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
@@ -39,40 +34,24 @@ object UsersModule {
   @Provides
   @IntoMap
   @ClassKey(UsersViewModel::class)
-  internal fun provideUsersModel(
-    repository: UsersRepository,
-    schedulers: AppSchedulers,
-    navigator: Navigator,
-    analytics: EventAnalytics
-  ): ViewModel {
-    return UsersViewModel(repository, schedulers, navigator, analytics)
+  internal fun provideUsersModel(viewModel: UsersViewModel): ViewModel {
+    return viewModel
   }
 
   @JvmStatic
   @Provides
   @IntoMap
   @ClassKey(UserDetailViewModel::class)
-  internal fun provideUserDetailModel(
-    repository: UsersRepository,
-    schedulers: AppSchedulers,
-    navigator: Navigator,
-    analytics: EventAnalytics,
-    config: Config
-  ): ViewModel {
-    return UserDetailViewModel(repository, schedulers, navigator, analytics, config)
+  internal fun provideUserDetailModel(viewModel: UserDetailViewModel): ViewModel {
+    return viewModel
   }
 
   @JvmStatic
   @Provides
   @IntoMap
   @ClassKey(RepoDetailViewModel::class)
-  internal fun provideRepoDetailModel(
-    repository: UsersRepository,
-    schedulers: AppSchedulers,
-    navigator: Navigator,
-    analytics: EventAnalytics
-  ): ViewModel {
-    return RepoDetailViewModel(repository, schedulers, navigator, analytics)
+  internal fun provideRepoDetailModel(viewModel: RepoDetailViewModel): ViewModel {
+    return viewModel
   }
 
   @JvmStatic

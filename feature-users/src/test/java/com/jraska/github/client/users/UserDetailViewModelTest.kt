@@ -1,16 +1,14 @@
 package com.jraska.github.client.users
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.jraska.github.client.Fakes
 import com.jraska.github.client.Navigator
-import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.User
 import com.jraska.github.client.users.model.UserDetail
 import com.jraska.github.client.users.model.UserStats
 import com.jraska.github.client.users.model.UsersRepository
 import com.jraska.livedata.test
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -32,10 +30,12 @@ class UserDetailViewModelTest {
     val detailObservable = Observable.just(testDetail())
     `when`(usersRepository.getUserDetail("someLogin", 3)).thenReturn(detailObservable)
     `when`(usersRepository.getUserDetail("different", 3)).thenReturn(detailObservable)
-    val config = com.jraska.github.client.FakeConfig.create(mapOf("user_detail_section_size" to 3L))
+    val config = Fakes.config(mapOf("user_detail_section_size" to 3L))
 
-    viewModel = UserDetailViewModel(usersRepository,
-      trampoline(), mock(Navigator::class.java), EventAnalytics.EMPTY, config)
+    viewModel = UserDetailViewModel(
+      usersRepository, Fakes.trampoline(),
+      mock(Navigator::class.java), Fakes.emptyAnalytics(), config
+    )
   }
 
   @Test
@@ -67,9 +67,4 @@ class UserDetailViewModelTest {
       return UserDetail(user, stats, emptyList(), emptyList())
     }
   }
-}
-
-fun trampoline(): AppSchedulers {
-  return AppSchedulers(Schedulers.trampoline(), Schedulers.trampoline(),
-    Schedulers.trampoline())
 }

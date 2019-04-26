@@ -1,4 +1,4 @@
-package com.jraska.github.client.core.android
+package com.jraska.github.client.core.android.logging
 
 import android.util.Log
 import com.jraska.github.client.Config

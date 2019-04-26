@@ -7,8 +7,9 @@ import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 
 import okhttp3.HttpUrl
+import javax.inject.Inject
 
-class ShortcutHandlerModel(
+class ShortcutHandlerModel @Inject constructor(
   private val deepLinkLauncher: DeepLinkLauncher,
   private val eventAnalytics: EventAnalytics
 ) : ViewModel() {

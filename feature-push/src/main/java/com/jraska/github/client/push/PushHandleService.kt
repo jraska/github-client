@@ -14,7 +14,7 @@ internal class PushHandleService : FirebaseMessagingService() {
     pushHandler().onTokenRefresh()
   }
 
-  fun pushHandler(): PushHandler {
+  private fun pushHandler(): PushHandler {
     val app = application as HasPushHandler
     return app.pushHandler()
   }

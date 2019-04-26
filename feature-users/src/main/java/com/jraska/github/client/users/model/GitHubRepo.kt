@@ -18,7 +18,7 @@ internal class GitHubRepo {
   var owner: GitHubUser? = null
   @SerializedName("private")
   @Expose
-  var _private: Boolean? = null
+  var private: Boolean? = null
   @SerializedName("html_url")
   @Expose
   var htmlUrl: String? = null

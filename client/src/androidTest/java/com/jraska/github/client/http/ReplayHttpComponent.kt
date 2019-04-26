@@ -73,7 +73,7 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
 
       REPLAY_INTERCEPTOR.interceptorsToRegister().forEach { builder.addInterceptor(it) }
 
-      builder.addNetworkInterceptor { _ -> throw UnsupportedOperationException(NETWORK_ERROR_MESSAGE) }
+      builder.addNetworkInterceptor { throw UnsupportedOperationException(NETWORK_ERROR_MESSAGE) }
       return builder.build()
     }
   }

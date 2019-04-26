@@ -1,1 +1,1 @@
-include ':client', ':core', ':feature-users', ':core-android', ':feature-push', ':feature-settings', ':core-testing'
+include ':client', ':core', ':core-testing', ':core-android', ':feature-users', ':feature-push', ':feature-settings'

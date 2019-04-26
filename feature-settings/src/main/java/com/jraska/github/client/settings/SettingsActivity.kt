@@ -10,7 +10,7 @@ import com.jraska.github.client.core.android.viewModel
 import kotlinx.android.synthetic.main.activity_settings.toolbar
 import kotlinx.android.synthetic.main.content_settings.settings_recycler
 
-internal class SettingsActivity : BaseActivity(), PurchaseReportModel.PurchaseListener {
+internal class SettingsActivity : BaseActivity() {
   private val viewModel: SettingsViewModel by lazy { viewModel(SettingsViewModel::class.java) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,12 +20,12 @@ internal class SettingsActivity : BaseActivity(), PurchaseReportModel.PurchaseLi
 
     settings_recycler.layoutManager = LinearLayoutManager(this)
     val adapter = SimpleEpoxyAdapter()
-    adapter.addModels(PurchaseReportModel(this))
+    adapter.addModels(PurchaseReportModel(this::onPurchaseButtonClicked))
     adapter.addModels(ConsoleModel())
     settings_recycler.adapter = adapter
   }
 
-  override fun onPurchaseButtonClicked(value: String) {
+  private fun onPurchaseButtonClicked(value: String) {
     viewModel.onPurchaseSubmitted(value)
   }
 

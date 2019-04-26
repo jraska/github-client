@@ -7,8 +7,7 @@ import javax.inject.Provider
 
 class ViewModelFactory @Inject internal constructor(
   private val providersMap: Map<Class<*>, @JvmSuppressWildcards Provider<ViewModel>>
-)
-  : ViewModelProvider.Factory {
+) : ViewModelProvider.Factory {
 
   @Suppress("UNCHECKED_CAST")
   override fun <T : ViewModel> create(aClass: Class<T>): T {

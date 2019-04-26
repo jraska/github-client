@@ -2,8 +2,9 @@ package com.jraska.github.client.push
 
 import com.jraska.github.client.Config
 import com.jraska.github.client.analytics.AnalyticsProperty
+import javax.inject.Inject
 
-internal class ConfigAsPropertyCommand constructor(
+internal class ConfigAsPropertyCommand @Inject constructor(
   private val config: Config,
   private val analyticsProperty: AnalyticsProperty
 ) : PushActionCommand {

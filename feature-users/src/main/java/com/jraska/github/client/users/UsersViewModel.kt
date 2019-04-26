@@ -15,8 +15,9 @@ import io.reactivex.Single
 import io.reactivex.SingleEmitter
 import io.reactivex.SingleOnSubscribe
 import java.util.concurrent.atomic.AtomicBoolean
+import javax.inject.Inject
 
-internal class UsersViewModel internal constructor(
+internal class UsersViewModel @Inject constructor(
   private val usersRepository: UsersRepository,
   private val appSchedulers: AppSchedulers,
   private val navigator: Navigator,
@@ -48,8 +49,8 @@ internal class UsersViewModel internal constructor(
 
   private fun usersInternal(): Single<List<User>> {
     val single = usersRepository.getUsers(0)
-      .subscribeOn(appSchedulers.io())
-      .observeOn(appSchedulers.mainThread())
+      .subscribeOn(appSchedulers.io)
+      .observeOn(appSchedulers.mainThread)
 
     refreshingCache = OnSubscribeRefreshingCache(single)
     return Single.create(refreshingCache!!)

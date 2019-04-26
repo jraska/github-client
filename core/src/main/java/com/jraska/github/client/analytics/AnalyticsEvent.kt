@@ -2,7 +2,10 @@ package com.jraska.github.client.analytics
 
 import java.util.Collections
 
-class AnalyticsEvent private constructor(val name: String, val properties: Map<String, Any>) {
+class AnalyticsEvent private constructor(
+  val name: String,
+  val properties: Map<String, Any>
+) {
 
   class Builder internal constructor(private val name: String) {
     private val properties = HashMap<String, Any>()

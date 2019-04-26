@@ -3,23 +3,13 @@ package com.jraska.github.client.push
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
+import android.os.Bundle
 import com.google.firebase.messaging.RemoteMessage
 import com.jraska.github.client.core.android.OnAppCreate
 import javax.inject.Inject
 
-internal class PushIntentObserver(private val pushHandler: PushHandler) : LifecycleObserver {
-
-  @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-  fun onCreate(owner: LifecycleOwner) {
-    if (owner !is Activity) {
-      return
-    }
-
-    val activity = owner as Activity
+internal class PushIntentObserver(private val pushHandler: PushHandler) {
+  fun onCreate(activity: Activity) {
     val intent = activity.intent
     if (isPush(intent)) {
       val message = RemoteMessage(intent.extras!!)
@@ -58,5 +48,24 @@ internal class PushIntentObserver(private val pushHandler: PushHandler) : Lifecy
     override fun onCreate(app: Application) {
       app.registerActivityLifecycleCallbacks(PushCallbacks(PushIntentObserver(pushHandler)))
     }
+  }
+
+  internal class PushCallbacks(private val intentObserver: PushIntentObserver) : Application.ActivityLifecycleCallbacks {
+
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+      intentObserver.onCreate(activity)
+    }
+
+    override fun onActivityStarted(activity: Activity) {}
+
+    override fun onActivityResumed(activity: Activity) {}
+
+    override fun onActivityPaused(activity: Activity) {}
+
+    override fun onActivityStopped(activity: Activity) {}
+
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
+
+    override fun onActivityDestroyed(activity: Activity) {}
   }
 }

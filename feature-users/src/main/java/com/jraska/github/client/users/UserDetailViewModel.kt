@@ -12,8 +12,9 @@ import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.RepoHeader
 import com.jraska.github.client.users.model.UserDetail
 import com.jraska.github.client.users.model.UsersRepository
+import javax.inject.Inject
 
-internal class UserDetailViewModel internal constructor(
+internal class UserDetailViewModel @Inject constructor(
   private val usersRepository: UsersRepository,
   private val schedulers: AppSchedulers,
   private val navigator: Navigator,
@@ -40,8 +41,8 @@ internal class UserDetailViewModel internal constructor(
     }
 
     val viewStateObservable = usersRepository.getUserDetail(login, reposInSection)
-      .subscribeOn(schedulers.io())
-      .observeOn(schedulers.mainThread())
+      .subscribeOn(schedulers.io)
+      .observeOn(schedulers.mainThread)
       .map { userDetail -> ViewState.DisplayUser(userDetail) as ViewState }
       .onErrorReturn { ViewState.Error(it) }
       .startWith(ViewState.Loading)

@@ -11,9 +11,9 @@ import com.airbnb.epoxy.SimpleEpoxyModel
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 import com.jraska.github.client.users.R
+import com.jraska.github.client.users.UserDetailViewModel
 import com.jraska.github.client.users.model.RepoHeader
 import com.jraska.github.client.users.model.UserDetail
-import com.jraska.github.client.users.UserDetailViewModel
 import kotlinx.android.synthetic.main.activity_user_detail.toolbar
 import kotlinx.android.synthetic.main.activity_user_detail.user_detail_avatar
 import kotlinx.android.synthetic.main.activity_user_detail.user_detail_github_fab
@@ -63,11 +63,11 @@ internal class UserDetailActivity : BaseActivity() {
     val models = ArrayList<EpoxyModel<*>>()
     models.add(UserHeaderModel(userDetail.basicStats))
 
-    if (!userDetail.popularRepos.isEmpty()) {
+    if (userDetail.popularRepos.isNotEmpty()) {
       models.add(ReposSectionModel(getString(R.string.repos_popular), userDetail.popularRepos, this::onRepoClicked))
     }
 
-    if (!userDetail.contributedRepos.isEmpty()) {
+    if (userDetail.contributedRepos.isNotEmpty()) {
       models.add(
         ReposSectionModel(
           getString(R.string.repos_contributed),
