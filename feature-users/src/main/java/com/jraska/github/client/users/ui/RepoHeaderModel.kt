@@ -25,5 +25,4 @@ internal class RepoHeaderModel(
 
     itemView.setOnClickListener { repoListener(repo) }
   }
-
 }
