@@ -38,7 +38,7 @@ class TopActivityProvider : Provider<Activity> {
     return topActivity!!
   }
 
-  class OnCreateSetup @Inject constructor(private val topActivityProvider: TopActivityProvider) : OnAppCreate {
+  class RegisterCallbacks @Inject constructor(private val topActivityProvider: TopActivityProvider) : OnAppCreate {
     override fun onCreate(app: Application) {
       app.registerActivityLifecycleCallbacks(topActivityProvider.callbacks)
     }

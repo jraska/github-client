@@ -2,6 +2,7 @@ package com.jraska.github.client.push
 
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.common.BooleanResult
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Provider
@@ -15,9 +16,9 @@ class PushHandler @Inject internal constructor(
   internal fun handlePush(action: PushAction) {
     Timber.v("Push received action: %s", action.name)
 
-    val handled = handleInternal(action)
+    val result = handleInternal(action)
 
-    if (handled) {
+    if (result == BooleanResult.SUCCESS) {
       val pushHandled = AnalyticsEvent.builder("push_handled")
         .addProperty("push_action", action.name)
         .build()
@@ -30,8 +31,8 @@ class PushHandler @Inject internal constructor(
     }
   }
 
-  private fun handleInternal(action: PushAction): Boolean {
-    val actionCommand = pushCommands[action.name] ?: return false
+  private fun handleInternal(action: PushAction): BooleanResult {
+    val actionCommand = pushCommands[action.name] ?: return BooleanResult.FAILURE
 
     return actionCommand.get().execute(action)
   }

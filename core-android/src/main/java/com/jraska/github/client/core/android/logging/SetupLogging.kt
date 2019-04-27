@@ -1,9 +1,8 @@
-package com.jraska.github.client
+package com.jraska.github.client.core.android.logging
 
 import android.app.Application
-import com.jraska.github.client.core.android.logging.AnalyticsLoggingTree
+import com.jraska.github.client.core.android.BuildConfig
 import com.jraska.github.client.core.android.OnAppCreate
-import com.jraska.github.client.core.android.logging.ErrorReportTree
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Provider

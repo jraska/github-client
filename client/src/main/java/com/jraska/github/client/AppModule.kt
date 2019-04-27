@@ -14,6 +14,7 @@ import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.core.android.ServiceModelFactory
 import com.jraska.github.client.core.android.TopActivityProvider
 import com.jraska.github.client.core.android.ViewModelFactory
+import com.jraska.github.client.core.android.logging.SetupLogging
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
@@ -35,7 +36,7 @@ object AppModule {
   @Provides
   @IntoSet
   @JvmStatic
-  fun topActivityOnCreate(setup: TopActivityProvider.OnCreateSetup): OnAppCreate {
+  fun topActivityOnCreate(setup: TopActivityProvider.RegisterCallbacks): OnAppCreate {
     return setup
   }
 

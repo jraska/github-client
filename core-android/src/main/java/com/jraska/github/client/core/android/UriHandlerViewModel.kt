@@ -5,6 +5,7 @@ import com.jraska.github.client.DeepLinkHandler
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.analytics.toAnalyticsString
+import com.jraska.github.client.common.toBoolean
 import okhttp3.HttpUrl
 import javax.inject.Inject
 
@@ -17,7 +18,7 @@ class UriHandlerViewModel @Inject constructor(
 
     val event = AnalyticsEvent.builder("deep_link_received")
       .addProperty("deep_link", deepLink.toAnalyticsString())
-      .addProperty("success", success)
+      .addProperty("success", success.toBoolean())
       .build()
     eventAnalytics.report(event)
   }
