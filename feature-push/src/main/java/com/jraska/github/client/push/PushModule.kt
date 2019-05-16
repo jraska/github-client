@@ -1,5 +1,7 @@
 package com.jraska.github.client.push
 
+import com.google.firebase.database.FirebaseDatabase
+import com.jraska.github.client.PerApp
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
 import dagger.Module
@@ -71,5 +73,12 @@ object PushModule {
   @StringKey("launch_deep_link")
   internal fun deepLinkCommand(command: LaunchDeepLinkCommand): PushActionCommand {
     return command
+  }
+
+  @JvmStatic
+  @Provides
+  @PerApp
+  internal fun firebaseDatabase(): FirebaseDatabase {
+    return FirebaseDatabase.getInstance()
   }
 }

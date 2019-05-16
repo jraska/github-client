@@ -1,6 +1,5 @@
 package com.jraska.github.client
 
-import com.google.firebase.database.FirebaseDatabase
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.logging.CrashReporter
@@ -17,6 +16,4 @@ interface CoreComponent {
   fun analyticsProperty(): AnalyticsProperty
 
   fun analytics(): EventAnalytics
-
-  fun firebaseDatabase(): FirebaseDatabase
 }

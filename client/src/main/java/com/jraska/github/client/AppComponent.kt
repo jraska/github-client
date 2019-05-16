@@ -2,7 +2,6 @@ package com.jraska.github.client
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.database.FirebaseDatabase
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.OnAppCreate
@@ -71,10 +70,5 @@ class CoreComponentModule(private val coreComponent: CoreComponent) {
   @Provides
   fun analytics(): EventAnalytics {
     return coreComponent.analytics()
-  }
-
-  @Provides
-  fun firebaseDatabase(): FirebaseDatabase {
-    return coreComponent.firebaseDatabase()
   }
 }
