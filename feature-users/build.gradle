@@ -19,17 +19,17 @@ dependencies {
   api project(':core')
   api project(':core-android')
 
-  kapt 'com.google.dagger:dagger-compiler:2.21'
-  api 'com.google.dagger:dagger:2.21'
+  kapt 'com.google.dagger:dagger-compiler:2.22.1'
+  api 'com.google.dagger:dagger:2.22.1'
 
   api 'com.squareup.retrofit2:retrofit:2.5.0'
   api 'com.squareup.retrofit2:converter-gson:2.5.0'
   api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
   api 'com.google.code.gson:gson:2.8.5'
-  api 'com.squareup.okhttp3:logging-interceptor:3.13.1'
+  api 'com.squareup.okhttp3:logging-interceptor:3.14.1'
 
-  implementation 'com.airbnb.android:epoxy:3.3.0'
-  implementation 'com.facebook.fresco:drawee:1.11.0'
+  implementation 'com.airbnb.android:epoxy:3.5.0'
+  implementation 'com.facebook.fresco:drawee:1.13.0'
 
   testImplementation 'com.jraska.livedata:testing:1.1.0'
   testImplementation 'com.jraska.livedata:testing-ktx:1.1.0'

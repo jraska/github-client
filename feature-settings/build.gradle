@@ -19,12 +19,12 @@ dependencies {
   api project(':core')
   api project(':core-android')
 
-  api 'com.airbnb.android:epoxy:3.3.0'
+  api 'com.airbnb.android:epoxy:3.5.0'
   api 'com.jraska:console:1.0.0'
   api 'com.jraska:console-timber-tree:1.0.0'
 
-  implementation 'com.google.dagger:dagger:2.21'
-  kapt 'com.google.dagger:dagger-compiler:2.21'
+  implementation 'com.google.dagger:dagger:2.22.1'
+  kapt 'com.google.dagger:dagger-compiler:2.22.1'
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.assertj:assertj-core:3.11.1'

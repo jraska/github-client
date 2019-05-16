@@ -18,11 +18,11 @@ dependencies {
   api project(':core')
   api project(':core-android')
 
-  api 'com.google.firebase:firebase-messaging:17.6.0'
-  api 'com.google.firebase:firebase-database:16.1.0'
+  api 'com.google.firebase:firebase-messaging:18.0.0'
+  api 'com.google.firebase:firebase-database:17.0.0'
 
-  implementation 'com.google.dagger:dagger:2.21'
-  kapt 'com.google.dagger:dagger-compiler:2.21'
+  implementation 'com.google.dagger:dagger:2.22.1'
+  kapt 'com.google.dagger:dagger-compiler:2.22.1'
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.assertj:assertj-core:3.11.1'
