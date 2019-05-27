@@ -7,13 +7,14 @@ import com.jraska.github.client.Navigator
 import com.jraska.github.client.Urls
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.core.android.rx.RxLiveData
+import com.jraska.github.client.core.android.rx.toLiveData
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.User
 import com.jraska.github.client.users.model.UsersRepository
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
 import io.reactivex.SingleOnSubscribe
+import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
@@ -24,18 +25,20 @@ internal class UsersViewModel @Inject constructor(
   private val eventAnalytics: EventAnalytics
 ) : ViewModel() {
 
-  private val users: RxLiveData<ViewState>
-  private var refreshingCache: OnSubscribeRefreshingCache<List<User>>? = null
+  private val users: LiveData<ViewState>
+  private val refreshSignal = PublishSubject.create<Any>()
 
   init {
-
-    val viewStateObservable = usersInternal()
+    users = usersRepository.getUsers(0)
       .map { users -> ViewState.ShowUsers(users) as ViewState }
       .onErrorReturn { ViewState.Error(it) }
       .toObservable()
       .startWith(ViewState.Loading)
-
-    users = RxLiveData.from(viewStateObservable)
+      .repeatWhen { refreshSignal }
+      .cache()
+      .subscribeOn(appSchedulers.io)
+      .observeOn(appSchedulers.mainThread)
+      .toLiveData()
   }
 
   fun users(): LiveData<ViewState> {
@@ -43,17 +46,7 @@ internal class UsersViewModel @Inject constructor(
   }
 
   fun onRefresh() {
-    refreshingCache!!.invalidate()
-    users.resubscribe()
-  }
-
-  private fun usersInternal(): Single<List<User>> {
-    val single = usersRepository.getUsers(0)
-      .subscribeOn(appSchedulers.io)
-      .observeOn(appSchedulers.mainThread)
-
-    refreshingCache = OnSubscribeRefreshingCache(single)
-    return Single.create(refreshingCache!!)
+    refreshSignal.onNext(Unit)
   }
 
   fun onUserClicked(user: User) {

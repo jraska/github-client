@@ -7,7 +7,7 @@ import com.jraska.github.client.Navigator
 import com.jraska.github.client.Urls
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.core.android.rx.RxLiveData
+import com.jraska.github.client.core.android.rx.toLiveData
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.RepoHeader
 import com.jraska.github.client.users.model.UserDetail
@@ -22,10 +22,10 @@ internal class UserDetailViewModel @Inject constructor(
   private val config: Config
 ) : ViewModel() {
 
-  private val liveDataMapping = HashMap<String, RxLiveData<ViewState>>()
+  private val liveDataMapping = HashMap<String, LiveData<ViewState>>()
 
   fun userDetail(login: String): LiveData<ViewState> {
-    var liveData: RxLiveData<ViewState>? = liveDataMapping[login]
+    var liveData: LiveData<ViewState>? = liveDataMapping[login]
     if (liveData == null) {
       liveData = newUserLiveData(login)
       liveDataMapping[login] = liveData
@@ -34,7 +34,7 @@ internal class UserDetailViewModel @Inject constructor(
     return liveData
   }
 
-  private fun newUserLiveData(login: String): RxLiveData<ViewState> {
+  private fun newUserLiveData(login: String): LiveData<ViewState> {
     var reposInSection = config.getLong("user_detail_section_size").toInt()
     if (reposInSection <= 0) {
       reposInSection = 5
@@ -47,7 +47,7 @@ internal class UserDetailViewModel @Inject constructor(
       .onErrorReturn { ViewState.Error(it) }
       .startWith(ViewState.Loading)
 
-    return RxLiveData.from(viewStateObservable)
+    return viewStateObservable.toLiveData()
   }
 
   fun onUserGitHubIconClick(login: String) {
