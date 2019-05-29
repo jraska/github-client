@@ -6,6 +6,7 @@ import com.jraska.github.client.Navigator
 import com.jraska.github.client.Urls
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.common.lazyMap
 import com.jraska.github.client.core.android.rx.toLiveData
 import com.jraska.github.client.rx.AppSchedulers
 import javax.inject.Inject
@@ -17,28 +18,23 @@ internal class RepoDetailViewModel @Inject constructor(
   private val eventAnalytics: EventAnalytics
 ) : ViewModel() {
 
-  private val repoDetailLiveDataMap = HashMap<String, LiveData<ViewState>>()
-
-  fun repoDetail(fullRepoName: String): LiveData<ViewState> {
-    var liveData: LiveData<ViewState>? = repoDetailLiveDataMap[fullRepoName]
-    if (liveData == null) {
-      liveData = newRepoDetailLiveData(fullRepoName)
-      repoDetailLiveDataMap[fullRepoName] = liveData
-    }
-
-    return liveData
+  private val liveDataMap = lazyMap<String, LiveData<ViewState>> {
+    return@lazyMap createRepoDetailLiveData(it)
   }
 
-  private fun newRepoDetailLiveData(fullRepoName: String): LiveData<ViewState> {
+  fun repoDetail(fullRepoName: String): LiveData<ViewState> {
+    return liveDataMap.getValue(fullRepoName)
+  }
+
+  private fun createRepoDetailLiveData(fullRepoName: String): LiveData<ViewState> {
     val parts = fullRepoName.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-    val stateObservable = usersRepository.getRepoDetail(parts[0], parts[1])
+    return usersRepository.getRepoDetail(parts[0], parts[1])
       .subscribeOn(appSchedulers.io)
       .observeOn(appSchedulers.mainThread)
       .map { detail -> ViewState.ShowRepo(detail) as ViewState }
       .onErrorReturn { ViewState.Error(it) }
       .startWith(ViewState.Loading)
-
-    return stateObservable.toLiveData()
+      .toLiveData()
   }
 
   fun onFitHubIconClicked(fullRepoName: String) {

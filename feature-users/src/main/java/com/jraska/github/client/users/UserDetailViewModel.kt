@@ -7,6 +7,7 @@ import com.jraska.github.client.Navigator
 import com.jraska.github.client.Urls
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.common.lazyMap
 import com.jraska.github.client.core.android.rx.toLiveData
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.RepoHeader
@@ -22,32 +23,27 @@ internal class UserDetailViewModel @Inject constructor(
   private val config: Config
 ) : ViewModel() {
 
-  private val liveDataMapping = HashMap<String, LiveData<ViewState>>()
-
-  fun userDetail(login: String): LiveData<ViewState> {
-    var liveData: LiveData<ViewState>? = liveDataMapping[login]
-    if (liveData == null) {
-      liveData = newUserLiveData(login)
-      liveDataMapping[login] = liveData
-    }
-
-    return liveData
+  private val liveData = lazyMap<String, LiveData<ViewState>> {
+    return@lazyMap createUserLiveData(it)
   }
 
-  private fun newUserLiveData(login: String): LiveData<ViewState> {
+  fun userDetail(login: String): LiveData<ViewState> {
+    return liveData.getValue(login)
+  }
+
+  private fun createUserLiveData(login: String): LiveData<ViewState> {
     var reposInSection = config.getLong("user_detail_section_size").toInt()
     if (reposInSection <= 0) {
       reposInSection = 5
     }
 
-    val viewStateObservable = usersRepository.getUserDetail(login, reposInSection)
+    return usersRepository.getUserDetail(login, reposInSection)
       .subscribeOn(schedulers.io)
       .observeOn(schedulers.mainThread)
       .map { userDetail -> ViewState.DisplayUser(userDetail) as ViewState }
       .onErrorReturn { ViewState.Error(it) }
       .startWith(ViewState.Loading)
-
-    return viewStateObservable.toLiveData()
+      .toLiveData()
   }
 
   fun onUserGitHubIconClick(login: String) {
