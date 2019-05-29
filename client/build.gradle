@@ -61,6 +61,7 @@ dependencies {
   api project(':feature-push')
   api project(':feature-users')
   api project(':feature-settings')
+  api project(':feature-about')
 
   implementation 'androidx.appcompat:appcompat:1.1.0-alpha05'
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'

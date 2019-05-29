@@ -15,5 +15,9 @@ class Urls private constructor() {
     fun settings(): HttpUrl {
       return HttpUrl.get("https://github.com/settings")
     }
+
+    fun about(): HttpUrl {
+      return HttpUrl.get("https://github.com/about")
+    }
   }
 }

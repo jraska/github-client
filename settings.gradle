@@ -6,4 +6,5 @@ include ':client',
 
   ':feature-users',
   ':feature-push',
-  ':feature-settings'
+  ':feature-settings',
+  ':feature-about'
