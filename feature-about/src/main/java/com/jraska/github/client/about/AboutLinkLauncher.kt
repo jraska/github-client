@@ -4,7 +4,7 @@ import android.app.Activity
 import com.jraska.github.client.core.android.LinkLauncher
 import okhttp3.HttpUrl
 
-class AboutLinkLauncher : LinkLauncher {
+internal class AboutLinkLauncher : LinkLauncher {
   override fun launch(inActivity: Activity, deepLink: HttpUrl): LinkLauncher.Result {
     return if ("/about" == deepLink.encodedPath()) {
       AboutActivity.start(inActivity)

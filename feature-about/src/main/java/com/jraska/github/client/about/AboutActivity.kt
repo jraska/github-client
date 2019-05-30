@@ -3,9 +3,13 @@ package com.jraska.github.client.about
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.epoxy.EpoxyModel
+import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
+import kotlinx.android.synthetic.main.activity_about.toolbar
+import kotlinx.android.synthetic.main.content_about.about_recycler
 
 internal class AboutActivity : BaseActivity() {
 
@@ -13,18 +17,17 @@ internal class AboutActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_about)
+    setSupportActionBar(toolbar)
 
-    viewModel.viewState().observe(this, Observer { onNewState(it) })
-  }
-
-  private fun onNewState(state: AboutViewModel.ViewState) {
-    when (state) {
-      is AboutViewModel.ViewState.Data -> showData(state)
+    about_recycler.layoutManager = LinearLayoutManager(this)
+    about_recycler.adapter = SimpleEpoxyAdapter().apply {
+      addModels(createModels())
     }
   }
 
-  private fun showData(state: AboutViewModel.ViewState.Data) {
-
+  private fun createModels(): List<EpoxyModel<*>>? {
+    return listOf(DescriptionModel(viewModel::onProjectDescriptionClick))
   }
 
   companion object {

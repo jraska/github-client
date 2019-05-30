@@ -49,6 +49,14 @@ class UsersActivityFlowTest {
 
   @Test
   @OkReplay
+  fun whenAbout_thenOpensAbout() {
+    onView(withId(R.id.action_about)).perform(click())
+
+    onView(withText("by Josef Raska")).check(matches(isDisplayed()))
+  }
+
+  @Test
+  @OkReplay
   fun whenRefreshes_thenDisplaysOtherUsers() {
     onView(withText("defunkt")).check(matches(isDisplayed()))
     onView(withId(R.id.users_refresh_swipe_layout)).perform(swipeDown())
