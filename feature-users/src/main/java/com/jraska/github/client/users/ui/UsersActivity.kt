@@ -45,6 +45,11 @@ class UsersActivity : BaseActivity(), UserModel.UserListener {
         return true
       }
 
+      R.id.action_about -> {
+        usersViewModel.onAboutIconClicked()
+        return true
+      }
+
       else -> super.onOptionsItemSelected(item)
     }
   }

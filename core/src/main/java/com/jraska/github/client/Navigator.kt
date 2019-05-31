@@ -10,4 +10,6 @@ interface Navigator {
   fun startRepoDetail(fullPath: String)
 
   fun showSettings()
+
+  fun showAbout()
 }

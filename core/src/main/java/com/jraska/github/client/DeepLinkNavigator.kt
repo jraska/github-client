@@ -33,4 +33,8 @@ class DeepLinkNavigator(
   override fun showSettings() {
     launch(Urls.settings())
   }
+
+  override fun showAbout() {
+    launch(Urls.about())
+  }
 }

@@ -3,6 +3,7 @@ package com.jraska.github.client
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.database.FirebaseDatabase
+import com.jraska.github.client.about.AboutModule
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.OnAppCreate
@@ -21,7 +22,8 @@ import retrofit2.Retrofit
 @PerApp
 @Component(
   modules = [UsersModule::class, NavigationModule::class,
-    PushModule::class, AppModule::class, SettingsModule::class,
+    PushModule::class, AppModule::class,
+    SettingsModule::class, AboutModule::class,
     HttpComponentModule::class, CoreComponentModule::class]
 )
 interface AppComponent {

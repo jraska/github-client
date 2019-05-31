@@ -75,6 +75,12 @@ internal class UsersViewModel @Inject constructor(
     navigator.showSettings()
   }
 
+  fun onAboutIconClicked() {
+    eventAnalytics.report(AnalyticsEvent.create("open_about_from_list"))
+
+    navigator.showAbout()
+  }
+
   sealed class ViewState {
     object Loading : ViewState()
     class Error(val error: Throwable) : ViewState()

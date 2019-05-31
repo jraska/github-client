@@ -1,0 +1,5 @@
+<resources>
+  <string name="about_app_name">Github Client App</string>
+  <string name="about_app_description">Experimental architecture app with example usage intended to be a showcase, test and skeleton app.</string>
+  <string name="about_app_developer">by Josef Raska</string>
+</resources>

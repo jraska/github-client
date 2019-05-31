@@ -1,8 +1,10 @@
 package com.jraska.github.client.http
 
+import android.Manifest
 import android.app.Activity
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.jraska.github.client.users.ui.UsersActivity
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,6 +12,7 @@ import okreplay.AndroidTapeRoot
 import okreplay.OkReplayConfig
 import okreplay.OkReplayRuleChain
 import okreplay.TapeMode
+import org.junit.rules.RuleChain
 import org.junit.rules.TestRule
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -54,7 +57,8 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
         .interceptor(REPLAY_INTERCEPTOR)
         .build()
 
-      return OkReplayRuleChain(configuration, ActivityTestRule(activityClass)).get()
+      return RuleChain.outerRule(GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE))
+        .around(OkReplayRuleChain(configuration, ActivityTestRule(activityClass)).get())
     }
 
     private fun findTestClassInStack(): Class<*> {
