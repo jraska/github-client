@@ -18,9 +18,7 @@ internal class RepoDetailViewModel @Inject constructor(
   private val eventAnalytics: EventAnalytics
 ) : ViewModel() {
 
-  private val liveDataMap = lazyMap<String, LiveData<ViewState>> {
-    return@lazyMap createRepoDetailLiveData(it)
-  }
+  private val liveDataMap: Map<String, LiveData<ViewState>> = lazyMap(this::createRepoDetailLiveData)
 
   fun repoDetail(fullRepoName: String): LiveData<ViewState> {
     return liveDataMap.getValue(fullRepoName)

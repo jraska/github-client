@@ -23,9 +23,7 @@ internal class UserDetailViewModel @Inject constructor(
   private val config: Config
 ) : ViewModel() {
 
-  private val liveData = lazyMap<String, LiveData<ViewState>> {
-    return@lazyMap createUserLiveData(it)
-  }
+  private val liveData: Map<String, LiveData<ViewState>> = lazyMap(this::createUserLiveData)
 
   fun userDetail(login: String): LiveData<ViewState> {
     return liveData.getValue(login)

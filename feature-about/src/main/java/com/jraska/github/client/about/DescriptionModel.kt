@@ -6,4 +6,8 @@ internal class DescriptionModel(onDescriptionClick: () -> Unit) : SimpleEpoxyMod
   init {
     onClick { onDescriptionClick() }
   }
+
+  override fun getSpanSize(totalSpanCount: Int, position: Int, itemCount: Int): Int {
+    return totalSpanCount
+  }
 }
