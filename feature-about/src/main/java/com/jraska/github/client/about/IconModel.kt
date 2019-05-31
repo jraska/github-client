@@ -6,7 +6,7 @@ import androidx.annotation.StringRes
 import com.airbnb.epoxy.SimpleEpoxyModel
 import kotlinx.android.synthetic.main.about_item_icon.view.*
 
-class IconModel(
+internal class IconModel(
   private val clickListener: () -> Unit,
   @DrawableRes val iconRes: Int,
   @StringRes val contentDescriptionRes: Int) : SimpleEpoxyModel(R.layout.about_item_icon) {

@@ -13,12 +13,12 @@ internal class AboutViewModel @Inject constructor(
   private val navigator: Navigator
 ) : ViewModel() {
 
-  fun onGithubClick() {
-    openUrl("https://github.com/jraska")
-  }
-
   fun onProjectDescriptionClick() {
     openUrl("https://github.com/jraska/github-client")
+  }
+
+  fun onGithubClick() {
+    openUrl("https://github.com/jraska")
   }
 
   fun onWebClick() {
@@ -30,7 +30,7 @@ internal class AboutViewModel @Inject constructor(
   }
 
   fun onTwitterClick() {
-    openUrl("https://twitter.com/josef.raska")
+    openUrl("https://twitter.com/josef_raska")
   }
 
   private fun openUrl(urlText: String) {

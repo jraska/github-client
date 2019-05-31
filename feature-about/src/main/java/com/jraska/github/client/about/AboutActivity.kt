@@ -38,7 +38,7 @@ internal class AboutActivity : BaseActivity() {
       IconModel(viewModel::onGithubClick, R.drawable.ic_github_48dp, R.string.about_github_description),
       IconModel(viewModel::onWebClick, R.drawable.ic_web_48dp, R.string.about_web_description),
       IconModel(viewModel::onMediumClick, R.drawable.ic_medium_48dp, R.string.about_medium_description),
-      IconModel(viewModel::onTwitterClick, R.drawable.ic_twitter_48dp, R.string.about_twitter_description)
+      IconModel(viewModel::onTwitterClick, R.drawable.ic_twitter_logo_blue_48dp, R.string.about_twitter_description)
     )
   }
 
