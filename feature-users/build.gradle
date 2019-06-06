@@ -38,6 +38,6 @@ dependencies {
   testImplementation 'org.mockito:mockito-core:2.27.0'
   testImplementation 'androidx.arch.core:core-testing:2.0.1'
   testImplementation 'org.mockito:mockito-core:2.27.0'
-  testImplementation 'androidx.annotation:annotation:1.0.2'
+  testImplementation 'androidx.annotation:annotation:1.1.0'
   testImplementation project(':core-testing')
 }

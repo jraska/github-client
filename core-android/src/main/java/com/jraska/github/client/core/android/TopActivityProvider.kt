@@ -31,11 +31,7 @@ class TopActivityProvider : Provider<Activity> {
   }
 
   override fun get(): Activity {
-    if (topActivity == null) {
-      throw IllegalStateException("No activity")
-    }
-
-    return topActivity!!
+    return topActivity ?: throw IllegalStateException("No activity")
   }
 
   class RegisterCallbacks @Inject constructor(private val topActivityProvider: TopActivityProvider) : OnAppCreate {

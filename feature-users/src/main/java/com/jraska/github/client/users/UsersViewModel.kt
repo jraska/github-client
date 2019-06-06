@@ -1,6 +1,5 @@
 package com.jraska.github.client.users
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.Navigator
@@ -11,16 +10,12 @@ import com.jraska.github.client.core.android.rx.toLiveData
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.User
 import com.jraska.github.client.users.model.UsersRepository
-import io.reactivex.Single
-import io.reactivex.SingleEmitter
-import io.reactivex.SingleOnSubscribe
 import io.reactivex.subjects.PublishSubject
-import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 internal class UsersViewModel @Inject constructor(
-  private val usersRepository: UsersRepository,
-  private val appSchedulers: AppSchedulers,
+  usersRepository: UsersRepository,
+  appSchedulers: AppSchedulers,
   private val navigator: Navigator,
   private val eventAnalytics: EventAnalytics
 ) : ViewModel() {
@@ -85,28 +80,5 @@ internal class UsersViewModel @Inject constructor(
     object Loading : ViewState()
     class Error(val error: Throwable) : ViewState()
     class ShowUsers(val users: List<User>) : ViewState()
-  }
-
-  class OnSubscribeRefreshingCache<T>(private val source: Single<T>) : SingleOnSubscribe<T> {
-
-    private val refresh = AtomicBoolean(true)
-    @Volatile private var current: Single<T>? = null
-
-    init {
-      this.current = source
-    }
-
-    fun invalidate() {
-      refresh.set(true)
-    }
-
-    @SuppressLint("CheckResult")
-    @Throws(Exception::class)
-    override fun subscribe(e: SingleEmitter<T>) {
-      if (refresh.compareAndSet(true, false)) {
-        current = source.cache()
-      }
-      current!!.subscribe({ e.onSuccess(it) }, { e.onError(it) })
-    }
   }
 }

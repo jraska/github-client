@@ -63,14 +63,14 @@ dependencies {
   api project(':feature-settings')
   api project(':feature-about')
 
-  implementation 'androidx.appcompat:appcompat:1.1.0-alpha05'
+  implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-  implementation 'com.google.android.material:material:1.1.0-alpha06'
+  implementation 'com.google.android.material:material:1.1.0-alpha07'
   implementation 'androidx.cardview:cardview:1.0.0'
   implementation 'androidx.browser:browser:1.0.0'
   implementation 'androidx.core:core:1.2.0-alpha01'
-  implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0-beta01'
-  implementation 'androidx.media:media:1.1.0-beta01'
+  implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0-beta02'
+  implementation 'androidx.media:media:1.1.0-beta02'
 
   implementation 'com.google.firebase:firebase-core:16.0.9'
   implementation 'com.google.firebase:firebase-config:17.0.0'
@@ -95,9 +95,9 @@ dependencies {
   testImplementation 'org.mockito:mockito-core:2.27.0'
   testImplementation 'org.threeten:threetenbp:1.4.0' // to fix failures with three ten db
 
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-  androidTestImplementation 'androidx.test:runner:1.1.1'
-  androidTestImplementation 'androidx.test:rules:1.1.1'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+  androidTestImplementation 'androidx.test:runner:1.2.0'
+  androidTestImplementation 'androidx.test:rules:1.2.0'
   androidTestImplementation 'org.assertj:assertj-core:3.12.2'
   androidTestImplementation 'org.mockito:mockito-core:2.27.0'
   androidTestImplementation 'org.mockito:mockito-android:2.27.0'
