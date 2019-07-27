@@ -11,7 +11,7 @@ class RealDeepLinkLauncher private constructor(
   private val launchers: List<LinkLauncher>
 ) : DeepLinkLauncher {
   override fun launch(deepLink: HttpUrl) {
-    if (deepLink.host() != "github.com") {
+    if (deepLink.host != "github.com") {
       throw IllegalArgumentException("We handle only GitHub deep links, not: $deepLink")
     }
 

@@ -34,7 +34,7 @@ object SettingsModule {
   internal fun provideSettingsLauncher(): LinkLauncher {
     return object : LinkLauncher {
       override fun launch(inActivity: Activity, deepLink: HttpUrl): LinkLauncher.Result {
-        return if ("/settings" == deepLink.encodedPath()) {
+        return if ("/settings" == deepLink.encodedPath) {
           SettingsActivity.start(inActivity)
           LinkLauncher.Result.LAUNCHED
         } else {

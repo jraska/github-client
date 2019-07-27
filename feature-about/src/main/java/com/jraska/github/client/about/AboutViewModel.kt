@@ -5,7 +5,7 @@ import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.analytics.toAnalyticsString
-import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import javax.inject.Inject
 
 internal class AboutViewModel @Inject constructor(
@@ -34,7 +34,7 @@ internal class AboutViewModel @Inject constructor(
   }
 
   private fun openUrl(urlText: String) {
-    val url = HttpUrl.get(urlText)
+    val url = urlText.toHttpUrl()
     val event = AnalyticsEvent.builder("about_clicked")
       .addProperty("url", url.toAnalyticsString())
       .build()

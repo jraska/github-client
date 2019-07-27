@@ -3,10 +3,8 @@ package com.jraska.github.client.analytics
 import okhttp3.HttpUrl
 
 fun HttpUrl.toAnalyticsString(): String {
-  val queryNames = queryParameterNames()
-
   val builder = newBuilder()
-  for (parameterName in queryNames) {
+  for (parameterName in queryParameterNames) {
     builder.removeAllQueryParameters(parameterName)
   }
 

@@ -19,14 +19,14 @@ dependencies {
   api project(':core')
   api project(':core-android')
 
-  kapt 'com.google.dagger:dagger-compiler:2.22.1'
-  api 'com.google.dagger:dagger:2.22.1'
+  kapt 'com.google.dagger:dagger-compiler:2.24'
+  api 'com.google.dagger:dagger:2.24'
 
-  implementation 'com.airbnb.android:epoxy:3.5.1'
-  implementation 'com.facebook.fresco:drawee:1.13.0'
+  implementation 'com.airbnb.android:epoxy:3.7.0'
+  implementation 'com.facebook.fresco:drawee:2.0.0'
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'androidx.arch.core:core-testing:2.0.1'
-  testImplementation 'org.mockito:mockito-core:2.27.0'
+  testImplementation 'org.mockito:mockito-core:3.0.0'
   testImplementation project(':core-testing')
 }

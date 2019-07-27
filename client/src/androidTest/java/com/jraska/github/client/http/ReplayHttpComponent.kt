@@ -6,7 +6,9 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.jraska.github.client.users.ui.UsersActivity
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import okreplay.AndroidTapeRoot
 import okreplay.OkReplayConfig
@@ -72,12 +74,19 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
     }
 
     private fun okReplayClient(): OkHttpClient {
+      val httpLoggingInterceptor = HttpLoggingInterceptor()
       val builder = OkHttpClient.Builder()
-        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
+        .addInterceptor(httpLoggingInterceptor.apply { httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC })
 
       REPLAY_INTERCEPTOR.interceptorsToRegister().forEach { builder.addInterceptor(it) }
 
-      builder.addNetworkInterceptor { throw UnsupportedOperationException(NETWORK_ERROR_MESSAGE) }
+      val noNetworkInterceptor = object : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+          throw UnsupportedOperationException(NETWORK_ERROR_MESSAGE)
+        }
+      }
+      builder.addNetworkInterceptor(noNetworkInterceptor)
+
       return builder.build()
     }
   }

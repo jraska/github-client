@@ -57,7 +57,11 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
   protected open fun httpComponent(): HttpComponent {
     return DaggerHttpComponent.builder()
       .cacheDir(File(cacheDir, "network"))
-      .logger(HttpLoggingInterceptor.Logger { Timber.tag("Network").v(it) })
+      .logger(object : HttpLoggingInterceptor.Logger {
+        override fun log(message: String) {
+          Timber.tag("Network").v(message)
+        }
+      })
       .build()
   }
 }

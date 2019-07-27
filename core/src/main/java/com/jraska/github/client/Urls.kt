@@ -1,21 +1,22 @@
 package com.jraska.github.client
 
 import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrl
 
 object Urls {
   fun user(login: String): HttpUrl {
-    return HttpUrl.get("https://github.com/$login")
+    return "https://github.com/$login".toHttpUrl()
   }
 
   fun repo(fullPath: String): HttpUrl {
-    return HttpUrl.get("https://github.com/$fullPath")
+    return "https://github.com/$fullPath".toHttpUrl()
   }
 
   fun settings(): HttpUrl {
-    return HttpUrl.get("https://github.com/settings")
+    return "https://github.com/settings".toHttpUrl()
   }
 
   fun about(): HttpUrl {
-    return HttpUrl.get("https://github.com/about")
+    return "https://github.com/about".toHttpUrl()
   }
 }

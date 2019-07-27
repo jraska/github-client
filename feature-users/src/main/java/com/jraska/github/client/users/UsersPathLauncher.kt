@@ -8,14 +8,14 @@ import okhttp3.HttpUrl
 
 internal class UsersPathLauncher : LinkLauncher {
   override fun launch(inActivity: Activity, deepLink: HttpUrl): LinkLauncher.Result {
-    if (deepLink.pathSize() == 2) {
-      val fullRepoPath = deepLink.pathSegments()[0] + "/" + deepLink.pathSegments()[1]
+    if (deepLink.pathSize == 2) {
+      val fullRepoPath = deepLink.pathSegments[0] + "/" + deepLink.pathSegments[1]
       RepoDetailActivity.start(inActivity, fullRepoPath)
       return LinkLauncher.Result.LAUNCHED
     }
 
-    if (deepLink.pathSize() == 1) {
-      val login = deepLink.pathSegments()[0]
+    if (deepLink.pathSize == 1) {
+      val login = deepLink.pathSegments[0]
       UserDetailActivity.start(inActivity, login)
       return LinkLauncher.Result.LAUNCHED
     }

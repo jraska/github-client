@@ -30,7 +30,7 @@ const val SYNTHETIC_PARAMETER_NAME = "syntheticOkReplayOrdinal"
 private class RemoveOrdinalParameterInterceptor : Interceptor {
   override fun intercept(chain: Interceptor.Chain): Response {
     val request = chain.request()
-    val url = request.url()
+    val url = request.url
     if (url.queryParameter(SYNTHETIC_PARAMETER_NAME) == null) {
       return chain.proceed(request)
     }
@@ -50,7 +50,7 @@ private class AddOrdinalParameterInterceptor : Interceptor {
 
   override fun intercept(chain: Interceptor.Chain): Response {
     val request = chain.request()
-    val url = request.url()
+    val url = request.url
 
     val requestsPerformed = requestCounts[url]
     if (requestsPerformed == null) {

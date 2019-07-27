@@ -67,7 +67,7 @@ object UsersModule {
   internal fun provideUsersListLauncher(): LinkLauncher {
     return object : LinkLauncher {
       override fun launch(inActivity: Activity, deepLink: HttpUrl): LinkLauncher.Result {
-        return if ("/users" == deepLink.encodedPath()) {
+        return if ("/users" == deepLink.encodedPath) {
           UsersActivity.start(inActivity)
           LinkLauncher.Result.LAUNCHED
         } else {
