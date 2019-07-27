@@ -4,7 +4,7 @@ import com.jraska.github.client.Fakes
 import com.jraska.github.client.Navigator
 import com.jraska.github.client.users.model.RepoDetailViewModel
 import com.jraska.github.client.users.model.UsersRepository
-import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
@@ -19,8 +19,8 @@ class RepoDetailViewModelTest {
       Fakes.trampoline(), navigatorMock, Fakes.emptyAnalytics()
     )
 
-    viewModel.onFitHubIconClicked("jraska/Falcon")
+    viewModel.onGitHubIconClicked("jraska/Falcon")
 
-    verify(navigatorMock).launchOnWeb(HttpUrl.get("https://github.com/jraska/Falcon"))
+    verify(navigatorMock).launchOnWeb("https://github.com/jraska/Falcon".toHttpUrl())
   }
 }

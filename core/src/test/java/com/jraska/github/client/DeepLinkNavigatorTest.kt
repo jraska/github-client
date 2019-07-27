@@ -1,6 +1,6 @@
 package com.jraska.github.client
 
-import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
@@ -14,6 +14,6 @@ class DeepLinkNavigatorTest {
 
     navigator.startUserDetail("johny")
 
-    verify(deepLinkLauncher).launch(HttpUrl.get("https://github.com/johny"))
+    verify(deepLinkLauncher).launch("https://github.com/johny".toHttpUrl())
   }
 }

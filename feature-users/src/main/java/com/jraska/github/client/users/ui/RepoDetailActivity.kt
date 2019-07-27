@@ -36,7 +36,7 @@ internal class RepoDetailActivity : BaseActivity() {
     val liveData = viewModel.repoDetail(fullRepoName())
     liveData.observe(this, Observer { this.setState(it) })
 
-    repo_detail_github_fab.setOnClickListener { viewModel.onFitHubIconClicked(fullRepoName()) }
+    repo_detail_github_fab.setOnClickListener { viewModel.onGitHubIconClicked(fullRepoName()) }
   }
 
   private fun setState(state: RepoDetailViewModel.ViewState) {

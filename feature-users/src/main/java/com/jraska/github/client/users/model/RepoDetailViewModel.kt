@@ -35,7 +35,7 @@ internal class RepoDetailViewModel @Inject constructor(
       .toLiveData()
   }
 
-  fun onFitHubIconClicked(fullRepoName: String) {
+  fun onGitHubIconClicked(fullRepoName: String) {
     val event = AnalyticsEvent.builder("open_repo_from_detail")
       .addProperty("owner", RepoHeader.name(fullRepoName))
       .addProperty("name", RepoHeader.name(fullRepoName))
