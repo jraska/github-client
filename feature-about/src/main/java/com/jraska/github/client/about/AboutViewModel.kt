@@ -5,12 +5,14 @@ import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.analytics.toAnalyticsString
+import com.jraska.github.client.identity.IdentityProvider
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import javax.inject.Inject
 
 internal class AboutViewModel @Inject constructor(
   private val analytics: EventAnalytics,
-  private val navigator: Navigator
+  private val navigator: Navigator,
+  private val identityProvider: IdentityProvider
 ) : ViewModel() {
 
   fun onProjectDescriptionClick() {
@@ -37,6 +39,7 @@ internal class AboutViewModel @Inject constructor(
     val url = urlText.toHttpUrl()
     val event = AnalyticsEvent.builder("about_clicked")
       .addProperty("url", url.toAnalyticsString())
+      .addProperty("user_id", identityProvider.session().userId.toString())
       .build()
 
     analytics.report(event)

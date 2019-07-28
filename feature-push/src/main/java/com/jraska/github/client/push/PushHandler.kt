@@ -3,6 +3,7 @@ package com.jraska.github.client.push
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.BooleanResult
+import com.jraska.github.client.identity.IdentityProvider
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Provider
@@ -10,6 +11,7 @@ import javax.inject.Provider
 class PushHandler @Inject internal constructor(
   private val eventAnalytics: EventAnalytics,
   private val tokenSynchronizer: PushTokenSynchronizer,
+  private val identityProvider: IdentityProvider,
   private val pushCommands: Map<String, @JvmSuppressWildcards Provider<PushActionCommand>>
 ) {
 
@@ -40,7 +42,9 @@ class PushHandler @Inject internal constructor(
   internal fun onTokenRefresh() {
     tokenSynchronizer.synchronizeToken()
 
-    val tokenEvent = AnalyticsEvent.create("push_token_refresh")
+    val tokenEvent = AnalyticsEvent.builder("push_token_refresh")
+      .addProperty("session_id", identityProvider.session().id.toString())
+      .build()
     eventAnalytics.report(tokenEvent)
   }
 }

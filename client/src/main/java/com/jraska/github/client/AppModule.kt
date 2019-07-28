@@ -18,6 +18,8 @@ import com.jraska.github.client.core.android.logging.SetupLogging
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
+import com.jraska.github.client.time.RealTimeProvider
+import com.jraska.github.client.time.TimeProvider
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoSet
@@ -64,6 +66,12 @@ object AppModule {
   @Provides
   @PerApp internal fun dateTimeProvider(): DateTimeProvider {
     return RealDateTimeProvider()
+  }
+
+  @JvmStatic
+  @Provides
+  @PerApp internal fun timeProvider(): TimeProvider {
+    return RealTimeProvider.INSTANCE
   }
 
   @JvmStatic
