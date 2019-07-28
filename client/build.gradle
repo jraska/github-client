@@ -58,6 +58,7 @@ dependencies {
 
   api project(':core')
   api project(':core-android')
+  api project(':lib-identity')
   api project(':feature-push')
   api project(':feature-users')
   api project(':feature-settings')

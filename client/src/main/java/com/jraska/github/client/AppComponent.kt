@@ -9,6 +9,7 @@ import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.HttpComponent
+import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.logging.CrashReporter
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.settings.SettingsModule
@@ -24,6 +25,7 @@ import retrofit2.Retrofit
   modules = [UsersModule::class, NavigationModule::class,
     PushModule::class, AppModule::class,
     SettingsModule::class, AboutModule::class,
+    IdentityModule::class,
     HttpComponentModule::class, CoreComponentModule::class]
 )
 interface AppComponent {
