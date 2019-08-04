@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.dynamic-feature'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -19,6 +19,7 @@ dependencies {
   api project(':core')
   api project(':core-android')
   api project(':lib-identity')
+  implementation project(':client')
 
   kapt 'com.google.dagger:dagger-compiler:2.24'
   api 'com.google.dagger:dagger:2.24'

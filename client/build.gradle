@@ -61,6 +61,8 @@ android {
   testOptions {
     unitTests.returnDefaultValues = true
   }
+
+  dynamicFeatures = [":feature:about"]
 }
 
 dependencies {
@@ -72,7 +74,6 @@ dependencies {
   api project(':feature:push')
   api project(':feature:users')
   api project(':feature:settings')
-  api project(':feature:about')
   api project(':feature:shortcuts')
 
   implementation 'androidx.appcompat:appcompat:1.1.0-rc01'

@@ -2,7 +2,6 @@ package com.jraska.github.client
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
-import com.jraska.github.client.about.AboutModule
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.HttpComponent
@@ -23,7 +22,6 @@ import dagger.Component
     UsersModule::class,
     PushModule::class,
     SettingsModule::class,
-    AboutModule::class,
     ShortcutsModule::class],
   dependencies = [
     HttpComponentDelegate::class,
