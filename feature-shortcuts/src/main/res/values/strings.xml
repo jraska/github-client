@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="shortcut_users_short_label">Users</string>
+  <string name="shortcut_users_long_label">Browse Users</string>
+  <string name="shortcut_users_disabled_message">No longer available :(</string>
+
+  <string name="shortcut_jraska_short_label">Me</string>
+  <string name="shortcut_jraska_long_label">Josef Raska</string>
+  <string name="shortcut_jraska_disabled_message">No longer available :(</string>
+
+  <string name="shortcut_jake_short_label">Jake</string>
+  <string name="shortcut_jake_long_label">Jake Wharton</string>
+  <string name="shortcut_jake_disabled_message">No longer available :(</string>
+</resources>
