@@ -9,8 +9,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
+import com.jraska.github.client.DynamicFeaturesComponent
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.dynamicFeaturesComponent
+import dagger.Component
 import kotlinx.android.synthetic.main.activity_about.toolbar
 import kotlinx.android.synthetic.main.content_about.about_recycler
 
@@ -58,10 +60,21 @@ internal class AboutActivity : BaseActivity() {
     return object : ViewModelProvider.Factory {
       @Suppress("UNCHECKED_CAST")
       override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val featuresComponent = dynamicFeaturesComponent()
+        val aboutViewModel = DaggerAboutComponent.builder()
+          .dynamicFeaturesComponent(dynamicFeaturesComponent())
+          .build()
+          .aboutViewModel()
 
-        return AboutViewModel(featuresComponent.eventAnalytics(), featuresComponent.navigator(), featuresComponent.identityProvider()) as T
+        return aboutViewModel as T
       }
     }
   }
+}
+
+@Component(
+  modules = [AboutModule::class],
+  dependencies = [DynamicFeaturesComponent::class]
+)
+internal interface AboutComponent {
+  fun aboutViewModel(): AboutViewModel
 }
