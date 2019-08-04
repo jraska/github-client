@@ -32,8 +32,7 @@ class HttpModule {
     val builder = OkHttpClient.Builder()
 
     if (BuildConfig.DEBUG) {
-      val loggingInterceptor = HttpLoggingInterceptor(logger)
-        .setLevel(Level.BASIC)
+      val loggingInterceptor = HttpLoggingInterceptor(logger).apply { level = Level.BASIC }
       builder.addInterceptor(loggingInterceptor)
     }
 

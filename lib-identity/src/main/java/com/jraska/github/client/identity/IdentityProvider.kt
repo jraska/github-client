@@ -3,7 +3,8 @@ package com.jraska.github.client.identity
 import com.jraska.github.client.identity.internal.AnonymousIdentity
 
 class IdentityProvider internal constructor(
-  private val anonymousIdentity: AnonymousIdentity) {
+  private val anonymousIdentity: AnonymousIdentity
+) {
 
   fun session(): Session {
     return everythingAnonymousNow()
