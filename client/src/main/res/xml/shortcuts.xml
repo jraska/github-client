@@ -7,12 +7,9 @@
     android:shortcutShortLabel="@string/shortcut_users_short_label"
     android:shortcutLongLabel="@string/shortcut_users_long_label"
     android:shortcutDisabledMessage="@string/shortcut_users_disabled_message">
-    <!-- TODO(josef): It is working now only for development app, this will probably stay development app  -->
     <intent
       android:action="android.intent.action.VIEW"
-      android:data="https://github.com/users"
-      android:targetPackage="com.jraska.github.client.dev"
-      android:targetClass="com.jraska.github.client.ui.ShortcutHandlerActivity" />
+      android:data="clientgithubjraskacom://github.com/users"/>
     <categories android:name="android.shortcut.conversation" />
   </shortcut>
   <shortcut
@@ -24,9 +21,7 @@
     android:shortcutDisabledMessage="@string/shortcut_jraska_disabled_message">
     <intent
       android:action="android.intent.action.VIEW"
-      android:data="https://github.com/jraska"
-      android:targetPackage="com.jraska.github.client.dev"
-      android:targetClass="com.jraska.github.client.ui.ShortcutHandlerActivity" />
+      android:data="clientgithubjraskacom://github.com/jraska"/>
     <categories android:name="android.shortcut.conversation" />
   </shortcut>
   <shortcut
@@ -38,9 +33,7 @@
     android:shortcutDisabledMessage="@string/shortcut_jake_disabled_message">
     <intent
       android:action="android.intent.action.VIEW"
-      android:data="https://github.com/JakeWharton"
-      android:targetPackage="com.jraska.github.client.dev"
-      android:targetClass="com.jraska.github.client.ui.ShortcutHandlerActivity" />
+      android:data="clientgithubjraskacom://github.com/JakeWharton"/>
     <categories android:name="android.shortcut.conversation" />
   </shortcut>
 </shortcuts>

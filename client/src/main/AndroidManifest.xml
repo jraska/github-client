@@ -26,7 +26,19 @@
         android:name="android.app.shortcuts"
         android:resource="@xml/shortcuts"/>
     </activity>
-    <activity android:name=".ui.ShortcutHandlerActivity"/>
+    <activity android:name=".ui.ShortcutHandlerActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
+
+        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+
+        <data
+          android:host="github.com"
+          android:pathPattern="/.*"
+          android:scheme="clientgithubjraskacom"/>
+      </intent-filter>
+    </activity>
   </application>
 
 </manifest>
