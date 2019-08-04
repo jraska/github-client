@@ -7,7 +7,7 @@ include ':client',
   ':lib-identity',
 
   ':feature-users',
-  ':feature-push',
+  ':feature:push',
   ':feature-settings',
-  ':feature-about',
+  ':feature:about',
   ':feature-shortcuts'
