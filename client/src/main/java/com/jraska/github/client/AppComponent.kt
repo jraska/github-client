@@ -13,6 +13,7 @@ import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.logging.CrashReporter
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.settings.SettingsModule
+import com.jraska.github.client.shortcuts.ShortcutsModule
 import com.jraska.github.client.users.UsersModule
 import dagger.BindsInstance
 import dagger.Component
@@ -26,6 +27,7 @@ import retrofit2.Retrofit
     PushModule::class, AppModule::class,
     SettingsModule::class, AboutModule::class,
     IdentityModule::class,
+    ShortcutsModule::class,
     HttpComponentModule::class, CoreComponentModule::class]
 )
 interface AppComponent {

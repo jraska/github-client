@@ -5,7 +5,6 @@ import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.core.android.RealDeepLinkLauncher
 import com.jraska.github.client.core.android.TopActivityProvider
 import com.jraska.github.client.core.android.UriHandlerViewModel
-import com.jraska.github.client.ui.ShortcutHandlerModel
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
@@ -39,14 +38,6 @@ object NavigationModule {
   @IntoMap
   @ClassKey(UriHandlerViewModel::class)
   fun uriHandlerViewModel(viewModel: UriHandlerViewModel): ViewModel {
-    return viewModel
-  }
-
-  @JvmStatic
-  @Provides
-  @IntoMap
-  @ClassKey(ShortcutHandlerModel::class)
-  fun uriShortcutViewModel(viewModel: ShortcutHandlerModel): ViewModel {
     return viewModel
   }
 }
