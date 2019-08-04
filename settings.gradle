@@ -6,8 +6,8 @@ include ':client',
 
   ':lib-identity',
 
-  ':feature-users',
+  ':feature:users',
   ':feature:push',
-  ':feature-settings',
+  ':feature:settings',
   ':feature:about',
-  ':feature-shortcuts'
+  ':feature:shortcuts'

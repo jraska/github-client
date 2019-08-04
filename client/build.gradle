@@ -70,10 +70,10 @@ dependencies {
   api project(':core-android')
   api project(':lib-identity')
   api project(':feature:push')
-  api project(':feature-users')
-  api project(':feature-settings')
+  api project(':feature:users')
+  api project(':feature:settings')
   api project(':feature:about')
-  api project(':feature-shortcuts')
+  api project(':feature:shortcuts')
 
   implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
