@@ -3,17 +3,22 @@ package com.jraska.github.client.about
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.core.android.BaseActivity
-import com.jraska.github.client.core.android.viewModel
-import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.content_about.*
+import com.jraska.github.client.dynamicFeaturesComponent
+import kotlinx.android.synthetic.main.activity_about.toolbar
+import kotlinx.android.synthetic.main.content_about.about_recycler
 
 internal class AboutActivity : BaseActivity() {
 
-  private val viewModel: AboutViewModel by lazy { viewModel(AboutViewModel::class.java) }
+  private val viewModel: AboutViewModel by lazy {
+    ViewModelProviders.of(this, viewModelFactory()).get(AboutViewModel::class.java)
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -46,6 +51,17 @@ internal class AboutActivity : BaseActivity() {
     fun start(inActivity: Activity) {
       val intent = Intent(inActivity, AboutActivity::class.java)
       inActivity.startActivity(intent)
+    }
+  }
+
+  fun viewModelFactory(): ViewModelProvider.Factory {
+    return object : ViewModelProvider.Factory {
+      @Suppress("UNCHECKED_CAST")
+      override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        val featuresComponent = dynamicFeaturesComponent()
+
+        return AboutViewModel(featuresComponent.eventAnalytics(), featuresComponent.navigator(), featuresComponent.identityProvider()) as T
+      }
     }
   }
 }

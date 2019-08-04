@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string translatable="false" name="title_dynamic_feature_about">About</string>
+  <string translatable="false" name="title_dynamic_feature_about">about</string>
 </resources>

@@ -15,7 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
 import java.io.File
 
-open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModelFactory {
+open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModelFactory, HasDynamicFeaturesComponent {
 
   private val appComponent: AppComponent by lazy { componentBuilder().build() }
 
@@ -25,6 +25,10 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
 
   override fun serviceModelFactory(): ServiceModel.Factory {
     return appComponent.serviceModelFactory()
+  }
+
+  override fun dynamicFeaturesComponent(): DynamicFeaturesComponent {
+    return appComponent.dynamicFeaturesComponent()
   }
 
   @AddTrace(name = "App.onCreate")
