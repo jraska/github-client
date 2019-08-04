@@ -1,0 +1,8 @@
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.jraska.github.client.about.entrance">
+
+  <application>
+    <activity android:name=".AboutLaunchActivity" />
+  </application>
+</manifest>
