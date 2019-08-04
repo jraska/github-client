@@ -31,20 +31,30 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
 
-  buildTypes {
-    debug {
-      signingConfig signingConfigs.debug
-      applicationIdSuffix '.dev'
-      versionNameSuffix '-dev'
-    }
-  }
-
   signingConfigs {
     debug {
       storeFile file("debug.keystore")
       storePassword "github-client"
       keyAlias "github-client"
       keyPassword "github-client"
+    }
+    release {
+      storeFile file("prod.keystore")
+      storePassword = System.getenv('GITHUB_CLIENT_STORE_PASS')
+      keyAlias "prod"
+      keyPassword System.getenv('GITHUB_CLIENT_KEY_PASS')
+    }
+  }
+
+  buildTypes {
+    debug {
+      signingConfig signingConfigs.debug
+      applicationIdSuffix '.dev'
+      versionNameSuffix '-dev'
+    }
+
+    release {
+      signingConfig signingConfigs.release
     }
   }
 
