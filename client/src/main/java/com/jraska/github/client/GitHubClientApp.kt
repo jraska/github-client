@@ -46,8 +46,8 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
   private fun componentBuilder(): AppComponent.Builder {
     return DaggerAppComponent.builder()
       .appContext(this)
-      .httpComponentModule(HttpComponentModule(httpComponent()))
-      .coreComponentModule(CoreComponentModule(coreComponent()))
+      .httpComponent(HttpComponentDelegate(httpComponent()))
+      .coreComponent(CoreComponentDelegate(coreComponent()))
   }
 
   protected open fun coreComponent(): CoreComponent {
