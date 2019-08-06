@@ -3,6 +3,6 @@
   package="com.jraska.github.client.about.entrance">
 
   <application>
-    <activity android:name=".AboutLaunchActivity" />
+    <activity android:name=".DynamicFeatureActivity" />
   </application>
 </manifest>

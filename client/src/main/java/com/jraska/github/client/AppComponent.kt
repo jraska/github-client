@@ -2,7 +2,7 @@ package com.jraska.github.client
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
-import com.jraska.github.client.about.entrance.AboutEntranceModule
+import com.jraska.github.client.about.entrance.DynamicFeaturesModule
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
@@ -26,7 +26,7 @@ import dagger.Subcomponent
     UsersModule::class,
     PushModule::class,
     SettingsModule::class,
-    AboutEntranceModule::class,
+    DynamicFeaturesModule::class,
     ShortcutsModule::class],
   dependencies = [
     HttpComponentDelegate::class,
