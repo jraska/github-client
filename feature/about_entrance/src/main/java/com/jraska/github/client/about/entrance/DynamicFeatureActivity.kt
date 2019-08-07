@@ -13,7 +13,6 @@ import com.jraska.github.client.core.android.viewModel
 
 internal class DynamicFeatureActivity : BaseActivity() {
   private val viewModel by lazy { viewModel(PlayInstallViewModel::class.java) }
-  private val aboutModuleName by lazy { getString(R.string.title_dynamic_feature_about) }
 
   override fun attachBaseContext(newBase: Context?) {
     super.attachBaseContext(newBase)
@@ -52,7 +51,7 @@ internal class DynamicFeatureActivity : BaseActivity() {
   }
 
   companion object {
-    private const val KEY_MODULE_NAME = "aiudha"
+    private const val KEY_MODULE_NAME = "aia"
     fun start(inActivity: Activity, moduleName: String) {
       val intent = Intent(inActivity, DynamicFeatureActivity::class.java)
         .apply { putExtra(KEY_MODULE_NAME, moduleName) }

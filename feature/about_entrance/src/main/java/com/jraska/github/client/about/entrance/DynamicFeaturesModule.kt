@@ -41,6 +41,7 @@ object DynamicFeaturesModule {
 
   @JvmStatic
   @Provides
+  @PerApp
   internal fun provideSplitManager(context: Context): SplitInstallManager {
     return SplitInstallManagerFactory.create(context)
   }
