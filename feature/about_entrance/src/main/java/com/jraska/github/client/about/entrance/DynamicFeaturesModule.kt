@@ -28,8 +28,8 @@ object DynamicFeaturesModule {
   @JvmStatic
   @Provides
   @IntoSet
-  internal fun provideLauncher(): LinkLauncher {
-    return DynamicAboutLinkLauncher()
+  internal fun provideLauncher(launcher: DynamicAboutLinkLauncher): LinkLauncher {
+    return launcher
   }
 
   @JvmStatic
