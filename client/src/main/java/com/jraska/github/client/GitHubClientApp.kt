@@ -1,8 +1,10 @@
 package com.jraska.github.client
 
 import android.app.Application
+import android.content.Context
 import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.perf.metrics.AddTrace
 import com.jraska.github.client.core.android.HasServiceModelFactory
 import com.jraska.github.client.core.android.HasViewModelFactory
@@ -29,6 +31,12 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
 
   override fun dynamicFeaturesComponent(): DynamicFeaturesComponent {
     return appComponent.dynamicFeaturesComponent()
+  }
+
+  override fun attachBaseContext(base: Context) {
+    super.attachBaseContext(base)
+    // Emulates installation of future on demand modules using SplitCompat.
+    SplitCompat.install(this)
   }
 
   @AddTrace(name = "App.onCreate")

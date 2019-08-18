@@ -35,6 +35,12 @@ object DynamicFeaturesModule {
   @JvmStatic
   @Provides
   @PerApp
+  internal fun providePlayDynamicFeatureInstaller(installManager: SplitInstallManager, context: Context): PlayDynamicFeatureInstaller {
+    return PlayDynamicFeatureInstaller(installManager, context)
+  }
+
+  @JvmStatic
+  @Provides
   internal fun provideSplitInstaller(installer: PlayDynamicFeatureInstaller): DynamicFeatureInstaller {
     return installer
   }

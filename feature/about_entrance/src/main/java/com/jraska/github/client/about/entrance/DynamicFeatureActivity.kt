@@ -1,6 +1,5 @@
 package com.jraska.github.client.about.entrance
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -24,6 +23,8 @@ internal class DynamicFeatureActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
+    Timber.i("Launching")
+
     viewModel.moduleInstallation(moduleName())
       .observe(this, Observer { onNewState(it) })
   }
@@ -35,14 +36,11 @@ internal class DynamicFeatureActivity : BaseActivity() {
 
   private fun moduleName() = intent.getStringExtra(KEY_MODULE_NAME)
 
-  private fun intentToLaunch() = intent.getParcelableExtra<Intent>(KEY_LAUNCH_INTENT)
-
   private fun onNewState(viewState: ViewState) {
     when (viewState) {
       is ViewState.Loading -> {
       }
-      is ViewState.Ready -> {
-        startActivity(intentToLaunch())
+      is ViewState.Finish -> {
         finish()
       }
       is ViewState.Error -> {
@@ -60,12 +58,12 @@ internal class DynamicFeatureActivity : BaseActivity() {
 
   companion object {
     private const val KEY_MODULE_NAME = "moduleName"
-    private const val KEY_LAUNCH_INTENT = "launchIntent"
-    fun start(inActivity: Activity, moduleName: String, launchIntent: Intent) {
-      val intent = Intent(inActivity, DynamicFeatureActivity::class.java)
+
+    fun start(context: Context, moduleName: String) {
+      val intent = Intent(context, DynamicFeatureActivity::class.java)
+        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         .apply { putExtra(KEY_MODULE_NAME, moduleName) }
-        .apply { putExtra(KEY_LAUNCH_INTENT, launchIntent) }
-      inActivity.startActivity(intent)
+      context.startActivity(intent)
     }
   }
 }
