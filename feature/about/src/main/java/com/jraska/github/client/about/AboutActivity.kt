@@ -1,6 +1,7 @@
 package com.jraska.github.client.about
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.jraska.github.client.DynamicFeaturesComponent
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.dynamicFeaturesComponent
@@ -37,6 +39,11 @@ internal class AboutActivity : BaseActivity() {
 
     about_recycler.layoutManager = layoutManager
     about_recycler.adapter = epoxyAdapter
+  }
+
+  override fun attachBaseContext(newBase: Context?) {
+    super.attachBaseContext(newBase)
+    SplitCompat.install(this)
   }
 
   private fun createModels(): List<EpoxyModel<*>>? {
