@@ -5,15 +5,32 @@ import androidx.lifecycle.ViewModel
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.jraska.github.client.PerApp
+import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.dynamicbase.internal.PlayDynamicFeatureInstaller
 import com.jraska.github.client.dynamicbase.internal.PlayInstallViewModel
+import com.jraska.github.client.dynamicbase.internal.SplitCompatInstallOnCreate
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
+import dagger.multibindings.IntoSet
 
 @Module
 object DynamicFeaturesModule {
+
+  @JvmStatic
+  @Provides
+  @IntoSet
+  internal fun splitInstallSetup(): OnAppCreate {
+    return SplitCompatInstallOnCreate()
+  }
+
+  @JvmStatic
+  @Provides
+  @PerApp
+  internal fun provideSplitManager(context: Context): SplitInstallManager {
+    return SplitInstallManagerFactory.create(context)
+  }
 
   @JvmStatic
   @Provides
@@ -34,12 +51,5 @@ object DynamicFeaturesModule {
   @Provides
   internal fun provideSplitInstaller(installer: PlayDynamicFeatureInstaller): DynamicFeatureInstaller {
     return installer
-  }
-
-  @JvmStatic
-  @Provides
-  @PerApp
-  internal fun provideSplitManager(context: Context): SplitInstallManager {
-    return SplitInstallManagerFactory.create(context)
   }
 }

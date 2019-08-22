@@ -33,12 +33,6 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
     return appComponent.dynamicFeaturesComponent()
   }
 
-  override fun attachBaseContext(base: Context) {
-    super.attachBaseContext(base)
-    // Emulates installation of future on demand modules using SplitCompat.
-    SplitCompat.install(this)
-  }
-
   @AddTrace(name = "App.onCreate")
   override fun onCreate() {
     super.onCreate()
