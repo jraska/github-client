@@ -40,9 +40,12 @@ internal class PlayInstallViewModel @Inject constructor(
         featureInstaller.onFeatureInstallError(moduleName, error)
       }
 
+      fun publishSuccess() {
+        liveData.value = ViewState.Finish(moduleName)
+        featureInstaller.onFeatureInstalled(moduleName)
+      }
+
       when (it.status()) {
-        SplitInstallSessionStatus.DOWNLOADED -> Unit
-        SplitInstallSessionStatus.DOWNLOADING -> Unit
         SplitInstallSessionStatus.REQUIRES_USER_CONFIRMATION -> {
           /*
     This may occur when attempting to download a sufficiently large module.
@@ -51,17 +54,16 @@ internal class PlayInstallViewModel @Inject constructor(
    */
 //          splitInstallManager.startConfirmationDialogForResult(it, this, CONFIRMATION_REQUEST_CODE)
         }
+        SplitInstallSessionStatus.DOWNLOADED -> Unit
+        SplitInstallSessionStatus.DOWNLOADING -> Unit
+        SplitInstallSessionStatus.UNKNOWN -> Unit
+        SplitInstallSessionStatus.PENDING -> Unit
         SplitInstallSessionStatus.INSTALLING -> Unit
-        SplitInstallSessionStatus.INSTALLED -> {
-          liveData.value = ViewState.Finish(moduleName)
-          featureInstaller.onFeatureInstalled(moduleName)
-        }
-        SplitInstallSessionStatus.FAILED -> {
-          publishError()
-        }
-        else -> {
-          publishError()
-        }
+        SplitInstallSessionStatus.INSTALLED -> publishSuccess()
+        SplitInstallSessionStatus.FAILED -> publishError()
+        SplitInstallSessionStatus.CANCELING -> publishError()
+        SplitInstallSessionStatus.CANCELED -> publishError()
+        else -> publishError()
       }
     }
 
