@@ -1,4 +1,4 @@
-package com.jraska.github.client.about.entrance.internal
+package com.jraska.github.client.dynamicbase.internal
 
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallRequest

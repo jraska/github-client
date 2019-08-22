@@ -1,19 +1,18 @@
-package com.jraska.github.client.about.entrance.internal
+package com.jraska.github.client.dynamicbase.internal
 
 import android.content.Context
 import com.google.android.play.core.splitinstall.SplitInstallManager
-import com.jraska.github.client.about.entrance.DynamicFeatureActivity
-import com.jraska.github.client.about.entrance.DynamicFeatureInstaller
+import com.jraska.github.client.dynamicbase.DynamicFeatureInstaller
 import io.reactivex.Completable
 import io.reactivex.subjects.PublishSubject
-import timber.log.Timber
-import javax.inject.Inject
+import io.reactivex.subjects.Subject
 
 internal class PlayDynamicFeatureInstaller constructor(
   private val splitInstallManager: SplitInstallManager,
   private val context: Context
 ) : DynamicFeatureInstaller {
-  private val installationRequests = mutableMapOf<String, PublishSubject<Unit>>()
+
+  private val installationRequests = mutableMapOf<String, Subject<Unit>>()
 
   override fun ensureInstalled(featureName: String): Completable {
     if (splitInstallManager.alreadyInstalled(featureName)) {
@@ -28,19 +27,19 @@ internal class PlayDynamicFeatureInstaller constructor(
     val publishSubject = PublishSubject.create<Unit>()
     installationRequests[featureName] = publishSubject
 
-    DynamicFeatureActivity.start(context, featureName)
+    FeatureInstallActivity.start(context, featureName)
 
     return publishSubject.ignoreElements()
   }
 
-  fun onFeatureInstalled(featureName: String) {
+  internal fun onFeatureInstalled(featureName: String) {
     val request = installationRequests[featureName] ?: return
 
     installationRequests.remove(featureName)
     request.onComplete()
   }
 
-  fun onFeatureInstallError(featureName: String, error: Throwable) {
+  internal fun onFeatureInstallError(featureName: String, error: Throwable) {
     val request = installationRequests[featureName] ?: return
 
     installationRequests.remove(featureName)

@@ -1,4 +1,4 @@
-package com.jraska.github.client.about.entrance.internal
+package com.jraska.github.client.dynamicbase.internal
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,6 @@ import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import com.jraska.github.client.common.lazyMap
-import com.jraska.github.client.rx.AppSchedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -34,9 +33,16 @@ internal class PlayInstallViewModel @Inject constructor(
       }
 
       Timber.d(it.toString())
+
+      fun publishError() {
+        val error = RuntimeException("Error downloaded")
+        liveData.value = ViewState.Error(error)
+        featureInstaller.onFeatureInstallError(moduleName, error)
+      }
+
       when (it.status()) {
-        SplitInstallSessionStatus.DOWNLOADED -> {}
-        SplitInstallSessionStatus.DOWNLOADING -> { }
+        SplitInstallSessionStatus.DOWNLOADED -> Unit
+        SplitInstallSessionStatus.DOWNLOADING -> Unit
         SplitInstallSessionStatus.REQUIRES_USER_CONFIRMATION -> {
           /*
     This may occur when attempting to download a sufficiently large module.
@@ -45,15 +51,16 @@ internal class PlayInstallViewModel @Inject constructor(
    */
 //          splitInstallManager.startConfirmationDialogForResult(it, this, CONFIRMATION_REQUEST_CODE)
         }
+        SplitInstallSessionStatus.INSTALLING -> Unit
         SplitInstallSessionStatus.INSTALLED -> {
           liveData.value = ViewState.Finish(moduleName)
           featureInstaller.onFeatureInstalled(moduleName)
         }
-        SplitInstallSessionStatus.INSTALLING -> {
-        }
         SplitInstallSessionStatus.FAILED -> {
-          liveData.value = ViewState.Error(RuntimeException("Error downloaded"))
-          featureInstaller.onFeatureInstallError(moduleName, RuntimeException("Error downloaded"))
+          publishError()
+        }
+        else -> {
+          publishError()
         }
       }
     }

@@ -1,17 +1,17 @@
-package com.jraska.github.client.about.entrance
+package com.jraska.github.client.about.entrance.internal
 
 import android.app.Activity
 import android.content.Intent
-import android.widget.Toast
+import com.jraska.github.client.about.entrance.R
 import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.core.android.TopActivityProvider
+import com.jraska.github.client.dynamicbase.DynamicFeatureInstaller
 import com.jraska.github.client.rx.AppSchedulers
 import okhttp3.HttpUrl
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class DynamicAboutLinkLauncher @Inject constructor(
+internal class DynamicAboutLinkLauncher @Inject constructor(
   val installer: DynamicFeatureInstaller,
   val appSchedulers: AppSchedulers,
   val topActivityProvider: TopActivityProvider
@@ -35,13 +35,7 @@ class DynamicAboutLinkLauncher @Inject constructor(
       .observeOn(appSchedulers.mainThread)
       .subscribe({
         val activity = topActivityProvider.get()
-
-        try{
-          activity.startActivity(launchIntent(activity))
-        } catch (x: Exception) {
-          Timber.e(x)
-          Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show()
-        }
+        activity.startActivity(launchIntent(activity))
       }, { Timber.e(it) })
   }
 

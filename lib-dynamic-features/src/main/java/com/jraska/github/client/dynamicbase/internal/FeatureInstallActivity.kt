@@ -1,4 +1,4 @@
-package com.jraska.github.client.about.entrance
+package com.jraska.github.client.dynamicbase.internal
 
 import android.content.Context
 import android.content.Intent
@@ -6,13 +6,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.google.android.play.core.splitcompat.SplitCompat
-import com.jraska.github.client.about.entrance.internal.PlayInstallViewModel
-import com.jraska.github.client.about.entrance.internal.PlayInstallViewModel.ViewState
+import com.jraska.github.client.dynamicbase.internal.PlayInstallViewModel.ViewState
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 import timber.log.Timber
 
-internal class DynamicFeatureActivity : BaseActivity() {
+internal class FeatureInstallActivity : BaseActivity() {
   private val viewModel by lazy { viewModel(PlayInstallViewModel::class.java) }
 
   override fun attachBaseContext(newBase: Context?) {
@@ -23,10 +22,12 @@ internal class DynamicFeatureActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    Timber.i("Launching")
-
     viewModel.moduleInstallation(moduleName())
       .observe(this, Observer { onNewState(it) })
+  }
+
+  override fun onBackPressed() {
+    // We will finish by ourselves for now
   }
 
   override fun finish() {
@@ -60,7 +61,7 @@ internal class DynamicFeatureActivity : BaseActivity() {
     private const val KEY_MODULE_NAME = "moduleName"
 
     fun start(context: Context, moduleName: String) {
-      val intent = Intent(context, DynamicFeatureActivity::class.java)
+      val intent = Intent(context, FeatureInstallActivity::class.java)
         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         .apply { putExtra(KEY_MODULE_NAME, moduleName) }
       context.startActivity(intent)

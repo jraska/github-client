@@ -1,4 +1,4 @@
-package com.jraska.github.client.about.entrance
+package com.jraska.github.client.dynamicbase
 
 import io.reactivex.Completable
 
