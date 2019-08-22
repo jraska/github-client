@@ -1,5 +1,6 @@
 package com.jraska.github.client.dynamicbase.internal
 
+import android.app.Activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,13 +18,18 @@ internal class PlayInstallViewModel @Inject constructor(
 ) : ViewModel() {
   private val liveDataMap = lazyMap(this::startInstalling)
   private val listeners = mutableListOf<SplitInstallStateUpdatedListener>()
+  private val confirmationDialog = MutableLiveData<ConfirmationDialogRequest>()
 
   fun moduleInstallation(moduleName: String): LiveData<ViewState> {
     return liveDataMap.getValue(moduleName)
   }
 
+  fun confirmationDialog(): LiveData<ConfirmationDialogRequest> {
+    return confirmationDialog
+  }
+
   private fun publishError(moduleName: String) {
-    val error = RuntimeException("Error downloaded")
+    val error = RuntimeException("Error installing feature")
     liveDataMap.getValue(moduleName).value = ViewState.Error(error)
     featureInstaller.onFeatureInstallError(moduleName, error)
   }
@@ -54,7 +60,7 @@ internal class PlayInstallViewModel @Inject constructor(
     Timber.d(it.toString())
 
     when (it.status()) {
-      SplitInstallSessionStatus.REQUIRES_USER_CONFIRMATION -> onConfirmationRequired(moduleName)
+      SplitInstallSessionStatus.REQUIRES_USER_CONFIRMATION -> onConfirmationRequired(it)
       SplitInstallSessionStatus.DOWNLOADED -> Unit
       SplitInstallSessionStatus.DOWNLOADING -> Unit
       SplitInstallSessionStatus.UNKNOWN -> Unit
@@ -68,12 +74,16 @@ internal class PlayInstallViewModel @Inject constructor(
     }
   }
 
-  private fun onConfirmationRequired(moduleName: String) {
-    /* This may occur when attempting to download a sufficiently large module.
-    In order to see this, the application has to be uploaded to the Play Store.
-    Then features can be requested until the confirmation path is triggered.*/
-    //    splitInstallManager.startConfirmationDialogForResult(it, this, CONFIRMATION_REQUEST_CODE)
-    throw NotImplementedError()
+  private fun onConfirmationRequired(state: SplitInstallSessionState) {
+    confirmationDialog.value = ConfirmationDialogRequest(state, splitInstallManager)
+  }
+
+  fun onConfirmationRequestCanceled(moduleName: String) {
+    publishError(moduleName)
+  }
+
+  fun onConfirmationRequestSuccess(moduleName: String) {
+    // We need to wait just for the listener
   }
 
   sealed class ViewState {
@@ -89,6 +99,18 @@ internal class PlayInstallViewModel @Inject constructor(
       }
 
       viewModel.onModuleStateUpdate(it, moduleName)
+    }
+  }
+
+  class ConfirmationDialogRequest(
+    private val state: SplitInstallSessionState,
+    private val splitInstallManager: SplitInstallManager
+  ) {
+    var consumed = false
+
+    fun consume(activity: Activity, requestCode: Int) {
+      consumed = true
+      splitInstallManager.startConfirmationDialogForResult(state, activity, requestCode)
     }
   }
 }

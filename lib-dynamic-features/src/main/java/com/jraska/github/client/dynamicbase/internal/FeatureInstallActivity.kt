@@ -1,18 +1,24 @@
 package com.jraska.github.client.dynamicbase.internal
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.google.android.play.core.splitcompat.SplitCompat
-import com.jraska.github.client.dynamicbase.internal.PlayInstallViewModel.ViewState
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
+import com.jraska.github.client.dynamicbase.internal.PlayInstallViewModel.ConfirmationDialogRequest
+import com.jraska.github.client.dynamicbase.internal.PlayInstallViewModel.ViewState
 import timber.log.Timber
+
+private const val CONFIRMATION_REQUEST_CODE = 101
 
 internal class FeatureInstallActivity : BaseActivity() {
   private val viewModel by lazy { viewModel(PlayInstallViewModel::class.java) }
+
+  private fun moduleName() = intent.getStringExtra(KEY_MODULE_NAME)
 
   override fun attachBaseContext(newBase: Context?) {
     super.attachBaseContext(newBase)
@@ -22,8 +28,8 @@ internal class FeatureInstallActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    viewModel.moduleInstallation(moduleName())
-      .observe(this, Observer { onNewState(it) })
+    viewModel.moduleInstallation(moduleName()).observe(this, Observer { onNewState(it) })
+    viewModel.confirmationDialog().observe(this, Observer { onConfirmationDialog(it) })
   }
 
   override fun onBackPressed() {
@@ -34,8 +40,6 @@ internal class FeatureInstallActivity : BaseActivity() {
     overridePendingTransition(0, 0)
     super.finish()
   }
-
-  private fun moduleName() = intent.getStringExtra(KEY_MODULE_NAME)
 
   private fun onNewState(viewState: ViewState) {
     when (viewState) {
@@ -48,6 +52,23 @@ internal class FeatureInstallActivity : BaseActivity() {
         displayError(viewState.error)
         finish()
       }
+    }
+  }
+
+  private fun onConfirmationDialog(dialogRequest: ConfirmationDialogRequest) {
+    if (!dialogRequest.consumed) {
+      dialogRequest.consume(this, CONFIRMATION_REQUEST_CODE)
+    }
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    when (requestCode) {
+      CONFIRMATION_REQUEST_CODE -> if (resultCode == Activity.RESULT_CANCELED) {
+        viewModel.onConfirmationRequestCanceled(moduleName())
+      } else {
+        viewModel.onConfirmationRequestSuccess(moduleName())
+      }
+      else -> super.onActivityResult(requestCode, resultCode, data)
     }
   }
 
