@@ -2,12 +2,14 @@ package com.jraska.github.client
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
-import com.jraska.github.client.about.AboutModule
+import com.jraska.github.client.about.entrance.AboutFeatureEntranceModule
+import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.dynamicbase.DynamicFeaturesModule
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.identity.IdentityModule
+import com.jraska.github.client.identity.IdentityProvider
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.settings.SettingsModule
 import com.jraska.github.client.shortcuts.ShortcutsModule
@@ -26,7 +28,7 @@ import dagger.Subcomponent
     UsersModule::class,
     PushModule::class,
     SettingsModule::class,
-    AboutModule::class,
+    AboutFeatureEntranceModule::class,
     ShortcutsModule::class],
   dependencies = [
     HttpComponentDelegate::class,
@@ -57,6 +59,11 @@ interface AppComponent {
 
 @Subcomponent
 interface DynamicFeaturesComponent {
+  fun navigator(): Navigator
+
+  fun identityProvider(): IdentityProvider
+
+  fun eventAnalytics(): EventAnalytics
 }
 
 class HttpComponentDelegate(private val httpComponent: HttpComponent) : HttpComponent by httpComponent

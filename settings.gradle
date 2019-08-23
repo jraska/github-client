@@ -10,5 +10,6 @@ include ':client',
   ':feature:users',
   ':feature:push',
   ':feature:settings',
+  ':feature:about_entrance',
   ':feature:about',
   ':feature:shortcuts'

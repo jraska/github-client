@@ -1,19 +1,33 @@
 package com.jraska.github.client.about
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
+import com.google.android.play.core.splitcompat.SplitCompat
+import com.jraska.github.client.DynamicFeaturesComponent
 import com.jraska.github.client.core.android.BaseActivity
-import com.jraska.github.client.core.android.viewModel
-import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.content_about.*
+import com.jraska.github.client.core.android.ViewModelFactory
+import com.jraska.github.client.dynamicFeaturesComponent
+import dagger.Component
+import kotlinx.android.synthetic.main.activity_about.toolbar
+import kotlinx.android.synthetic.main.content_about.about_recycler
 
 internal class AboutActivity : BaseActivity() {
 
-  private val viewModel: AboutViewModel by lazy { viewModel(AboutViewModel::class.java) }
+  private val viewModel: AboutViewModel by lazy {
+    ViewModelProviders.of(this, viewModelFactory()).get(AboutViewModel::class.java)
+  }
+
+  override fun attachBaseContext(newBase: Context?) {
+    super.attachBaseContext(newBase)
+    SplitCompat.install(this)
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -48,4 +62,19 @@ internal class AboutActivity : BaseActivity() {
       inActivity.startActivity(intent)
     }
   }
+
+  private fun viewModelFactory(): ViewModelProvider.Factory {
+    return DaggerAboutComponent.builder()
+      .dynamicFeaturesComponent(dynamicFeaturesComponent())
+      .build()
+      .viewModelFactory()
+  }
+}
+
+@Component(
+  modules = [AboutModule::class],
+  dependencies = [DynamicFeaturesComponent::class]
+)
+internal interface AboutComponent {
+  fun viewModelFactory(): ViewModelFactory
 }

@@ -18,11 +18,4 @@ object AboutModule {
   internal fun provideViewModel(viewModel: AboutViewModel): ViewModel {
     return viewModel
   }
-
-  @JvmStatic
-  @Provides
-  @IntoSet
-  internal fun provideLauncher(): LinkLauncher {
-    return AboutLinkLauncher()
-  }
 }

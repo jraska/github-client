@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.dynamic-feature'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -16,6 +16,9 @@ android {
 }
 
 dependencies {
+
+  implementation project(':client')
+
   api project(':core')
   api project(':core-android')
   api project(':lib-identity')
