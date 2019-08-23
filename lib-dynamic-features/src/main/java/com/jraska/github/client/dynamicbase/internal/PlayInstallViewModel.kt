@@ -28,20 +28,9 @@ internal class PlayInstallViewModel @Inject constructor(
     return confirmationDialog
   }
 
-  private fun publishError(moduleName: String) {
-    val error = RuntimeException("Error installing feature")
-    liveDataMap.getValue(moduleName).value = ViewState.Error(error)
-    featureInstaller.onFeatureInstallError(moduleName, error)
-  }
-
-  private fun publishSuccess(moduleName: String) {
-    liveDataMap.getValue(moduleName).value = ViewState.Finish
-    featureInstaller.onFeatureInstalled(moduleName)
-  }
-
   private fun startInstalling(moduleName: String): MutableLiveData<ViewState> {
     val liveData = MutableLiveData<ViewState>()
-    liveData.value = ViewState.Loading
+    liveData.value = ViewState.Pending(moduleName)
 
     splitInstallManager.beginInstallation(moduleName)
 
@@ -62,10 +51,10 @@ internal class PlayInstallViewModel @Inject constructor(
     when (it.status()) {
       SplitInstallSessionStatus.REQUIRES_USER_CONFIRMATION -> onConfirmationRequired(it)
       SplitInstallSessionStatus.DOWNLOADED -> Unit
-      SplitInstallSessionStatus.DOWNLOADING -> Unit
+      SplitInstallSessionStatus.DOWNLOADING -> downloading(moduleName, it)
       SplitInstallSessionStatus.UNKNOWN -> Unit
-      SplitInstallSessionStatus.PENDING -> Unit
-      SplitInstallSessionStatus.INSTALLING -> Unit
+      SplitInstallSessionStatus.PENDING -> pending(moduleName)
+      SplitInstallSessionStatus.INSTALLING -> installing(moduleName)
       SplitInstallSessionStatus.INSTALLED -> publishSuccess(moduleName)
       SplitInstallSessionStatus.FAILED -> publishError(moduleName)
       SplitInstallSessionStatus.CANCELING -> publishError(moduleName)
@@ -74,8 +63,31 @@ internal class PlayInstallViewModel @Inject constructor(
     }
   }
 
+  private fun installing(moduleName: String) {
+    liveDataMap.getValue(moduleName).value = ViewState.Installing(moduleName)
+  }
+
+  private fun pending(moduleName: String) {
+    liveDataMap.getValue(moduleName).value = ViewState.Pending(moduleName)
+  }
+
   private fun onConfirmationRequired(state: SplitInstallSessionState) {
     confirmationDialog.value = ConfirmationDialogRequest(state, splitInstallManager)
+  }
+
+  private fun downloading(moduleName: String, it: SplitInstallSessionState) {
+    liveDataMap.getValue(moduleName).value = ViewState.Downloading(moduleName, it.bytesDownloaded(), it.totalBytesToDownload())
+  }
+
+  private fun publishError(moduleName: String) {
+    val error = RuntimeException("Error installing feature")
+    liveDataMap.getValue(moduleName).value = ViewState.Error(moduleName, error)
+    featureInstaller.onFeatureInstallError(moduleName, error)
+  }
+
+  private fun publishSuccess(moduleName: String) {
+    liveDataMap.getValue(moduleName).postValue(ViewState.Finish)
+    featureInstaller.onFeatureInstalled(moduleName)
   }
 
   fun onConfirmationRequestCanceled(moduleName: String) {
@@ -83,13 +95,15 @@ internal class PlayInstallViewModel @Inject constructor(
   }
 
   fun onConfirmationRequestSuccess(moduleName: String) {
-    // We need to wait just for the listener
+    // We need to wait only for the listener
   }
 
   sealed class ViewState {
-    object Loading : ViewState()
+    class Pending(val moduleName: String) : ViewState()
+    class Downloading(val moduleName: String, val fraction: Long, val total: Long) : ViewState()
+    class Installing(val moduleName: String) : ViewState()
     object Finish : ViewState()
-    class Error(val error: Throwable) : ViewState()
+    class Error(val moduleName: String, val error: Throwable) : ViewState()
   }
 
   class Listener(val moduleName: String, val viewModel: PlayInstallViewModel) : SplitInstallStateUpdatedListener {

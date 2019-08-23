@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,6 +12,7 @@ import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.jraska.github.client.DynamicFeaturesComponent
 import com.jraska.github.client.core.android.BaseActivity
+import com.jraska.github.client.core.android.ViewModelFactory
 import com.jraska.github.client.dynamicFeaturesComponent
 import dagger.Component
 import kotlinx.android.synthetic.main.activity_about.toolbar
@@ -63,18 +63,11 @@ internal class AboutActivity : BaseActivity() {
     }
   }
 
-  fun viewModelFactory(): ViewModelProvider.Factory {
-    return object : ViewModelProvider.Factory {
-      @Suppress("UNCHECKED_CAST")
-      override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val aboutViewModel = DaggerAboutComponent.builder()
-          .dynamicFeaturesComponent(dynamicFeaturesComponent())
-          .build()
-          .aboutViewModel()
-
-        return aboutViewModel as T
-      }
-    }
+  private fun viewModelFactory(): ViewModelProvider.Factory {
+    return DaggerAboutComponent.builder()
+      .dynamicFeaturesComponent(dynamicFeaturesComponent())
+      .build()
+      .viewModelFactory()
   }
 }
 
@@ -83,5 +76,5 @@ internal class AboutActivity : BaseActivity() {
   dependencies = [DynamicFeaturesComponent::class]
 )
 internal interface AboutComponent {
-  fun aboutViewModel(): AboutViewModel
+  fun viewModelFactory(): ViewModelFactory
 }

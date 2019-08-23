@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="feature_downloading">Downloading %s</string>
+  <string name="feature_pending">Pending install for %s</string>
+  <string name="feature_installing">Installing %s</string>
+  <string name="feature_module_name">Error installing %s</string>
+</resources>
