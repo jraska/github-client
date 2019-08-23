@@ -14,6 +14,7 @@ import com.jraska.github.client.shortcuts.ShortcutsModule
 import com.jraska.github.client.users.UsersModule
 import dagger.BindsInstance
 import dagger.Component
+import dagger.Subcomponent
 
 @PerApp
 @Component(
@@ -40,6 +41,8 @@ interface AppComponent {
 
   fun viewModelFactory(): ViewModelProvider.Factory
 
+  fun dynamicFeaturesComponent(): DynamicFeaturesComponent
+
   @Component.Builder
   interface Builder {
     fun build(): AppComponent
@@ -50,6 +53,10 @@ interface AppComponent {
     @BindsInstance
     fun appContext(context: Context): Builder
   }
+}
+
+@Subcomponent
+interface DynamicFeaturesComponent {
 }
 
 class HttpComponentDelegate(private val httpComponent: HttpComponent) : HttpComponent by httpComponent
