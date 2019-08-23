@@ -7,8 +7,6 @@ import timber.log.Timber
 
 internal class SetupConsoleLogging : OnAppCreate {
   override fun onCreate(app: Application) {
-    if (BuildConfig.DEBUG) {
-      Timber.plant(ConsoleTree.create())
-    }
+    Timber.plant(ConsoleTree.create())
   }
 }
