@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.jraska.github.client.about.AboutModule
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
+import com.jraska.github.client.dynamicbase.DynamicFeaturesModule
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.push.PushModule
@@ -19,6 +20,7 @@ import dagger.Component
   modules = [
     AppModule::class,
     NavigationModule::class,
+    DynamicFeaturesModule::class,
     IdentityModule::class,
     UsersModule::class,
     PushModule::class,

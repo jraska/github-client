@@ -5,6 +5,7 @@ include ':client',
   ':core-android',
 
   ':lib-identity',
+  ':lib-dynamic-features',
 
   ':feature:users',
   ':feature:push',
