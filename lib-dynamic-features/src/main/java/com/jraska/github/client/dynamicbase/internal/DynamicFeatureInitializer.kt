@@ -23,6 +23,12 @@ internal class DynamicFeatureInitializer constructor(
     splitInstallManager.registerListener(listener)
   }
 
+  override fun priority(): Int {
+    return needsToRunAfterEverythingElse()
+  }
+
+  private fun needsToRunAfterEverythingElse() = Int.MIN_VALUE
+
   private fun onModulesInstalled(moduleNames: List<String>) {
     loadModules(moduleNames)
   }
