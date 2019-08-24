@@ -17,12 +17,10 @@ internal class DynamicFeatureInitializer constructor(
 
   val listener = InstallationsListener(this)
 
-  init {
-    splitInstallManager.registerListener(listener)
-  }
-
   override fun onCreate(app: Application) {
     loadModules(splitInstallManager.installedModules)
+
+    splitInstallManager.registerListener(listener)
   }
 
   private fun onModulesInstalled(moduleNames: List<String>) {

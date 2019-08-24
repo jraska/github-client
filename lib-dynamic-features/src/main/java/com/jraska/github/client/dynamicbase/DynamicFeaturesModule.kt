@@ -9,7 +9,6 @@ import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.dynamicbase.internal.DynamicFeatureInitializer
 import com.jraska.github.client.dynamicbase.internal.PlayDynamicFeatureInstaller
 import com.jraska.github.client.dynamicbase.internal.PlayInstallViewModel
-import com.jraska.github.client.dynamicbase.internal.SplitCompatInstallOnCreate
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
