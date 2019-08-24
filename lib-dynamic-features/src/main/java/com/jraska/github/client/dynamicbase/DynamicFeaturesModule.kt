@@ -8,7 +8,6 @@ import com.jraska.github.client.PerApp
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.dynamicbase.internal.PlayDynamicFeatureInstaller
 import com.jraska.github.client.dynamicbase.internal.PlayInstallViewModel
-import com.jraska.github.client.dynamicbase.internal.SplitCompatInstallOnCreate
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
@@ -17,13 +16,6 @@ import dagger.multibindings.IntoSet
 
 @Module
 object DynamicFeaturesModule {
-
-  @JvmStatic
-  @Provides
-  @IntoSet
-  internal fun splitInstallSetup(): OnAppCreate {
-    return SplitCompatInstallOnCreate()
-  }
 
   @JvmStatic
   @Provides

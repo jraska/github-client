@@ -1,8 +1,10 @@
 package com.jraska.github.client
 
 import android.app.Application
+import android.content.Context
 import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.perf.metrics.AddTrace
 import com.jraska.github.client.core.android.HasServiceModelFactory
 import com.jraska.github.client.core.android.HasViewModelFactory
@@ -31,14 +33,21 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
     return appComponent.dynamicFeaturesComponent()
   }
 
+  override fun attachBaseContext(base: Context) {
+    super.attachBaseContext(base)
+    SplitCompat.install(this)
+  }
+
   @AddTrace(name = "App.onCreate")
   override fun onCreate() {
     super.onCreate()
 
     initRxAndroidMainThread()
-    appComponent.onAppCreateActions().forEach {
-      it.onCreate(this)
-    }
+    appComponent.onAppCreateActions()
+      .sortedByDescending { it.priority() }
+      .forEach {
+        it.onCreate(this)
+      }
   }
 
   private fun initRxAndroidMainThread() {
