@@ -36,7 +36,7 @@ internal class DynamicFeatureInitializer constructor(
   private fun loadModules(moduleNames: Iterable<String>) {
     moduleNames.forEach { installedFeature ->
       val dynamicFeature = featureSpecs.getValue(installedFeature).get()
-      dynamicFeature.onLoad()
+      dynamicFeature.onFeatureCreate()
     }
   }
 

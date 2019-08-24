@@ -6,7 +6,7 @@ import timber.log.Timber
 
 @Keep // Used by reflection
 class AboutFeature : DynamicFeature {
-  override fun onLoad() {
+  override fun onFeatureCreate() {
     Timber.i("about feature loaded")
   }
 }
