@@ -15,8 +15,8 @@ android {
     applicationId "com.jraska.github.client"
     minSdkVersion 21
     targetSdkVersion 28
-    versionName '0.16.0'
-    versionCode 48
+    versionName '0.17.0'
+    versionCode 50
     multiDexEnabled true
 
     testInstrumentationRunner "com.jraska.github.client.TestRunner"
@@ -49,12 +49,16 @@ android {
   buildTypes {
     debug {
       signingConfig signingConfigs.debug
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
       applicationIdSuffix '.dev'
       versionNameSuffix '-dev'
     }
 
     release {
       signingConfig signingConfigs.release
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
 
