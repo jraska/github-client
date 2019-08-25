@@ -9,6 +9,7 @@ include ':client',
 
   ':feature:users',
   ':feature:push',
+  ':feature:settings_entrance',
   ':feature:settings',
   ':feature:about_entrance',
   ':feature:about',

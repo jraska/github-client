@@ -1,17 +1,31 @@
 package com.jraska.github.client.settings
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.SimpleEpoxyAdapter
+import com.google.android.play.core.splitcompat.SplitCompat
+import com.jraska.github.client.DynamicFeaturesComponent
 import com.jraska.github.client.core.android.BaseActivity
-import com.jraska.github.client.core.android.viewModel
+import com.jraska.github.client.core.android.ViewModelFactory
+import com.jraska.github.client.dynamicFeaturesComponent
+import dagger.Component
 import kotlinx.android.synthetic.main.activity_settings.toolbar
 import kotlinx.android.synthetic.main.content_settings.settings_recycler
 
 internal class SettingsActivity : BaseActivity() {
-  private val viewModel: SettingsViewModel by lazy { viewModel(SettingsViewModel::class.java) }
+  private val viewModel: SettingsViewModel by lazy {
+    ViewModelProviders.of(this, viewModelFactory()).get(SettingsViewModel::class.java)
+  }
+
+  override fun attachBaseContext(newBase: Context?) {
+    super.attachBaseContext(newBase)
+    SplitCompat.install(this)
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -29,10 +43,18 @@ internal class SettingsActivity : BaseActivity() {
     viewModel.onPurchaseSubmitted(value)
   }
 
-  companion object {
-    fun start(inActivity: Activity) {
-      val intent = Intent(inActivity, SettingsActivity::class.java)
-      inActivity.startActivity(intent)
-    }
+  private fun viewModelFactory(): ViewModelProvider.Factory {
+    return DaggerSettingsComponent.builder()
+      .dynamicFeaturesComponent(dynamicFeaturesComponent())
+      .build()
+      .viewModelFactory()
   }
+}
+
+@Component(
+  modules = [SettingsModule::class],
+  dependencies = [DynamicFeaturesComponent::class]
+)
+internal interface SettingsComponent {
+  fun viewModelFactory(): ViewModelFactory
 }

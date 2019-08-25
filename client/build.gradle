@@ -15,8 +15,8 @@ android {
     applicationId "com.jraska.github.client"
     minSdkVersion 21
     targetSdkVersion 28
-    versionName '0.15.7'
-    versionCode 47
+    versionName '0.16.0'
+    versionCode 48
     multiDexEnabled true
 
     testInstrumentationRunner "com.jraska.github.client.TestRunner"
@@ -62,7 +62,7 @@ android {
     unitTests.returnDefaultValues = true
   }
 
-  dynamicFeatures = [":feature:about"]
+  dynamicFeatures = [":feature:about", ":feature:settings"]
 }
 
 dependencies {
@@ -74,7 +74,7 @@ dependencies {
   api project(':lib-dynamic-features')
   api project(':feature:push')
   api project(':feature:users')
-  api project(':feature:settings')
+  api project(':feature:settings_entrance')
   api project(':feature:about_entrance')
   api project(':feature:shortcuts')
 

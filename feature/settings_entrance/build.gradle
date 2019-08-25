@@ -1,4 +1,4 @@
-apply plugin: 'com.android.dynamic-feature'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
@@ -19,15 +19,7 @@ dependencies {
   api project(':core')
   api project(':core-android')
   implementation project(':lib-dynamic-features')
-  implementation project(':client')
-
-  api 'com.airbnb.android:epoxy:3.7.0'
-  api 'com.jraska:console:1.0.0'
-  api 'com.jraska:console-timber-tree:1.0.0'
 
   implementation 'com.google.dagger:dagger:2.24'
   kapt 'com.google.dagger:dagger-compiler:2.24'
-
-  testImplementation 'junit:junit:4.12'
-  testImplementation 'org.assertj:assertj-core:3.12.2'
 }

@@ -11,7 +11,7 @@ import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.identity.IdentityProvider
 import com.jraska.github.client.push.PushModule
-import com.jraska.github.client.settings.SettingsModule
+import com.jraska.github.client.settings.entrance.SettingsEntranceModule
 import com.jraska.github.client.shortcuts.ShortcutsModule
 import com.jraska.github.client.users.UsersModule
 import dagger.BindsInstance
@@ -27,7 +27,7 @@ import dagger.Subcomponent
     IdentityModule::class,
     UsersModule::class,
     PushModule::class,
-    SettingsModule::class,
+    SettingsEntranceModule::class,
     AboutFeatureEntranceModule::class,
     ShortcutsModule::class],
   dependencies = [
