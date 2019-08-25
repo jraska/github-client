@@ -5,14 +5,14 @@ apply plugin: 'kotlin'
 dependencies {
   api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-  api 'io.reactivex.rxjava2:rxjava:2.2.10'
-  api 'com.squareup.okhttp3:okhttp:4.0.1'
-  api 'com.squareup.okio:okio:2.2.2'
+  api 'io.reactivex.rxjava2:rxjava:2.2.11'
+  api 'com.squareup.okhttp3:okhttp:4.1.0'
+  api 'com.squareup.okio:okio:2.3.0'
 
   api 'org.threeten:threetenbp:1.4.0:no-tzdb'
   api 'javax.inject:javax.inject:1'
 
   testImplementation 'junit:junit:4.12'
-  testImplementation 'org.assertj:assertj-core:3.12.2'
+  testImplementation 'org.assertj:assertj-core:3.13.2'
   testImplementation 'org.mockito:mockito-core:3.0.0'
 }

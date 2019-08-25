@@ -84,10 +84,10 @@ dependencies {
 
   implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-  implementation 'com.google.android.material:material:1.1.0-alpha08'
+  implementation 'com.google.android.material:material:1.1.0-alpha09'
   implementation 'androidx.cardview:cardview:1.0.0'
   implementation 'androidx.browser:browser:1.0.0'
-  implementation 'androidx.core:core:1.2.0-alpha02'
+  implementation 'androidx.core:core:1.2.0-alpha03'
   implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0-rc01'
   implementation 'androidx.media:media:1.1.0-rc01'
 
@@ -117,7 +117,7 @@ dependencies {
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
   androidTestImplementation 'androidx.test:runner:1.2.0'
   androidTestImplementation 'androidx.test:rules:1.2.0'
-  androidTestImplementation 'org.assertj:assertj-core:3.12.2'
+  androidTestImplementation 'org.assertj:assertj-core:3.13.2'
   androidTestImplementation 'org.mockito:mockito-core:3.0.0'
   androidTestImplementation 'org.mockito:mockito-android:3.0.0'
   androidTestImplementation 'com.airbnb.okreplay:okreplay:1.4.0'

@@ -23,5 +23,5 @@ dependencies {
   implementation project(':lib-dynamic-features')
 
   testImplementation 'junit:junit:4.12'
-  testImplementation 'org.assertj:assertj-core:3.12.2'
+  testImplementation 'org.assertj:assertj-core:3.13.2'
 }
