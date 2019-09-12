@@ -18,7 +18,7 @@ internal class DynamicSettingsLinkLauncher @Inject constructor(
 ) : LinkLauncher {
   override fun launch(inActivity: Activity, deepLink: HttpUrl): LinkLauncher.Result {
     return if ("/settings" == deepLink.encodedPath) {
-      installAndLaunchSettingsFeature(inActivity)
+      installAndLaunchSettingsFeature(inActivity.getString(R.string.title_dynamic_feature_settings))
       LinkLauncher.Result.LAUNCHED
     } else {
       LinkLauncher.Result.NOT_LAUNCHED
@@ -27,16 +27,12 @@ internal class DynamicSettingsLinkLauncher @Inject constructor(
 
   override fun priority(): LinkLauncher.Priority = LinkLauncher.Priority.EXACT_MATCH
 
-  private fun installAndLaunchSettingsFeature(inActivity: Activity) {
-    val aboutFeature = inActivity.getString(R.string.title_dynamic_feature_settings)
-
-    installer.ensureInstalled(aboutFeature)
+  private fun installAndLaunchSettingsFeature(featureName: String) {
+    installer.ensureInstalled(featureName)
+      .andThen(topActivityProvider.topActivity())
       .subscribeOn(appSchedulers.io)
       .observeOn(appSchedulers.mainThread)
-      .subscribe({
-        val activity = topActivityProvider.get()
-        activity.startActivity(launchIntent(activity))
-      }, { Timber.e(it) })
+      .subscribe({ it.startActivity(launchIntent(it)) }, { Timber.e(it) })
   }
 
   private fun launchIntent(inActivity: Activity): Intent {

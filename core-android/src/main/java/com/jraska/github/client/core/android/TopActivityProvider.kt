@@ -3,25 +3,59 @@ package com.jraska.github.client.core.android
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
-import javax.inject.Provider
+class TopActivityProvider {
+  private val topActivitySubject = BehaviorSubject.createDefault<Any>(NO_ACTIVITY)
+  private val resumedActivitySubject = BehaviorSubject.createDefault<Any>(NO_ACTIVITY)
 
-class TopActivityProvider : Provider<Activity> {
-  private var topActivity: Activity? = null
+  fun topActivity(): Single<Activity> {
+    return topActivitySubject.filter { it is Activity }
+      .take(1)
+      .cast(Activity::class.java)
+      .firstOrError()
+  }
+
+  fun resumedActivity(): Single<Activity> {
+    return resumedActivitySubject.filter { it is Activity }
+      .take(1)
+      .cast(Activity::class.java)
+      .firstOrError()
+  }
+
+  fun topActivitySync(): Activity? {
+    val value = topActivitySubject.value
+    if (value is Activity) {
+      return value
+    } else {
+      return null
+    }
+  }
 
   private val callbacks: Application.ActivityLifecycleCallbacks = object : Application.ActivityLifecycleCallbacks {
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-      topActivity = activity
+      topActivitySubject.onNext(activity)
     }
 
-    override fun onActivityStarted(activity: Activity) {}
+    override fun onActivityStarted(activity: Activity) {
+      topActivitySubject.onNext(activity)
+    }
 
     override fun onActivityResumed(activity: Activity) {
-      topActivity = activity
+      topActivitySubject.onNext(activity)
+      resumedActivitySubject.onNext(activity)
     }
 
-    override fun onActivityPaused(activity: Activity) {}
+    override fun onActivityPaused(activity: Activity) {
+      if (resumedActivitySubject.value == activity) {
+        resumedActivitySubject.onNext(NO_ACTIVITY)
+      }
+
+      topActivitySubject.onNext(NO_ACTIVITY)
+    }
 
     override fun onActivityStopped(activity: Activity) {}
 
@@ -30,13 +64,13 @@ class TopActivityProvider : Provider<Activity> {
     override fun onActivityDestroyed(activity: Activity) {}
   }
 
-  override fun get(): Activity {
-    return topActivity ?: throw IllegalStateException("No activity")
-  }
-
   class RegisterCallbacks @Inject constructor(private val topActivityProvider: TopActivityProvider) : OnAppCreate {
     override fun onCreate(app: Application) {
       app.registerActivityLifecycleCallbacks(topActivityProvider.callbacks)
     }
+  }
+
+  companion object {
+    val NO_ACTIVITY = Unit
   }
 }
