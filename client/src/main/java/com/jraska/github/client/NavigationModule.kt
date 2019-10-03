@@ -5,6 +5,7 @@ import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.core.android.RealDeepLinkLauncher
 import com.jraska.github.client.core.android.TopActivityProvider
 import com.jraska.github.client.core.android.UriHandlerViewModel
+import com.jraska.github.client.rx.AppSchedulers
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
@@ -29,8 +30,8 @@ object NavigationModule {
 
   @JvmStatic
   @Provides
-  fun webLinkLauncher(provider: TopActivityProvider): WebLinkLauncher {
-    return ChromeCustomTabsLauncher(provider)
+  fun webLinkLauncher(provider: TopActivityProvider, appSchedulers: AppSchedulers): WebLinkLauncher {
+    return ChromeCustomTabsLauncher(provider, appSchedulers)
   }
 
   @JvmStatic

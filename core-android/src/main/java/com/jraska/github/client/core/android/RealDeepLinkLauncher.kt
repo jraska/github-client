@@ -1,13 +1,11 @@
 package com.jraska.github.client.core.android
 
-import android.app.Activity
 import com.jraska.github.client.DeepLinkLauncher
 import okhttp3.HttpUrl
 import timber.log.Timber
-import javax.inject.Provider
 
 class RealDeepLinkLauncher private constructor(
-  private val topActivityProvider: Provider<Activity>,
+  private val topActivityProvider: TopActivityProvider,
   private val launchers: List<LinkLauncher>
 ) : DeepLinkLauncher {
   override fun launch(deepLink: HttpUrl) {
@@ -17,7 +15,8 @@ class RealDeepLinkLauncher private constructor(
 
     Timber.i("Launching %s", deepLink)
 
-    val activity = topActivityProvider.get()
+    val activity = topActivityProvider.topActivitySync() ?: throw IllegalStateException("No top activity")
+
     for (launcher in launchers) {
       val result = launcher.launch(activity, deepLink)
       if (result == LinkLauncher.Result.LAUNCHED) {
@@ -29,7 +28,7 @@ class RealDeepLinkLauncher private constructor(
   }
 
   companion object {
-    fun create(activityProvider: Provider<Activity>, launchers: Set<LinkLauncher>): RealDeepLinkLauncher {
+    fun create(activityProvider: TopActivityProvider, launchers: Set<LinkLauncher>): RealDeepLinkLauncher {
       val sortedLaunchers = launchers.sortedBy { it.priority().value }
       return RealDeepLinkLauncher(activityProvider, sortedLaunchers)
     }

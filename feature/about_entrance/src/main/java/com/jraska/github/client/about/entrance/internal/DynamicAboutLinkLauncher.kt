@@ -18,7 +18,7 @@ internal class DynamicAboutLinkLauncher @Inject constructor(
 ) : LinkLauncher {
   override fun launch(inActivity: Activity, deepLink: HttpUrl): LinkLauncher.Result {
     return if ("/about" == deepLink.encodedPath) {
-      installAndLaunchAboutFeature(inActivity)
+      installAndLaunchAboutFeature(inActivity.getString(R.string.title_dynamic_feature_about))
       LinkLauncher.Result.LAUNCHED
     } else {
       LinkLauncher.Result.NOT_LAUNCHED
@@ -27,15 +27,13 @@ internal class DynamicAboutLinkLauncher @Inject constructor(
 
   override fun priority(): LinkLauncher.Priority = LinkLauncher.Priority.EXACT_MATCH
 
-  private fun installAndLaunchAboutFeature(inActivity: Activity) {
-    val aboutFeature = inActivity.getString(R.string.title_dynamic_feature_about)
-
-    installer.ensureInstalled(aboutFeature)
+  private fun installAndLaunchAboutFeature(featureName: String) {
+    installer.ensureInstalled(featureName)
+      .andThen(topActivityProvider.topActivity())
       .subscribeOn(appSchedulers.io)
       .observeOn(appSchedulers.mainThread)
       .subscribe({
-        val activity = topActivityProvider.get()
-        activity.startActivity(launchIntent(activity))
+        it.startActivity(launchIntent(it))
       }, { Timber.e(it) })
   }
 
