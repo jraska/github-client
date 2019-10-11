@@ -6,6 +6,7 @@ include ':client',
 
   ':lib:identity',
   ':lib:dynamic-features',
+  ':lib:network-status',
 
   ':feature:users',
   ':feature:push',
