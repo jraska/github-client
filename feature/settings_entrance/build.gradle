@@ -18,7 +18,7 @@ android {
 dependencies {
   api project(':core')
   api project(':core-android')
-  implementation project(':lib-dynamic-features')
+  implementation project(':lib:dynamic-features')
 
   implementation 'com.google.dagger:dagger:2.24'
   kapt 'com.google.dagger:dagger-compiler:2.24'
