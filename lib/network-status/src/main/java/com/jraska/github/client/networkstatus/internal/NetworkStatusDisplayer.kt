@@ -65,6 +65,3 @@ internal class NetworkStatusDisplayer @Inject constructor(
     }
   }
 }
-
-
-
