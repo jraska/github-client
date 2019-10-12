@@ -10,6 +10,7 @@ import com.jraska.github.client.dynamicbase.DynamicFeaturesModule
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.identity.IdentityProvider
+import com.jraska.github.client.networkstatus.NetworkStatusModule
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.settings.entrance.SettingsEntranceModule
 import com.jraska.github.client.shortcuts.ShortcutsModule
@@ -25,6 +26,7 @@ import dagger.Subcomponent
     NavigationModule::class,
     DynamicFeaturesModule::class,
     IdentityModule::class,
+    NetworkStatusModule::class,
     UsersModule::class,
     PushModule::class,
     SettingsEntranceModule::class,
