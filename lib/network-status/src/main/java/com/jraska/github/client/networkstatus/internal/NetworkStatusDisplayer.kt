@@ -1,10 +1,9 @@
 package com.jraska.github.client.networkstatus.internal
 
 import android.app.Activity
-import android.app.Application
-import android.os.Bundle
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
+import com.jraska.github.client.core.android.DefaultActivityCallbacks
 import com.jraska.github.client.networkstatus.R
 import com.jraska.github.client.rx.AppSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -18,14 +17,14 @@ internal class NetworkStatusDisplayer @Inject constructor(
   private val compositeDisposable = CompositeDisposable()
   private var offlineSnackbar: Snackbar? = null
 
-  fun onResume(activity: Activity) {
+  fun onActivityResumed(activity: Activity) {
     networkObservable.connectedObservable()
       .observeOn(appSchedulers.mainThread)
       .subscribe { showState(activity, it) }
       .also { compositeDisposable.add(it) }
   }
 
-  fun onPause(unused: Activity) {
+  fun onActivityPaused() {
     dismissAnySnackbar()
     compositeDisposable.clear()
   }
@@ -55,25 +54,15 @@ internal class NetworkStatusDisplayer @Inject constructor(
 
   internal class Callbacks(
     private val displayer: NetworkStatusDisplayer
-  ) : Application.ActivityLifecycleCallbacks {
-
-    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
-
-    override fun onActivityStarted(activity: Activity) {}
+  ) : DefaultActivityCallbacks() {
 
     override fun onActivityResumed(activity: Activity) {
-      displayer.onResume(activity)
+      displayer.onActivityResumed(activity)
     }
 
     override fun onActivityPaused(activity: Activity) {
-      displayer.onPause(activity)
+      displayer.onActivityPaused()
     }
-
-    override fun onActivityStopped(activity: Activity) {}
-
-    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
-
-    override fun onActivityDestroyed(activity: Activity) {}
   }
 }
 
