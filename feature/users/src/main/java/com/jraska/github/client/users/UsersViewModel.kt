@@ -28,10 +28,10 @@ internal class UsersViewModel @Inject constructor(
       .map { users -> ViewState.ShowUsers(users) as ViewState }
       .onErrorReturn { ViewState.Error(it) }
       .toObservable()
+      .subscribeOn(appSchedulers.io)
       .startWith(ViewState.Loading)
       .repeatWhen { refreshSignal }
       .cache()
-      .subscribeOn(appSchedulers.io)
       .observeOn(appSchedulers.mainThread)
       .toLiveData()
   }

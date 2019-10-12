@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import com.google.firebase.messaging.RemoteMessage
+import com.jraska.github.client.core.android.DefaultActivityCallbacks
 import com.jraska.github.client.core.android.OnAppCreate
 import javax.inject.Inject
 
@@ -50,22 +51,10 @@ internal class PushIntentObserver(private val pushHandler: PushHandler) {
     }
   }
 
-  internal class PushCallbacks(private val intentObserver: PushIntentObserver) : Application.ActivityLifecycleCallbacks {
+  internal class PushCallbacks(private val intentObserver: PushIntentObserver) : DefaultActivityCallbacks() {
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
       intentObserver.onCreate(activity)
     }
-
-    override fun onActivityStarted(activity: Activity) {}
-
-    override fun onActivityResumed(activity: Activity) {}
-
-    override fun onActivityPaused(activity: Activity) {}
-
-    override fun onActivityStopped(activity: Activity) {}
-
-    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
-
-    override fun onActivityDestroyed(activity: Activity) {}
   }
 }

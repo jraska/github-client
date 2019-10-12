@@ -35,7 +35,7 @@ class TopActivityProvider {
     }
   }
 
-  private val callbacks: Application.ActivityLifecycleCallbacks = object : Application.ActivityLifecycleCallbacks {
+  private val callbacks: Application.ActivityLifecycleCallbacks = object : DefaultActivityCallbacks() {
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
       topActivitySubject.onNext(activity)
     }
@@ -56,12 +56,6 @@ class TopActivityProvider {
 
       topActivitySubject.onNext(NO_ACTIVITY)
     }
-
-    override fun onActivityStopped(activity: Activity) {}
-
-    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
-
-    override fun onActivityDestroyed(activity: Activity) {}
   }
 
   class RegisterCallbacks @Inject constructor(private val topActivityProvider: TopActivityProvider) : OnAppCreate {
