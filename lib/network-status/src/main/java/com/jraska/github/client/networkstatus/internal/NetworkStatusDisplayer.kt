@@ -5,6 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
+import com.jraska.github.client.networkstatus.R
 import com.jraska.github.client.rx.AppSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -47,7 +48,7 @@ internal class NetworkStatusDisplayer @Inject constructor(
 
     val view = activity.findViewById<View>(android.R.id.content)
 
-    val snackbar = Snackbar.make(view, "Offline", Snackbar.LENGTH_INDEFINITE)
+    val snackbar = Snackbar.make(view, R.string.status_is_offline, Snackbar.LENGTH_INDEFINITE)
     snackbar.show()
     offlineSnackbar = snackbar
   }
