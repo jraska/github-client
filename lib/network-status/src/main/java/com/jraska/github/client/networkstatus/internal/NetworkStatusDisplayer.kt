@@ -2,11 +2,14 @@ package com.jraska.github.client.networkstatus.internal
 
 import android.app.Activity
 import android.view.View
+import android.view.ViewGroup
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.snackbar.Snackbar
 import com.jraska.github.client.core.android.DefaultActivityCallbacks
 import com.jraska.github.client.networkstatus.R
 import com.jraska.github.client.rx.AppSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import timber.log.Timber
 import javax.inject.Inject
 
 internal class NetworkStatusDisplayer @Inject constructor(
@@ -43,13 +46,36 @@ internal class NetworkStatusDisplayer @Inject constructor(
   }
 
   private fun showOfflineSnackbar(activity: Activity) {
+    Timber.i("Showing offline snackbar in %s", activity::class.java.name)
+
     dismissAnySnackbar()
 
-    val view = activity.findViewById<View>(android.R.id.content)
+    val contentView = activity.findViewById<View>(android.R.id.content)
+    val viewForSnackbar = findCoordinatorLayout(contentView) ?: contentView
 
-    val snackbar = Snackbar.make(view, R.string.status_is_offline, Snackbar.LENGTH_INDEFINITE)
+    val snackbar = Snackbar.make(viewForSnackbar, R.string.status_is_offline, Snackbar.LENGTH_INDEFINITE)
     snackbar.show()
     offlineSnackbar = snackbar
+  }
+
+  private fun findCoordinatorLayout(view: View): CoordinatorLayout? {
+    if (view is CoordinatorLayout) {
+      return view
+    }
+
+    if (view is ViewGroup) {
+      val childCount = view.childCount
+      for (childViewIndex in 0 until childCount) {
+        val childView = view.getChildAt(childViewIndex)
+
+        val coordinatorLayout = findCoordinatorLayout(childView)
+        if (coordinatorLayout != null) {
+          return coordinatorLayout
+        }
+      }
+    }
+
+    return null
   }
 
   internal class Callbacks(
