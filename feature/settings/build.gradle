@@ -19,7 +19,7 @@ dependencies {
   api project(':core')
   api project(':core-android')
   implementation project(':lib:dynamic-features')
-  implementation project(':client')
+  implementation project(':app')
 
   api 'com.airbnb.android:epoxy:3.7.0'
   api 'com.jraska:console:1.0.0'

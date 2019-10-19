@@ -1,4 +1,4 @@
-include ':client',
+include ':app',
 
   ':core',
   ':core-testing',
