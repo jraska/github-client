@@ -16,18 +16,25 @@ android {
 }
 
 dependencies {
-  api project(':core')
-  api project(':core-android')
+  implementation project(':core')
+  implementation project(':core-android')
   implementation project(':lib:dynamic-features')
   implementation project(':app')
 
-  api 'com.airbnb.android:epoxy:3.7.0'
-  api 'com.jraska:console:1.0.0'
-  api 'com.jraska:console-timber-tree:1.0.0'
+  implementation project(':lib:dynamic-features')
+
+  implementation 'com.google.android.play:core:1.6.1'
+
+  implementation 'com.airbnb.android:epoxy:3.7.0'
+  implementation 'com.jraska:console:1.0.0'
+  implementation 'com.jraska:console-timber-tree:1.0.0'
 
   implementation 'com.google.dagger:dagger:2.24'
   kapt 'com.google.dagger:dagger-compiler:2.24'
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.assertj:assertj-core:3.13.2'
+
+  androidTestImplementation 'androidx.appcompat:appcompat:1.1.0'
+  androidTestImplementation 'com.google.android.gms:play-services-basement:17.0.0'
 }

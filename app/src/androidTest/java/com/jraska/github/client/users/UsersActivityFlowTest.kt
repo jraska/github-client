@@ -7,6 +7,7 @@ import androidx.test.espresso.action.ViewActions.swipeDown
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withHint
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
@@ -38,8 +39,8 @@ class UsersActivityFlowTest {
   @OkReplay
   fun whenSettings_thenReportsEvent() {
     onView(withId(R.id.action_settings)).perform(click())
-    onView(withId(R.id.settings_purchase_input)).perform(ViewActions.typeText("0.01"))
-    onView(withId(R.id.settings_purchase_submit_button)).perform(click())
+    onView(withHint("Value")).perform(ViewActions.typeText("0.01"))
+    onView(withText("Purchase")).perform(click())
 
     val testUITestApp = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as TestUITestApp
     val event = testUITestApp.coreComponent.eventAnalytics.events().findLast { event -> event.name == FirebaseAnalytics.Event.ECOMMERCE_PURCHASE }

@@ -19,13 +19,17 @@ dependencies {
 
   implementation project(':app')
 
-  api project(':core')
-  api project(':core-android')
-  api project(':navigation')
-  api project(':lib:identity')
+  implementation project(':core')
+  implementation project(':core-android')
+  implementation project(':navigation')
+  implementation project(':lib:identity')
+  implementation project(':lib:dynamic-features')
+
+  implementation 'com.google.android.play:core:1.6.1'
+
 
   kapt 'com.google.dagger:dagger-compiler:2.24'
-  api 'com.google.dagger:dagger:2.24'
+  implementation 'com.google.dagger:dagger:2.24'
 
   implementation 'com.airbnb.android:epoxy:3.7.0'
   implementation 'com.facebook.fresco:drawee:2.0.0'
@@ -34,4 +38,7 @@ dependencies {
   testImplementation 'androidx.arch.core:core-testing:2.1.0'
   testImplementation 'org.mockito:mockito-core:3.0.0'
   testImplementation project(':core-testing')
+
+  androidTestImplementation 'androidx.appcompat:appcompat:1.1.0'
+  androidTestImplementation 'com.google.android.gms:play-services-basement:17.0.0'
 }

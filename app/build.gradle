@@ -72,17 +72,17 @@ android {
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-  api project(':core')
-  api project(':core-android')
-  api project(':lib:navigation-deeplink')
-  api project(':lib:identity')
-  api project(':lib:dynamic-features')
-  api project(':lib:network-status')
-  api project(':feature:push')
-  api project(':feature:users')
-  api project(':feature:settings_entrance')
-  api project(':feature:about_entrance')
-  api project(':feature:shortcuts')
+  implementation project(':core')
+  implementation project(':core-android')
+  implementation project(':lib:navigation-deeplink')
+  implementation project(':lib:identity')
+  implementation project(':lib:dynamic-features')
+  implementation project(':lib:network-status')
+  implementation project(':feature:push')
+  implementation project(':feature:users')
+  implementation project(':feature:settings_entrance')
+  implementation project(':feature:about_entrance')
+  implementation project(':feature:shortcuts')
 
   implementation 'androidx.appcompat:appcompat:1.1.0'
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -108,6 +108,7 @@ dependencies {
 
   implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
   implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+  implementation 'com.google.android.play:core:1.6.1'
 
   testImplementation 'com.google.code.gson:gson:2.8.5'
 
@@ -124,6 +125,7 @@ dependencies {
   androidTestImplementation 'org.mockito:mockito-android:3.0.0'
   androidTestImplementation 'com.airbnb.okreplay:okreplay:1.4.0'
   androidTestImplementation 'com.airbnb.okreplay:espresso:1.4.0'
+  androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.9.1'
   androidTestImplementation project(':core-testing')
 }
 
