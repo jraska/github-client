@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.jraska.github.client.about.entrance.AboutFeatureEntranceModule
 import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.core.android.CoreAndroidModule
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.dynamicbase.DynamicFeaturesModule
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.identity.IdentityProvider
+import com.jraska.github.client.navigation.Navigator
+import com.jraska.github.client.navigation.deeplink.DeepLinkNavigationModule
 import com.jraska.github.client.networkstatus.NetworkStatusModule
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.settings.entrance.SettingsEntranceModule
@@ -23,8 +26,10 @@ import dagger.Subcomponent
 @Component(
   modules = [
     AppModule::class,
-    NavigationModule::class,
+    CoreAndroidModule::class,
+    ChromeCustomTabsModule::class,
     DynamicFeaturesModule::class,
+    DeepLinkNavigationModule::class,
     IdentityModule::class,
     NetworkStatusModule::class,
     UsersModule::class,

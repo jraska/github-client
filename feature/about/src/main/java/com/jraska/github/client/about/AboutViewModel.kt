@@ -1,11 +1,11 @@
 package com.jraska.github.client.about
 
 import androidx.lifecycle.ViewModel
-import com.jraska.github.client.Navigator
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.analytics.toAnalyticsString
 import com.jraska.github.client.identity.IdentityProvider
+import com.jraska.github.client.navigation.Navigator
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import javax.inject.Inject
 

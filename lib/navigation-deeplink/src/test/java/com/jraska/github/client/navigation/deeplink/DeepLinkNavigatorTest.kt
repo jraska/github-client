@@ -1,5 +1,8 @@
-package com.jraska.github.client
+package com.jraska.github.client.navigation.deeplink
 
+import com.jraska.github.client.DeepLinkLauncher
+import com.jraska.github.client.WebLinkLauncher
+import com.jraska.github.client.navigation.deeplink.internal.DeepLinkNavigator
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import org.junit.Test
 import org.mockito.Mockito.mock

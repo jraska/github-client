@@ -1,5 +1,9 @@
-package com.jraska.github.client
+package com.jraska.github.client.navigation.deeplink.internal
 
+import com.jraska.github.client.DeepLinkLauncher
+import com.jraska.github.client.WebLinkLauncher
+import com.jraska.github.client.navigation.Navigator
+import com.jraska.github.client.navigation.Urls
 import okhttp3.HttpUrl
 
 /**

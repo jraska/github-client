@@ -3,10 +3,12 @@ include ':app',
   ':core',
   ':core-testing',
   ':core-android',
+  ':navigation',
 
   ':lib:identity',
   ':lib:dynamic-features',
   ':lib:network-status',
+  ':lib:navigation-deeplink',
 
   ':feature:users',
   ':feature:push',

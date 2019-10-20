@@ -21,6 +21,7 @@ dependencies {
 
   api project(':core')
   api project(':core-android')
+  api project(':navigation')
   api project(':lib:identity')
 
   kapt 'com.google.dagger:dagger-compiler:2.24'

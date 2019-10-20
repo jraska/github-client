@@ -1,4 +1,4 @@
-package com.jraska.github.client
+package com.jraska.github.client.navigation
 
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl

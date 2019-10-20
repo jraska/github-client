@@ -5,7 +5,6 @@ import android.net.Uri
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 
-@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 fun Activity.inputUrl(): HttpUrl {
   val inputUri = intent.data ?: throw IllegalArgumentException("No uri provided")
 

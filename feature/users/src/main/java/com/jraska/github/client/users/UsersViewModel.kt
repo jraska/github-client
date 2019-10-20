@@ -2,11 +2,11 @@ package com.jraska.github.client.users
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.jraska.github.client.Navigator
-import com.jraska.github.client.Urls
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.rx.toLiveData
+import com.jraska.github.client.navigation.Navigator
+import com.jraska.github.client.navigation.Urls
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.User
 import com.jraska.github.client.users.model.UsersRepository

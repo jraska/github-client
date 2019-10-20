@@ -74,6 +74,7 @@ dependencies {
 
   api project(':core')
   api project(':core-android')
+  api project(':lib:navigation-deeplink')
   api project(':lib:identity')
   api project(':lib:dynamic-features')
   api project(':lib:network-status')

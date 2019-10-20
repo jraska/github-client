@@ -1,0 +1,8 @@
+apply plugin: 'java-library'
+apply plugin: 'com.android.lint'
+apply plugin: 'kotlin'
+
+dependencies {
+  api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  api 'com.squareup.okhttp3:okhttp:4.1.0'
+}
