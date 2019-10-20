@@ -10,8 +10,8 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withHint
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.platform.app.InstrumentationRegistry
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.jraska.github.client.EnableConfigRule
 import com.jraska.github.client.R
 import com.jraska.github.client.TestUITestApp
 import com.jraska.github.client.http.ReplayHttpComponent
@@ -25,6 +25,9 @@ class UsersActivityFlowTest {
   @Suppress("unused")
   @get:Rule
   val testRule = ReplayHttpComponent.okReplayRule()
+
+  @get:Rule
+  val enableConfigRule = EnableConfigRule("user_detail_section_size", 4L)
 
   @Test
   @OkReplay
@@ -42,8 +45,11 @@ class UsersActivityFlowTest {
     onView(withHint("Value")).perform(ViewActions.typeText("0.01"))
     onView(withText("Purchase")).perform(click())
 
-    val testUITestApp = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as TestUITestApp
-    val event = testUITestApp.coreComponent.eventAnalytics.events().findLast { event -> event.name == FirebaseAnalytics.Event.ECOMMERCE_PURCHASE }
+    val event = TestUITestApp.get()
+      .coreComponent
+      .eventAnalytics
+      .events()
+      .findLast { event -> event.name == FirebaseAnalytics.Event.ECOMMERCE_PURCHASE }
     assertThat(event).isNotNull
     assertThat(event!!.properties[FirebaseAnalytics.Param.VALUE]).isEqualTo(0.01)
   }

@@ -1,5 +1,6 @@
 package com.jraska.github.client
 
+import androidx.test.platform.app.InstrumentationRegistry
 import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.http.ReplayHttpComponent
 
@@ -12,5 +13,11 @@ class TestUITestApp : GitHubClientApp() {
 
   override fun coreComponent(): CoreComponent {
     return coreComponent
+  }
+
+  companion object {
+    fun get(): TestUITestApp {
+      return InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as TestUITestApp
+    }
   }
 }

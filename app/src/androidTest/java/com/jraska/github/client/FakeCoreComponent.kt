@@ -11,6 +11,7 @@ import org.mockito.Mockito.mock
 
 class FakeCoreComponent : CoreComponent {
   val eventAnalytics = Fakes.recordingAnalytics()
+  val config = Fakes.config()
 
   override fun analytics(): EventAnalytics {
     return eventAnalytics
@@ -25,7 +26,7 @@ class FakeCoreComponent : CoreComponent {
   }
 
   override fun config(): Config {
-    return mock(Config::class.java)
+    return config
   }
 
   override fun firebaseDatabase(): FirebaseDatabase {
