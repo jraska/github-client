@@ -9,20 +9,20 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "client/build.gradle" }}-{{ checksum  "core/build.gradle" }}-{{ checksum  "core-android/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum  "core/build.gradle" }}-{{ checksum  "core-android/build.gradle" }}
       - run:
           name: Get Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "client/build.gradle" }}-{{ checksum  "core/build.gradle" }}-{{ checksum  "core-android/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum  "core/build.gradle" }}-{{ checksum  "core-android/build.gradle" }}
       - run:
           name: Run Tests
           command: ./gradlew lint test
       - store_artifacts:
-          path: client/build/reports
-          destination: client/reports
+          path: app/build/reports
+          destination: app/reports
       - store_artifacts:
           path: core/build/reports
           destination: core/reports
@@ -33,7 +33,7 @@ jobs:
           path: feature/push/build/reports
           destination: feature/push/reports
       - store_test_results:
-          path: client/build/test-results
+          path: app/build/test-results
       - store_test_results:
           path: core/build/test-results
       - store_test_results:
