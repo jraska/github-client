@@ -18,9 +18,9 @@ class TestRunner : AndroidJUnitRunner() {
 
     RxJavaPlugins.setInitComputationSchedulerHandler(
       Rx2Idler.create("RxJava 2.x Computation Scheduler")
-    );
+    )
     RxJavaPlugins.setInitIoSchedulerHandler(
       Rx2Idler.create("RxJava 2.x IO Scheduler")
-    );
+    )
   }
 }

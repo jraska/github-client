@@ -3,7 +3,6 @@ package com.jraska.github.client.core.android
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject

@@ -3,7 +3,7 @@
   <shortcut
     android:shortcutId="users"
     android:enabled="true"
-    android:icon="@drawable/ic_github_48dp"
+    android:icon="@drawable/ic_shortcut_github"
     android:shortcutShortLabel="@string/shortcut_users_short_label"
     android:shortcutLongLabel="@string/shortcut_users_long_label"
     android:shortcutDisabledMessage="@string/shortcut_users_disabled_message">
@@ -15,7 +15,7 @@
   <shortcut
     android:shortcutId="users/jraska"
     android:enabled="true"
-    android:icon="@drawable/ic_watchers_black_48dp"
+    android:icon="@drawable/ic_shortcut_watchers"
     android:shortcutShortLabel="@string/shortcut_jraska_short_label"
     android:shortcutLongLabel="@string/shortcut_jraska_long_label"
     android:shortcutDisabledMessage="@string/shortcut_jraska_disabled_message">
@@ -27,7 +27,7 @@
   <shortcut
     android:shortcutId="users/JakeWharton"
     android:enabled="true"
-    android:icon="@drawable/ic_admin_24dp"
+    android:icon="@drawable/ic_shortcut_admin"
     android:shortcutShortLabel="@string/shortcut_jake_short_label"
     android:shortcutLongLabel="@string/shortcut_jake_long_label"
     android:shortcutDisabledMessage="@string/shortcut_jake_disabled_message">
