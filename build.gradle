@@ -1,3 +1,5 @@
+import com.jraska.github.client.GenerateProjectsGraphTask
+
 buildscript {
   ext.kotlin_version = '1.3.50'
   repositories {
@@ -27,6 +29,8 @@ allprojects {
 task clean(type: Delete) {
   delete rootProject.buildDir
 }
+
+task generateGraph(type: GenerateProjectsGraphTask)
 
 subprojects {
   apply plugin: "org.jlleitschuh.gradle.ktlint"
