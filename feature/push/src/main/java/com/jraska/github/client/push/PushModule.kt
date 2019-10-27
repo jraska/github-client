@@ -11,7 +11,7 @@ import dagger.multibindings.StringKey
 
 @Module
 object PushModule {
-  @JvmStatic
+
   @Provides
   @IntoSet
   internal fun bindObserverSetup(observerSetup: PushIntentObserver.CallbacksSetup): OnAppCreate {
@@ -19,13 +19,11 @@ object PushModule {
   }
 
   @Provides
-  @JvmStatic
   @IntoSet
   internal fun setupNotificationsOnCreate(notificationSetup: NotificationSetup): OnAppCreate {
     return notificationSetup
   }
 
-  @JvmStatic
   @Provides
   @IntoMap
   @ClassKey(PushHandleModel::class)
@@ -33,7 +31,6 @@ object PushModule {
     return pushHandleModel
   }
 
-  @JvmStatic
   @Provides
   @IntoMap
   @StringKey("refresh_config")
@@ -41,7 +38,6 @@ object PushModule {
     return command
   }
 
-  @JvmStatic
   @Provides
   @IntoMap
   @StringKey("set_config_as_property")
@@ -49,7 +45,6 @@ object PushModule {
     return command
   }
 
-  @JvmStatic
   @Provides
   @IntoMap
   @StringKey("set_analytics_property")
@@ -57,7 +52,6 @@ object PushModule {
     return command
   }
 
-  @JvmStatic
   @Provides
   @IntoMap
   @StringKey("notification")
@@ -65,7 +59,6 @@ object PushModule {
     return command
   }
 
-  @JvmStatic
   @Provides
   @IntoMap
   @StringKey("launch_deep_link")

@@ -9,7 +9,7 @@ import dagger.multibindings.IntoSet
 
 @Module
 object NetworkStatusModule {
-  @JvmStatic
+
   @Provides
   @IntoSet
   internal fun addNetworkStatusDisplayer(networkStatusDisplayer: NetworkStatusDisplayer): OnAppCreate {

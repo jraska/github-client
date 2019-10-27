@@ -9,7 +9,7 @@ import dagger.Provides
 
 @Module
 object DeepLinkNavigationModule {
-  @JvmStatic
+
   @Provides
   fun provideNavigator(webLinkLauncher: WebLinkLauncher, deepLinkLauncher: DeepLinkLauncher): Navigator {
     return DeepLinkNavigator(deepLinkLauncher, webLinkLauncher)

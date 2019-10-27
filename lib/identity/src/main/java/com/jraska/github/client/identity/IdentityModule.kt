@@ -10,14 +10,12 @@ import dagger.Provides
 @Module
 object IdentityModule {
 
-  @JvmStatic
   @Provides
   @PerApp
   internal fun provideSessionIdProvider(timeProvider: TimeProvider): SessionIdProvider {
     return SessionIdProvider(timeProvider)
   }
 
-  @JvmStatic
   @Provides
   @PerApp
   internal fun identityProvider(anonymousIdentity: AnonymousIdentity): IdentityProvider {

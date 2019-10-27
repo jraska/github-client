@@ -20,7 +20,7 @@ import retrofit2.Retrofit
 
 @Module
 object UsersModule {
-  @JvmStatic
+
   @Provides
   @PerApp
   internal fun provideUsersRepository(retrofit: Retrofit): UsersRepository {
@@ -30,7 +30,6 @@ object UsersModule {
     return GitHubApiUsersRepository(usersApi, detailApi)
   }
 
-  @JvmStatic
   @Provides
   @IntoMap
   @ClassKey(UsersViewModel::class)
@@ -38,7 +37,6 @@ object UsersModule {
     return viewModel
   }
 
-  @JvmStatic
   @Provides
   @IntoMap
   @ClassKey(UserDetailViewModel::class)
@@ -46,7 +44,6 @@ object UsersModule {
     return viewModel
   }
 
-  @JvmStatic
   @Provides
   @IntoMap
   @ClassKey(RepoDetailViewModel::class)
@@ -54,14 +51,12 @@ object UsersModule {
     return viewModel
   }
 
-  @JvmStatic
   @Provides
   @IntoSet
   internal fun provideUsersPathLauncher(): LinkLauncher {
     return UsersPathLauncher()
   }
 
-  @JvmStatic
   @Provides
   @IntoSet
   internal fun provideUsersListLauncher(): LinkLauncher {

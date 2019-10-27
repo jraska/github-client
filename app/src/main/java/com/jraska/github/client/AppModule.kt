@@ -15,19 +15,16 @@ import dagger.multibindings.IntoSet
 object AppModule {
 
   @Provides
-  @JvmStatic
   @PerApp
   internal fun provideLayoutInflater(context: Context): LayoutInflater {
     return LayoutInflater.from(context)
   }
 
-  @JvmStatic
   @Provides
   internal fun notificationManager(context: Context): NotificationManager {
     return context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
   }
 
-  @JvmStatic
   @Provides
   @IntoSet
   fun setupFresco(): OnAppCreate {
@@ -36,7 +33,6 @@ object AppModule {
     }
   }
 
-  @JvmStatic
   @Provides
   @IntoSet
   fun setupThreeTen(): OnAppCreate {

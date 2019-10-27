@@ -8,7 +8,7 @@ import dagger.multibindings.IntoMap
 
 @Module
 object SettingsModule {
-  @JvmStatic
+
   @Provides
   @IntoMap
   @ClassKey(SettingsViewModel::class)

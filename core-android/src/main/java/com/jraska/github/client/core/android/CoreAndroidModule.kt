@@ -25,19 +25,16 @@ import io.reactivex.schedulers.Schedulers
 object CoreAndroidModule {
   @Provides
   @PerApp
-  @JvmStatic
   internal fun provideViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory {
     return factory
   }
 
   @Provides
   @PerApp
-  @JvmStatic
   internal fun provideServiceModelFactory(factory: ServiceModelFactory): ServiceModel.Factory {
     return factory
   }
 
-  @JvmStatic
   @Provides
   fun bindDeepLinkLauncher(
     topActivityProvider: TopActivityProvider,
@@ -46,7 +43,6 @@ object CoreAndroidModule {
     return RealDeepLinkLauncher.create(topActivityProvider, launchers)
   }
 
-  @JvmStatic
   @Provides
   @IntoMap
   @ClassKey(UriHandlerViewModel::class)
@@ -55,7 +51,6 @@ object CoreAndroidModule {
   }
 
   @Provides
-  @JvmStatic
   @PerApp
   internal fun topActivityProvider(): TopActivityProvider {
     return TopActivityProvider()
@@ -63,26 +58,22 @@ object CoreAndroidModule {
 
   @Provides
   @IntoSet
-  @JvmStatic
   fun topActivityOnCreate(setup: TopActivityProvider.RegisterCallbacks): OnAppCreate {
     return setup
   }
 
-  @JvmStatic
   @Provides
   @PerApp
   internal fun dateTimeProvider(): DateTimeProvider {
     return RealDateTimeProvider()
   }
 
-  @JvmStatic
   @Provides
   @PerApp
   internal fun timeProvider(): TimeProvider {
     return RealTimeProvider.INSTANCE
   }
 
-  @JvmStatic
   @Provides
   @PerApp
   fun schedulers(): AppSchedulers {
@@ -92,14 +83,12 @@ object CoreAndroidModule {
     )
   }
 
-  @JvmStatic
   @Provides
   @IntoSet
   internal fun setupLoggingOnCreate(setupLogging: SetupLogging): OnAppCreate {
     return setupLogging
   }
 
-  @JvmStatic
   @Provides
   @IntoSet
   fun reportAppCreateEvent(eventAnalytics: EventAnalytics): OnAppCreate {

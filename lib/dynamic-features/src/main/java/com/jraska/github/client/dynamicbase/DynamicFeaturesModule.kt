@@ -18,20 +18,17 @@ import dagger.multibindings.IntoSet
 @Module
 object DynamicFeaturesModule {
 
-  @JvmStatic
   @Provides
   internal fun provideSplitInstaller(installer: PlayDynamicFeatureInstaller): DynamicFeatureInstaller {
     return installer
   }
 
-  @JvmStatic
   @Provides
   @PerApp
   internal fun provideSplitManager(context: Context): SplitInstallManager {
     return SplitInstallManagerFactory.create(context)
   }
 
-  @JvmStatic
   @Provides
   @IntoMap
   @ClassKey(PlayInstallViewModel::class)
@@ -39,14 +36,12 @@ object DynamicFeaturesModule {
     return viewModel
   }
 
-  @JvmStatic
   @Provides
   @PerApp
   internal fun providePlayDynamicFeatureInstaller(installManager: SplitInstallManager, context: Context): PlayDynamicFeatureInstaller {
     return PlayDynamicFeatureInstaller(installManager, context)
   }
 
-  @JvmStatic
   @Provides
   @PerApp
   internal fun provideFeatureInitializer(
@@ -56,7 +51,6 @@ object DynamicFeaturesModule {
     return DynamicFeatureInitializer.create(splitInstallManager, specs)
   }
 
-  @JvmStatic
   @Provides
   @IntoSet
   internal fun initializerOnCreate(initializer: DynamicFeatureInitializer): OnAppCreate {

@@ -8,7 +8,6 @@ import dagger.Provides
 @Module
 object ChromeCustomTabsModule {
 
-  @JvmStatic
   @Provides
   fun webLinkLauncher(provider: TopActivityProvider, appSchedulers: AppSchedulers): WebLinkLauncher {
     return ChromeCustomTabsLauncher(provider, appSchedulers)

@@ -8,10 +8,10 @@ import dagger.multibindings.IntoMap
 
 @Module
 object ShortcutsModule {
-  @JvmStatic
+
   @Provides
   @IntoMap
-  @ClassKey(com.jraska.github.client.shortcuts.ShortcutHandlerModel::class)
+  @ClassKey(ShortcutHandlerModel::class)
   internal fun uriShortcutViewModel(viewModel: ShortcutHandlerModel): ViewModel {
     return viewModel
   }

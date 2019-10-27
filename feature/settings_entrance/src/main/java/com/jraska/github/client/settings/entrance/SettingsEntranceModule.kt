@@ -11,14 +11,13 @@ import dagger.multibindings.IntoSet
 
 @Module
 object SettingsEntranceModule {
-  @JvmStatic
+
   @Provides
   @IntoSet
   internal fun provideSettingsLauncher(launcher: DynamicSettingsLinkLauncher): LinkLauncher {
     return launcher
   }
 
-  @JvmStatic
   @Provides
   @IntoSet
   internal fun featureProvider(context: Context): DynamicFeatureSpec {
