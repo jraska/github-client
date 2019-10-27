@@ -4,5 +4,5 @@ apply plugin: 'kotlin'
 
 dependencies {
   api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-  api 'com.squareup.okhttp3:okhttp:4.1.0'
+  api 'com.squareup.okhttp3:okhttp:4.2.2'
 }

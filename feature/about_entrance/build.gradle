@@ -18,8 +18,8 @@ dependencies {
   api project(':core')
   api project(':core-android')
 
-  implementation 'com.google.dagger:dagger:2.24'
-  kapt 'com.google.dagger:dagger-compiler:2.24'
+  implementation 'com.google.dagger:dagger:2.25.2'
+  kapt 'com.google.dagger:dagger-compiler:2.25.2'
   implementation project(':lib:dynamic-features')
 
   testImplementation 'junit:junit:4.12'

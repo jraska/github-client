@@ -102,29 +102,29 @@ dependencies {
 
   implementation 'com.facebook.fresco:fresco:2.0.0'
 
-  implementation 'com.airbnb.android:epoxy:3.7.0'
+  implementation 'com.airbnb.android:epoxy:3.8.0'
 
-  kapt 'com.google.dagger:dagger-compiler:2.24'
+  kapt 'com.google.dagger:dagger-compiler:2.25.2'
 
   implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
   implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
   implementation 'com.google.android.play:core:1.6.1'
 
-  testImplementation 'com.google.code.gson:gson:2.8.5'
+  testImplementation 'com.google.code.gson:gson:2.8.6'
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'javax.inject:javax.inject:1'
-  testImplementation 'org.mockito:mockito-core:3.0.0'
+  testImplementation 'org.mockito:mockito-core:3.1.0'
   testImplementation 'org.threeten:threetenbp:1.4.0' // to fix failures with three ten db
 
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
   androidTestImplementation 'androidx.test:runner:1.2.0'
   androidTestImplementation 'androidx.test:rules:1.2.0'
   androidTestImplementation 'org.assertj:assertj-core:3.13.2'
-  androidTestImplementation 'org.mockito:mockito-core:3.0.0'
-  androidTestImplementation 'org.mockito:mockito-android:3.0.0'
-  androidTestImplementation 'com.airbnb.okreplay:okreplay:1.4.0'
-  androidTestImplementation 'com.airbnb.okreplay:espresso:1.4.0'
+  androidTestImplementation 'org.mockito:mockito-core:3.1.0'
+  androidTestImplementation 'org.mockito:mockito-android:3.1.0'
+  androidTestImplementation 'com.airbnb.okreplay:okreplay:1.5.0'
+  androidTestImplementation 'com.airbnb.okreplay:espresso:1.5.0'
   androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.9.1'
   androidTestImplementation project(':core-testing')
 }
