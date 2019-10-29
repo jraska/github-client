@@ -7,6 +7,6 @@ open class GenerateProjectsGraphTask : DefaultTask() {
   @TaskAction
   fun run() {
     val modulesTree = DependencyTreeFactory.create(project)
-    println(modulesTree.toGraphviz())
+    println(GraphvizGenerator.toGraphviz(modulesTree))
   }
 }

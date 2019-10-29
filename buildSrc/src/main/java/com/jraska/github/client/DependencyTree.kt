@@ -3,6 +3,8 @@ package com.jraska.github.client
 class DependencyTree() {
   private val nodes = mutableMapOf<String, Node>()
 
+  fun nodes(): Collection<Node> = nodes.values
+
   fun longestPath(key: String): LongestPath {
     val nodeNames = nodes.getValue(key)
       .longestPath()
@@ -17,23 +19,6 @@ class DependencyTree() {
 
   fun addEdge(from: String, to: String) {
     getOrCreate(from).children.add(getOrCreate(to))
-  }
-
-  fun toGraphviz(): String {
-    val stringBuilder = StringBuilder()
-
-    stringBuilder.append("digraph G {\n")
-    nodes.values.flatMap { node -> node.children.map { node.key to it.key } }
-      .forEach { (moduleName, dependency) ->
-        stringBuilder.append("\"$moduleName\"")
-          .append(" -> ")
-          .append("\"$dependency\"")
-          .append("\n")
-      }
-
-    stringBuilder.append("}")
-
-    return stringBuilder.toString()
   }
 
   private fun getOrCreate(key: String): Node {
