@@ -3,6 +3,19 @@ package com.jraska.github.client
 class DependencyTree() {
   private val nodes = mutableMapOf<String, Node>()
 
+  fun findRoot(): Node {
+    if (nodes.isEmpty()) {
+      throw IllegalArgumentException("Dependnecy Tree is empty")
+    }
+
+    val mutableNodes = nodes().toMutableSet()
+
+    nodes().flatMap { it.children }
+      .forEach { mutableNodes.remove(it) }
+
+    return mutableNodes.first()
+  }
+
   fun nodes(): Collection<Node> = nodes.values
 
   fun longestPath(key: String): LongestPath {
