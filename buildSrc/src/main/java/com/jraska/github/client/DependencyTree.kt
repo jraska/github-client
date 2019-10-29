@@ -4,19 +4,22 @@ class DependencyTree() {
   private val nodes = mutableMapOf<String, Node>()
 
   fun findRoot(): Node {
-    if (nodes.isEmpty()) {
-      throw IllegalArgumentException("Dependnecy Tree is empty")
-    }
+    require(nodes.isNotEmpty()) { "Dependency Tree is empty" }
 
-    val mutableNodes = nodes().toMutableSet()
+    val rootCandidates = nodes().toMutableSet()
 
     nodes().flatMap { it.children }
-      .forEach { mutableNodes.remove(it) }
+      .forEach { rootCandidates.remove(it) }
 
-    return mutableNodes.first()
+    return rootCandidates.associateBy { heightOf(it.key) }
+      .maxBy { it.key }!!.value
   }
 
   fun nodes(): Collection<Node> = nodes.values
+
+  fun longestPath(): LongestPath {
+    return longestPath(findRoot().key)
+  }
 
   fun longestPath(key: String): LongestPath {
     val nodeNames = nodes.getValue(key)
