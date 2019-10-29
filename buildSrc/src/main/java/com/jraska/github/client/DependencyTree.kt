@@ -3,6 +3,14 @@ package com.jraska.github.client
 class DependencyTree() {
   private val nodes = mutableMapOf<String, Node>()
 
+  fun longestPath(key: String): LongestPath {
+    val nodeNames = nodes.getValue(key)
+      .longestPath()
+      .map { it.key }
+
+    return LongestPath(nodeNames)
+  }
+
   fun heightOf(key: String): Int {
     return nodes.getValue(key).height()
   }
@@ -42,6 +50,19 @@ class DependencyTree() {
         return 0
       } else {
         return 1 + children.map { it.height() }.max()!!
+      }
+    }
+
+    internal fun longestPath(): List<Node> {
+      if (isLeaf()) {
+        return listOf(this)
+      } else {
+        val path = mutableListOf<Node>(this)
+
+        val maxHeightNode = children.maxBy { it.height() }!!
+        path.addAll(maxHeightNode.longestPath())
+
+        return path
       }
     }
   }
