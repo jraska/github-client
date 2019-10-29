@@ -1,5 +1,5 @@
-import com.jraska.github.client.AssertModuleTreeHeight
-import com.jraska.github.client.GenerateProjectsGraphTask
+import com.jraska.github.client.AssertModuleTreeHeightTask
+import com.jraska.github.client.GenerateModulesGraphTask
 
 buildscript {
   ext.kotlin_version = '1.3.50'
@@ -31,9 +31,13 @@ task clean(type: Delete) {
   delete rootProject.buildDir
 }
 
-task generateGraph(type: GenerateProjectsGraphTask)
+task generateModulesGraph(type: GenerateModulesGraphTask)
 
-task assertDependencyTreeHeight(type: AssertModuleTreeHeight) {
+task generateOneModuleTask(type: GenerateModulesGraphTask) {
+  moduleName = ":app"
+}
+
+task assertDependencyTreeHeight(type: AssertModuleTreeHeightTask) {
   moduleName = ":app"
   maxHeight = 4
 }

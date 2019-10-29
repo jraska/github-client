@@ -44,4 +44,21 @@ class DependencyTreeTest {
 
     assert(dependencyTree.findRoot().key == "app")
   }
+
+  @Test
+  fun createSubtreeProperly() {
+    val dependencyTree = DependencyTree()
+
+    dependencyTree.addEdge("feature", "lib")
+    dependencyTree.addEdge("lib", "core")
+    dependencyTree.addEdge("app", "feature")
+    dependencyTree.addEdge("feature", "core")
+    dependencyTree.addEdge("app", "core")
+
+    val subTree = dependencyTree.subTree("feature")
+
+    assert(subTree.findRoot().key == "feature")
+    assert(subTree.heightOf("feature") == 2)
+    assert(subTree.longestPath("feature").nodeNames == listOf("feature", "lib", "core"))
+  }
 }

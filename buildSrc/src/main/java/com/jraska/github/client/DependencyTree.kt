@@ -37,6 +37,21 @@ class DependencyTree() {
     getOrCreate(from).children.add(getOrCreate(to))
   }
 
+  fun subTree(key: String): DependencyTree {
+    val dependencyTree = DependencyTree()
+
+    addConnections(nodes.getValue(key), dependencyTree)
+
+    return dependencyTree
+  }
+
+  private fun addConnections(node: Node, into: DependencyTree) {
+    node.children.forEach {
+      into.addEdge(node.key, it.key)
+      addConnections(it, into)
+    }
+  }
+
   private fun getOrCreate(key: String): Node {
     return nodes[key] ?: Node(key).also { nodes[key] = it }
   }

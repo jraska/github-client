@@ -4,7 +4,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.TaskAction
 
-open class AssertModuleTreeHeight : DefaultTask() {
+open class GenerateOneModuleGraphTask : DefaultTask() {
   lateinit var moduleName: String
   var maxHeight: Int = 0
 
