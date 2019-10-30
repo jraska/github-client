@@ -61,4 +61,21 @@ class DependencyTreeTest {
     assert(subTree.heightOf("feature") == 2)
     assert(subTree.longestPath("feature").nodeNames == listOf("feature", "lib", "core"))
   }
+
+  @Test
+  fun createCountStatisticsWell() {
+    val dependencyTree = DependencyTree()
+
+    dependencyTree.addEdge("feature", "lib")
+    dependencyTree.addEdge("lib", "core")
+    dependencyTree.addEdge("app", "feature")
+    dependencyTree.addEdge("feature", "core")
+    dependencyTree.addEdge("app", "core")
+
+    val statistics = dependencyTree.statistics()
+
+    assert(statistics.height == 3)
+    assert(statistics.nodeCount == 4)
+    assert(statistics.edgesCount == 5)
+  }
 }

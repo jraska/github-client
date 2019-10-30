@@ -11,6 +11,7 @@ open class GenerateModulesGraphTask : DefaultTask() {
     val allModulesTree = DependencyTreeFactory.create(project)
     val moduleTree = allModulesTree.subTree(moduleName)
 
+    println(moduleTree.statistics())
     println(GraphvizGenerator.toGraphviz(moduleTree))
   }
 }

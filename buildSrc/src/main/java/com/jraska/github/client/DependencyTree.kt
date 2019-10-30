@@ -29,8 +29,22 @@ class DependencyTree() {
     return LongestPath(nodeNames)
   }
 
+  fun height(): Int {
+    return heightOf(findRoot().key)
+  }
+
   fun heightOf(key: String): Int {
     return nodes.getValue(key).height()
+  }
+
+  fun statistics(): GraphStatistics {
+    val height = height()
+    val edgesCount = countEdges()
+    return GraphStatistics(
+      nodeCount = nodes.size,
+      edgesCount = edgesCount,
+      height = height
+    )
   }
 
   fun addEdge(from: String, to: String) {
@@ -50,6 +64,10 @@ class DependencyTree() {
       into.addEdge(node.key, it.key)
       addConnections(it, into)
     }
+  }
+
+  private fun countEdges(): Int {
+    return nodes().flatMap { node -> node.children }.count()
   }
 
   private fun getOrCreate(key: String): Node {
