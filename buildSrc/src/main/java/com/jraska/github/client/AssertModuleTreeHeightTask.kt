@@ -2,10 +2,14 @@ package com.jraska.github.client
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
 open class AssertModuleTreeHeightTask : DefaultTask() {
+  @Input
   lateinit var moduleName: String
+
+  @Input
   var maxHeight: Int = 0
 
   @TaskAction
