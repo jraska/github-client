@@ -9,6 +9,6 @@ open class GenerateModulesGraphTask : DefaultTask() {
     val allModulesTree = DependencyTreeFactory.create(project)
 
     println(allModulesTree.statistics())
-    println(GraphvizGenerator.toGraphviz(allModulesTree))
+    println(GraphvizGenerator.toGraphviz(allModulesTree, setOf(":lib", ":feature", ":core")))
   }
 }
