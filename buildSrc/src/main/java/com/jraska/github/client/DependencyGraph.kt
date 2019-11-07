@@ -1,6 +1,6 @@
 package com.jraska.github.client
 
-class DependencyTree() {
+class DependencyGraph() {
   private val nodes = mutableMapOf<String, Node>()
 
   fun findRoot(): Node {
@@ -51,15 +51,15 @@ class DependencyTree() {
     getOrCreate(from).children.add(getOrCreate(to))
   }
 
-  fun subTree(key: String): DependencyTree {
-    val dependencyTree = DependencyTree()
+  fun subTree(key: String): DependencyGraph {
+    val dependencyTree = DependencyGraph()
 
     addConnections(nodes.getValue(key), dependencyTree)
 
     return dependencyTree
   }
 
-  private fun addConnections(node: Node, into: DependencyTree) {
+  private fun addConnections(node: Node, into: DependencyGraph) {
     node.children.forEach {
       into.addEdge(node.key, it.key)
       addConnections(it, into)

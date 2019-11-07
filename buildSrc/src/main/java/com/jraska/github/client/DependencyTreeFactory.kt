@@ -5,10 +5,10 @@ import org.gradle.api.internal.artifacts.dependencies.DefaultProjectDependency
 
 object DependencyTreeFactory {
 
-  fun create(project: Project): DependencyTree {
+  fun create(project: Project): DependencyGraph {
     val dependencies = project.listDependencyPairs()
 
-    val modulesTree = DependencyTree()
+    val modulesTree = DependencyGraph()
     dependencies.forEach {
       modulesTree.addEdge(it.first, it.second)
     }

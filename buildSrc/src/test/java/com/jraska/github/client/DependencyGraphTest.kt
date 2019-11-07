@@ -2,10 +2,10 @@ package com.jraska.github.client
 
 import org.junit.Test
 
-class DependencyTreeTest {
+class DependencyGraphTest {
   @Test
   fun correctHeightIsMaintained() {
-    val dependencyTree = DependencyTree()
+    val dependencyTree = DependencyGraph()
 
     dependencyTree.addEdge("app", "feature")
     assert(dependencyTree.heightOf("app") == 1)
@@ -21,7 +21,7 @@ class DependencyTreeTest {
 
   @Test
   fun findsProperLongestPath() {
-    val dependencyTree = DependencyTree()
+    val dependencyTree = DependencyGraph()
 
     dependencyTree.addEdge("app", "feature")
     dependencyTree.addEdge("app", "lib")
@@ -34,7 +34,7 @@ class DependencyTreeTest {
 
   @Test
   fun findsProperRoot() {
-    val dependencyTree = DependencyTree()
+    val dependencyTree = DependencyGraph()
 
     dependencyTree.addEdge("feature", "lib")
     dependencyTree.addEdge("lib", "core")
@@ -47,7 +47,7 @@ class DependencyTreeTest {
 
   @Test
   fun createSubtreeProperly() {
-    val dependencyTree = DependencyTree()
+    val dependencyTree = DependencyGraph()
 
     dependencyTree.addEdge("feature", "lib")
     dependencyTree.addEdge("lib", "core")
@@ -64,7 +64,7 @@ class DependencyTreeTest {
 
   @Test
   fun createCountStatisticsWell() {
-    val dependencyTree = DependencyTree()
+    val dependencyTree = DependencyGraph()
 
     dependencyTree.addEdge("feature", "lib")
     dependencyTree.addEdge("lib", "core")

@@ -1,9 +1,9 @@
 package com.jraska.github.client
 
 object GraphvizGenerator {
-  fun toGraphviz(dependencyTree: DependencyTree, groups: Set<String> = emptySet()): String {
+  fun toGraphviz(dependencyGraph: DependencyGraph, groups: Set<String> = emptySet()): String {
 
-    val longestPathConnections = dependencyTree.longestPath()
+    val longestPathConnections = dependencyGraph.longestPath()
       .nodeNames.zipWithNext()
       .toSet()
 
@@ -12,10 +12,10 @@ object GraphvizGenerator {
     stringBuilder.append("digraph G {\n")
 
     groups.forEach {
-      stringBuilder.append(generateGroup(dependencyTree, it))
+      stringBuilder.append(generateGroup(dependencyGraph, it))
     }
 
-    dependencyTree.nodes().flatMap { node -> node.children.map { node.key to it.key } }
+    dependencyGraph.nodes().flatMap { node -> node.children.map { node.key to it.key } }
       .forEach { connection ->
         stringBuilder.append("\"${connection.first}\"")
           .append(" -> ")
@@ -33,7 +33,7 @@ object GraphvizGenerator {
     return stringBuilder.toString()
   }
 
-  private fun generateGroup(dependencyTree: DependencyTree, groupName: String): String {
+  private fun generateGroup(dependencyGraph: DependencyGraph, groupName: String): String {
     val builder = StringBuilder()
       .append("subgraph cluster_").append(groupName.replace(":", "")).appendln("{")
       .appendln("style = filled;")
@@ -41,7 +41,7 @@ object GraphvizGenerator {
       .appendln("node[style = filled, color = white];")
       .append("label = \"").append(groupName).appendln("\"")
 
-    dependencyTree.nodes().filter { it.key.startsWith(groupName) }.forEach {
+    dependencyGraph.nodes().filter { it.key.startsWith(groupName) }.forEach {
       builder.append("\"").append(it.key).appendln("\"")
     }
 
