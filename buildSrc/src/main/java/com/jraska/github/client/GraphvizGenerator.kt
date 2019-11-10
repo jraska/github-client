@@ -11,6 +11,9 @@ object GraphvizGenerator {
 
     stringBuilder.append("digraph G {\n")
 
+    if(groups.isNotEmpty()) {
+      stringBuilder.append("ranksep = 1.5\n")
+    }
     groups.forEach {
       stringBuilder.append(generateGroup(dependencyGraph, it))
     }
