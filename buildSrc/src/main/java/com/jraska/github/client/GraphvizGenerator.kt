@@ -15,7 +15,7 @@ object GraphvizGenerator {
       stringBuilder.append(generateGroup(dependencyGraph, it))
     }
 
-    dependencyGraph.nodes().flatMap { node -> node.children.map { node.key to it.key } }
+    dependencyGraph.nodes().flatMap { node -> node.dependsOn.map { node.key to it.key } }
       .forEach { connection ->
         stringBuilder.append("\"${connection.first}\"")
           .append(" -> ")

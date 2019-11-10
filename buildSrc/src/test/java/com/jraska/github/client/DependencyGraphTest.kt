@@ -75,7 +75,7 @@ class DependencyGraphTest {
     val statistics = dependencyTree.statistics()
 
     assert(statistics.height == 3)
-    assert(statistics.nodeCount == 4)
+    assert(statistics.modulesCount == 4)
     assert(statistics.edgesCount == 5)
   }
 }

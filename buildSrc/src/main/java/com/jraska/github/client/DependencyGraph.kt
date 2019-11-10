@@ -8,7 +8,7 @@ class DependencyGraph() {
 
     val rootCandidates = nodes().toMutableSet()
 
-    nodes().flatMap { it.children }
+    nodes().flatMap { it.dependsOn }
       .forEach { rootCandidates.remove(it) }
 
     return rootCandidates.associateBy { heightOf(it.key) }
@@ -41,14 +41,14 @@ class DependencyGraph() {
     val height = height()
     val edgesCount = countEdges()
     return GraphStatistics(
-      nodeCount = nodes.size,
+      modulesCount = nodes.size,
       edgesCount = edgesCount,
       height = height
     )
   }
 
   fun addEdge(from: String, to: String) {
-    getOrCreate(from).children.add(getOrCreate(to))
+    getOrCreate(from).dependsOn.add(getOrCreate(to))
   }
 
   fun subTree(key: String): DependencyGraph {
@@ -60,14 +60,14 @@ class DependencyGraph() {
   }
 
   private fun addConnections(node: Node, into: DependencyGraph) {
-    node.children.forEach {
+    node.dependsOn.forEach {
       into.addEdge(node.key, it.key)
       addConnections(it, into)
     }
   }
 
   private fun countEdges(): Int {
-    return nodes().flatMap { node -> node.children }.count()
+    return nodes().flatMap { node -> node.dependsOn }.count()
   }
 
   private fun getOrCreate(key: String): Node {
@@ -75,15 +75,15 @@ class DependencyGraph() {
   }
 
   class Node(val key: String) {
-    val children = mutableSetOf<Node>()
+    val dependsOn = mutableSetOf<Node>()
 
-    private fun isLeaf() = children.isEmpty()
+    private fun isLeaf() = dependsOn.isEmpty()
 
     fun height(): Int {
       if (isLeaf()) {
         return 0
       } else {
-        return 1 + children.map { it.height() }.max()!!
+        return 1 + dependsOn.map { it.height() }.max()!!
       }
     }
 
@@ -93,7 +93,7 @@ class DependencyGraph() {
       } else {
         val path = mutableListOf<Node>(this)
 
-        val maxHeightNode = children.maxBy { it.height() }!!
+        val maxHeightNode = dependsOn.maxBy { it.height() }!!
         path.addAll(maxHeightNode.longestPath())
 
         return path
