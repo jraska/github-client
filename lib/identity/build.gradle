@@ -1,26 +1,13 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
 
-android {
-  compileSdkVersion 28
-  defaultConfig {
-    minSdkVersion 21
-  }
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-}
 
 dependencies {
-  api project(':core')
-  api project(':core-android')
+  implementation project(':core')
 
   kapt 'com.google.dagger:dagger-compiler:2.25.2'
-  api 'com.google.dagger:dagger:2.25.2'
+  implementation 'com.google.dagger:dagger:2.25.2'
 
   testImplementation 'junit:junit:4.12'
   testImplementation project(':core-testing')

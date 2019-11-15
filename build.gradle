@@ -64,3 +64,15 @@ subprojects {
     }
   }
 }
+
+
+subprojects { subProject ->
+  configurations.all { configuration ->
+    // https://github.com/square/okio/issues/647
+    // https://youtrack.jetbrains.com/issue/KT-31641
+    // https://youtrack.jetbrains.com/issue/KT-33206
+    if (name.contains('kapt')) {
+      attributes.attribute(Usage.USAGE_ATTRIBUTE, subProject.objects.named(Usage.class, Usage.JAVA_RUNTIME))
+    }
+  }
+}
