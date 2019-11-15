@@ -3,6 +3,6 @@ apply plugin: 'com.android.lint'
 apply plugin: 'kotlin'
 
 dependencies {
-  api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-  api 'com.squareup.okhttp3:okhttp:4.2.2'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  implementation 'com.squareup.okhttp3:okhttp:4.2.2'
 }

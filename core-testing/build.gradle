@@ -2,7 +2,7 @@ apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
 dependencies {
-    api project(':core')
+  implementation project(':core')
 }
 
 sourceCompatibility = "8"
