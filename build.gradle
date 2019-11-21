@@ -1,4 +1,4 @@
-import com.jraska.github.client.*
+import com.jraska.github.client.tasks.*
 
 buildscript {
   ext.kotlin_version = '1.3.50'

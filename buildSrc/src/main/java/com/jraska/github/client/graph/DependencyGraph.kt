@@ -1,4 +1,4 @@
-package com.jraska.github.client
+package com.jraska.github.client.graph
 
 class DependencyGraph() {
   private val nodes = mutableMapOf<String, Node>()
@@ -47,10 +47,6 @@ class DependencyGraph() {
     )
   }
 
-  fun addEdge(from: String, to: String) {
-    getOrCreate(from).dependsOn.add(getOrCreate(to))
-  }
-
   fun subTree(key: String): DependencyGraph {
     val dependencyTree = DependencyGraph()
 
@@ -64,6 +60,10 @@ class DependencyGraph() {
       into.addEdge(node.key, it.key)
       addConnections(it, into)
     }
+  }
+
+  private fun addEdge(from: String, to: String) {
+    getOrCreate(from).dependsOn.add(getOrCreate(to))
   }
 
   private fun countEdges(): Int {
@@ -98,6 +98,14 @@ class DependencyGraph() {
 
         return path
       }
+    }
+  }
+
+  companion object {
+    fun create(dependencies: List<Pair<String, String>>): DependencyGraph {
+      val graph = DependencyGraph()
+      dependencies.forEach { graph.addEdge(it.first, it.second) }
+      return graph
     }
   }
 }

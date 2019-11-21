@@ -1,5 +1,7 @@
-package com.jraska.github.client
+package com.jraska.github.client.tasks
 
+import com.jraska.github.client.GradleDependencyGraphFactory
+import com.jraska.github.client.graph.DependencyGraph
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
@@ -11,7 +13,7 @@ open class AssertCrossLayerDependencies : DefaultTask() {
 
   @TaskAction
   fun run() {
-    val modulesTree = DependencyTreeFactory.create(project)
+    val modulesTree = GradleDependencyGraphFactory.create(project)
 
     verifyAllLayersHaveModule(modulesTree)
 
@@ -27,7 +29,7 @@ open class AssertCrossLayerDependencies : DefaultTask() {
   private fun buildErrorMessage(againstLayerDependencies: List<Pair<DependencyGraph.Node, DependencyGraph.Node>>): String {
     val errorsMessage = againstLayerDependencies.joinToString("\n") { " Module '${it.first.key}' cannot depend on '${it.second.key}'." }
 
-    return "Dependencies agaist direction of layers '${layersDependencyString()}' are not allowed. The violating dependencies are: \n$errorsMessage"
+    return "Dependencies against direction of layers '${layersDependencyString()}' are not allowed. The violating dependencies are: \n$errorsMessage"
   }
 
   private fun layersDependencyString(): String {
@@ -38,10 +40,7 @@ open class AssertCrossLayerDependencies : DefaultTask() {
     val nodes = modulesTree.nodes()
 
     for (layerPrefix in layersFromTheTop) {
-      val someNodeInLayer = nodes.find { it.key.startsWith(layerPrefix) }
-      if (someNodeInLayer == null) {
-        throw GradleException("There is no module, which belongs to layer '$layerPrefix'")
-      }
+      nodes.find { it.key.startsWith(layerPrefix) } ?: throw GradleException("There is no module, which belongs to layer '$layerPrefix'")
     }
   }
 

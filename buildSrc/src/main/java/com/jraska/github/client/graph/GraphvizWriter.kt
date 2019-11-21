@@ -1,6 +1,6 @@
-package com.jraska.github.client
+package com.jraska.github.client.graph
 
-object GraphvizGenerator {
+object GraphvizWriter {
   fun toGraphviz(dependencyGraph: DependencyGraph, groups: Set<String> = emptySet()): String {
 
     val longestPathConnections = dependencyGraph.longestPath()

@@ -1,5 +1,7 @@
-package com.jraska.github.client
+package com.jraska.github.client.tasks
 
+import com.jraska.github.client.GradleDependencyGraphFactory
+import com.jraska.github.client.graph.DependencyGraph
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
@@ -11,7 +13,7 @@ open class AssertInLayerDependencies : DefaultTask() {
 
   @TaskAction
   fun run() {
-    val modulesTree = DependencyTreeFactory.create(project)
+    val modulesTree = GradleDependencyGraphFactory.create(project)
 
     val inLayerDependencies = modulesTree.nodes()
       .filter { it.key.startsWith(layerPrefix) }

@@ -1,5 +1,6 @@
-package com.jraska.github.client
+package com.jraska.github.client.tasks
 
+import com.jraska.github.client.GradleDependencyGraphFactory
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
@@ -14,7 +15,7 @@ open class AssertModuleTreeHeightTask : DefaultTask() {
 
   @TaskAction
   fun run() {
-    val modulesTree = DependencyTreeFactory.create(project)
+    val modulesTree = GradleDependencyGraphFactory.create(project)
 
     val height = modulesTree.heightOf(moduleName)
     if (height > maxHeight) {

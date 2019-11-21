@@ -1,4 +1,4 @@
-package com.jraska.github.client
+package com.jraska.github.client.graph
 
 class LongestPath(
   val nodeNames: List<String>

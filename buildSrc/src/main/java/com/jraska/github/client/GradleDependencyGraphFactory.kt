@@ -1,19 +1,14 @@
 package com.jraska.github.client
 
+import com.jraska.github.client.graph.DependencyGraph
 import org.gradle.api.Project
 import org.gradle.api.internal.artifacts.dependencies.DefaultProjectDependency
 
-object DependencyTreeFactory {
+object GradleDependencyGraphFactory {
 
   fun create(project: Project): DependencyGraph {
     val dependencies = project.listDependencyPairs()
-
-    val modulesTree = DependencyGraph()
-    dependencies.forEach {
-      modulesTree.addEdge(it.first, it.second)
-    }
-
-    return modulesTree
+    return DependencyGraph.create(dependencies)
   }
 
   private fun Project.listDependencyPairs(): List<Pair<String, String>> {
