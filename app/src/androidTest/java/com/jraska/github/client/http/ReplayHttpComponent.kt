@@ -5,6 +5,7 @@ import android.app.Activity
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
+import com.jraska.github.client.HasRetrofit
 import com.jraska.github.client.users.ui.UsersActivity
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -20,7 +21,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : HttpComponent {
+class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : HasRetrofit {
 
   override fun retrofit(): Retrofit {
     return retrofit

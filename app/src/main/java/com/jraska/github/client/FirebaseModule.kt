@@ -2,7 +2,6 @@ package com.jraska.github.client
 
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
@@ -52,11 +51,5 @@ class FirebaseModule {
     configProxy.setupDefaults().fetch()
 
     return configProxy
-  }
-
-  @Provides
-  @Singleton
-  internal fun firebaseDatabase(): FirebaseDatabase {
-    return FirebaseDatabase.getInstance()
   }
 }

@@ -8,7 +8,6 @@ import com.jraska.github.client.core.android.CoreAndroidModule
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.dynamicbase.DynamicFeaturesModule
-import com.jraska.github.client.http.HttpComponent
 import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.identity.IdentityProvider
 import com.jraska.github.client.navigation.Navigator
@@ -38,8 +37,8 @@ import dagger.Subcomponent
     AboutFeatureEntranceModule::class,
     ShortcutsModule::class],
   dependencies = [
-    HttpComponentDelegate::class,
-    CoreComponentDelegate::class
+    HasRetrofit::class,
+    CoreComponent::class
   ]
 )
 interface AppComponent {
@@ -56,8 +55,8 @@ interface AppComponent {
   interface Builder {
     fun build(): AppComponent
 
-    fun coreComponent(delegate: CoreComponentDelegate): Builder
-    fun httpComponent(module: HttpComponentDelegate): Builder
+    fun coreComponent(coreComponent: CoreComponent): Builder
+    fun httpComponent(retrofit: HasRetrofit): Builder
 
     @BindsInstance
     fun appContext(context: Context): Builder
@@ -72,7 +71,3 @@ interface DynamicFeaturesComponent {
 
   fun eventAnalytics(): EventAnalytics
 }
-
-class HttpComponentDelegate(private val httpComponent: HttpComponent) : HttpComponent by httpComponent
-
-class CoreComponentDelegate(private val coreComponent: CoreComponent) : CoreComponent by coreComponent

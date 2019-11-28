@@ -2,7 +2,6 @@ package com.jraska.github.client
 
 import android.app.Application
 import android.content.Context
-import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.perf.metrics.AddTrace
@@ -10,9 +9,6 @@ import com.jraska.github.client.core.android.HasServiceModelFactory
 import com.jraska.github.client.core.android.HasViewModelFactory
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.DaggerHttpComponent
-import com.jraska.github.client.http.HttpComponent
-import io.reactivex.android.plugins.RxAndroidPlugins
-import io.reactivex.android.schedulers.AndroidSchedulers
 import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
 import java.io.File
@@ -42,7 +38,6 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
   override fun onCreate() {
     super.onCreate()
 
-    initRxAndroidMainThread()
     appComponent.onAppCreateActions()
       .sortedByDescending { it.priority() }
       .forEach {
@@ -50,24 +45,18 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
       }
   }
 
-  private fun initRxAndroidMainThread() {
-    RxAndroidPlugins.setInitMainThreadSchedulerHandler {
-      AndroidSchedulers.from(Looper.getMainLooper(), true)
-    }
-  }
-
   private fun componentBuilder(): AppComponent.Builder {
     return DaggerAppComponent.builder()
       .appContext(this)
-      .httpComponent(HttpComponentDelegate(httpComponent()))
-      .coreComponent(CoreComponentDelegate(coreComponent()))
+      .httpComponent(retrofit())
+      .coreComponent(coreComponent())
   }
 
   protected open fun coreComponent(): CoreComponent {
-    return DaggerCoreComponent.builder().build()
+    return DaggerFirebaseCoreComponent.builder().build()
   }
 
-  protected open fun httpComponent(): HttpComponent {
+  protected open fun retrofit(): HasRetrofit {
     return DaggerHttpComponent.builder()
       .cacheDir(File(cacheDir, "network"))
       .logger(object : HttpLoggingInterceptor.Logger {

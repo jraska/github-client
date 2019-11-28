@@ -1,5 +1,6 @@
 package com.jraska.github.client.http
 
+import com.jraska.github.client.HasRetrofit
 import dagger.BindsInstance
 import dagger.Component
 import okhttp3.logging.HttpLoggingInterceptor
@@ -8,8 +9,8 @@ import java.io.File
 
 @Http
 @Component(modules = [HttpModule::class])
-interface HttpComponent {
-  fun retrofit(): Retrofit
+interface HttpComponent : HasRetrofit {
+  override fun retrofit(): Retrofit
 
   @Component.Builder
   interface Builder {

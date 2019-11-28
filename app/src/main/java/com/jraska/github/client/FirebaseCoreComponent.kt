@@ -1,6 +1,5 @@
 package com.jraska.github.client
 
-import com.google.firebase.database.FirebaseDatabase
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.logging.CrashReporter
@@ -9,14 +8,12 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [FirebaseModule::class])
-interface CoreComponent {
-  fun crashReporter(): CrashReporter
+interface FirebaseCoreComponent : CoreComponent{
+  override fun crashReporter(): CrashReporter
 
-  fun config(): Config
+  override fun config(): Config
 
-  fun analyticsProperty(): AnalyticsProperty
+  override fun analyticsProperty(): AnalyticsProperty
 
-  fun analytics(): EventAnalytics
-
-  fun firebaseDatabase(): FirebaseDatabase
+  override fun analytics(): EventAnalytics
 }
