@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [FirebaseModule::class])
-interface FirebaseCoreComponent : CoreComponent{
+interface FirebaseCoreComponent : CoreComponent {
   override fun crashReporter(): CrashReporter
 
   override fun config(): Config
