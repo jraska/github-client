@@ -7,7 +7,7 @@ import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
-open class AssertCrossLayerDependencies : DefaultTask() {
+open class AssertLayersOrderTask : DefaultTask() {
   @Input
   lateinit var layersFromTheTop: Array<String>
 

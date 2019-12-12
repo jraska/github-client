@@ -17,6 +17,5 @@ open class GenerateModulesGraphTask : DefaultTask() {
 
     println(allModulesTree.statistics())
     println(GraphvizWriter.toGraphviz(allModulesTree, layers.toSet()))
-    println(KotlinCodeWriter.toKotlinCode(allModulesTree))
   }
 }

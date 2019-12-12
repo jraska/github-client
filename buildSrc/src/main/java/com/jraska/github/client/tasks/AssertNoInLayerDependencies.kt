@@ -7,7 +7,7 @@ import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
-open class AssertInLayerDependencies : DefaultTask() {
+open class AssertNoInLayerDependencies : DefaultTask() {
   @Input
   lateinit var layerPrefix: String
 
