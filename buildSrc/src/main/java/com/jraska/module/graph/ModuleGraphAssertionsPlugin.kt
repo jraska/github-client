@@ -4,21 +4,24 @@ import com.jraska.github.client.tasks.AssertLayersOrderTask
 import com.jraska.github.client.tasks.AssertModuleTreeHeightTask
 import com.jraska.github.client.tasks.AssertNoInLayerDependencies
 import com.jraska.github.client.tasks.GenerateModulesGraphTask
+import com.jraska.module.graph.Api.Tasks
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.language.base.plugins.LifecycleBasePlugin.VERIFICATION_GROUP
 import java.util.Locale
 
 @Suppress("unused") // Used as plugin
 class ModuleGraphAssertionsPlugin : Plugin<Project> {
 
   override fun apply(project: Project) {
-    val graphRules = project.extensions.create("moduleGraphRules", GraphRulesExtension::class.java)
+    val graphRules = project.extensions.create(Api.EXTENSION_ROOT, GraphRulesExtension::class.java)
 
     project.addModuleGraphGeneration()
 
-    val allAssertionsTask = project.tasks.create("assertModulesGraph")
-    project.tasks.find { it.name == "check" }?.dependsOn(allAssertionsTask)
+    val allAssertionsTask = project.tasks.create(Tasks.ASSERT_ALL)
+    allAssertionsTask.group = VERIFICATION_GROUP
+    project.tasks.find { it.name == Api.CHECK_TASK }?.dependsOn(allAssertionsTask)
 
     project.addMaxHeightTasks(graphRules).forEach { allAssertionsTask.dependsOn(it) }
     project.addModuleLayersTasks(graphRules).forEach { allAssertionsTask.dependsOn(it) }
@@ -26,7 +29,7 @@ class ModuleGraphAssertionsPlugin : Plugin<Project> {
   }
 
   private fun Project.addModuleGraphGeneration() {
-    tasks.create("generateModulesGrapvizText", GenerateModulesGraphTask::class.java)
+    tasks.create(Tasks.GENERATE_GRAPHVIZ, GenerateModulesGraphTask::class.java)
   }
 
   private fun Project.addMaxHeightTasks(graphRules: GraphRulesExtension): List<Task> {
@@ -34,9 +37,10 @@ class ModuleGraphAssertionsPlugin : Plugin<Project> {
       return emptyList()
     }
 
-    val task = tasks.create("assertMaxHeight", AssertModuleTreeHeightTask::class.java)
+    val task = tasks.create(Tasks.ASSERT_MAX_HEIGHT, AssertModuleTreeHeightTask::class.java)
     task.maxHeight = graphRules.maxHeight
     task.moduleName = graphRules.appModuleName
+    task.group = VERIFICATION_GROUP
 
     return listOf(task)
   }
@@ -46,16 +50,20 @@ class ModuleGraphAssertionsPlugin : Plugin<Project> {
       return emptyList()
     }
 
-    val task = tasks.create("assertModuleLayersOrder", AssertLayersOrderTask::class.java)
+    val task = tasks.create(Tasks.ASSERT_LAYER_ORDER, AssertLayersOrderTask::class.java)
     task.layersFromTheTop = graphRules.moduleLayersFromTheTop
+    task.group = VERIFICATION_GROUP
+
     return listOf(task)
   }
 
   private fun Project.addInLayerDependencyTasks(graphRules: GraphRulesExtension): List<Task> {
     return graphRules.notAllowedInLayerDependencies.map { layerPrefix ->
       val taskNameSuffix = layerPrefix.replace(":", "").capitalizeFirst()
-      val task = tasks.create("assertNoDependenciesWithin$taskNameSuffix", AssertNoInLayerDependencies::class.java)
+      val task = tasks.create("${Tasks.ASSERT_NO_IN_LAYER_PREFIX}$taskNameSuffix", AssertNoInLayerDependencies::class.java)
       task.layerPrefix = layerPrefix
+      task.group = VERIFICATION_GROUP
+
       return@map task
     }
   }
