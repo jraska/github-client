@@ -15,8 +15,14 @@ import java.util.Locale
 class ModuleGraphAssertionsPlugin : Plugin<Project> {
 
   override fun apply(project: Project) {
-    val graphRules = project.extensions.create(Api.EXTENSION_ROOT, GraphRulesExtension::class.java)
+    val graphRules = project.extensions.create(GraphRulesExtension::class.java, Api.EXTENSION_ROOT, GraphRulesExtension::class.java)
 
+    project.afterEvaluate {
+      addModulesAssertions(project, graphRules)
+    }
+  }
+
+  private fun addModulesAssertions(project: Project, graphRules: GraphRulesExtension) {
     project.addModuleGraphGeneration()
 
     val allAssertionsTask = project.tasks.create(Tasks.ASSERT_ALL)
@@ -58,7 +64,7 @@ class ModuleGraphAssertionsPlugin : Plugin<Project> {
   }
 
   private fun Project.addInLayerDependencyTasks(graphRules: GraphRulesExtension): List<Task> {
-    return graphRules.notAllowedInLayerDependencies.map { layerPrefix ->
+    return graphRules.restrinctInLayerDependencies.map { layerPrefix ->
       val taskNameSuffix = layerPrefix.replace(":", "").capitalizeFirst()
       val task = tasks.create("${Tasks.ASSERT_NO_IN_LAYER_PREFIX}$taskNameSuffix", AssertNoInLayerDependencies::class.java)
       task.layerPrefix = layerPrefix
