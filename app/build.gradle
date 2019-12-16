@@ -132,9 +132,9 @@ dependencies {
   androidTestImplementation project(':core-testing')
 }
 
-apply plugin: 'com.jraska.module.graph'
+apply plugin: 'com.jraska.module.graph.assertion'
 
-moduleGraphRules {
+modulesGraphAssert {
   maxHeight = 4
   moduleLayersFromTheTop = [":feature", ":lib", ":core"]
   restrinctInLayerDependencies = [":feature", ":lib"]
