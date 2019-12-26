@@ -20,6 +20,6 @@ dependencies {
   implementation project(':core-android')
   implementation project(':lib:dynamic-features')
 
-  implementation 'com.google.dagger:dagger:2.25.2'
-  kapt 'com.google.dagger:dagger-compiler:2.25.2'
+  implementation 'com.google.dagger:dagger:2.25.3'
+  kapt 'com.google.dagger:dagger-compiler:2.25.3'
 }

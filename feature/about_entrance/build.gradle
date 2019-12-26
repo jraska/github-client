@@ -18,10 +18,10 @@ dependencies {
   implementation project(':core')
   implementation project(':core-android')
 
-  implementation 'com.google.dagger:dagger:2.25.2'
-  kapt 'com.google.dagger:dagger-compiler:2.25.2'
+  implementation 'com.google.dagger:dagger:2.25.3'
+  kapt 'com.google.dagger:dagger-compiler:2.25.3'
   implementation project(':lib:dynamic-features')
 
   testImplementation 'junit:junit:4.12'
-  testImplementation 'org.assertj:assertj-core:3.13.2'
+  testImplementation 'org.assertj:assertj-core:3.14.0'
 }

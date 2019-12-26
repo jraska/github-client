@@ -20,24 +20,23 @@ dependencies {
   implementation project(':core-android')
   implementation project(':navigation')
 
-  kapt 'com.google.dagger:dagger-compiler:2.25.2'
-  implementation 'com.google.dagger:dagger:2.25.2'
+  kapt 'com.google.dagger:dagger-compiler:2.25.3'
+  implementation 'com.google.dagger:dagger:2.25.3'
 
-  api 'com.squareup.retrofit2:retrofit:2.6.2'
-  api 'com.squareup.retrofit2:converter-gson:2.6.2'
-  api 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+  api 'com.squareup.retrofit2:retrofit:2.7.0'
+  api 'com.squareup.retrofit2:converter-gson:2.7.0'
+  api 'com.squareup.retrofit2:adapter-rxjava2:2.7.0'
   api 'com.google.code.gson:gson:2.8.6'
 
-  implementation 'com.airbnb.android:epoxy:3.8.0'
-  implementation 'com.facebook.fresco:drawee:2.0.0'
+  implementation 'com.airbnb.android:epoxy:3.9.0'
+  implementation 'com.facebook.fresco:drawee:2.1.0'
 
   testImplementation 'com.jraska.livedata:testing:1.1.0'
   testImplementation 'com.jraska.livedata:testing-ktx:1.1.0'
   testImplementation 'junit:junit:4.12'
-  testImplementation 'org.assertj:assertj-core:3.13.2'
-  testImplementation 'org.mockito:mockito-core:3.1.0'
+  testImplementation 'org.assertj:assertj-core:3.14.0'
+  testImplementation 'org.mockito:mockito-core:3.2.4'
   testImplementation 'androidx.arch.core:core-testing:2.1.0'
-  testImplementation 'org.mockito:mockito-core:3.1.0'
   testImplementation 'androidx.annotation:annotation:1.1.0'
   testImplementation project(':core-testing')
 }
