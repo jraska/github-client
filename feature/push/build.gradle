@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion 28
+  compileSdkVersion 29
   defaultConfig {
     minSdkVersion 21
   }
@@ -19,8 +19,8 @@ dependencies {
   implementation project(':core-android')
   implementation project(':lib:identity')
 
-  api 'com.google.firebase:firebase-messaging:19.0.1'
-  api 'com.google.firebase:firebase-database:18.0.0'
+  api 'com.google.firebase:firebase-messaging:20.1.0'
+  api 'com.google.firebase:firebase-database:19.2.0'
 
   implementation 'com.google.dagger:dagger:2.25.3'
   kapt 'com.google.dagger:dagger-compiler:2.25.3'

@@ -39,8 +39,8 @@ class PushHandler @Inject internal constructor(
     return actionCommand.get().execute(action)
   }
 
-  internal fun onTokenRefresh() {
-    tokenSynchronizer.synchronizeToken()
+  internal fun onTokenRefresh(token: String) {
+    tokenSynchronizer.synchronizeToken(token)
 
     val tokenEvent = AnalyticsEvent.builder("push_token_refresh")
       .addProperty("session_id", identityProvider.session().id.toString())

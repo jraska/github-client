@@ -9,5 +9,5 @@ internal class PushHandleService : FirebaseMessagingService() {
 
   override fun onMessageReceived(message: RemoteMessage) = model.onMessageReceived(message)
 
-  override fun onNewToken(token: String?) = model.onNewToken(token)
+  override fun onNewToken(token: String) = model.onNewToken(token)
 }

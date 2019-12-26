@@ -12,8 +12,7 @@ internal class PushHandleModel @Inject constructor(
     pushHandler.handlePush(action)
   }
 
-  @Suppress("UNUSED_PARAMETER")
-  fun onNewToken(token: String?) {
-    pushHandler.onTokenRefresh()
+  fun onNewToken(token: String) {
+    pushHandler.onTokenRefresh(token)
   }
 }

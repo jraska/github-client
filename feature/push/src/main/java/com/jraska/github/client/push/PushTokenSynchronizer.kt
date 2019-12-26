@@ -13,16 +13,11 @@ internal class PushTokenSynchronizer @Inject constructor(
   private val dateTimeProvider: DateTimeProvider
 ) {
 
-  fun synchronizeToken() {
+  fun synchronizeToken(token: String) {
     val instanceId = FirebaseInstanceId.getInstance()
     val id = instanceId.id
-    val token = instanceId.token
 
     Timber.d("Id: %s, Token: %s", id, token)
-
-    if (id == null || token == null) {
-      return
-    }
 
     val map = HashMap<String, Any>()
     map["date"] = dateTimeProvider.now().toString()
