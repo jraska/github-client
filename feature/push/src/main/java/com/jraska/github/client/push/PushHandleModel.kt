@@ -5,14 +5,20 @@ import com.jraska.github.client.core.android.ServiceModel
 import javax.inject.Inject
 
 internal class PushHandleModel @Inject constructor(
-  private val pushHandler: PushHandler
+  private val pushHandler: PushHandler,
+  private val analytics: PushAnalytics,
+  private val tokenSynchronizer: PushTokenSynchronizer
 ) : ServiceModel {
   fun onMessageReceived(remoteMessage: RemoteMessage) {
     val action = RemoteMessageToActionConverter.convert(remoteMessage)
-    pushHandler.handlePush(action)
+
+    val pushResult = pushHandler.handlePush(action)
+
+    analytics.onPushHandled(action, pushResult)
   }
 
   fun onNewToken(token: String) {
-    pushHandler.onTokenRefresh(token)
+    analytics.onTokenRefresh()
+    tokenSynchronizer.onTokenRefresh(token)
   }
 }
