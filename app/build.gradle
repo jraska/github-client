@@ -1,3 +1,7 @@
+plugins {
+  id "com.jraska.module.graph.assertion" version "0.4.1"
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -136,8 +140,9 @@ apply plugin: 'com.jraska.module.graph.assertion'
 
 moduleGraphAssert {
   maxHeight = 4
-  moduleLayersFromTheTop = [":feature", ":lib", ":core"]
-  restrictInLayerDependencies = [":feature", ":lib"]
+  moduleLayers = [":feature\\S*", ":lib\\S*", ":core\\S*"]
+  moduleLayersExclude = [":core-android -> :core"]
+  restricted = [":feature:\\S* -X> :not-wanted-module"]
 }
 
 apply plugin: 'com.google.gms.google-services'
