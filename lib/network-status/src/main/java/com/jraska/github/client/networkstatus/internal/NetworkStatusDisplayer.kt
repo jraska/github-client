@@ -9,8 +9,8 @@ import com.jraska.github.client.core.android.DefaultActivityCallbacks
 import com.jraska.github.client.networkstatus.R
 import com.jraska.github.client.rx.AppSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
 internal class NetworkStatusDisplayer @Inject constructor(
   private val networkObservable: NetworkObservable,

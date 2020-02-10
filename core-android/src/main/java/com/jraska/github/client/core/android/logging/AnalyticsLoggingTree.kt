@@ -5,8 +5,8 @@ import com.jraska.github.client.Config
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.time.DateTimeProvider
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
 class AnalyticsLoggingTree @Inject constructor(
   private val config: Config,

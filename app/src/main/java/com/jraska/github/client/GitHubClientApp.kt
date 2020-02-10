@@ -9,9 +9,9 @@ import com.jraska.github.client.core.android.HasServiceModelFactory
 import com.jraska.github.client.core.android.HasViewModelFactory
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.DaggerHttpComponent
+import java.io.File
 import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
-import java.io.File
 
 open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModelFactory, HasDynamicFeaturesComponent {
 

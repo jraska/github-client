@@ -10,8 +10,8 @@ import kotlinx.android.synthetic.main.item_repo_detail_stats.view.repo_detail_st
 import kotlinx.android.synthetic.main.item_repo_detail_stats.view.repo_detail_subscribers_count
 import org.threeten.bp.format.DateTimeFormatter
 
-internal class RepoDetailHeaderModel(private val repoDetail: RepoDetail)
-  : EpoxyModel<View>() {
+internal class RepoDetailHeaderModel(private val repoDetail: RepoDetail) :
+  EpoxyModel<View>() {
 
   override fun getDefaultLayout(): Int {
     return R.layout.item_repo_detail_stats

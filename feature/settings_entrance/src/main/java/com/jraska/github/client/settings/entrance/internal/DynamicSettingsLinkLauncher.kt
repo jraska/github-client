@@ -7,9 +7,9 @@ import com.jraska.github.client.core.android.TopActivityProvider
 import com.jraska.github.client.dynamicbase.DynamicFeatureInstaller
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.settings.entrance.R
+import javax.inject.Inject
 import okhttp3.HttpUrl
 import timber.log.Timber
-import javax.inject.Inject
 
 internal class DynamicSettingsLinkLauncher @Inject constructor(
   val installer: DynamicFeatureInstaller,

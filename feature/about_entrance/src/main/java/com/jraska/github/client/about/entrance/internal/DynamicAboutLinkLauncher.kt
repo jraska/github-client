@@ -7,9 +7,9 @@ import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.core.android.TopActivityProvider
 import com.jraska.github.client.dynamicbase.DynamicFeatureInstaller
 import com.jraska.github.client.rx.AppSchedulers
+import javax.inject.Inject
 import okhttp3.HttpUrl
 import timber.log.Timber
-import javax.inject.Inject
 
 internal class DynamicAboutLinkLauncher @Inject constructor(
   val installer: DynamicFeatureInstaller,

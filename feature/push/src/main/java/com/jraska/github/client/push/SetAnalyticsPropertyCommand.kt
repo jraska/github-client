@@ -1,9 +1,9 @@
 package com.jraska.github.client.push
 
+import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.common.BooleanResult
 import com.jraska.github.client.common.BooleanResult.FAILURE
 import com.jraska.github.client.common.BooleanResult.SUCCESS
-import com.jraska.github.client.analytics.AnalyticsProperty
 import javax.inject.Inject
 
 internal class SetAnalyticsPropertyCommand @Inject constructor(

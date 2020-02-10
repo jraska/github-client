@@ -2,12 +2,10 @@ package com.jraska.github.client.shortcuts
 
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.DeepLinkHandler
-
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-
-import okhttp3.HttpUrl
 import javax.inject.Inject
+import okhttp3.HttpUrl
 
 internal class ShortcutHandlerModel @Inject constructor(
   private val deepLinkHandler: DeepLinkHandler,

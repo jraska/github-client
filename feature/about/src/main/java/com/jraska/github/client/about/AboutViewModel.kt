@@ -6,8 +6,8 @@ import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.analytics.toAnalyticsString
 import com.jraska.github.client.identity.IdentityProvider
 import com.jraska.github.client.navigation.Navigator
-import okhttp3.HttpUrl.Companion.toHttpUrl
 import javax.inject.Inject
+import okhttp3.HttpUrl.Companion.toHttpUrl
 
 internal class AboutViewModel @Inject constructor(
   private val analytics: EventAnalytics,

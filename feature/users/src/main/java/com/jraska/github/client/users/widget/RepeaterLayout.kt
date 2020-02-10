@@ -16,8 +16,8 @@ internal class RepeaterLayout : LinearLayout {
 
   @Suppress("unused")
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int)
-    : super(context, attrs, defStyleAttr, defStyleRes)
+  constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) :
+    super(context, attrs, defStyleAttr, defStyleRes)
 
   fun <T : RecyclerView.ViewHolder> setAdapter(adapter: RecyclerView.Adapter<T>) {
     removeAllViews()

@@ -9,8 +9,8 @@ import com.google.android.play.core.splitinstall.SplitInstallSessionState
 import com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import com.jraska.github.client.common.lazyMap
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
 internal class PlayInstallViewModel @Inject constructor(
   private val splitInstallManager: SplitInstallManager,

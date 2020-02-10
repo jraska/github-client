@@ -3,9 +3,9 @@ package com.jraska.github.client.http
 import com.jraska.github.client.HasRetrofit
 import dagger.BindsInstance
 import dagger.Component
+import java.io.File
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import java.io.File
 
 @Http
 @Component(modules = [HttpModule::class])

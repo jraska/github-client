@@ -6,7 +6,6 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import com.jraska.github.client.core.android.OnAppCreate
-
 import javax.inject.Inject
 
 internal class NotificationSetup @Inject constructor(

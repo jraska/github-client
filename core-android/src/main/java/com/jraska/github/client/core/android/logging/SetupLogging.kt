@@ -3,9 +3,9 @@ package com.jraska.github.client.core.android.logging
 import android.app.Application
 import com.jraska.github.client.core.android.BuildConfig
 import com.jraska.github.client.core.android.OnAppCreate
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Provider
+import timber.log.Timber
 
 class SetupLogging @Inject constructor(
   private val errorTree: ErrorReportTree,

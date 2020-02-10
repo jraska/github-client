@@ -6,8 +6,8 @@ import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.analytics.toAnalyticsString
 import com.jraska.github.client.common.toBoolean
-import okhttp3.HttpUrl
 import javax.inject.Inject
+import okhttp3.HttpUrl
 
 class UriHandlerViewModel @Inject constructor(
   private val deepLinkHandler: DeepLinkHandler,

@@ -9,8 +9,8 @@ import com.jraska.github.client.logging.CrashReporter
 import com.jraska.github.client.logging.FirebaseCrashlyticsReporter
 import dagger.Module
 import dagger.Provides
-import timber.log.Timber
 import javax.inject.Singleton
+import timber.log.Timber
 
 @Module
 class FirebaseModule {

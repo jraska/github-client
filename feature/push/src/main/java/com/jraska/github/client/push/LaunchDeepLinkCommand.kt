@@ -5,9 +5,9 @@ import com.jraska.github.client.common.BooleanResult
 import com.jraska.github.client.common.BooleanResult.FAILURE
 import com.jraska.github.client.common.BooleanResult.SUCCESS
 import com.jraska.github.client.logging.CrashReporter
+import javax.inject.Inject
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
-import javax.inject.Inject
 
 internal class LaunchDeepLinkCommand @Inject constructor(
   private val deepLinkHandler: DeepLinkHandler,

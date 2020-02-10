@@ -2,8 +2,8 @@ package com.jraska.github.client
 
 import com.jraska.github.client.common.BooleanResult
 import com.jraska.github.client.logging.CrashReporter
-import okhttp3.HttpUrl
 import javax.inject.Inject
+import okhttp3.HttpUrl
 
 class DeepLinkHandler @Inject constructor(
   private val linkLauncher: DeepLinkLauncher,

@@ -2,9 +2,9 @@ package com.jraska.github.client.push
 
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.BooleanResult
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Provider
+import timber.log.Timber
 
 class PushHandler @Inject internal constructor(
   private val eventAnalytics: EventAnalytics,

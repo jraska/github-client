@@ -4,9 +4,9 @@ import android.os.Build
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
 import com.jraska.github.client.time.DateTimeProvider
-import timber.log.Timber
 import java.util.HashMap
 import javax.inject.Inject
+import timber.log.Timber
 
 internal class PushTokenSynchronizer @Inject constructor(
   private val database: FirebaseDatabase,
