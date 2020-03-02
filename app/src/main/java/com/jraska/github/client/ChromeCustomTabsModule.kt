@@ -1,7 +1,6 @@
 package com.jraska.github.client
 
 import com.jraska.github.client.core.android.TopActivityProvider
-import com.jraska.github.client.rx.AppSchedulers
 import dagger.Module
 import dagger.Provides
 
@@ -9,7 +8,7 @@ import dagger.Provides
 object ChromeCustomTabsModule {
 
   @Provides
-  fun webLinkLauncher(provider: TopActivityProvider, appSchedulers: AppSchedulers): WebLinkLauncher {
-    return ChromeCustomTabsLauncher(provider, appSchedulers)
+  fun webLinkLauncher(provider: TopActivityProvider): WebLinkLauncher {
+    return ChromeCustomTabsLauncher(provider)
   }
 }

@@ -3,67 +3,84 @@ package com.jraska.github.client.core.android
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import io.reactivex.Single
-import io.reactivex.subjects.BehaviorSubject
+import android.os.Looper
+import androidx.annotation.AnyThread
+import androidx.annotation.MainThread
+import okhttp3.internal.toImmutableList
 import javax.inject.Inject
 
-class TopActivityProvider {
-  private val topActivitySubject = BehaviorSubject.createDefault<Any>(NO_ACTIVITY)
-  private val resumedActivitySubject = BehaviorSubject.createDefault<Any>(NO_ACTIVITY)
+class TopActivityProvider(
+  private val isMainThread: () -> Boolean = { Looper.getMainLooper() == Looper.myLooper() }
+) {
 
-  fun topActivity(): Single<Activity> {
-    return topActivitySubject.filter { it is Activity }
-      .take(1)
-      .cast(Activity::class.java)
-      .firstOrError()
-  }
+  private val pendingActions = mutableListOf<(Activity) -> Unit>()
+  private var topActivity: Activity? = null
+    set(activity) {
+      field = activity
+      executePendingActions()
+    }
 
-  fun resumedActivity(): Single<Activity> {
-    return resumedActivitySubject.filter { it is Activity }
-      .take(1)
-      .cast(Activity::class.java)
-      .firstOrError()
-  }
+  @AnyThread
+  fun onTopActivity(action: (Activity) -> Unit) {
+    val topActivity = topActivity
 
-  fun topActivitySync(): Activity? {
-    val value = topActivitySubject.value
-    if (value is Activity) {
-      return value
+    if (topActivity == null) {
+      addPendingAction(action)
     } else {
-      return null
+      if (isMainThread()) {
+        action(topActivity)
+      } else {
+        addPendingAction(action)
+        topActivity.runOnUiThread { executePendingActions() }
+      }
+    }
+  }
+
+  @MainThread
+  private fun executePendingActions() {
+    val activity = topActivity ?: return
+
+    val actionsToExecute: List<(Activity) -> Unit>
+    synchronized(pendingActions) {
+      actionsToExecute = pendingActions.toImmutableList()
+      pendingActions.clear()
+    }
+
+    actionsToExecute.forEach { it(activity) }
+  }
+
+  @AnyThread
+  private fun addPendingAction(action: (Activity) -> Unit) {
+    synchronized(pendingActions) {
+      pendingActions.add(action)
     }
   }
 
   private val callbacks: Application.ActivityLifecycleCallbacks = object : DefaultActivityCallbacks() {
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-      topActivitySubject.onNext(activity)
+      topActivity = activity
     }
 
     override fun onActivityStarted(activity: Activity) {
-      topActivitySubject.onNext(activity)
+      topActivity = activity
     }
 
     override fun onActivityResumed(activity: Activity) {
-      topActivitySubject.onNext(activity)
-      resumedActivitySubject.onNext(activity)
+      topActivity = activity
     }
 
     override fun onActivityPaused(activity: Activity) {
-      if (resumedActivitySubject.value == activity) {
-        resumedActivitySubject.onNext(NO_ACTIVITY)
-      }
-
-      topActivitySubject.onNext(NO_ACTIVITY)
+      topActivity = null
     }
+  }
+
+  private fun setupWith(app: Application) {
+    app.registerActivityLifecycleCallbacks(callbacks)
   }
 
   class RegisterCallbacks @Inject constructor(private val topActivityProvider: TopActivityProvider) : OnAppCreate {
     override fun onCreate(app: Application) {
-      app.registerActivityLifecycleCallbacks(topActivityProvider.callbacks)
+      topActivityProvider.setupWith(app)
     }
-  }
-
-  companion object {
-    val NO_ACTIVITY = Unit
   }
 }

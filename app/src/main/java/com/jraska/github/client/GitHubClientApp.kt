@@ -2,6 +2,7 @@ package com.jraska.github.client
 
 import android.app.Application
 import android.content.Context
+import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.perf.metrics.AddTrace
@@ -9,6 +10,8 @@ import com.jraska.github.client.core.android.HasServiceModelFactory
 import com.jraska.github.client.core.android.HasViewModelFactory
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.DaggerHttpComponent
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.android.schedulers.AndroidSchedulers
 import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
 import java.io.File
@@ -38,6 +41,8 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
   override fun onCreate() {
     super.onCreate()
 
+    initRxAndroidMainThread() // Must be here, otherwise is fragile fue to class loading
+
     appComponent.onAppCreateActions()
       .sortedByDescending { it.priority() }
       .forEach {
@@ -65,5 +70,11 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
         }
       })
       .build()
+  }
+
+  private fun initRxAndroidMainThread() {
+    RxAndroidPlugins.setInitMainThreadSchedulerHandler {
+      AndroidSchedulers.from(Looper.getMainLooper(), true)
+    }
   }
 }

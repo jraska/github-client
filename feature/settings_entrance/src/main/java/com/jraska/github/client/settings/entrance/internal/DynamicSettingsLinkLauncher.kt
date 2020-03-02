@@ -29,10 +29,12 @@ internal class DynamicSettingsLinkLauncher @Inject constructor(
 
   private fun installAndLaunchSettingsFeature(featureName: String) {
     installer.ensureInstalled(featureName)
-      .andThen(topActivityProvider.topActivity())
       .subscribeOn(appSchedulers.io)
-      .observeOn(appSchedulers.mainThread)
-      .subscribe({ it.startActivity(launchIntent(it)) }, { Timber.e(it) })
+      .subscribe({
+        topActivityProvider.onTopActivity {
+          it.startActivity(launchIntent(it))
+        }
+      }, { Timber.e(it) })
   }
 
   private fun launchIntent(inActivity: Activity): Intent {

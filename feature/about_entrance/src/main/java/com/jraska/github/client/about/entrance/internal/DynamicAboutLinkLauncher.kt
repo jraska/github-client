@@ -29,11 +29,11 @@ internal class DynamicAboutLinkLauncher @Inject constructor(
 
   private fun installAndLaunchAboutFeature(featureName: String) {
     installer.ensureInstalled(featureName)
-      .andThen(topActivityProvider.topActivity())
       .subscribeOn(appSchedulers.io)
-      .observeOn(appSchedulers.mainThread)
       .subscribe({
-        it.startActivity(launchIntent(it))
+        topActivityProvider.onTopActivity {
+          it.startActivity(launchIntent(it))
+        }
       }, { Timber.e(it) })
   }
 
