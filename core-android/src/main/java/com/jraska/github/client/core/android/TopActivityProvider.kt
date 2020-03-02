@@ -56,7 +56,7 @@ class TopActivityProvider(
     }
   }
 
-  private val callbacks: Application.ActivityLifecycleCallbacks = object : DefaultActivityCallbacks() {
+  internal val callbacks: Application.ActivityLifecycleCallbacks = object : DefaultActivityCallbacks() {
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
       topActivity = activity
     }
