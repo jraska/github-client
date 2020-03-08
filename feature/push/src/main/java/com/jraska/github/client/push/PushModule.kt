@@ -1,7 +1,6 @@
 package com.jraska.github.client.push
 
 import com.google.firebase.database.FirebaseDatabase
-import com.jraska.github.client.PerApp
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
 import dagger.Module
@@ -10,6 +9,7 @@ import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import dagger.multibindings.StringKey
+import javax.inject.Singleton
 
 @Module
 object PushModule {
@@ -69,7 +69,7 @@ object PushModule {
   }
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun firebaseDatabase(): FirebaseDatabase {
     return FirebaseDatabase.getInstance()
   }

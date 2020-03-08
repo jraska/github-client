@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
-import com.jraska.github.client.PerApp
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.dynamicbase.internal.DynamicFeatureInitializer
 import com.jraska.github.client.dynamicbase.internal.PlayDynamicFeatureInstaller
@@ -14,6 +13,7 @@ import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
+import javax.inject.Singleton
 
 @Module
 object DynamicFeaturesModule {
@@ -24,7 +24,7 @@ object DynamicFeaturesModule {
   }
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun provideSplitManager(context: Context): SplitInstallManager {
     return SplitInstallManagerFactory.create(context)
   }
@@ -37,13 +37,13 @@ object DynamicFeaturesModule {
   }
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun providePlayDynamicFeatureInstaller(installManager: SplitInstallManager, context: Context): PlayDynamicFeatureInstaller {
     return PlayDynamicFeatureInstaller(installManager, context)
   }
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun provideFeatureInitializer(
     splitInstallManager: SplitInstallManager,
     specs: @JvmSuppressWildcards Set<DynamicFeatureSpec>

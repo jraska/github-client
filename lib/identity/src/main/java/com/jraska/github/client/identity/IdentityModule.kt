@@ -1,23 +1,23 @@
 package com.jraska.github.client.identity
 
-import com.jraska.github.client.PerApp
 import com.jraska.github.client.identity.internal.AnonymousIdentity
 import com.jraska.github.client.identity.internal.SessionIdProvider
 import com.jraska.github.client.time.TimeProvider
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 object IdentityModule {
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun provideSessionIdProvider(timeProvider: TimeProvider): SessionIdProvider {
     return SessionIdProvider(timeProvider)
   }
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun identityProvider(anonymousIdentity: AnonymousIdentity): IdentityProvider {
     return IdentityProvider(anonymousIdentity)
   }

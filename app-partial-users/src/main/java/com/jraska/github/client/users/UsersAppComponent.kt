@@ -6,7 +6,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.jraska.github.client.CoreComponent
 import com.jraska.github.client.HasRetrofit
-import com.jraska.github.client.PerApp
+import javax.inject.Singleton
 import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.core.android.CoreAndroidModule
 import com.jraska.github.client.core.android.OnAppCreate
@@ -17,7 +17,7 @@ import dagger.Provides
 import dagger.multibindings.IntoSet
 import okhttp3.HttpUrl
 
-@PerApp
+@Singleton
 @Component(
   modules = [
     AppModule::class,

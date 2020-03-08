@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jraska.github.client.DeepLinkLauncher
-import com.jraska.github.client.PerApp
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.logging.SetupLogging
@@ -20,17 +19,18 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Singleton
 
 @Module
 object CoreAndroidModule {
   @Provides
-  @PerApp
+  @Singleton
   internal fun provideViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory {
     return factory
   }
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun provideServiceModelFactory(factory: ServiceModelFactory): ServiceModel.Factory {
     return factory
   }
@@ -51,7 +51,7 @@ object CoreAndroidModule {
   }
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun topActivityProvider(): TopActivityProvider {
     return TopActivityProvider()
   }
@@ -63,19 +63,19 @@ object CoreAndroidModule {
   }
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun dateTimeProvider(): DateTimeProvider {
     return RealDateTimeProvider()
   }
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun timeProvider(): TimeProvider {
     return RealTimeProvider.INSTANCE
   }
 
   @Provides
-  @PerApp
+  @Singleton
   fun schedulers(): AppSchedulers {
     return AppSchedulers(
       AndroidSchedulers.mainThread(),

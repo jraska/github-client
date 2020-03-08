@@ -2,7 +2,6 @@ package com.jraska.github.client.users
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel
-import com.jraska.github.client.PerApp
 import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
 import com.jraska.github.client.users.model.GitHubUserDetailApi
@@ -17,12 +16,13 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import okhttp3.HttpUrl
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 @Module
 object UsersModule {
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun provideUsersRepository(retrofit: Retrofit): UsersRepository {
     val usersApi = retrofit.create(GitHubUsersApi::class.java)
     val detailApi = retrofit.create(GitHubUserDetailApi::class.java)

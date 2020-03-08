@@ -10,12 +10,13 @@ import com.jraska.github.client.core.android.OnAppCreate
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoSet
+import javax.inject.Singleton
 
 @Module
 object AppModule {
 
   @Provides
-  @PerApp
+  @Singleton
   internal fun provideLayoutInflater(context: Context): LayoutInflater {
     return LayoutInflater.from(context)
   }

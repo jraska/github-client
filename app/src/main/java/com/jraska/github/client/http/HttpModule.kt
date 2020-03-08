@@ -11,11 +11,12 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import javax.inject.Singleton
 
 @Module
 class HttpModule {
   @Provides
-  @Http
+  @Singleton
   fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
       .baseUrl("https://api.github.com")
@@ -27,8 +28,8 @@ class HttpModule {
   }
 
   @Provides
-  @Http
-  fun provideOkHttpClient(@Http cacheDir: File, logger: HttpLoggingInterceptor.Logger): OkHttpClient {
+  @Singleton
+  fun provideOkHttpClient(cacheDir: File, logger: HttpLoggingInterceptor.Logger): OkHttpClient {
     val builder = OkHttpClient.Builder()
 
     if (BuildConfig.DEBUG) {

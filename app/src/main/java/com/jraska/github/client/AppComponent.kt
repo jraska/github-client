@@ -20,8 +20,9 @@ import com.jraska.github.client.users.UsersModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Subcomponent
+import javax.inject.Singleton
 
-@PerApp
+@Singleton
 @Component(
   modules = [
     AppModule::class,

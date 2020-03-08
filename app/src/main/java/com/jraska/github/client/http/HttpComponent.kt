@@ -6,8 +6,9 @@ import dagger.Component
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.io.File
+import javax.inject.Singleton
 
-@Http
+@Singleton
 @Component(modules = [HttpModule::class])
 interface HttpComponent : HasRetrofit {
   override fun retrofit(): Retrofit
