@@ -14,8 +14,8 @@ class TopActivityProvider(
 ) {
 
   private val pendingActions = mutableListOf<(Activity) -> Unit>()
-  private var topActivity: Activity? = null
-    set(activity) {
+  var topActivity: Activity? = null
+    private set(activity) {
       field = activity
       executePendingActions()
     }
