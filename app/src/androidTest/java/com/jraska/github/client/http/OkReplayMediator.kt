@@ -2,26 +2,26 @@ package com.jraska.github.client.http
 
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import okhttp3.Response
-import okreplay.OkReplayConfig
 import okreplay.OkReplayInterceptor
-import okreplay.Tape
 
-class CustomOkReplayInterceptor : OkReplayInterceptor() {
+class OkReplayMediator {
   private val ordinalsInterceptor = AddOrdinalParameterInterceptor()
+  val okReplayInterceptor = OkReplayInterceptor()
 
-  override fun start(configuration: OkReplayConfig?, tape: Tape?) {
-    ordinalsInterceptor.clear()
-    super.start(configuration, tape)
-  }
-
-  override fun stop() {
-    super.stop()
+  fun onTestStart() {
     ordinalsInterceptor.clear()
   }
 
-  fun interceptorsToRegister(): List<Interceptor> {
-    return listOf(ordinalsInterceptor, this, RemoveOrdinalParameterInterceptor())
+  fun onTestStop() {
+    ordinalsInterceptor.clear()
+  }
+
+  fun configure(clientBuilder: OkHttpClient.Builder) {
+    clientBuilder.addInterceptor(ordinalsInterceptor)
+    clientBuilder.addInterceptor(okReplayInterceptor)
+    clientBuilder.addInterceptor(RemoveOrdinalParameterInterceptor())
   }
 }
 

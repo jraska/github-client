@@ -15,6 +15,7 @@ import okreplay.AndroidTapeRoot
 import okreplay.OkReplayConfig
 import okreplay.OkReplayRuleChain
 import okreplay.TapeMode
+import org.junit.rules.ExternalResource
 import org.junit.rules.RuleChain
 import org.junit.rules.TestRule
 import retrofit2.Retrofit
@@ -28,7 +29,7 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
   }
 
   companion object {
-    private val REPLAY_INTERCEPTOR = CustomOkReplayInterceptor()
+    private val REPLAY_MEDIATOR = OkReplayMediator()
     private const val NETWORK_ERROR_MESSAGE = "You are trying to do network requests in tests you naughty developer!"
 
     fun create(): ReplayHttpComponent {
@@ -57,10 +58,11 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
         .tapeRoot(AndroidTapeRoot(InstrumentationRegistry.getInstrumentation().context, testClass))
         .defaultMode(tapeMode)
         .sslEnabled(true)
-        .interceptor(REPLAY_INTERCEPTOR)
+        .interceptor(REPLAY_MEDIATOR.okReplayInterceptor)
         .build()
 
       return RuleChain.outerRule(GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE))
+        .around(MediatorRule(REPLAY_MEDIATOR))
         .around(OkReplayRuleChain(configuration, ActivityTestRule(activityClass)).get())
     }
 
@@ -79,7 +81,7 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
       val builder = OkHttpClient.Builder()
         .addInterceptor(httpLoggingInterceptor.apply { httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC })
 
-      REPLAY_INTERCEPTOR.interceptorsToRegister().forEach { builder.addInterceptor(it) }
+      REPLAY_MEDIATOR.configure(builder)
 
       val noNetworkInterceptor = object : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
@@ -89,6 +91,16 @@ class ReplayHttpComponent private constructor(private val retrofit: Retrofit) : 
       builder.addNetworkInterceptor(noNetworkInterceptor)
 
       return builder.build()
+    }
+  }
+
+  class MediatorRule(private val okReplayMediator: OkReplayMediator) : ExternalResource() {
+    override fun before() {
+      okReplayMediator.onTestStart()
+    }
+
+    override fun after() {
+      okReplayMediator.onTestStop()
     }
   }
 }
