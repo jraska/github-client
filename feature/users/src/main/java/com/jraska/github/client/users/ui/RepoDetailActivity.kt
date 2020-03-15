@@ -21,7 +21,7 @@ internal class RepoDetailActivity : BaseActivity() {
   private val viewModel: RepoDetailViewModel by lazy { viewModel(RepoDetailViewModel::class.java) }
 
   private fun fullRepoName(): String {
-    return intent.getStringExtra(EXTRA_FULL_REPO_NAME)
+    return intent.getStringExtra(EXTRA_FULL_REPO_NAME)!!
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {

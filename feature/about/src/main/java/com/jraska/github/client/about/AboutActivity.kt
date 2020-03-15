@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
@@ -21,7 +20,7 @@ import kotlinx.android.synthetic.main.content_about.about_recycler
 internal class AboutActivity : BaseActivity() {
 
   private val viewModel: AboutViewModel by lazy {
-    ViewModelProviders.of(this, viewModelFactory()).get(AboutViewModel::class.java)
+    ViewModelProvider(this, viewModelFactory()).get(AboutViewModel::class.java)
   }
 
   override fun attachBaseContext(newBase: Context?) {

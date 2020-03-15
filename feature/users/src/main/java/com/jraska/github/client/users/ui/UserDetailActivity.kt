@@ -24,7 +24,7 @@ internal class UserDetailActivity : BaseActivity() {
   private val userDetailViewModel: UserDetailViewModel by lazy { viewModel(UserDetailViewModel::class.java) }
 
   fun login(): String {
-    return intent.getStringExtra(EXTRA_USER_LOGIN)
+    return intent.getStringExtra(EXTRA_USER_LOGIN)!!
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
