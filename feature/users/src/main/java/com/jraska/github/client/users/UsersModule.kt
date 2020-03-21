@@ -3,12 +3,14 @@ package com.jraska.github.client.users
 import android.app.Activity
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.core.android.LinkLauncher
+import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
 import com.jraska.github.client.users.model.GitHubUserDetailApi
 import com.jraska.github.client.users.model.GitHubUsersApi
 import com.jraska.github.client.users.model.RepoDetailViewModel
 import com.jraska.github.client.users.model.UsersRepository
 import com.jraska.github.client.users.ui.UsersActivity
+import com.jraska.github.client.users.widget.TopSnackbarDisplay
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
@@ -75,4 +77,7 @@ object UsersModule {
       }
     }
   }
+
+  @Provides
+  fun snackbarDisplay(display: TopSnackbarDisplay): SnackbarDisplay = display
 }
