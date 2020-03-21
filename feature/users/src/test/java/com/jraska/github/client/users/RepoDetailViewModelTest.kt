@@ -1,6 +1,7 @@
 package com.jraska.github.client.users
 
 import com.jraska.github.client.Fakes
+import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
 import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.users.model.RepoDetailViewModel
 import com.jraska.github.client.users.model.UsersRepository
@@ -16,7 +17,7 @@ class RepoDetailViewModelTest {
 
     val viewModel = RepoDetailViewModel(
       mock(UsersRepository::class.java),
-      Fakes.trampoline(), navigatorMock, Fakes.emptyAnalytics()
+      Fakes.trampoline(), navigatorMock, Fakes.emptyAnalytics(), mock(SnackbarDisplay::class.java)
     )
 
     viewModel.onGitHubIconClicked("jraska/Falcon")

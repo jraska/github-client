@@ -20,8 +20,8 @@ internal class RepoDetailViewModel @Inject constructor(
   private val usersRepository: UsersRepository,
   private val appSchedulers: AppSchedulers,
   private val navigator: Navigator,
-  private val snackbarDisplay: SnackbarDisplay,
-  private val eventAnalytics: EventAnalytics
+  private val eventAnalytics: EventAnalytics,
+  private val snackbarDisplay: SnackbarDisplay
 ) : ViewModel() {
 
   private val liveDataMap: Map<String, LiveData<ViewState>> = lazyMap(this::createRepoDetailLiveData)
