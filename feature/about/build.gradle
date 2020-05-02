@@ -32,7 +32,7 @@ dependencies {
   implementation 'com.google.dagger:dagger:2.27'
 
   implementation 'com.airbnb.android:epoxy:3.9.0'
-  implementation 'com.facebook.fresco:drawee:2.1.0'
+  implementation 'com.facebook.fresco:drawee:2.2.0'
 
   testImplementation 'junit:junit:4.13'
   testImplementation 'androidx.arch.core:core-testing:2.1.0'

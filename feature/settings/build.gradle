@@ -27,8 +27,8 @@ dependencies {
   implementation 'com.google.android.gms:play-services-basement:17.1.1'
 
   implementation 'com.airbnb.android:epoxy:3.9.0'
-  implementation 'com.jraska:console:1.0.0'
-  implementation 'com.jraska:console-timber-tree:1.0.0'
+  implementation 'com.jraska:console:1.1.0'
+  implementation 'com.jraska:console-timber-tree:1.1.0'
 
   implementation 'com.google.dagger:dagger:2.27'
   kapt 'com.google.dagger:dagger-compiler:2.27'
