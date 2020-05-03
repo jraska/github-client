@@ -2,6 +2,7 @@ package com.jraska.github.client.core.android.logging
 
 import android.util.Log
 import com.jraska.github.client.Config
+import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.time.DateTimeProvider
@@ -14,14 +15,25 @@ class AnalyticsLoggingTree @Inject constructor(
   private val dateTimeProvider: DateTimeProvider
 ) : Timber.DebugTree() {
 
+  private val analyticsKeyMap by lazy {
+    mapOf(
+      Log.VERBOSE to AnalyticsEvent.Key("verbose", Owner.CORE_TEAM),
+      Log.DEBUG to AnalyticsEvent.Key("debug", Owner.CORE_TEAM),
+      Log.INFO to AnalyticsEvent.Key("info", Owner.CORE_TEAM),
+      Log.WARN to AnalyticsEvent.Key("warning", Owner.CORE_TEAM),
+      Log.ERROR to AnalyticsEvent.Key("error", Owner.CORE_TEAM),
+      Log.ASSERT to AnalyticsEvent.Key("WTF", Owner.CORE_TEAM)
+    ).withDefault { AnalyticsEvent.Key("unknown", Owner.CORE_TEAM) }
+  }
+
   override fun isLoggable(tag: String?, priority: Int): Boolean {
-    val priorityToLog = config.getLong("logging_analytics_priority")
+    val priorityToLog = config.getLong(LOGGING_PRIORITY)
     return (priority >= priorityToLog && priorityToLog != 0L)
   }
 
   override fun log(priority: Int, tag: String?, message: String, error: Throwable?) {
-    val analyticsName = analyticsName(priority)
-    val eventBuilder = AnalyticsEvent.builder(analyticsName)
+    val analyticsKey = analyticsKeyMap.getValue(priority)
+    val eventBuilder = AnalyticsEvent.builder(analyticsKey)
       .addProperty("tag", maxString(tag))
       .addProperty("message", maxString(message))
       .addProperty("time", dateTimeProvider.now().toString())
@@ -47,20 +59,8 @@ class AnalyticsLoggingTree @Inject constructor(
     }
   }
 
-  private fun analyticsName(priority: Int): String {
-    return when (priority) {
-      Log.VERBOSE -> "verbose"
-      Log.DEBUG -> "debug"
-      Log.INFO -> "info"
-      Log.WARN -> "warning"
-      Log.ERROR -> "error"
-      Log.ASSERT -> "WTF"
-
-      else -> "unknown"
-    }
-  }
-
   companion object {
     const val MAX_LENGTH: Int = 100
+    val LOGGING_PRIORITY = Config.Key("logging_analytics_priority", Owner.CORE_TEAM)
   }
 }

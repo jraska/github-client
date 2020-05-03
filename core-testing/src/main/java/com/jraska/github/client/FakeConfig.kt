@@ -6,16 +6,16 @@ class FakeConfig private constructor(private val values: MutableMap<String, Any>
     // do nothing
   }
 
-  override fun getBoolean(key: String): Boolean {
-    return (values[key] ?: false) as Boolean
+  override fun getBoolean(key: Config.Key): Boolean {
+    return (values[key.name] ?: false) as Boolean
   }
 
-  override fun getString(key: String): String {
-    return (values[key] ?: "") as String
+  override fun getString(key: Config.Key): String {
+    return (values[key.name] ?: "") as String
   }
 
-  override fun getLong(key: String): Long {
-    return (values[key] ?: 0L) as Long
+  override fun getLong(key: Config.Key): Long {
+    return (values[key.name] ?: 0L) as Long
   }
 
   fun set(key: String, value: Any): RevertSet {

@@ -12,16 +12,16 @@ internal class FirebaseConfigProxy(private val config: FirebaseRemoteConfig) : C
       Date(config.info.fetchTimeMillis))
   }
 
-  override fun getBoolean(key: String): Boolean {
-    return config.getBoolean(key)
+  override fun getBoolean(key: Config.Key): Boolean {
+    return config.getBoolean(key.name)
   }
 
-  override fun getLong(key: String): Long {
-    return config.getLong(key)
+  override fun getLong(key: Config.Key): Long {
+    return config.getLong(key.name)
   }
 
-  override fun getString(key: String): String {
-    return config.getString(key)
+  override fun getString(key: Config.Key): String {
+    return config.getString(key.name)
   }
 
   override fun triggerRefresh() {

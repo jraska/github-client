@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.lazyMap
@@ -42,7 +43,7 @@ internal class RepoDetailViewModel @Inject constructor(
   }
 
   fun onGitHubIconClicked(fullRepoName: String) {
-    val event = AnalyticsEvent.builder("open_repo_from_detail")
+    val event = AnalyticsEvent.builder(ANALYTICS_OPEN_REPO)
       .addProperty("owner", RepoHeader.name(fullRepoName))
       .addProperty("name", RepoHeader.name(fullRepoName))
       .build()
@@ -63,5 +64,9 @@ internal class RepoDetailViewModel @Inject constructor(
     object Loading : ViewState()
     class Error(val error: Throwable) : ViewState()
     class ShowRepo(val repo: RepoDetail) : ViewState()
+  }
+
+  companion object {
+    val ANALYTICS_OPEN_REPO = AnalyticsEvent.Key("open_repo_from_detail", Owner.USERS_TEAM)
   }
 }

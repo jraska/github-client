@@ -2,6 +2,7 @@ package com.jraska.github.client.users
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.rx.toLiveData
@@ -45,7 +46,7 @@ internal class UsersViewModel @Inject constructor(
   }
 
   fun onUserClicked(user: User) {
-    val event = AnalyticsEvent.builder("open_user_detail")
+    val event = AnalyticsEvent.builder(ANALYTICS_OPEN_USER)
       .addProperty("login", user.login)
       .build()
 
@@ -55,7 +56,7 @@ internal class UsersViewModel @Inject constructor(
   }
 
   fun onUserGitHubIconClicked(user: User) {
-    val event = AnalyticsEvent.builder("open_github_from_list")
+    val event = AnalyticsEvent.builder(ANALYTICS_OPEN_GITHUB)
       .addProperty("login", user.login)
       .build()
 
@@ -65,13 +66,13 @@ internal class UsersViewModel @Inject constructor(
   }
 
   fun onSettingsIconClicked() {
-    eventAnalytics.report(AnalyticsEvent.create("open_settings_from_list"))
+    eventAnalytics.report(AnalyticsEvent.create(ANALYTICS_OPEN_SETTINGS))
 
     navigator.showSettings()
   }
 
   fun onAboutIconClicked() {
-    eventAnalytics.report(AnalyticsEvent.create("open_about_from_list"))
+    eventAnalytics.report(AnalyticsEvent.create(ANALYTICS_OPEN_ABOUT))
 
     navigator.showAbout()
   }
@@ -80,5 +81,12 @@ internal class UsersViewModel @Inject constructor(
     object Loading : ViewState()
     class Error(val error: Throwable) : ViewState()
     class ShowUsers(val users: List<User>) : ViewState()
+  }
+
+  companion object {
+    val ANALYTICS_OPEN_USER = AnalyticsEvent.Key("open_user_detail", Owner.USERS_TEAM)
+    val ANALYTICS_OPEN_GITHUB = AnalyticsEvent.Key("open_github_from_list", Owner.USERS_TEAM)
+    val ANALYTICS_OPEN_SETTINGS = AnalyticsEvent.Key("open_settings_from_list", Owner.USERS_TEAM)
+    val ANALYTICS_OPEN_ABOUT = AnalyticsEvent.Key("open_about_from_list", Owner.USERS_TEAM)
   }
 }

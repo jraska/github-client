@@ -7,15 +7,16 @@ import org.junit.Test
 class FirebaseEventConverterTest {
   @Test
   fun convertsProperly() {
-    val event = AnalyticsEvent.builder("whatever")
-      .addProperty("boolean", true)
-      .addProperty("int", 8)
-      .addProperty("double", 3.4)
-      .addProperty("string", "Hello")
-      .addProperty("long", 123L)
-      .build()
+    val event = AnalyticsEvent.builder(
+      AnalyticsEvent.Key("whatever", Owner.CORE_TEAM))
+        .addProperty("boolean", true)
+        .addProperty("int", 8)
+        .addProperty("double", 3.4)
+        .addProperty("string", "Hello")
+        .addProperty("long", 123L)
+        .build()
 
-    val firebaseBundle = FirebaseEventConverter.firebaseBundle(event.properties)!!
+      val firebaseBundle = FirebaseEventConverter . firebaseBundle (event.properties)!!
 
     assertThat(firebaseBundle.getInt("boolean")).isEqualTo(1)
     assertThat(firebaseBundle.getDouble("double")).isEqualTo(3.4)

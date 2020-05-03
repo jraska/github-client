@@ -1,6 +1,7 @@
 package com.jraska.github.client.push
 
 import com.jraska.github.client.Config
+import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.common.BooleanResult
 import com.jraska.github.client.common.BooleanResult.FAILURE
@@ -13,7 +14,7 @@ internal class ConfigAsPropertyCommand @Inject constructor(
   override fun execute(action: PushAction): BooleanResult {
     val key = action.parameters["config_key"] ?: return FAILURE
 
-    val value = config.getString(key)
+    val value = config.getString(Config.Key(key, Owner.UNKNOWN))
     analyticsProperty.setUserProperty(key, value)
     return BooleanResult.SUCCESS
   }

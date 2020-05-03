@@ -3,9 +3,11 @@ package com.jraska.github.client
 interface Config {
   fun triggerRefresh()
 
-  fun getBoolean(key: String): Boolean
+  fun getBoolean(key: Key): Boolean
 
-  fun getLong(key: String): Long
+  fun getLong(key: Key): Long
 
-  fun getString(key: String): String
+  fun getString(key: Key): String
+
+  class Key(val name: String, val owner: Owner)
 }

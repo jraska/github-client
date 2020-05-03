@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jraska.github.client.DeepLinkLauncher
+import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.logging.SetupLogging
@@ -94,7 +95,7 @@ object CoreAndroidModule {
   fun reportAppCreateEvent(eventAnalytics: EventAnalytics): OnAppCreate {
     return object : OnAppCreate {
       override fun onCreate(app: Application) {
-        val createEvent = AnalyticsEvent.create("app_create")
+        val createEvent = AnalyticsEvent.create(AnalyticsEvent.Key("app_create", Owner.CORE_TEAM))
         eventAnalytics.report(createEvent)
       }
     }

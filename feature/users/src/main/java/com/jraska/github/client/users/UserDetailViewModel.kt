@@ -3,6 +3,7 @@ package com.jraska.github.client.users
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.Config
+import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.lazyMap
@@ -30,7 +31,7 @@ internal class UserDetailViewModel @Inject constructor(
   }
 
   private fun createUserLiveData(login: String): LiveData<ViewState> {
-    var reposInSection = config.getLong("user_detail_section_size").toInt()
+    var reposInSection = config.getLong(USER_DETAIL_SECTION_SIZE_KEY).toInt()
     if (reposInSection <= 0) {
       reposInSection = 5
     }
@@ -45,7 +46,7 @@ internal class UserDetailViewModel @Inject constructor(
   }
 
   fun onUserGitHubIconClick(login: String) {
-    val event = AnalyticsEvent.builder("open_github_from_detail")
+    val event = AnalyticsEvent.builder(ANALYTICS_OPEN_GITHUB)
       .addProperty("login", login)
       .build()
 
@@ -55,7 +56,7 @@ internal class UserDetailViewModel @Inject constructor(
   }
 
   fun onRepoClicked(header: RepoHeader) {
-    val event = AnalyticsEvent.builder("open_repo_from_detail")
+    val event = AnalyticsEvent.builder(ANALYTICS_OPEN_REPO)
       .addProperty("owner", header.owner)
       .addProperty("name", header.name)
       .build()
@@ -69,5 +70,11 @@ internal class UserDetailViewModel @Inject constructor(
     object Loading : ViewState()
     class Error(val error: Throwable) : ViewState()
     class DisplayUser(val user: UserDetail) : ViewState()
+  }
+
+  companion object {
+    val USER_DETAIL_SECTION_SIZE_KEY = Config.Key("user_detail_section_size", Owner.USERS_TEAM)
+    val ANALYTICS_OPEN_GITHUB = AnalyticsEvent.Key("open_github_from_detail", Owner.USERS_TEAM)
+    val ANALYTICS_OPEN_REPO = AnalyticsEvent.Key("open_repo_from_detail", Owner.USERS_TEAM)
   }
 }

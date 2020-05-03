@@ -1,6 +1,7 @@
 package com.jraska.github.client.about
 
 import androidx.lifecycle.ViewModel
+import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.analytics.toAnalyticsString
@@ -37,7 +38,7 @@ internal class AboutViewModel @Inject constructor(
 
   private fun openUrl(urlText: String) {
     val url = urlText.toHttpUrl()
-    val event = AnalyticsEvent.builder("about_clicked")
+    val event = AnalyticsEvent.builder(ANALYTICS_ABOUT_CLICKED)
       .addProperty("url", url.toAnalyticsString())
       .addProperty("user_id", identityProvider.session().userId.toString())
       .build()
@@ -45,5 +46,9 @@ internal class AboutViewModel @Inject constructor(
     analytics.report(event)
 
     navigator.launchOnWeb(url)
+  }
+
+  companion object {
+    val ANALYTICS_ABOUT_CLICKED = AnalyticsEvent.Key("about_clicked", Owner.USERS_TEAM)
   }
 }

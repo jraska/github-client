@@ -13,13 +13,15 @@ import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
-class FirebaseModule {
+object FirebaseModule {
+
+  val ANALYTICS_DISABLED_KEY = Config.Key("analytics_disabled", Owner.CORE_TEAM)
 
   @Provides
   @Singleton internal fun firebaseAnalytics(config: Config): FirebaseEventAnalytics {
     val firebaseAnalytics = FirebaseAnalytics.getInstance(FirebaseApp.getInstance().applicationContext)
 
-    if (config.getBoolean("analytics_disabled")) {
+    if (config.getBoolean(ANALYTICS_DISABLED_KEY)) {
       firebaseAnalytics.setAnalyticsCollectionEnabled(false)
       Timber.d("Analytics disabled")
     } else {

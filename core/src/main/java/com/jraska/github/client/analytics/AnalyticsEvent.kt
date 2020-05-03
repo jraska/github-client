@@ -1,13 +1,18 @@
 package com.jraska.github.client.analytics
 
+import com.jraska.github.client.Owner
 import java.util.Collections
 
 class AnalyticsEvent private constructor(
-  val name: String,
+  val key: Key,
   val properties: Map<String, Any>
 ) {
 
-  class Builder internal constructor(private val name: String) {
+  val name get() = key.name
+
+  class Key(val name: String, val owner: Owner)
+
+  class Builder internal constructor(private val key: Key) {
     private val properties = HashMap<String, Any>()
 
     private fun addAny(name: String, value: Any): Builder {
@@ -36,17 +41,17 @@ class AnalyticsEvent private constructor(
     }
 
     fun build(): AnalyticsEvent {
-      return AnalyticsEvent(name, Collections.unmodifiableMap(properties))
+      return AnalyticsEvent(key, Collections.unmodifiableMap(properties))
     }
   }
 
   companion object {
-    fun create(name: String): AnalyticsEvent {
-      return AnalyticsEvent(name, emptyMap())
+    fun create(key: Key): AnalyticsEvent {
+      return AnalyticsEvent(key, emptyMap())
     }
 
-    fun builder(name: String): Builder {
-      return Builder(name)
+    fun builder(key: Key): Builder {
+      return Builder(key)
     }
   }
 }
