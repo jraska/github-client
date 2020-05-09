@@ -19,10 +19,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum  "core/build.gradle" }}-{{ checksum  "core-android/build.gradle" }}
       - run:
           name: Setup GCloud SDK
-          command: curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-291.0.0-linux-x86_64.tar.gz | tar xvz -C ~/.gradle
-      - run:
-          name: Check GCloud SDK
-          command: ~/.gradle/google-cloud-sdk/bin/gcloud --version
+          command: curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-291.0.0-linux-x86_64.tar.gz | tar xz -C ~/gcloud
       - run:
           name: Run Tests
           command: ./gradlew check
