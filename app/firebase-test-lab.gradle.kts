@@ -1,10 +1,10 @@
 project.afterEvaluate {
   val gcloud = "~/gcloud/google-cloud-sdk/bin/gcloud"
-  val setupGCloudProject = tasks.register("setupGCloud", Exec::class) {
+  val setupGCloudProject = tasks.register("setupGCloudProject", Exec::class) {
     commandLine = "$gcloud config set project github-client-25b47".split(' ')
   }
 
-  val setupGCloudAccount = tasks.register("setupGCloud", Exec::class) {
+  val setupGCloudAccount = tasks.register("setupGCloudAccount", Exec::class) {
     val credentialsPath = createCredentialsFile()
     commandLine = "$gcloud auth activate-service-account --key-file $credentialsPath".split(' ')
 
