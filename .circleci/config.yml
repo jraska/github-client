@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-29
-    resource_class: large
+    resource_class: medium+
     environment:
       JVM_OPTS: -Xmx4096m
       GRADLE_OPTS: -Xmx3072m -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
