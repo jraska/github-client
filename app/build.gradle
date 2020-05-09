@@ -147,7 +147,7 @@ moduleGraphAssert {
 
 apply plugin: 'com.google.gms.google-services'
 
-//apply from: 'firebase-test-lab.gradle.kts'
+apply from: 'firebase-test-lab.gradle.kts'
 repositories {
   mavenCentral()
 }
