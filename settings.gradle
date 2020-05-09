@@ -7,14 +7,11 @@ include ':app',
   ':navigation',
 
   ':lib:identity',
-  ':lib:dynamic-features',
   ':lib:network-status',
   ':lib:navigation-deeplink',
 
   ':feature:users',
   ':feature:push',
-  ':feature:settings_entrance',
   ':feature:settings',
-  ':feature:about_entrance',
   ':feature:about',
   ':feature:shortcuts'

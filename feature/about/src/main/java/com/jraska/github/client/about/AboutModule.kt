@@ -1,18 +1,22 @@
 package com.jraska.github.client.about
 
 import androidx.lifecycle.ViewModel
+import com.jraska.github.client.core.android.LinkLauncher
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
+import dagger.multibindings.IntoSet
 
 @Module
-object AboutModule {
+abstract class AboutModule {
 
-  @Provides
+  @Binds
   @IntoMap
   @ClassKey(AboutViewModel::class)
-  internal fun provideViewModel(viewModel: AboutViewModel): ViewModel {
-    return viewModel
-  }
+  internal abstract fun provideViewModel(viewModel: AboutViewModel): ViewModel
+
+  @Binds
+  @IntoSet
+  internal abstract fun provideLauncher(launcher: AboutLinkLauncher): LinkLauncher
 }

@@ -1,18 +1,22 @@
 package com.jraska.github.client.settings
 
 import androidx.lifecycle.ViewModel
+import com.jraska.github.client.core.android.LinkLauncher
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
+import dagger.multibindings.IntoSet
 
 @Module
-object SettingsModule {
+abstract class SettingsModule {
 
-  @Provides
+  @Binds
   @IntoMap
   @ClassKey(SettingsViewModel::class)
-  internal fun provideUserDetailModel(viewModel: SettingsViewModel): ViewModel {
-    return viewModel
-  }
+  internal abstract fun provideUserDetailModel(viewModel: SettingsViewModel): ViewModel
+
+  @Binds
+  @IntoSet
+  internal abstract fun provideSettingsLauncher(launcher: SettingsLinkLauncher): LinkLauncher
 }

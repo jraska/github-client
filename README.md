@@ -10,7 +10,6 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Plugin based composition of features and modules contributing to collection of "plugins" - see: `OnAppCreate`, or `LinkLauncher`
 - Android Architectue Components `LiveData` and `ViewModel` are used to connect Activities with app logic
 - Deep Link navigation used across the app - [Article](https://proandroiddev.com/in-app-deep-link-navigation-because-deep-links-matter-17f0c91f2658)
-- Dynamic features are implemented. See e.g. `:about_entrance_module`
 - UI Instrumentation testing using Espresso and mocking network layer to achieve isolation [OkReplay](https://github.com/airbnb/okreplay) See `ReplayHttpComponent`
 - All core services have its lightweight fake implementation. See `Fakes`
 - Dependency replacement in test is done by Dagger components in `TestUITestApp`

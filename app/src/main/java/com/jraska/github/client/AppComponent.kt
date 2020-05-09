@@ -2,24 +2,19 @@ package com.jraska.github.client
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
-import com.jraska.github.client.about.entrance.AboutFeatureEntranceModule
-import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.about.AboutModule
 import com.jraska.github.client.core.android.CoreAndroidModule
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
-import com.jraska.github.client.dynamicbase.DynamicFeaturesModule
 import com.jraska.github.client.identity.IdentityModule
-import com.jraska.github.client.identity.IdentityProvider
-import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.navigation.deeplink.DeepLinkNavigationModule
 import com.jraska.github.client.networkstatus.NetworkStatusModule
 import com.jraska.github.client.push.PushModule
-import com.jraska.github.client.settings.entrance.SettingsEntranceModule
+import com.jraska.github.client.settings.SettingsModule
 import com.jraska.github.client.shortcuts.ShortcutsModule
 import com.jraska.github.client.users.UsersModule
 import dagger.BindsInstance
 import dagger.Component
-import dagger.Subcomponent
 import javax.inject.Singleton
 
 @Singleton
@@ -28,14 +23,13 @@ import javax.inject.Singleton
     AppModule::class,
     CoreAndroidModule::class,
     ChromeCustomTabsModule::class,
-    DynamicFeaturesModule::class,
     DeepLinkNavigationModule::class,
     IdentityModule::class,
     NetworkStatusModule::class,
     UsersModule::class,
     PushModule::class,
-    SettingsEntranceModule::class,
-    AboutFeatureEntranceModule::class,
+    SettingsModule::class,
+    AboutModule::class,
     ShortcutsModule::class],
   dependencies = [
     HasRetrofit::class,
@@ -50,8 +44,6 @@ interface AppComponent {
 
   fun viewModelFactory(): ViewModelProvider.Factory
 
-  fun dynamicFeaturesComponent(): DynamicFeaturesComponent
-
   @Component.Builder
   interface Builder {
     fun build(): AppComponent
@@ -62,13 +54,4 @@ interface AppComponent {
     @BindsInstance
     fun appContext(context: Context): Builder
   }
-}
-
-@Subcomponent
-interface DynamicFeaturesComponent {
-  fun navigator(): Navigator
-
-  fun identityProvider(): IdentityProvider
-
-  fun eventAnalytics(): EventAnalytics
 }

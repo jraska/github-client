@@ -1,9 +1,0 @@
-<manifest
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.jraska.github.client.dynamicbase">
-
-  <application>
-    <activity android:name="com.jraska.github.client.dynamicbase.internal.FeatureInstallActivity"
-      android:theme="@style/Theme.AppCompat.Light.Dialog"/>
-  </application>
-</manifest>

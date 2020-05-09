@@ -1,10 +1,8 @@
 package com.jraska.github.client
 
 import android.app.Application
-import android.content.Context
 import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.perf.metrics.AddTrace
 import com.jraska.github.client.core.android.HasServiceModelFactory
 import com.jraska.github.client.core.android.HasViewModelFactory
@@ -16,7 +14,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
 import java.io.File
 
-open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModelFactory, HasDynamicFeaturesComponent {
+open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModelFactory {
 
   private val appComponent: AppComponent by lazy { componentBuilder().build() }
 
@@ -26,15 +24,6 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
 
   override fun serviceModelFactory(): ServiceModel.Factory {
     return appComponent.serviceModelFactory()
-  }
-
-  override fun dynamicFeaturesComponent(): DynamicFeaturesComponent {
-    return appComponent.dynamicFeaturesComponent()
-  }
-
-  override fun attachBaseContext(base: Context) {
-    super.attachBaseContext(base)
-    SplitCompat.install(this)
   }
 
   @AddTrace(name = "App.onCreate")

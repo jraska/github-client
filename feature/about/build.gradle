@@ -1,4 +1,4 @@
-apply plugin: 'com.android.dynamic-feature'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -17,16 +17,10 @@ android {
 
 dependencies {
 
-  implementation project(':app')
-
   implementation project(':core')
   implementation project(':core-android')
   implementation project(':navigation')
   implementation project(':lib:identity')
-  implementation project(':lib:dynamic-features')
-
-  implementation 'com.google.android.play:core:1.6.1'
-  implementation 'com.google.android.gms:play-services-basement:17.1.1'
 
   kapt 'com.google.dagger:dagger-compiler:2.27'
   implementation 'com.google.dagger:dagger:2.27'
@@ -38,7 +32,4 @@ dependencies {
   testImplementation 'androidx.arch.core:core-testing:2.1.0'
   testImplementation 'org.mockito:mockito-core:3.3.3'
   testImplementation project(':core-testing')
-
-  androidTestImplementation 'androidx.appcompat:appcompat:1.1.0'
-  androidTestImplementation 'com.google.android.gms:play-services-basement:17.1.1'
 }
