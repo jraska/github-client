@@ -23,7 +23,7 @@ jobs:
           command: mkdir ~/gcloud && curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-291.0.0-linux-x86_64.tar.gz | tar xz -C ~/gcloud && echo "export PATH=~/gcloud/google-cloud-sdk/bin:$PATH" >> $BASH_ENV && gcloud --version
       - run:
           name: Run Tests
-          command: ./gradlew runInstrumentedTestsOnFirebase --stacktrace --no-daemon
+          command: ./gradlew check --stacktrace --no-daemon
       - store_artifacts:
           path: app/build/reports
           destination: app/reports
