@@ -37,7 +37,7 @@ String createCredentialsFile() {
   def credentialsPath = "$projectDir/credentials.json"
   def credentials = System.getenv("GCLOUD_CREDENTIALS")
   if (credentials != null) {
-    File(credentialsPath).writeText(credentials)
+    new File(credentialsPath).write(credentials)
   }
   return credentialsPath
 }
