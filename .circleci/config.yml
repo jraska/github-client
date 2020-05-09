@@ -6,7 +6,7 @@ jobs:
       - image: circleci/android:api-29
     environment:
       JVM_OPTS: -Xmx4096m
-      GRADLE_OPTS: -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      GRADLE_OPTS: -Xmx2048m -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
     steps:
       - checkout
       - restore_cache:
