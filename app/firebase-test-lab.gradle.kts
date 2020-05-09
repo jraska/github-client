@@ -1,5 +1,5 @@
 project.afterEvaluate {
-  val gcloud = "~/gcloud/google-cloud-sdk/bin/gcloud"
+  val gcloud = "gcloud"
   val setupGCloudProject = tasks.register("setupGCloudProject", Exec::class) {
     commandLine = "$gcloud config set project github-client-25b47".split(' ')
   }
