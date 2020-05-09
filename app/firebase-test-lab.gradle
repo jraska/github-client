@@ -11,7 +11,7 @@ project.afterEvaluate {
     dependsOn(setupGCloudProject)
   }
 
-  def firebaseTestsTask = tasks.register("runInstrumentedTestsOnFirebase", Exec.class) {
+  tasks.register("runInstrumentedTestsOnFirebase", Exec.class) {
     def appApk = "${project.buildDir}/outputs/apk/debug/app-debug.apk"
     def testApk = "${project.buildDir}/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
     def device = "model=Pixel2,version=29,locale=en,orientation=portrait"
@@ -29,8 +29,6 @@ project.afterEvaluate {
     dependsOn(project.tasks.named("assembleDebug"))
     dependsOn(setupGCloudAccount)
   }
-
-//  project.tasks.named("check").configure { dependsOn(firebaseTestsTask) }
 }
 
 String createCredentialsFile() {
