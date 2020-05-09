@@ -18,6 +18,5 @@ Experimental architecture app with example usage intended to be a showcase, test
 - `Navigator` pattern to be able to easily navigate without `Context`
 - `TopActivityProvider` to avoid having `Context` dependencie everywhere and to be able to have cleaner pure Kotlin interfaces
 - Uses [LiveData-Testing](https://github.com/jraska/livedata-testing) to test ViewModel. [Article](https://android.jlelse.eu/effective-livedata-and-viewmodel-testing-17f25069fcd4)
-- Module Graph generation into Graphviz is implemented together with highlighting longest path in the graph. See [PR #205](https://github.com/jraska/github-client/pull/205}
-- Module Graph measurement is used to assert height of dependency graph. See `/buildSrc` and [PR #205](https://github.com/jraska/github-client/pull/204).
-Adding features by decoration to all screens implemented. See [PR #189](https://github.com/jraska/github-client/pull/189)
+- Example usage of [module graph assertion](https://proandroiddev.com/module-rules-protect-your-build-time-and-architecture-d1194c7cc6bc) - see [here](https://github.com/jraska/github-client/blob/be3b06558118721968547de9237e9b48d1a8833d/app/build.gradle#L141).
+- Tests are run on Firebase Test Lab. [See PR](https://github.com/jraska/github-client/pull/233)
