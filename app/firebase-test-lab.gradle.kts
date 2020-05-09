@@ -12,7 +12,7 @@ project.afterEvaluate {
 
   val firebaseTestsTask = tasks.register("runInstrumentedTestsOnFirebase", Exec::class) {
     val appApk = "${project.buildDir}/outputs/apk/debug/app-debug.apk"
-    val testApk = "${project.buildDir}/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+    val testApk = "${project.buildDir}/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
     val device = "model=Pixel2,version=29,locale=en,orientation=portrait"
 
     commandLine =
@@ -23,6 +23,7 @@ project.afterEvaluate {
         "--device $device " +
         "--no-performance-metrics")
         .split(' ')
+
     dependsOn(project.tasks.named("assembleDebugAndroidTest"))
     dependsOn(project.tasks.named("assembleDebug"))
     dependsOn(setupGCloudAccount)
