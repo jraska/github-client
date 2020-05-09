@@ -10,6 +10,4 @@ interface Config {
   fun getString(key: Key): String
 
   class Key(val name: String, val owner: Owner)
-
-  class BreaksCaching()
 }
