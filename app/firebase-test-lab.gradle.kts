@@ -1,12 +1,11 @@
 project.afterEvaluate {
-  val gcloud = "gcloud"
   val setupGCloudProject = tasks.register("setupGCloudProject", Exec::class) {
-    commandLine = "$gcloud config set project github-client-25b47".split(' ')
+    commandLine = "gcloud config set project github-client-25b47".split(' ')
   }
 
   val setupGCloudAccount = tasks.register("setupGCloudAccount", Exec::class) {
     val credentialsPath = createCredentialsFile()
-    commandLine = "$gcloud auth activate-service-account --key-file $credentialsPath".split(' ')
+    commandLine = "gcloud auth activate-service-account --key-file $credentialsPath".split(' ')
 
     dependsOn(setupGCloudProject)
   }
@@ -17,7 +16,7 @@ project.afterEvaluate {
     val device = "model=Pixel2,version=29,locale=en,orientation=portrait"
 
     commandLine =
-      ("$gcloud " +
+      ("gcloud " +
         "firebase test android run " +
         "--app $appApk " +
         "--test $testApk " +
@@ -33,8 +32,10 @@ project.afterEvaluate {
 
 fun Project.createCredentialsFile(): String {
   val credentialsPath = "$projectDir/credentials.json"
-  val credentials: String = System.getenv("GCLOUD_CREDENTIALS")
-  File(credentialsPath).writeText(credentials)
+  val credentials: String? = System.getenv("GCLOUD_CREDENTIALS")
+  if (credentials != null) {
+    File(credentialsPath).writeText(credentials)
+  }
   return credentialsPath
 }
 
