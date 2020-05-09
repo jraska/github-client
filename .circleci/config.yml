@@ -48,5 +48,3 @@ jobs:
           path: feature/users/build/test-results
       - store_test_results:
           path: feature/push/build/test-results
-
-
