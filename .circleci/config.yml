@@ -21,6 +21,9 @@ jobs:
           name: Setup GCloud SDK
           command: curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-291.0.0-linux-x86_64.tar.gz | tar xvz -C ~/.gradle
       - run:
+          name: Check GCloud SDK
+          command: ~/.gradle/google-cloud-sdk/bin/gcloud --version
+      - run:
           name: Run Tests
           command: ./gradlew check
       - store_artifacts:
