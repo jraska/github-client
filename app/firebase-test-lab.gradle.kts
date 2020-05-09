@@ -1,6 +1,7 @@
 project.afterEvaluate {
   val setupGCloudProject = tasks.register("setupGCloudProject", Exec::class) {
     commandLine = "gcloud config set project github-client-25b47".split(' ')
+    dependsOn(project.tasks.named("assembleDebugAndroidTest"))
   }
 
   val setupGCloudAccount = tasks.register("setupGCloudAccount", Exec::class) {
@@ -29,7 +30,7 @@ project.afterEvaluate {
     dependsOn(setupGCloudAccount)
   }
 
-//  project.tasks.named("check").configure { dependsOn(firebaseTestsTask) }
+  project.tasks.named("check").configure { dependsOn(firebaseTestsTask) }
 }
 
 fun Project.createCredentialsFile(): String {
