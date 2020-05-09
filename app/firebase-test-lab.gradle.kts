@@ -24,6 +24,7 @@ project.afterEvaluate {
         "--no-performance-metrics")
         .split(' ')
     dependsOn(project.tasks.named("assembleDebugAndroidTest"))
+    dependsOn(project.tasks.named("assembleDebug"))
     dependsOn(setupGCloudAccount)
   }
 

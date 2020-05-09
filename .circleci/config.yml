@@ -6,7 +6,6 @@ jobs:
       - image: circleci/android:api-29
     environment:
       JVM_OPTS: -Xmx4096m
-      GRADLE_OPTS: -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
     steps:
       - checkout
       - restore_cache:
@@ -23,7 +22,7 @@ jobs:
           command: mkdir ~/gcloud && curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-291.0.0-linux-x86_64.tar.gz | tar xz -C ~/gcloud && echo "export PATH=~/gcloud/google-cloud-sdk/bin:$PATH" >> $BASH_ENV && gcloud --version
       - run:
           name: Run Tests
-          command: ./gradlew check --stacktrace
+          command: ./gradlew test runInstrumentedTestsOnFirebase --stacktrace
       - store_artifacts:
           path: app/build/reports
           destination: app/reports
