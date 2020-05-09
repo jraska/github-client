@@ -29,7 +29,7 @@ project.afterEvaluate {
     dependsOn(setupGCloudAccount)
   }
 
-  project.tasks.named("check").configure { dependsOn(firebaseTestsTask) }
+//  project.tasks.named("check").configure { dependsOn(firebaseTestsTask) }
 }
 
 fun Project.createCredentialsFile(): String {
