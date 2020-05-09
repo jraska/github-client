@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Get Dependencies
           command: ./gradlew androidDependencies
-      - gcloud:
+      - run:
           name: Setup GCloud SDK
           command: curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-291.0.0-linux-x86_64.tar.gz | tar xvz - -C ~/.gradle
       - save_cache:
