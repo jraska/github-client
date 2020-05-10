@@ -1,3 +1,6 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 project.afterEvaluate {
   def setupGCloudProject = tasks.register("setupGCloudProject", Exec.class) {
     commandLine = "gcloud config set project github-client-25b47".split(' ')
@@ -14,7 +17,8 @@ project.afterEvaluate {
   tasks.register("runInstrumentedTestsOnFirebase", Exec.class) {
     def appApk = "${project.buildDir}/outputs/apk/debug/app-debug.apk"
     def testApk = "${project.buildDir}/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
-    def device = "model=flame,version=29,locale=en,orientation=portrait"
+    def device = "model=Pixel2,version=29,locale=en,orientation=portrait"
+    def resultDir = DateTimeFormatter.ISO_DATE.format(LocalDateTime.now())
 
     commandLine =
       ("gcloud " +
@@ -22,6 +26,7 @@ project.afterEvaluate {
         "--app $appApk " +
         "--test $testApk " +
         "--device $device " +
+        "--results-dir $resultDir " +
         "--no-performance-metrics")
         .split(' ')
 

@@ -18,9 +18,6 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum  "core/build.gradle" }}-{{ checksum  "core-android/build.gradle" }}
       - run:
-          name: Run Tests
-          command: ./gradlew check --stacktrace --no-parallel --no-daemon
-      - run:
           name: Run Tests Firebase
           command: mkdir ~/gcloud
             && curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-291.0.0-linux-x86_64.tar.gz | tar xz -C ~/gcloud
