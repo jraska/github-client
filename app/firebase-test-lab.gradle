@@ -14,15 +14,17 @@ project.afterEvaluate {
     dependsOn(setupGCloudProject)
   }
 
-  tasks.register("runInstrumentedTestsOnFirebase", Exec.class) {
+  String resultsFileToPull
+
+  def executeTestsInTestLab = tasks.register("executeInstrumentedTestsOnFirebase", Exec.class) {
     def appApk = "${project.buildDir}/outputs/apk/debug/app-debug.apk"
     def testApk = "${project.buildDir}/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
-    def device = "model=Pixel2,version=29,locale=en,orientation=portrait"
-    def resultDir = DateTimeFormatter.ISO_DATE.format(LocalDateTime.now())
+    def deviceName = "flame"
+    def androidVersion = "29"
+    def device = "model=$deviceName,version=$androidVersion,locale=en,orientation=portrait"
+    def resultDir = DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())
 
-    def fileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/Pixel2-29-en-portrait/test_result_1.xml"
-
-    println("gsutil cp $fileToPull results.xml")
+    resultsFileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/$deviceName-$androidVersion-en-portrait/test_result_1.xml"
 
     commandLine =
       ("gcloud " +
@@ -37,6 +39,16 @@ project.afterEvaluate {
     dependsOn(project.tasks.named("assembleDebugAndroidTest"))
     dependsOn(project.tasks.named("assembleDebug"))
     dependsOn(setupGCloudAccount)
+  }
+
+  def pullResults = tasks.register("pullFirebaseXmlResults", Exec.class) {
+    dependsOn(executeTestsInTestLab)
+    commandLine = "gsutil cp $resultsFileToPull ${project.buildDir}/test-results/firebase-tests-results.xml".split(' ')
+  }
+
+  tasks.register("runInstrumentedTestsOnFirebase") {
+    dependsOn(executeTestsInTestLab)
+    dependsOn(pullResults)
   }
 }
 
