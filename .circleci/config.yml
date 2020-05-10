@@ -19,7 +19,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum  "core/build.gradle" }}-{{ checksum  "core-android/build.gradle" }}
       - run:
           name: Run Tests
-          command: ./gradlew check --stacktrace --no-daemon
+          command: ./gradlew check --stacktrace --no-daemon --no-parallel
       - run:
           name: Run Tests Firebase
           command: mkdir ~/gcloud
