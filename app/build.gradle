@@ -151,3 +151,11 @@ apply from: 'firebase-test-lab.gradle'
 repositories {
   mavenCentral()
 }
+
+subprojects {
+  tasks.configureEach {
+    if (name.startsWith("lint")) {
+      enabled = false
+    }
+  }
+}
