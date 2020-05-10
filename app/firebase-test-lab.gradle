@@ -22,6 +22,8 @@ project.afterEvaluate {
 
     def fileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/Pixel2-29-en-portrait/test_result_1.xml"
 
+    println("gsutil cp $fileToPull results.xml")
+
     commandLine =
       ("gcloud " +
         "firebase test android run " +
@@ -29,8 +31,7 @@ project.afterEvaluate {
         "--test $testApk " +
         "--device $device " +
         "--results-dir $resultDir " +
-        "--no-performance-metrics " +
-        "&& gsutil cp $fileToPull results.xml")
+        "--no-performance-metrics")
         .split(' ')
 
     dependsOn(project.tasks.named("assembleDebugAndroidTest"))
