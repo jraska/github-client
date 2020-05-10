@@ -43,7 +43,7 @@ project.afterEvaluate {
 
   def pullResults = tasks.register("pullFirebaseXmlResults", Exec.class) {
     dependsOn(executeTestsInTestLab)
-    commandLine = "gsutil cp $resultsFileToPull ${project.buildDir}/test-results/firebase-tests-results.xml".split(' ')
+    commandLine = "gsutil cp $resultsFileToPull firebase-tests-results.xml".split(' ')
   }
 
   tasks.register("runInstrumentedTestsOnFirebase") {
