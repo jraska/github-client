@@ -20,6 +20,8 @@ project.afterEvaluate {
     def device = "model=Pixel2,version=29,locale=en,orientation=portrait"
     def resultDir = DateTimeFormatter.ISO_DATE.format(LocalDateTime.now())
 
+    def fileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/Pixel2-29-en-portrait/test_result_1.xml"
+
     commandLine =
       ("gcloud " +
         "firebase test android run " +
@@ -27,7 +29,8 @@ project.afterEvaluate {
         "--test $testApk " +
         "--device $device " +
         "--results-dir $resultDir " +
-        "--no-performance-metrics")
+        "--no-performance-metrics " +
+        "&& gsutil cp $fileToPull results.xml")
         .split(' ')
 
     dependsOn(project.tasks.named("assembleDebugAndroidTest"))
