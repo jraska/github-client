@@ -45,9 +45,7 @@ project.afterEvaluate {
     dependsOn(executeTestsInTestLab)
 
     doFirst {
-      println("resultsFileToPull")
-      println(resultsFileToPull)
-      commandLine = "gsutil cp $resultsFileToPull firebase-tests-results.xml".split(' ')
+      commandLine = "gsutil cp $resultsFileToPull $buildDir/test-results/firebase-tests-results.xml".split(' ')
     }
   }
 

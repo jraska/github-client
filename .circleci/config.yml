@@ -38,8 +38,6 @@ jobs:
       - store_test_results:
           path: app/build/test-results
       - store_test_results:
-          path: app/firebase-tests-results.xml
-      - store_test_results:
           path: core-android/build/test-results
       - store_test_results:
           path: core/build/test-results
