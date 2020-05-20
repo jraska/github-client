@@ -3,6 +3,8 @@ Experimental architecture app with example usage intended to be a showcase, test
 
 [![Build Status](https://circleci.com/gh/jraska/github-client.svg?style=shield&circle-token=7af979ba3177a70daee39260f230a756edbab6b2)](https://circleci.com/gh/jraska/github-client)
 
+<img width="1358" alt="Screenshot 2020-05-20 at 20 01 04" src="https://user-images.githubusercontent.com/6277721/82481032-fd33dc00-9ad4-11ea-9d04-685ef2679031.png">
+
 ## Topics demonstrated
 - Modularised app with flat structure: `:app -> :feature -> :lib -> :core-android -> core`.
 - Core features (Analytics, Configuration, Crash reporting, Networking, Logging, Deep Linking) are behing simple pure Kotlin interfaces to achieve convenient simple core interfaces.
