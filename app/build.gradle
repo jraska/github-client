@@ -91,12 +91,12 @@ dependencies {
   implementation project(':feature:settings')
   implementation project(':feature:about')
   implementation project(':feature:shortcuts')
+  implementation project(':feature:chrome-custom-tabs')
 
   implementation 'androidx.appcompat:appcompat:1.1.0'
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
   implementation 'com.google.android.material:material:1.1.0'
   implementation 'androidx.cardview:cardview:1.0.0'
-  implementation 'androidx.browser:browser:1.2.0'
   implementation 'androidx.core:core:1.2.0'
   implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
   implementation 'androidx.media:media:1.1.0'

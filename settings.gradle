@@ -16,4 +16,5 @@ include ':app',
   ':feature:push',
   ':feature:settings',
   ':feature:about',
-  ':feature:shortcuts'
+  ':feature:shortcuts',
+  ':feature:chrome-custom-tabs'

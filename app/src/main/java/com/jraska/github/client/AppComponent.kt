@@ -3,6 +3,7 @@ package com.jraska.github.client
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.jraska.github.client.about.AboutModule
+import com.jraska.github.client.chrome.ChromeCustomTabsModule
 import com.jraska.github.client.core.android.CoreAndroidModule
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
