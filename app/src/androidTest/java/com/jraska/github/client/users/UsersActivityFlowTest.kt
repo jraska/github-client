@@ -13,8 +13,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.jraska.github.client.EnableConfigRule
 import com.jraska.github.client.R
-import com.jraska.github.client.TestUITestApp
 import com.jraska.github.client.http.ReplayHttpComponent
+import com.jraska.github.client.recordedEvents
 import okreplay.OkReplay
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
@@ -45,11 +45,7 @@ class UsersActivityFlowTest {
     onView(withHint("Value")).perform(ViewActions.typeText("0.01"))
     onView(withText("Purchase")).perform(click())
 
-    val event = TestUITestApp.get()
-      .coreComponent
-      .eventAnalytics
-      .events()
-      .findLast { event -> event.name == FirebaseAnalytics.Event.ECOMMERCE_PURCHASE }
+    val event = recordedEvents().findLast { event -> event.name == FirebaseAnalytics.Event.ECOMMERCE_PURCHASE }
     assertThat(event).isNotNull
     assertThat(event!!.properties[FirebaseAnalytics.Param.VALUE]).isEqualTo(0.01)
   }

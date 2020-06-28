@@ -30,7 +30,7 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
   override fun onCreate() {
     super.onCreate()
 
-    initRxAndroidMainThread() // Must be here, otherwise is fragile fue to class loading
+    initRxAndroidMainThread() // Must be here, otherwise is fragile due to class loading
 
     appComponent.onAppCreateActions()
       .sortedByDescending { it.priority() }
