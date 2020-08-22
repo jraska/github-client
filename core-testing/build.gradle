@@ -4,6 +4,3 @@ apply plugin: 'kotlin'
 dependencies {
   implementation project(':core')
 }
-
-sourceCompatibility = "8"
-targetCompatibility = "8"
