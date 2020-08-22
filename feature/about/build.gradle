@@ -22,8 +22,8 @@ dependencies {
   implementation project(':navigation')
   implementation project(':lib:identity')
 
-  kapt 'com.google.dagger:dagger-compiler:2.27'
-  implementation 'com.google.dagger:dagger:2.27'
+  kapt rootProject.ext.daggerAnnotationProcessor
+  implementation rootProject.ext.dagger
 
   implementation 'com.airbnb.android:epoxy:3.11.0'
   implementation 'com.facebook.fresco:drawee:2.2.0'

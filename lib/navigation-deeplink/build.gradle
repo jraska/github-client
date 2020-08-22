@@ -6,8 +6,8 @@ dependencies {
   implementation project(':navigation')
   implementation project(':core')
 
-  kapt 'com.google.dagger:dagger-compiler:2.27'
-  implementation 'com.google.dagger:dagger:2.27'
+  kapt rootProject.ext.daggerAnnotationProcessor
+  implementation rootProject.ext.dagger
 
   testImplementation 'junit:junit:4.13'
   testImplementation 'org.mockito:mockito-core:3.3.3'

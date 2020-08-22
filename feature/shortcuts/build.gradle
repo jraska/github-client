@@ -19,6 +19,6 @@ dependencies {
   implementation project(':core')
   implementation project(':core-android')
 
-  kapt 'com.google.dagger:dagger-compiler:2.27'
-  implementation 'com.google.dagger:dagger:2.27'
+  kapt rootProject.ext.daggerAnnotationProcessor
+  implementation rootProject.ext.dagger
 }

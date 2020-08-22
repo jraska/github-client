@@ -20,8 +20,8 @@ dependencies {
   implementation project(':core-android')
   implementation project(':navigation')
 
-  kapt 'com.google.dagger:dagger-compiler:2.27'
-  implementation 'com.google.dagger:dagger:2.27'
+  kapt rootProject.ext.daggerAnnotationProcessor
+  implementation rootProject.ext.dagger
 
   api 'com.squareup.retrofit2:retrofit:2.8.1'
   api 'com.squareup.retrofit2:converter-gson:2.8.1'

@@ -51,3 +51,8 @@ subprojects {
     }
   }
 }
+
+ext {
+  daggerAnnotationProcessor = 'com.google.dagger:dagger-compiler:2.27'
+  dagger = 'com.google.dagger:dagger:2.27'
+}
