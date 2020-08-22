@@ -28,7 +28,7 @@ dependencies {
   api 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
   api 'com.google.code.gson:gson:2.8.6'
 
-  implementation 'com.airbnb.android:epoxy:3.9.0'
+  implementation 'com.airbnb.android:epoxy:3.11.0'
   implementation 'com.facebook.fresco:drawee:2.2.0'
 
   testImplementation 'com.jraska.livedata:testing:1.1.2'

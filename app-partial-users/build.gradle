@@ -49,7 +49,7 @@ dependencies {
 
   implementation 'com.facebook.fresco:fresco:2.2.0'
 
-  implementation 'com.airbnb.android:epoxy:3.9.0'
+  implementation 'com.airbnb.android:epoxy:3.11.0'
 
   kapt 'com.google.dagger:dagger-compiler:2.27'
   implementation 'com.google.dagger:dagger:2.27'

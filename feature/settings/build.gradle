@@ -19,7 +19,7 @@ dependencies {
   implementation project(':core')
   implementation project(':core-android')
 
-  implementation 'com.airbnb.android:epoxy:3.9.0'
+  implementation 'com.airbnb.android:epoxy:3.11.0'
   implementation 'com.jraska:console:1.1.0'
   implementation 'com.jraska:console-timber-tree:1.1.0'
 
