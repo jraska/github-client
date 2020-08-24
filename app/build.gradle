@@ -1,5 +1,5 @@
 plugins {
-  id "com.jraska.module.graph.assertion" version "1.3.1"
+  id "com.jraska.module.graph.assertion" version "1.4.0"
   id "com.github.triplet.play" version "2.7.5"
   id "com.jraska.github.client.firebase"
 }
