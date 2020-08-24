@@ -134,7 +134,7 @@ dependencies {
   androidTestImplementation 'org.mockito:mockito-android:3.3.3'
   androidTestImplementation 'com.airbnb.okreplay:okreplay:1.6.0'
   androidTestImplementation 'com.airbnb.okreplay:espresso:1.6.0'
-  androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.9.1'
+  androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.11.0'
   androidTestImplementation project(':core-testing')
 }
 
