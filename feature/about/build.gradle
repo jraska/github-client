@@ -30,6 +30,6 @@ dependencies {
 
   testImplementation 'junit:junit:4.13'
   testImplementation 'androidx.arch.core:core-testing:2.1.0'
-  testImplementation 'org.mockito:mockito-core:3.3.3'
+  testImplementation 'org.mockito:mockito-core:3.5.6'
   testImplementation project(':core-testing')
 }
