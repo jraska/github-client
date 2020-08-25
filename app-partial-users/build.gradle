@@ -47,7 +47,7 @@ dependencies {
 
   implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
 
-  implementation 'com.facebook.fresco:fresco:2.2.0'
+  implementation 'com.facebook.fresco:fresco:2.3.0'
 
   implementation 'com.airbnb.android:epoxy:3.11.0'
 
