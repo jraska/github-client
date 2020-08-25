@@ -59,9 +59,6 @@ ext {
   okHttpVersion = '4.6.0'
   okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
-
-  retrofitVersion = '2.8.1'
-  retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
-  retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-  retrofitRxJavaAdapter = "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 }
+
+apply from: 'dependencies.gradle'
