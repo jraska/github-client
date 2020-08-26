@@ -126,7 +126,7 @@ dependencies {
   testImplementation 'org.mockito:mockito-core:3.5.6'
   testImplementation 'org.threeten:threetenbp:1.4.4' // to fix failures with three ten db
 
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
   androidTestImplementation 'androidx.test:runner:1.2.0'
   androidTestImplementation 'androidx.test:rules:1.2.0'
   androidTestImplementation 'org.assertj:assertj-core:3.16.1'
