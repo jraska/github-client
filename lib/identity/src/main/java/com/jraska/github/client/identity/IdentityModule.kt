@@ -18,7 +18,7 @@ object IdentityModule {
 
   @Provides
   @Singleton
-  internal fun identityProvider(anonymousIdentity: AnonymousIdentity): IdentityProvider {
-    return IdentityProvider(anonymousIdentity)
+  internal fun identityProvider(anonymousIdentity: AnonymousIdentity): IdentityProviderImpl {
+    return IdentityProviderImpl(anonymousIdentity)
   }
 }

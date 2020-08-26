@@ -86,6 +86,7 @@ dependencies {
   implementation project(':navigation')
   implementation project(':lib:navigation-deeplink')
   implementation project(':lib:identity')
+  implementation project(':lib:identity-api')
   implementation project(':lib:network-status')
   implementation project(':feature:push')
   implementation project(':feature:users')

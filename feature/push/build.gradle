@@ -17,7 +17,7 @@ android {
 dependencies {
   implementation project(':core-api')
   implementation project(':core-android-api')
-  implementation project(':lib:identity')
+  implementation project(':lib:identity-api')
 
   api 'com.google.firebase:firebase-messaging:20.1.2'
   api 'com.google.firebase:firebase-database:19.2.1'
