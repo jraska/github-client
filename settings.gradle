@@ -7,7 +7,7 @@ include ':app',
   ':core-api',
   ':core-testing',
   ':core-android-api',
-  ':navigation',
+  ':navigation-api',
 
   ':lib:identity',
   ':lib:identity-api',

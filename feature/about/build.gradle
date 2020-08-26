@@ -19,7 +19,7 @@ dependencies {
 
   implementation project(':core-api')
   implementation project(':core-android-api')
-  implementation project(':navigation')
+  implementation project(':navigation-api')
   implementation project(':lib:identity-api')
 
   kapt rootProject.ext.daggerAnnotationProcessor
