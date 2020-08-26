@@ -34,7 +34,7 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
   implementation project(':core-api')
-  implementation project(':core-android')
+  implementation project(':core-android-api')
   implementation project(':core')
   implementation project(':navigation')
   implementation project(':lib:navigation-deeplink')

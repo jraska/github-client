@@ -17,7 +17,7 @@ android {
 
 dependencies {
   implementation project(':core-api')
-  implementation project(':core-android')
+  implementation project(':core-android-api')
 
   implementation 'com.airbnb.android:epoxy:3.11.0'
   implementation 'com.jraska:console:1.1.0'
