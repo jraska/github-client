@@ -42,12 +42,12 @@ dependencies {
 
   implementation 'androidx.appcompat:appcompat:1.2.0'
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-  implementation 'com.google.android.material:material:1.1.0'
+  implementation 'com.google.android.material:material:1.2.0'
   implementation 'androidx.cardview:cardview:1.0.0'
 
   implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
 
-  implementation 'com.facebook.fresco:fresco:2.3.0'
+  implementation rootProject.ext.fresco
 
   implementation 'com.airbnb.android:epoxy:3.11.0'
 

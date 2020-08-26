@@ -26,7 +26,7 @@ dependencies {
   implementation rootProject.ext.dagger
 
   implementation 'com.airbnb.android:epoxy:3.11.0'
-  implementation 'com.facebook.fresco:drawee:2.2.0'
+  implementation rootProject.ext.frescoDrawee
 
   testImplementation 'junit:junit:4.13'
   testImplementation 'androidx.arch.core:core-testing:2.1.0'

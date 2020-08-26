@@ -29,7 +29,7 @@ dependencies {
   api 'com.google.code.gson:gson:2.8.6'
 
   implementation 'com.airbnb.android:epoxy:3.11.0'
-  implementation 'com.facebook.fresco:drawee:2.2.0'
+  implementation rootProject.ext.fresco
 
   testImplementation 'com.jraska.livedata:testing:1.1.2'
   testImplementation 'com.jraska.livedata:testing-ktx:1.1.2'
