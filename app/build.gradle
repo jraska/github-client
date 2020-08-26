@@ -141,9 +141,8 @@ dependencies {
 apply plugin: 'com.jraska.module.graph.assertion'
 
 moduleGraphAssert {
-  maxHeight = 3
-  moduleLayers = [":feature\\S*", ":lib\\S*", ":core\\S*"]
-  moduleLayersExclude = [":core -> :core-\\S*"]
+  maxHeight = 2
+  moduleLayers = [":feature\\S*", "\\S*-api"]
   restricted = [":feature:\\S* -X> :not-wanted-module"]
 }
 
