@@ -140,9 +140,9 @@ dependencies {
 apply plugin: 'com.jraska.module.graph.assertion'
 
 moduleGraphAssert {
-  maxHeight = 4
+  maxHeight = 3
   moduleLayers = [":feature\\S*", ":lib\\S*", ":core\\S*"]
-  moduleLayersExclude = [":core-android -> :core"]
+  moduleLayersExclude = [":core -> :core-\\S*"]
   restricted = [":feature:\\S* -X> :not-wanted-module"]
 }
 
