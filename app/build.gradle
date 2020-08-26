@@ -142,8 +142,9 @@ apply plugin: 'com.jraska.module.graph.assertion'
 
 moduleGraphAssert {
   maxHeight = 2
-  moduleLayers = [":feature\\S*", "\\S*-api"]
-  restricted = [":feature:\\S* -X> :not-wanted-module"]
+  moduleLayers = ["[\\S:]*(?<!-api)", "[\\S:]*-api"]
+  moduleLayersExclude = [":app -> [\\S:]*"]
+  restricted = [":feature:\\S* -X> :not-wanted-module-example"]
 }
 
 apply plugin: 'com.google.gms.google-services'
