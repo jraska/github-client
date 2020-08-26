@@ -101,7 +101,7 @@ dependencies {
   implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
   implementation 'androidx.media:media:1.1.0'
 
-  implementation 'com.google.firebase:firebase-core:17.2.3'
+  implementation 'com.google.firebase:firebase-core:17.5.0'
   implementation 'com.google.firebase:firebase-config:19.1.2'
   implementation 'com.google.firebase:firebase-perf:19.0.5'
   implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
