@@ -2,7 +2,6 @@ package com.jraska.github.client.users.ui
 
 import android.view.View
 import com.airbnb.epoxy.EpoxyModel
-import com.jraska.github.client.core.android.visible
 import com.jraska.github.client.users.R
 import com.jraska.github.client.users.model.User
 import kotlinx.android.synthetic.main.item_row_user.view.user_admin_image
@@ -16,7 +15,11 @@ internal class UserModel(private val user: User, private val userListener: UserL
   override fun bind(itemView: View) {
     itemView.user_login.text = user.login
     itemView.user_avatar.setImageURI(user.avatarUrl)
-    itemView.user_admin_image.visible(user.isAdmin)
+    itemView.user_admin_image.visibility = if (user.isAdmin) {
+      View.VISIBLE
+    } else {
+      View.GONE
+    }
     itemView.user_item_gitHub_icon.setOnClickListener { userListener.onUserGitHubIconClicked(user) }
     itemView.user_container.setOnClickListener { userListener.onUserClicked(user) }
   }

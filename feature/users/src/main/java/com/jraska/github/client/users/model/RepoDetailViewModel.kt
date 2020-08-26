@@ -8,7 +8,7 @@ import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.lazyMap
-import com.jraska.github.client.core.android.rx.toLiveData
+import com.jraska.github.client.users.rx.toLiveData
 import com.jraska.github.client.core.android.snackbar.SnackbarData
 import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
 import com.jraska.github.client.navigation.Navigator

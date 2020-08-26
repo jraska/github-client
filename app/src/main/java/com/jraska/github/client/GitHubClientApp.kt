@@ -32,11 +32,9 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
 
     initRxAndroidMainThread() // Must be here, otherwise is fragile due to class loading
 
-    appComponent.onAppCreateActions()
-      .sortedByDescending { it.priority() }
-      .forEach {
-        it.onCreate(this)
-      }
+    appComponent.onAppCreateActions().forEach {
+      it.onCreate(this)
+    }
   }
 
   private fun componentBuilder(): AppComponent.Builder {

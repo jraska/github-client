@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.core.android.rx.toLiveData
+import com.jraska.github.client.users.rx.toLiveData
 import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.navigation.Urls
 import com.jraska.github.client.rx.AppSchedulers

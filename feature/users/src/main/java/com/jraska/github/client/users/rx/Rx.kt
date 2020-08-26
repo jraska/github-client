@@ -1,4 +1,4 @@
-package com.jraska.github.client.core.android.rx
+package com.jraska.github.client.users.rx
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.toLiveData

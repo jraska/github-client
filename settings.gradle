@@ -4,6 +4,7 @@ include ':app',
   ':app-partial-users',
 
   ':core',
+  ':core-api',
   ':core-testing',
   ':core-android',
   ':navigation',
