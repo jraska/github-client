@@ -9,7 +9,6 @@ import androidx.core.app.NotificationCompat
 import com.jraska.github.client.common.BooleanResult
 import com.jraska.github.client.common.BooleanResult.FAILURE
 import com.jraska.github.client.common.BooleanResult.SUCCESS
-import com.jraska.github.client.core.android.UriHandlerActivity
 import javax.inject.Inject
 
 internal class ShowNotificationCommand @Inject constructor(
@@ -21,7 +20,8 @@ internal class ShowNotificationCommand @Inject constructor(
     val message = action.parameters["message"] ?: return FAILURE
     val deepLink = action.parameters["clickDeepLink"] ?: return FAILURE
 
-    val uriActivityIntent = Intent(context, UriHandlerActivity::class.java)
+    val uriActivityIntent = Intent(Intent.ACTION_VIEW)
+    uriActivityIntent.`package` = context.packageName
     uriActivityIntent.data = Uri.parse(deepLink)
 
     val linkContentIntent = PendingIntent.getActivity(context, 0, uriActivityIntent, 0)

@@ -22,11 +22,9 @@ class UsersApp : Application(), HasViewModelFactory {
   override fun onCreate() {
     super.onCreate()
 
-    appComponent.onAppCreateActions()
-      .sortedByDescending { it.priority() }
-      .forEach {
-        it.onCreate(this)
-      }
+    appComponent.onAppCreateActions().forEach {
+      it.onCreate(this)
+    }
   }
 
   private fun createRetrofit(): Retrofit {

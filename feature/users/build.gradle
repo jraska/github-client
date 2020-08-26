@@ -35,6 +35,8 @@ dependencies {
   implementation 'com.airbnb.android:epoxy:3.11.0'
   implementation rootProject.ext.fresco
 
+  implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0'
+
   testImplementation 'com.jraska.livedata:testing:1.1.2'
   testImplementation 'com.jraska.livedata:testing-ktx:1.1.2'
   testImplementation 'junit:junit:4.13'

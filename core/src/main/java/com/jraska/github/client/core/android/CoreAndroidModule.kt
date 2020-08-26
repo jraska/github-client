@@ -39,7 +39,7 @@ object CoreAndroidModule {
 
   @Provides
   fun bindDeepLinkLauncher(
-    topActivityProvider: TopActivityProvider,
+    topActivityProvider: TopActivityProviderImpl,
     launchers: @JvmSuppressWildcards Set<LinkLauncher>
   ): DeepLinkLauncher {
     return RealDeepLinkLauncher.create(topActivityProvider, launchers)
@@ -54,13 +54,16 @@ object CoreAndroidModule {
 
   @Provides
   @Singleton
-  internal fun topActivityProvider(): TopActivityProvider {
-    return TopActivityProvider()
+  internal fun topActivityProviderImpl(): TopActivityProviderImpl {
+    return TopActivityProviderImpl()
   }
 
   @Provides
+  internal fun topActivityProvider(implementation: TopActivityProviderImpl): TopActivityProvider = implementation
+
+  @Provides
   @IntoSet
-  fun topActivityOnCreate(setup: TopActivityProvider.RegisterCallbacks): OnAppCreate {
+  fun topActivityOnCreate(setup: TopActivityProviderImpl.RegisterCallbacks): OnAppCreate {
     return setup
   }
 

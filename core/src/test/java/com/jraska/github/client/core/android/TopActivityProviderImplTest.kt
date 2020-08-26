@@ -7,7 +7,7 @@ import org.mockito.Mockito.mock
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
-class TopActivityProviderTest {
+class TopActivityProviderImplTest {
 
   val activity = mock(Activity::class.java)
 
@@ -28,7 +28,7 @@ class TopActivityProviderTest {
 
   private fun testMultiThreadAccess(threadsCount: Int, iterationsCount: Int) {
     val testThread = Thread.currentThread()
-    val topActivityProvider = TopActivityProvider { Thread.currentThread() == testThread }
+    val topActivityProvider = TopActivityProviderImpl { Thread.currentThread() == testThread }
 
     val countDownLatch = CountDownLatch(threadsCount)
     val counter = NonAtomicInteger()
