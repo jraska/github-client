@@ -6,7 +6,7 @@ Experimental architecture app with example usage intended to be a showcase, test
 <img width="1358" alt="Screenshot 2020-05-20 at 20 01 04" src="https://user-images.githubusercontent.com/6277721/82481032-fd33dc00-9ad4-11ea-9d04-685ef2679031.png">
 
 ## Topics demonstrated
-- Modularised app with flat structure: `:app -> :feature -> :lib -> :core-android -> core`.
+- Modularised app with flat structure: `:app -> :feature* -> *-api` with a graph height of 2.
 - Core features (Analytics, Configuration, Crash reporting, Networking, Logging, Deep Linking) are behing simple pure Kotlin interfaces to achieve convenient simple core interfaces.
 - Features are composed together within `AppComponent` in plugin based manner. Each feature contributes by Dagger module. To add a feature only module and Gradle dependency lines are needed.
 - Plugin based composition of features and modules contributing to collection of "plugins" - see: `OnAppCreate`, or `LinkLauncher`
