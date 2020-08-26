@@ -2,5 +2,5 @@ apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
 dependencies {
-  implementation project(':core')
+  implementation project(':core-api')
 }

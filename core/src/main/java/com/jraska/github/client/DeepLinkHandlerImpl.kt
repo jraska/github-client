@@ -5,13 +5,13 @@ import com.jraska.github.client.logging.CrashReporter
 import okhttp3.HttpUrl
 import javax.inject.Inject
 
-class DeepLinkHandler @Inject constructor(
+class DeepLinkHandlerImpl @Inject constructor(
   private val linkLauncher: DeepLinkLauncher,
   private val fallbackLauncher: WebLinkLauncher,
   private val crashReporter: CrashReporter
-) {
+) : DeepLinkHandler {
 
-  fun handleDeepLink(deepLink: HttpUrl): BooleanResult {
+  override fun handleDeepLink(deepLink: HttpUrl): BooleanResult {
     try {
       linkLauncher.launch(deepLink)
       return BooleanResult.SUCCESS

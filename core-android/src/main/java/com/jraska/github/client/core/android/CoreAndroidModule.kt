@@ -3,8 +3,9 @@ package com.jraska.github.client.core.android
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.jraska.github.client.DeepLinkHandler
+import com.jraska.github.client.DeepLinkHandlerImpl
 import com.jraska.github.client.DeepLinkLauncher
-import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.logging.SetupLogging
@@ -77,6 +78,10 @@ object CoreAndroidModule {
 
   @Provides
   @Singleton
+  internal fun deepLinkHandler(implementation: DeepLinkHandlerImpl): DeepLinkHandler = implementation
+
+  @Provides
+  @Singleton
   fun schedulers(): AppSchedulers {
     return AppSchedulers(
       AndroidSchedulers.mainThread(),
@@ -95,7 +100,7 @@ object CoreAndroidModule {
   fun reportAppCreateEvent(eventAnalytics: EventAnalytics): OnAppCreate {
     return object : OnAppCreate {
       override fun onCreate(app: Application) {
-        val createEvent = AnalyticsEvent.create(AnalyticsEvent.Key("app_create", Owner.CORE_TEAM))
+        val createEvent = AnalyticsEvent.create(AnalyticsEvent.Key("app_create", com.jraska.github.client.Owner.CORE_TEAM))
         eventAnalytics.report(createEvent)
       }
     }
