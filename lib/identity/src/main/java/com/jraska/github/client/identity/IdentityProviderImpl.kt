@@ -4,9 +4,9 @@ import com.jraska.github.client.identity.internal.AnonymousIdentity
 
 class IdentityProviderImpl internal constructor(
   private val anonymousIdentity: AnonymousIdentity
-) {
+) : IdentityProvider {
 
-  fun session(): Session {
+  override fun session(): Session {
     return everythingAnonymousNow()
   }
 
