@@ -20,7 +20,7 @@ dependencies {
   implementation project(':feature:identity-api')
 
   api 'com.google.firebase:firebase-messaging:20.2.4'
-  api 'com.google.firebase:firebase-database:19.3.1'
+  api 'com.google.firebase:firebase-database:19.4.0'
 
   implementation rootProject.ext.dagger
   kapt rootProject.ext.daggerAnnotationProcessor
