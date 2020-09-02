@@ -24,7 +24,7 @@ dependencies {
   api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
   implementation rootProject.ext.okHttp
-  implementation 'com.squareup.okio:okio:2.7.0'
+  implementation 'com.squareup.okio:okio:2.8.0'
 
   api 'com.jakewharton.timber:timber:4.7.1'
 }
