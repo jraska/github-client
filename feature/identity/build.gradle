@@ -12,5 +12,5 @@ dependencies {
 
   testImplementation 'junit:junit:4.13'
   testImplementation project(':core-testing')
-  testImplementation 'org.assertj:assertj-core:3.16.1'
+  testImplementation 'org.assertj:assertj-core:3.17.1'
 }
