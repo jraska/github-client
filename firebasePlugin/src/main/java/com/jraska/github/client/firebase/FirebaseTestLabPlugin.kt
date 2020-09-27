@@ -32,6 +32,8 @@ class FirebaseTestLabPlugin : Plugin<Project> {
         val device = "model=$deviceName,version=$androidVersion,locale=en,orientation=portrait"
         val resultDir = DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())
 
+        val fcmKey = System.getenv("FCM_API_KEY")
+
         resultsFileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/$deviceName-$androidVersion-en-portrait/test_result_1.xml"
 
         it.commandLine =
@@ -41,7 +43,8 @@ class FirebaseTestLabPlugin : Plugin<Project> {
             "--test $testApk " +
             "--device $device " +
             "--results-dir $resultDir " +
-            "--no-performance-metrics")
+            "--no-performance-metrics " +
+            "--environment-variables FCM_API_KEY=$fcmKey")
             .split(' ')
 
         it.dependsOn(project.tasks.named("assembleDebugAndroidTest"))
