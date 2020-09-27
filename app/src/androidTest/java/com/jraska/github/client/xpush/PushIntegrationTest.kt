@@ -61,6 +61,6 @@ class PushIntegrationTest {
 
   private fun awaitPush() {
     // TODO: 27/09/2020 Idling resource on Push
-    Thread.sleep(3_000)
+    Thread.sleep(10_000)
   }
 }
