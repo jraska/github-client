@@ -1,4 +1,4 @@
-package com.jraska.github.client.push
+package com.jraska.github.client.xpush
 
 import io.reactivex.Completable
 import okhttp3.OkHttpClient

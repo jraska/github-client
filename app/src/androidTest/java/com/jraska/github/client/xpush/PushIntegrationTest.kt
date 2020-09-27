@@ -1,4 +1,4 @@
-package com.jraska.github.client.push
+package com.jraska.github.client.xpush
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches

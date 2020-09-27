@@ -1,4 +1,4 @@
-package com.jraska.github.client.push
+package com.jraska.github.client.xpush
 
 import com.google.gson.annotations.SerializedName
 
