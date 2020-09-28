@@ -1,15 +1,17 @@
 package com.jraska.github.client
 
 import com.jraska.github.client.core.android.ServiceModel
+import com.jraska.github.client.push.PushHandleModel
+import com.jraska.github.client.xpush.PushAwaitRule
 
 class DecoratedServiceModelFactory(val productionFactory: ServiceModel.Factory) : ServiceModel.Factory {
-  var decorator: Decorator? = null
 
+  @Suppress("UNCHECKED_CAST")
   override fun <T : ServiceModel> create(modelClass: Class<T>): T {
-    return decorator?.create(modelClass, productionFactory) ?: productionFactory.create(modelClass)
-  }
+    if (modelClass == PushHandleModel::class.java) {
+      return PushAwaitRule.TestPushHandleModel(productionFactory.create(modelClass)) as T
+    }
 
-  interface Decorator {
-    fun <T : ServiceModel> create(modelClass: Class<T>, productionFactory: ServiceModel.Factory): T
+    return productionFactory.create(modelClass)
   }
 }
