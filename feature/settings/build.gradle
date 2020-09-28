@@ -19,6 +19,7 @@ dependencies {
   implementation project(':core-api')
   implementation project(':core-android-api')
 
+  implementation 'androidx.recyclerview:recyclerview:1.1.0'
   implementation 'com.airbnb.android:epoxy:4.1.0'
   implementation 'com.jraska:console:1.1.0'
   implementation 'com.jraska:console-timber-tree:1.1.0'
