@@ -38,6 +38,9 @@ object PushModule {
     internal abstract fun bindServiceModel(pushHandleModel: PushHandleModel): ServiceModel
 
     @Binds
+    internal abstract fun bindPushModel(pushHandleModel: PushHandleModelImpl): PushHandleModel
+
+    @Binds
     @IntoMap
     @StringKey("refresh_config")
     internal abstract fun refreshConfigCommand(command: RefreshConfigCommand): PushActionCommand
