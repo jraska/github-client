@@ -9,5 +9,3 @@ class PushServerDto {
   @SerializedName("data")
   val data = mutableMapOf<String, String>()
 }
-
-

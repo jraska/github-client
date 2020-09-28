@@ -10,7 +10,7 @@ class PushHandler @Inject internal constructor(
 ) {
 
   internal fun handlePush(action: PushAction): BooleanResult {
-    Timber.v("Push received action: %s", action.name)
+    Timber.d("Push received action: %s", action.name)
 
     val result = handleInternal(action)
 
