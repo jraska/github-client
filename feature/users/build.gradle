@@ -32,7 +32,7 @@ dependencies {
   api rootProject.ext.retrofitRxJavaAdapter
   api 'com.google.code.gson:gson:2.8.6'
 
-  implementation 'com.airbnb.android:epoxy:3.11.0'
+  implementation 'com.airbnb.android:epoxy:4.1.0'
   implementation rootProject.ext.fresco
 
   implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0'

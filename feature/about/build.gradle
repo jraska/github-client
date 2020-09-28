@@ -25,7 +25,7 @@ dependencies {
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
 
-  implementation 'com.airbnb.android:epoxy:3.11.0'
+  implementation 'com.airbnb.android:epoxy:4.1.0'
   implementation rootProject.ext.frescoDrawee
 
   testImplementation 'junit:junit:4.13'
