@@ -5,6 +5,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.iid.FirebaseInstanceId
 import com.jraska.github.client.DeepLinkLaunchTest
 import org.junit.Assume
@@ -23,14 +24,16 @@ class PushIntegrationTest {
   @Before
   fun setUp() {
     pushClient = PushServerClient.create(apiKey())
-    thisDeviceToken = FirebaseInstanceId.getInstance().token!!
+
+    val instanceIdTask = FirebaseInstanceId.getInstance().instanceId
+    thisDeviceToken = Tasks.await(instanceIdTask).token
   }
 
   @Test
   fun testPushIntegration_fromSettingsToAbout() {
     DeepLinkLaunchTest.launchDeepLink("https://github.com/settings")
 
-    sendDeepLinKMessage("https://github.com/about")
+    sendDeepLinkPush("https://github.com/about")
 
     awaitPush()
     onView(withText("by Josef Raska")).check(matches(isDisplayed()))
@@ -40,13 +43,14 @@ class PushIntegrationTest {
   fun testPushIntegration_fromAboutToSettings() {
     DeepLinkLaunchTest.launchDeepLink("https://github.com/about")
 
-    sendDeepLinKMessage("https://github.com/settings")
+    sendDeepLinkPush("https://github.com/settings")
 
     awaitPush()
     onView(withText("Purchase")).check(matches(isDisplayed()))
   }
 
-  private fun sendDeepLinKMessage(deepLink: String) {
+  // See LaunchDeepLinkCommand to see how this is handled.
+  private fun sendDeepLinkPush(deepLink: String) {
     val messageToThisDevice = PushServerDto().apply {
       ids.add(thisDeviceToken)
       data["action"] = "launch_deep_link"
@@ -66,5 +70,4 @@ class PushIntegrationTest {
   private fun awaitPush() {
     pushRule.waitForPush()
   }
-
 }
