@@ -3,6 +3,7 @@ package com.jraska.github.client.xpush
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.idling.CountingIdlingResource
+import androidx.test.internal.runner.junit4.statement.UiThreadStatement
 import com.google.firebase.messaging.RemoteMessage
 import com.jraska.github.client.push.PushHandleModel
 import org.junit.rules.ExternalResource
@@ -27,7 +28,12 @@ class PushAwaitRule : ExternalResource() {
 
     fun waitForPush() = countingIdlingResource.increment()
 
-    fun onPush() = countingIdlingResource.decrement()
+    fun onPush() {
+      // Doing this to make sure anything scheduled on UI thread will run before this
+      UiThreadStatement.runOnUiThread {
+        countingIdlingResource.decrement()
+      }
+    }
   }
 
   class TestPushHandleModel(
