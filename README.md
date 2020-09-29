@@ -17,6 +17,7 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Dependency replacement in test is done by Dagger components in `TestUITestApp`
 - RxJava is used for threading everywhere, allowing proper idling of UI tests. Also `AppSchedulers` dependency makes all threading testable.
 - Push is implemented by using Firebase Cloud Messaging. See `PushActionCommand`. Thanks to deep link navigation app can be controlled remotely by executing deep links - `LaunchDeepLinkCommand : PushActionCommand`
+- Push integration is tested end to end through UI test - see [this PR](https://github.com/jraska/github-client/pull/300).
 - `Navigator` pattern to be able to easily navigate without `Context`
 - `TopActivityProvider` to avoid having `Context` dependencie everywhere and to be able to have cleaner pure Kotlin interfaces
 - Uses [LiveData-Testing](https://github.com/jraska/livedata-testing) to test ViewModel. [Article](https://android.jlelse.eu/effective-livedata-and-viewmodel-testing-17f25069fcd4)
