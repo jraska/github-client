@@ -2,6 +2,7 @@ plugins {
   id "com.jraska.module.graph.assertion" version "1.4.0"
   id "com.github.triplet.play" version "2.8.0"
   id "com.jraska.github.client.firebase"
+  id 'com.jraska.gradle.buildtime'
 }
 
 apply plugin: 'com.android.application'

@@ -18,10 +18,6 @@ buildscript {
   }
 }
 
-plugins {
-  id 'com.jraska.gradle.buildtime'
-}
-
 allprojects {
   repositories {
     google()
