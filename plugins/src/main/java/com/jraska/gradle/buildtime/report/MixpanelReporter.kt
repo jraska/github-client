@@ -13,6 +13,14 @@ class MixpanelReporter(
   private val api: MixpanelAPI
 ) : BuildReporter {
   override fun report(buildData: BuildData) {
+    try {
+      reportToMixpanel(buildData)
+    } catch (ex: Exception) {
+      println("Build time reporting failed: $ex")
+    }
+  }
+
+  private fun reportToMixpanel(buildData: BuildData) {
     val start = nowMillis()
 
     reportInternal(buildData)
