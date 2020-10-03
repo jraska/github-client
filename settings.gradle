@@ -1,4 +1,4 @@
-includeBuild("firebasePlugin")
+includeBuild("plugins")
 
 include ':app',
   ':app-partial-users',

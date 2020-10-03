@@ -37,5 +37,9 @@ gradlePlugin {
       id = 'com.jraska.github.client.firebase'
       implementationClass = 'com.jraska.github.client.firebase.FirebaseTestLabPlugin'
     }
+    buildTime {
+      id = 'com.jraska.gradle.buildtime'
+      implementationClass = 'com.jraska.gradle.buildtime.BuildTimePlugin'
+    }
   }
 }
