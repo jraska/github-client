@@ -2,6 +2,7 @@ package com.jraska.gradle.buildtime
 
 import org.codehaus.groovy.runtime.ProcessGroovyMethods
 import org.gradle.BuildResult
+import org.gradle.api.internal.tasks.execution.statistics.TaskExecutionStatistics
 import org.gradle.api.invocation.Gradle
 import org.gradle.internal.buildevents.BuildStartedTime
 import org.gradle.internal.time.Clock
@@ -10,7 +11,7 @@ import org.gradle.launcher.daemon.server.scaninfo.DaemonScanInfo
 import java.util.Locale
 
 object BuildDataFactory {
-  fun buildData(result: BuildResult): BuildData {
+  fun buildData(result: BuildResult, statistics: TaskExecutionStatistics): BuildData {
     val gradle = result.gradle as DefaultGradle
     val services = gradle.services
 
@@ -30,6 +31,7 @@ object BuildDataFactory {
       hostname = hostname(),
       tasks = startParameter.taskNames,
       environment = gradle.environment(),
+      gradleVersion = gradle.gradleVersion,
       operatingSystem = System.getProperty("os.name").toLowerCase(Locale.getDefault()),
       parameters = mutableMapOf(
         "isConfigureOnDemand" to startParameter.isConfigureOnDemand,
@@ -37,7 +39,13 @@ object BuildDataFactory {
         "isConfigurationCache" to startParameter.isConfigurationCache,
         "isBuildCacheEnabled" to startParameter.isBuildCacheEnabled,
         "maxWorkers" to startParameter.maxWorkerCount
-      ).apply { putAll(startParameter.systemPropertiesArgs) }
+      ).apply { putAll(startParameter.systemPropertiesArgs) },
+      taskStatistics = TaskStatistics(
+        statistics.totalTaskCount,
+        statistics.upToDateTaskCount,
+        statistics.fromCacheTaskCount,
+        statistics.executedTasksCount
+      )
     )
   }
 

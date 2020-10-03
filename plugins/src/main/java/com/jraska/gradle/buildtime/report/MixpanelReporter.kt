@@ -45,8 +45,13 @@ class MixpanelReporter(
       "daemonsRunning" to buildData.daemonsRunning,
       "thisDaemonBuilds" to buildData.thisDaemonBuilds,
       "hostname" to buildData.hostname,
+      "gradleVersion" to buildData.gradleVersion,
       "OS" to buildData.operatingSystem,
-      "environment" to buildData.environment
+      "environment" to buildData.environment,
+      "tasksTotal" to buildData.taskStatistics.total,
+      "tasksUpToDate" to buildData.taskStatistics.upToDate,
+      "tasksFromCache" to buildData.taskStatistics.fromCache,
+      "tasksExecuted" to buildData.taskStatistics.executed
     ).apply { putAll(buildData.parameters) }
   }
 
