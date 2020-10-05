@@ -44,7 +44,7 @@ dependencies {
   testImplementation 'com.jraska.livedata:testing-ktx:1.1.2'
   testImplementation 'junit:junit:4.13'
   testImplementation 'org.assertj:assertj-core:3.17.2'
-  testImplementation 'org.mockito:mockito-core:3.5.10'
+  testImplementation 'org.mockito:mockito-core:3.5.13'
   testImplementation 'androidx.arch.core:core-testing:2.1.0'
   testImplementation 'androidx.annotation:annotation:1.1.0'
   testImplementation project(':core-testing')
