@@ -10,7 +10,7 @@ dependencies {
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
 
-  testImplementation 'junit:junit:4.13'
+  testImplementation 'junit:junit:4.13.1'
   testImplementation project(':core-testing')
   testImplementation 'org.assertj:assertj-core:3.17.2'
 }
