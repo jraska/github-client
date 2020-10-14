@@ -1,13 +1,13 @@
 package com.jraska.github.client.logging
 
-import com.crashlytics.android.Crashlytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 internal open class FirebaseCrashlyticsProxy {
   open fun log(message: String) {
-    Crashlytics.log(message)
+    FirebaseCrashlytics.getInstance().log(message)
   }
 
-  open fun report(error: Throwable?) {
-    Crashlytics.logException(error)
+  open fun report(error: Throwable) {
+    FirebaseCrashlytics.getInstance().recordException(error)
   }
 }
