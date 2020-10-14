@@ -20,8 +20,8 @@ dependencies {
   implementation project(':feature:identity-api')
 
   implementation platform('com.google.firebase:firebase-bom:25.12.0')
-  api 'com.google.firebase:firebase-messaging'
-  api 'com.google.firebase:firebase-database'
+  implementation 'com.google.firebase:firebase-messaging'
+  implementation 'com.google.firebase:firebase-database'
 
   implementation rootProject.ext.dagger
   kapt rootProject.ext.daggerAnnotationProcessor
