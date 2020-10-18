@@ -13,7 +13,7 @@ abstract class DefaultActivityCallbacks : Application.ActivityLifecycleCallbacks
 
   override fun onActivityPaused(activity: Activity) {}
 
-  override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
+  override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
 
   override fun onActivityStopped(activity: Activity) {}
 

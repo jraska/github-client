@@ -16,12 +16,12 @@ if (project.hasProperty("enable-performance-plugin")) {
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-  compileSdkVersion 29
+  compileSdkVersion 30
 
   defaultConfig {
     applicationId "com.jraska.github.client"
     minSdkVersion 21
-    targetSdkVersion 29
+    targetSdkVersion 30
     versionName '0.19.2'
     versionCode 54
     multiDexEnabled true
