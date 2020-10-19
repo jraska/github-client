@@ -35,6 +35,7 @@ internal class AboutActivity : BaseActivity() {
   private fun createModels(): List<EpoxyModel<*>>? {
     return listOf(
       DescriptionModel(viewModel::onProjectDescriptionClick),
+      VersionInfoModel(),
       IconModel(viewModel::onGithubClick, R.drawable.ic_github_about_48dp, R.string.about_github_description),
       IconModel(viewModel::onWebClick, R.drawable.ic_web_48dp, R.string.about_web_description),
       IconModel(viewModel::onMediumClick, R.drawable.ic_medium_48dp, R.string.about_medium_description),
