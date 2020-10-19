@@ -12,6 +12,7 @@ include ':app',
   ':feature:identity',
   ':feature:identity-api',
   ':feature:network-status',
+  ':feature:in-app-update',
   ':feature:navigation-deeplink',
 
   ':feature:users',

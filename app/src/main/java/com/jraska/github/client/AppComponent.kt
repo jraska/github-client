@@ -8,6 +8,7 @@ import com.jraska.github.client.core.android.CoreAndroidModule
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.identity.IdentityModule
+import com.jraska.github.client.inappupdate.InAppUpdateModule
 import com.jraska.github.client.navigation.deeplink.DeepLinkNavigationModule
 import com.jraska.github.client.networkstatus.NetworkStatusModule
 import com.jraska.github.client.push.PushModule
@@ -27,6 +28,7 @@ import javax.inject.Singleton
     DeepLinkNavigationModule::class,
     IdentityModule::class,
     NetworkStatusModule::class,
+    InAppUpdateModule::class,
     UsersModule::class,
     PushModule::class,
     SettingsModule::class,
