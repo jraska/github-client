@@ -2,6 +2,7 @@ package com.jraska.github.client.settings
 
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.core.android.LinkLauncher
+import com.jraska.github.client.core.android.OnAppCreate
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.ClassKey
@@ -19,4 +20,8 @@ abstract class SettingsModule {
   @Binds
   @IntoSet
   internal abstract fun provideSettingsLauncher(launcher: SettingsLinkLauncher): LinkLauncher
+
+  @Binds
+  @IntoSet
+  internal abstract fun provideConsoleLogging(logginngSetup: SetupConsoleLogging) : OnAppCreate
 }
