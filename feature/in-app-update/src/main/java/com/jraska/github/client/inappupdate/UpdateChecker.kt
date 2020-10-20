@@ -33,11 +33,12 @@ internal class UpdateChecker @Inject constructor(
     val appUpdateInfoTask = appUpdateManager.appUpdateInfo
 
     appUpdateInfoTask.addOnSuccessListener {
-      if (it.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-        Timber.d("Update available")
+      val updateAvailability = it.updateAvailability()
+      if (updateAvailability == UpdateAvailability.UPDATE_AVAILABLE || updateAvailability == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+        Timber.d("Update available: %s", it)
         onUpdateAvailable(it)
       } else {
-        Timber.d("Update not available")
+        Timber.d("Update not available: %s", it)
       }
     }.addOnFailureListener {
       Timber.w(it, "Checking for update failed")
@@ -45,12 +46,15 @@ internal class UpdateChecker @Inject constructor(
   }
 
   private fun onUpdateAvailable(appUpdateInfo: AppUpdateInfo) {
+    Timber.d("Immediate update allowed: %s", appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE))
+    Timber.d("Flexible update allowed: %s", appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE))
+
     if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
       showUpdateSnackbar()
-    } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-      startImmediateUpdate(appUpdateInfo)
     } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
       startFlexibleUpdate(appUpdateInfo)
+    } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+      startImmediateUpdate(appUpdateInfo)
     }
   }
 
@@ -64,6 +68,7 @@ internal class UpdateChecker @Inject constructor(
     }
 
     appUpdateManager.registerListener { state ->
+      Timber.d("State is %s", state)
       if (state.installStatus() == InstallStatus.DOWNLOADED) {
         showUpdateSnackbar()
       }
