@@ -14,12 +14,12 @@ class ReleasePlugin : Plugin<Project> {
   private fun addTasks(project: Project) {
     project.tasks.register("incrementPatch") {
       it.doFirst {
-        updateMinorVersionInBuildGradle(project)
+        updatePatchVersionInBuildGradle(project)
       }
     }
   }
 
-  private fun updateMinorVersionInBuildGradle(project: Project) {
+  private fun updatePatchVersionInBuildGradle(project: Project) {
     val buildGradleFile = File(project.projectDir, "build.gradle")
     val buildGradleText = buildGradleFile.readText()
 
