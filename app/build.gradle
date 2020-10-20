@@ -3,6 +3,7 @@ plugins {
   id "com.github.triplet.play" version "3.0.0"
   id "com.jraska.github.client.firebase"
   id 'com.jraska.gradle.buildtime'
+  id 'com.jraska.github.client.release'
 }
 
 apply plugin: 'com.android.application'
