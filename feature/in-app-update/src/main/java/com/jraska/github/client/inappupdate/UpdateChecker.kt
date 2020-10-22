@@ -1,9 +1,7 @@
 package com.jraska.github.client.inappupdate
 
-import android.content.Context
 import android.view.View
 import com.google.android.play.core.appupdate.AppUpdateInfo
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
@@ -12,24 +10,29 @@ import com.jraska.github.client.Owner
 import com.jraska.github.client.core.android.TopActivityProvider
 import com.jraska.github.client.core.android.snackbar.SnackbarData
 import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
+import com.jraska.github.client.inappupdate.UpdateStrategyConfig.FLEXIBLE
+import com.jraska.github.client.inappupdate.UpdateStrategyConfig.IMMEDIATE
+import com.jraska.github.client.inappupdate.UpdateStrategyConfig.OFF
+import com.jraska.github.client.inappupdate.UpdateStrategyConfig.UNKNOWN
 import timber.log.Timber
 import javax.inject.Inject
 
-internal class UpdateChecker @Inject constructor(
-  private val context: Context,
+class UpdateChecker @Inject constructor(
+  private val updateManagerFactory: UpdateManagerFactory,
   private val config: Config,
   private val topActivityProvider: TopActivityProvider,
   private val snackbarDisplay: SnackbarDisplay
 ) {
 
   fun checkForUpdates() {
-//    if (!inAppUpdateEnabled()) {
-//      return
-//    }
+    if (!shouldCheckForUpdate()) {
+      Timber.d("Update check disabled")
+      return
+    }
 
     Timber.d("Checking for update...")
 
-    val appUpdateManager = AppUpdateManagerFactory.create(context)
+    val appUpdateManager = updateManagerFactory.create()
     val appUpdateInfoTask = appUpdateManager.appUpdateInfo
 
     appUpdateInfoTask.addOnSuccessListener {
@@ -46,22 +49,30 @@ internal class UpdateChecker @Inject constructor(
   }
 
   private fun onUpdateAvailable(appUpdateInfo: AppUpdateInfo) {
-    Timber.d("Immediate update allowed: %s", appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE))
-    Timber.d("Flexible update allowed: %s", appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE))
-
     if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
       showUpdateSnackbar()
-    } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+    } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE) && strategyForApp() == FLEXIBLE) {
       startFlexibleUpdate(appUpdateInfo)
-    } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+    } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) && strategyForApp() == IMMEDIATE) {
       startImmediateUpdate(appUpdateInfo)
     }
   }
 
-  private fun inAppUpdateEnabled(): Boolean = config.getBoolean(UPDATE_STALE_DAYS_VERSION_KEY)
+  private fun strategyForApp(): UpdateStrategyConfig {
+    return UpdateStrategyConfig.fromConfig(config.getString(KEY_UPDATE_STRATEGY))
+  }
+
+  private fun shouldCheckForUpdate(): Boolean {
+    return when (strategyForApp()) {
+      FLEXIBLE -> true
+      IMMEDIATE -> true
+      OFF -> false
+      UNKNOWN -> false
+    }
+  }
 
   private fun startFlexibleUpdate(appUpdateInfo: AppUpdateInfo) {
-    val appUpdateManager = AppUpdateManagerFactory.create(context)
+    val appUpdateManager = updateManagerFactory.create()
 
     topActivityProvider.onTopActivity {
       appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.FLEXIBLE, it, 0)
@@ -75,25 +86,25 @@ internal class UpdateChecker @Inject constructor(
     }
   }
 
-  private fun showUpdateSnackbar() {
-    snackbarDisplay.showSnackbar(
-      SnackbarData(
-        text = R.string.update_available,
-        length = -2,
-        action = R.string.cta_install to View.OnClickListener { AppUpdateManagerFactory.create(context).completeUpdate() }
-      )
-    )
-  }
-
   private fun startImmediateUpdate(appUpdateInfo: AppUpdateInfo) {
-    val appUpdateManager = AppUpdateManagerFactory.create(context)
+    val appUpdateManager = updateManagerFactory.create()
 
     topActivityProvider.onTopActivity {
       appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, it, 0)
     }
   }
 
+  private fun showUpdateSnackbar() {
+    snackbarDisplay.showSnackbar(
+      SnackbarData(
+        text = R.string.update_available,
+        length = -2,
+        action = R.string.cta_install to View.OnClickListener { updateManagerFactory.create().completeUpdate() }
+      )
+    )
+  }
+
   companion object {
-    val UPDATE_STALE_DAYS_VERSION_KEY = Config.Key("in_app_update_enabled", Owner.CORE_TEAM)
+    val KEY_UPDATE_STRATEGY = Config.Key("in_app_update_strategy", Owner.CORE_TEAM)
   }
 }
