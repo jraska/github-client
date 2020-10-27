@@ -99,6 +99,8 @@ dependencies {
   implementation project(':feature:shortcuts')
   implementation project(':feature:chrome-custom-tabs')
   implementation project(':feature:in-app-update')
+  implementation project(':feature:config-debug')
+  implementation project(':feature:config-debug-api')
 
   implementation 'androidx.appcompat:appcompat:1.2.0'
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'

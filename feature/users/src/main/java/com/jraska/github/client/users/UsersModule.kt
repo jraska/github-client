@@ -2,6 +2,9 @@ package com.jraska.github.client.users
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel
+import com.jraska.github.client.config.debug.MutableConfigDef
+import com.jraska.github.client.config.debug.MutableConfigSetup
+import com.jraska.github.client.config.debug.MutableConfigType
 import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
@@ -74,6 +77,22 @@ object UsersModule {
 
       override fun priority(): LinkLauncher.Priority {
         return LinkLauncher.Priority.EXACT_MATCH
+      }
+    }
+  }
+
+  @Provides
+  @IntoSet
+  internal fun debugConfigs(): MutableConfigSetup {
+    return object : MutableConfigSetup {
+      override fun mutableConfigs(): List<MutableConfigDef> {
+        return listOf(
+          MutableConfigDef(
+            UserDetailViewModel.USER_DETAIL_SECTION_SIZE_KEY.name,
+            MutableConfigType.LONG,
+            listOf(1, 2, 3, 4, 5, 7, 10)
+          )
+        )
       }
     }
   }

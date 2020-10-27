@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
@@ -22,6 +23,10 @@ internal class SettingsActivity : BaseActivity() {
     val adapter = SimpleEpoxyAdapter()
     adapter.addModels(PurchaseReportModel(this::onPurchaseButtonClicked))
     adapter.addModels(ConsoleModel(viewModel::onConsoleClick))
+
+    viewModel.configRows().forEach {
+      adapter.addModels(it as EpoxyModel<*>)
+    }
     settingsRecycler.adapter = adapter
   }
 

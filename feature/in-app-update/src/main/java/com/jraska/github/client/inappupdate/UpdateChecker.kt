@@ -105,6 +105,6 @@ class UpdateChecker @Inject constructor(
   }
 
   companion object {
-    val KEY_UPDATE_STRATEGY = Config.Key("in_app_update_strategy", Owner.CORE_TEAM)
+    internal val KEY_UPDATE_STRATEGY = Config.Key("in_app_update_strategy", Owner.CORE_TEAM)
   }
 }

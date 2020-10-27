@@ -10,4 +10,8 @@ interface Config {
   fun getString(key: Key): String
 
   class Key(val name: String, val owner: Owner)
+
+  interface Decoration {
+    fun decorate(config: Config): Config
+  }
 }

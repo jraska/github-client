@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
+import com.jraska.github.client.config.debug.ui.ConfigRowModelProvider
 import com.jraska.github.client.navigation.Navigator
 import javax.inject.Inject
 
@@ -11,6 +12,7 @@ internal class SettingsViewModel @Inject
 constructor(
   private val eventAnalytics: EventAnalytics,
   private val navigator: Navigator
+  private val rowModelProvider: ConfigRowModelProvider
 ) : ViewModel() {
   fun onPurchaseSubmitted(value: String) {
     val money = value.toDoubleOrNull() ?: return
@@ -22,6 +24,8 @@ constructor(
 
     eventAnalytics.report(event)
   }
+
+  fun configRows() = rowModelProvider.epoxyModels()
 
   fun onConsoleClick() {
     navigator.startConsole()

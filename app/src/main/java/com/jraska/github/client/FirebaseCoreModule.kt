@@ -47,11 +47,11 @@ object FirebaseCoreModule {
   }
 
   @Provides
-  @Singleton internal fun config(): Config {
+  @Singleton internal fun config(configDecoration: Config.Decoration): Config {
     val configProxy = FirebaseConfigProxy(FirebaseRemoteConfig.getInstance())
 
     configProxy.setupDefaults().fetch()
 
-    return configProxy
+    return configDecoration.decorate(configProxy)
   }
 }
