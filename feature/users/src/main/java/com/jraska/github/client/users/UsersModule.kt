@@ -2,9 +2,9 @@ package com.jraska.github.client.users
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel
-import com.jraska.github.client.config.debug.MutableConfigDef
-import com.jraska.github.client.config.debug.MutableConfigSetup
-import com.jraska.github.client.config.debug.MutableConfigType
+import com.jraska.github.client.config.MutableConfigDef
+import com.jraska.github.client.config.MutableConfigSetup
+import com.jraska.github.client.config.MutableConfigType
 import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
@@ -88,7 +88,7 @@ object UsersModule {
       override fun mutableConfigs(): List<MutableConfigDef> {
         return listOf(
           MutableConfigDef(
-            UserDetailViewModel.USER_DETAIL_SECTION_SIZE_KEY.name,
+            UserDetailViewModel.USER_DETAIL_SECTION_SIZE_KEY,
             MutableConfigType.LONG,
             listOf(1, 2, 3, 4, 5, 7, 10)
           )

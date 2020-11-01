@@ -1,7 +1,9 @@
-package com.jraska.github.client.config.debug
+package com.jraska.github.client.config
+
+import com.jraska.github.client.Config
 
 class MutableConfigDef(
-  val name: String,
+  val key: Config.Key,
   val type: MutableConfigType,
   val domain: List<Any?>
 )

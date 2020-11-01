@@ -11,21 +11,29 @@ class MutableConfig(
     return (values[key.name] as Boolean? ?: config.getBoolean(key))
   }
 
+  fun setBoolean(key: Config.Key, value: Boolean) {
+    values[key.name] = value
+  }
+
   override fun getString(key: Config.Key): String {
     return (values[key.name] as String? ?: config.getString(key))
+  }
+
+  fun setString(key: Config.Key, value: String) {
+    values[key.name] = value
   }
 
   override fun getLong(key: Config.Key): Long {
     return (values[key.name] as Long? ?: config.getLong(key))
   }
 
-  override fun triggerRefresh() = config.triggerRefresh()
-
-  fun set(key: String, value: Any) {
-    values[key] = value
+  fun setLong(key: Config.Key, value: Long) {
+    values[key.name] = value
   }
 
-  fun resetToDefault(key: String) {
+  override fun triggerRefresh() = config.triggerRefresh()
+
+  fun resetToDefault(key: Config.Key) {
     values.remove(key)
   }
 }

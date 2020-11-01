@@ -2,9 +2,9 @@ package com.jraska.github.client.inappupdate
 
 import android.app.Application
 import android.content.Context
-import com.jraska.github.client.config.debug.MutableConfigDef
-import com.jraska.github.client.config.debug.MutableConfigSetup
-import com.jraska.github.client.config.debug.MutableConfigType
+import com.jraska.github.client.config.MutableConfigDef
+import com.jraska.github.client.config.MutableConfigSetup
+import com.jraska.github.client.config.MutableConfigType
 import com.jraska.github.client.core.android.OnAppCreate
 import dagger.Module
 import dagger.Provides
@@ -34,7 +34,7 @@ object InAppUpdateModule {
       override fun mutableConfigs(): List<MutableConfigDef> {
         return listOf(
           MutableConfigDef(
-            UpdateChecker.KEY_UPDATE_STRATEGY.name,
+            UpdateChecker.KEY_UPDATE_STRATEGY,
             MutableConfigType.STRING,
             listOf("Flexible", "Immediate", "", "Off", "Error value ^%@*&")
           )
