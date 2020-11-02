@@ -8,7 +8,6 @@ plugins {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 if (project.hasProperty("enable-performance-plugin")) {
   apply plugin: 'com.google.firebase.firebase-perf'

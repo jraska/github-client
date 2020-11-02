@@ -1,12 +1,12 @@
 package com.jraska.github.client.users.ui
 
 import android.view.View
+import android.widget.TextView
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.users.R
 import com.jraska.github.client.users.model.RepoHeader
-import kotlinx.android.synthetic.main.item_repos_section.view.repos_repeater
-import kotlinx.android.synthetic.main.item_repos_section.view.repos_title
+import com.jraska.github.client.users.widget.RepeaterLayout
 
 internal class ReposSectionModel(
   private val title: String,
@@ -19,11 +19,11 @@ internal class ReposSectionModel(
   }
 
   override fun bind(itemView: View) {
-    itemView.repos_title.text = title
+    itemView.findViewById<TextView>(R.id.repos_title).text = title
 
     val adapter = SimpleEpoxyAdapter()
     adapter.addModels(repos.map { repo -> RepoHeaderModel(repo, repoListener) })
 
-    itemView.repos_repeater.setAdapter(adapter)
+    itemView.findViewById<RepeaterLayout>(R.id.repos_repeater).setAdapter(adapter)
   }
 }

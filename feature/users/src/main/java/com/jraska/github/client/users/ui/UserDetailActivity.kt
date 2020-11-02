@@ -5,19 +5,18 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.airbnb.epoxy.SimpleEpoxyModel
+import com.facebook.drawee.view.SimpleDraweeView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 import com.jraska.github.client.users.R
 import com.jraska.github.client.users.UserDetailViewModel
 import com.jraska.github.client.users.model.RepoHeader
 import com.jraska.github.client.users.model.UserDetail
-import kotlinx.android.synthetic.main.activity_user_detail.toolbar
-import kotlinx.android.synthetic.main.activity_user_detail.user_detail_avatar
-import kotlinx.android.synthetic.main.activity_user_detail.user_detail_github_fab
-import kotlinx.android.synthetic.main.content_user_detail.user_detail_recycler
 
 internal class UserDetailActivity : BaseActivity() {
 
@@ -30,17 +29,18 @@ internal class UserDetailActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_user_detail)
-    setSupportActionBar(toolbar)
+    setSupportActionBar(findViewById(R.id.toolbar))
 
-    user_detail_recycler.layoutManager = LinearLayoutManager(this)
-    user_detail_recycler.isNestedScrollingEnabled = false
+    val userDetailRecycler = findViewById<RecyclerView>(R.id.user_detail_recycler)
+    userDetailRecycler.layoutManager = LinearLayoutManager(this)
+    userDetailRecycler.isNestedScrollingEnabled = false
 
     title = login()
 
     val detailLiveData = userDetailViewModel.userDetail(login())
-    detailLiveData.observe(this, Observer { this.setState(it) })
+    detailLiveData.observe(this, { this.setState(it) })
 
-    user_detail_github_fab.setOnClickListener { userDetailViewModel.onUserGitHubIconClick(login()) }
+    findViewById<FloatingActionButton>(R.id.user_detail_github_fab).setOnClickListener { userDetailViewModel.onUserGitHubIconClick(login()) }
   }
 
   private fun setState(state: UserDetailViewModel.ViewState) {
@@ -52,7 +52,7 @@ internal class UserDetailActivity : BaseActivity() {
   }
 
   private fun setUser(userDetail: UserDetail) {
-    user_detail_avatar.setImageURI(userDetail.user.avatarUrl)
+    findViewById<SimpleDraweeView>(R.id.user_detail_avatar).setImageURI(userDetail.user.avatarUrl)
 
     if (userDetail.basicStats == null) {
       return
@@ -79,15 +79,15 @@ internal class UserDetailActivity : BaseActivity() {
 
     adapter.addModels(models)
 
-    user_detail_recycler.adapter = adapter
+    findViewById<RecyclerView>(R.id.user_detail_recycler).adapter = adapter
   }
 
   private fun showLoading() {
-    user_detail_recycler.adapter = SimpleEpoxyAdapter().apply { addModels(SimpleEpoxyModel(R.layout.item_loading)) }
+    findViewById<RecyclerView>(R.id.user_detail_recycler).adapter = SimpleEpoxyAdapter().apply { addModels(SimpleEpoxyModel(R.layout.item_loading)) }
   }
 
   private fun showError(error: Throwable) {
-    ErrorHandler.displayError(error, user_detail_recycler)
+    ErrorHandler.displayError(error, findViewById(R.id.user_detail_recycler))
   }
 
   private fun onRepoClicked(header: RepoHeader) {

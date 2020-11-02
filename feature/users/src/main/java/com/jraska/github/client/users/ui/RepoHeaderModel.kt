@@ -1,13 +1,10 @@
 package com.jraska.github.client.users.ui
 
 import android.view.View
+import android.widget.TextView
 import com.airbnb.epoxy.EpoxyModel
 import com.jraska.github.client.users.R
 import com.jraska.github.client.users.model.RepoHeader
-import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_description
-import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_forks
-import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_stars
-import kotlinx.android.synthetic.main.item_row_user_detail_repo.view.repo_item_title
 
 internal class RepoHeaderModel(
   private val repo: RepoHeader,
@@ -18,10 +15,10 @@ internal class RepoHeaderModel(
   }
 
   override fun bind(itemView: View) {
-    itemView.repo_item_title.text = repo.name
-    itemView.repo_item_description.text = repo.description
-    itemView.repo_item_stars.text = repo.stars.toString()
-    itemView.repo_item_forks.text = repo.forks.toString()
+    itemView.findViewById<TextView>(R.id.repo_item_title).text = repo.name
+    itemView.findViewById<TextView>(R.id.repo_item_description).text = repo.description
+    itemView.findViewById<TextView>(R.id.repo_item_stars).text = repo.stars.toString()
+    itemView.findViewById<TextView>(R.id.repo_item_forks).text = repo.forks.toString()
 
     itemView.setOnClickListener { repoListener(repo) }
   }

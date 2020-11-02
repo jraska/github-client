@@ -7,30 +7,34 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 import com.jraska.github.client.users.R
 import com.jraska.github.client.users.UsersViewModel
 import com.jraska.github.client.users.model.User
-import kotlinx.android.synthetic.main.activity_users_list.toolbar
-import kotlinx.android.synthetic.main.content_users_list.users_recycler
-import kotlinx.android.synthetic.main.content_users_list.users_refresh_swipe_layout
 
 class UsersActivity : BaseActivity(), UserModel.UserListener {
   private val usersViewModel: UsersViewModel by lazy { viewModel(UsersViewModel::class.java) }
 
+  private val usersRecycler: RecyclerView get() = findViewById(R.id.users_recycler)
+  private val usersRefreshSwipeLayout: SwipeRefreshLayout get() = findViewById(R.id.users_refresh_swipe_layout)
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_users_list)
-    setSupportActionBar(toolbar)
+    setSupportActionBar(findViewById(R.id.toolbar))
 
-    users_recycler.layoutManager = LinearLayoutManager(this)
-    users_refresh_swipe_layout.setOnRefreshListener { usersViewModel.onRefresh() }
+    usersRecycler.layoutManager = LinearLayoutManager(this)
+    usersRefreshSwipeLayout.setOnRefreshListener { usersViewModel.onRefresh() }
+
+    packageManager.getPackageInfo(packageName, 0)
 
     showProgressIndicator()
 
-    usersViewModel.users().observe(this, Observer { this.setState(it) })
+    usersViewModel.users().observe(this, { this.setState(it) })
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -79,29 +83,29 @@ class UsersActivity : BaseActivity(), UserModel.UserListener {
     val models = users.map { user -> UserModel(user, this) }
 
     adapter.addModels(models)
-    users_recycler.adapter = adapter
+    usersRecycler.adapter = adapter
   }
 
   private fun showError(error: Throwable) {
-    ErrorHandler.displayError(error, users_recycler)
+    ErrorHandler.displayError(error, usersRecycler)
   }
 
   private fun showProgressIndicator() {
     ensureProgressIndicatorVisible()
 
-    users_refresh_swipe_layout.isRefreshing = true
+    usersRefreshSwipeLayout.isRefreshing = true
   }
 
   private fun hideProgressIndicator() {
-    users_refresh_swipe_layout.isRefreshing = false
+    usersRefreshSwipeLayout.isRefreshing = false
   }
 
   private fun ensureProgressIndicatorVisible() {
     // Workaround for start progress called before onMeasure
     // Issue: https://code.google.com/p/android/issues/detail?id=77712
-    if (users_refresh_swipe_layout.measuredHeight == 0) {
+    if (usersRefreshSwipeLayout.measuredHeight == 0) {
       val circleSize = resources.getDimensionPixelSize(R.dimen.swipe_progress_circle_diameter)
-      users_refresh_swipe_layout.setProgressViewOffset(false, 0, circleSize)
+      usersRefreshSwipeLayout.setProgressViewOffset(false, 0, circleSize)
     }
   }
 

@@ -3,22 +3,22 @@ package com.jraska.github.client.users.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.airbnb.epoxy.SimpleEpoxyModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 import com.jraska.github.client.users.R
 import com.jraska.github.client.users.model.RepoDetail
 import com.jraska.github.client.users.model.RepoDetailViewModel
-import kotlinx.android.synthetic.main.activity_repo_detail.repo_detail_github_fab
-import kotlinx.android.synthetic.main.activity_repo_detail.toolbar
-import kotlinx.android.synthetic.main.content_repo_detail.repo_detail_recycler
 
 internal class RepoDetailActivity : BaseActivity() {
 
   private val viewModel: RepoDetailViewModel by lazy { viewModel(RepoDetailViewModel::class.java) }
+
+  private val repoDetailRecycler: RecyclerView get() = findViewById(R.id.repo_detail_recycler)
 
   private fun fullRepoName(): String {
     return intent.getStringExtra(EXTRA_FULL_REPO_NAME)!!
@@ -28,15 +28,16 @@ internal class RepoDetailActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
 
     setContentView(R.layout.activity_repo_detail)
-    setSupportActionBar(toolbar)
-    repo_detail_recycler.layoutManager = LinearLayoutManager(this)
+    setSupportActionBar(findViewById(R.id.toolbar))
+    repoDetailRecycler.layoutManager = LinearLayoutManager(this)
 
     title = fullRepoName()
 
     val liveData = viewModel.repoDetail(fullRepoName())
-    liveData.observe(this, Observer { this.setState(it) })
+    liveData.observe(this, { this.setState(it) })
 
-    repo_detail_github_fab.setOnClickListener { viewModel.onGitHubIconClicked(fullRepoName()) }
+    findViewById<FloatingActionButton>(R.id.repo_detail_github_fab)
+      .setOnClickListener { viewModel.onGitHubIconClicked(fullRepoName()) }
   }
 
   private fun setState(state: RepoDetailViewModel.ViewState) {
@@ -48,11 +49,11 @@ internal class RepoDetailActivity : BaseActivity() {
   }
 
   private fun showLoading() {
-    repo_detail_recycler.adapter = SimpleEpoxyAdapter().apply { addModels(SimpleEpoxyModel(R.layout.item_loading)) }
+    findViewById<RecyclerView>(R.id.repo_detail_recycler).adapter = SimpleEpoxyAdapter().apply { addModels(SimpleEpoxyModel(R.layout.item_loading)) }
   }
 
   private fun setError(error: Throwable) {
-    ErrorHandler.displayError(error, repo_detail_recycler)
+    ErrorHandler.displayError(error, repoDetailRecycler)
   }
 
   private fun setRepoDetail(repoDetail: RepoDetail) {
@@ -71,7 +72,7 @@ internal class RepoDetailActivity : BaseActivity() {
     )
     adapter.addModels(SimpleTextModel(issuesText))
 
-    repo_detail_recycler.adapter = adapter
+    repoDetailRecycler.adapter = adapter
   }
 
   companion object {

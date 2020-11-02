@@ -4,12 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
-import kotlinx.android.synthetic.main.activity_about.toolbar
-import kotlinx.android.synthetic.main.content_about.about_recycler
 
 internal class AboutActivity : BaseActivity() {
 
@@ -18,7 +17,7 @@ internal class AboutActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_about)
-    setSupportActionBar(toolbar)
+    setSupportActionBar(findViewById(R.id.toolbar))
 
     val spansCount = 2
     val epoxyAdapter = SimpleEpoxyAdapter()
@@ -28,8 +27,9 @@ internal class AboutActivity : BaseActivity() {
     val layoutManager = GridLayoutManager(this, spansCount)
     layoutManager.spanSizeLookup = epoxyAdapter.spanSizeLookup
 
-    about_recycler.layoutManager = layoutManager
-    about_recycler.adapter = epoxyAdapter
+    val aboutRecycler = findViewById<RecyclerView>(R.id.about_recycler)
+    aboutRecycler.layoutManager = layoutManager
+    aboutRecycler.adapter = epoxyAdapter
   }
 
   private fun createModels(): List<EpoxyModel<*>>? {

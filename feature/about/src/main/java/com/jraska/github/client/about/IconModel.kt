@@ -1,10 +1,10 @@
 package com.jraska.github.client.about
 
 import android.view.View
+import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.airbnb.epoxy.SimpleEpoxyModel
-import kotlinx.android.synthetic.main.about_item_icon.view.about_item_icon
 
 internal class IconModel(
   private val clickListener: () -> Unit,
@@ -17,8 +17,9 @@ internal class IconModel(
 
     view.setOnClickListener { clickListener() }
 
-    view.about_item_icon.setImageResource(iconRes)
-    view.about_item_icon.contentDescription = view.context.getString(contentDescriptionRes)
+    val aboutItemIcon = view.findViewById<ImageView>(R.id.about_item_icon)
+    aboutItemIcon.setImageResource(iconRes)
+    aboutItemIcon.contentDescription = view.context.getString(contentDescriptionRes)
   }
 
   override fun getSpanSize(totalSpanCount: Int, position: Int, itemCount: Int): Int {
