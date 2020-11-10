@@ -9,7 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
-import com.jraska.github.client.http.ReplayHttpComponent
+import com.jraska.github.client.http.ReplayHttpModule
 import okreplay.OkReplay
 import org.hamcrest.Matchers
 import org.junit.Rule
@@ -17,7 +17,7 @@ import org.junit.Test
 
 class DeepLinkLaunchTest {
   @get:Rule
-  val testRule = ReplayHttpComponent.okReplayRule()
+  val testRule = ReplayHttpModule.okReplayRule()
 
   @Test
   @OkReplay

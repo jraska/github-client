@@ -1,30 +1,44 @@
 package com.jraska.github.client
 
+import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
+import com.jraska.github.client.core.android.HasServiceModelFactory
+import com.jraska.github.client.core.android.HasViewModelFactory
 import com.jraska.github.client.core.android.ServiceModel
-import com.jraska.github.client.http.ReplayHttpComponent
+import com.jraska.github.client.http.ReplayHttpModule
+import dagger.BindsInstance
+import dagger.Component
+import javax.inject.Singleton
 
-class TestUITestApp : GitHubClientApp() {
-  val coreComponent = FakeCoreComponent()
-  val decoratedServiceFactory by lazy {
+class TestUITestApp : GitHubClientApp(), HasViewModelFactory, HasServiceModelFactory {
+  val coreModule = FakeCoreModule
+
+  private val decoratedServiceFactory by lazy {
     DecoratedServiceModelFactory(super.serviceModelFactory())
   }
 
+  private val appComponent: TestAppComponent by lazy {
+    DaggerTestAppComponent.factory().create(this)
+  }
+
+  override fun createAppComponent() = appComponent
+
   override fun serviceModelFactory(): ServiceModel.Factory {
     return decoratedServiceFactory
-  }
-
-  override fun retrofit(): HasRetrofit {
-    return ReplayHttpComponent.create()
-  }
-
-  override fun coreComponent(): CoreComponent {
-    return coreComponent
   }
 
   companion object {
     fun get(): TestUITestApp {
       return InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as TestUITestApp
     }
+  }
+}
+
+@Singleton
+@Component(modules = [SharedModules::class, FakeCoreModule::class, ReplayHttpModule::class])
+interface TestAppComponent : AppComponent {
+  @Component.Factory
+  interface Factory {
+    fun create(@BindsInstance context: Context): TestAppComponent
   }
 }

@@ -1,6 +1,7 @@
 package com.jraska.github.client.http
 
-import com.jraska.github.client.BuildConfig
+import android.content.Context
+import com.jraska.github.client.core.BuildConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -10,6 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.io.File
 import javax.inject.Singleton
 
@@ -29,14 +31,16 @@ class HttpModule {
 
   @Provides
   @Singleton
-  fun provideOkHttpClient(cacheDir: File, logger: HttpLoggingInterceptor.Logger): OkHttpClient {
+  internal fun provideOkHttpClient(context: Context): OkHttpClient {
     val builder = OkHttpClient.Builder()
 
     if (BuildConfig.DEBUG) {
-      val loggingInterceptor = HttpLoggingInterceptor(logger).apply { level = Level.BASIC }
+      val loggingInterceptor = HttpLoggingInterceptor { message -> Timber.tag("Network").v(message) }
+      loggingInterceptor.level = Level.BASIC
       builder.addInterceptor(loggingInterceptor)
     }
 
+    val cacheDir = File(context.cacheDir, "network")
     val cache = Cache(cacheDir, 1024 * 1024 * 4)
     builder.cache(cache)
 

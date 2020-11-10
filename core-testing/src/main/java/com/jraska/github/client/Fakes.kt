@@ -26,10 +26,6 @@ object Fakes {
     return AppSchedulers(Schedulers.trampoline(), Schedulers.trampoline(), Schedulers.trampoline())
   }
 
-  fun emptyCrashReporter(): CrashReporter {
-    return EmptyCrashReporter
-  }
-
   fun recordingAnalyticsProperty(): RecordingAnalyticsProperty {
     return RecordingAnalyticsProperty()
   }

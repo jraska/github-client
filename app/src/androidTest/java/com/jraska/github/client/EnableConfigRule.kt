@@ -10,7 +10,7 @@ class EnableConfigRule(
   lateinit var revert: FakeConfig.RevertSet
 
   override fun before() {
-    revert = TestUITestApp.get().coreComponent.config.set(key, value)
+    revert = FakeCoreModule.config.set(key, value)
   }
 
   override fun after() {

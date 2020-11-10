@@ -27,3 +27,12 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Enforced ownership of remote configuration and analytics events - [Details on PR](https://github.com/jraska/github-client/pull/230). More on why these need to be explicitly owned on [this article](https://proandroiddev.com/remote-feature-flags-do-not-always-come-for-free-a372f1768a70).
 - Build time tracking with reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/303).
 
+## What we need
+- Dagger module per Gradle module
+- Decoration of any dependency possible - probbably in same graph
+- Exchange of dependencies in tests
+- Clear boundaries with external system
+- Share as much as possible to be similar to the production app
+- Modules separation means kapt in testing module
+
+- What should the module provide - Dagger Module to integrate functionality and its fakes - how the fakes should look like?

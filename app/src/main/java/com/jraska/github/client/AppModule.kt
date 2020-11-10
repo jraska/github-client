@@ -1,8 +1,6 @@
 package com.jraska.github.client
 
 import android.app.Application
-import android.app.NotificationManager
-import android.content.Context
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.jraska.github.client.core.android.OnAppCreate
@@ -12,11 +10,6 @@ import dagger.multibindings.IntoSet
 
 @Module
 object AppModule {
-
-  @Provides
-  internal fun notificationManager(context: Context): NotificationManager {
-    return context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-  }
 
   @Provides
   @IntoSet

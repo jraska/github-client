@@ -33,8 +33,7 @@ class AppSetupTest {
   }
 }
 
-fun recordedEvents() = TestUITestApp.get()
-  .coreComponent
+fun recordedEvents() = FakeCoreModule
   .eventAnalytics
   .events()
 

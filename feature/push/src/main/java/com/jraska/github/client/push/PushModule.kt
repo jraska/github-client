@@ -1,5 +1,7 @@
 package com.jraska.github.client.push
 
+import android.app.NotificationManager
+import android.content.Context
 import com.google.firebase.database.FirebaseDatabase
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
@@ -19,6 +21,11 @@ object PushModule {
   @Singleton
   internal fun firebaseDatabase(): FirebaseDatabase {
     return FirebaseDatabase.getInstance()
+  }
+
+  @Provides
+  internal fun notificationManager(context: Context): NotificationManager {
+    return context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
   }
 
   @Module

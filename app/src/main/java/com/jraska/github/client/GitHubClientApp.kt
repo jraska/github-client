@@ -7,16 +7,12 @@ import com.google.firebase.perf.metrics.AddTrace
 import com.jraska.github.client.core.android.HasServiceModelFactory
 import com.jraska.github.client.core.android.HasViewModelFactory
 import com.jraska.github.client.core.android.ServiceModel
-import com.jraska.github.client.http.DaggerHttpComponent
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.android.schedulers.AndroidSchedulers
-import okhttp3.logging.HttpLoggingInterceptor
-import timber.log.Timber
-import java.io.File
 
 open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModelFactory {
 
-  private val appComponent: AppComponent by lazy { componentBuilder().build() }
+  private val appComponent: AppComponent by lazy { createAppComponent() }
 
   override fun factory(): ViewModelProvider.Factory {
     return appComponent.viewModelFactory()
@@ -37,26 +33,8 @@ open class GitHubClientApp : Application(), HasViewModelFactory, HasServiceModel
     }
   }
 
-  private fun componentBuilder(): AppComponent.Builder {
-    return DaggerAppComponent.builder()
-      .appContext(this)
-      .httpComponent(retrofit())
-      .coreComponent(coreComponent())
-  }
-
-  protected open fun coreComponent(): CoreComponent {
-    return DaggerFirebaseCoreComponent.builder().build()
-  }
-
-  protected open fun retrofit(): HasRetrofit {
-    return DaggerHttpComponent.builder()
-      .cacheDir(File(cacheDir, "network"))
-      .logger(object : HttpLoggingInterceptor.Logger {
-        override fun log(message: String) {
-          Timber.tag("Network").v(message)
-        }
-      })
-      .build()
+  open fun createAppComponent(): AppComponent {
+    return DaggerAppComponent.factory().create(this)
   }
 
   private fun initRxAndroidMainThread() {

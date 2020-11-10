@@ -9,6 +9,8 @@ dependencies {
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
 
+  implementation rootProject.ext.okHttp
+
   testImplementation 'junit:junit:4.13.1'
   testImplementation 'org.mockito:mockito-core:3.6.0'
 }

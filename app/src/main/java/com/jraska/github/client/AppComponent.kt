@@ -7,6 +7,7 @@ import com.jraska.github.client.chrome.ChromeCustomTabsModule
 import com.jraska.github.client.core.android.CoreAndroidModule
 import com.jraska.github.client.core.android.OnAppCreate
 import com.jraska.github.client.core.android.ServiceModel
+import com.jraska.github.client.http.HttpModule
 import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.inappupdate.InAppUpdateModule
 import com.jraska.github.client.navigation.deeplink.DeepLinkNavigationModule
@@ -17,11 +18,29 @@ import com.jraska.github.client.shortcuts.ShortcutsModule
 import com.jraska.github.client.users.UsersModule
 import dagger.BindsInstance
 import dagger.Component
+import dagger.Module
 import javax.inject.Singleton
 
 @Singleton
 @Component(
-  modules = [
+  modules = [SharedModules::class, ToExchange::class]
+)
+interface AppComponent {
+
+  fun onAppCreateActions(): Set<OnAppCreate>
+
+  fun serviceModelFactory(): ServiceModel.Factory
+
+  fun viewModelFactory(): ViewModelProvider.Factory
+
+  @Component.Factory
+  interface Factory {
+    fun create(@BindsInstance context: Context): AppComponent
+  }
+}
+
+@Module(
+  includes = [
     AppModule::class,
     CoreAndroidModule::class,
     ChromeCustomTabsModule::class,
@@ -33,28 +52,9 @@ import javax.inject.Singleton
     PushModule::class,
     SettingsModule::class,
     AboutModule::class,
-    ShortcutsModule::class],
-  dependencies = [
-    HasRetrofit::class,
-    CoreComponent::class
-  ]
+    ShortcutsModule::class]
 )
-interface AppComponent {
+object SharedModules
 
-  fun onAppCreateActions(): Set<OnAppCreate>
-
-  fun serviceModelFactory(): ServiceModel.Factory
-
-  fun viewModelFactory(): ViewModelProvider.Factory
-
-  @Component.Builder
-  interface Builder {
-    fun build(): AppComponent
-
-    fun coreComponent(coreComponent: CoreComponent): Builder
-    fun httpComponent(retrofit: HasRetrofit): Builder
-
-    @BindsInstance
-    fun appContext(context: Context): Builder
-  }
-}
+@Module(includes = [FirebaseCoreModule::class, HttpModule::class])
+object ToExchange

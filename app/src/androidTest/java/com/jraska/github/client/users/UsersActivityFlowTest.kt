@@ -13,7 +13,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.jraska.github.client.EnableConfigRule
 import com.jraska.github.client.R
-import com.jraska.github.client.http.ReplayHttpComponent
+import com.jraska.github.client.http.ReplayHttpModule
 import com.jraska.github.client.recordedEvents
 import okreplay.OkReplay
 import org.assertj.core.api.Assertions.assertThat
@@ -24,7 +24,7 @@ class UsersActivityFlowTest {
 
   @Suppress("unused")
   @get:Rule
-  val testRule = ReplayHttpComponent.okReplayRule()
+  val testRule = ReplayHttpModule.okReplayRule()
 
   @get:Rule
   val enableConfigRule = EnableConfigRule("user_detail_section_size", 4L)

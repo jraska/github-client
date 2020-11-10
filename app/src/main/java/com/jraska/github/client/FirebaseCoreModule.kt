@@ -13,7 +13,7 @@ import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
-object FirebaseModule {
+object FirebaseCoreModule {
 
   val ANALYTICS_DISABLED_KEY = Config.Key("analytics_disabled", Owner.CORE_TEAM)
 
