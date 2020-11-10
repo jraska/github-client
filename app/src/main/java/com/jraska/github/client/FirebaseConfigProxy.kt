@@ -7,7 +7,7 @@ import java.util.Date
 
 internal class FirebaseConfigProxy(private val config: FirebaseRemoteConfig) : Config {
   private val onFetchCompleteListener: OnCompleteListener<Void> = OnCompleteListener {
-    config.activateFetched()
+    config.activate()
     Timber.d("Config fetch complete. last fetch: %s",
       Date(config.info.fetchTimeMillis))
   }
@@ -34,7 +34,7 @@ internal class FirebaseConfigProxy(private val config: FirebaseRemoteConfig) : C
   }
 
   fun setupDefaults(): FirebaseConfigProxy {
-    config.setDefaults(R.xml.config_defaults)
+    config.setDefaultsAsync(R.xml.config_defaults)
     return this
   }
 
