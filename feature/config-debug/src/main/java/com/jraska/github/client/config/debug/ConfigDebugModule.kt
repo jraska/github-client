@@ -36,10 +36,6 @@ object ConfigDebugModule {
       }
     }
   }
-}
-
-@Module
-object ConfigDebugCoreModule {
 
   @Provides
   internal fun bindDecoration(decoration: MutableConfigDecoration): Config.Decoration = decoration
