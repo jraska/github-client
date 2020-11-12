@@ -4,6 +4,7 @@ plugins {
   id "com.jraska.github.client.firebase"
   id 'com.jraska.gradle.buildtime'
   id 'com.jraska.github.client.release'
+  id 'com.jraska.module.stats'
 }
 
 apply plugin: 'com.android.application'

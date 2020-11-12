@@ -48,5 +48,9 @@ gradlePlugin {
       id = 'com.jraska.github.client.release'
       implementationClass = 'com.jraska.github.client.release.ReleasePlugin'
     }
+    statsPlugin {
+      id = 'com.jraska.module.stats'
+      implementationClass = 'com.jraska.module.ModuleStatsPlugin'
+    }
   }
 }
