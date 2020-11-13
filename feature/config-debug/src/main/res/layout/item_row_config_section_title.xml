@@ -6,7 +6,7 @@
   android:padding="8dp"
   android:text="@string/title_mutable_configs"
   android:textColor="@color/textMain"
-  android:textSize="18sp"
+  android:textSize="@dimen/textTitle"
   >
 
 </TextView>
