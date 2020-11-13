@@ -23,12 +23,12 @@ internal class StringConfigModel(
     val spinner = view.findViewById<Spinner>(R.id.item_row_boolean_config_spinner)
 
     val initialValue = config.getString(configDef.key)
-    val values = configDef.domain.toMutableList().also { it.add(0, initialValue) }
-    spinner.adapter = ArrayAdapter(view.context, android.R.layout.simple_dropdown_item_1line, values)
+    val valuesToSelect = configDef.domain.toMutableList().also { it.add(0, initialValue) }
+    spinner.adapter = ArrayAdapter(view.context, android.R.layout.simple_dropdown_item_1line, valuesToSelect)
 
     spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-        config.setString(configDef.key, configDef.domain[position] as String)
+        config.setString(configDef.key, valuesToSelect[position] as String)
       }
 
       override fun onNothingSelected(parent: AdapterView<*>) = Unit
