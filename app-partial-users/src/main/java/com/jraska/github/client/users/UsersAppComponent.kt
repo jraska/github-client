@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.jakewharton.threetenabp.AndroidThreeTen
+import com.jraska.github.client.FakeConfigModule
 import com.jraska.github.client.FakeCoreModule
 import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.core.android.CoreAndroidModule
@@ -26,6 +27,7 @@ import javax.inject.Singleton
     CoreAndroidModule::class,
     DeepLinkNavigationModule::class,
     FakeCoreModule::class,
+    FakeConfigModule::class,
     HttpModule::class,
     UsersModule::class]
 )
