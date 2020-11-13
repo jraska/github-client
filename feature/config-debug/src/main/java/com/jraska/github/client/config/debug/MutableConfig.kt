@@ -34,6 +34,6 @@ class MutableConfig(
   override fun triggerRefresh() = config.triggerRefresh()
 
   fun resetToDefault(key: Config.Key) {
-    values.remove(key)
+    values.remove(key.name)
   }
 }

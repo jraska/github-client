@@ -24,4 +24,8 @@ dependencies {
 
   implementation 'androidx.recyclerview:recyclerview:1.1.0'
   implementation 'com.airbnb.android:epoxy:4.1.0'
+
+  testImplementation 'junit:junit:4.13.1'
+  testImplementation project(':core-testing')
+  testImplementation 'org.assertj:assertj-core:3.18.0'
 }
