@@ -9,13 +9,11 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withSubstring
 import com.jraska.github.client.DeepLinkLaunchTest
 import com.jraska.github.client.navigation.Urls
-import okreplay.OkReplay
 import org.junit.Test
 
 class SettingsTest {
   @Test
-  @OkReplay
-  fun whenUsersLink_thenUsersActivityDisplayed() {
+  fun whenConsoleClicked_thenConsoleOpens() {
     DeepLinkLaunchTest.launchDeepLink(Urls.settings().toString())
 
     onView(withId(R.id.console_item_container)).perform(click())

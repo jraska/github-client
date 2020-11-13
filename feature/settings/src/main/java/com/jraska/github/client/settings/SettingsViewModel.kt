@@ -8,10 +8,9 @@ import com.jraska.github.client.config.debug.ui.ConfigRowModelProvider
 import com.jraska.github.client.navigation.Navigator
 import javax.inject.Inject
 
-internal class SettingsViewModel @Inject
-constructor(
+internal class SettingsViewModel @Inject constructor(
   private val eventAnalytics: EventAnalytics,
-  private val navigator: Navigator
+  private val navigator: Navigator,
   private val rowModelProvider: ConfigRowModelProvider
 ) : ViewModel() {
   fun onPurchaseSubmitted(value: String) {
