@@ -19,4 +19,8 @@ object Urls {
   fun about(): HttpUrl {
     return "https://github.com/about".toHttpUrl()
   }
+
+  fun console(): HttpUrl {
+    return "https://github.com/internal/console".toHttpUrl()
+  }
 }

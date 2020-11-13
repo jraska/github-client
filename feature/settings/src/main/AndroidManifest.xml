@@ -4,6 +4,7 @@
 
   <application>
     <activity android:name=".SettingsActivity" />
+    <activity android:name=".ConsoleActivity" />
   </application>
 
 </manifest>

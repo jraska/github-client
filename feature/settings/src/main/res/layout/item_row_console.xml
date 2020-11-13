@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.jraska.console.Console xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/user_container"
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="400dp">
+  android:id="@+id/console_item_container"
+  android:layout_height="300dp"
+  >
 
-</com.jraska.console.Console>
+  <com.jraska.console.Console
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
+
+  <FrameLayout
+    android:id="@+id/console_overlay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
+
+</FrameLayout>
+

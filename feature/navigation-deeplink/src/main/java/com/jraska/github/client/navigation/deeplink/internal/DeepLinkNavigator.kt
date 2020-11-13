@@ -41,4 +41,8 @@ class DeepLinkNavigator(
   override fun showAbout() {
     launch(Urls.about())
   }
+
+  override fun startConsole() {
+    launch(Urls.console())
+  }
 }

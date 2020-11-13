@@ -12,4 +12,6 @@ interface Navigator {
   fun showSettings()
 
   fun showAbout()
+
+  fun startConsole()
 }

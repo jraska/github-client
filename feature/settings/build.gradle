@@ -17,6 +17,7 @@ android {
 dependencies {
   implementation project(':core-api')
   implementation project(':core-android-api')
+  implementation project(':navigation-api')
 
   implementation 'androidx.recyclerview:recyclerview:1.1.0'
   implementation 'com.airbnb.android:epoxy:4.1.0'

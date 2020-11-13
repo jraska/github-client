@@ -1,12 +1,12 @@
 package com.jraska.github.client.settings
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import com.airbnb.epoxy.EpoxyModelWithView
-import com.jraska.console.Console
+import android.view.View
+import com.airbnb.epoxy.EpoxyModel
 
-internal class ConsoleModel : EpoxyModelWithView<Console>() {
-  override fun buildView(parent: ViewGroup): Console {
-    return LayoutInflater.from(parent.context).inflate(R.layout.item_row_console, parent, false) as Console
+internal class ConsoleModel(private val onConsoleClick: () -> Unit) : EpoxyModel<View>() {
+  override fun getDefaultLayout() = R.layout.item_row_console
+
+  override fun bind(view: View) {
+    view.findViewById<View>(R.id.console_overlay).setOnClickListener { onConsoleClick() }
   }
 }
