@@ -5,6 +5,7 @@ import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.logging.CrashReporter
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoSet
 
 @Module
 object FakeCoreModule {
@@ -28,7 +29,12 @@ object FakeCoreModule {
   }
 
   @Provides
-  fun config(): Config {
-    return config
+  @IntoSet
+  fun config(): Config.Decoration {
+    return object : Config.Decoration {
+      override fun decorate(originalConfig: Config): Config {
+        return config
+      }
+    }
   }
 }

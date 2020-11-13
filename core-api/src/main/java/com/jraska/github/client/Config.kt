@@ -12,6 +12,6 @@ interface Config {
   class Key(val name: String, val owner: Owner)
 
   interface Decoration {
-    fun decorate(config: Config): Config
+    fun decorate(originalConfig: Config): Config
   }
 }

@@ -10,16 +10,27 @@ import com.jraska.github.client.config.debug.ui.EpoxyMutableConfigsRowProvider
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoSet
-import javax.inject.Singleton
 
 @Module
-object ConfigDebugModule {
+class ConfigDebugModule {
+
+  private lateinit var mutableConfig: MutableConfig
 
   @Provides
   internal fun bindRowProvider(provider: EpoxyMutableConfigsRowProvider): ConfigRowModelProvider = provider
 
   @Provides
-  internal fun mutableConfig(config: Config) = config as MutableConfig
+  internal fun mutableConfig() = mutableConfig
+
+  @Provides
+  @IntoSet
+  internal fun bindDecoration(): Config.Decoration {
+    return object : Config.Decoration {
+      override fun decorate(originalConfig: Config): Config {
+        return MutableConfig(originalConfig).also { mutableConfig = it }
+      }
+    }
+  }
 
   @Provides
   @IntoSet
@@ -36,11 +47,4 @@ object ConfigDebugModule {
       }
     }
   }
-
-  @Provides
-  internal fun bindDecoration(decoration: MutableConfigDecoration): Config.Decoration = decoration
-
-  @Provides
-  @Singleton
-  internal fun theDecoration() = MutableConfigDecoration()
 }
