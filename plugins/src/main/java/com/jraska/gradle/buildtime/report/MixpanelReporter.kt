@@ -49,7 +49,7 @@ class MixpanelReporter(
       "buildTime" to buildData.buildTime,
       "tasks" to buildData.tasks.joinToString(),
       "failed" to buildData.failed,
-      "failure" to buildData.failure,
+      "failure" to buildData.failure.toString(),
       "daemonsRunning" to buildData.daemonsRunning,
       "thisDaemonBuilds" to buildData.thisDaemonBuilds,
       "hostname" to buildData.hostname,
