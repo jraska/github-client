@@ -22,6 +22,7 @@ class FirebaseResultExtractor(
     val failedCount = testSuiteNode.attributeInt("failures")
     val errorsCount = testSuiteNode.attributeInt("errors")
     val time = testSuiteNode.attributeDouble("time")
+    val passedCount = testsCount - ignoredCount - failedCount - errorsCount
 
     val tests = (testSuiteNode.get("testcase") as NodeList)
       .map { it as Node }
@@ -38,6 +39,7 @@ class FirebaseResultExtractor(
       gitInfo = gitInfo,
       firebaseUrl = firebaseUrl,
       errorsCount = errorsCount,
+      passedCount = passedCount,
       failedCount = failedCount,
       flakyCount = flakyTests,
       ignoredCount = ignoredCount,

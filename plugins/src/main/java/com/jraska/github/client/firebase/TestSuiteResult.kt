@@ -9,6 +9,7 @@ data class TestSuiteResult(
   val testsCount: Int,
   val failedCount: Int,
   val errorsCount: Int,
+  val passedCount: Int,
   val ignoredCount: Int,
   val flakyCount: Int,
   val firebaseUrl: String,
