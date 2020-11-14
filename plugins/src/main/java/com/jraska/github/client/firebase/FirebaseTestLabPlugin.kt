@@ -51,7 +51,7 @@ class FirebaseTestLabPlugin : Plugin<Project> {
         firebaseTask.isIgnoreExitValue = true
 
         val decorativeStream = ByteArrayOutputStream()
-        firebaseTask.standardOutput = TeeOutputStream(decorativeStream, firebaseTask.standardOutput)
+        firebaseTask.standardOutput = TeeOutputStream(decorativeStream, System.out)
 
         firebaseTask.doLast {
           val outputFile = "${project.buildDir}/test-results/firebase-tests-results.xml"
