@@ -39,7 +39,7 @@ internal class UserDetailViewModel @Inject constructor(
     return usersRepository.getUserDetail(login, reposInSection)
       .subscribeOn(schedulers.io)
       .observeOn(schedulers.mainThread)
-      .map { userDetail -> ViewState.DisplayUser(userDetail) as ViewState }
+      .map<ViewState> { userDetail -> ViewState.DisplayUser(userDetail) }
       .onErrorReturn { ViewState.Error(it) }
       .startWith(ViewState.Loading)
       .toLiveData()

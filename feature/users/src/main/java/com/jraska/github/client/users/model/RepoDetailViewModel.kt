@@ -36,7 +36,7 @@ internal class RepoDetailViewModel @Inject constructor(
     return usersRepository.getRepoDetail(parts[0], parts[1])
       .subscribeOn(appSchedulers.io)
       .observeOn(appSchedulers.mainThread)
-      .map { detail -> ViewState.ShowRepo(detail) as ViewState }
+      .map<ViewState> { detail -> ViewState.ShowRepo(detail) }
       .onErrorReturn { ViewState.Error(it) }
       .startWith(ViewState.Loading)
       .toLiveData()

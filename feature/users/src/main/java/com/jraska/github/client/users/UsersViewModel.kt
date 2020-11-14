@@ -26,7 +26,7 @@ internal class UsersViewModel @Inject constructor(
 
   init {
     users = usersRepository.getUsers(0)
-      .map { users -> ViewState.ShowUsers(users) as ViewState }
+      .map<ViewState> { users -> ViewState.ShowUsers(users) }
       .onErrorReturn { ViewState.Error(it) }
       .toObservable()
       .subscribeOn(appSchedulers.io)
