@@ -2,13 +2,16 @@ package com.jraska.github.client.firebase
 
 import com.jraska.github.client.firebase.report.ConsoleTestResultReporter
 import com.jraska.github.client.firebase.report.FirebaseResultExtractor
+import com.jraska.github.client.firebase.report.FirebaseUrlParser
 import com.jraska.github.client.firebase.report.MixpanelTestResultsReporter
 import com.jraska.gradle.git.GitInfoProvider
 import com.mixpanel.mixpanelapi.MixpanelAPI
+import org.apache.tools.ant.util.TeeOutputStream
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.Exec
 import org.gradle.process.ExecResult
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -47,11 +50,16 @@ class FirebaseTestLabPlugin : Plugin<Project> {
             .split(' ')
         firebaseTask.isIgnoreExitValue = true
 
+        val decorativeStream = ByteArrayOutputStream()
+        firebaseTask.standardOutput = TeeOutputStream(decorativeStream, firebaseTask.standardOutput)
+
         firebaseTask.doLast {
           val outputFile = "${project.buildDir}/test-results/firebase-tests-results.xml"
           project.exec("gsutil cp $resultsFileToPull $outputFile")
 
-          val result = FirebaseResultExtractor("noUrlYet", GitInfoProvider.gitInfo(project), device).extract(File(outputFile).readText())
+          val firebaseUrl = FirebaseUrlParser.parse(decorativeStream.toString())
+
+          val result = FirebaseResultExtractor(firebaseUrl, GitInfoProvider.gitInfo(project), device).extract(File(outputFile).readText())
           val mixpanelToken: String? = System.getenv("GITHUB_CLIENT_MIXPANEL_API_KEY")
           val reporter = if (mixpanelToken == null) {
             println("'GITHUB_CLIENT_MIXPANEL_API_KEY' not set, data will be reported to console only")
@@ -61,8 +69,6 @@ class FirebaseTestLabPlugin : Plugin<Project> {
           }
 
           reporter.report(result)
-
-          println("Exit code is: ${firebaseTask.execResult!!.exitValue}")
           firebaseTask.execResult!!.assertNormalExitValue()
         }
 
