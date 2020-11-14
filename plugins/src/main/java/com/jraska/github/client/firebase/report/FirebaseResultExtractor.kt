@@ -26,31 +26,7 @@ class FirebaseResultExtractor(
     val tests = (testSuiteNode.get("testcase") as NodeList)
       .map { it as Node }
       .filter { it.attributeString("name") != "null" }
-      .map { testNode ->
-
-        val flaky = testNode.attributeBoolean("flaky")
-        val failure = ((testNode.get("failure") as NodeList?)?.firstOrNull() as Node?)?.text() ?: ""
-
-        val outcome = when {
-          flaky -> TestOutcome.FLAKY
-          failure.isNotEmpty() -> TestOutcome.FAILED
-          else -> TestOutcome.PASSED
-        }
-
-        val methodName = testNode.attributeString("name")
-        val className = testNode.attributeString("classname")
-        TestResult(
-          methodName = methodName,
-          className = className,
-          time = testNode.attributeDouble("time"),
-          failure = failure,
-          outcome = outcome,
-          firebaseUrl = firebaseUrl,
-          gitInfo = gitInfo,
-          device = device,
-          fullName = "$className#$methodName"
-        )
-      }
+      .map { parseTestResult(it) }
 
     val suitePassed = errorsCount == 0 && failedCount == 0
 
@@ -66,6 +42,31 @@ class FirebaseResultExtractor(
       flakyCount = flakyTests,
       ignoredCount = ignoredCount,
       suitePassed = suitePassed
+    )
+  }
+
+  private fun parseTestResult(testNode: Node): TestResult {
+    val flaky = testNode.attributeBoolean("flaky")
+    val failure = ((testNode.get("failure") as NodeList?)?.firstOrNull() as Node?)?.text() ?: ""
+
+    val outcome = when {
+      flaky -> TestOutcome.FLAKY
+      failure.isNotEmpty() -> TestOutcome.FAILED
+      else -> TestOutcome.PASSED
+    }
+
+    val methodName = testNode.attributeString("name")
+    val className = testNode.attributeString("classname")
+    return TestResult(
+      methodName = methodName,
+      className = className,
+      time = testNode.attributeDouble("time"),
+      failure = failure,
+      outcome = outcome,
+      firebaseUrl = firebaseUrl,
+      gitInfo = gitInfo,
+      device = device,
+      fullName = "$className#$methodName"
     )
   }
 
