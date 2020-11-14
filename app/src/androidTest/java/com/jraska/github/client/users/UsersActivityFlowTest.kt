@@ -55,7 +55,7 @@ class UsersActivityFlowTest {
   fun whenAbout_thenOpensAbout() {
     onView(withId(R.id.action_about)).perform(click())
 
-    onView(withText("by Josf Raska")).check(matches(isDisplayed()))
+    onView(withText("by Josef Raska")).check(matches(isDisplayed()))
   }
 
   @Test
