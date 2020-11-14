@@ -62,10 +62,7 @@ class FirebaseTestLabPlugin : Plugin<Project> {
 
           reporter.report(result)
 
-          val execResult = firebaseTask.execResult!!
-          if (execResult.exitValue != 0) {
-            execResult.rethrowFailure()
-          }
+          firebaseTask.execResult!!.assertNormalExitValue()
         }
 
         firebaseTask.dependsOn(project.tasks.named("assembleDebugAndroidTest"))
