@@ -52,6 +52,8 @@ class FirebaseResultExtractor(
         )
       }
 
+    val suitePassed = errorsCount == 0 && failedCount == 0
+
     return TestSuiteResult(
       testResults = tests,
       time = time,
@@ -63,7 +65,7 @@ class FirebaseResultExtractor(
       failedCount = failedCount,
       flakyCount = flakyTests,
       ignoredCount = ignoredCount,
-      suitePassed = true
+      suitePassed = suitePassed
     )
   }
 

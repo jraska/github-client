@@ -50,7 +50,7 @@ class FirebaseResultExtractorTest {
     assertThat(suiteResult.ignoredCount).isZero()
     assertThat(suiteResult.testsCount).isEqualTo(14)
     assertThat(suiteResult.flakyCount).isZero()
-    assertThat(suiteResult.suitePassed).isTrue()
+    assertThat(suiteResult.suitePassed).isFalse()
     assertThat(suiteResult.time).isEqualTo(13.846)
     assertThat(suiteResult.testResults).hasSize(14)
 

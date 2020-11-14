@@ -17,10 +17,7 @@ class FirebaseTestLabPlugin : Plugin<Project> {
   override fun apply(theProject: Project) {
     theProject.afterEvaluate { project ->
 
-      var resultsFileToPull: String? = null
-      lateinit var deviceExecuted: String
-
-      val executeTestsInTestLab = project.tasks.register("executeInstrumentedTestsOnFirebase", Exec::class.java) { firebaseTask ->
+      project.tasks.register("runInstrumentedTestsOnFirebase", Exec::class.java) { firebaseTask ->
         firebaseTask.doFirst {
           project.exec("gcloud config set project github-client-25b47")
           val credentialsPath = project.createCredentialsFile()
@@ -33,11 +30,10 @@ class FirebaseTestLabPlugin : Plugin<Project> {
         val androidVersion = "29"
         val device = "model=$deviceName,version=$androidVersion,locale=en,orientation=portrait"
         val resultDir = DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())
-        deviceExecuted = device
 
         val fcmKey = System.getenv("FCM_API_KEY")
 
-        resultsFileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/$deviceName-$androidVersion-en-portrait/test_result_1.xml"
+        val resultsFileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/$deviceName-$androidVersion-en-portrait/test_result_1.xml"
 
         firebaseTask.commandLine =
           ("gcloud " +
@@ -51,20 +47,11 @@ class FirebaseTestLabPlugin : Plugin<Project> {
             .split(' ')
         firebaseTask.isIgnoreExitValue = true
 
-        firebaseTask.dependsOn(project.tasks.named("assembleDebugAndroidTest"))
-        firebaseTask.dependsOn(project.tasks.named("assembleDebug"))
-      }
+        firebaseTask.doLast {
+          val outputFile = "${project.buildDir}/test-results/firebase-tests-results.xml"
+          project.exec("gsutil cp $resultsFileToPull $outputFile")
 
-      val reportResults = project.tasks.register("reportFirebaseXmlResults", Exec::class.java) { pullTask ->
-        pullTask.dependsOn(executeTestsInTestLab)
-
-        val outputFile = "${project.buildDir}/test-results/firebase-tests-results.xml"
-        pullTask.doFirst {
-          pullTask.commandLine = "gsutil cp $resultsFileToPull $outputFile".split(' ')
-        }
-
-        pullTask.doLast {
-          val result = FirebaseResultExtractor("noUrlYet", GitInfoProvider.gitInfo(project), deviceExecuted).extract(File(outputFile).readText())
+          val result = FirebaseResultExtractor("noUrlYet", GitInfoProvider.gitInfo(project), device).extract(File(outputFile).readText())
           val mixpanelToken: String? = System.getenv("GITHUB_CLIENT_MIXPANEL_API_KEY")
           val reporter = if (mixpanelToken == null) {
             println("'GITHUB_CLIENT_MIXPANEL_API_KEY' not set, data will be reported to console only")
@@ -74,21 +61,15 @@ class FirebaseTestLabPlugin : Plugin<Project> {
           }
 
           reporter.report(result)
-        }
-      }
 
-      project.tasks.register("runInstrumentedTestsOnFirebase") {
-        it.dependsOn(executeTestsInTestLab)
-        it.dependsOn(reportResults)
-
-        it.doLast {
-          if (executeTestsInTestLab.isPresent) {
-            val execResult = executeTestsInTestLab.get().execResult!!
-            if (execResult.exitValue != 0) {
-              execResult.rethrowFailure()
-            }
+          val execResult = firebaseTask.execResult!!
+          if (execResult.exitValue != 0) {
+            execResult.rethrowFailure()
           }
         }
+
+        firebaseTask.dependsOn(project.tasks.named("assembleDebugAndroidTest"))
+        firebaseTask.dependsOn(project.tasks.named("assembleDebug"))
       }
     }
   }
