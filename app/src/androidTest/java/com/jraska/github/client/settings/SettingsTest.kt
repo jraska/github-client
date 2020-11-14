@@ -9,6 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withSubstring
 import com.jraska.github.client.DeepLinkLaunchTest
 import com.jraska.github.client.navigation.Urls
+import org.hamcrest.CoreMatchers.not
 import org.junit.Test
 
 class SettingsTest {
@@ -17,9 +18,8 @@ class SettingsTest {
     DeepLinkLaunchTest.launchDeepLink(Urls.settings().toString())
 
     onView(withId(R.id.console_item_container)).perform(click())
-    onView(withSubstring(Urls.console().toString())).check(matches(isDisplayed()))
 
-    Espresso.pressBack()
-    onView(withId(R.id.console_item_container)).check(matches(isDisplayed()))
+    onView(withSubstring(Urls.console().toString())).check(matches(isDisplayed()))
+    onView(withId(R.id.console_item_container)).check(matches(not(isDisplayed())))
   }
 }
