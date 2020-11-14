@@ -24,6 +24,10 @@ internal class BuildTimeListener(
 
   override fun buildFinished(result: BuildResult) {
     val buildData = buildDataFactory.buildData(result, taskExecutionStatisticsEventAdapter.statistics)
+
+    println("Build data collected in ${buildData.buildDataCollectionOverhead} ms")
+
     buildReporter.report(buildData)
   }
+
 }

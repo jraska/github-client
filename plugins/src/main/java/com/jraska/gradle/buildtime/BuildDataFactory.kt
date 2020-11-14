@@ -1,5 +1,6 @@
 package com.jraska.gradle.buildtime
 
+import com.jraska.gradle.git.GitInfoProvider
 import org.codehaus.groovy.runtime.ProcessGroovyMethods
 import org.gradle.BuildResult
 import org.gradle.api.internal.tasks.execution.statistics.TaskExecutionStatistics
@@ -9,9 +10,14 @@ import org.gradle.internal.time.Clock
 import org.gradle.invocation.DefaultGradle
 import org.gradle.launcher.daemon.server.scaninfo.DaemonScanInfo
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 object BuildDataFactory {
+
+  @Suppress("UnstableApiUsage")
   fun buildData(result: BuildResult, statistics: TaskExecutionStatistics): BuildData {
+    val start = nowMillis()
+
     val gradle = result.gradle as DefaultGradle
     val services = gradle.services
 
@@ -40,12 +46,14 @@ object BuildDataFactory {
         "isBuildCacheEnabled" to startParameter.isBuildCacheEnabled,
         "maxWorkers" to startParameter.maxWorkerCount
       ).apply { putAll(startParameter.systemPropertiesArgs) },
+      gitInfo = GitInfoProvider.gitInfo(gradle.rootProject),
       taskStatistics = TaskStatistics(
         statistics.totalTaskCount,
         statistics.upToDateTaskCount,
         statistics.fromCacheTaskCount,
         statistics.executedTasksCount
-      )
+      ),
+      buildDataCollectionOverhead = nowMillis() - start
     )
   }
 
@@ -64,4 +72,6 @@ object BuildDataFactory {
       Environment.CMD
     }
   }
+
+  private fun nowMillis() = TimeUnit.NANOSECONDS.toMillis(System.nanoTime())
 }
