@@ -51,7 +51,6 @@ class FirebaseTestLabPlugin : Plugin<Project> {
         firebaseTask.isIgnoreExitValue = true
 
         val decorativeStream = ByteArrayOutputStream()
-        firebaseTask.standardOutput = TeeOutputStream(decorativeStream, System.out)
         firebaseTask.errorOutput = TeeOutputStream(decorativeStream, System.err)
 
         firebaseTask.doLast {
