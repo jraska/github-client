@@ -62,6 +62,7 @@ class FirebaseTestLabPlugin : Plugin<Project> {
 
           reporter.report(result)
 
+          println("Exit code is: ${firebaseTask.execResult!!.exitValue}")
           firebaseTask.execResult!!.assertNormalExitValue()
         }
 
