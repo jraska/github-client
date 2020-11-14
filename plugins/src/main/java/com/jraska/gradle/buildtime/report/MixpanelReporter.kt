@@ -60,12 +60,11 @@ class MixpanelReporter(
       "tasksUpToDate" to buildData.taskStatistics.upToDate,
       "tasksFromCache" to buildData.taskStatistics.fromCache,
       "tasksExecuted" to buildData.taskStatistics.executed,
-      "gitBranch" to buildData.gitInfo.branchName,
-      "gitCommit" to buildData.gitInfo.commitId,
-      "gitDirty" to buildData.gitInfo.dirty,
-      "gitStatus" to buildData.gitInfo.status,
       "buildDataCollectionOverhead" to buildData.buildDataCollectionOverhead
-    ).apply { putAll(buildData.parameters) }
+    ).apply {
+      putAll(buildData.parameters)
+      putAll(buildData.gitInfo.asAnalyticsProperties())
+    }
   }
 
   companion object {
