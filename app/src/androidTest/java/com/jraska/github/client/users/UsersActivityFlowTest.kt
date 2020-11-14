@@ -35,7 +35,7 @@ class UsersActivityFlowTest {
     onView(withText("defunkt")).perform(click())
     onView(withText("dotjs")).check(matches(isDisplayed()))
     onView(withText("facebox")).perform(click())
-    onView(withText("1941")).check(matches(isDisplayed()))
+    onView(withText("1942")).check(matches(isDisplayed()))
   }
 
   @Test
@@ -43,7 +43,7 @@ class UsersActivityFlowTest {
   fun whenSettings_thenReportsEvent() {
     onView(withId(R.id.action_settings)).perform(click())
     onView(withHint("Value")).perform(ViewActions.typeText("0.01"))
-    onView(withText("Purchase")).perform(click())
+    onView(withText("Purchas")).perform(click())
 
     val event = recordedEvents().findLast { event -> event.name == FirebaseAnalytics.Event.ECOMMERCE_PURCHASE }
     assertThat(event).isNotNull
