@@ -75,7 +75,7 @@ class FirebaseTestLabPlugin : Plugin<Project> {
           }
 
           reporter.report(firstResult)
-//          reporter.report(secondResult)
+          reporter.report(secondResult)
           firebaseTask.execResult!!.assertNormalExitValue()
         }
 
