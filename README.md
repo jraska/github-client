@@ -3,11 +3,14 @@ Experimental architecture app with example usage intended to be a showcase, test
 
 [![Build Status](https://circleci.com/gh/jraska/github-client.svg?style=shield&circle-token=7af979ba3177a70daee39260f230a756edbab6b2)](https://circleci.com/gh/jraska/github-client)
 
-<img width="1597" alt="Screenshot 2020-08-27 at 00 42 58" src="https://user-images.githubusercontent.com/6277721/91364157-6a56bc00-e7fe-11ea-9a68-91d1ab948469.png">
+<img width="1514" alt="Screenshot 2020-11-15 at 13 38 02" src="https://user-images.githubusercontent.com/6277721/99185093-daaf1280-2747-11eb-9f4c-b2512da1e540.png">
 
 ## Topics demonstrated
 - Modularised app with flat structure: `:app -> :feature* -> *-api` with a graph height of 2.
-- Core features (Analytics, Configuration, Crash reporting, Networking, Logging, Deep Linking) are behing simple pure Kotlin interfaces to achieve convenient simple core interfaces.
+- Build time tracking with reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/303).
+- Modularisation statistics reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/334).
+- UI tests on Firebase Test Lab results reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/342).
+- Core features (Analytics, Configuration, Crash reporting, Networking, Logging, Deep Linking) are behing simple pure Kotlin interfaces to achieve convenient core interfaces.
 - Features are composed together within `AppComponent` in plugin based manner. Each feature contributes by Dagger module. To add a feature only module and Gradle dependency lines are needed.
 - Plugin based composition of features and modules contributing to collection of "plugins" - see: `OnAppCreate`, or `LinkLauncher`
 - Android Architectue Components `LiveData` and `ViewModel` are used to connect Activities with app logic
@@ -25,4 +28,3 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Tests are run on Firebase Test Lab. [See PR](https://github.com/jraska/github-client/pull/233)
 - Release publishing by [Triple-T/google-play-publisher plugin](https://github.com/Triple-T/gradle-play-publisher)
 - Enforced ownership of remote configuration and analytics events - [Details on PR](https://github.com/jraska/github-client/pull/230). More on why these need to be explicitly owned on [this article](https://proandroiddev.com/remote-feature-flags-do-not-always-come-for-free-a372f1768a70).
-- Build time tracking with reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/303).
