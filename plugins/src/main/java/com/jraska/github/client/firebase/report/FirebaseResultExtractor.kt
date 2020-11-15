@@ -49,11 +49,11 @@ class FirebaseResultExtractor(
 
   private fun parseTestResult(testNode: Node): TestResult {
     val flaky = testNode.attributeBoolean("flaky")
-    val failure = ((testNode.get("failure") as NodeList?)?.firstOrNull() as Node?)?.text() ?: ""
+    val failure = ((testNode.get("failure") as NodeList?)?.firstOrNull() as Node?)?.text()
 
     val outcome = when {
       flaky -> TestOutcome.FLAKY
-      failure.isNotEmpty() -> TestOutcome.FAILED
+      failure != null -> TestOutcome.FAILED
       else -> TestOutcome.PASSED
     }
 
