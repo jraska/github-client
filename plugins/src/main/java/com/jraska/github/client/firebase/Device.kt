@@ -1,10 +1,10 @@
 package com.jraska.github.client.firebase
 
 class Device(
-  val model: String,
-  val apiLevel: Int,
-  val locale: String,
-  val orientation: String
+  private val model: String,
+  private val apiLevel: Int,
+  private val locale: String,
+  private val orientation: String
 ) {
   fun firebaseCommandString(): String {
     return "model=$model,version=$apiLevel,locale=$locale,orientation=$orientation"
