@@ -22,7 +22,7 @@ jobs:
           command: ./gradlew check --max-workers=2 --stacktrace
       - run:
           name: Run Tests Firebase
-          command: ./gradlew  --max-workers=2 --stacktrace
+          command: ./gradlew runInstrumentedTestsOnFirebase --max-workers=2 --stacktrace
   moduleStatisticsReport:
     environment:
       JVM_OPTS: -Xmx4096m
