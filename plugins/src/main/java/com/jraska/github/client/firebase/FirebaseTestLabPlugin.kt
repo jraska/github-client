@@ -41,7 +41,7 @@ class FirebaseTestLabPlugin : Plugin<Project> {
             "firebase test android run " +
             "--app $appApk " +
             "--test $testApk " +
-            "--device $device " +
+            "--device ${device.firebaseCommandString()} " +
             "--results-dir $resultDir " +
             "--no-performance-metrics " +
             "--environment-variables FCM_API_KEY=$fcmKey")
