@@ -44,6 +44,7 @@ class FirebaseTestLabPlugin : Plugin<Project> {
             "--device ${secondDevice.firebaseCommandString()} " +
             "--results-dir $resultDir " +
             "--no-performance-metrics " +
+            "--timeout 3m " +
             "--environment-variables FCM_API_KEY=$fcmKey")
             .split(' ')
         firebaseTask.isIgnoreExitValue = true
