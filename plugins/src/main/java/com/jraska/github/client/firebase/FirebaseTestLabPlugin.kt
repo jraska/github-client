@@ -29,14 +29,12 @@ class FirebaseTestLabPlugin : Plugin<Project> {
 
         val appApk = "${project.buildDir}/outputs/apk/debug/app-debug.apk"
         val testApk = "${project.buildDir}/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
-        val deviceName = "flame"
-        val androidVersion = "29"
-        val device = "model=$deviceName,version=$androidVersion,locale=en,orientation=portrait"
+        val device = Device.Pixel4
         val resultDir = DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())
 
         val fcmKey = System.getenv("FCM_API_KEY")
 
-        val resultsFileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/$deviceName-$androidVersion-en-portrait/test_result_1.xml"
+        val resultsFileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/${device.cloudStoragePath()}/test_result_1.xml"
 
         firebaseTask.commandLine =
           ("gcloud " +

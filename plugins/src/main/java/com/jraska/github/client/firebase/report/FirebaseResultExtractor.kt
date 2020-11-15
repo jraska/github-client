@@ -1,5 +1,6 @@
 package com.jraska.github.client.firebase.report
 
+import com.jraska.github.client.firebase.Device
 import com.jraska.github.client.firebase.TestOutcome
 import com.jraska.github.client.firebase.TestResult
 import com.jraska.github.client.firebase.TestSuiteResult
@@ -9,9 +10,9 @@ import groovy.util.NodeList
 import groovy.util.XmlParser
 
 class FirebaseResultExtractor(
-  val firebaseUrl: String,
-  val gitInfo: GitInfo,
-  val device: String
+  private val firebaseUrl: String,
+  private val gitInfo: GitInfo,
+  private val device: Device
 ) {
   fun extract(xml: String): TestSuiteResult {
     val testSuiteNode = XmlParser().parseText(xml)
@@ -35,7 +36,7 @@ class FirebaseResultExtractor(
       testResults = tests,
       time = time,
       testsCount = testsCount,
-      device = device,
+      device = device.firebaseCommandString(),
       gitInfo = gitInfo,
       firebaseUrl = firebaseUrl,
       errorsCount = errorsCount,
@@ -67,7 +68,7 @@ class FirebaseResultExtractor(
       outcome = outcome,
       firebaseUrl = firebaseUrl,
       gitInfo = gitInfo,
-      device = device,
+      device = device.firebaseCommandString(),
       fullName = "$className#$methodName"
     )
   }
