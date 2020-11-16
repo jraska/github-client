@@ -19,7 +19,7 @@ dependencies {
   implementation project(':core-android-api')
   implementation project(':feature:identity-api')
 
-  implementation platform('com.google.firebase:firebase-bom:26.0.0')
+  implementation platform('com.google.firebase:firebase-bom:26.1.0')
   implementation 'com.google.firebase:firebase-messaging'
   implementation 'com.google.firebase:firebase-database'
 
