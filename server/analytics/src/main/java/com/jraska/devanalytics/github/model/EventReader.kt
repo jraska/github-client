@@ -9,31 +9,39 @@ class EventReader(
   fun parse(reader: BufferedReader): GitHubPrEvent {
     val dto = gson.getAdapter(GitHubEventDto::class.java).fromJson(reader)
 
-    if(dto.action == "assigned") {
-      return assignedEvent(dto)
+    val action = dto.action
+    when {
+      action == "assigned" || action == "unassigned" -> return assignedEvent(dto)
+      action == "labeled" || action == "unlabeled" -> return labeledEvent(dto)
+      action == "synchronize" -> return synchronizeEvent(dto)
+
+      dto.requestedReviewer != null -> {
+        return requestedReviewEvent(dto)
+      }
+      dto.review != null -> {
+        return reviewCreatedEvent(dto)
+      }
+      dto.comment != null -> {
+        return commentEvent(dto)
+      }
+      dto.pullRequest != null -> {
+        return createPrEvent(dto)
+      }
+      else -> throw IllegalArgumentException("Unknown event $dto")
     }
 
-    if(dto.action == "synchronize") {
-      return synchronizeEvent(dto)
-    }
+  }
 
-    if (dto.requestedReviewer != null) {
-      return requestedReviewEvent(dto)
-    }
-
-    if (dto.review != null) {
-      return reviewCreatedEvent(dto)
-    }
-
-    if (dto.comment != null) {
-      return commentEvent(dto)
-    }
-
-    if (dto.pullRequest != null) {
-      return createPrEvent(dto)
-    }
-
-    throw IllegalArgumentException("Unknown event $dto")
+  private fun labeledEvent(dto: GitHubEventDto): GitHubPrEvent {
+    return GitHubPrEvent(
+      if (dto.action == "unlabeled") EventNames.PR_UNLABELED else EventNames.PR_LABELED,
+      dto.action,
+      dto.sender.login,
+      dto.pullRequest!!.prUrl,
+      dto.pullRequest!!.number,
+      dto.pullRequest!!.body,
+      dto.pullRequest!!.state
+    )
   }
 
   private fun synchronizeEvent(dto: GitHubEventDto): GitHubPrEvent {
@@ -50,7 +58,7 @@ class EventReader(
 
   private fun assignedEvent(dto: GitHubEventDto): GitHubPrEvent {
     return GitHubPrEvent(
-      EventNames.PR_ASSIGNED,
+      if (dto.action == "unassigned") EventNames.PR_UNASSIGNED else EventNames.PR_ASSIGNED,
       dto.action,
       dto.sender.login,
       dto.pullRequest!!.prUrl,
@@ -65,7 +73,7 @@ class EventReader(
       EventNames.PR_OPEN
     } else if (dto.action == "closed") {
       if (dto.pullRequest!!.merged) EventNames.PR_MERGE else EventNames.PR_CLOSE
-    } else if (dto.action == "edited"){
+    } else if (dto.action == "edited") {
       EventNames.PR_EDIT
     } else {
       throw IllegalArgumentException("Unknown event $dto")

@@ -127,6 +127,20 @@ class EventReaderTest {
   }
 
   @Test
+  fun canReadPrUnassignedEvent() {
+    val jsonReader = json("response/pr_unassigned.json")
+
+    val event = EventReader.create().parse(jsonReader)
+
+    assertThat(event.name).isEqualTo("PR Unassigned")
+    assertThat(event.action).isEqualTo("unassigned")
+    assertThat(event.author).isEqualTo("jraska")
+    assertThat(event.prUrl).isEqualTo("https://github.com/jraska/github-client/pull/357")
+    assertThat(event.prNumber).isEqualTo(357)
+    assertThat(event.state).isEqualTo("open")
+  }
+
+  @Test
   fun canReadPrSynchronizeEvent() {
     val jsonReader = json("response/pr_synchronize.json")
 
@@ -134,6 +148,34 @@ class EventReaderTest {
 
     assertThat(event.name).isEqualTo("PR Synchronize")
     assertThat(event.action).isEqualTo("synchronize")
+    assertThat(event.author).isEqualTo("jraska")
+    assertThat(event.prUrl).isEqualTo("https://github.com/jraska/github-client/pull/357")
+    assertThat(event.prNumber).isEqualTo(357)
+    assertThat(event.state).isEqualTo("open")
+  }
+
+  @Test
+  fun canReadPrLabeledEvent() {
+    val jsonReader = json("response/pr_labeled.json")
+
+    val event = EventReader.create().parse(jsonReader)
+
+    assertThat(event.name).isEqualTo("PR Labeled")
+    assertThat(event.action).isEqualTo("labeled")
+    assertThat(event.author).isEqualTo("jraska")
+    assertThat(event.prUrl).isEqualTo("https://github.com/jraska/github-client/pull/357")
+    assertThat(event.prNumber).isEqualTo(357)
+    assertThat(event.state).isEqualTo("open")
+  }
+
+  @Test
+  fun canReadPrUnlabeledEvent() {
+    val jsonReader = json("response/pr_unlabeled.json")
+
+    val event = EventReader.create().parse(jsonReader)
+
+    assertThat(event.name).isEqualTo("PR Unlabeled")
+    assertThat(event.action).isEqualTo("unlabeled")
     assertThat(event.author).isEqualTo("jraska")
     assertThat(event.prUrl).isEqualTo("https://github.com/jraska/github-client/pull/357")
     assertThat(event.prNumber).isEqualTo(357)
