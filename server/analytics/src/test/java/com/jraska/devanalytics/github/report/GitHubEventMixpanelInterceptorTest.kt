@@ -21,6 +21,7 @@ class GitHubEventMixpanelInterceptorTest {
 
     val event = interceptor.intercept(EventReaderTest.json("response/pr_comment.json"))
 
+    assertThat(event.name).isEqualTo("PR Comment")
     assertThat(event.action).isEqualTo("created")
     assertThat(event.author).isEqualTo("jraska")
     assertThat(event.prUrl).isEqualTo("https://github.com/jraska/github-client/pull/353")

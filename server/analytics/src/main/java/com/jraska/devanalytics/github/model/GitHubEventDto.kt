@@ -20,6 +20,9 @@ class GitHubEventDto {
 
   @SerializedName("review")
   var review: ReviewDto? = null
+
+  @SerializedName("requested_reviewer")
+  var requestedReviewer: UserDto? = null
 }
 
 class UserDto {
@@ -34,16 +37,33 @@ class PullRequestDto {
   @SerializedName("number")
   var number: Int = 0
 
+  @SerializedName("state")
+  var state: String? = null
+
   @SerializedName("body")
   var body: String = ""
+
+  @SerializedName("merged")
+  var merged: Boolean = false
+
+  @SerializedName("merged_by")
+  var mergedBy: UserDto? = null
+}
+
+class IssuePullRequestDto {
+  @SerializedName("html_url")
+  lateinit var prUrl: String
 }
 
 class IssueDto {
   @SerializedName("pull_request")
-  var pullRequest: PullRequestDto? = null
+  var pullRequest: IssuePullRequestDto? = null
 
   @SerializedName("number")
   var number: Int = 0
+
+  @SerializedName("state")
+  var state: String? = null
 }
 
 class CommentDto {

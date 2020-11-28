@@ -16,7 +16,7 @@ class MixpanelReporter(
 
     val properties = convertEvent(event)
     val mixpanelEvent = MessageBuilder(apiKey)
-      .event(SINGLE_NAME_FOR_ONE_USER, "PR Event", JSONObject(properties))
+      .event(SINGLE_NAME_FOR_ONE_USER, event.name, JSONObject(properties))
 
     delivery.addMessage(mixpanelEvent)
 
