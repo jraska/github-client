@@ -9,6 +9,14 @@ class EventReader(
   fun parse(reader: BufferedReader): GitHubPrEvent {
     val dto = gson.getAdapter(GitHubEventDto::class.java).fromJson(reader)
 
+    if(dto.action == "assigned") {
+      return assignedEvent(dto)
+    }
+
+    if(dto.action == "synchronize") {
+      return synchronizeEvent(dto)
+    }
+
     if (dto.requestedReviewer != null) {
       return requestedReviewEvent(dto)
     }
@@ -26,6 +34,30 @@ class EventReader(
     }
 
     throw IllegalArgumentException("Unknown event $dto")
+  }
+
+  private fun synchronizeEvent(dto: GitHubEventDto): GitHubPrEvent {
+    return GitHubPrEvent(
+      EventNames.PR_SYNC,
+      dto.action,
+      dto.sender.login,
+      dto.pullRequest!!.prUrl,
+      dto.pullRequest!!.number,
+      dto.pullRequest!!.body,
+      dto.pullRequest!!.state
+    )
+  }
+
+  private fun assignedEvent(dto: GitHubEventDto): GitHubPrEvent {
+    return GitHubPrEvent(
+      EventNames.PR_ASSIGNED,
+      dto.action,
+      dto.sender.login,
+      dto.pullRequest!!.prUrl,
+      dto.pullRequest!!.number,
+      dto.pullRequest!!.body,
+      dto.pullRequest!!.state
+    )
   }
 
   private fun createPrEvent(dto: GitHubEventDto): GitHubPrEvent {

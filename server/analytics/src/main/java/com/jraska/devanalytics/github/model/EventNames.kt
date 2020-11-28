@@ -10,4 +10,6 @@ internal object EventNames {
   val PR_EDIT = "PR Edit"
   val PR_COMMENT_EDIT = "PR Comment Edit"
   val PR_COMMENT_DELETED = "PR Comment Delete"
+  val PR_ASSIGNED = "PR Assigned"
+  val PR_SYNC = "PR Synchronize"
 }

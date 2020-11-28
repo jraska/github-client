@@ -112,6 +112,34 @@ class EventReaderTest {
     assertThat(event.name).isEqualTo("PR Edit")
   }
 
+  @Test
+  fun canReadPrAssignedEvent() {
+    val jsonReader = json("response/pr_assigned.json")
+
+    val event = EventReader.create().parse(jsonReader)
+
+    assertThat(event.name).isEqualTo("PR Assigned")
+    assertThat(event.action).isEqualTo("assigned")
+    assertThat(event.author).isEqualTo("jraska")
+    assertThat(event.prUrl).isEqualTo("https://github.com/jraska/github-client/pull/357")
+    assertThat(event.prNumber).isEqualTo(357)
+    assertThat(event.state).isEqualTo("open")
+  }
+
+  @Test
+  fun canReadPrSynchronizeEvent() {
+    val jsonReader = json("response/pr_synchronize.json")
+
+    val event = EventReader.create().parse(jsonReader)
+
+    assertThat(event.name).isEqualTo("PR Synchronize")
+    assertThat(event.action).isEqualTo("synchronize")
+    assertThat(event.author).isEqualTo("jraska")
+    assertThat(event.prUrl).isEqualTo("https://github.com/jraska/github-client/pull/357")
+    assertThat(event.prNumber).isEqualTo(357)
+    assertThat(event.state).isEqualTo("open")
+  }
+
   companion object {
     fun json(path: String): BufferedReader {
       val uri = this.javaClass.classLoader.getResource(path)
