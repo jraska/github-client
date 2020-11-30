@@ -22,7 +22,7 @@ configurations {
 }
 
 dependencies {
-  compileOnly 'com.google.cloud.functions:functions-framework-api:1.0.1'
+  compileOnly 'com.google.cloud.functions:functions-framework-api:1.0.2'
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.20"
   implementation 'com.mixpanel:mixpanel-java:1.4.4'
