@@ -22,6 +22,4 @@ include ':app',
   ':feature:settings',
   ':feature:about',
   ':feature:shortcuts',
-  ':feature:chrome-custom-tabs',
-
-  ':server:analytics'
+  ':feature:chrome-custom-tabs'
