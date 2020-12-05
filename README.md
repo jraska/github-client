@@ -28,3 +28,5 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Tests are run on Firebase Test Lab. [See PR](https://github.com/jraska/github-client/pull/233)
 - Release publishing by [Triple-T/google-play-publisher plugin](https://github.com/Triple-T/gradle-play-publisher)
 - Enforced ownership of remote configuration and analytics events - [Details on PR](https://github.com/jraska/github-client/pull/230). More on why these need to be explicitly owned on [this article](https://proandroiddev.com/remote-feature-flags-do-not-always-come-for-free-a372f1768a70).
+
+Change to create test PR to test the analytics reporting.
