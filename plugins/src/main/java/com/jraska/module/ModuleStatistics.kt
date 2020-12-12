@@ -9,6 +9,7 @@ data class ProjectStatistics(
   val prodJavaTotalLines: Int,
   val prodXmlTotalLines: Int,
   val moduleStatistics: List<ModuleStatistics>,
+  val externalDependencies: List<ModuleArtifactDependency>
 )
 
 data class ModuleStatistics(
@@ -23,6 +24,16 @@ data class FileTypeStatistics(
   val lineCount: Int,
   val fileCount: Int,
   val type: FileType
+)
+
+data class ModuleArtifactDependency(
+  val moduleName: String,
+  val type: ModuleType,
+  val fullName: String,
+  val group: String,
+  val artifact: String,
+  val version: String?,
+  val configurationName: String
 )
 
 enum class ModuleType {

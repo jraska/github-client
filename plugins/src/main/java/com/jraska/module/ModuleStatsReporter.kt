@@ -17,6 +17,11 @@ class ModuleStatsReporter(
       events.add(AnalyticsEvent("Android Module Detail", properties))
     }
 
+    stats.externalDependencies.forEach {
+      val properties = convertModuleDependency(it)
+      events.add(AnalyticsEvent("Android Module External Dependency", properties))
+    }
+
     analyticsReporter.report(*events.toTypedArray())
 
     println("$GRAPH_ICON Module stats reported to Mixpanel $GRAPH_ICON")
@@ -61,6 +66,18 @@ class ModuleStatsReporter(
       FileType.JAVA -> "Java"
       FileType.XML -> "Xml"
     }
+  }
+
+  private fun convertModuleDependency(artifactDependency: ModuleArtifactDependency): Map<String, Any?> {
+    return mapOf<String, Any?>(
+      "moduleName" to artifactDependency.moduleName,
+      "moduleType" to artifactDependency.type.name,
+      "groupId" to artifactDependency.group,
+      "artifactId" to artifactDependency.artifact,
+      "version" to artifactDependency.version,
+      "fullComponentName" to artifactDependency.fullName,
+      "configurationName" to artifactDependency.configurationName
+    )
   }
 
   companion object {
