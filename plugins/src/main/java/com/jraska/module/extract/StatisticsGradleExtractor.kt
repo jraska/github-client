@@ -1,5 +1,6 @@
 package com.jraska.module.extract
 
+import com.jraska.module.ArtifactDependencyType
 import com.jraska.module.FileType
 import com.jraska.module.FileTypeStatistics
 import com.jraska.module.ModuleArtifactDependency
@@ -55,7 +56,7 @@ class StatisticsGradleExtractor() {
     val moduleName = module.name
 
     val dependencies = module.configurations
-      .filter { CONFIGURATION_TO_LOOK.contains(it.name) }
+      .filter { CONFIGURATION_TO_LOOK.containsKey(it.name) }
       .flatMap { configuration ->
         val projectDependencies = configuration.allDependencies.filterIsInstance(ProjectDependency::class.java)
         configuration.resolvedConfiguration.firstLevelModuleDependencies
@@ -66,7 +67,7 @@ class StatisticsGradleExtractor() {
               moduleName = moduleName,
               type = moduleType,
               group = it.moduleGroup,
-              configurationName = configuration.name,
+              dependencyType = CONFIGURATION_TO_LOOK.getValue(configuration.name),
               artifact = it.moduleName,
               version = it.moduleVersion,
               fullName = it.name
@@ -140,12 +141,14 @@ class StatisticsGradleExtractor() {
   }
 
   companion object {
-    val CONFIGURATION_TO_LOOK = setOf(
-      "debugAndroidTestCompileClasspath",
-      "debugCompileClasspath",
-      "releaseCompileClasspath",
-      "debugUnitTestCompileClasspath",
-      "kapt"
+    val CONFIGURATION_TO_LOOK = mapOf(
+      "debugAndroidTestCompileClasspath" to ArtifactDependencyType.AndroidTest,
+      "debugCompileClasspath" to ArtifactDependencyType.Compile,
+      "releaseCompileClasspath" to ArtifactDependencyType.Compile,
+      "debugUnitTestCompileClasspath" to ArtifactDependencyType.Test,
+      "compileClasspath" to ArtifactDependencyType.Compile,
+      "testCompileClasspath" to ArtifactDependencyType.Test,
+      "kapt" to ArtifactDependencyType.Kapt
     )
   }
 }

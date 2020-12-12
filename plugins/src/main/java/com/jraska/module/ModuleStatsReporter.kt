@@ -76,7 +76,7 @@ class ModuleStatsReporter(
       "artifactId" to artifactDependency.artifact,
       "version" to artifactDependency.version,
       "fullComponentName" to artifactDependency.fullName,
-      "configurationName" to artifactDependency.configurationName
+      "dependencyType" to artifactDependency.dependencyType
     )
   }
 

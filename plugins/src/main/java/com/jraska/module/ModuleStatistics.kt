@@ -33,8 +33,15 @@ data class ModuleArtifactDependency(
   val group: String,
   val artifact: String,
   val version: String?,
-  val configurationName: String
+  val dependencyType: ArtifactDependencyType
 )
+
+enum class ArtifactDependencyType {
+  Compile,
+  Test,
+  AndroidTest,
+  Kapt
+}
 
 enum class ModuleType {
   Api,
