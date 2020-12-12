@@ -26,8 +26,6 @@ class BuildReporter(
   }
 
   private fun reportInternal(buildData: BuildData) {
-    val delivery = ClientDelivery()
-
     val properties = convertBuildData(buildData)
     val event = AnalyticsEvent("Android Build", properties)
     analyticsReporter.report(event)
