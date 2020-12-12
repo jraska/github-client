@@ -7,10 +7,13 @@ import com.jraska.module.ModuleStatistics
 import com.jraska.module.ModuleType
 import com.jraska.module.ProjectStatistics
 import org.gradle.api.Project
-import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
+import org.gradle.api.artifacts.ProjectDependency
+import org.gradle.api.artifacts.ResolvedDependency
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
+import java.util.LinkedList
+import java.util.Queue
 
 class StatisticsGradleExtractor() {
   private val typesToLookFor = arrayOf(FileType.JAVA, FileType.KOTLIN, FileType.XML)
@@ -48,28 +51,53 @@ class StatisticsGradleExtractor() {
   }
 
   private fun extractDependencies(module: Project): List<ModuleArtifactDependency> {
-    val configurationsToLook = setOf("api", "implementation", "testImplementation", "androidTestImplementation", "kapt", "kaptAndroidTest")
-
     val moduleType = moduleType(module)
     val moduleName = module.name
 
-    return module.configurations
-      .filter { configurationsToLook.contains(it.name) }
+    val dependencies = module.configurations
+      .filter { CONFIGURATION_TO_LOOK.contains(it.name) }
       .flatMap { configuration ->
-        configuration.dependencies
-          .filterIsInstance<DefaultExternalModuleDependency>()
+        val projectDependencies = configuration.allDependencies.filterIsInstance(ProjectDependency::class.java)
+        configuration.resolvedConfiguration.firstLevelModuleDependencies
+          .filter { isExternalDependency(it, projectDependencies) }
+          .flatMap { traverseAndAddChildren(it) }
           .map {
             ModuleArtifactDependency(
               moduleName = moduleName,
               type = moduleType,
-              group = it.group!!,
+              group = it.moduleGroup,
               configurationName = configuration.name,
-              artifact = it.name,
-              version = it.version,
-              fullName = "${it.group}:${it.name}:${it.version}"
+              artifact = it.moduleName,
+              version = it.moduleVersion,
+              fullName = it.name
             )
           }
       }.distinct()
+
+    return dependencies
+  }
+
+  private fun traverseAndAddChildren(firstLevelDependency: ResolvedDependency): Set<ResolvedDependency> {
+    val queue: Queue<ResolvedDependency> = LinkedList()
+
+    val dependencies = mutableSetOf(firstLevelDependency)
+    queue.offer(firstLevelDependency)
+
+    while (queue.isNotEmpty()) {
+      val element = queue.poll()
+      element.children.forEach { child ->
+        dependencies.add(child)
+        queue.offer(child)
+      }
+    }
+
+    return dependencies
+  }
+
+  private fun isExternalDependency(dependency: ResolvedDependency, projectDependencies: List<ProjectDependency>): Boolean {
+    return projectDependencies.none {
+      it.group == dependency.moduleGroup && it.name == dependency.moduleName
+    }
   }
 
   private fun extractFromModule(module: Project): ModuleStatistics {
@@ -109,5 +137,15 @@ class StatisticsGradleExtractor() {
       reader.close()
     }
     return lines
+  }
+
+  companion object {
+    val CONFIGURATION_TO_LOOK = setOf(
+      "debugAndroidTestCompileClasspath",
+      "debugCompileClasspath",
+      "releaseCompileClasspath",
+      "debugUnitTestCompileClasspath",
+      "kapt"
+    )
   }
 }
