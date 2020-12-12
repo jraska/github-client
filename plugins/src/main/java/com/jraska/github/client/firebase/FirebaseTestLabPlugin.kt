@@ -1,11 +1,10 @@
 package com.jraska.github.client.firebase
 
-import com.jraska.github.client.firebase.report.ConsoleTestResultReporter
+import com.jraska.analytics.AnalyticsReporter
 import com.jraska.github.client.firebase.report.FirebaseResultExtractor
 import com.jraska.github.client.firebase.report.FirebaseUrlParser
-import com.jraska.github.client.firebase.report.MixpanelTestResultsReporter
+import com.jraska.github.client.firebase.report.TestResultsReporter
 import com.jraska.gradle.git.GitInfoProvider
-import com.mixpanel.mixpanelapi.MixpanelAPI
 import org.apache.tools.ant.util.TeeOutputStream
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -66,13 +65,7 @@ class FirebaseTestLabPlugin : Plugin<Project> {
 
           val secondResult = FirebaseResultExtractor(firebaseUrl, GitInfoProvider.gitInfo(project), secondDevice).extract(File(secondOutputFile).readText())
 
-          val mixpanelToken: String? = System.getenv("GITHUB_CLIENT_MIXPANEL_API_KEY")
-          val reporter = if (mixpanelToken == null) {
-            println("'GITHUB_CLIENT_MIXPANEL_API_KEY' not set, data will be reported to console only")
-            ConsoleTestResultReporter()
-          } else {
-            MixpanelTestResultsReporter(mixpanelToken, MixpanelAPI())
-          }
+          val reporter = TestResultsReporter(AnalyticsReporter.create("Test Reporter"))
 
           reporter.report(firstResult)
           reporter.report(secondResult)

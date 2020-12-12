@@ -1,11 +1,8 @@
 package com.jraska.module
 
+import com.jraska.analytics.AnalyticsReporter
 import com.jraska.module.extract.StatisticsGradleExtractor
-import com.jraska.module.report.ConsoleReporter
-import com.jraska.module.report.MixpanelModuleStatsReporter
-import com.mixpanel.mixpanelapi.MixpanelAPI
 import org.gradle.api.Project
-import java.sql.DriverManager
 
 class GradleStatisticsReportProcess(
   private val statisticsGradleExtractor: StatisticsGradleExtractor,
@@ -21,14 +18,7 @@ class GradleStatisticsReportProcess(
       return GradleStatisticsReportProcess(StatisticsGradleExtractor(), reporter())
     }
 
-    private fun reporter(): ModuleStatsReporter {
-      val mixpanelToken: String? = System.getenv("GITHUB_CLIENT_MIXPANEL_API_KEY")
-      if (mixpanelToken == null) {
-        DriverManager.println("'GITHUB_CLIENT_MIXPANEL_API_KEY' not set, data will be reported to console only")
-        return ConsoleReporter()
-      } else {
-        return MixpanelModuleStatsReporter(mixpanelToken, MixpanelAPI())
-      }
-    }
+    private fun reporter() = ModuleStatsReporter(AnalyticsReporter.create("Module Stats Plugin"))
   }
 }
+

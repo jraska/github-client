@@ -1,35 +1,25 @@
 package com.jraska.github.client.firebase.report
 
+import com.jraska.analytics.AnalyticsEvent
+import com.jraska.analytics.AnalyticsReporter
 import com.jraska.github.client.firebase.TestResult
-import com.jraska.github.client.firebase.TestResultReporter
 import com.jraska.github.client.firebase.TestSuiteResult
-import com.mixpanel.mixpanelapi.ClientDelivery
-import com.mixpanel.mixpanelapi.MessageBuilder
-import com.mixpanel.mixpanelapi.MixpanelAPI
-import org.json.JSONObject
 
-class MixpanelTestResultsReporter(
-  private val apiKey: String,
-  private val api: MixpanelAPI
-) : TestResultReporter {
-  override fun report(results: TestSuiteResult) {
-    val delivery = ClientDelivery()
+class TestResultsReporter(
+  private val analyticsReporter: AnalyticsReporter
+) {
+  fun report(results: TestSuiteResult) {
+    val delivery = mutableListOf<AnalyticsEvent>()
 
     val properties = convertTestSuite(results)
-    val messageBuilder = MessageBuilder(apiKey)
-    val moduleEvent = messageBuilder
-      .event(SINGLE_NAME_FOR_TEST_REPORTS_USER, "Android Test Suite Firebase", JSONObject(properties))
-
-    delivery.addMessage(moduleEvent)
+    delivery.add(AnalyticsEvent("Android Test Suite Firebase", properties))
 
     results.testResults.forEach {
       val testProperties = convertSingleTest(it)
-
-      val estateEvent = messageBuilder.event(SINGLE_NAME_FOR_TEST_REPORTS_USER, "Android Test Firebase", JSONObject(testProperties))
-      delivery.addMessage(estateEvent)
+      delivery.add(AnalyticsEvent("Android Test Firebase", testProperties))
     }
 
-    api.deliver(delivery)
+    analyticsReporter.report(*delivery.toTypedArray())
 
     println("$FLAG_ICON Test result reported to Mixpanel $FLAG_ICON")
   }
