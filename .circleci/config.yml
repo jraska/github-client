@@ -34,7 +34,7 @@ jobs:
           key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Execute Data Processing
-          command: ./gradlew reportModuleStatistics --max-workers=2 --stacktrace
+          command: ./gradlew reportModuleStatistics --max-workers=2 --stacktrace --no-configure-on-demand
       - save_cache:
           paths:
             - ~/.gradle
