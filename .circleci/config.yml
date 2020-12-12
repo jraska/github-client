@@ -45,6 +45,7 @@ workflows:
   check:
     jobs:
       - build
+      - moduleStatisticsReport
   statisticsReport:
     triggers:
       - schedule:
