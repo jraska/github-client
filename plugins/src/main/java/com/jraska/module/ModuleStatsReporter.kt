@@ -41,8 +41,8 @@ class ModuleStatsReporter(
 
   private fun convertSingleModule(moduleStats: ModuleStatistics): Map<String, Any?> {
     val properties = mutableMapOf<String, Any?>(
-      "moduleName" to moduleStats.moduleName,
-      "moduleType" to moduleStats.type.name,
+      "moduleName" to moduleStats.metadata.moduleName,
+      "moduleType" to moduleStats.metadata.type.name,
     )
 
     properties.addFilesData(moduleStats.containedProdFiles, "prod")
@@ -70,8 +70,8 @@ class ModuleStatsReporter(
 
   private fun convertModuleDependency(artifactDependency: ModuleArtifactDependency): Map<String, Any?> {
     return mapOf<String, Any?>(
-      "moduleName" to artifactDependency.moduleName,
-      "moduleType" to artifactDependency.type.name,
+      "moduleName" to artifactDependency.metadata.moduleName,
+      "moduleType" to artifactDependency.metadata.type.name,
       "groupId" to artifactDependency.group,
       "artifactId" to artifactDependency.artifact,
       "version" to artifactDependency.version,

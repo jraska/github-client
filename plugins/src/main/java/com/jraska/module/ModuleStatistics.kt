@@ -13,11 +13,10 @@ data class ProjectStatistics(
 )
 
 data class ModuleStatistics(
-  val moduleName: String,
+  val metadata: ModuleMetadata,
   val containedProdFiles: Collection<FileTypeStatistics>,
   val containedUnitTestFiles: Collection<FileTypeStatistics>,
   val containedAndroidTestFiles: Collection<FileTypeStatistics>,
-  val type: ModuleType
 )
 
 data class FileTypeStatistics(
@@ -27,8 +26,7 @@ data class FileTypeStatistics(
 )
 
 data class ModuleArtifactDependency(
-  val moduleName: String,
-  val type: ModuleType,
+  val metadata: ModuleMetadata,
   val fullName: String,
   val group: String,
   val artifact: String,
@@ -41,12 +39,6 @@ enum class ArtifactDependencyType {
   Test,
   AndroidTest,
   Kapt
-}
-
-enum class ModuleType {
-  Api,
-  Implementation,
-  App
 }
 
 enum class FileType(val suffix: String) {

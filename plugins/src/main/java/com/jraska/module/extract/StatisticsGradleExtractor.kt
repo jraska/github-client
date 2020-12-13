@@ -4,6 +4,7 @@ import com.jraska.module.ArtifactDependencyType
 import com.jraska.module.FileType
 import com.jraska.module.FileTypeStatistics
 import com.jraska.module.ModuleArtifactDependency
+import com.jraska.module.ModuleMetadata
 import com.jraska.module.ModuleStatistics
 import com.jraska.module.ModuleType
 import com.jraska.module.ProjectStatistics
@@ -16,7 +17,7 @@ import java.io.FileReader
 import java.util.LinkedList
 import java.util.Queue
 
-class StatisticsGradleExtractor() {
+class StatisticsGradleExtractor {
   private val typesToLookFor = arrayOf(FileType.JAVA, FileType.KOTLIN, FileType.XML)
 
   fun extract(project: Project): ProjectStatistics {
@@ -32,9 +33,9 @@ class StatisticsGradleExtractor() {
 
     return ProjectStatistics(
       modulesCount = moduleStats.size,
-      apiModules = moduleStats.count { it.type == ModuleType.Api },
-      appModules = moduleStats.count { it.type == ModuleType.App },
-      implementationModules = moduleStats.count { it.type == ModuleType.Implementation },
+      apiModules = moduleStats.count { it.metadata.type == ModuleType.Api },
+      appModules = moduleStats.count { it.metadata.type == ModuleType.App },
+      implementationModules = moduleStats.count { it.metadata.type == ModuleType.Implementation },
       moduleStatistics = moduleStats,
       externalDependencies = externalDependencies,
       prodKotlinTotalLines = moduleStats
@@ -52,9 +53,7 @@ class StatisticsGradleExtractor() {
   }
 
   private fun extractDependencies(module: Project): List<ModuleArtifactDependency> {
-    val moduleType = moduleType(module)
-    val moduleName = module.name
-
+    val metadata = module.moduleMetadata()
     val dependencies = module.configurations
       .filter { CONFIGURATION_TO_LOOK.containsKey(it.name) }
       .flatMap { configuration ->
@@ -64,8 +63,7 @@ class StatisticsGradleExtractor() {
           .flatMap { traverseAndAddChildren(it) }
           .map {
             ModuleArtifactDependency(
-              moduleName = moduleName,
-              type = moduleType,
+              metadata = metadata,
               group = it.moduleGroup,
               dependencyType = CONFIGURATION_TO_LOOK.getValue(configuration.name),
               artifact = it.moduleName,
@@ -106,15 +104,7 @@ class StatisticsGradleExtractor() {
     val unitTestFileStats = typesToLookFor.map { getFileTypeStatistics(it, File(module.projectDir, "src/test")) }
     val androidTestFileStats = typesToLookFor.map { getFileTypeStatistics(it, File(module.projectDir, "src/androidTest")) }
 
-    return ModuleStatistics(module.name, prodFileStats, unitTestFileStats, androidTestFileStats, moduleType(module))
-  }
-
-  private fun moduleType(module: Project): ModuleType {
-    return when {
-      module.name.endsWith("-api") -> ModuleType.Api
-      module.name.startsWith("app") -> ModuleType.App
-      else -> ModuleType.Implementation
-    }
+    return ModuleStatistics(module.moduleMetadata(), prodFileStats, unitTestFileStats, androidTestFileStats)
   }
 
   private fun getFileTypeStatistics(type: FileType, src: File): FileTypeStatistics {
@@ -150,5 +140,17 @@ class StatisticsGradleExtractor() {
       "testCompileClasspath" to ArtifactDependencyType.Test,
       "kapt" to ArtifactDependencyType.Kapt
     )
+
+    fun Project.moduleMetadata(): ModuleMetadata {
+      return ModuleMetadata(name, moduleType(this))
+    }
+
+    private fun moduleType(module: Project): ModuleType {
+      return when {
+        module.name.endsWith("-api") -> ModuleType.Api
+        module.name.startsWith("app") -> ModuleType.App
+        else -> ModuleType.Implementation
+      }
+    }
   }
 }
