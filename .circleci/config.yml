@@ -58,7 +58,7 @@ jobs:
           key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run Lint
-          command: ./gradlew lint --max-workers=2 --stacktrace
+          command: ./gradlew lintStatisticsReport --max-workers=2 --stacktrace
 
 workflows:
   version: 2
