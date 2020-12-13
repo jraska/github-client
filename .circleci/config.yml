@@ -39,12 +39,25 @@ jobs:
           paths:
             - ~/.gradle
           key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
+  moduleStatisticsReport:
+    environment:
+      JVM_OPTS: -Xmx4096m
+    docker:
+      - image: circleci/android:api-30
+    steps:
+      - checkout
+      - restore_cache:
+          key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Run Lint
+          command: ./gradlew lint --max-workers=2 --stacktrace
 
 workflows:
   version: 2
   check:
     jobs:
       - build
+      - lint
   statisticsReport:
     triggers:
       - schedule:
