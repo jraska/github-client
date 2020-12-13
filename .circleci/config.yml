@@ -9,14 +9,14 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum  "core/build.gradle" }}-{{ checksum  "core-android-api/build.gradle" }}
+          key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Get Dependencies
           command: ./gradlew androidDependencies --max-workers=2 --stacktrace
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum  "core/build.gradle" }}-{{ checksum  "core-android-api/build.gradle" }}
+          key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run Tests
           command: ./gradlew check --max-workers=2 --stacktrace
@@ -57,7 +57,7 @@ jobs:
       - restore_cache:
           key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Run Lint
+          name: Run Lint Report
           command: ./gradlew lintStatisticsReport --max-workers=2 --stacktrace
 
 workflows:
@@ -66,7 +66,6 @@ workflows:
     jobs:
       - build
       - lint
-      - lintReport
   statisticsReport:
     triggers:
       - schedule:

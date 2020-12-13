@@ -15,6 +15,8 @@ class LintAnalyticsReporter(
     )
 
     analyticsReporter.report(*allEvents.toTypedArray())
+
+    println("$GRAPH_ICON Lint results reported $GRAPH_ICON")
   }
 
   private fun convertModule(moduleResult: LintModuleResult): List<AnalyticsEvent> {
@@ -67,5 +69,9 @@ class LintAnalyticsReporter(
         "totalIgnored" to projectResult.ignoredCount,
       )
     )
+  }
+
+  companion object {
+    private val GRAPH_ICON = "\uD83D\uDCC9"
   }
 }
