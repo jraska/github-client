@@ -39,7 +39,7 @@ jobs:
           paths:
             - ~/.gradle
           key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
-  moduleStatisticsReport:
+  lint:
     environment:
       JVM_OPTS: -Xmx4096m
     docker:
