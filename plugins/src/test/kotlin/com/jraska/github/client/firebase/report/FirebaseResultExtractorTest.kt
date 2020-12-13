@@ -1,5 +1,6 @@
 package com.jraska.github.client.firebase.report
 
+import com.jraska.github.client.firebase.Device
 import com.jraska.github.client.firebase.TestOutcome
 import com.jraska.gradle.git.GitInfo
 import org.assertj.core.api.Assertions.assertThat
@@ -12,7 +13,7 @@ class FirebaseResultExtractorTest {
 
   @Before
   fun setUp() {
-    extractor = FirebaseResultExtractor("someUrl", GitInfo("exampleBrach", "123", false, ""), "someDevice")
+    extractor = FirebaseResultExtractor("someUrl", GitInfo("exampleBrach", "123", false, ""), Device.Pixel4)
   }
 
   @Test
@@ -59,7 +60,7 @@ class FirebaseResultExtractorTest {
     assertThat(firstTest.outcome).isEqualTo(TestOutcome.PASSED)
     assertThat(firstTest.className).isEqualTo("com.jraska.github.client.AppSetupTest")
     assertThat(firstTest.methodName).isEqualTo("appCreateEventFired")
-    assertThat(firstTest.failure).isEmpty()
+    assertThat(firstTest.failure).isNull()
     assertThat(firstTest.fullName).isEqualTo("com.jraska.github.client.AppSetupTest#appCreateEventFired")
 
 
