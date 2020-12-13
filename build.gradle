@@ -44,14 +44,6 @@ subprojects {
   }
 }
 
-subprojects {
-  tasks.configureEach {
-    if (name.startsWith("lint")) {
-      enabled = false
-    }
-  }
-}
-
 ext {
   daggerVersion = '2.30.1'
   daggerAnnotationProcessor = "com.google.dagger:dagger-compiler:$daggerVersion"
