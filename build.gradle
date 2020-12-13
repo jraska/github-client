@@ -9,7 +9,7 @@ buildscript {
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:4.1.1'
-    classpath ('com.google.firebase:firebase-plugins:2.0.0') {
+    classpath('com.google.firebase:firebase-plugins:2.0.0') {
       exclude group: 'com.google.api-client', module: 'google-api-client' // conflicts with com.github.triplet.play
     }
     classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
@@ -39,6 +39,16 @@ subprojects {
           events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
           exceptionFormat 'full'
         }
+      }
+    }
+  }
+}
+
+subprojects {
+  if (!gradle.startParameter.taskNames.any { it.contains("lint") }) {
+    tasks.configureEach {
+      if (name.startsWith("lint")) {
+        enabled = false
       }
     }
   }
