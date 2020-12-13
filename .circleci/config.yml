@@ -66,6 +66,7 @@ workflows:
     jobs:
       - build
       - lint
+      - lintReport
   statisticsReport:
     triggers:
       - schedule:
