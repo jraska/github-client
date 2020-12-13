@@ -35,11 +35,19 @@ jobs:
       - run:
           name: Execute Data Processing
           command: ./gradlew reportModuleStatistics --max-workers=2 --stacktrace --no-configure-on-demand
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
   lint:
+    environment:
+      JVM_OPTS: -Xmx4096m
+    docker:
+      - image: circleci/android:api-30
+    steps:
+      - checkout
+      - restore_cache:
+          key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Run Lint
+          command: ./gradlew lint --max-workers=2 --stacktrace
+  lintReport:
     environment:
       JVM_OPTS: -Xmx4096m
     docker:
@@ -68,4 +76,5 @@ workflows:
                 - master
     jobs:
       - moduleStatisticsReport
+      - lintReport
 
