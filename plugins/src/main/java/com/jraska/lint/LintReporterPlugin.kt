@@ -8,9 +8,7 @@ class LintReporterPlugin : Plugin<Project> {
     project.afterEvaluate {
       it.tasks.register("lintStatisticsReport") { lintReportTask ->
         lintReportTask.doLast {
-          val result = LintProjectExtractor().extract(lintReportTask.project)
-
-          println(result)
+          LintReportProcess.create().executeReport(lintReportTask.project)
         }
 
         project.rootProject.subprojects
