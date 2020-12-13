@@ -52,5 +52,9 @@ gradlePlugin {
       id = 'com.jraska.module.stats'
       implementationClass = 'com.jraska.module.ModuleStatsPlugin'
     }
+    lintReportPlugin {
+      id = 'com.jraska.module.lint.report'
+      implementationClass = 'com.jraska.lint.LintReporterPlugin'
+    }
   }
 }

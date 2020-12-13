@@ -5,6 +5,7 @@ plugins {
   id 'com.jraska.gradle.buildtime'
   id 'com.jraska.github.client.release'
   id 'com.jraska.module.stats'
+  id 'com.jraska.module.lint.report'
 }
 
 apply plugin: 'com.android.application'
