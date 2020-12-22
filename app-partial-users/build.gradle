@@ -7,7 +7,7 @@ android {
 
   defaultConfig {
     applicationId "com.jraska.github.client.users"
-    minSdkVersion 21
+    minSdkVersion 24
     targetSdkVersion 30
     versionName '0.1.0'
     versionCode 1

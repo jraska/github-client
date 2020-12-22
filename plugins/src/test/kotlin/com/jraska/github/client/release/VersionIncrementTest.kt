@@ -9,7 +9,7 @@ class VersionIncrementTest {
 
   defaultConfig {
     applicationId "com.jraska.github.client"
-    minSdkVersion 21
+    minSdkVersion 24
     targetSdkVersion 30
     versionName '0.20.9'
     versionCode 66
