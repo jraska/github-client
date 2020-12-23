@@ -3,7 +3,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.20"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21"
   }
 }
 
@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
   implementation gradleApi()
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.20"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.21"
   implementation 'com.mixpanel:mixpanel-java:1.4.4'
 
   testImplementation 'junit:junit:4.13.1'
