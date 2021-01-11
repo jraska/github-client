@@ -7,7 +7,7 @@ dependencies {
 
   api 'io.reactivex.rxjava2:rxjava:2.2.20'
   api rootProject.ext.okHttp
-  api 'com.squareup.okio:okio:2.9.0'
+  api 'com.squareup.okio:okio:2.10.0'
 
   api 'org.threeten:threetenbp:1.4.4:no-tzdb'
   api 'javax.inject:javax.inject:1'
