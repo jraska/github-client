@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.UserDetailActivity">
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fitsSystemWindows="true"
+  tools:context=".ui.UserDetailActivity"
+  >
 
   <com.google.android.material.appbar.AppBarLayout
-      android:id="@+id/app_bar"
-      android:fitsSystemWindows="true"
-      android:layout_height="@dimen/app_bar_height"
-      android:layout_width="match_parent"
-      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    android:id="@+id/app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/app_bar_height"
+    android:fitsSystemWindows="true"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    >
 
     <com.google.android.material.appbar.CollapsingToolbarLayout
-        android:id="@+id/toolbar_layout"
-        android:fitsSystemWindows="true"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed"
-        app:contentScrim="?attr/colorPrimary">
+      android:id="@+id/toolbar_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fitsSystemWindows="true"
+      app:contentScrim="?attr/colorPrimary"
+      app:layout_scrollFlags="scroll|exitUntilCollapsed"
+      >
 
       <com.facebook.drawee.view.SimpleDraweeView
-          android:id="@+id/user_detail_avatar"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:fitsSystemWindows="true"
-          android:scaleType="centerCrop"
-          app:layout_collapseMode="parallax" />
+        android:id="@+id/user_detail_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:scaleType="centerCrop"
+        app:layout_collapseMode="parallax"
+        />
 
       <androidx.appcompat.widget.Toolbar
-          android:id="@+id/toolbar"
-          android:layout_height="?attr/actionBarSize"
-          android:layout_width="match_parent"
-          app:layout_collapseMode="pin"
-          app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        />
 
     </com.google.android.material.appbar.CollapsingToolbarLayout>
   </com.google.android.material.appbar.AppBarLayout>
@@ -43,12 +49,14 @@
   <include layout="@layout/content_user_detail" />
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
-      android:id="@+id/user_detail_github_fab"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/fab_margin"
-      app:layout_anchor="@id/app_bar"
-      app:layout_anchorGravity="bottom|end"
-      android:src="@drawable/ic_github_48dp" />
+    android:id="@+id/user_detail_github_fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/fab_margin"
+    android:contentDescription="@null"
+    android:src="@drawable/ic_github_48dp"
+    app:layout_anchor="@id/app_bar"
+    app:layout_anchorGravity="bottom|end"
+    />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
