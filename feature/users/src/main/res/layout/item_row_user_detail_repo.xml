@@ -1,62 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/list_item_height"
+  android:background="@android:drawable/list_selector_background"
+  >
+
+  <TextView
+    android:id="@+id/repo_item_title"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_height"
-    android:background="@android:drawable/list_selector_background">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/list_item_vertical_margin"
+    android:layout_toStartOf="@+id/repo_item_stats_container"
+    android:maxLines="1"
+    android:textColor="@color/textMain"
+    android:textSize="@dimen/textTitle"
+    tools:text="Falcon"
+    />
 
   <TextView
-      android:id="@+id/repo_item_title"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/list_item_vertical_margin"
-      android:layout_toStartOf="@+id/repo_item_stats_container"
-      android:textSize="@dimen/textTitle"
-      android:textColor="@color/textMain"
-      android:maxLines="1"
-      tools:text="Falcon" />
-
-  <TextView
-      android:id="@+id/repo_item_description"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_toStartOf="@+id/repo_item_stats_container"
-      android:layout_below="@+id/repo_item_title"
-      android:textSize="@dimen/textSubtitle"
-      android:textColor="@color/textSecondary"
-      android:maxLines="1"
-      tools:text="Take Android screenshots with Falcons bright eye" />
+    android:id="@+id/repo_item_description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/repo_item_title"
+    android:layout_toStartOf="@+id/repo_item_stats_container"
+    android:maxLines="1"
+    android:textColor="@color/textSecondary"
+    android:textSize="@dimen/textSubtitle"
+    tools:text="Take Android screenshots with Falcons bright eye"
+    />
 
   <LinearLayout
-      android:id="@+id/repo_item_stats_container"
+    android:id="@+id/repo_item_stats_container"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_alignParentEnd="true"
+
+    android:orientation="horizontal"
+    >
+
+    <TextView
+      android:id="@+id/repo_item_stars"
       android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:layout_alignParentEnd="true"
-
-      android:orientation="horizontal">
-    
-    <TextView
-        android:id="@+id/repo_item_stars"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:drawableTop="@drawable/ic_star_black_24dp"
-        android:textColor="@color/textMain"
-        android:layout_marginEnd="@dimen/padding_small"
-        android:textSize="@dimen/textSubtitle"
-        tools:text="1125" />
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginEnd="@dimen/padding_small"
+      android:gravity="center"
+      android:textColor="@color/textMain"
+      android:textSize="@dimen/textSubtitle"
+      app:drawableTopCompat="@drawable/ic_star_black_24dp"
+      tools:text="1125"
+      />
 
     <TextView
-        android:id="@+id/repo_item_forks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:drawableTop="@drawable/ic_source_fork_24dp"
-        android:textColor="@color/textMain"
-        android:textSize="@dimen/textSubtitle"
-        tools:text="1125" />
+      android:id="@+id/repo_item_forks"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:textColor="@color/textMain"
+      android:textSize="@dimen/textSubtitle"
+      app:drawableTopCompat="@drawable/ic_source_fork_24dp"
+      tools:text="1125"
+      />
 
   </LinearLayout>
 

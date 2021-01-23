@@ -1,6 +1,7 @@
 package com.jraska.github.client.config.debug.ui
 
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.Switch
 import com.airbnb.epoxy.EpoxyModel
 import com.jraska.github.client.config.MutableConfigDef
@@ -14,7 +15,7 @@ internal class BooleanConfigModel(
   override fun getDefaultLayout() = R.layout.item_row_boolean_config
 
   override fun bind(view: View) {
-    val switch = view as Switch
+    val switch = view as CompoundButton
     switch.text = mutableConfigDef.key.name
     switch.isChecked = mutableConfig.getBoolean(mutableConfigDef.key)
 

@@ -1,59 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
 
   <TextView
-      android:id="@+id/repo_detail_created"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="start|center_vertical"
-      android:paddingLeft="@dimen/text_margin"
-      android:paddingRight="@dimen/text_margin"
-      android:paddingBottom="@dimen/padding_medium"
-      android:paddingTop="@dimen/padding_medium"
-      android:textSize="@dimen/textMain"
-      android:drawableStart="@drawable/ic_history_24dp"
-      android:drawablePadding="@dimen/padding_medium"
-      tools:text="Joined on Dec 28, 2013" />
+    android:id="@+id/repo_detail_created"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawablePadding="@dimen/padding_medium"
+    android:gravity="start|center_vertical"
+    android:paddingLeft="@dimen/text_margin"
+    android:paddingTop="@dimen/padding_medium"
+    android:paddingRight="@dimen/text_margin"
+    android:paddingBottom="@dimen/padding_medium"
+    android:textSize="@dimen/textMain"
+    app:drawableStartCompat="@drawable/ic_history_24dp"
+    tools:text="Joined on Dec 28, 2013"
+    />
 
   <LinearLayout
-      android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="3"
+    >
+
+    <TextView
+      android:id="@+id/repo_detail_subscribers_count"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:weightSum="3">
+      android:layout_weight="1"
+      android:gravity="center"
+      android:textSize="@dimen/textMain"
+      app:drawableTopCompat="@drawable/ic_watchers_black_48dp"
+      tools:text="2"
+      />
 
     <TextView
-        android:id="@+id/repo_detail_subscribers_count"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="@dimen/textMain"
-        android:drawableTop="@drawable/ic_watchers_black_48dp"
-        tools:text="2" />
+      android:id="@+id/repo_detail_stars_count"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:textSize="@dimen/textMain"
+      app:drawableTopCompat="@drawable/ic_star_black_48dp"
+      tools:text="20"
+      />
 
     <TextView
-        android:id="@+id/repo_detail_stars_count"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="@dimen/textMain"
-        android:drawableTop="@drawable/ic_star_black_48dp"
-        tools:text="20" />
-
-
-    <TextView
-        android:id="@+id/repo_detail_forks_count"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="@dimen/textMain"
-        android:drawableTop="@drawable/ic_source_fork_48dp"
-        tools:text="20" />
+      android:id="@+id/repo_detail_forks_count"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:textSize="@dimen/textMain"
+      app:drawableTopCompat="@drawable/ic_source_fork_48dp"
+      tools:text="20"
+      />
 
   </LinearLayout>
 
