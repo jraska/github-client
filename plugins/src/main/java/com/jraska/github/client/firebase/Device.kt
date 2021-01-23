@@ -15,7 +15,7 @@ class Device(
   }
 
   companion object {
-    val Pixel4 = Device("flame", 29, "en", "portrait")
+    val Pixel4 = Device("flame", 30, "en", "portrait")
     val Pixel2 = Device("walleye", 28, "en", "portrait")
   }
 }
