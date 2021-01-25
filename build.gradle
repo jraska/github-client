@@ -8,7 +8,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:4.1.1'
+    classpath 'com.android.tools.build:gradle:4.1.2'
     classpath('com.google.firebase:firebase-plugins:2.0.0') {
       exclude group: 'com.google.api-client', module: 'google-api-client' // conflicts with com.github.triplet.play
     }
@@ -55,7 +55,7 @@ subprojects {
 }
 
 ext {
-  daggerVersion = '2.31'
+  daggerVersion = '2.31.2'
   daggerAnnotationProcessor = "com.google.dagger:dagger-compiler:$daggerVersion"
   dagger = "com.google.dagger:dagger:$daggerVersion"
 
@@ -63,7 +63,7 @@ ext {
   okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
 
-  frescoVesion = '2.3.0'
+  frescoVesion = '2.4.0'
   fresco = "com.facebook.fresco:fresco:$frescoVesion"
   frescoDrawee = "com.facebook.fresco:drawee:$frescoVesion"
 }
