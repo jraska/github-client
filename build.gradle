@@ -63,7 +63,7 @@ ext {
   okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
 
-  frescoVesion = '2.3.0'
+  frescoVesion = '2.4.0'
   fresco = "com.facebook.fresco:fresco:$frescoVesion"
   frescoDrawee = "com.facebook.fresco:drawee:$frescoVesion"
 }
