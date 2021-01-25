@@ -1,24 +1,27 @@
-package com.jraska.github.client.users.model
+package com.jraska.github.client.repo
 
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.toLiveData
 import com.google.android.material.snackbar.Snackbar
 import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.lazyMap
-import com.jraska.github.client.users.rx.toLiveData
 import com.jraska.github.client.core.android.snackbar.SnackbarData
 import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
 import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.navigation.Urls
+import com.jraska.github.client.repo.model.RepoDetail
+import com.jraska.github.client.repo.model.RepoHeader
+import com.jraska.github.client.repo.model.RepoRepository
 import com.jraska.github.client.rx.AppSchedulers
-import com.jraska.github.client.users.R
+import io.reactivex.BackpressureStrategy
 import javax.inject.Inject
 
 internal class RepoDetailViewModel @Inject constructor(
-  private val usersRepository: UsersRepository,
+  private val repoRepository: RepoRepository,
   private val appSchedulers: AppSchedulers,
   private val navigator: Navigator,
   private val eventAnalytics: EventAnalytics,
@@ -33,12 +36,13 @@ internal class RepoDetailViewModel @Inject constructor(
 
   private fun createRepoDetailLiveData(fullRepoName: String): LiveData<ViewState> {
     val parts = fullRepoName.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-    return usersRepository.getRepoDetail(parts[0], parts[1])
+    return repoRepository.getRepoDetail(parts[0], parts[1])
       .subscribeOn(appSchedulers.io)
       .observeOn(appSchedulers.mainThread)
       .map<ViewState> { detail -> ViewState.ShowRepo(detail) }
       .onErrorReturn { ViewState.Error(it) }
       .startWith(ViewState.Loading)
+      .toFlowable(BackpressureStrategy.MISSING)
       .toLiveData()
   }
 

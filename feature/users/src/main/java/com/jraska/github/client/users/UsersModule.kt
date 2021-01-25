@@ -10,7 +10,6 @@ import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
 import com.jraska.github.client.users.model.GitHubUserDetailApi
 import com.jraska.github.client.users.model.GitHubUsersApi
-import com.jraska.github.client.users.model.RepoDetailViewModel
 import com.jraska.github.client.users.model.UsersRepository
 import com.jraska.github.client.users.ui.UsersActivity
 import com.jraska.github.client.users.widget.TopSnackbarDisplay
@@ -46,13 +45,6 @@ object UsersModule {
   @IntoMap
   @ClassKey(UserDetailViewModel::class)
   internal fun provideUserDetailModel(viewModel: UserDetailViewModel): ViewModel {
-    return viewModel
-  }
-
-  @Provides
-  @IntoMap
-  @ClassKey(RepoDetailViewModel::class)
-  internal fun provideRepoDetailModel(viewModel: RepoDetailViewModel): ViewModel {
     return viewModel
   }
 

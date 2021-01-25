@@ -5,7 +5,7 @@ import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import java.net.UnknownHostException
 
-internal object ErrorHandler {
+object ErrorHandler {
   private fun modelsForError(error: Throwable): List<EpoxyModel<*>> {
     if (error is UnknownHostException) {
       return listOf(ErrorModel.networkError())

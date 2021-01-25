@@ -4,7 +4,7 @@ import org.threeten.bp.Instant
 
 internal class UserDetailWithReposConverter {
 
-  fun translateUserDetail(gitHubUserDetail: GitHubUserDetail, gitHubRepos: List<GitHubRepo>, reposToDisplay: Int): UserDetail {
+  fun translateUserDetail(gitHubUserDetail: GitHubUserDetail, gitHubRepos: List<GitHubUserRepo>, reposToDisplay: Int): UserDetail {
     val joined = Instant.parse(gitHubUserDetail.createdAt)
 
     val stats = UserStats(
@@ -31,8 +31,12 @@ internal class UserDetailWithReposConverter {
     return UserDetail(user, stats, usersRepos, contributedRepos)
   }
 
-  private fun convert(gitHubRepo: GitHubRepo): RepoHeader {
-    return RepoConverter.INSTANCE.convert(gitHubRepo)
+  private fun convert(gitHubRepo: GitHubUserRepo): RepoHeader {
+    return RepoHeader(
+      gitHubRepo.owner!!.login!!,
+      gitHubRepo.name!!, gitHubRepo.description ?: "",
+      gitHubRepo.stargazersCount!!, gitHubRepo.forks!!
+    )
   }
 
   private fun convert(gitHubUser: GitHubUserDetail): User {

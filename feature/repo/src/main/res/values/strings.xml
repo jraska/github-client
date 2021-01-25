@@ -1,0 +1,6 @@
+<resources>
+  <string name="repo_detail_language_used_template">Language: %s</string>
+  <string name="repo_detail_issues_template">Issues Count: %s</string>
+  <string name="repo_detail_open_web_text">Test: Opens a website</string>
+  <string name="repo_detail_open_web_action">Open</string>
+</resources>

@@ -19,6 +19,7 @@ dependencies {
   implementation project(':core-android-api')
   implementation project(':feature:config-debug-api')
   implementation project(':navigation-api')
+  implementation project(':feature:ui-common-api')
 
   implementation 'androidx.recyclerview:recyclerview:1.1.0'
   implementation 'com.google.android.material:material:1.2.1'

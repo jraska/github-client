@@ -9,5 +9,5 @@ internal interface GitHubUserDetailApi {
   fun getUserDetail(@Path("login") login: String): Single<GitHubUserDetail>
 
   @GET("/users/{login}/repos?type=all")
-  fun getRepos(@Path("login") login: String): Single<List<GitHubRepo>>
+  fun getRepos(@Path("login") login: String): Single<List<GitHubUserRepo>>
 }

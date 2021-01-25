@@ -41,6 +41,7 @@ class DeepLinkLaunchTest {
   fun whenRepoLink_thenRepoActivityDisplayed() {
     launchDeepLink("https://github.com/jraska/Falcon")
 
+    Thread.sleep(1000)
     onView(withText(Matchers.containsString("Language: Java")))
       .check(matches(isDisplayed()))
 

@@ -1,15 +1,15 @@
-package com.jraska.github.client.users
+package com.jraska.github.client.repo
 
 import android.app.Activity
 import com.jraska.github.client.core.android.LinkLauncher
-import com.jraska.github.client.users.ui.UserDetailActivity
+import com.jraska.github.client.repo.ui.RepoDetailActivity
 import okhttp3.HttpUrl
 
-internal class UsersPathLauncher : LinkLauncher {
+internal class RepoPathLauncher : LinkLauncher {
   override fun launch(inActivity: Activity, deepLink: HttpUrl): LinkLauncher.Result {
-    if (deepLink.pathSize == 1) {
-      val login = deepLink.pathSegments[0]
-      UserDetailActivity.start(inActivity, login)
+    if (deepLink.pathSize == 2) {
+      val fullRepoPath = deepLink.pathSegments[0] + "/" + deepLink.pathSegments[1]
+      RepoDetailActivity.start(inActivity, fullRepoPath)
       return LinkLauncher.Result.LAUNCHED
     }
 

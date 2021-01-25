@@ -1,4 +1,4 @@
-package com.jraska.github.client.users.ui
+package com.jraska.github.client.repo.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -10,9 +10,11 @@ import com.airbnb.epoxy.SimpleEpoxyModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
-import com.jraska.github.client.users.R
-import com.jraska.github.client.users.model.RepoDetail
-import com.jraska.github.client.users.model.RepoDetailViewModel
+import com.jraska.github.client.repo.R
+import com.jraska.github.client.repo.RepoDetailViewModel
+import com.jraska.github.client.repo.model.RepoDetail
+import com.jraska.github.client.users.ui.ErrorHandler
+import com.jraska.github.client.users.ui.SimpleTextModel
 
 internal class RepoDetailActivity : BaseActivity() {
 

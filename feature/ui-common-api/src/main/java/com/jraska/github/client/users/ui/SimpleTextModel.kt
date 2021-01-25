@@ -2,9 +2,9 @@ package com.jraska.github.client.users.ui
 
 import android.widget.TextView
 import com.airbnb.epoxy.EpoxyModel
-import com.jraska.github.client.users.R
+import com.jraska.github.client.ui.R
 
-internal class SimpleTextModel(private val text: String) : EpoxyModel<TextView>() {
+class SimpleTextModel(private val text: String) : EpoxyModel<TextView>() {
 
   override fun getDefaultLayout(): Int {
     return R.layout.item_simple_text
