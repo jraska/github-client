@@ -4,9 +4,10 @@ import android.view.View
 import android.widget.TextView
 import com.airbnb.epoxy.EpoxyModel
 import com.jraska.github.client.repo.R
+import com.jraska.github.client.repo.model.RepoDetail
 import org.threeten.bp.format.DateTimeFormatter
 
-internal class RepoDetailHeaderModel(private val repoDetail: com.jraska.github.client.repo.model.RepoDetail) : EpoxyModel<View>() {
+internal class RepoDetailHeaderModel(private val repoDetail: RepoDetail) : EpoxyModel<View>() {
 
   override fun getDefaultLayout(): Int {
     return R.layout.item_repo_detail_stats

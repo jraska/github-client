@@ -13,6 +13,7 @@ import com.jraska.github.client.core.android.snackbar.SnackbarData
 import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
 import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.navigation.Urls
+import com.jraska.github.client.repo.model.RepoDetail
 import com.jraska.github.client.repo.model.RepoHeader
 import com.jraska.github.client.repo.model.RepoRepository
 import com.jraska.github.client.rx.AppSchedulers
@@ -54,19 +55,19 @@ internal class RepoDetailViewModel @Inject constructor(
     eventAnalytics.report(event)
 
     snackbarDisplay.showSnackbar(
-        SnackbarData(
-            R.string.repo_detail_open_web_text,
-            Snackbar.LENGTH_INDEFINITE,
-            R.string.repo_detail_open_web_action to View.OnClickListener {
-                navigator.launchOnWeb(Urls.repo(fullRepoName))
-            })
+      SnackbarData(
+        R.string.repo_detail_open_web_text,
+        Snackbar.LENGTH_INDEFINITE,
+        R.string.repo_detail_open_web_action to View.OnClickListener {
+          navigator.launchOnWeb(Urls.repo(fullRepoName))
+        })
     )
   }
 
   sealed class ViewState {
     object Loading : ViewState()
     class Error(val error: Throwable) : ViewState()
-    class ShowRepo(val repo: com.jraska.github.client.repo.model.RepoDetail) : ViewState()
+    class ShowRepo(val repo: RepoDetail) : ViewState()
   }
 
   companion object {

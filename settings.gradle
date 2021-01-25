@@ -8,6 +8,7 @@ include ':app',
   ':core-testing',
   ':core-android-api',
   ':navigation-api',
+  ':feature:ui-common-api',
 
   ':feature:identity',
   ':feature:identity-api',

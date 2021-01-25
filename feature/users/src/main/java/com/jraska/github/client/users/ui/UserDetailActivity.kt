@@ -3,7 +3,6 @@ package com.jraska.github.client.users.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyModel
