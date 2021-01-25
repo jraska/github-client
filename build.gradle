@@ -8,7 +8,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:4.1.1'
+    classpath 'com.android.tools.build:gradle:4.1.2'
     classpath('com.google.firebase:firebase-plugins:2.0.0') {
       exclude group: 'com.google.api-client', module: 'google-api-client' // conflicts with com.github.triplet.play
     }
