@@ -17,7 +17,7 @@ internal class GitHubRepo {
   var fullName: String? = null
   @SerializedName("owner")
   @Expose
-  var owner: GitHubUser? = null
+  var owner: GitHubRepoUser? = null
   @SerializedName("private")
   @Expose
   var private: Boolean? = null
@@ -45,36 +45,6 @@ internal class GitHubRepo {
   @SerializedName("teams_url")
   @Expose
   var teamsUrl: String? = null
-  @SerializedName("hooks_url")
-  @Expose
-  var hooksUrl: String? = null
-  @SerializedName("issue_events_url")
-  @Expose
-  var issueEventsUrl: String? = null
-  @SerializedName("events_url")
-  @Expose
-  var eventsUrl: String? = null
-  @SerializedName("assignees_url")
-  @Expose
-  var assigneesUrl: String? = null
-  @SerializedName("branches_url")
-  @Expose
-  var branchesUrl: String? = null
-  @SerializedName("tags_url")
-  @Expose
-  var tagsUrl: String? = null
-  @SerializedName("blobs_url")
-  @Expose
-  var blobsUrl: String? = null
-  @SerializedName("git_tags_url")
-  @Expose
-  var gitTagsUrl: String? = null
-  @SerializedName("git_refs_url")
-  @Expose
-  var gitRefsUrl: String? = null
-  @SerializedName("trees_url")
-  @Expose
-  var treesUrl: String? = null
   @SerializedName("statuses_url")
   @Expose
   var statusesUrl: String? = null
@@ -114,12 +84,6 @@ internal class GitHubRepo {
   @SerializedName("merges_url")
   @Expose
   var mergesUrl: String? = null
-  @SerializedName("archive_url")
-  @Expose
-  var archiveUrl: String? = null
-  @SerializedName("downloads_url")
-  @Expose
-  var downloadsUrl: String? = null
   @SerializedName("issues_url")
   @Expose
   var issuesUrl: String? = null
@@ -129,18 +93,12 @@ internal class GitHubRepo {
   @SerializedName("milestones_url")
   @Expose
   var milestonesUrl: String? = null
-  @SerializedName("notifications_url")
-  @Expose
-  var notificationsUrl: String? = null
   @SerializedName("labels_url")
   @Expose
   var labelsUrl: String? = null
   @SerializedName("releases_url")
   @Expose
   var releasesUrl: String? = null
-  @SerializedName("deployments_url")
-  @Expose
-  var deploymentsUrl: String? = null
   @SerializedName("created_at")
   @Expose
   var createdAt: String? = null
@@ -159,9 +117,6 @@ internal class GitHubRepo {
   @SerializedName("clone_url")
   @Expose
   var cloneUrl: String? = null
-  @SerializedName("svn_url")
-  @Expose
-  var svnUrl: String? = null
   @SerializedName("homepage")
   @Expose
   var homepage: String? = null
@@ -177,24 +132,9 @@ internal class GitHubRepo {
   @SerializedName("language")
   @Expose
   var language: String? = null
-  @SerializedName("has_issues")
-  @Expose
-  var hasIssues: Boolean? = null
-  @SerializedName("has_downloads")
-  @Expose
-  var hasDownloads: Boolean? = null
-  @SerializedName("has_wiki")
-  @Expose
-  var hasWiki: Boolean? = null
-  @SerializedName("has_pages")
-  @Expose
-  var hasPages: Boolean? = null
   @SerializedName("forks_count")
   @Expose
   var forksCount: Int? = null
-  @SerializedName("mirror_url")
-  @Expose
-  var mirrorUrl: Any? = null
   @SerializedName("open_issues_count")
   @Expose
   var openIssuesCount: Int? = null
