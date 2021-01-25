@@ -10,7 +10,7 @@
   android:paddingLeft="@dimen/activity_horizontal_margin"
   android:paddingRight="@dimen/activity_horizontal_margin"
   app:layout_behavior="@string/appbar_scrolling_view_behavior"
-  tools:context=".ui.RepoDetailActivity"
+  tools:context="com.jraska.github.client.repo.ui.RepoDetailActivity"
   tools:showIn="@layout/activity_repo_detail">
 
 </androidx.recyclerview.widget.RecyclerView>

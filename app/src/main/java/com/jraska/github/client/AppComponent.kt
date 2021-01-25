@@ -14,6 +14,7 @@ import com.jraska.github.client.inappupdate.InAppUpdateModule
 import com.jraska.github.client.navigation.deeplink.DeepLinkNavigationModule
 import com.jraska.github.client.networkstatus.NetworkStatusModule
 import com.jraska.github.client.push.PushModule
+import com.jraska.github.client.repo.RepoModule
 import com.jraska.github.client.settings.SettingsModule
 import com.jraska.github.client.shortcuts.ShortcutsModule
 import com.jraska.github.client.users.UsersModule
@@ -51,6 +52,7 @@ interface AppComponent {
     NetworkStatusModule::class,
     InAppUpdateModule::class,
     UsersModule::class,
+    RepoModule::class,
     PushModule::class,
     SettingsModule::class,
     AboutModule::class,

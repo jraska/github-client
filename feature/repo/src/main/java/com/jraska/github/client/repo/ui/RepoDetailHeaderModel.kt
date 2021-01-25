@@ -1,13 +1,12 @@
-package com.jraska.github.client.users.ui
+package com.jraska.github.client.repo.ui
 
 import android.view.View
 import android.widget.TextView
 import com.airbnb.epoxy.EpoxyModel
-import com.jraska.github.client.users.R
-import com.jraska.github.client.users.model.RepoDetail
+import com.jraska.github.client.repo.R
 import org.threeten.bp.format.DateTimeFormatter
 
-internal class RepoDetailHeaderModel(private val repoDetail: RepoDetail) : EpoxyModel<View>() {
+internal class RepoDetailHeaderModel(private val repoDetail: com.jraska.github.client.repo.model.RepoDetail) : EpoxyModel<View>() {
 
   override fun getDefaultLayout(): Int {
     return R.layout.item_repo_detail_stats

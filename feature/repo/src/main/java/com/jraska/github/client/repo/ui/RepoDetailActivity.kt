@@ -1,4 +1,4 @@
-package com.jraska.github.client.users.ui
+package com.jraska.github.client.repo.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -10,13 +10,11 @@ import com.airbnb.epoxy.SimpleEpoxyModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
-import com.jraska.github.client.users.R
-import com.jraska.github.client.users.model.RepoDetail
-import com.jraska.github.client.users.model.RepoDetailViewModel
+import com.jraska.github.client.repo.R
 
 internal class RepoDetailActivity : BaseActivity() {
 
-  private val viewModel: RepoDetailViewModel by lazy { viewModel(RepoDetailViewModel::class.java) }
+  private val viewModel: com.jraska.github.client.repo.RepoDetailViewModel by lazy { viewModel(com.jraska.github.client.repo.RepoDetailViewModel::class.java) }
 
   private val repoDetailRecycler: RecyclerView get() = findViewById(R.id.repo_detail_recycler)
 
@@ -40,11 +38,11 @@ internal class RepoDetailActivity : BaseActivity() {
       .setOnClickListener { viewModel.onGitHubIconClicked(fullRepoName()) }
   }
 
-  private fun setState(state: RepoDetailViewModel.ViewState) {
+  private fun setState(state: com.jraska.github.client.repo.RepoDetailViewModel.ViewState) {
     when (state) {
-      is RepoDetailViewModel.ViewState.Loading -> showLoading()
-      is RepoDetailViewModel.ViewState.Error -> setError(state.error)
-      is RepoDetailViewModel.ViewState.ShowRepo -> setRepoDetail(state.repo)
+      is com.jraska.github.client.repo.RepoDetailViewModel.ViewState.Loading -> showLoading()
+      is com.jraska.github.client.repo.RepoDetailViewModel.ViewState.Error -> setError(state.error)
+      is com.jraska.github.client.repo.RepoDetailViewModel.ViewState.ShowRepo -> setRepoDetail(state.repo)
     }
   }
 
@@ -53,10 +51,10 @@ internal class RepoDetailActivity : BaseActivity() {
   }
 
   private fun setError(error: Throwable) {
-    ErrorHandler.displayError(error, repoDetailRecycler)
+//    ErrorHandler.displayError(error, repoDetailRecycler)
   }
 
-  private fun setRepoDetail(repoDetail: RepoDetail) {
+  private fun setRepoDetail(repoDetail: com.jraska.github.client.repo.model.RepoDetail) {
     val adapter = SimpleEpoxyAdapter()
     adapter.addModels(RepoDetailHeaderModel(repoDetail))
 
@@ -64,13 +62,13 @@ internal class RepoDetailActivity : BaseActivity() {
       R.string.repo_detail_language_used_template,
       repoDetail.data.language
     )
-    adapter.addModels(SimpleTextModel(languageText))
+//    adapter.addModels(SimpleTextModel(languageText))
 
     val issuesText = getString(
       R.string.repo_detail_issues_template,
       repoDetail.data.issuesCount.toString()
     )
-    adapter.addModels(SimpleTextModel(issuesText))
+//    adapter.addModels(SimpleTextModel(issuesText))
 
     repoDetailRecycler.adapter = adapter
   }

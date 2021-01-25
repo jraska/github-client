@@ -2,7 +2,6 @@ package com.jraska.github.client.users.model
 
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import java.util.Collections
 
@@ -24,16 +23,10 @@ internal class GitHubApiUsersRepository(
   override fun getUserDetail(login: String, reposInSection: Int): Observable<UserDetail> {
     return gitHubUserDetailApi.getUserDetail(login)
       .subscribeOn(Schedulers.io()) // this has to be here now to run requests in parallel
-      .zipWith(gitHubUserDetailApi.getRepos(login), BiFunction { a: GitHubUserDetail, b: List<GitHubRepo> -> Pair(a, b) })
+      .zipWith(gitHubUserDetailApi.getRepos(login), { a: GitHubUserDetail, b: List<GitHubUserRepo> -> Pair(a, b) })
       .map { result -> converter.translateUserDetail(result.component1(), result.component2(), reposInSection) }
       .toObservable()
       .startWith(cachedUser(login))
-  }
-
-  override fun getRepoDetail(owner: String, repoName: String): Observable<RepoDetail> {
-    return gitHubUsersApi.getRepo(owner, repoName)
-      .toObservable()
-      .map { RepoConverter.INSTANCE.convertToDetail(it) }
   }
 
   private fun cachedUser(login: String): Observable<UserDetail> {

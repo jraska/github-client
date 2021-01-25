@@ -95,6 +95,7 @@ dependencies {
   implementation project(':feature:network-status')
   implementation project(':feature:push')
   implementation project(':feature:users')
+  implementation project(':feature:repo')
   implementation project(':feature:settings')
   implementation project(':feature:about')
   implementation project(':feature:shortcuts')

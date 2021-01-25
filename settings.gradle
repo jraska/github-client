@@ -18,6 +18,7 @@ include ':app',
   ':feature:config-debug',
 
   ':feature:users',
+  ':feature:repo',
   ':feature:push',
   ':feature:settings',
   ':feature:about',

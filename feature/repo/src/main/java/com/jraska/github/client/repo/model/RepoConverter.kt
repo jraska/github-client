@@ -1,10 +1,10 @@
-package com.jraska.github.client.users.model
+package com.jraska.github.client.repo.model
 
 import org.threeten.bp.Instant
 
-internal class RepoConverter {
+internal object RepoConverter {
 
-  fun convert(gitHubRepo: GitHubRepo): RepoHeader {
+  private fun convert(gitHubRepo: GitHubRepo): RepoHeader {
     return RepoHeader(
       gitHubRepo.owner!!.login!!,
       gitHubRepo.name!!, gitHubRepo.description ?: "",
@@ -22,9 +22,5 @@ internal class RepoConverter {
     )
 
     return RepoDetail(header, data)
-  }
-
-  companion object {
-    val INSTANCE = RepoConverter()
   }
 }

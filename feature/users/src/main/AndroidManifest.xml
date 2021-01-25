@@ -4,6 +4,5 @@
   <application>
     <activity android:name=".ui.UsersActivity"/>
     <activity android:name=".ui.UserDetailActivity"/>
-    <activity android:name=".ui.RepoDetailActivity"/>
   </application>
 </manifest>

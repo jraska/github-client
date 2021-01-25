@@ -1,4 +1,4 @@
-package com.jraska.github.client.users.model
+package com.jraska.github.client.repo.model
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.Expose
