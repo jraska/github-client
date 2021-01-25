@@ -3,7 +3,8 @@ Experimental architecture app with example usage intended to be a showcase, test
 
 [![Build Status](https://circleci.com/gh/jraska/github-client.svg?style=shield&circle-token=7af979ba3177a70daee39260f230a756edbab6b2)](https://circleci.com/gh/jraska/github-client)
 
-<img width="1514" alt="Screenshot 2020-11-15 at 13 38 02" src="https://user-images.githubusercontent.com/6277721/99185093-daaf1280-2747-11eb-9f4c-b2512da1e540.png">
+<img width="1667" alt="Screenshot 2021-01-25 at 23 16 04" src="https://user-images.githubusercontent.com/6277721/105773043-71c3f200-5f63-11eb-9a28-99073c2e92ce.png">
+
 
 ## Topics demonstrated
 - Modularised app with flat structure: `:app -> :feature* -> *-api` with a graph height of 2.
