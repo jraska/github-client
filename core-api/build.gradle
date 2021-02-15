@@ -12,5 +12,5 @@ dependencies {
   api 'org.threeten:threetenbp:1.4.4:no-tzdb'
   api 'javax.inject:javax.inject:1'
 
-  testImplementation 'junit:junit:4.13.1'
+  testImplementation 'junit:junit:4.13.2'
 }

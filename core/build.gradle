@@ -40,7 +40,7 @@ dependencies {
   implementation 'com.google.code.gson:gson:2.8.6'
   implementation rootProject.ext.okHttpLoggingInterceptor
 
-  testImplementation 'junit:junit:4.13.1'
+  testImplementation 'junit:junit:4.13.2'
   testImplementation 'org.assertj:assertj-core:3.19.0'
   testImplementation 'org.mockito:mockito-core:3.7.7'
 }

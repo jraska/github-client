@@ -12,6 +12,6 @@ dependencies {
 
   implementation rootProject.ext.okHttp
 
-  testImplementation 'junit:junit:4.13.1'
+  testImplementation 'junit:junit:4.13.2'
   testImplementation 'org.mockito:mockito-core:3.7.7'
 }

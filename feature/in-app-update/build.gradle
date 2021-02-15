@@ -24,5 +24,5 @@ dependencies {
 
   implementation 'com.google.android.play:core:1.9.1'
 
-  testImplementation 'junit:junit:4.13.1'
+  testImplementation 'junit:junit:4.13.2'
 }
