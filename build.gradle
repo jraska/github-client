@@ -55,7 +55,7 @@ subprojects {
 }
 
 ext {
-  daggerVersion = '2.32'
+  daggerVersion = '2.33'
   daggerAnnotationProcessor = "com.google.dagger:dagger-compiler:$daggerVersion"
   dagger = "com.google.dagger:dagger:$daggerVersion"
 
