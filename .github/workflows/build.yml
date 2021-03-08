@@ -10,7 +10,9 @@ jobs:
         id: cache-dependencies
         uses: actions/cache@v2.1.4
         with:
-          path: ~/.gradle
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
           key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
       - name: Get Dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -26,7 +28,9 @@ jobs:
         id: cache-dependencies
         uses: actions/cache@v2.1.4
         with:
-          path: ~/.gradle
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
           key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
       - name: Lint
         run: ./gradlew lint --stacktrace
