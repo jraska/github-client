@@ -13,6 +13,11 @@ import dagger.multibindings.IntoSet
 @Module
 object InAppUpdateModule {
   @Provides
+  internal fun appManagerFactory(context: Context): UpdateManagerFactory {
+    return AppUpdateManagerFactoryProxy(context)
+  }
+
+  @Provides
   @IntoSet
   internal fun checkOnAppCreate(checkScheduler: UpdateCheckScheduler): OnAppCreate {
     return object : OnAppCreate {
@@ -20,11 +25,6 @@ object InAppUpdateModule {
         checkScheduler.startNonBlockingCheck()
       }
     }
-  }
-
-  @Provides
-  internal fun appManagerFactory(context: Context): UpdateManagerFactory {
-    return AppUpdateManagerFactoryProxy(context)
   }
 
   @Provides
