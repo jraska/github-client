@@ -19,7 +19,7 @@ jobs:
         run: ./gradlew androidDependencies --stacktrace
       - name: Check
         env:
-          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.GITHUB_CLIENT_MIXPANEL_API_KEY }}
+          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
         run: ./gradlew check --stacktrace
   lint:
     runs-on: ubuntu-latest
@@ -36,5 +36,5 @@ jobs:
           key: key-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
       - name: Lint
         env:
-          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.GITHUB_CLIENT_MIXPANEL_API_KEY }}
+          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
         run: ./gradlew lint --stacktrace
