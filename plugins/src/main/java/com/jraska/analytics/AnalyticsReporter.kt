@@ -12,6 +12,7 @@ interface AnalyticsReporter {
         println("'GITHUB_CLIENT_MIXPANEL_API_KEY' not set, data will be reported to console only")
         return ConsoleReporter(reporterName)
       } else {
+        println("The key length is ${mixpanelToken.length}")
         return MixpanelAnalyticsReporter(mixpanelToken, MixpanelAPI(), reporterName)
       }
     }
