@@ -17,3 +17,16 @@ jobs:
         run: ./gradlew androidDependencies --stacktrace
       - name: Check
         run: ./gradlew check --stacktrace
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Cache Dependencies
+        id: cache-dependencies
+        uses: actions/cache@v2.1.4
+        with:
+          path: ~/.gradle
+          key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - name: Lint
+        run: ./gradlew lint --stacktrace
