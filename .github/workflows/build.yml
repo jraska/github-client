@@ -7,11 +7,11 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
       - name: Cache Dependencies
-          id: cache-dependencies
-          uses: actions/cache@v2.1.4
-          with:
-            path: ~/.gradle
-            key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
+        id: cache-dependencies
+        uses: actions/cache@v2.1.4
+        with:
+          path: ~/.gradle
+          key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
       - name: Get Dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: ./gradlew androidDependencies --stacktrace
