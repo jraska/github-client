@@ -17,10 +17,16 @@ jobs:
       - name: Get Dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: ./gradlew androidDependencies --stacktrace
-      - name: Check
+      - name: Run Tests
         env:
           GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
         run: ./gradlew check --stacktrace
+      - name: Run Tests Firebase
+        env:
+          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
+          GCLOUD_CREDENTIALS: ${{ secrets.GCLOUD_CREDENTIALS }}
+          FCM_API_KEY: ${{ secrets.FCM_API_KEY }}
+        run: ./gradlew runInstrumentedTestsOnFirebase  --stacktrace
   lint:
     runs-on: ubuntu-latest
     steps:
