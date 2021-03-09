@@ -1,7 +1,9 @@
-name: Build
-on: [push]
+name: Daily Reporting
+on:
+  schedule:
+    - cron: "0 8 * * *" # Every Day at 8:00 UTC
 jobs:
-  build:
+  moduleStatisticsReport:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
@@ -14,22 +16,11 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: key-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - name: Get Dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        env:
-          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
-        run: ./gradlew androidDependencies --stacktrace
       - name: Run Tests
         env:
           GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
-        run: ./gradlew check --stacktrace
-      - name: Run Tests Firebase
-        env:
-          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
-          GCLOUD_CREDENTIALS: ${{ secrets.GCLOUD_CREDENTIALS }}
-          FCM_API_KEY: ${{ secrets.FCM_API_KEY }}
-        run: ./gradlew runInstrumentedTestsOnFirebase  --stacktrace
-  lint:
+        run: ./gradlew reportModuleStatistics --stacktrace --no-configure-on-demand
+  lintReport:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
@@ -42,7 +33,7 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: key-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - name: Lint
+      - name: Run Lint Report
         env:
           GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
-        run: ./gradlew lint --stacktrace
+        run: ./gradlew lintStatisticsReport --stacktrace
