@@ -1,28 +1,5 @@
 version: 2.4.4
 jobs:
-  build:
-    working_directory: ~/code
-    docker:
-      - image: circleci/android:api-30
-    environment:
-      JVM_OPTS: -Xmx4096m
-    steps:
-      - checkout
-      - restore_cache:
-          key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Get Dependencies
-          command: ./gradlew androidDependencies --max-workers=2 --stacktrace
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Run Tests
-          command: ./gradlew check --max-workers=2 --stacktrace
-      - run:
-          name: Run Tests Firebase
-          command: ./gradlew runInstrumentedTestsOnFirebase --max-workers=2 --stacktrace
   moduleStatisticsReport:
     environment:
       JVM_OPTS: -Xmx4096m
@@ -35,18 +12,6 @@ jobs:
       - run:
           name: Execute Data Processing
           command: ./gradlew reportModuleStatistics --max-workers=2 --stacktrace --no-configure-on-demand
-  lint:
-    environment:
-      JVM_OPTS: -Xmx4096m
-    docker:
-      - image: circleci/android:api-30
-    steps:
-      - checkout
-      - restore_cache:
-          key: cache-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Run Lint
-          command: ./gradlew lint --max-workers=2 --stacktrace
   lintReport:
     environment:
       JVM_OPTS: -Xmx4096m
@@ -62,10 +27,6 @@ jobs:
 
 workflows:
   version: 2
-  check:
-    jobs:
-      - build
-      - lint
   statisticsReport:
     triggers:
       - schedule:
