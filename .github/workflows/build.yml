@@ -20,7 +20,7 @@ jobs:
       - name: Check
         env:
           GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
-        run: ./gradlew check -Parg1=$GITHUB_CLIENT_MIXPANEL_API_KEY --stacktrace
+        run: ./gradlew check --stacktrace
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -37,4 +37,4 @@ jobs:
       - name: Lint
         env:
           GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
-        run: ./gradlew lint -Parg1=$GITHUB_CLIENT_MIXPANEL_API_KEY --stacktrace
+        run: ./gradlew lint --stacktrace
