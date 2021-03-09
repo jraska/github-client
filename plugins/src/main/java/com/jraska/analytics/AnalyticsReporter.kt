@@ -9,7 +9,6 @@ interface AnalyticsReporter {
     fun create(reporterName: String): AnalyticsReporter {
       val mixpanelToken: String? = System.getenv("GITHUB_CLIENT_MIXPANEL_API_KEY")
       if (mixpanelToken == null) {
-        println("'GITHUB_CLIENT_MIXPANEL_API_KEY' not set, data will be reported to console only")
         return ConsoleReporter(reporterName)
       } else {
         println("The key length is ${mixpanelToken.length}")
