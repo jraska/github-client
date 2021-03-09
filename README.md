@@ -1,8 +1,6 @@
 # github-client
 Experimental architecture app with example usage intended to be a showcase, test and skeleton app.
 
-[![Build Status](https://circleci.com/gh/jraska/github-client.svg?style=shield&circle-token=7af979ba3177a70daee39260f230a756edbab6b2)](https://circleci.com/gh/jraska/github-client)
-
 <img width="1667" alt="Screenshot 2021-01-25 at 23 16 04" src="https://user-images.githubusercontent.com/6277721/105773043-71c3f200-5f63-11eb-9a28-99073c2e92ce.png">
 
 
