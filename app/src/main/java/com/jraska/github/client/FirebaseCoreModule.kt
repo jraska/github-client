@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @Module
 object FirebaseCoreModule {
 
-  val ANALYTICS_DISABLED_KEY = Config.Key("analytics_disabled", Owner.CORE_TEAM)
+  private val ANALYTICS_DISABLED_KEY = Config.Key("analytics_disabled", Owner.CORE_TEAM)
 
   @Provides
   @Singleton internal fun firebaseAnalytics(config: Config): FirebaseEventAnalytics {
