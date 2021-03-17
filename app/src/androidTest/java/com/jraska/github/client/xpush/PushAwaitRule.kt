@@ -17,7 +17,7 @@ class PushAwaitRule : ExternalResource() {
     IdlingRegistry.getInstance().unregister(PushAwaitIdlingResource.idlingResource())
   }
 
-  fun viewWillAwaitpPush() {
+  fun viewWillAwaitPush() {
     PushAwaitIdlingResource.waitForPush()
   }
 

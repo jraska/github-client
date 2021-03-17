@@ -68,6 +68,6 @@ class PushIntegrationTest {
   }
 
   private fun viewWillAwaitPush() {
-    pushRule.viewWillAwaitpPush()
+    pushRule.viewWillAwaitPush()
   }
 }
