@@ -33,9 +33,9 @@ class PushIntegrationTest {
   fun testPushIntegration_fromSettingsToAbout() {
     DeepLinkLaunchTest.launchDeepLink("https://github.com/settings")
 
+    viewWillAwaitPush()
     sendDeepLinkPush("https://github.com/about")
 
-    awaitPush()
     onView(withText("by Josef Raska")).check(matches(isDisplayed()))
   }
 
@@ -43,9 +43,9 @@ class PushIntegrationTest {
   fun testPushIntegration_fromAboutToSettings() {
     DeepLinkLaunchTest.launchDeepLink("https://github.com/about")
 
+    viewWillAwaitPush()
     sendDeepLinkPush("https://github.com/settings")
 
-    awaitPush()
     onView(withText("Purchase")).check(matches(isDisplayed()))
   }
 
@@ -67,7 +67,7 @@ class PushIntegrationTest {
     return apiKey as String
   }
 
-  private fun awaitPush() {
-    pushRule.waitForPush()
+  private fun viewWillAwaitPush() {
+    pushRule.viewWillAwaitpPush()
   }
 }
