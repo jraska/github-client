@@ -73,6 +73,10 @@ android {
     }
   }
 
+  testOptions {
+    unitTests.returnDefaultValues = true
+  }
+
   packagingOptions {
     exclude 'META-INF/licenses/ASM'
   }
