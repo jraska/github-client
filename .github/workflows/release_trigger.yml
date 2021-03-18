@@ -1,0 +1,24 @@
+name: Trigger Release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Git Tag'
+        required: true
+        default: '0.1.0'
+
+jobs:
+  create_tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create a GitHub release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          release_name: ${{ github.event.inputs.version }}
+          body: |
+            Release ${{ github.event.inputs.version }}
