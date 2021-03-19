@@ -51,9 +51,9 @@ android {
     }
     release {
       storeFile file("prod.keystore")
-      storePassword = System.getenv('GITHUB_CLIENT_STORE_PASS')
+      storePassword = System.getenv('CLIENT_GITHUB_STORE_PASS')
       keyAlias "prod"
-      keyPassword System.getenv('GITHUB_CLIENT_KEY_PASS')
+      keyPassword System.getenv('CLIENT_GITHUB_KEY_PASS')
     }
   }
 
