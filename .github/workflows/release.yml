@@ -1,15 +1,16 @@
-name: Release Process
+name: Release To App Store
 on:
   release:
     types: [published]
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
       - name: Publish Release
         env:
+          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
           CLIENT_GITHUB_KEY_PASS: ${{ secrets.CLIENT_GITHUB_KEY_PASS }}
           CLIENT_GITHUB_STORE_PASS: ${{ secrets.CLIENT_GITHUB_STORE_PASS }}
           PLAY_PUBLISHER_CREDENTIALS: ${{ secrets.PLAY_PUBLISHER_CREDENTIALS }}

@@ -173,6 +173,7 @@ project.afterEvaluate {
     if (credentials == null) {
       throw new GradleException("PLAY_PUBLISHER_CREDENTIALS not set, cannot release")
     }
+    buildDir.mkdir()
     new File("$buildDir/play-publish-key.json").write(credentials)
   }
 }
