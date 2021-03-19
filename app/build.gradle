@@ -24,8 +24,8 @@ android {
     applicationId "com.jraska.github.client"
     minSdkVersion 24
     targetSdkVersion 30
-    versionName '0.21.4'
-    versionCode 84
+    versionName '0.22.1'
+    versionCode 86
     multiDexEnabled true
 
     testInstrumentationRunner "com.jraska.github.client.TestRunner"
@@ -168,15 +168,11 @@ play {
 }
 
 project.afterEvaluate {
-  def setupPlayPublisherJsonTask = tasks.register("setupPlayPublisherJson") {
-    doFirst {
-      def credentials = System.getenv("PLAY_PUBLISHER_CREDENTIALS")
-      if (credentials == null) {
-        throw new GradleException("PLAY_PUBLISHER_CREDENTIALS not set, cannot release")
-      }
-      new File("$buildDir/play-publish-key.json").write(credentials)
+  if (gradle.startParameter.taskNames.first().startsWith("publishBundle")) {
+    def credentials = System.getenv("PLAY_PUBLISHER_CREDENTIALS")
+    if (credentials == null) {
+      throw new GradleException("PLAY_PUBLISHER_CREDENTIALS not set, cannot release")
     }
+    new File("$buildDir/play-publish-key.json").write(credentials)
   }
-
-  tasks.named("publishBundle").configure({ dependsOn(setupPlayPublisherJsonTask) })
 }

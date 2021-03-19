@@ -1,0 +1,16 @@
+name: Release Process
+on:
+  release:
+    types: [published]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Publish Release
+        env:
+          CLIENT_GITHUB_KEY_PASS: ${{ secrets.CLIENT_GITHUB_KEY_PASS }}
+          CLIENT_GITHUB_STORE_PASS: ${{ secrets.CLIENT_GITHUB_STORE_PASS }}
+          PLAY_PUBLISHER_CREDENTIALS: ${{ secrets.PLAY_PUBLISHER_CREDENTIALS }}
+        run: ./gradlew publishBundle  --stacktrace
