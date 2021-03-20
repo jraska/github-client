@@ -15,3 +15,8 @@ jobs:
           CLIENT_GITHUB_STORE_PASS: ${{ secrets.CLIENT_GITHUB_STORE_PASS }}
           PLAY_PUBLISHER_CREDENTIALS: ${{ secrets.PLAY_PUBLISHER_CREDENTIALS }}
         run: ./gradlew publishBundle  --stacktrace
+      - name: Mark PRs with Milestone
+        env:
+          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
+          TOKEN_GITHUB_API: ${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew markAllPrsWithReleaseMilestone  --stacktrace

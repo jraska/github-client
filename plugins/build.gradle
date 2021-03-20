@@ -9,6 +9,7 @@ buildscript {
 
 apply plugin: 'kotlin'
 apply plugin: 'java-gradle-plugin'
+apply from: '../dependencies.gradle'
 
 repositories {
   jcenter()
@@ -18,6 +19,11 @@ dependencies {
   implementation gradleApi()
   implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.31"
   implementation 'com.mixpanel:mixpanel-java:1.4.4'
+
+  implementation project.ext.retrofit
+  implementation project.ext.retrofitGsonConverter
+  implementation project.ext.okHttp
+  implementation project.ext.okHttpLoggingInterceptor
 
   testImplementation 'junit:junit:4.13.2'
   testImplementation 'org.assertj:assertj-core:3.19.0'
