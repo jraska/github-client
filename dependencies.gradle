@@ -11,6 +11,7 @@ ext {
   okHttpVersion = '4.9.1'
   okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+  okHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 
   frescoVesion = '2.4.0'
   fresco = "com.facebook.fresco:fresco:$frescoVesion"
