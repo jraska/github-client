@@ -16,5 +16,5 @@ jobs:
       - name: Create Release and Bump version
         env:
           GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
-          TOKEN_GITHUB_API: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN_GITHUB_API: ${{ secrets.CI_GITHUB_TOKEN }}
         run: ./gradlew createNewReleaseAndBumpVersion  --stacktrace
