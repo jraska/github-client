@@ -34,7 +34,7 @@ class ReleasePlugin : Plugin<Project> {
       it.standardOutput = byteArrayOutputStream
     }
 
-    return byteArrayOutputStream.toString()
+    return byteArrayOutputStream.toString().trim() // trim() is there is it returned linefeed	- %0a
   }
 
   private fun updatePatchVersionInBuildGradle(project: Project) {
