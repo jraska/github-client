@@ -54,18 +54,4 @@ subprojects {
   }
 }
 
-ext {
-  daggerVersion = '2.33'
-  daggerAnnotationProcessor = "com.google.dagger:dagger-compiler:$daggerVersion"
-  dagger = "com.google.dagger:dagger:$daggerVersion"
-
-  okHttpVersion = '4.9.1'
-  okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
-  okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
-
-  frescoVesion = '2.4.0'
-  fresco = "com.facebook.fresco:fresco:$frescoVesion"
-  frescoDrawee = "com.facebook.fresco:drawee:$frescoVesion"
-}
-
 apply from: 'dependencies.gradle'
