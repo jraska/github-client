@@ -3,7 +3,7 @@ package com.jraska.github.client.release
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class VersionIncrementTest {
+class GradleFileUtilsTest {
   val GRADLE_FILE_TEXT = """android {
   compileSdkVersion 30
 
@@ -31,23 +31,30 @@ class VersionIncrementTest {
 }"""
 
   @Test
+  fun versionNameFoundProperly() {
+    val versionName = GradleFileUtils.versionName(GRADLE_FILE_TEXT)
+
+    assertThat(versionName).isEqualTo("0.20.9")
+  }
+
+  @Test
   fun versionCodeIsIncremented() {
-    val incrementedContent = GradleFileVersionIncrement.incrementVersionCode(GRADLE_FILE_TEXT)
+    val incrementedContent = GradleFileUtils.incrementVersionCode(GRADLE_FILE_TEXT)
     assertThat(incrementedContent).contains("versionCode 67")
     assertThat(incrementedContent.length).isEqualTo(GRADLE_FILE_TEXT.length)
 
-    val anotherIncrementedContent = GradleFileVersionIncrement.incrementVersionCode(incrementedContent)
+    val anotherIncrementedContent = GradleFileUtils.incrementVersionCode(incrementedContent)
     assertThat(anotherIncrementedContent).contains("versionCode 68")
     assertThat(incrementedContent.length).isEqualTo(GRADLE_FILE_TEXT.length)
   }
 
   @Test
   fun patchIsIncremented() {
-    val incrementedContent = GradleFileVersionIncrement.incrementVersionNamePatch(GRADLE_FILE_TEXT)
+    val incrementedContent = GradleFileUtils.incrementVersionNamePatch(GRADLE_FILE_TEXT)
     assertThat(incrementedContent).contains("versionName '0.20.10'")
     assertThat(incrementedContent.length).isEqualTo(GRADLE_FILE_TEXT.length + 1)
 
-    val anotherIncrementedContent = GradleFileVersionIncrement.incrementVersionNamePatch(incrementedContent)
+    val anotherIncrementedContent = GradleFileUtils.incrementVersionNamePatch(incrementedContent)
     assertThat(anotherIncrementedContent).contains("versionName '0.20.11'")
     assertThat(incrementedContent.length).isEqualTo(GRADLE_FILE_TEXT.length + 1)
   }

@@ -31,6 +31,9 @@ interface RetrofitGitHubApi {
 
   @GET("pulls?state=closed&base=master&per_page=100")
   fun getPulls(@Query("page") page: Int = 1): Call<List<PullRequestDto>>
+
+  @POST("releases")
+  fun createRelease(@Body dto: CreateReleaseDto): Call<ResponseBody>
 }
 
 class PullRequestDto {
@@ -53,6 +56,17 @@ class ReleaseDto {
   @SerializedName("id")
   var id: Int = 0
 }
+
+class CreateReleaseDto(
+  @SerializedName("tag_name")
+  val tagName: String,
+
+  @SerializedName("target_commitish")
+  val targetCommitish: String = "master",
+
+  @SerializedName("name")
+  val name: String = tagName
+)
 
 class AssignMilestoneDto(
   @SerializedName("milestone")

@@ -2,7 +2,18 @@ package com.jraska.github.client.release
 
 import java.util.regex.Pattern
 
-object GradleFileVersionIncrement {
+object GradleFileUtils {
+  fun versionName(gradleFileText: String): String {
+    val versionNamePattern = Pattern.compile("""versionName '([0-9]*\.[0-9]*\.[0-9]*)'""")
+    val versionNameMatcher = versionNamePattern.matcher(gradleFileText)
+    val found = versionNameMatcher.find()
+    if (!found) {
+      throw IllegalStateException("No match found for $versionNamePattern")
+    }
+
+    return versionNameMatcher.group(1)
+  }
+
   fun incrementVersionCode(gradleFileText: String): String {
     val versionCodePattern = Pattern.compile("""versionCode ([0-9]*)""")
     val versionCodeMatcher = versionCodePattern.matcher(gradleFileText)

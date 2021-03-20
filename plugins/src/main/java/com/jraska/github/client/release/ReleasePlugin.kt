@@ -13,9 +13,9 @@ class ReleasePlugin : Plugin<Project> {
   }
 
   private fun addTasks(project: Project) {
-    project.tasks.register("incrementPatch") {
+    project.tasks.register("createNewReleaseAndBumpVersion") {
       it.doFirst {
-        updatePatchVersionInBuildGradle(project)
+        CreateReleaseAndBump.execute(project)
       }
     }
 
@@ -35,15 +35,5 @@ class ReleasePlugin : Plugin<Project> {
     }
 
     return byteArrayOutputStream.toString().trim() // trim() is there is it returned linefeed	- %0a
-  }
-
-  private fun updatePatchVersionInBuildGradle(project: Project) {
-    val buildGradleFile = File(project.projectDir, "build.gradle")
-    val buildGradleText = buildGradleFile.readText()
-
-    val incrementVersionCode = GradleFileVersionIncrement.incrementVersionCode(buildGradleText)
-    val newContent = GradleFileVersionIncrement.incrementVersionNamePatch(incrementVersionCode)
-
-    buildGradleFile.writeText(newContent)
   }
 }

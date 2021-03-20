@@ -47,4 +47,8 @@ class GitHubApiImpl(
 
     return pulls
   }
+
+  override fun createRelease(version: String) {
+    api.createRelease(CreateReleaseDto(version)).execute()
+  }
 }

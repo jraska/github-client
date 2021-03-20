@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Git Tag'
-        required: true
-        default: '0.1.0'
+        description: 'Comment'
+        required: false
+        default: 'Next release'
 
 jobs:
   create_tag:
@@ -13,12 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Create a GitHub release
-        uses: actions/create-release@v1
+      - name: Create Release and Bump version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.event.inputs.version }}
-          release_name: ${{ github.event.inputs.version }}
-          body: |
-            Release ${{ github.event.inputs.version }}
+          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
+          TOKEN_GITHUB_API: ${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew createNewReleaseAndBumpVersion  --stacktrace
