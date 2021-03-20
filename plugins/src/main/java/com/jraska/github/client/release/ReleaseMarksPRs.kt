@@ -5,9 +5,10 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 
 object ReleaseMarksPRs {
   fun execute(tag: String) {
-    val release = Release(tag, "https://github.com/jraska/github-client/releases/tag/$tag".toHttpUrl())
+    val environment = Environment.create()
+    val release = Release(tag, "${environment.baseUrl}releases/tag/$tag".toHttpUrl())
 
-    val api = GitHubApiFactory.create()
+    val api = GitHubApiFactory.create(environment)
     val releaseMarker = ReleaseMarker(api, NotesComposer())
 
     releaseMarker.markPrsWithMilestone(release)
