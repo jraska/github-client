@@ -2,10 +2,10 @@ name: Trigger Release
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Comment'
+      updateType:
+        description: 'Update Type (minor is default)'
         required: false
-        default: 'Next release'
+        default: 'minor/patch/major'
 
 jobs:
   create_tag:
@@ -13,8 +13,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
       - name: Create Release and Bump version
         env:
           GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
           TOKEN_GITHUB_API: ${{ secrets.CI_GITHUB_TOKEN }}
-        run: ./gradlew createNewReleaseAndBumpVersion  --stacktrace
+        run: ./gradlew createNewReleaseAndBumpVersion -PupdateType=${{ github.event.inputs.updateType }} --stacktrace
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.CI_GITHUB_TOKEN }}

@@ -58,4 +58,26 @@ class GradleFileUtilsTest {
     assertThat(anotherIncrementedContent).contains("versionName '0.20.11'")
     assertThat(incrementedContent.length).isEqualTo(GRADLE_FILE_TEXT.length + 1)
   }
+
+  @Test
+  fun minorIsIncremented() {
+    val incrementedContent = GradleFileUtils.incrementVersionNameMinor(GRADLE_FILE_TEXT)
+    assertThat(incrementedContent).contains("versionName '0.21.0'")
+    assertThat(incrementedContent.length).isEqualTo(GRADLE_FILE_TEXT.length)
+
+    val anotherIncrementedContent = GradleFileUtils.incrementVersionNameMinor(incrementedContent)
+    assertThat(anotherIncrementedContent).contains("versionName '0.22.0'")
+    assertThat(incrementedContent.length).isEqualTo(GRADLE_FILE_TEXT.length)
+  }
+
+  @Test
+  fun majorIsIncremented() {
+    val incrementedContent = GradleFileUtils.incrementVersionNameMajor(GRADLE_FILE_TEXT)
+    assertThat(incrementedContent).contains("versionName '1.0.0'")
+    assertThat(incrementedContent.length).isEqualTo(GRADLE_FILE_TEXT.length - 1)
+
+    val anotherIncrementedContent = GradleFileUtils.incrementVersionNameMajor(incrementedContent)
+    assertThat(anotherIncrementedContent).contains("versionName '2.0.0'")
+    assertThat(incrementedContent.length).isEqualTo(GRADLE_FILE_TEXT.length - 1)
+  }
 }
