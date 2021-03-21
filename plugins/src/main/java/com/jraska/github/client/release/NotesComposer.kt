@@ -6,6 +6,6 @@ class NotesComposer {
   }
 
   fun prReleaseComment(release: Release): String {
-    return "This PR was released in [${release.releaseName}](${release.releaseUrl})."
+    return "This PR was released in [${release.releaseName}](${release.releaseUrl}). \uD83D\uDE80 "
   }
 }
