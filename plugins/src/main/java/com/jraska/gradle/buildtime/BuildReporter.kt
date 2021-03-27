@@ -54,6 +54,9 @@ class BuildReporter(
     ).apply {
       putAll(buildData.parameters)
       putAll(buildData.gitInfo.asAnalyticsProperties())
+      if (buildData.ciInfo != null) {
+        putAll(buildData.ciInfo.asAnalyticsProperties())
+      }
     }
   }
 

@@ -1,5 +1,6 @@
 package com.jraska.gradle.buildtime
 
+import com.jraska.gradle.CiInfo
 import com.jraska.gradle.git.GitInfo
 
 data class BuildData(
@@ -16,6 +17,7 @@ data class BuildData(
   val environment: Environment,
   val parameters: Map<String, Any>,
   val gitInfo: GitInfo,
+  val ciInfo: CiInfo?,
   val taskStatistics: TaskStatistics,
   val buildDataCollectionOverhead: Long // This is only collection overhead. We cannot see the reporting overhead as measuring and reporting it will add meta- overhead :D
 )

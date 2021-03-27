@@ -1,5 +1,6 @@
 package com.jraska.gradle.buildtime
 
+import com.jraska.gradle.CiInfo
 import com.jraska.gradle.git.GitInfoProvider
 import org.codehaus.groovy.runtime.ProcessGroovyMethods
 import org.gradle.BuildResult
@@ -27,6 +28,8 @@ object BuildDataFactory {
     val daemonInfo = services[DaemonScanInfo::class.java]
     val startParameter = gradle.startParameter
 
+    val ciInfo = CiInfo.collectGitHubActions()
+
     return BuildData(
       action = result.action,
       buildTime = totalTime,
@@ -47,6 +50,7 @@ object BuildDataFactory {
         "maxWorkers" to startParameter.maxWorkerCount
       ).apply { putAll(startParameter.systemPropertiesArgs) },
       gitInfo = GitInfoProvider.gitInfo(gradle.rootProject),
+      ciInfo = ciInfo,
       taskStatistics = TaskStatistics(
         statistics.totalTaskCount,
         statistics.upToDateTaskCount,

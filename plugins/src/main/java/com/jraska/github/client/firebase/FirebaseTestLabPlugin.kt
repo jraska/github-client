@@ -4,6 +4,7 @@ import com.jraska.analytics.AnalyticsReporter
 import com.jraska.github.client.firebase.report.FirebaseResultExtractor
 import com.jraska.github.client.firebase.report.FirebaseUrlParser
 import com.jraska.github.client.firebase.report.TestResultsReporter
+import com.jraska.gradle.CiInfo
 import com.jraska.gradle.git.GitInfoProvider
 import org.apache.tools.ant.util.TeeOutputStream
 import org.gradle.api.Plugin
@@ -57,13 +58,13 @@ class FirebaseTestLabPlugin : Plugin<Project> {
           project.exec("gsutil cp $firstResultsFileToPull $firstOutputFile")
 
           val firebaseUrl = FirebaseUrlParser.parse(decorativeStream.toString())
-          val firstResult = FirebaseResultExtractor(firebaseUrl, GitInfoProvider.gitInfo(project), firstDevice).extract(File(firstOutputFile).readText())
+          val firstResult = FirebaseResultExtractor(firebaseUrl, GitInfoProvider.gitInfo(project), CiInfo.collectGitHubActions(), firstDevice).extract(File(firstOutputFile).readText())
 
           val secondOutputFile = "${project.buildDir}/test-results/${secondDevice.cloudStoragePath()}/firebase-tests-results.xml"
           val secondResultsFileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/${secondDevice.cloudStoragePath()}/test_result_1.xml"
           project.exec("gsutil cp $secondResultsFileToPull $secondOutputFile")
 
-          val secondResult = FirebaseResultExtractor(firebaseUrl, GitInfoProvider.gitInfo(project), secondDevice).extract(File(secondOutputFile).readText())
+          val secondResult = FirebaseResultExtractor(firebaseUrl, GitInfoProvider.gitInfo(project), CiInfo.collectGitHubActions(), secondDevice).extract(File(secondOutputFile).readText())
 
           val reporter = TestResultsReporter(AnalyticsReporter.create("Test Reporter"))
 
