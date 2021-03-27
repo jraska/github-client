@@ -24,7 +24,7 @@ class CiInfo(
 
       val runId = System.getenv("GITHUB_RUN_ID").toLong()
       val runNumber = System.getenv("GITHUB_RUN_NUMBER").toInt()
-      val runLink = "https://github.com/jraska/github-client/runs/$runId".toHttpUrl()
+      val runLink = "https://github.com/jraska/github-client/actions/runs/$runId".toHttpUrl()
 
       return CiInfo(runId, workflowName, runNumber, runLink)
     }

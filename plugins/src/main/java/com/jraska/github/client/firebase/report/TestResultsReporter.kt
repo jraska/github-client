@@ -34,7 +34,12 @@ class TestResultsReporter(
       "failure" to testResult.failure,
       "outcome" to testResult.outcome,
       "testTime" to testResult.time
-    ).apply { putAll(testResult.gitInfo.asAnalyticsProperties()) }
+    ).apply {
+      putAll(testResult.gitInfo.asAnalyticsProperties())
+      if(testResult.ciInfo != null) {
+        putAll(testResult.ciInfo.asAnalyticsProperties())
+      }
+    }
   }
 
   private fun convertTestSuite(results: TestSuiteResult): Map<String, Any?> {
@@ -49,7 +54,12 @@ class TestResultsReporter(
       "flakyCount" to results.flakyCount,
       "failedCount" to results.failedCount,
       "errorsCount" to results.errorsCount
-    ).apply { putAll(results.gitInfo.asAnalyticsProperties()) }
+    ).apply {
+      putAll(results.gitInfo.asAnalyticsProperties())
+      if(results.ciInfo != null) {
+        putAll(results.ciInfo.asAnalyticsProperties())
+      }
+    }
   }
 
   companion object {
