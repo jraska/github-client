@@ -25,6 +25,7 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Release publishing by [Triple-T/google-play-publisher plugin](https://github.com/Triple-T/gradle-play-publisher)
 - [GitHub Actions implemented](https://github.com/jraska/github-client/tree/master/.github/workflows) with full releasing to Play Store with [automatic version bump](https://github.com/jraska/github-client/blob/master/.github/workflows/release_trigger.yml).
 - Automatic creation of release, release tag, release milestone and tagging all PRs which belong to that release with certain mileston. See [this issue](https://github.com/jraska/github-client/issues/236#issuecomment-802366339), [this PR](https://github.com/jraska/github-client/pull/437), [example release](https://github.com/jraska/github-client/releases/tag/0.23.4) or [tagged pull requests](https://github.com/jraska/github-client/pulls?q=is%3Apr+is%3Aclosed).
+- [Dependabot configured](https://github.com/jraska/github-client/blob/master/.github/dependabot.yml) to keep project dependencies up to date.
 
 ## Architecture
 - Android Architectue Components `LiveData` and `ViewModel` are used to connect Activities with app logic
