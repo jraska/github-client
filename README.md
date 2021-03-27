@@ -38,6 +38,7 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Enforced ownership of remote configuration and analytics events - [Details on PR](https://github.com/jraska/github-client/pull/230). More on why these need to be explicitly owned on [this article](https://proandroiddev.com/remote-feature-flags-do-not-always-come-for-free-a372f1768a70).
 
 ## Metrics
+In case you want to copy and use any of these with your analytics platform, the only adjustment could be your own [`AnalyticsReporter` implementation](https://github.com/jraska/github-client/blob/master/plugins/src/main/java/com/jraska/analytics/AnalyticsReporter.kt#L6).
 - Build time tracking with reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/303).
 - Modularisation statistics reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/334).
 - Dependencies reporting to see which modules depend on too much - see [this PR](https://github.com/jraska/github-client/pull/371
