@@ -2,6 +2,6 @@ package com.jraska.github.client.users.model
 
 class User(
   val login: String,
-  val ava tarUrl: String,
+  val avatarUrl: String,
   val isAdmin: Boolean
 )
