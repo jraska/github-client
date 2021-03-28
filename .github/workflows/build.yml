@@ -1,6 +1,5 @@
 name: Build
 on: [push]
-
 env:
   GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
 jobs:
