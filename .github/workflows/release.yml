@@ -2,6 +2,8 @@ name: Release To App Store
 on:
   release:
     types: [published]
+env:
+  GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -10,13 +12,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Publish Release
         env:
-          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
           CLIENT_GITHUB_KEY_PASS: ${{ secrets.CLIENT_GITHUB_KEY_PASS }}
           CLIENT_GITHUB_STORE_PASS: ${{ secrets.CLIENT_GITHUB_STORE_PASS }}
           PLAY_PUBLISHER_CREDENTIALS: ${{ secrets.PLAY_PUBLISHER_CREDENTIALS }}
         run: ./gradlew publishBundle  --stacktrace
       - name: Mark PRs with Milestone
         env:
-          GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
           TOKEN_GITHUB_API: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew markAllPrsWithReleaseMilestone  --stacktrace
