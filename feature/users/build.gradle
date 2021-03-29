@@ -39,7 +39,7 @@ dependencies {
   implementation 'com.airbnb.android:epoxy:4.4.3'
   implementation rootProject.ext.fresco
 
-  implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.0'
+  implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.1'
 
   testImplementation 'com.jraska.livedata:testing:1.1.2'
   testImplementation 'com.jraska.livedata:testing-ktx:1.1.2'
@@ -47,6 +47,6 @@ dependencies {
   testImplementation 'org.assertj:assertj-core:3.19.0'
   testImplementation 'org.mockito:mockito-core:3.8.0'
   testImplementation 'androidx.arch.core:core-testing:2.1.0'
-  testImplementation 'androidx.annotation:annotation:1.1.0'
+  testImplementation 'androidx.annotation:annotation:1.2.0'
   testImplementation project(':core-testing')
 }
