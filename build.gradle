@@ -12,7 +12,7 @@ buildscript {
     classpath('com.google.firebase:firebase-plugins:2.0.0') {
       exclude group: 'com.google.api-client', module: 'google-api-client' // conflicts with com.github.triplet.play
     }
-    classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.1'
+    classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
     classpath 'com.google.gms:google-services:4.3.5'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
   }
