@@ -36,7 +36,9 @@ class GitHubApiRepoRepositoryTest {
   // This needs to be easier to create in tests
   private fun repoGitHubApi() = Retrofit.Builder()
     .baseUrl(mockWebServer.url("/"))
-    .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor()).build())
+    .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor { println(it) }.apply {
+      level = HttpLoggingInterceptor.Level.BASIC
+    }).build())
     .addConverterFactory(GsonConverterFactory.create())
     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
     .build()
