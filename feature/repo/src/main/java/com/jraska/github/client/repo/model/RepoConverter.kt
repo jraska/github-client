@@ -21,6 +21,19 @@ internal object RepoConverter {
       repo.subscribersCount!!
     )
 
-    return RepoDetail(header, data)
+    return RepoDetail(header, data, RepoDetail.PullRequestsState.Loading)
+  }
+
+  fun convertRepos(detail: RepoDetail, prs: List<GitHubPullRequest>): RepoDetail {
+    val pulls = prs.map { convertPr(it) }
+    return detail.copy(pullRequests = RepoDetail.PullRequestsState.PullRequests(pulls))
+  }
+
+  fun convertRepos(detail: RepoDetail, prsError: Throwable): RepoDetail {
+    return detail.copy(pullRequests = RepoDetail.PullRequestsState.Error(prsError))
+  }
+
+  private fun convertPr(gitHubPr: GitHubPullRequest): RepoDetail.PullRequest {
+    return RepoDetail.PullRequest(gitHubPr.title)
   }
 }

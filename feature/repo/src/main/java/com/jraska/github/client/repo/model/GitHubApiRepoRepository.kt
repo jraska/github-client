@@ -10,5 +10,13 @@ internal class GitHubApiRepoRepository(
     return gitHubRepoApi.getRepo(owner, repoName)
       .toObservable()
       .map { RepoConverter.convertToDetail(it) }
+      .concatMap { detail ->
+        Observable.just(detail)
+          .concatWith(
+            gitHubRepoApi.getPulls(owner, repoName)
+              .map { RepoConverter.convertRepos(detail, it) }
+              .onErrorReturn { RepoConverter.convertRepos(detail, it) }
+          )
+      }
   }
 }
