@@ -184,4 +184,8 @@ project.afterEvaluate {
     buildDir.mkdir()
     new File("$buildDir/play-publish-key.json").write(credentials)
   }
+
+  tasks.named("publishBundle").configure {
+    it.dependsOn("uploadCrashlyticsMappingFileRelease")
+  }
 }
