@@ -8,6 +8,8 @@ dependencies {
   implementation project(':core-api')
   implementation project(':feature:identity-api')
 
+  implementation 'org.threeten:threetenbp:1.4.4:no-tzdb'
+
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
 

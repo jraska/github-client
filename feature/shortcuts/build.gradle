@@ -22,4 +22,6 @@ dependencies {
 
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
+
+  implementation rootProject.ext.okHttp
 }

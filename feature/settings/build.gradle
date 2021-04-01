@@ -26,6 +26,7 @@ dependencies {
   implementation 'com.airbnb.android:epoxy:4.4.4'
   implementation 'com.jraska:console:1.1.0'
   implementation 'com.jraska:console-timber-tree:1.1.0'
+  implementation rootProject.ext.okHttp
 
   implementation rootProject.ext.dagger
   kapt rootProject.ext.daggerAnnotationProcessor

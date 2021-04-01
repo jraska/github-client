@@ -25,6 +25,7 @@ dependencies {
   implementation 'androidx.appcompat:appcompat:1.2.0'
   implementation 'androidx.annotation:annotation:1.2.0'
   implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+  implementation 'org.threeten:threetenbp:1.4.4:no-tzdb'
 
 
   kapt rootProject.ext.daggerAnnotationProcessor

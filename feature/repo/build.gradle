@@ -36,6 +36,7 @@ dependencies {
   implementation 'androidx.recyclerview:recyclerview:1.1.0'
   implementation 'com.airbnb.android:epoxy:4.4.4'
   implementation rootProject.ext.fresco
+  implementation 'org.threeten:threetenbp:1.4.4:no-tzdb'
 
   implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.1'
 

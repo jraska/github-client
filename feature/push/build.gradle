@@ -27,6 +27,8 @@ dependencies {
   kapt rootProject.ext.daggerAnnotationProcessor
 
   implementation 'com.jakewharton.timber:timber:4.7.1'
+  implementation rootProject.ext.okHttp
+  implementation 'org.threeten:threetenbp:1.4.4:no-tzdb'
 
   testImplementation 'junit:junit:4.13.2'
   testImplementation 'org.assertj:assertj-core:3.19.0'

@@ -26,6 +26,7 @@ dependencies {
   implementation rootProject.ext.dagger
 
   implementation 'com.airbnb.android:epoxy:4.4.4'
+  implementation rootProject.ext.okHttp
   implementation rootProject.ext.frescoDrawee
   implementation 'androidx.recyclerview:recyclerview:1.1.0'
   implementation 'com.google.android.material:material:1.3.0'
