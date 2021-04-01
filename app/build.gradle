@@ -185,6 +185,7 @@ project.afterEvaluate {
     new File("$buildDir/play-publish-key.json").write(credentials)
   }
 
+  // https://github.com/Triple-T/gradle-play-publisher/issues/859
   tasks.named("publishBundle").configure {
     it.dependsOn("uploadCrashlyticsMappingFileRelease")
   }
