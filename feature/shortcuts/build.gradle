@@ -18,6 +18,8 @@ dependencies {
   implementation project(':core-api')
   implementation project(':core-android-api')
 
+  implementation 'androidx.appcompat:appcompat:1.2.0'
+
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
 }
