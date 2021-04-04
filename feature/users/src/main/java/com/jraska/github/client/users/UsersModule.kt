@@ -8,7 +8,6 @@ import com.jraska.github.client.config.MutableConfigType
 import com.jraska.github.client.core.android.LinkLauncher
 import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
-import com.jraska.github.client.users.model.GitHubUserDetailApi
 import com.jraska.github.client.users.model.GitHubUsersApi
 import com.jraska.github.client.users.model.UsersRepository
 import com.jraska.github.client.users.ui.UsersActivity
@@ -29,9 +28,8 @@ object UsersModule {
   @Singleton
   internal fun provideUsersRepository(retrofit: Retrofit): UsersRepository {
     val usersApi = retrofit.create(GitHubUsersApi::class.java)
-    val detailApi = retrofit.create(GitHubUserDetailApi::class.java)
 
-    return GitHubApiUsersRepository(usersApi, detailApi)
+    return GitHubApiUsersRepository(usersApi)
   }
 
   @Provides

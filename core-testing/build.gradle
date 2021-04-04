@@ -10,4 +10,11 @@ dependencies {
   implementation rootProject.ext.dagger
 
   implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+
+  implementation rootProject.ext.retrofit
+  implementation rootProject.ext.retrofitGsonConverter
+  implementation rootProject.ext.retrofitRxJavaAdapter
+  implementation okHttp
+  implementation okHttpMockWebServer
+  implementation okHttpLoggingInterceptor
 }

@@ -7,7 +7,6 @@ import java.util.Collections
 
 internal class GitHubApiUsersRepository(
   private val gitHubUsersApi: GitHubUsersApi,
-  private val gitHubUserDetailApi: GitHubUserDetailApi
 ) : UsersRepository {
   private val converter: UserDetailWithReposConverter =
     UserDetailWithReposConverter.INSTANCE
@@ -21,9 +20,9 @@ internal class GitHubApiUsersRepository(
   }
 
   override fun getUserDetail(login: String, reposInSection: Int): Observable<UserDetail> {
-    return gitHubUserDetailApi.getUserDetail(login)
+    return gitHubUsersApi.getUserDetail(login)
       .subscribeOn(Schedulers.io()) // this has to be here now to run requests in parallel
-      .zipWith(gitHubUserDetailApi.getRepos(login), { a: GitHubUserDetail, b: List<GitHubUserRepo> -> Pair(a, b) })
+      .zipWith(gitHubUsersApi.getRepos(login), { a: GitHubUserDetail, b: List<GitHubUserRepo> -> Pair(a, b) })
       .map { result -> converter.translateUserDetail(result.component1(), result.component2(), reposInSection) }
       .toObservable()
       .startWith(cachedUser(login))

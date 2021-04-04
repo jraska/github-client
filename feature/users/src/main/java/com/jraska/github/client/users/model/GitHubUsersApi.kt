@@ -9,6 +9,9 @@ internal interface GitHubUsersApi {
   @GET("/users")
   fun getUsers(@Query("since") since: Int): Single<List<GitHubUser>>
 
-  @GET("/repos/{owner}/{name}")
-  fun getRepo(@Path("owner") path: String, @Path("name") name: String): Single<GitHubUserRepo>
+  @GET("/users/{login}")
+  fun getUserDetail(@Path("login") login: String): Single<GitHubUserDetail>
+
+  @GET("/users/{login}/repos?type=all")
+  fun getRepos(@Path("login") login: String): Single<List<GitHubUserRepo>>
 }

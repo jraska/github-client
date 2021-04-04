@@ -1,17 +1,12 @@
 package com.jraska.github.client.repo.model
 
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import okhttp3.mockwebserver.MockResponse
+import com.jraska.github.client.HttpTest
+import com.jraska.github.client.enqueue
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.threeten.bp.Instant
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
-import java.io.File
 
 class GitHubApiRepoRepositoryTest {
 
@@ -33,16 +28,7 @@ class GitHubApiRepoRepositoryTest {
     assertThat(repoDetail).usingRecursiveComparison().isEqualTo(expectedRepoDetail())
   }
 
-  // This needs to be easier to create in tests
-  private fun repoGitHubApi() = Retrofit.Builder()
-    .baseUrl(mockWebServer.url("/"))
-    .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor { println(it) }.apply {
-      level = HttpLoggingInterceptor.Level.BASIC
-    }).build())
-    .addConverterFactory(GsonConverterFactory.create())
-    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-    .build()
-    .create(RepoGitHubApi::class.java)
+  private fun repoGitHubApi() = HttpTest.retrofit(mockWebServer.url("/")).create(RepoGitHubApi::class.java)
 
   private fun expectedRepoDetail(): RepoDetail {
     return RepoDetail(
@@ -61,16 +47,5 @@ class GitHubApiRepoRepositoryTest {
         )
       )
     )
-  }
-
-  fun MockWebServer.enqueue(path: String) {
-    enqueue(MockResponse().setBody(json(path)))
-  }
-
-  @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-  private fun MockWebServer.json(path: String): String {
-    val uri = this.javaClass.classLoader.getResource(path)
-    val file = File(uri?.path!!)
-    return String(file.readBytes())
   }
 }

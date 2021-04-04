@@ -44,4 +44,5 @@ dependencies {
   testImplementation okHttpLoggingInterceptor
   testImplementation 'junit:junit:4.13.2'
   testImplementation 'org.assertj:assertj-core:3.18.1'
+  testImplementation project(':core-testing')
 }

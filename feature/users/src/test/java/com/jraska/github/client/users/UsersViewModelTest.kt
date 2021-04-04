@@ -5,7 +5,6 @@ import com.jraska.github.client.Fakes
 import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
 import com.jraska.github.client.users.model.GitHubUser
-import com.jraska.github.client.users.model.GitHubUserDetailApi
 import com.jraska.github.client.users.model.GitHubUsersApi
 import com.jraska.livedata.test
 import io.reactivex.Single
@@ -19,7 +18,6 @@ import org.mockito.MockitoAnnotations
 class UsersViewModelTest {
   @get:Rule val testRule = InstantTaskExecutorRule()
 
-  @Mock private lateinit var detailApi: GitHubUserDetailApi
   @Mock private lateinit var usersApi: GitHubUsersApi
   @Mock private lateinit var navigator: Navigator
 
@@ -32,7 +30,7 @@ class UsersViewModelTest {
 
     Mockito.`when`(usersApi.getUsers(0)).thenReturn(Single.fromCallable { users })
 
-    val usersRepository = GitHubApiUsersRepository(usersApi, detailApi)
+    val usersRepository = GitHubApiUsersRepository(usersApi)
     viewModel = UsersViewModel(usersRepository, Fakes.trampoline(), navigator, Fakes.emptyAnalytics())
   }
 
