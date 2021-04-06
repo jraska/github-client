@@ -1,7 +1,7 @@
 package com.jraska.github.client.repo.model
 
-import com.jraska.github.client.HttpTest
-import com.jraska.github.client.enqueue
+import com.jraska.github.client.http.HttpTest
+import com.jraska.github.client.http.enqueue
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule

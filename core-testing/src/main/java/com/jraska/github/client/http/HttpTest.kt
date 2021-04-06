@@ -1,4 +1,4 @@
-package com.jraska.github.client
+package com.jraska.github.client.http
 
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -27,7 +27,25 @@ fun MockWebServer.enqueue(path: String) {
   this.enqueue(MockResponse().setBody(json(path)))
 }
 
-private fun json(path: String): String {
+fun MockWebServer.onUrlPartReturn(urlPart: String, jsonPath: String) {
+  ensureMapDispatcher()
+
+  (dispatcher as MapDispatcher).onUrlPartReturn(urlPart, jsonPath)
+}
+
+fun MockWebServer.onUrlReturn(urlRegex: Regex, jsonPath: String) {
+  ensureMapDispatcher()
+
+  (dispatcher as MapDispatcher).onUrlReturn(urlRegex, jsonPath)
+}
+
+private fun MockWebServer.ensureMapDispatcher() {
+  if (dispatcher !is MapDispatcher) {
+    dispatcher = MapDispatcher()
+  }
+}
+
+internal fun json(path: String): String {
   val uri = HttpTest.javaClass.classLoader.getResource(path)
   val file = File(uri?.path!!)
   return String(file.readBytes())

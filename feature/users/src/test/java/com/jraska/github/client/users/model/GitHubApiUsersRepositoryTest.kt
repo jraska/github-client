@@ -1,7 +1,9 @@
 package com.jraska.github.client.users.model
 
-import com.jraska.github.client.HttpTest
-import com.jraska.github.client.enqueue
+import com.jraska.github.client.http.HttpTest
+import com.jraska.github.client.http.enqueue
+import com.jraska.github.client.http.onUrlPartReturn
+import com.jraska.github.client.http.onUrlReturn
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -30,7 +32,29 @@ class GitHubApiUsersRepositoryTest {
     assertThat(users.first()).usingRecursiveComparison().isEqualTo(testFirstUser())
   }
 
+  @Test
+  fun cachesUserProperly() {
+    mockWebServer.onUrlPartReturn("users?since", "response/users.json")
+    mockWebServer.onUrlReturn(".*/users.mojombo".toRegex(), "response/mojombo.json")
+    mockWebServer.onUrlPartReturn("users/mojombo/repos", "response/mojombo_repos.json")
+
+    repository.getUserDetail("mojombo", 1)
+      .test()
+      .awaitCount(1)
+      .assertComplete()
+
+    repository.getUsers(0).test() // this line simulates the list request to cache
+    val values = repository.getUserDetail("mojombo", 1)
+      .test()
+      .awaitCount(2)
+      .assertComplete()
+      .values()
+
+    assertThat(values.first().user).usingRecursiveComparison().isEqualTo(testFirstUser())
+    assertThat(values.last().user).usingRecursiveComparison().isEqualTo(testFirstUser())
+  }
+
   private fun testFirstUser(): User {
-    return User("mojombo", "https://avatars0.githubusercontent.com/u/1?v=4", false)
+    return User("mojombo", "https://avatars.githubusercontent.com/u/1?v=4", false)
   }
 }
