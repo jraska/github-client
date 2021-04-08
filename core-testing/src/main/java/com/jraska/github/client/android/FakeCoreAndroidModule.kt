@@ -1,10 +1,10 @@
-package com.jraska.github.client
+package com.jraska.github.client.android
 
+import com.jraska.github.client.Fakes
 import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.rx.AppSchedulers
 import dagger.Module
 import dagger.Provides
-import okhttp3.HttpUrl
 import javax.inject.Singleton
 
 @Module
@@ -20,4 +20,6 @@ object FakeCoreAndroidModule {
   fun provideNavigator(): Navigator {
     return Fakes.recordingNavigator()
   }
+
+
 }

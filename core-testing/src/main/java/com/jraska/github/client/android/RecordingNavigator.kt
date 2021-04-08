@@ -1,4 +1,4 @@
-package com.jraska.github.client
+package com.jraska.github.client.android
 
 import com.jraska.github.client.navigation.Navigator
 import okhttp3.HttpUrl
