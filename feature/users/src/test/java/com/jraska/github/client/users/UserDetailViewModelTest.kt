@@ -28,7 +28,7 @@ class UserDetailViewModelTest {
   fun before() {
     val component = DaggerTestUsersComponent.create()
     viewModel = component.userDetailViewModel()
-    mockWebServer = component.mockWebServer()
+    mockWebServer = component.mockWebServer
   }
 
   @Test

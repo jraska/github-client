@@ -18,8 +18,8 @@ class UsersViewModelTest {
     val component = DaggerTestUsersComponent.create()
     viewModel = component.usersViewModel()
 
-    component.mockWebServer().enqueue("response/users.json")
-    component.mockWebServer().enqueue("response/users_with_extra.json")
+    component.mockWebServer.enqueue("response/users.json")
+    component.mockWebServer.enqueue("response/users_with_extra.json")
   }
 
   @Test

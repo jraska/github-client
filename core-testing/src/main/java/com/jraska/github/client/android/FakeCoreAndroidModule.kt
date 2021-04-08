@@ -25,7 +25,10 @@ object FakeCoreAndroidModule {
 
   @Provides
   @Singleton
-  internal fun provideFakeSnackbarDisplay(): SnackbarDisplay {
+  internal fun provideFakeSnackbarDisplay(): FakeSnackbarDisplay {
     return FakeSnackbarDisplay()
   }
+
+  @Provides
+  internal fun provideSnackbarDisplay(fake: FakeSnackbarDisplay): SnackbarDisplay = fake
 }

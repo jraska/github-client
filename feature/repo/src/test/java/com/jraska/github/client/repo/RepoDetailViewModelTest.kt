@@ -27,8 +27,8 @@ internal class RepoDetailViewModelTest {
 
   @Test
   fun whenLoad_thenLoadsProperRepoDetail() {
-    component.mockWebServer().enqueue("response/repo_detail.json")
-    component.mockWebServer().enqueue("response/repo_pulls.json")
+    component.mockWebServer.enqueue("response/repo_detail.json")
+    component.mockWebServer.enqueue("response/repo_pulls.json")
 
     val showRepo = repoDetailViewModel.repoDetail("jraska/github-client")
       .test()
@@ -38,9 +38,16 @@ internal class RepoDetailViewModelTest {
   }
 
   @Test
+  fun whenClicks_thenOpensGitHub() {
+    repoDetailViewModel.onGitHubIconClicked("jraska/github-client")
+
+    assertThat(component.fakeSnackbarDisplay.snackbarsInvoked().last().text).isEqualTo(R.string.repo_detail_open_web_text)
+  }
+
+  @Test
   fun whenError_thenLoadsErrorState() {
-    component.mockWebServer().enqueue("response/error.json")
-    component.mockWebServer().enqueue("response/error.json")
+    component.mockWebServer.enqueue("response/error.json")
+    component.mockWebServer.enqueue("response/error.json")
 
     val state = repoDetailViewModel.repoDetail("jraska/github-client")
       .test()

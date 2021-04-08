@@ -1,6 +1,7 @@
 package com.jraska.github.client.repo.di
 
 import com.jraska.github.client.FakeModules
+import com.jraska.github.client.android.FakeSnackbarDisplay
 import com.jraska.github.client.repo.RepoDetailViewModel
 import com.jraska.github.client.repo.RepoModule
 import dagger.Component
@@ -12,5 +13,7 @@ import javax.inject.Singleton
 internal interface TestRepoComponent {
   fun repoDetailViewModel(): RepoDetailViewModel
 
-  fun mockWebServer(): MockWebServer
+  val mockWebServer: MockWebServer
+
+  val fakeSnackbarDisplay: FakeSnackbarDisplay
 }
