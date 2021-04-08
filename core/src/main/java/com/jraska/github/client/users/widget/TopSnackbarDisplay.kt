@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.snackbar.Snackbar
 import com.jraska.github.client.core.android.TopActivityProvider
-import com.jraska.github.client.core.android.snackbar.SnackbarData
-import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
+import com.jraska.github.client.ui.SnackbarData
+import com.jraska.github.client.ui.SnackbarDisplay
 import javax.inject.Inject
 
 class TopSnackbarDisplay @Inject constructor(
@@ -22,7 +22,7 @@ class TopSnackbarDisplay @Inject constructor(
     val snackbarView = findSnackbarView(activity)
 
     val snackbar = Snackbar.make(snackbarView, snackbarData.text, snackbarData.length)
-    snackbarData.action?.also { snackbar.setAction(it.first, it.second) }
+    snackbarData.action?.also { action -> snackbar.setAction(action.first) { action.second() } }
 
     snackbar.show()
   }

@@ -9,8 +9,8 @@ import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.lazyMap
-import com.jraska.github.client.core.android.snackbar.SnackbarData
-import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
+import com.jraska.github.client.ui.SnackbarData
+import com.jraska.github.client.ui.SnackbarDisplay
 import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.navigation.Urls
 import com.jraska.github.client.repo.model.RepoDetail
@@ -58,9 +58,7 @@ internal class RepoDetailViewModel @Inject constructor(
       SnackbarData(
         R.string.repo_detail_open_web_text,
         Snackbar.LENGTH_INDEFINITE,
-        R.string.repo_detail_open_web_action to View.OnClickListener {
-          navigator.launchOnWeb(Urls.repo(fullRepoName))
-        })
+        R.string.repo_detail_open_web_action to { navigator.launchOnWeb(Urls.repo(fullRepoName)) })
     )
   }
 

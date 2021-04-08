@@ -1,6 +1,5 @@
-package com.jraska.github.client.core.android.snackbar
+package com.jraska.github.client.ui
 
-import android.view.View
 
 interface SnackbarDisplay {
   fun showSnackbar(snackbarData: SnackbarData)
@@ -9,5 +8,5 @@ interface SnackbarDisplay {
 class SnackbarData(
   val text: Int,
   val length: Int,
-  val action: Pair<Int, View.OnClickListener?>? = null
+  val action: Pair<Int, () -> Any?>? = null
 )

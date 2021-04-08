@@ -8,8 +8,8 @@ import com.google.android.play.core.install.model.UpdateAvailability
 import com.jraska.github.client.Config
 import com.jraska.github.client.Owner
 import com.jraska.github.client.core.android.TopActivityProvider
-import com.jraska.github.client.core.android.snackbar.SnackbarData
-import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
+import com.jraska.github.client.ui.SnackbarData
+import com.jraska.github.client.ui.SnackbarDisplay
 import com.jraska.github.client.inappupdate.UpdateStrategyConfig.FLEXIBLE
 import com.jraska.github.client.inappupdate.UpdateStrategyConfig.IMMEDIATE
 import com.jraska.github.client.inappupdate.UpdateStrategyConfig.OFF
@@ -99,7 +99,7 @@ class UpdateChecker @Inject constructor(
       SnackbarData(
         text = R.string.update_available,
         length = -2,
-        action = R.string.cta_install to View.OnClickListener { updateManagerFactory.create().completeUpdate() }
+        action = R.string.cta_install to { updateManagerFactory.create().completeUpdate() }
       )
     )
   }

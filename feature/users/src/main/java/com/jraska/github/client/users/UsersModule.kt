@@ -6,12 +6,10 @@ import com.jraska.github.client.config.MutableConfigDef
 import com.jraska.github.client.config.MutableConfigSetup
 import com.jraska.github.client.config.MutableConfigType
 import com.jraska.github.client.core.android.LinkLauncher
-import com.jraska.github.client.core.android.snackbar.SnackbarDisplay
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
 import com.jraska.github.client.users.model.GitHubUsersApi
 import com.jraska.github.client.users.model.UsersRepository
 import com.jraska.github.client.users.ui.UsersActivity
-import com.jraska.github.client.users.widget.TopSnackbarDisplay
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
@@ -86,7 +84,4 @@ object UsersModule {
       }
     }
   }
-
-  @Provides
-  fun snackbarDisplay(display: TopSnackbarDisplay): SnackbarDisplay = display
 }

@@ -15,6 +15,8 @@ import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
 import com.jraska.github.client.time.RealTimeProvider
 import com.jraska.github.client.time.TimeProvider
+import com.jraska.github.client.ui.SnackbarDisplay
+import com.jraska.github.client.users.widget.TopSnackbarDisplay
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
@@ -109,4 +111,7 @@ object CoreAndroidModule {
       }
     }
   }
+
+  @Provides
+  fun snackbarDisplay(display: TopSnackbarDisplay): SnackbarDisplay = display
 }
