@@ -51,4 +51,5 @@ dependencies {
   testImplementation 'androidx.annotation:annotation:1.2.0'
   testImplementation okHttpMockWebServer
   testImplementation project(':core-testing')
+  kaptTest rootProject.ext.daggerAnnotationProcessor
 }

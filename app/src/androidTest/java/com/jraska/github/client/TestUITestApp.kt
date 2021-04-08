@@ -11,8 +11,6 @@ import dagger.Component
 import javax.inject.Singleton
 
 class TestUITestApp : GitHubClientApp(), HasViewModelFactory, HasServiceModelFactory {
-  val coreModule = FakeCoreModule
-
   private val decoratedServiceFactory by lazy {
     DecoratedServiceModelFactory(super.serviceModelFactory())
   }

@@ -3,6 +3,7 @@ package com.jraska.github.client.users
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.jraska.github.client.users.model.GitHubUser
+import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions
 import org.junit.Test
 import java.util.ArrayList

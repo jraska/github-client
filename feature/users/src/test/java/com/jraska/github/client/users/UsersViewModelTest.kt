@@ -2,7 +2,9 @@ package com.jraska.github.client.users
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.jraska.github.client.Fakes
+import com.jraska.github.client.http.enqueue
 import com.jraska.github.client.navigation.Navigator
+import com.jraska.github.client.users.di.DaggerTestUsersComponent
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
 import com.jraska.github.client.users.model.GitHubUser
 import com.jraska.github.client.users.model.GitHubUsersApi
@@ -18,20 +20,15 @@ import org.mockito.MockitoAnnotations
 class UsersViewModelTest {
   @get:Rule val testRule = InstantTaskExecutorRule()
 
-  @Mock private lateinit var usersApi: GitHubUsersApi
-  @Mock private lateinit var navigator: Navigator
-
   private lateinit var viewModel: UsersViewModel
-  private var users = ArrayList<GitHubUser>()
 
   @Before
   fun setUp() {
-    MockitoAnnotations.initMocks(this)
+    val component = DaggerTestUsersComponent.create()
+    viewModel = component.usersViewModel()
 
-    Mockito.`when`(usersApi.getUsers(0)).thenReturn(Single.fromCallable { users })
-
-    val usersRepository = GitHubApiUsersRepository(usersApi)
-    viewModel = UsersViewModel(usersRepository, Fakes.trampoline(), navigator, Fakes.emptyAnalytics())
+    component.mockWebServer().enqueue("response/users.json")
+    component.mockWebServer().enqueue("response/users_with_extra.json")
   }
 
   @Test
@@ -40,12 +37,6 @@ class UsersViewModelTest {
       .test()
       .assertValue { it is UsersViewModel.ViewState.ShowUsers }
       .assertHistorySize(2)
-
-    users.add(GitHubUser().apply {
-      login = "jraska"
-      avatarUrl = "https://gihub.com/jraska/avatar.png"
-      htmlUrl = "https://github.com/jraska"
-    })
 
     testObserver.assertValue { it is UsersViewModel.ViewState.ShowUsers }
 
@@ -57,6 +48,6 @@ class UsersViewModelTest {
       .test()
       .assertNever { it == null }
       .map { it as UsersViewModel.ViewState.ShowUsers }
-      .assertValue { it.users.first().login == "jraska" }
+      .assertValue { it.users.last().login == "jraska" }
   }
 }

@@ -5,6 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 dependencies {
   implementation project(':core-api')
+  implementation project(':navigation-api')
 
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
