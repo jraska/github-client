@@ -36,9 +36,12 @@ class UserDetailViewModelTest {
     mockWebServer.onUrlReturn(".*/users/jraska".toRegex(), "response/jraska.json")
     mockWebServer.onUrlPartReturn("users/jraska/repos", "response/jraska_repos.json")
 
-    val displayUser = viewModel.userDetail("jraska")
+    val testObserver = viewModel.userDetail("jraska")
       .test()
-      .awaitValue()
+
+    val displayUser = testObserver
+      .doOnChanged { if(it is UserDetailViewModel.ViewState.Loading) testObserver.awaitNextValue() }
+      .apply { println(valueHistory()) }
       .value() as UserDetailViewModel.ViewState.DisplayUser
 
     assertThat(displayUser.user).usingRecursiveComparison().isEqualTo(testDetail())
