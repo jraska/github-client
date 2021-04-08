@@ -1,6 +1,7 @@
 package com.jraska.github.client.users.di
 
 import com.jraska.github.client.FakeModules
+import com.jraska.github.client.users.UserDetailViewModel
 import com.jraska.github.client.users.UsersModule
 import com.jraska.github.client.users.UsersViewModel
 import dagger.Component
@@ -13,6 +14,8 @@ import javax.inject.Singleton
 )
 internal interface TestUsersComponent {
   fun usersViewModel(): UsersViewModel
+
+  fun userDetailViewModel(): UserDetailViewModel
 
   fun mockWebServer(): MockWebServer
 }
