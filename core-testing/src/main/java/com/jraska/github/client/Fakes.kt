@@ -29,4 +29,8 @@ object Fakes {
   fun recordingAnalyticsProperty(): RecordingAnalyticsProperty {
     return RecordingAnalyticsProperty()
   }
+
+  fun recordingNavigator() : RecordingNavigator {
+    return RecordingNavigator()
+  }
 }
