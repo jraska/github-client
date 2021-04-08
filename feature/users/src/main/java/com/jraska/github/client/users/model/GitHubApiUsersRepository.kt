@@ -1,5 +1,6 @@
 package com.jraska.github.client.users.model
 
+import com.jraska.github.client.rx.AppSchedulers
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -7,6 +8,7 @@ import java.util.Collections
 
 internal class GitHubApiUsersRepository(
   private val gitHubUsersApi: GitHubUsersApi,
+  private val appSchedulers: AppSchedulers
 ) : UsersRepository {
   private val converter: UserDetailWithReposConverter =
     UserDetailWithReposConverter.INSTANCE
@@ -21,7 +23,7 @@ internal class GitHubApiUsersRepository(
 
   override fun getUserDetail(login: String, reposInSection: Int): Observable<UserDetail> {
     return gitHubUsersApi.getUserDetail(login)
-      .subscribeOn(Schedulers.io()) // this has to be here now to run requests in parallel
+      .subscribeOn(appSchedulers.io) // this has to be here now to run requests in parallel
       .zipWith(gitHubUsersApi.getRepos(login), { a: GitHubUserDetail, b: List<GitHubUserRepo> -> Pair(a, b) })
       .map { result -> converter.translateUserDetail(result.component1(), result.component2(), reposInSection) }
       .toObservable()

@@ -1,5 +1,6 @@
 package com.jraska.github.client.users.model
 
+import com.jraska.github.client.Fakes
 import com.jraska.github.client.http.HttpTest
 import com.jraska.github.client.http.enqueue
 import com.jraska.github.client.http.onUrlPartReturn
@@ -16,7 +17,7 @@ class GitHubApiUsersRepositoryTest {
 
   @Before
   fun setUp() {
-    repository = GitHubApiUsersRepository(HttpTest.retrofit(mockWebServer.url("/")).create(GitHubUsersApi::class.java))
+    repository = GitHubApiUsersRepository(HttpTest.retrofit(mockWebServer.url("/")).create(GitHubUsersApi::class.java), Fakes.trampoline())
   }
 
   @Test

@@ -6,6 +6,7 @@ import com.jraska.github.client.config.MutableConfigDef
 import com.jraska.github.client.config.MutableConfigSetup
 import com.jraska.github.client.config.MutableConfigType
 import com.jraska.github.client.core.android.LinkLauncher
+import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
 import com.jraska.github.client.users.model.GitHubUsersApi
 import com.jraska.github.client.users.model.UsersRepository
@@ -24,10 +25,10 @@ object UsersModule {
 
   @Provides
   @Singleton
-  internal fun provideUsersRepository(retrofit: Retrofit): UsersRepository {
+  internal fun provideUsersRepository(retrofit: Retrofit, appSchedulers: AppSchedulers): UsersRepository {
     val usersApi = retrofit.create(GitHubUsersApi::class.java)
 
-    return GitHubApiUsersRepository(usersApi)
+    return GitHubApiUsersRepository(usersApi, appSchedulers)
   }
 
   @Provides
