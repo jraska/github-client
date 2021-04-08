@@ -8,7 +8,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.threeten.bp.Instant
 
-class GitHubApiRepoRepositoryTest {
+internal class GitHubApiRepoRepositoryTest {
 
   @get:Rule
   val mockWebServer = MockWebServer()
@@ -30,22 +30,24 @@ class GitHubApiRepoRepositoryTest {
 
   private fun repoGitHubApi() = HttpTest.retrofit(mockWebServer.url("/")).create(RepoGitHubApi::class.java)
 
-  private fun expectedRepoDetail(): RepoDetail {
-    return RepoDetail(
-      RepoHeader(
-        "jraska",
-        "github-client",
-        "Experimental architecture app with example usage intended to be a showcase, test and skeleton app.",
-        102,
-        14
-      ),
-      RepoDetail.Data(Instant.parse("2016-03-01T23:38:14Z"), 4, "Kotlin", 3),
-      RepoDetail.PullRequestsState.PullRequests(
-        listOf(
-          RepoDetail.PullRequest("Bump epoxy from 4.4.3 to 4.4.4"),
-          RepoDetail.PullRequest("Bump kotlin_version from 1.4.31 to 1.4.32")
+  companion object {
+    fun expectedRepoDetail(): RepoDetail {
+      return RepoDetail(
+        RepoHeader(
+          "jraska",
+          "github-client",
+          "Experimental architecture app with example usage intended to be a showcase, test and skeleton app.",
+          102,
+          14
+        ),
+        RepoDetail.Data(Instant.parse("2016-03-01T23:38:14Z"), 4, "Kotlin", 3),
+        RepoDetail.PullRequestsState.PullRequests(
+          listOf(
+            RepoDetail.PullRequest("Bump epoxy from 4.4.3 to 4.4.4"),
+            RepoDetail.PullRequest("Bump kotlin_version from 1.4.31 to 1.4.32")
+          )
         )
       )
-    )
+    }
   }
 }
