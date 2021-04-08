@@ -38,7 +38,6 @@ class UserDetailViewModelTest {
 
     val displayUser = viewModel.userDetail("jraska")
       .test()
-      .assertHistorySize(2)
       .value() as UserDetailViewModel.ViewState.DisplayUser
 
     assertThat(displayUser.user).usingRecursiveComparison().isEqualTo(testDetail())
