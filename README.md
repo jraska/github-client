@@ -19,6 +19,8 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Tests are run on Firebase Test Lab. [See PR](https://github.com/jraska/github-client/pull/233)
 - UI tests on Firebase Test Lab results reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/342).
 - Uses [LiveData-Testing](https://github.com/jraska/livedata-testing) to test ViewModel. [Article](https://android.jlelse.eu/effective-livedata-and-viewmodel-testing-17f25069fcd4)
+- ViewModels are tested with real dependencies, faking only network code and therefore simulating the real usage, increasing the confiidence in tests - [Example](https://github.com/jraska/github-client/pull/467/files#diff-7ef3a06920375e0c0ccd785bc53f127aa8700f6f76171f784e0ddcf9dcde7634), [Related article on philosophy](https://kentcdodds.com/blog/write-tests). They are fast as they run on JVM.
+- Respositories tests are implemented similar like ViewModels tests - using real dependnecies and faking network requests only - [Example](https://github.com/jraska/github-client/blob/master/feature/users/src/test/java/com/jraska/github/client/users/model/GitHubApiUsersRepositoryTest.kt)
 - Push integration is tested end to end through UI test - see [this PR](https://github.com/jraska/github-client/pull/300).
 
 ## Release & CI
@@ -39,7 +41,8 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Enforced ownership of remote configuration and analytics events - [Details on PR](https://github.com/jraska/github-client/pull/230). More on why these need to be explicitly owned on [this article](https://proandroiddev.com/remote-feature-flags-do-not-always-come-for-free-a372f1768a70).
 
 ## Metrics
-In case you want to copy and use any of these with your analytics platform, the only adjustment could be your own [`AnalyticsReporter` implementation](https://github.com/jraska/github-client/blob/master/plugins/src/main/java/com/jraska/analytics/AnalyticsReporter.kt#L6).
+- [Sonarqube Cloud integrated](https://github.com/jraska/github-client/pull/467#issuecomment-816293325).
+In case you want to copy and use any of metrics with your analytics platform, the only adjustment could be your own [`AnalyticsReporter` implementation](https://github.com/jraska/github-client/blob/master/plugins/src/main/java/com/jraska/analytics/AnalyticsReporter.kt#L6).
 - Build time tracking with reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/303).
 - Modularisation statistics reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/334).
 - Dependencies reporting to see which modules depend on too much - see [this PR](https://github.com/jraska/github-client/pull/371
