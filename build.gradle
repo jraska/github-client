@@ -54,4 +54,10 @@ subprojects {
   }
 }
 
+project.rootProject.subprojects.find { it.name == "core" }.afterEvaluate {
+  it.tasks.named("check").configure {
+    it.dependsOn(project.gradle.includedBuild("plugins").task(":test"))
+  }
+}
+
 apply from: 'dependencies.gradle'
