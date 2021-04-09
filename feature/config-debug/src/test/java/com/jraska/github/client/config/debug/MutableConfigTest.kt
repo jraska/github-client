@@ -8,7 +8,7 @@ import org.junit.Test
 
 class MutableConfigTest {
   @Test
-  fun whenModifyingBooleanConfigs_thenStateIsKept() {
+  fun whenModifyingBooleanConfigsThenStateIsKept() {
     val testKey = Config.Key("booleanTest", CORE_TEAM)
     val fakeConfig = FakeConfig.create(mapOf(testKey.name to true))
     val mutableConfig = MutableConfig(fakeConfig)
@@ -23,7 +23,7 @@ class MutableConfigTest {
   }
 
   @Test
-  fun whenModifyingLongConfigs_thenStateIsKept() {
+  fun whenModifyingLongConfigsThenStateIsKept() {
     val testKey = Config.Key("longTest", CORE_TEAM)
     val fakeConfig = FakeConfig.create(mapOf(testKey.name to 5L))
     val mutableConfig = MutableConfig(fakeConfig)
@@ -38,7 +38,7 @@ class MutableConfigTest {
   }
 
   @Test
-  fun whenModifyingStringConfigs_thenStateIsKept() {
+  fun whenModifyingStringConfigsThenStateIsKept() {
     val testKey = Config.Key("stringTest", CORE_TEAM)
     val fakeConfig = FakeConfig.create(mapOf(testKey.name to "hey dude"))
     val mutableConfig = MutableConfig(fakeConfig)

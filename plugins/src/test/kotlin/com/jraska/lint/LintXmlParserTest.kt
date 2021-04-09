@@ -7,7 +7,7 @@ import org.junit.Test
 
 class LintXmlParserTest {
   @Test
-  fun whenEmptyXml_thenNoResults() {
+  fun whenEmptyXmlThenNoResults() {
     val lintXmlParser = LintXmlParser(ModuleMetadata("fakeModule", ModuleType.Implementation))
 
     val issues = lintXmlParser.parse(EMPTY_LINT_RESULT)
@@ -16,7 +16,7 @@ class LintXmlParserTest {
   }
 
   @Test
-  fun whenXmlWithSeveralIssuesFound_thenReportsCorrectly() {
+  fun whenXmlWithSeveralIssuesFoundThenReportsCorrectly() {
     val moduleMetadata = ModuleMetadata("app-partial-users", ModuleType.Implementation)
     val lintXmlParser = LintXmlParser(moduleMetadata)
 
@@ -54,7 +54,7 @@ class LintXmlParserTest {
   }
 
   @Test
-  fun whenXmlWithIssuesHavingLocationFound_thenReportsCorrectly() {
+  fun whenXmlWithIssuesHavingLocationFoundThenReportsCorrectly() {
     val moduleMetadata = ModuleMetadata("chrome-custom-tabs", ModuleType.Implementation)
     val lintXmlParser = LintXmlParser(moduleMetadata)
 

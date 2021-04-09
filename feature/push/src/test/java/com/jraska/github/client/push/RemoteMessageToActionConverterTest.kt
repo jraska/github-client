@@ -6,7 +6,7 @@ import java.util.Collections
 
 class RemoteMessageToActionConverterTest {
   @Test
-  fun whenRemoteMessageWithoutAction_thenDefaultReturned() {
+  fun whenRemoteMessageWithoutActionThenDefaultReturned() {
     val action =
       RemoteMessageToActionConverter.convert(Collections.emptyMap<String, String>())
 
@@ -14,7 +14,7 @@ class RemoteMessageToActionConverterTest {
   }
 
   @Test
-  fun whenRemoteMessageWithAction_thenActionReturned() {
+  fun whenRemoteMessageWithActionThenActionReturned() {
     val action = RemoteMessageToActionConverter.convert(mapOf("action" to "heeeya"))
 
     assertThat(action.name).isEqualTo("heeeya")
@@ -22,7 +22,7 @@ class RemoteMessageToActionConverterTest {
   }
 
   @Test
-  fun whenRemoteMessageWithParameters_thenActionReturned() {
+  fun whenRemoteMessageWithParametersThenActionReturned() {
     val map = mapOf("action" to "heeeya", "parameter" to "true")
 
     val action = RemoteMessageToActionConverter.convert(map)

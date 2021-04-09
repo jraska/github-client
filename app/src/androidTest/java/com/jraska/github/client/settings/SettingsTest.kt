@@ -13,7 +13,7 @@ import org.junit.Test
 
 class SettingsTest {
   @Test
-  fun whenConsoleClicked_thenConsoleOpens() {
+  fun whenConsoleClickedThenConsoleOpens() {
     DeepLinkLaunchTest.launchDeepLink(Urls.settings().toString())
 
     onView(withId(R.id.console_item_container)).perform(click())

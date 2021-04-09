@@ -10,7 +10,7 @@ import org.mockito.Mockito.verify
 
 class DeepLinkNavigatorTest {
   @Test
-  fun whenStartUserDetail_thenCorrectDeepLinkLaunched() {
+  fun whenStartUserDetailThenCorrectDeepLinkLaunched() {
     val deepLinkLauncher = mock(DeepLinkLauncher::class.java)
     val webLinkLauncher = mock(WebLinkLauncher::class.java)
     val navigator = DeepLinkNavigator(deepLinkLauncher, webLinkLauncher)

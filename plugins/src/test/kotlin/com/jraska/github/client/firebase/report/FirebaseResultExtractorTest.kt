@@ -17,7 +17,7 @@ class FirebaseResultExtractorTest {
   }
 
   @Test
-  fun whenSuccessfulResult_thenParsesCorrectly() {
+  fun whenSuccessfulResultThenParsesCorrectly() {
     val suiteResult = extractor.extract(SUCCESS_RESULT)
 
     assertThat(suiteResult.failedCount).isZero()
@@ -44,7 +44,7 @@ class FirebaseResultExtractorTest {
   }
 
   @Test
-  fun whenErrorResult_thenParsesCorrectly() {
+  fun whenErrorResultThenParsesCorrectly() {
     val suiteResult = extractor.extract(ERROR_RESULT)
 
     assertThat(suiteResult.failedCount).isOne()

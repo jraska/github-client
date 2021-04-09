@@ -21,7 +21,7 @@ class DeepLinkLaunchTest {
 
   @Test
   @OkReplay
-  fun whenUsersLink_thenUsersActivityDisplayed() {
+  fun whenUsersLinkThenUsersActivityDisplayed() {
     launchDeepLink("https://github.com/users")
 
     onView(withText("defunkt")).check(matches(isDisplayed()))
@@ -30,7 +30,7 @@ class DeepLinkLaunchTest {
 
   @Test
   @OkReplay
-  fun whenDetailLink_thenUserDetailActivityDisplayed() {
+  fun whenDetailLinkThenUserDetailActivityDisplayed() {
     launchDeepLink("https://github.com/defunkt")
 
     onView(withText("dotjs")).check(matches(isDisplayed()))
@@ -38,7 +38,7 @@ class DeepLinkLaunchTest {
 
   @Test
   @OkReplay
-  fun whenRepoLink_thenRepoActivityDisplayed() {
+  fun whenRepoLinkThenRepoActivityDisplayed() {
     launchDeepLink("https://github.com/jraska/Falcon")
 
     onView(withText(Matchers.containsString("Language: Java")))

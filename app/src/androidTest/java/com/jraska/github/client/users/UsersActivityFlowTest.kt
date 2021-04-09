@@ -31,7 +31,7 @@ class UsersActivityFlowTest {
 
   @Test
   @OkReplay
-  fun whenStarts_thenDisplaysUsers() {
+  fun whenStartsThenDisplaysUsers() {
     onView(withText("defunkt")).perform(click())
     onView(withText("dotjs")).check(matches(isDisplayed()))
     onView(withText("facebox")).perform(click())
@@ -40,7 +40,7 @@ class UsersActivityFlowTest {
 
   @Test
   @OkReplay
-  fun whenSettings_thenReportsEvent() {
+  fun whenSettingsThenReportsEvent() {
     onView(withId(R.id.action_settings)).perform(click())
     onView(withHint("Value")).perform(ViewActions.typeText("0.01"))
     onView(withText("Purchase")).perform(click())
@@ -52,7 +52,7 @@ class UsersActivityFlowTest {
 
   @Test
   @OkReplay
-  fun whenAbout_thenOpensAbout() {
+  fun whenAboutThenOpensAbout() {
     onView(withId(R.id.action_about)).perform(click())
 
     onView(withText("by Josef Raska")).check(matches(isDisplayed()))
@@ -60,7 +60,7 @@ class UsersActivityFlowTest {
 
   @Test
   @OkReplay
-  fun whenRefreshes_thenDisplaysOtherUsers() {
+  fun whenRefreshesThenDisplaysOtherUsers() {
     onView(withText("defunkt")).check(matches(isDisplayed()))
     onView(withId(R.id.users_refresh_swipe_layout)).perform(swipeDown())
     onView(withText("defunkt")).check(doesNotExist())

@@ -32,7 +32,7 @@ class UserDetailViewModelTest {
   }
 
   @Test
-  fun whenLiveData_thenCorrectUser() {
+  fun whenLiveDataThenCorrectUser() {
     mockWebServer.onUrlReturn(".*/users/jraska".toRegex(), "response/jraska.json")
     mockWebServer.onUrlPartReturn("users/jraska/repos", "response/jraska_repos.json")
 
@@ -44,7 +44,7 @@ class UserDetailViewModelTest {
   }
 
   @Test
-  fun whenError_thenErrorStateDisplayed() {
+  fun whenErrorThenErrorStateDisplayed() {
     mockWebServer.enqueue("response/error.json")
     mockWebServer.enqueue("response/error.json")
 
@@ -54,7 +54,7 @@ class UserDetailViewModelTest {
   }
 
   @Test
-  fun whenSameLoginMultipleTimes_thenOnlyOneObservableCreated() {
+  fun whenSameLoginMultipleTimesThenOnlyOneObservableCreated() {
     mockWebServer.onUrlReturn(".*/users/mojombo".toRegex(), "response/mojombo.json")
     mockWebServer.onUrlPartReturn("users/mojombo/repos", "response/mojombo_repos.json")
 

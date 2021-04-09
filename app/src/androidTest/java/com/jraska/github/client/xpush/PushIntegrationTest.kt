@@ -30,7 +30,7 @@ class PushIntegrationTest {
   }
 
   @Test
-  fun testPushIntegration_fromSettingsToAbout() {
+  fun testPushIntegrationFromSettingsToAbout() {
     DeepLinkLaunchTest.launchDeepLink("https://github.com/settings")
 
     viewWillAwaitPush()
@@ -40,7 +40,7 @@ class PushIntegrationTest {
   }
 
   @Test
-  fun testPushIntegration_fromAboutToSettings() {
+  fun testPushIntegrationFromAboutToSettings() {
     DeepLinkLaunchTest.launchDeepLink("https://github.com/about")
 
     viewWillAwaitPush()
