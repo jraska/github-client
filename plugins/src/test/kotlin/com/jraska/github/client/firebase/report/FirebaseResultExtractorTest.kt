@@ -39,8 +39,8 @@ class FirebaseResultExtractorTest {
     assertThat(ninthTest.time).isEqualTo(1.182)
     assertThat(ninthTest.outcome).isEqualTo(TestOutcome.PASSED)
     assertThat(ninthTest.className).isEqualTo("com.jraska.github.client.users.UsersActivityFlowTest")
-    assertThat(ninthTest.methodName).isEqualTo("whenStarts_thenDisplaysUsers")
-    assertThat(ninthTest.fullName).isEqualTo("com.jraska.github.client.users.UsersActivityFlowTest#whenStarts_thenDisplaysUsers")
+    assertThat(ninthTest.methodName).isEqualTo("whenStartsThenDisplaysUsers")
+    assertThat(ninthTest.fullName).isEqualTo("com.jraska.github.client.users.UsersActivityFlowTest#whenStartsThenDisplaysUsers")
   }
 
   @Test
@@ -68,8 +68,8 @@ class FirebaseResultExtractorTest {
     assertThat(failedTest.time).isEqualTo(0.853)
     assertThat(failedTest.outcome).isEqualTo(TestOutcome.FAILED)
     assertThat(failedTest.className).isEqualTo("com.jraska.github.client.settings.SettingsTest")
-    assertThat(failedTest.methodName).isEqualTo("whenConsoleClicked_thenConsoleOpens")
-    assertThat(failedTest.fullName).isEqualTo("com.jraska.github.client.settings.SettingsTest#whenConsoleClicked_thenConsoleOpens")
+    assertThat(failedTest.methodName).isEqualTo("whenConsoleClickedThenConsoleOpens")
+    assertThat(failedTest.fullName).isEqualTo("com.jraska.github.client.settings.SettingsTest#whenConsoleClickedThenConsoleOpens")
     assertThat(failedTest.failure).startsWith("androidx.test.espresso.NoMatchingViewException: No views in hierarchy found matching: with")
   }
 
@@ -81,15 +81,15 @@ class FirebaseResultExtractorTest {
         <testcase name="appCreateEventFired" classname="com.jraska.github.client.AppSetupTest" time="0.026"/>
         <testcase name="androidSchedulerIsAsync" classname="com.jraska.github.client.AppSetupTest" time="0.0"/>
         <testcase name="timberHasTrees" classname="com.jraska.github.client.AppSetupTest" time="0.0"/>
-        <testcase name="whenDetailLink_thenUserDetailActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="0.88"/>
-        <testcase name="whenRepoLink_thenRepoActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="1.507"/>
-        <testcase name="whenUsersLink_thenUsersActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="0.829"/>
+        <testcase name="whenDetailLinkThenUserDetailActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="0.88"/>
+        <testcase name="whenRepoLinkThenRepoActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="1.507"/>
+        <testcase name="whenUsersLinkThenUsersActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="0.829"/>
         <testcase name="convertsProperly" classname="com.jraska.github.client.FirebaseEventConverterTest" time="0.025"/>
-        <testcase name="whenConsoleClicked_thenConsoleOpens" classname="com.jraska.github.client.settings.SettingsTest" time="0.905"/>
-        <testcase name="whenStarts_thenDisplaysUsers" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.182"/>
-        <testcase name="whenSettings_thenReportsEvent" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.582"/>
-        <testcase name="whenAbout_thenOpensAbout" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="0.703"/>
-        <testcase name="whenRefreshes_thenDisplaysOtherUsers" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.307"/>
+        <testcase name="whenConsoleClickedThenConsoleOpens" classname="com.jraska.github.client.settings.SettingsTest" time="0.905"/>
+        <testcase name="whenStartsThenDisplaysUsers" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.182"/>
+        <testcase name="whenSettingsThenReportsEvent" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.582"/>
+        <testcase name="whenAboutThenOpensAbout" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="0.703"/>
+        <testcase name="whenRefreshesThenDisplaysOtherUsers" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.307"/>
         <testcase name="testPushIntegration_fromSettingsToAbout" classname="com.jraska.github.client.xpush.PushIntegrationTest" time="4.497"/>
         <testcase name="testPushIntegration_fromAboutToSettings" classname="com.jraska.github.client.xpush.PushIntegrationTest" time="0.628"/>
         </testsuite>
@@ -101,17 +101,17 @@ class FirebaseResultExtractorTest {
       <testcase name="appCreateEventFired" classname="com.jraska.github.client.AppSetupTest" time="0.0"/>
       <testcase name="androidSchedulerIsAsync" classname="com.jraska.github.client.AppSetupTest" time="0.0"/>
       <testcase name="timberHasTrees" classname="com.jraska.github.client.AppSetupTest" time="0.0"/>
-      <testcase name="whenDetailLink_thenUserDetailActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="1.079"/>
-      <testcase name="whenRepoLink_thenRepoActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="1.154"/>
-      <testcase name="whenUsersLink_thenUsersActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="0.63"/>
+      <testcase name="whenDetailLinkThenUserDetailActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="1.079"/>
+      <testcase name="whenRepoLinkThenRepoActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="1.154"/>
+      <testcase name="whenUsersLinkThenUsersActivityDisplayed" classname="com.jraska.github.client.DeepLinkLaunchTest" time="0.63"/>
       <testcase name="convertsProperly" classname="com.jraska.github.client.FirebaseEventConverterTest" time="0.026"/>
-      <testcase name="whenConsoleClicked_thenConsoleOpens" classname="com.jraska.github.client.settings.SettingsTest" time="0.853">
+      <testcase name="whenConsoleClickedThenConsoleOpens" classname="com.jraska.github.client.settings.SettingsTest" time="0.853">
       <failure>androidx.test.espresso.NoMatchingViewException: No views in hierarchy found matching: with id is.runner.TestExecutor.execute(TestExecutor.java:56) at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:395) at android.app.Instrumentation      .run(Instrumentation.java:2196) </failure>
       </testcase>
-      <testcase name="whenStarts_thenDisplaysUsers" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.129"/>
-      <testcase name="whenSettings_thenReportsEvent" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.552"/>
-      <testcase name="whenAbout_thenOpensAbout" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="0.711"/>
-      <testcase name="whenRefreshes_thenDisplaysOtherUsers" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.003"/>
+      <testcase name="whenStartsThenDisplaysUsers" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.129"/>
+      <testcase name="whenSettingsThenReportsEvent" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.552"/>
+      <testcase name="whenAboutThenOpensAbout" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="0.711"/>
+      <testcase name="whenRefreshesThenDisplaysOtherUsers" classname="com.jraska.github.client.users.UsersActivityFlowTest" time="1.003"/>
       <testcase name="testPushIntegration_fromSettingsToAbout" classname="com.jraska.github.client.xpush.PushIntegrationTest" time="3.308"/>
       <testcase name="testPushIntegration_fromAboutToSettings" classname="com.jraska.github.client.xpush.PushIntegrationTest" time="1.104"/>
       </testsuite>
