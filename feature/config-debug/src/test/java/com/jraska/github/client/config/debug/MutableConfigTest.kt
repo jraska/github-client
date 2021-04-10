@@ -40,15 +40,16 @@ class MutableConfigTest {
   @Test
   fun whenModifyingStringConfigsThenStateIsKept() {
     val testKey = Config.Key("stringTest", CORE_TEAM)
-    val fakeConfig = FakeConfig.create(mapOf(testKey.name to "hey dude"))
+    val configValue = "hey dude"
+    val fakeConfig = FakeConfig.create(mapOf(testKey.name to configValue))
     val mutableConfig = MutableConfig(fakeConfig)
 
-    assertThat(mutableConfig.getString(testKey)).isEqualTo("hey dude")
+    assertThat(mutableConfig.getString(testKey)).isEqualTo(configValue)
 
     mutableConfig.setString(testKey, "bye dude")
     assertThat(mutableConfig.getString(testKey)).isEqualTo("bye dude")
 
     mutableConfig.resetToDefault(testKey)
-    assertThat(mutableConfig.getString(testKey)).isEqualTo("hey dude")
+    assertThat(mutableConfig.getString(testKey)).isEqualTo(configValue)
   }
 }
