@@ -1,8 +1,11 @@
 package com.jraska.github.client.release
 
+import com.jraska.github.client.release.data.LeadTimeReporter
+
 class ReleaseMarker(
   private val gitHubApi: GitHubApi,
-  private val notesComposer: NotesComposer
+  private val notesComposer: NotesComposer,
+  private val leadTimeReporter: LeadTimeReporter
 ) {
   fun markPrsWithMilestone(release: Release) {
     val pullRequests = gitHubApi.listPrsWithoutMilestone()
@@ -19,5 +22,7 @@ class ReleaseMarker(
     val releaseNotes = notesComposer.releaseNotes(pullRequests)
     gitHubApi.setMilestoneBody(milestoneNumber, releaseNotes)
     gitHubApi.setReleaseBody(release.releaseName, releaseNotes)
+
+    leadTimeReporter.reportLeadTime(pullRequests)
   }
 }
