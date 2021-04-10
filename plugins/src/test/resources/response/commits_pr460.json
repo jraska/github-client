@@ -1,0 +1,81 @@
+[
+  {
+    "sha": "70e59ee5f812506651b10effbb00657d8e7ca4b2",
+    "node_id": "MDY6Q29tbWl0NTI5MTg0OTA6NzBlNTllZTVmODEyNTA2NjUxYjEwZWZmYmIwMDY1N2Q4ZTdjYTRiMg==",
+    "commit": {
+      "author": {
+        "name": "dependabot[bot]",
+        "email": "49699333+dependabot[bot]@users.noreply.github.com",
+        "date": "2021-03-29T12:36:00Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2021-03-29T12:36:00Z"
+      },
+      "message": "Bump kotlin_version from 1.4.31 to 1.4.32\n\nBumps `kotlin_version` from 1.4.31 to 1.4.32.\n\nUpdates `kotlin-gradle-plugin` from 1.4.31 to 1.4.32\n- [Release notes](https://github.com/JetBrains/kotlin/releases)\n- [Changelog](https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md)\n- [Commits](https://github.com/JetBrains/kotlin/commits)\n\nUpdates `kotlin-stdlib` from 1.4.31 to 1.4.32\n- [Release notes](https://github.com/JetBrains/kotlin/releases)\n- [Changelog](https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md)\n- [Commits](https://github.com/JetBrains/kotlin/commits)\n\nSigned-off-by: dependabot[bot] <support@github.com>",
+      "tree": {
+        "sha": "1e6eb849ab73581051cdfde20468feecea1cde54",
+        "url": "https://api.github.com/repos/jraska/github-client/git/trees/1e6eb849ab73581051cdfde20468feecea1cde54"
+      },
+      "url": "https://api.github.com/repos/jraska/github-client/git/commits/70e59ee5f812506651b10effbb00657d8e7ca4b2",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJgYcmwCRBK7hj4Ov3rIwAAdHIIAHxtpsVYTcCcFzSfkyyg6LlS\nhLceVlDo3BbNjc90VEckWPIAWeVT143ZZCPgH49u/U4md9GW0NINr01CaUMjKpQn\nfE4HAhXWfmWj8otyZBVyE7i46EgB4Glr2BVeEz/4xrRNqsFhl3HVsZzHPIK3LnXw\nl3WrobsSmvmmKnZA8AaixkFfBhgnoKNgPPDZcLhTi7xBMQ2at86zo43qfCv8dqaK\nMv0pAc22xv4dUN2HHNXSU1LmIelR+7UZrA6bFDhwnOnwhq8l/Hn3c+UcrSRhwYx+\nI0tOEzDWSGn+LPRD8+S2ePPo6lPduGHlnYDKACECseH2eDtuF0PU0379T96f5uQ=\n=W4w4\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 1e6eb849ab73581051cdfde20468feecea1cde54\nparent e3840f0f9e91184ed4daeeaf74f44ff1796a9eea\nauthor dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> 1617021360 +0000\ncommitter GitHub <noreply@github.com> 1617021360 +0000\n\nBump kotlin_version from 1.4.31 to 1.4.32\n\nBumps `kotlin_version` from 1.4.31 to 1.4.32.\n\nUpdates `kotlin-gradle-plugin` from 1.4.31 to 1.4.32\n- [Release notes](https://github.com/JetBrains/kotlin/releases)\n- [Changelog](https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md)\n- [Commits](https://github.com/JetBrains/kotlin/commits)\n\nUpdates `kotlin-stdlib` from 1.4.31 to 1.4.32\n- [Release notes](https://github.com/JetBrains/kotlin/releases)\n- [Changelog](https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md)\n- [Commits](https://github.com/JetBrains/kotlin/commits)\n\nSigned-off-by: dependabot[bot] <support@github.com>"
+      }
+    },
+    "url": "https://api.github.com/repos/jraska/github-client/commits/70e59ee5f812506651b10effbb00657d8e7ca4b2",
+    "html_url": "https://github.com/jraska/github-client/commit/70e59ee5f812506651b10effbb00657d8e7ca4b2",
+    "comments_url": "https://api.github.com/repos/jraska/github-client/commits/70e59ee5f812506651b10effbb00657d8e7ca4b2/comments",
+    "author": {
+      "login": "dependabot[bot]",
+      "id": 49699333,
+      "node_id": "MDM6Qm90NDk2OTkzMzM=",
+      "avatar_url": "https://avatars.githubusercontent.com/in/29110?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/dependabot%5Bbot%5D",
+      "html_url": "https://github.com/apps/dependabot",
+      "followers_url": "https://api.github.com/users/dependabot%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/dependabot%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/dependabot%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/dependabot%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/dependabot%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/dependabot%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/dependabot%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/dependabot%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/dependabot%5Bbot%5D/received_events",
+      "type": "Bot",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "e3840f0f9e91184ed4daeeaf74f44ff1796a9eea",
+        "url": "https://api.github.com/repos/jraska/github-client/commits/e3840f0f9e91184ed4daeeaf74f44ff1796a9eea",
+        "html_url": "https://github.com/jraska/github-client/commit/e3840f0f9e91184ed4daeeaf74f44ff1796a9eea"
+      }
+    ]
+  }
+]

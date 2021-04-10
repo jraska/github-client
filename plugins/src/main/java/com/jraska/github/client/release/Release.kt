@@ -5,7 +5,8 @@ import java.time.Instant
 
 class Release(
   val releaseName: String,
-  val releaseUrl: HttpUrl
+  val releaseUrl: HttpUrl,
+  val timestamp: Instant
 )
 
 class PullRequest(

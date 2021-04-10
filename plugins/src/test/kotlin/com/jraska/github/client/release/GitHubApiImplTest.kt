@@ -25,7 +25,7 @@ class GitHubApiImplTest {
 
   @Test
   fun testPrMarkedProperly() {
-    mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(json("response/release.json")))
+    mockWebServer.enqueue("response/release.json")
     mockWebServer.enqueue(MockResponse().setResponseCode(200))
 
     gitHubApi.setReleaseBody("0.23.0", "Hey hallo")
@@ -39,7 +39,7 @@ class GitHubApiImplTest {
 
   @Test
   fun testGetsCommits() {
-    mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(json("response/commits.json")))
+    mockWebServer.enqueue("response/commits_pr472.json")
 
     val prCommits = gitHubApi.prCommits(472)
 
@@ -48,10 +48,14 @@ class GitHubApiImplTest {
     val expectedCommit = Commit("65910afb3de84bb52283fbc8cb0c4be0988d4343", Instant.parse("2021-04-09T22:37:33Z"), "jraska", 472)
     assertThat(prCommits[1]).usingRecursiveComparison().isEqualTo(expectedCommit)
   }
+}
 
-  internal fun json(path: String): String {
-    val uri = javaClass.classLoader.getResource(path)
-    val file = File(uri?.path!!)
-    return String(file.readBytes())
-  }
+fun MockWebServer.enqueue(path: String) {
+  enqueue(MockResponse().setResponseCode(200).setBody(json(path)))
+}
+
+fun json(path: String): String {
+  val uri = GitHubApiImplTest::class.java.classLoader.getResource(path)
+  val file = File(uri?.path!!)
+  return String(file.readBytes())
 }
