@@ -60,6 +60,7 @@ class GitHubApiImpl(
         it.sha,
         Instant.parse(it.commit.author.dateString),
         it.author.login,
+        it.commit.message,
         prNumber
       )
     }

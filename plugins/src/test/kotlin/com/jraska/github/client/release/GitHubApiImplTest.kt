@@ -45,7 +45,10 @@ class GitHubApiImplTest {
 
     assertThat(mockWebServer.takeRequest().requestUrl!!.encodedPath).endsWith("/pulls/472/commits")
 
-    val expectedCommit = Commit("65910afb3de84bb52283fbc8cb0c4be0988d4343", Instant.parse("2021-04-09T22:37:33Z"), "jraska", 472)
+    val expectedCommit = Commit(
+      "65910afb3de84bb52283fbc8cb0c4be0988d4343", Instant.parse("2021-04-09T22:37:33Z"),
+      "jraska", "Delete test which isn't needed anymore",472
+    )
     assertThat(prCommits[1]).usingRecursiveComparison().isEqualTo(expectedCommit)
   }
 }

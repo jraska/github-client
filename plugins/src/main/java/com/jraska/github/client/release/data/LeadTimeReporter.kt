@@ -28,7 +28,8 @@ class LeadTimeReporter(
         "gitCommit" to commit.sha,
         "author" to commit.author,
         "prNumber" to commit.prNumber,
-        "releaseName" to release.releaseName
+        "releaseName" to release.releaseName,
+        "message" to commit.message
       )
     )
   }

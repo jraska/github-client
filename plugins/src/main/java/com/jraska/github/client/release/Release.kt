@@ -18,5 +18,6 @@ class Commit(
   val sha: String,
   val time: Instant,
   val author: String,
+  val message: String,
   val prNumber: Int
 )

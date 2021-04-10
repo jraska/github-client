@@ -110,6 +110,9 @@ class CommitItemDto {
 class CommitDto {
   @SerializedName("author")
   lateinit var author: AuthorDto
+
+  @SerializedName("message")
+  lateinit var message: String
 }
 
 class AuthorDto {

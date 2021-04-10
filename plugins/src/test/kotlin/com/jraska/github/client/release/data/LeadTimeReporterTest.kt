@@ -50,18 +50,18 @@ class LeadTimeReporterTest {
     assertThat(first.properties["leadTimeSec"]).isEqualTo(13 * 3600 + 24 * 60 + 53L)
     assertThat(first.properties["author"]).isEqualTo("jraska")
     assertThat(first.properties["gitCommit"]).isEqualTo("859ffe735dc185336cbcad09e692d45dcf8c3361")
+    assertThat(first.properties["message"]).isEqualTo("un composite build tests on CI")
 
     val second = reportedEvents[1]
     assertThat(second.properties["leadTimeSec"]).isEqualTo(13 * 3600 + 22 * 60 + 27L)
     assertThat(second.properties["author"]).isEqualTo("jraska")
     assertThat(second.properties["gitCommit"]).isEqualTo("65910afb3de84bb52283fbc8cb0c4be0988d4343")
+    assertThat(second.properties["message"]).isEqualTo("Delete test which isn't needed anymore")
 
     val third = reportedEvents[2]
     assertThat(third.properties["leadTimeSec"]).isEqualTo(11 * 24 * 3600 + 23 * 3600 + 24 * 60 + 0L)
     assertThat(third.properties["author"]).isEqualTo("dependabot[bot]")
     assertThat(third.properties["gitCommit"]).isEqualTo("70e59ee5f812506651b10effbb00657d8e7ca4b2")
-
-//    [AnalyticsEvent(name=Commit Released, properties={leadTimeSec=-48293, gitCommit=859ffe735dc185336cbcad09e692d45dcf8c3361, author=jraska, prNumber=472, releaseName=testRelease}),
   }
 }
 
