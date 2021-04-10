@@ -41,13 +41,13 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Enforced ownership of remote configuration and analytics events - [Details on PR](https://github.com/jraska/github-client/pull/230). More on why these need to be explicitly owned on [this article](https://proandroiddev.com/remote-feature-flags-do-not-always-come-for-free-a372f1768a70).
 
 ## Metrics
-- [Sonarqube Cloud integrated](https://github.com/jraska/github-client/pull/467#issuecomment-816293325).
 In case you want to copy and use any of metrics with your analytics platform, the only adjustment could be your own [`AnalyticsReporter` implementation](https://github.com/jraska/github-client/blob/master/plugins/src/main/java/com/jraska/analytics/AnalyticsReporter.kt#L6).
 - Build time tracking with reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/303).
 - Modularisation statistics reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/334).
-- Dependencies reporting to see which modules depend on too much - see [this PR](https://github.com/jraska/github-client/pull/371
-)
+- Dependencies reporting to see which modules depend on too much - see [this PR](https://github.com/jraska/github-client/pull/371)
 - Lint issues tracking to see the health of modules - see [this PR](https://github.com/jraska/github-client/pull/372)
 - UI tests on Firebase Test Lab results reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/342).
+- [Sonarqube Cloud integrated](https://github.com/jraska/github-client/pull/467#issuecomment-816293325).
 - [Key 4 DevOps metrics](https://circleci.com/blog/how-to-measure-devops-success-4-key-metrics/) implemented through build time reporting and GitHub Webhooks
-![Screenshot 2021-03-27 at 12 15 08](https://user-images.githubusercontent.com/6277721/112718893-30fe4000-8ef6-11eb-9878-593f1cfd2b7e.png)
+- [Lead Time](https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance) of commit to production - see [this PR](https://github.com/jraska/github-client/pull/474).
+![Screenshot 2021-04-10 at 17 47 05](https://user-images.githubusercontent.com/6277721/114275959-d51ed580-9a24-11eb-8787-f3e84672ce85.png)
