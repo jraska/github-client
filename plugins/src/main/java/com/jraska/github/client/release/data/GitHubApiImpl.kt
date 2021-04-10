@@ -1,7 +1,9 @@
 package com.jraska.github.client.release.data
 
+import com.jraska.github.client.release.Commit
 import com.jraska.github.client.release.GitHubApi
 import com.jraska.github.client.release.PullRequest
+import java.time.Instant
 
 class GitHubApiImpl(
   private val api: RetrofitGitHubApi
@@ -50,5 +52,16 @@ class GitHubApiImpl(
 
   override fun createRelease(version: String) {
     api.createRelease(CreateReleaseDto(version)).execute()
+  }
+
+  override fun prCommits(prNumber: Int): List<Commit> {
+    return api.commits(prNumber).execute().body()!!.map {
+      Commit(
+        it.sha,
+        Instant.parse(it.commit.author.dateString),
+        it.author.login,
+        prNumber
+      )
+    }
   }
 }

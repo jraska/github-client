@@ -34,6 +34,9 @@ interface RetrofitGitHubApi {
 
   @POST("releases")
   fun createRelease(@Body dto: CreateReleaseDto): Call<ResponseBody>
+
+  @GET("pulls/{pr_number}/commits")
+  fun commits(@Path("pr_number") prNumber: Int): Call<List<CommitItemDto>>
 }
 
 class PullRequestDto {
@@ -92,3 +95,29 @@ class CreateMilestoneResponseDto {
 }
 
 class CommentRequestDto(val body: String)
+
+class CommitItemDto {
+  @SerializedName("sha")
+  lateinit var sha: String
+
+  @SerializedName("commit")
+  lateinit var commit: CommitDto
+
+  @SerializedName("author")
+  lateinit var author: UserDto
+}
+
+class CommitDto {
+  @SerializedName("author")
+  lateinit var author: AuthorDto
+}
+
+class AuthorDto {
+  @SerializedName("date")
+  lateinit var dateString: String
+}
+
+class UserDto {
+  @SerializedName("login")
+  lateinit var login: String
+}

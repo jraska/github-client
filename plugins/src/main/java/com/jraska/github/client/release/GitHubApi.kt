@@ -14,4 +14,6 @@ interface GitHubApi {
   fun listPrsWithoutMilestone(): List<PullRequest>
 
   fun createRelease(version: String)
+
+  fun prCommits(prNumber: Int): List<Commit>
 }
