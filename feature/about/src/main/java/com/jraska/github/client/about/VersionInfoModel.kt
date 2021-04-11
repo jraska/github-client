@@ -5,7 +5,7 @@ import android.widget.TextView
 import androidx.core.content.pm.PackageInfoCompat
 import com.airbnb.epoxy.SimpleEpoxyModel
 
-internal class VersionInfoModel : SimpleEpoxyModel(R.layout.about_item_version) {
+class VersionInfoModel : SimpleEpoxyModel(R.layout.about_item_version) {
   override fun bind(view: View) {
     super.bind(view)
 
