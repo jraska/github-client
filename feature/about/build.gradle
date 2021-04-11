@@ -17,9 +17,7 @@ android {
 }
 
 // Test will be executed on Firebase Test Lab
-project(":app") {
-  android.sourceSets.androidTest.java.srcDirs += ["./src/androidTest/java"]
-}
+//project(":app").android.sourceSets.androidTest.java.srcDirs += ["../feature/about/src/androidTest/java"]
 
 dependencies {
 

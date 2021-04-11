@@ -80,6 +80,12 @@ android {
   packagingOptions {
     exclude 'META-INF/licenses/ASM'
   }
+
+  sourceSets {
+    androidTest {
+      java.srcDirs += ["../feature/about/src/androidTest/java"]
+    }
+  }
 }
 
 dependencies {
@@ -176,7 +182,7 @@ play {
 }
 
 project.afterEvaluate {
-  if (gradle.startParameter.taskNames.any{ it.startsWith("publishBundle")}) {
+  if (gradle.startParameter.taskNames.any { it.startsWith("publishBundle") }) {
     def credentials = System.getenv("PLAY_PUBLISHER_CREDENTIALS")
     if (credentials == null) {
       throw new GradleException("PLAY_PUBLISHER_CREDENTIALS not set, cannot release")

@@ -10,7 +10,7 @@ import org.junit.Test
 
 internal class VersionInfoModelTest {
   @Test
-  fun testBinding() {
+  fun bindsProperly() {
     val context = InstrumentationRegistry.getInstrumentation().targetContext
     val frameLayout = FrameLayout(context)
 
