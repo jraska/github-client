@@ -81,10 +81,8 @@ android {
     exclude 'META-INF/licenses/ASM'
   }
 
-  sourceSets {
-    androidTest {
-      java.srcDirs += ["../feature/about/src/androidTest/java"]
-    }
+  if (gradle.startParameter.taskNames.any { it.contains("Firebase") }) {
+    sourceSets.androidTest.java.srcDirs += ["../feature/about/src/androidTest/java"]
   }
 }
 
