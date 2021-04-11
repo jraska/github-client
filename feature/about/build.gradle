@@ -17,10 +17,8 @@ android {
 }
 
 // Test will be executed on Firebase Test Lab
-if (gradle.startParameter.taskNames.any { it.contains("Firebase") }) {
-  project(":app").afterEvaluate {
-    android.sourceSets.androidTest.java.srcDirs += ["./src/androidTest/java"]
-  }
+project(":app").afterEvaluate {
+  android.sourceSets.androidTest.java.srcDirs += ["./src/androidTest/java"]
 }
 
 dependencies {
