@@ -4,7 +4,7 @@ ext {
   retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
   retrofitRxJavaAdapter = "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 
-  daggerVersion = '2.33'
+  daggerVersion = '2.34'
   daggerAnnotationProcessor = "com.google.dagger:dagger-compiler:$daggerVersion"
   dagger = "com.google.dagger:dagger:$daggerVersion"
 
