@@ -14,7 +14,6 @@ internal class BuildTimeListener(
 ) : BuildListener {
   private val taskExecutionStatisticsEventAdapter = TaskExecutionStatisticsEventAdapter()
 
-  override fun buildStarted(gradle: Gradle) = Unit
   override fun settingsEvaluated(gradle: Settings) = Unit
   override fun projectsLoaded(gradle: Gradle) = Unit
   override fun projectsEvaluated(gradle: Gradle) {

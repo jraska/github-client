@@ -15,7 +15,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: key-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties"}}
+          key: key-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties"}}
       - name: Get Dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: ./gradlew androidDependencies --stacktrace
@@ -38,6 +38,6 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: key-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties"}}
+          key: key-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties"}}
       - name: Lint
         run: ./gradlew lint --stacktrace

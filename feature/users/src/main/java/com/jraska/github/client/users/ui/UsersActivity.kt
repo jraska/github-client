@@ -29,8 +29,6 @@ class UsersActivity : BaseActivity(), UserModel.UserListener {
     usersRecycler.layoutManager = LinearLayoutManager(this)
     usersRefreshSwipeLayout.setOnRefreshListener { usersViewModel.onRefresh() }
 
-    packageManager.getPackageInfo(packageName, 0)
-
     showProgressIndicator()
 
     usersViewModel.users().observe(this, { this.setState(it) })

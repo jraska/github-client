@@ -17,7 +17,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: key-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: key-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties"}}
       - name: Run Module Statistics Report
         run: ./gradlew reportModuleStatistics --stacktrace --no-configure-on-demand
   lintReport:
@@ -32,6 +32,6 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: key-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: key-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum  "dependencies.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties"}}
       - name: Run Lint Report
         run: ./gradlew lintStatisticsReport --stacktrace

@@ -44,7 +44,6 @@ object BuildDataFactory {
       operatingSystem = System.getProperty("os.name").toLowerCase(Locale.getDefault()),
       parameters = mutableMapOf(
         "isConfigureOnDemand" to startParameter.isConfigureOnDemand,
-        "isWatchFileSystem" to startParameter.isWatchFileSystem,
         "isConfigurationCache" to startParameter.isConfigurationCache,
         "isBuildCacheEnabled" to startParameter.isBuildCacheEnabled,
         "maxWorkers" to startParameter.maxWorkerCount
