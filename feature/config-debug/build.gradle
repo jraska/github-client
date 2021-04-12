@@ -23,7 +23,7 @@ dependencies {
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
 
-  implementation 'androidx.recyclerview:recyclerview:1.1.0'
+  implementation 'androidx.recyclerview:recyclerview:1.2.0'
   implementation 'com.airbnb.android:epoxy:4.4.4'
 
   testImplementation 'junit:junit:4.13.2'
