@@ -47,7 +47,7 @@ object AppModule {
   @Provides
   fun provideLinkLauncher(): WebLinkLauncher {
     return object : WebLinkLauncher {
-      override fun launch(url: HttpUrl) {
+      override fun launchOnWeb(url: HttpUrl) {
         throw UnsupportedOperationException("Partial app tried to open $url")
       }
     }

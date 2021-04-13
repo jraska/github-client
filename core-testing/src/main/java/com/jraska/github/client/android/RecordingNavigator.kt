@@ -6,10 +6,6 @@ import okhttp3.HttpUrl
 class RecordingNavigator: Navigator {
   val screensStarted: MutableList<Any> = mutableListOf()
 
-  override fun launchOnWeb(httpUrl: HttpUrl) {
-    screensStarted.add(httpUrl)
-  }
-
   override fun startUserDetail(login: String) {
     screensStarted.add(login)
   }

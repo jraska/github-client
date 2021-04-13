@@ -13,7 +13,7 @@ internal class ChromeCustomTabsLauncher(
   private val provider: TopActivityProvider,
   private val packageManager: PackageManager
 ) : WebLinkLauncher {
-  override fun launch(url: HttpUrl) {
+  override fun launchOnWeb(url: HttpUrl) {
     val uri = Uri.parse(url.toString())
 
     val customTabsIntent = prepareIntent(uri)

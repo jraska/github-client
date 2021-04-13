@@ -12,16 +12,11 @@ import okhttp3.HttpUrl
  * ways how to handle activity start.
  */
 class DeepLinkNavigator(
-  private val deepLinkLauncher: DeepLinkLauncher,
-  private val webLinkLauncher: WebLinkLauncher
+  private val deepLinkLauncher: DeepLinkLauncher
 ) : Navigator {
 
   private fun launch(url: HttpUrl) {
     deepLinkLauncher.launch(url)
-  }
-
-  override fun launchOnWeb(httpUrl: HttpUrl) {
-    webLinkLauncher.launch(httpUrl)
   }
 
   override fun startUserDetail(login: String) {

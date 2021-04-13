@@ -2,17 +2,17 @@ package com.jraska.github.client.about
 
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.Owner
+import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.analytics.toAnalyticsString
 import com.jraska.github.client.identity.IdentityProvider
-import com.jraska.github.client.navigation.Navigator
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import javax.inject.Inject
 
 internal class AboutViewModel @Inject constructor(
   private val analytics: EventAnalytics,
-  private val navigator: Navigator,
+  private val webLinkLauncher: WebLinkLauncher,
   private val identityProvider: IdentityProvider
 ) : ViewModel() {
 
@@ -45,7 +45,7 @@ internal class AboutViewModel @Inject constructor(
 
     analytics.report(event)
 
-    navigator.launchOnWeb(url)
+    webLinkLauncher.launchOnWeb(url)
   }
 
   companion object {

@@ -1,6 +1,8 @@
 package com.jraska.github.client.android
 
 import com.jraska.github.client.Fakes
+import com.jraska.github.client.RecordingWebLinkLauncher
+import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.ui.SnackbarData
@@ -24,6 +26,12 @@ object FakeCoreAndroidModule {
   @Singleton
   fun provideNavigator(): Navigator {
     return Fakes.recordingNavigator()
+  }
+
+  @Provides
+  @Singleton
+  fun webLinkLauncher(): WebLinkLauncher {
+    return RecordingWebLinkLauncher()
   }
 
   @Provides

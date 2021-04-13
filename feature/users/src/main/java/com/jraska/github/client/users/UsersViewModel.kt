@@ -3,6 +3,7 @@ package com.jraska.github.client.users
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.Owner
+import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.users.rx.toLiveData
@@ -18,6 +19,7 @@ internal class UsersViewModel @Inject constructor(
   usersRepository: UsersRepository,
   appSchedulers: AppSchedulers,
   private val navigator: Navigator,
+  private val webLinkLauncher: WebLinkLauncher,
   private val eventAnalytics: EventAnalytics
 ) : ViewModel() {
 
@@ -62,7 +64,7 @@ internal class UsersViewModel @Inject constructor(
 
     eventAnalytics.report(event)
 
-    navigator.launchOnWeb(Urls.user(user.login))
+    webLinkLauncher.launchOnWeb(Urls.user(user.login))
   }
 
   fun onSettingsIconClicked() {

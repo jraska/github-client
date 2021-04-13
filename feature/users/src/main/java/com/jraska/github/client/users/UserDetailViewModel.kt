@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.Config
 import com.jraska.github.client.Owner
+import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.lazyMap
@@ -20,6 +21,7 @@ internal class UserDetailViewModel @Inject constructor(
   private val usersRepository: UsersRepository,
   private val schedulers: AppSchedulers,
   private val navigator: Navigator,
+  private val webLinkLauncher: WebLinkLauncher,
   private val eventAnalytics: EventAnalytics,
   private val config: Config
 ) : ViewModel() {
@@ -52,7 +54,7 @@ internal class UserDetailViewModel @Inject constructor(
 
     eventAnalytics.report(event)
 
-    navigator.launchOnWeb(Urls.user(login))
+    webLinkLauncher.launchOnWeb(Urls.user(login))
   }
 
   fun onRepoClicked(header: RepoHeader) {

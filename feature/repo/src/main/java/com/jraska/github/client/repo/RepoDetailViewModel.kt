@@ -1,17 +1,16 @@
 package com.jraska.github.client.repo
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.toLiveData
 import com.google.android.material.snackbar.Snackbar
 import com.jraska.github.client.Owner
+import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.lazyMap
 import com.jraska.github.client.ui.SnackbarData
 import com.jraska.github.client.ui.SnackbarDisplay
-import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.navigation.Urls
 import com.jraska.github.client.repo.model.RepoDetail
 import com.jraska.github.client.repo.model.RepoHeader
@@ -23,7 +22,7 @@ import javax.inject.Inject
 internal class RepoDetailViewModel @Inject constructor(
   private val repoRepository: RepoRepository,
   private val appSchedulers: AppSchedulers,
-  private val navigator: Navigator,
+  private val webLinkLauncher: WebLinkLauncher,
   private val eventAnalytics: EventAnalytics,
   private val snackbarDisplay: SnackbarDisplay
 ) : ViewModel() {
@@ -58,7 +57,7 @@ internal class RepoDetailViewModel @Inject constructor(
       SnackbarData(
         R.string.repo_detail_open_web_text,
         Snackbar.LENGTH_INDEFINITE,
-        R.string.repo_detail_open_web_action to { navigator.launchOnWeb(Urls.repo(fullRepoName)) })
+        R.string.repo_detail_open_web_action to { webLinkLauncher.launchOnWeb(Urls.repo(fullRepoName)) })
     )
   }
 

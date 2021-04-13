@@ -17,7 +17,7 @@ class DeepLinkHandlerImpl @Inject constructor(
       return BooleanResult.SUCCESS
     } catch (ex: IllegalArgumentException) {
       crashReporter.report(ex, "Invalid deep link $deepLink")
-      fallbackLauncher.launch(deepLink)
+      fallbackLauncher.launchOnWeb(deepLink)
       return BooleanResult.FAILURE
     }
   }

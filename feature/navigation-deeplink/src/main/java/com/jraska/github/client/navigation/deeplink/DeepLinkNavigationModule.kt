@@ -11,7 +11,7 @@ import dagger.Provides
 object DeepLinkNavigationModule {
 
   @Provides
-  fun provideNavigator(webLinkLauncher: WebLinkLauncher, deepLinkLauncher: DeepLinkLauncher): Navigator {
-    return DeepLinkNavigator(deepLinkLauncher, webLinkLauncher)
+  fun provideNavigator(deepLinkLauncher: DeepLinkLauncher): Navigator {
+    return DeepLinkNavigator(deepLinkLauncher)
   }
 }
