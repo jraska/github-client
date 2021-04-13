@@ -93,7 +93,6 @@ dependencies {
   implementation project(':core')
   implementation project(':core-android-api')
   implementation project(':navigation-api')
-  implementation project(':feature:navigation-deeplink')
   implementation project(':feature:identity')
   implementation project(':feature:identity-api')
   implementation project(':feature:network-status')

@@ -14,7 +14,6 @@ include ':app',
   ':feature:identity-api',
   ':feature:network-status',
   ':feature:in-app-update',
-  ':feature:navigation-deeplink',
   ':feature:config-debug-api',
   ':feature:config-debug',
 

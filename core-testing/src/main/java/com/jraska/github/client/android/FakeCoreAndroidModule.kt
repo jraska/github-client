@@ -1,11 +1,11 @@
 package com.jraska.github.client.android
 
+import com.jraska.github.client.DeepLinkLauncher
 import com.jraska.github.client.Fakes
 import com.jraska.github.client.RecordingWebLinkLauncher
 import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.rx.AppSchedulers
-import com.jraska.github.client.ui.SnackbarData
 import com.jraska.github.client.ui.SnackbarDisplay
 import dagger.Module
 import dagger.Provides
@@ -24,8 +24,8 @@ object FakeCoreAndroidModule {
 
   @Provides
   @Singleton
-  fun provideNavigator(): Navigator {
-    return Fakes.recordingNavigator()
+  fun provideNavigator(): DeepLinkLauncher {
+    return Fakes.recordingDeeplinkLauncher()
   }
 
   @Provides

@@ -1,7 +1,7 @@
 package com.jraska.github.client
 
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.android.RecordingNavigator
+import com.jraska.github.client.android.RecordingDeeplinkLauncher
 import com.jraska.github.client.rx.AppSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -30,7 +30,7 @@ object Fakes {
     return RecordingAnalyticsProperty()
   }
 
-  fun recordingNavigator() : RecordingNavigator {
-    return RecordingNavigator()
+  fun recordingDeeplinkLauncher() : RecordingDeeplinkLauncher {
+    return RecordingDeeplinkLauncher()
   }
 }

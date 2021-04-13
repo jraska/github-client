@@ -36,7 +36,6 @@ dependencies {
   implementation project(':core-android-api')
   implementation project(':core')
   implementation project(':navigation-api')
-  implementation project(':feature:navigation-deeplink')
   implementation project(':core-testing')
   implementation project(':feature:users')
 

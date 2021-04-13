@@ -3,6 +3,7 @@ package com.jraska.github.client.users
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.Config
+import com.jraska.github.client.DeepLinkLauncher
 import com.jraska.github.client.Owner
 import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.analytics.AnalyticsEvent
@@ -20,7 +21,7 @@ import javax.inject.Inject
 internal class UserDetailViewModel @Inject constructor(
   private val usersRepository: UsersRepository,
   private val schedulers: AppSchedulers,
-  private val navigator: Navigator,
+  private val deepLinkLauncher: DeepLinkLauncher,
   private val webLinkLauncher: WebLinkLauncher,
   private val eventAnalytics: EventAnalytics,
   private val config: Config
@@ -65,7 +66,7 @@ internal class UserDetailViewModel @Inject constructor(
 
     eventAnalytics.report(event)
 
-    navigator.startRepoDetail(header.fullName())
+    deepLinkLauncher.launch(Urls.repo(header.fullName()))
   }
 
   sealed class ViewState {

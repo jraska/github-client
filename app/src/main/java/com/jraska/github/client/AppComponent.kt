@@ -11,7 +11,6 @@ import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.HttpModule
 import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.inappupdate.InAppUpdateModule
-import com.jraska.github.client.navigation.deeplink.DeepLinkNavigationModule
 import com.jraska.github.client.networkstatus.NetworkStatusModule
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.repo.RepoModule
@@ -47,7 +46,6 @@ interface AppComponent {
     ConfigDebugModule::class,
     CoreAndroidModule::class,
     ChromeCustomTabsModule::class,
-    DeepLinkNavigationModule::class,
     IdentityModule::class,
     NetworkStatusModule::class,
     InAppUpdateModule::class,
