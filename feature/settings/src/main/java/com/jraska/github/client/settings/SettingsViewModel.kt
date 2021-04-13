@@ -6,7 +6,6 @@ import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.config.debug.ui.ConfigRowModelProvider
-import com.jraska.github.client.navigation.Navigator
 import com.jraska.github.client.navigation.Urls
 import javax.inject.Inject
 
