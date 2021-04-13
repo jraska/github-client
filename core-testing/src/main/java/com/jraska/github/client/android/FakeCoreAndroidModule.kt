@@ -24,7 +24,7 @@ object FakeCoreAndroidModule {
   @Provides
   @Singleton
   fun provideNavigator(): DeepLinkLauncher {
-    return Fakes.recordingDeeplinkLauncher()
+    return Fakes.recordingDeepLinkLauncher()
   }
 
   @Provides
