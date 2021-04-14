@@ -2,4 +2,8 @@
 <resources>
   <color name="textMain">#202020</color>
   <color name="textSecondary">#767676</color>
+
+  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#FF4081</color>
 </resources>
