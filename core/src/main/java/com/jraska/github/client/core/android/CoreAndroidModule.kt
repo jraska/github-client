@@ -3,6 +3,8 @@ package com.jraska.github.client.core.android
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.jraska.github.client.DeepLinkHandler
 import com.jraska.github.client.DeepLinkHandlerImpl
 import com.jraska.github.client.DeepLinkLauncher
@@ -114,4 +116,20 @@ object CoreAndroidModule {
 
   @Provides
   fun snackbarDisplay(display: TopSnackbarDisplay): SnackbarDisplay = display
+
+  @Provides
+  @IntoSet
+  fun setupFresco(): OnAppCreate {
+    return object : OnAppCreate {
+      override fun onCreate(app: Application) = Fresco.initialize(app)
+    }
+  }
+
+  @Provides
+  @IntoSet
+  fun setupThreeTen(): OnAppCreate {
+    return object : OnAppCreate {
+      override fun onCreate(app: Application) = AndroidThreeTen.init(app)
+    }
+  }
 }

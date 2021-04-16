@@ -42,7 +42,6 @@ interface AppComponent {
 
 @Module(
   includes = [
-    AppModule::class,
     ConfigDebugModule::class,
     CoreAndroidModule::class,
     ChromeCustomTabsModule::class,
