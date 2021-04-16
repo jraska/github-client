@@ -8,7 +8,7 @@ import com.jraska.github.client.users.R
 import com.jraska.github.client.users.model.RepoHeader
 import com.jraska.github.client.users.widget.RepeaterLayout
 
-internal class ReposSectionModel(
+class ReposSectionModel(
   private val title: String,
   private val repos: List<RepoHeader>,
   private val repoListener: (RepoHeader) -> Unit

@@ -1,6 +1,6 @@
 package com.jraska.github.client.users.model
 
-internal class RepoHeader(
+class RepoHeader(
   val owner: String,
   val name: String,
   val description: String,

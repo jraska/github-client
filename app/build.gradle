@@ -82,7 +82,10 @@ android {
   }
 
   if (gradle.startParameter.taskNames.any { it.contains("Firebase") }) {
-    sourceSets.androidTest.java.srcDirs += ["../feature/about/src/androidTest/java"]
+    sourceSets.androidTest.java {
+      srcDirs += ["../feature/about/src/androidTest/java"]
+      srcDirs += ["../feature/users/src/androidTest/java"]
+    }
   }
 }
 
