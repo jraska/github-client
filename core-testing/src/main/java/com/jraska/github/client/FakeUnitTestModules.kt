@@ -8,8 +8,8 @@ import dagger.Module
   includes = [
     FakeCoreModule::class,
     FakeCoreAndroidModule::class,
-    FakeConfigModule::class,
-    FakeHttpModule::class
+    FakeHttpModule::class,
+    FakeWebLinkModule::class
   ]
 )
-object FakeModules
+object FakeUnitTestModules

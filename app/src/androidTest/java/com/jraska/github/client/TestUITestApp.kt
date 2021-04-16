@@ -15,7 +15,7 @@ class TestUITestApp : GitHubClientApp(), HasViewModelFactory, HasServiceModelFac
     DecoratedServiceModelFactory(super.serviceModelFactory())
   }
 
-  private val appComponent: TestAppComponent by lazy {
+  val appComponent: TestAppComponent by lazy {
     DaggerTestAppComponent.factory().create(this)
   }
 
@@ -35,6 +35,8 @@ class TestUITestApp : GitHubClientApp(), HasViewModelFactory, HasServiceModelFac
 @Singleton
 @Component(modules = [SharedModules::class, FakeCoreModule::class, ReplayHttpModule::class])
 interface TestAppComponent : AppComponent {
+  val config: FakeConfig
+
   @Component.Factory
   interface Factory {
     fun create(@BindsInstance context: Context): TestAppComponent

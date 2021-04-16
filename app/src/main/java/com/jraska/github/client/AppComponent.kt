@@ -54,8 +54,7 @@ interface AppComponent {
     PushModule::class,
     SettingsModule::class,
     AboutModule::class,
-    ShortcutsModule::class,
-    FirebaseConfigModule::class]
+    ShortcutsModule::class]
 )
 object SharedModules
 

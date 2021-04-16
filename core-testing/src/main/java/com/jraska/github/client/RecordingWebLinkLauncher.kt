@@ -11,3 +11,5 @@ class RecordingWebLinkLauncher : WebLinkLauncher {
     linksLaunched.add(url)
   }
 }
+
+fun Fakes.recordingWebLinkLauncher() = RecordingWebLinkLauncher()

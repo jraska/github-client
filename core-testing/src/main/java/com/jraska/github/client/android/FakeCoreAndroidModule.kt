@@ -29,12 +29,6 @@ object FakeCoreAndroidModule {
 
   @Provides
   @Singleton
-  fun webLinkLauncher(): WebLinkLauncher {
-    return RecordingWebLinkLauncher()
-  }
-
-  @Provides
-  @Singleton
   internal fun provideFakeSnackbarDisplay(): FakeSnackbarDisplay {
     return FakeSnackbarDisplay()
   }
