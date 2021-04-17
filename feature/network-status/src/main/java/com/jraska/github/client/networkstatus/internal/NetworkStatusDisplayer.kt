@@ -8,7 +8,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.jraska.github.client.core.android.DefaultActivityCallbacks
 import com.jraska.github.client.networkstatus.R
 import com.jraska.github.client.rx.AppSchedulers
-import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import timber.log.Timber
 import javax.inject.Inject
 

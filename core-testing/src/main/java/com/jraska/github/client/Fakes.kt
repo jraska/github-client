@@ -3,7 +3,7 @@ package com.jraska.github.client
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.android.RecordingDeepLinkLauncher
 import com.jraska.github.client.rx.AppSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 object Fakes {
   fun config(values: Map<String, Any> = emptyMap()): FakeConfig {

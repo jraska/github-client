@@ -4,8 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import androidx.test.runner.AndroidJUnitRunner
-import com.squareup.rx2.idler.Rx2Idler
-import io.reactivex.plugins.RxJavaPlugins
+import com.squareup.rx3.idler.Rx3Idler
+import io.reactivex.rxjava3.plugins.RxJavaPlugins
 
 @Suppress("unused") // build.gradle
 class TestRunner : AndroidJUnitRunner() {
@@ -17,10 +17,10 @@ class TestRunner : AndroidJUnitRunner() {
     super.onCreate(arguments)
 
     RxJavaPlugins.setInitComputationSchedulerHandler(
-      Rx2Idler.create("RxJava 2.x Computation Scheduler")
+      Rx3Idler.create("RxJava 3.x Computation Scheduler")
     )
     RxJavaPlugins.setInitIoSchedulerHandler(
-      Rx2Idler.create("RxJava 2.x IO Scheduler")
+      Rx3Idler.create("RxJava 3.x IO Scheduler")
     )
   }
 }

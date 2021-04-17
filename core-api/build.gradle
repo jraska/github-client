@@ -5,7 +5,7 @@ apply plugin: 'kotlin'
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-  implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+  implementation 'io.reactivex.rxjava3:rxjava:3.0.12'
   implementation rootProject.ext.okHttp
   implementation 'com.squareup.okio:okio:2.10.0'
 

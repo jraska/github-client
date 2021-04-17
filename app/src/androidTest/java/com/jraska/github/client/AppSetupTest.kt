@@ -1,6 +1,6 @@
 package com.jraska.github.client
 
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import timber.log.Timber

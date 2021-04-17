@@ -20,7 +20,7 @@ import org.junit.rules.ExternalResource
 import org.junit.rules.RuleChain
 import org.junit.rules.TestRule
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
@@ -39,7 +39,7 @@ object ReplayHttpModule {
   private fun createRetrofit(): Retrofit {
     return Retrofit.Builder()
       .baseUrl("https://api.github.com")
-      .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+      .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
       .addConverterFactory(GsonConverterFactory.create())
       .client(okReplayClient())
       .build()

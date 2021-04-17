@@ -1,10 +1,10 @@
 package com.jraska.github.client.xpush
 
-import io.reactivex.Completable
+import io.reactivex.rxjava3.core.Completable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -17,7 +17,7 @@ interface PushServerClient {
   companion object {
     fun create(authorizationToken: String): PushServerClient {
       return Retrofit.Builder().validateEagerly(true)
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl("https://fcm.googleapis.com")
         .client(

@@ -5,6 +5,8 @@ import com.jraska.github.client.http.HttpTest
 import com.jraska.github.client.http.enqueue
 import com.jraska.github.client.http.onUrlPartReturn
 import com.jraska.github.client.http.onUrlReturn
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -23,6 +25,8 @@ class GitHubApiUsersRepositoryTest {
   @Test
   fun getsUsersProperly() {
     mockWebServer.enqueue("response/users.json")
+
+    println(Thread.currentThread().id)
 
     val users = repository.getUsers(0)
       .test()

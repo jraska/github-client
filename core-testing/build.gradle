@@ -10,7 +10,7 @@ dependencies {
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
 
-  implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+  implementation 'io.reactivex.rxjava3:rxjava:3.0.12'
 
   implementation rootProject.ext.retrofit
   implementation rootProject.ext.retrofitGsonConverter

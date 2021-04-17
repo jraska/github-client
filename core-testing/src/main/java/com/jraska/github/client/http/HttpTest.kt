@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 
@@ -18,7 +18,7 @@ object HttpTest {
         level = HttpLoggingInterceptor.Level.BASIC
       }).build())
       .addConverterFactory(GsonConverterFactory.create())
-      .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+      .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
       .build()
   }
 }

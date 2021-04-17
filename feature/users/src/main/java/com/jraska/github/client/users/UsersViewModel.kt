@@ -12,7 +12,8 @@ import com.jraska.github.client.navigation.Urls
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.User
 import com.jraska.github.client.users.model.UsersRepository
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.subjects.PublishSubject
 import javax.inject.Inject
 
 internal class UsersViewModel @Inject constructor(
@@ -32,7 +33,7 @@ internal class UsersViewModel @Inject constructor(
       .onErrorReturn { ViewState.Error(it) }
       .toObservable()
       .subscribeOn(appSchedulers.io)
-      .startWith(ViewState.Loading)
+      .startWith(Single.just(ViewState.Loading))
       .repeatWhen { refreshSignal }
       .cache()
       .observeOn(appSchedulers.mainThread)

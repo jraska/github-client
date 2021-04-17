@@ -1,6 +1,6 @@
 package com.jraska.github.client.repo.model
 
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 internal class GitHubApiRepoRepository(
   private val gitHubRepoApi: RepoGitHubApi

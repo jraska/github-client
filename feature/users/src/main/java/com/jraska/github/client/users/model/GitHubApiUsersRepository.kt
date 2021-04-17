@@ -1,9 +1,8 @@
 package com.jraska.github.client.users.model
 
 import com.jraska.github.client.rx.AppSchedulers
-import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import java.util.Collections
 
 internal class GitHubApiUsersRepository(

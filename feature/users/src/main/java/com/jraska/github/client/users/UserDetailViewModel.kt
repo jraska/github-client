@@ -15,6 +15,7 @@ import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.RepoHeader
 import com.jraska.github.client.users.model.UserDetail
 import com.jraska.github.client.users.model.UsersRepository
+import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 internal class UserDetailViewModel @Inject constructor(
@@ -43,7 +44,7 @@ internal class UserDetailViewModel @Inject constructor(
       .observeOn(schedulers.mainThread)
       .map<ViewState> { userDetail -> ViewState.DisplayUser(userDetail) }
       .onErrorReturn { ViewState.Error(it) }
-      .startWith(ViewState.Loading)
+      .startWith(Single.just(ViewState.Loading))
       .toLiveData()
   }
 

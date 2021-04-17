@@ -1,6 +1,6 @@
 package com.jraska.github.client.users.model
 
-import io.reactivex.Single
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

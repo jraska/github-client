@@ -1,6 +1,6 @@
 package com.jraska.github.client.rx
 
-import io.reactivex.Scheduler
+import io.reactivex.rxjava3.core.Scheduler
 
 class AppSchedulers(
   val mainThread: Scheduler,

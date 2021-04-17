@@ -16,7 +16,8 @@ import com.jraska.github.client.repo.model.RepoDetail
 import com.jraska.github.client.repo.model.RepoHeader
 import com.jraska.github.client.repo.model.RepoRepository
 import com.jraska.github.client.rx.AppSchedulers
-import io.reactivex.BackpressureStrategy
+import io.reactivex.rxjava3.core.BackpressureStrategy
+import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 internal class RepoDetailViewModel @Inject constructor(
@@ -40,7 +41,7 @@ internal class RepoDetailViewModel @Inject constructor(
       .observeOn(appSchedulers.mainThread)
       .map<ViewState> { detail -> ViewState.ShowRepo(detail) }
       .onErrorReturn { ViewState.Error(it) }
-      .startWith(ViewState.Loading)
+      .startWith(Single.just(ViewState.Loading))
       .toFlowable(BackpressureStrategy.MISSING)
       .toLiveData()
   }

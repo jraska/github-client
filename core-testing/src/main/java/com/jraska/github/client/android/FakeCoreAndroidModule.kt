@@ -2,13 +2,11 @@ package com.jraska.github.client.android
 
 import com.jraska.github.client.DeepLinkLauncher
 import com.jraska.github.client.Fakes
-import com.jraska.github.client.RecordingWebLinkLauncher
-import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.ui.SnackbarDisplay
 import dagger.Module
 import dagger.Provides
-import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import javax.inject.Singleton
 
 @Module

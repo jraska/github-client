@@ -2,8 +2,8 @@ package com.jraska.github.client.inappupdate
 
 import android.annotation.SuppressLint
 import com.jraska.github.client.rx.AppSchedulers
-import io.reactivex.Completable
-import io.reactivex.internal.functions.Functions
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.internal.functions.Functions
 import timber.log.Timber
 import javax.inject.Inject
 

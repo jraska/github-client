@@ -2,7 +2,7 @@ ext {
   retrofitVersion = '2.9.0'
   retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
   retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-  retrofitRxJavaAdapter = "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+  retrofitRxJavaAdapter = "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
 
   daggerVersion = '2.34'
   daggerAnnotationProcessor = "com.google.dagger:dagger-compiler:$daggerVersion"
