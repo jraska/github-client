@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.jraska.github.client.users">
 
-  <application>
+  <application android:theme="@style/AppTheme.NoActionBar">
     <activity android:name=".ui.UsersActivity"/>
     <activity android:name=".ui.UserDetailActivity"/>
   </application>
