@@ -130,7 +130,7 @@ dependencies {
 
   implementation rootProject.ext.fresco
 
-  implementation 'com.airbnb.android:epoxy:4.4.4'
+  implementation 'com.airbnb.android:epoxy:4.5.0'
 
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
