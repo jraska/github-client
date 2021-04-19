@@ -1,13 +1,11 @@
 package com.jraska.github.client
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import com.jraska.github.client.about.AboutModule
 import com.jraska.github.client.chrome.ChromeCustomTabsModule
 import com.jraska.github.client.config.debug.ConfigDebugModule
+import com.jraska.github.client.core.android.AppBaseComponent
 import com.jraska.github.client.core.android.CoreAndroidModule
-import com.jraska.github.client.core.android.OnAppCreate
-import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.HttpModule
 import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.inappupdate.InAppUpdateModule
@@ -26,13 +24,7 @@ import javax.inject.Singleton
 @Component(
   modules = [SharedModules::class, ToExchange::class]
 )
-interface AppComponent {
-
-  fun onAppCreateActions(): Set<OnAppCreate>
-
-  fun serviceModelFactory(): ServiceModel.Factory
-
-  fun viewModelFactory(): ViewModelProvider.Factory
+interface AppComponent : AppBaseComponent {
 
   @Component.Factory
   interface Factory {

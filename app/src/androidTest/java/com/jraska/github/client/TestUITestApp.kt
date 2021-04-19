@@ -2,24 +2,21 @@ package com.jraska.github.client
 
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
-import com.jraska.github.client.core.android.HasServiceModelFactory
-import com.jraska.github.client.core.android.HasViewModelFactory
+import com.jraska.github.client.core.android.BaseApp
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.ReplayHttpModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
-class TestUITestApp : GitHubClientApp(), HasViewModelFactory, HasServiceModelFactory {
+class TestUITestApp : BaseApp() {
   private val decoratedServiceFactory by lazy {
     DecoratedServiceModelFactory(super.serviceModelFactory())
   }
 
-  val appComponent: TestAppComponent by lazy {
+  override val appComponent: TestAppComponent by lazy {
     DaggerTestAppComponent.factory().create(this)
   }
-
-  override fun createAppComponent() = appComponent
 
   override fun serviceModelFactory(): ServiceModel.Factory {
     return decoratedServiceFactory
