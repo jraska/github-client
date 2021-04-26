@@ -57,7 +57,7 @@ dependencies {
   implementation rootProject.ext.dagger
 
   implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-  implementation 'com.jakewharton.threetenabp:threetenabp:1.3.0'
+  implementation 'com.jakewharton.threetenabp:threetenabp:1.3.1'
   implementation rootProject.ext.okHttpLoggingInterceptor
 
 }
