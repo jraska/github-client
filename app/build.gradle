@@ -157,10 +157,12 @@ dependencies {
   androidTestImplementation 'com.airbnb.okreplay:espresso:1.6.0'
   androidTestImplementation 'com.squareup.rx.idler:rx3-idler:0.11.0'
   androidTestImplementation project(':core-testing')
+  androidTestImplementation project(':core-android-testing')
 
   androidTestImplementation rootProject.ext.retrofit
   androidTestImplementation rootProject.ext.retrofitGsonConverter
   androidTestImplementation rootProject.ext.retrofitRxJavaAdapter
+  androidTestImplementation okHttpMockWebServer
 
   kaptAndroidTest rootProject.ext.daggerAnnotationProcessor
 }

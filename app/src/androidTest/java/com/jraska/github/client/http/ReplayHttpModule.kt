@@ -10,7 +10,6 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import okreplay.AndroidTapeRoot
 import okreplay.OkReplayConfig
@@ -34,7 +33,6 @@ object ReplayHttpModule {
   }
 
   private val REPLAY_MEDIATOR = OkReplayMediator()
-  private const val NETWORK_ERROR_MESSAGE = "You are trying to do network requests in tests you naughty developer!"
 
   private fun createRetrofit(): Retrofit {
     return Retrofit.Builder()
@@ -85,12 +83,7 @@ object ReplayHttpModule {
 
     REPLAY_MEDIATOR.configure(builder)
 
-    val noNetworkInterceptor = object : Interceptor {
-      override fun intercept(chain: Interceptor.Chain): Response {
-        throw UnsupportedOperationException(NETWORK_ERROR_MESSAGE)
-      }
-    }
-    builder.addNetworkInterceptor(noNetworkInterceptor)
+    builder.addInterceptor(MockWebServerInterceptor)
 
     return builder.build()
   }

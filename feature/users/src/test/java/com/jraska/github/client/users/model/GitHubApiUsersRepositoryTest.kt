@@ -10,11 +10,14 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class GitHubApiUsersRepositoryTest {
 
+  @get:Rule
   val mockWebServer = MockWebServer()
+
   internal lateinit var repository: GitHubApiUsersRepository
 
   @Before
@@ -25,8 +28,6 @@ class GitHubApiUsersRepositoryTest {
   @Test
   fun getsUsersProperly() {
     mockWebServer.enqueue("response/users.json")
-
-    println(Thread.currentThread().id)
 
     val users = repository.getUsers(0)
       .test()

@@ -16,6 +16,4 @@ internal interface TestUsersComponent {
   fun usersViewModel(): UsersViewModel
 
   fun userDetailViewModel(): UserDetailViewModel
-
-  val mockWebServer: MockWebServer
 }

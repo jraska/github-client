@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion 30
+  defaultConfig {
+    minSdkVersion 24
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
+  }
+}
+
+dependencies {
+  implementation project(':core-api')
+  implementation project(':core-android-api')
+
+  kapt rootProject.ext.daggerAnnotationProcessor
+  implementation rootProject.ext.dagger
+
+  implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+  implementation okHttpMockWebServer
+  implementation rootProject.ext.okHttp
+  implementation 'com.squareup.okio:okio:2.10.0'
+
+  implementation 'com.squareup.rx.idler:rx3-idler:0.11.0'
+}

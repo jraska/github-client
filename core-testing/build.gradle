@@ -10,6 +10,7 @@ dependencies {
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
 
+  implementation 'junit:junit:4.13.2'
   implementation 'io.reactivex.rxjava3:rxjava:3.0.12'
 
   implementation rootProject.ext.retrofit

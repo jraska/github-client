@@ -5,6 +5,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.jraska.github.client.core.android.BaseApp
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.ReplayHttpModule
+import com.jraska.github.client.users.test.DeepLinkRecordingComponent
+import com.jraska.github.client.users.test.FakeDeepLinkRecordingModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -30,8 +32,15 @@ class TestUITestApp : BaseApp() {
 }
 
 @Singleton
-@Component(modules = [SharedModules::class, FakeCoreModule::class, ReplayHttpModule::class])
-interface TestAppComponent : AppComponent {
+@Component(
+  modules = [
+    SharedModules::class,
+    FakeCoreModule::class,
+    ReplayHttpModule::class,
+    FakeDeepLinkRecordingModule::class
+  ]
+)
+interface TestAppComponent : AppComponent, DeepLinkRecordingComponent {
   val config: FakeConfig
 
   @Component.Factory

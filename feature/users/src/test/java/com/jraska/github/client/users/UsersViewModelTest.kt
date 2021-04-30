@@ -1,15 +1,22 @@
 package com.jraska.github.client.users
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.jraska.github.client.http.MockWebServerInterceptor
+import com.jraska.github.client.http.MockWebServerInterceptorRule
 import com.jraska.github.client.http.enqueue
 import com.jraska.github.client.users.di.DaggerTestUsersComponent
 import com.jraska.livedata.test
+import okhttp3.mockwebserver.MockWebServer
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
 class UsersViewModelTest {
   @get:Rule val testRule = InstantTaskExecutorRule()
+
+  @get:Rule val mockWebServer = MockWebServer()
+
+  @get:Rule val mockWebServerInterceptorRule = MockWebServerInterceptorRule(mockWebServer)
 
   private lateinit var viewModel: UsersViewModel
 
@@ -18,8 +25,8 @@ class UsersViewModelTest {
     val component = DaggerTestUsersComponent.create()
     viewModel = component.usersViewModel()
 
-    component.mockWebServer.enqueue("response/users.json")
-    component.mockWebServer.enqueue("response/users_with_extra.json")
+    mockWebServer.enqueue("response/users.json")
+    mockWebServer.enqueue("response/users_with_extra.json")
   }
 
   @Test

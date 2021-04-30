@@ -1,11 +1,13 @@
 package com.jraska.github.client.repo
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.jraska.github.client.http.MockWebServerInterceptorRule
 import com.jraska.github.client.http.enqueue
 import com.jraska.github.client.repo.di.DaggerTestRepoComponent
 import com.jraska.github.client.repo.di.TestRepoComponent
 import com.jraska.github.client.repo.model.GitHubApiRepoRepositoryTest
 import com.jraska.livedata.test
+import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -15,6 +17,10 @@ internal class RepoDetailViewModelTest {
 
   @get:Rule
   val testRule = InstantTaskExecutorRule()
+
+  @get:Rule val mockWebServer = MockWebServer()
+
+  @get:Rule val mockWebServerInterceptorRule = MockWebServerInterceptorRule(mockWebServer)
 
   lateinit var component: TestRepoComponent
   lateinit var repoDetailViewModel: RepoDetailViewModel
@@ -27,8 +33,8 @@ internal class RepoDetailViewModelTest {
 
   @Test
   fun whenLoadThenLoadsProperRepoDetail() {
-    component.mockWebServer.enqueue("response/repo_detail.json")
-    component.mockWebServer.enqueue("response/repo_pulls.json")
+    mockWebServer.enqueue("response/repo_detail.json")
+    mockWebServer.enqueue("response/repo_pulls.json")
 
     val showRepo = repoDetailViewModel.repoDetail("jraska/github-client")
       .test()
@@ -46,8 +52,8 @@ internal class RepoDetailViewModelTest {
 
   @Test
   fun whenErrorThenLoadsErrorState() {
-    component.mockWebServer.enqueue("response/error.json")
-    component.mockWebServer.enqueue("response/error.json")
+    mockWebServer.enqueue("response/error.json")
+    mockWebServer.enqueue("response/error.json")
 
     val state = repoDetailViewModel.repoDetail("jraska/github-client")
       .test()

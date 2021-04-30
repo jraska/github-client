@@ -14,7 +14,8 @@ interface LinkLauncher {
   }
 
   enum class Priority(val value: Int) {
-    EXACT_MATCH(0),
-    PATH_LENGTH(1)
+    TESTING(0),
+    EXACT_MATCH(1),
+    PATH_LENGTH(2)
   }
 }

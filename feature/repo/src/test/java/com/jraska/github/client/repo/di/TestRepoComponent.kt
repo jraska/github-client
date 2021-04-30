@@ -13,7 +13,5 @@ import javax.inject.Singleton
 internal interface TestRepoComponent {
   fun repoDetailViewModel(): RepoDetailViewModel
 
-  val mockWebServer: MockWebServer
-
   val fakeSnackbarDisplay: FakeSnackbarDisplay
 }

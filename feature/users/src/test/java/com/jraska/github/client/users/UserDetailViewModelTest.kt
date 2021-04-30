@@ -1,6 +1,7 @@
 package com.jraska.github.client.users
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.jraska.github.client.http.MockWebServerInterceptorRule
 import com.jraska.github.client.http.enqueue
 import com.jraska.github.client.http.onUrlPartReturn
 import com.jraska.github.client.http.onUrlReturn
@@ -21,14 +22,16 @@ class UserDetailViewModelTest {
   @get:Rule
   val testRule = InstantTaskExecutorRule()
 
+  @get:Rule val mockWebServer = MockWebServer()
+
+  @get:Rule val mockWebServerInterceptorRule = MockWebServerInterceptorRule(mockWebServer)
+
   private lateinit var viewModel: UserDetailViewModel
-  private lateinit var mockWebServer: MockWebServer
 
   @Before
   fun before() {
     val component = DaggerTestUsersComponent.create()
     viewModel = component.userDetailViewModel()
-    mockWebServer = component.mockWebServer
   }
 
   @Test
@@ -38,8 +41,6 @@ class UserDetailViewModelTest {
 
     val observer = viewModel.userDetail("jraska")
       .test()
-
-//    Thread.sleep(200)
 
     val displayUser = observer.value() as UserDetailViewModel.ViewState.DisplayUser
 
