@@ -6,7 +6,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 internal interface GitHubUsersApi {
-  @GET("/users")
+  @GET("/users?some=1")
   fun getUsers(@Query("since") since: Int): Single<List<GitHubUser>>
 
   @GET("/users/{login}")

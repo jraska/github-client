@@ -10,37 +10,53 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withHint
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.rule.ActivityTestRule
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.jraska.github.client.EnableConfigRule
 import com.jraska.github.client.R
-import com.jraska.github.client.http.ReplayHttpModule
+import com.jraska.github.client.android.test.http.assetJson
+import com.jraska.github.client.http.MockWebServerInterceptorRule
+import com.jraska.github.client.http.onUrlPartReturn
+import com.jraska.github.client.http.onUrlReturn
 import com.jraska.github.client.recordedEvents
-import okreplay.OkReplay
+import com.jraska.github.client.users.ui.UsersActivity
+import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
 
 class UsersActivityFlowTest {
 
-  @Suppress("unused")
+  @get:Rule val mockWebServer = MockWebServer()
+
+  @get:Rule val mockWebServerInterceptorRule = MockWebServerInterceptorRule(mockWebServer)
+
   @get:Rule
-  val testRule = ReplayHttpModule.okReplayRule()
+  val rule = ActivityTestRule(UsersActivity::class.java, false, false)
 
   @get:Rule
   val enableConfigRule = EnableConfigRule("user_detail_section_size", 4L)
 
   @Test
-  @OkReplay
   fun whenStartsThenDisplaysUsers() {
-    onView(withText("defunkt")).perform(click())
-    onView(withText("dotjs")).check(matches(isDisplayed()))
-    onView(withText("facebox")).perform(click())
-    onView(withText("1941")).check(matches(isDisplayed()))
+    mockWebServer.onUrlReturn(".*/users".toRegex(), assetJson("response/users.json"))
+    mockWebServer.onUrlReturn(".*/users/mojombo".toRegex(), assetJson("response/defunkt.json"))
+    mockWebServer.onUrlPartReturn("users/mojombo/repos", assetJson("response/defunkt_repos.json"))
+    mockWebServer.onUrlPartReturn("repos/defunkt/hurl", assetJson("response/repo_hurl.json"))
+
+    rule.launchActivity(null)
+
+    onView(withText("mojombo")).perform(click())
+    onView(withText("charlock_holmes")).check(matches(isDisplayed()))
+    onView(withText("hurl")).perform(click())
+    onView(withText("523")).check(matches(isDisplayed()))
   }
 
   @Test
-  @OkReplay
   fun whenSettingsThenReportsEvent() {
+    rule.launchActivity(null)
+    mockWebServer.enqueue(assetJson("response/users.json"))
+
     onView(withId(R.id.action_settings)).perform(click())
     onView(withHint("Value")).perform(ViewActions.typeText("0.01"))
     onView(withText("Purchase")).perform(click())
@@ -51,16 +67,21 @@ class UsersActivityFlowTest {
   }
 
   @Test
-  @OkReplay
   fun whenAboutThenOpensAbout() {
+    rule.launchActivity(null)
+    mockWebServer.enqueue(assetJson("response/users.json"))
+
     onView(withId(R.id.action_about)).perform(click())
 
     onView(withText("by Josef Raska")).check(matches(isDisplayed()))
   }
 
   @Test
-  @OkReplay
   fun whenRefreshesThenDisplaysOtherUsers() {
+    rule.launchActivity(null)
+    mockWebServer.enqueue(assetJson("response/users.json"))
+    mockWebServer.enqueue(assetJson("response/users_no_defunkt.json"))
+
     onView(withText("defunkt")).check(matches(isDisplayed()))
     onView(withId(R.id.users_refresh_swipe_layout)).perform(swipeDown())
     onView(withText("defunkt")).check(doesNotExist())

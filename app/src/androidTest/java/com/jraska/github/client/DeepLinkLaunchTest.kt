@@ -11,12 +11,9 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
 import com.jraska.github.client.android.test.http.assetJson
 import com.jraska.github.client.http.MockWebServerInterceptorRule
-import com.jraska.github.client.http.ReplayHttpModule
-import com.jraska.github.client.http.enqueue
 import com.jraska.github.client.http.onUrlPartReturn
 import com.jraska.github.client.http.onUrlReturn
 import okhttp3.mockwebserver.MockWebServer
-import okreplay.OkReplay
 import org.hamcrest.Matchers
 import org.junit.Rule
 import org.junit.Test
