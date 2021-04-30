@@ -81,10 +81,14 @@ android {
     exclude 'META-INF/licenses/ASM'
   }
 
-  if (gradle.startParameter.taskNames.any { it.contains("Firebase") }) {
+  if (!gradle.startParameter.taskNames.any { it.contains("Firebase") }) {
     sourceSets.androidTest.java {
       srcDirs += ["../feature/about/src/androidTest/java"]
       srcDirs += ["../feature/users/src/androidTest/java"]
+    }
+    sourceSets.androidTest.assets {
+      srcDirs += ["../feature/about/src/androidTest/assets"]
+      srcDirs += ["../feature/users/src/androidTest/assets"]
     }
   }
 }
