@@ -41,7 +41,7 @@ class UsersActivityTest {
   }
 
   private fun twoUsersResponse(): MockResponse {
-    val assetsStream = InstrumentationRegistry.getInstrumentation().targetContext.assets.open("users/two_users.json")
+    val assetsStream = InstrumentationRegistry.getInstrumentation().context.assets.open("users/two_users.json")
 
     val json = assetsStream.bufferedReader().readText()
 
