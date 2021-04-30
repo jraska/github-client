@@ -22,12 +22,11 @@ class UsersActivityTest {
   @get:Rule val mockWebServerInterceptorRule = MockWebServerInterceptorRule(mockWebServer)
 
   @get:Rule
-  val rule = ActivityTestRule(UsersActivity::class.java, false, false)
+  val rule = ActivityTestRule(UsersActivity::class.java)
 
   @Test
   fun testLaunches() {
     mockWebServer.enqueue(twoUsersResponse())
-    rule.launchActivity(null)
 
     usingLinkRecording {
       onView(withText("defunkt")).perform(click())
