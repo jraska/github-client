@@ -10,19 +10,9 @@ import org.hamcrest.TypeSafeMatcher
 class MapDispatcher : Dispatcher() {
   private val requestDispatchers = mutableSetOf<NetworkMockEntry>()
 
-  fun onUrlReturn(urlRegex: Regex, jsonPath: String) {
-    onMatchingReturn(UrlRegexMatcher(urlRegex), jsonPath)
-  }
-
-  fun onUrlPartReturn(urlPart: String, jsonPath: String) {
-    onMatchingReturn(UrlContainsMatcher(urlPart), jsonPath)
-  }
-
-  fun onMatchingReturn(matcher: Matcher<RecordedRequest>, jsonPath: String) {
+  fun onMatchingReturn(matcher: Matcher<RecordedRequest>, mockResponse: MockResponse) {
     requestDispatchers.add(
-      NetworkMockEntry(matcher) {
-        MockResponse().setBody(json(jsonPath))
-      })
+      NetworkMockEntry(matcher) { mockResponse })
   }
 
   override fun dispatch(request: RecordedRequest): MockResponse {

@@ -37,16 +37,20 @@ fun MockWebServer.enqueue(path: String) {
   this.enqueue(MockResponse().setBody(json(path)))
 }
 
-fun MockWebServer.onUrlPartReturn(urlPart: String, jsonPath: String) {
+fun MockWebServer.onUrlPartReturn(urlPart: String, jsonPath: String) = onUrlPartReturn(urlPart, jsonResource(jsonPath))
+
+fun MockWebServer.onUrlPartReturn(urlPart: String, mockResponse: MockResponse) {
   ensureMapDispatcher()
 
-  (dispatcher as MapDispatcher).onUrlPartReturn(urlPart, jsonPath)
+  (dispatcher as MapDispatcher).onMatchingReturn(UrlContainsMatcher(urlPart), mockResponse)
 }
 
-fun MockWebServer.onUrlReturn(urlRegex: Regex, jsonPath: String) {
+fun MockWebServer.onUrlReturn(urlRegex: Regex, jsonPath: String) = onUrlReturn(urlRegex, jsonResource(jsonPath))
+
+fun MockWebServer.onUrlReturn(urlRegex: Regex, mockResponse: MockResponse) {
   ensureMapDispatcher()
 
-  (dispatcher as MapDispatcher).onUrlReturn(urlRegex, jsonPath)
+  (dispatcher as MapDispatcher).onMatchingReturn(UrlRegexMatcher(urlRegex), mockResponse)
 }
 
 private fun MockWebServer.ensureMapDispatcher() {
@@ -59,6 +63,10 @@ internal fun json(path: String): String {
   val uri = HttpTest.javaClass.classLoader.getResource(path)
   val file = File(uri?.path!!)
   return String(file.readBytes())
+}
+
+fun jsonResource(path: String): MockResponse {
+  return MockResponse().setBody(json(path))
 }
 
 object MockWebServerInterceptor : Interceptor {

@@ -5,6 +5,7 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import com.jraska.github.client.android.test.http.assetJson
 import com.jraska.github.client.http.MockWebServerInterceptorRule
 import com.jraska.github.client.users.ui.UsersActivity
 import okhttp3.mockwebserver.MockResponse
@@ -41,10 +42,6 @@ class UsersActivityTest {
   }
 
   private fun twoUsersResponse(): MockResponse {
-    val assetsStream = InstrumentationRegistry.getInstrumentation().context.assets.open("users/two_users.json")
-
-    val json = assetsStream.bufferedReader().readText()
-
-    return MockResponse().setResponseCode(200).setBody(json)
+    return assetJson("users/two_users.json")
   }
 }

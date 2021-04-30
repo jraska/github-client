@@ -9,19 +9,28 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
+import com.jraska.github.client.android.test.http.assetJson
+import com.jraska.github.client.http.MockWebServerInterceptorRule
 import com.jraska.github.client.http.ReplayHttpModule
+import com.jraska.github.client.http.enqueue
+import com.jraska.github.client.http.onUrlPartReturn
+import com.jraska.github.client.http.onUrlReturn
+import okhttp3.mockwebserver.MockWebServer
 import okreplay.OkReplay
 import org.hamcrest.Matchers
 import org.junit.Rule
 import org.junit.Test
 
 class DeepLinkLaunchTest {
-  @get:Rule
-  val testRule = ReplayHttpModule.okReplayRule()
+
+  @get:Rule val mockWebServer = MockWebServer()
+
+  @get:Rule val mockWebServerInterceptorRule = MockWebServerInterceptorRule(mockWebServer)
 
   @Test
-  @OkReplay
   fun whenUsersLinkThenUsersActivityDisplayed() {
+    mockWebServer.enqueue(assetJson("response/users.json"))
+
     launchDeepLink("https://github.com/users")
 
     onView(withText("defunkt")).check(matches(isDisplayed()))
@@ -29,16 +38,20 @@ class DeepLinkLaunchTest {
   }
 
   @Test
-  @OkReplay
   fun whenDetailLinkThenUserDetailActivityDisplayed() {
-    launchDeepLink("https://github.com/defunkt")
+    mockWebServer.onUrlReturn(".*/users/mojombo".toRegex(), assetJson("response/mojombo.json"))
+    mockWebServer.onUrlPartReturn("users/mojombo/repos", assetJson("response/mojombo_repos.json"))
 
-    onView(withText("dotjs")).check(matches(isDisplayed()))
+    launchDeepLink("https://github.com/mojombo")
+
+    onView(withText("charlock_holmes")).check(matches(isDisplayed()))
   }
 
   @Test
-  @OkReplay
   fun whenRepoLinkThenRepoActivityDisplayed() {
+    mockWebServer.enqueue(assetJson("response/repo_detail.json"))
+    mockWebServer.enqueue(assetJson("response/repo_pulls.json"))
+
     launchDeepLink("https://github.com/jraska/Falcon")
 
     onView(withText(Matchers.containsString("Language: Java")))
