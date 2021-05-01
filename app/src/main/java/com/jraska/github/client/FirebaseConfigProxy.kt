@@ -1,6 +1,7 @@
 package com.jraska.github.client
 
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import timber.log.Timber
 import java.util.Date
@@ -8,8 +9,11 @@ import java.util.Date
 internal class FirebaseConfigProxy(private val config: FirebaseRemoteConfig) : Config {
   private val onFetchCompleteListener: OnCompleteListener<Void> = OnCompleteListener {
     config.activate()
-    Timber.d("Config fetch complete. last fetch: %s",
-      Date(config.info.fetchTimeMillis))
+    Timber.d(
+      "Config fetch complete. last fetch: %s",
+      Date(config.info.fetchTimeMillis)
+    )
+    configsToCrashlytics()
   }
 
   override fun getBoolean(key: Config.Key): Boolean {
@@ -36,6 +40,15 @@ internal class FirebaseConfigProxy(private val config: FirebaseRemoteConfig) : C
   fun setupDefaults(): FirebaseConfigProxy {
     config.setDefaultsAsync(R.xml.config_defaults)
     return this
+  }
+
+  private fun configsToCrashlytics() {
+    config.getKeysByPrefix("")
+      .map { it to config.getValue(it).asString() }
+      .also { Timber.v("Setting Crashlytics properties from config: %s", it) }
+      .forEach {
+        FirebaseCrashlytics.getInstance().setCustomKey(it.first, it.second)
+      }
   }
 
   companion object {
