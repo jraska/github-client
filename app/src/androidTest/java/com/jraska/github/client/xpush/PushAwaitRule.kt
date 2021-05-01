@@ -9,11 +9,11 @@ import org.junit.rules.ExternalResource
 
 class PushAwaitRule : ExternalResource() {
   override fun before() {
-    IdlingRegistry.getInstance().register(PushAwaitIdlingResource.idlingResource())
+    IdlingRegistry.getInstance().register(PushAwaitIdlingResource.idlingResource)
   }
 
   override fun after() {
-    IdlingRegistry.getInstance().unregister(PushAwaitIdlingResource.idlingResource())
+    IdlingRegistry.getInstance().unregister(PushAwaitIdlingResource.idlingResource)
   }
 
   fun onViewWillAwaitPush() {
@@ -23,7 +23,7 @@ class PushAwaitRule : ExternalResource() {
   private object PushAwaitIdlingResource {
     private val countingIdlingResource = CountingIdlingResource("Push Await")
 
-    fun idlingResource(): IdlingResource = countingIdlingResource
+    val idlingResource: IdlingResource = countingIdlingResource
 
     fun waitForPush() = countingIdlingResource.increment()
 
