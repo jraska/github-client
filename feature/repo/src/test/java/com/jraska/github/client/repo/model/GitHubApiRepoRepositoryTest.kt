@@ -28,7 +28,7 @@ internal class GitHubApiRepoRepositoryTest {
     assertThat(repoDetail).usingRecursiveComparison().isEqualTo(expectedRepoDetail())
   }
 
-  private fun repoGitHubApi() = HttpTest.retrofit(mockWebServer.url("/")).create(RepoGitHubApi::class.java)
+  private fun repoGitHubApi() = HttpTest.retrofit(mockWebServer).create(RepoGitHubApi::class.java)
 
   companion object {
     fun expectedRepoDetail(): RepoDetail {

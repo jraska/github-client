@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import com.jraska.github.client.core.android.BaseApp
 import com.jraska.github.client.core.android.ServiceModel
-import com.jraska.github.client.http.ReplayHttpModule
+import com.jraska.github.client.http.FakeHttpModule
 import com.jraska.github.client.users.test.DeepLinkRecordingComponent
 import com.jraska.github.client.users.test.FakeDeepLinkRecordingModule
 import dagger.BindsInstance
@@ -36,7 +36,7 @@ class TestUITestApp : BaseApp() {
   modules = [
     SharedModules::class,
     FakeCoreModule::class,
-    ReplayHttpModule::class,
+    FakeHttpModule::class,
     FakeDeepLinkRecordingModule::class
   ]
 )

@@ -17,7 +17,7 @@ import java.io.File
 import javax.inject.Singleton
 
 @Module
-class HttpModule {
+object HttpModule {
   @Provides
   @Singleton
   fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {

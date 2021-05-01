@@ -22,7 +22,7 @@ class GitHubApiUsersRepositoryTest {
 
   @Before
   fun setUp() {
-    repository = GitHubApiUsersRepository(HttpTest.retrofit(mockWebServer.url("/")).create(GitHubUsersApi::class.java), Fakes.trampoline())
+    repository = GitHubApiUsersRepository(HttpTest.retrofit(mockWebServer).create(GitHubUsersApi::class.java), Fakes.trampoline())
   }
 
   @Test

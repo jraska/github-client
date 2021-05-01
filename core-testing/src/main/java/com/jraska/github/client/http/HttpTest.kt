@@ -1,6 +1,5 @@
 package com.jraska.github.client.http
 
-import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -17,19 +16,21 @@ import java.io.File
 object HttpTest {
   private val DEFAULT_BASE_URL = "https://api.github.com".toHttpUrl()
 
-  fun retrofit(baseUrl: HttpUrl = DEFAULT_BASE_URL): Retrofit {
+  fun retrofit(mockWebServer: MockWebServer? = null): Retrofit {
     return Retrofit.Builder()
-      .baseUrl(baseUrl)
-      .client(
-        OkHttpClient.Builder()
-          .also { if (baseUrl == DEFAULT_BASE_URL) it.addInterceptor(MockWebServerInterceptor) } // TODO: 30/4/21 Hack - unification of network mocking needed
-          .addInterceptor(HttpLoggingInterceptor { println(it) }.apply {
-            level = HttpLoggingInterceptor.Level.BASIC
-          }).build()
-      )
+      .baseUrl(mockWebServer?.url("/") ?: DEFAULT_BASE_URL)
+      .client(client(mockWebServer))
       .addConverterFactory(GsonConverterFactory.create())
       .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
       .build()
+  }
+
+  private fun client(mockWebServer: MockWebServer?): OkHttpClient {
+    return OkHttpClient.Builder()
+      .also { if (mockWebServer == null) it.addInterceptor(MockWebServerInterceptor) }
+      .addInterceptor(HttpLoggingInterceptor { println(it) }.apply {
+        level = HttpLoggingInterceptor.Level.BASIC
+      }).build()
   }
 }
 

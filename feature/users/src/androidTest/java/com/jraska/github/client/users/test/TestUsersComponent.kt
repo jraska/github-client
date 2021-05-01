@@ -6,6 +6,7 @@ import com.jraska.github.client.FakeWebLinkModule
 import com.jraska.github.client.android.test.FakeAndroidCoreModule
 import com.jraska.github.client.core.android.AppBaseComponent
 import com.jraska.github.client.core.android.CoreAndroidModule
+import com.jraska.github.client.http.FakeHttpModule
 import com.jraska.github.client.http.HttpTest
 import com.jraska.github.client.users.UsersModule
 import dagger.BindsInstance
@@ -31,12 +32,4 @@ interface TestUsersComponent : AppBaseComponent, DeepLinkRecordingComponent {
   interface Factory {
     fun create(@BindsInstance context: Context): TestUsersComponent
   }
-}
-
-// TODO: 21/04/2021 Unify the network mocking with app to have only one fake http module
-@Module
-class FakeHttpModule {
-  @Provides
-  @Singleton
-  fun provideRetrofit() = HttpTest.retrofit()
 }
