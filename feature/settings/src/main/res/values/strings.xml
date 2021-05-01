@@ -3,4 +3,6 @@
   <string name="settings_button_purchase">Purchase</string>
   <string name="dollar_sign">$</string>
   <string name="settings_purchase_value_hint">Value</string>
+  <string name="settings_crash_label">Test: </string>
+  <string name="settings_crash_button">Crash!</string>
 </resources>

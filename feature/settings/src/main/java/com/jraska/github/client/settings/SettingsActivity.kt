@@ -23,6 +23,7 @@ internal class SettingsActivity : BaseActivity() {
     val adapter = SimpleEpoxyAdapter()
     adapter.addModels(PurchaseReportModel(this::onPurchaseButtonClicked))
     adapter.addModels(ConsoleModel(viewModel::onConsoleClick))
+    adapter.addModels(CrashButtonModel(viewModel::onCrashClick))
 
     viewModel.configRows().forEach {
       adapter.addModels(it as EpoxyModel<*>)
