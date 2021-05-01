@@ -1,7 +1,7 @@
 # github-client
 Experimental architecture app with example usage intended to be a showcase, test and skeleton app.
 
-<img width="1667" alt="Screenshot 2021-01-25 at 23 16 04" src="https://user-images.githubusercontent.com/6277721/105773043-71c3f200-5f63-11eb-9a28-99073c2e92ce.png">
+<img width="1640" alt="Module graph" src="https://user-images.githubusercontent.com/6277721/116779526-ed5ba080-aa76-11eb-805d-ffaff2889f8b.png">
 
 # Topics demonstrated
 - If you are interested in any of these topics, feel free to reach out by creating an issue or [contact me on Twitter](https://twitter.com/josef_raska) - I'm happy to chat, exchange opinions or development stories.
@@ -15,10 +15,10 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Plugin based composition of features and modules contributing to collection of "plugins" - see: `OnAppCreate`, or `LinkLauncher`
 
 ## Testing
-- UI Instrumentation testing using Espresso and mocking network layer to achieve isolation [OkReplay](https://github.com/airbnb/okreplay) See `ReplayHttpComponent`
+- UI Instrumentation testing using Espresso and mocking network layer with `okhttp3.MockWebServer` to achieve isolation. See [UsersActivityFlowTest](https://github.com/jraska/github-client/blob/master/app/src/androidTest/java/com/jraska/github/client/users/UsersActivityFlowTest.kt) or [DeepLinkLaunchTest](https://github.com/jraska/github-client/blob/master/app/src/androidTest/java/com/jraska/github/client/DeepLinkLaunchTest.kt)
 - Tests are run on Firebase Test Lab. [See PR](https://github.com/jraska/github-client/pull/233)
 - UI tests on Firebase Test Lab results reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/342).
-- Instrumented tests can live in modules for fast local iteration - see [this PR](https://github.com/jraska/github-client/pull/477)
+- Instrumented tests can live in modules for fast local iteration - see [this PR](https://github.com/jraska/github-client/pull/477) or this [issue track](https://github.com/jraska/github-client/issues/436).
 - Uses [LiveData-Testing](https://github.com/jraska/livedata-testing) to test ViewModel. [Article](https://android.jlelse.eu/effective-livedata-and-viewmodel-testing-17f25069fcd4)
 - ViewModels are tested with real dependencies, faking only network code and therefore simulating the real usage, increasing the confiidence in tests - [Example](https://github.com/jraska/github-client/pull/467/files#diff-7ef3a06920375e0c0ccd785bc53f127aa8700f6f76171f784e0ddcf9dcde7634), [Related article on philosophy](https://kentcdodds.com/blog/write-tests). They are fast as they run on JVM.
 - Respositories tests are implemented similar like ViewModels tests - using real dependnecies and faking network requests only - [Example](https://github.com/jraska/github-client/blob/master/feature/users/src/test/java/com/jraska/github/client/users/model/GitHubApiUsersRepositoryTest.kt)
