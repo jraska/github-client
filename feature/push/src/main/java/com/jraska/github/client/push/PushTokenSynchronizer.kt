@@ -14,10 +14,10 @@ internal class PushTokenSynchronizer @Inject constructor(
 ) {
 
   fun onTokenRefresh(token: String) {
-    val instanceIdTask = FirebaseInstallations.getInstance().id
+    val installationIdTask = FirebaseInstallations.getInstance().id
 
-    instanceIdTask.addOnSuccessListener { saveToken(it, token) }
-      .addOnFailureListener { Timber.e(it, "Token couldn't be found.") }
+    installationIdTask.addOnSuccessListener { saveToken(it, token) }
+      .addOnFailureListener { Timber.e(it, "installation Id couldn't be found.") }
   }
 
   private fun saveToken(id: String, pushToken: String) {
