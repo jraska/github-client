@@ -2,7 +2,7 @@ package com.jraska.github.client.push
 
 import android.os.Build
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.installations.FirebaseInstallations
 import com.jraska.github.client.time.DateTimeProvider
 import timber.log.Timber
 import java.util.HashMap
@@ -14,15 +14,19 @@ internal class PushTokenSynchronizer @Inject constructor(
 ) {
 
   fun onTokenRefresh(token: String) {
-    val instanceId = FirebaseInstanceId.getInstance()
-    val id = instanceId.id
+    val instanceIdTask = FirebaseInstallations.getInstance().id
 
-    Timber.d("Id: %s, Token: %s", id, token)
+    instanceIdTask.addOnSuccessListener { saveToken(it, token) }
+      .addOnFailureListener { Timber.e(it, "Token couldn't be found.") }
+  }
+
+  private fun saveToken(id: String, pushToken: String) {
+    Timber.d("Id: %s, Token: %s", id, pushToken)
 
     val map = HashMap<String, Any>()
     map["date"] = dateTimeProvider.now().toString()
 
-    map["push_token"] = token
+    map["push_token"] = pushToken
     map["android_os"] = Build.VERSION.RELEASE
     map["manufacturer"] = Build.BRAND
     map["model"] = Build.MODEL
