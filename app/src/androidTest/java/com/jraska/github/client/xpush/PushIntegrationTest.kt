@@ -6,7 +6,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.android.gms.tasks.Tasks
-import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import com.jraska.github.client.DeepLinkLaunchTest
 import org.junit.Assume
 import org.junit.Before
@@ -25,15 +25,15 @@ class PushIntegrationTest {
   fun setUp() {
     pushClient = PushServerClient.create(apiKey())
 
-    val instanceIdTask = FirebaseInstanceId.getInstance().instanceId
-    thisDeviceToken = Tasks.await(instanceIdTask).token
+    val tokenTask = FirebaseMessaging.getInstance().token
+    thisDeviceToken = Tasks.await(tokenTask)
   }
 
   @Test
   fun testPushIntegrationFromSettingsToAbout() {
     DeepLinkLaunchTest.launchDeepLink("https://github.com/settings")
 
-    viewWillAwaitPush()
+    pushRule.onViewWillAwaitPush()
     sendDeepLinkPush("https://github.com/about")
 
     onView(withText("by Josef Raska")).check(matches(isDisplayed()))
@@ -43,7 +43,7 @@ class PushIntegrationTest {
   fun testPushIntegrationFromAboutToSettings() {
     DeepLinkLaunchTest.launchDeepLink("https://github.com/about")
 
-    viewWillAwaitPush()
+    pushRule.onViewWillAwaitPush()
     sendDeepLinkPush("https://github.com/settings")
 
     onView(withText("Purchase")).check(matches(isDisplayed()))
@@ -65,9 +65,5 @@ class PushIntegrationTest {
     Assume.assumeTrue("FCM key not found in argument 'FCM_API_KEY', ignoring the test.", apiKey is String)
 
     return apiKey as String
-  }
-
-  private fun viewWillAwaitPush() {
-    pushRule.viewWillAwaitPush()
   }
 }
