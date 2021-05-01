@@ -35,6 +35,7 @@ class PushAwaitRule : ExternalResource() {
   ) : PushHandleModel by productionModel {
     override fun onMessageReceived(message: RemoteMessage) {
       productionModel.onMessageReceived(message)
+
       PushAwaitIdlingResource.onPush()
     }
   }
