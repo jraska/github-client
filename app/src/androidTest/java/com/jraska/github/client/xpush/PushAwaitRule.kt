@@ -16,8 +16,8 @@ class PushAwaitRule : ExternalResource() {
     IdlingRegistry.getInstance().unregister(PushAwaitIdlingResource.idlingResource)
   }
 
-  fun onViewWillAwaitPush() {
-    PushAwaitIdlingResource.waitForPush()
+  fun onViewAwaitPush() {
+    PushAwaitIdlingResource.awaitPush()
   }
 
   private object PushAwaitIdlingResource {
@@ -25,7 +25,7 @@ class PushAwaitRule : ExternalResource() {
 
     val idlingResource: IdlingResource = countingIdlingResource
 
-    fun waitForPush() = countingIdlingResource.increment()
+    fun awaitPush() = countingIdlingResource.increment()
 
     fun onPush() = countingIdlingResource.decrement()
   }
