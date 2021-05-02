@@ -6,13 +6,11 @@
   android:layout_width="match_parent"
   android:layout_height="@dimen/list_item_height"
   android:orientation="horizontal"
-  android:weightSum="10"
   tools:background="#bbbbbb">
 
   <TextView
-    android:layout_width="0dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="6"
     android:gravity="center_vertical"
     android:maxLines="1"
     android:text="@string/settings_crash_label"
