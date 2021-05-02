@@ -22,8 +22,8 @@ internal class SettingsActivity : BaseActivity() {
     settingsRecycler.layoutManager = LinearLayoutManager(this)
     val adapter = SimpleEpoxyAdapter()
     adapter.addModels(PurchaseReportModel(this::onPurchaseButtonClicked))
-    adapter.addModels(ConsoleModel(viewModel::onConsoleClick))
     adapter.addModels(CrashButtonModel(viewModel::onCrashClick))
+    adapter.addModels(ConsoleModel(viewModel::onConsoleClick))
 
     viewModel.configRows().forEach {
       adapter.addModels(it as EpoxyModel<*>)
