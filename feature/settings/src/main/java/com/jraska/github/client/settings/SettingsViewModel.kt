@@ -31,10 +31,6 @@ internal class SettingsViewModel @Inject constructor(
     deepLinkLauncher.launch(Urls.console())
   }
 
-  fun onCrashClick() {
-    throw IllegalStateException("Test Crash")
-  }
-
   companion object {
     val ANALYTICS_ECOMMERCE_PURCHASE = AnalyticsEvent.Key("ecommerce_purchase", Owner.USERS_TEAM)
   }

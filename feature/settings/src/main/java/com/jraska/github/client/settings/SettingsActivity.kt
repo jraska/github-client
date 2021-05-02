@@ -20,7 +20,6 @@ internal class SettingsActivity : BaseActivity() {
 
     val settingsRecycler = findViewById<RecyclerView>(R.id.settings_recycler)
     settingsRecycler.layoutManager = LinearLayoutManager(this)
-
     val adapter = SimpleEpoxyAdapter()
     adapter.addModels(PurchaseReportModel(this::onPurchaseButtonClicked))
     adapter.addModels(ConsoleModel(viewModel::onConsoleClick))
@@ -29,7 +28,6 @@ internal class SettingsActivity : BaseActivity() {
       adapter.addModels(it as EpoxyModel<*>)
     }
 
-//    adapter.addModels(CrashItemModel(viewModel::onCrashClick))
 
     settingsRecycler.adapter = adapter
   }
