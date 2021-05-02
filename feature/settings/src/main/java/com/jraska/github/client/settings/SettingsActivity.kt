@@ -27,8 +27,6 @@ internal class SettingsActivity : BaseActivity() {
     viewModel.configRows().forEach {
       adapter.addModels(it as EpoxyModel<*>)
     }
-
-
     settingsRecycler.adapter = adapter
   }
 
