@@ -29,7 +29,7 @@ internal class SettingsActivity : BaseActivity() {
       adapter.addModels(it as EpoxyModel<*>)
     }
 
-    adapter.addModels(CrashButtonModel(viewModel::onCrashClick))
+    adapter.addModels(CrashItemModel(viewModel::onCrashClick))
 
     settingsRecycler.adapter = adapter
   }

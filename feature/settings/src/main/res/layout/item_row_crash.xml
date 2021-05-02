@@ -19,12 +19,4 @@
     android:textColor="@color/textMain"
     android:textSize="@dimen/textTitle"/>
 
-  <Button
-    android:id="@+id/settings_crash_button"
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    android:layout_weight="4"
-    android:text="@string/settings_crash_button" />
-
 </LinearLayout>
