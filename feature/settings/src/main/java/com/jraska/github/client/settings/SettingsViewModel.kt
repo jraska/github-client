@@ -32,9 +32,7 @@ internal class SettingsViewModel @Inject constructor(
   }
 
   fun onCrashClick() {
-    if (true) {
-      throw IllegalStateException("Test Crash")
-    }
+    throw IllegalStateException("Test Crash")
   }
 
   companion object {
