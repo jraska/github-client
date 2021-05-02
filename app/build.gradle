@@ -124,6 +124,7 @@ dependencies {
   implementation 'com.google.firebase:firebase-perf'
   implementation 'com.google.firebase:firebase-crashlytics'
   implementation 'com.google.firebase:firebase-messaging'
+  implementation 'com.google.firebase:firebase-inappmessaging-display'
   implementation 'com.google.firebase:firebase-database'
 
   implementation 'androidx.lifecycle:lifecycle-runtime:2.3.1'
