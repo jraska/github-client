@@ -1,7 +1,18 @@
-apply plugin: 'java-library'
-apply plugin: 'com.android.lint'
-apply plugin: 'kotlin'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion 30
+  defaultConfig {
+    minSdkVersion 24
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
 
 dependencies {
   implementation project(':core-api')
