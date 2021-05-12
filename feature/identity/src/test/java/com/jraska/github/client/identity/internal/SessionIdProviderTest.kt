@@ -1,7 +1,5 @@
 package com.jraska.github.client.identity.internal
 
-import com.jraska.github.client.Fakes
-import com.jraska.github.client.TestTimeProvider
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -12,7 +10,7 @@ class SessionIdProviderTest {
 
   @Before
   fun setUp() {
-    timeProvider = Fakes.testTimeProvider()
+    timeProvider = TestTimeProvider()
     sessionIdProvider = SessionIdProvider(timeProvider)
   }
 

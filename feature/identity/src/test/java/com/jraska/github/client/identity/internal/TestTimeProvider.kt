@@ -1,4 +1,4 @@
-package com.jraska.github.client
+package com.jraska.github.client.identity.internal
 
 import com.jraska.github.client.time.TimeProvider
 

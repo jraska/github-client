@@ -18,10 +18,6 @@ object Fakes {
     return RecordingEventAnalytics()
   }
 
-  fun testTimeProvider(elapsed: Long = 0): TestTimeProvider {
-    return TestTimeProvider(elapsed)
-  }
-
   fun trampoline(): AppSchedulers {
     return AppSchedulers(Schedulers.trampoline(), Schedulers.trampoline(), Schedulers.trampoline())
   }
