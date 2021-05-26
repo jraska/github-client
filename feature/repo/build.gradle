@@ -46,6 +46,6 @@ dependencies {
   testImplementation 'org.assertj:assertj-core:3.18.1'
   testImplementation project(':core-testing')
   testImplementation 'androidx.arch.core:core-testing:2.1.0'
-  testImplementation 'com.jraska.livedata:testing-ktx:1.1.2'
+  testImplementation 'com.jraska.livedata:testing-ktx:1.2.0'
   kaptTest rootProject.ext.daggerAnnotationProcessor
 }
