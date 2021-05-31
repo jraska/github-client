@@ -1,11 +1,7 @@
 <lint>
   <issue id="InvalidPackage">
-    <ignore regexp=".*butterknife.*" />
     <ignore regexp=".*javax.inject.*" />
     <ignore regexp="okio.Okio" />
     <ignore regexp="retrofit2.Platform.Java8" />
-  </issue>
-  <issue id="ResourceType">
-    <ignore path="*$$ViewBinder*" />
   </issue>
 </lint>
