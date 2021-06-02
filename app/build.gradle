@@ -11,7 +11,8 @@ plugins {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-if (project.hasProperty("enable-performance-plugin")) {
+if (System.getenv("CI") == "true") {
+  println("Applying 'com.google.firebase.firebase-perf'")
   apply plugin: 'com.google.firebase.firebase-perf'
 }
 
