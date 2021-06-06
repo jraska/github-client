@@ -76,7 +76,9 @@ class UsersActivity : BaseActivity(), UserModel.UserListener {
   }
 
   private fun setUsers(users: List<User>) {
-    val adapter = SimpleEpoxyAdapter()
+    val adapter = usersRecycler.adapter as SimpleEpoxyAdapter? ?: SimpleEpoxyAdapter()
+    adapter.removeAllModels()
+
     val models = users.map { user -> UserModel(user, this) }
 
     adapter.addModels(models)
