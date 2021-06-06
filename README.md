@@ -21,7 +21,7 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Instrumented tests can live in modules for fast local iteration - see [this PR](https://github.com/jraska/github-client/pull/477) or this [issue track](https://github.com/jraska/github-client/issues/436).
 - Uses [LiveData-Testing](https://github.com/jraska/livedata-testing) to test ViewModel. [Article](https://android.jlelse.eu/effective-livedata-and-viewmodel-testing-17f25069fcd4)
 - ViewModels are tested with real dependencies, faking only network code and therefore simulating the real usage, increasing the confiidence in tests - [Example](https://github.com/jraska/github-client/pull/467/files#diff-7ef3a06920375e0c0ccd785bc53f127aa8700f6f76171f784e0ddcf9dcde7634), [Related article on philosophy](https://kentcdodds.com/blog/write-tests). They are fast as they run on JVM.
-- Respositories tests are implemented similar like ViewModels tests - using real dependnecies and faking network requests only - [Example](https://github.com/jraska/github-client/blob/master/feature/users/src/test/java/com/jraska/github/client/users/model/GitHubApiUsersRepositoryTest.kt)
+- Repository tests are implemented similar like ViewModels tests - using real dependnecies and faking network requests only - [Example](https://github.com/jraska/github-client/blob/master/feature/users/src/test/java/com/jraska/github/client/users/model/GitHubApiUsersRepositoryTest.kt)
 - Push integration is tested end to end through UI test - see [this PR](https://github.com/jraska/github-client/pull/300).
 
 ## Release & CI
