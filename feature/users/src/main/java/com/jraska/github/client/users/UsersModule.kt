@@ -1,11 +1,13 @@
 package com.jraska.github.client.users
 
 import android.app.Activity
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.config.MutableConfigDef
 import com.jraska.github.client.config.MutableConfigSetup
 import com.jraska.github.client.config.MutableConfigType
 import com.jraska.github.client.core.android.LinkLauncher
+import com.jraska.github.client.core.android.OnAppCreateAsync
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.GitHubApiUsersRepository
 import com.jraska.github.client.users.model.GitHubUsersApi
@@ -18,6 +20,7 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import okhttp3.HttpUrl
 import retrofit2.Retrofit
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
@@ -66,6 +69,20 @@ object UsersModule {
 
       override fun priority(): LinkLauncher.Priority {
         return LinkLauncher.Priority.EXACT_MATCH
+      }
+    }
+  }
+
+  /**
+   * This is an optimisation of the app startup - all features SHOULD NOT do this as it consumes app startup resources.
+   * This is recommended only for features loaded at the app startup.
+   */
+  @Provides
+  @IntoSet
+  internal fun prepareHttpClient(usersRepositoryProvider: Provider<UsersRepository>): OnAppCreateAsync {
+    return object : OnAppCreateAsync {
+      override fun onCreateAsync(app: Application) {
+        usersRepositoryProvider.get() // setups asynchronously the rest client
       }
     }
   }

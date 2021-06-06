@@ -26,6 +26,7 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
@@ -105,11 +106,11 @@ object CoreAndroidModule {
 
   @Provides
   @IntoSet
-  fun reportAppCreateEvent(eventAnalytics: EventAnalytics): OnAppCreate {
-    return object : OnAppCreate {
-      override fun onCreate(app: Application) {
+  fun reportAppCreateEvent(eventAnalytics: Provider<EventAnalytics>): OnAppCreateAsync {
+    return object : OnAppCreateAsync {
+      override fun onCreateAsync(app: Application) {
         val createEvent = AnalyticsEvent.create(AnalyticsEvent.Key("app_create", Owner.CORE_TEAM))
-        eventAnalytics.report(createEvent)
+        eventAnalytics.get().report(createEvent)
       }
     }
   }
@@ -119,17 +120,21 @@ object CoreAndroidModule {
 
   @Provides
   @IntoSet
-  fun setupFresco(): OnAppCreate {
-    return object : OnAppCreate {
-      override fun onCreate(app: Application) = Fresco.initialize(app)
-    }
-  }
-
-  @Provides
-  @IntoSet
   fun setupThreeTen(): OnAppCreate {
     return object : OnAppCreate {
       override fun onCreate(app: Application) = AndroidThreeTen.init(app)
     }
   }
+
+  @Provides
+  @IntoSet
+  fun setupFresco(): OnAppCreateAsync {
+    return object : OnAppCreateAsync {
+      override fun onCreateAsync(app: Application) = Fresco.initialize(app)
+    }
+  }
+
+  @Provides
+  @IntoSet
+  fun bindAppAsync(executor: OnAppCreateAsyncExecutor): OnAppCreate = executor
 }

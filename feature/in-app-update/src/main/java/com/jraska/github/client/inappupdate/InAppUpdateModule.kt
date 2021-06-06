@@ -5,19 +5,20 @@ import android.content.Context
 import com.jraska.github.client.config.MutableConfigDef
 import com.jraska.github.client.config.MutableConfigSetup
 import com.jraska.github.client.config.MutableConfigType
-import com.jraska.github.client.core.android.OnAppCreate
+import com.jraska.github.client.core.android.OnAppCreateAsync
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoSet
+import javax.inject.Provider
 
 @Module
 object InAppUpdateModule {
   @Provides
   @IntoSet
-  internal fun checkOnAppCreate(checkScheduler: UpdateCheckScheduler): OnAppCreate {
-    return object : OnAppCreate {
-      override fun onCreate(app: Application) {
-        checkScheduler.startNonBlockingCheck()
+  internal fun checkOnAppCreate(checkScheduler: Provider<UpdateCheckScheduler>): OnAppCreateAsync {
+    return object : OnAppCreateAsync {
+      override fun onCreateAsync(app: Application) {
+        checkScheduler.get().startNonBlockingCheck()
       }
     }
   }
