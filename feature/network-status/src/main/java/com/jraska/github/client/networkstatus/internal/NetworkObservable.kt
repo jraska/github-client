@@ -5,7 +5,8 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.subjects.BehaviorSubject
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.subjects.PublishSubject
 import javax.inject.Inject
 
 internal class NetworkObservable @Inject constructor(
@@ -16,26 +17,27 @@ internal class NetworkObservable @Inject constructor(
   }
 
   fun connectedObservable(): Observable<Boolean> {
-    return networkObservable
+    return networkObservable.startWith(Single.just(isConnected()))
+      .distinctUntilChanged()
   }
 
   private val connectivityManager
     get() = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
   private fun setupNetworkObservable(): Observable<Boolean> {
-    val behaviorSubject = BehaviorSubject.createDefault(isConnected())
+    val publishSubject = PublishSubject.create<Boolean>()
 
     connectivityManager.registerNetworkCallback(allChangesRequest(), object : ConnectivityManager.NetworkCallback() {
       override fun onAvailable(network: Network) {
-        behaviorSubject.onNext(isConnected())
+        publishSubject.onNext(isConnected())
       }
 
       override fun onLost(network: Network) {
-        behaviorSubject.onNext(isConnected())
+        publishSubject.onNext(isConnected())
       }
     })
 
-    return behaviorSubject.distinctUntilChanged()
+    return publishSubject
   }
 
   private fun allChangesRequest() = NetworkRequest.Builder().build()
