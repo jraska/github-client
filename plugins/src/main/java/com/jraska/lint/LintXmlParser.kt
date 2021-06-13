@@ -3,7 +3,7 @@ package com.jraska.lint
 import com.jraska.module.ModuleMetadata
 import groovy.util.Node
 import groovy.util.NodeList
-import groovy.util.XmlParser
+import groovy.xml.XmlParser
 
 class LintXmlParser(
   private val moduleMetadata: ModuleMetadata,
