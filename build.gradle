@@ -17,7 +17,6 @@ allprojects {
   repositories {
     google()
     mavenCentral()
-    jcenter() // Fresco https://github.com/facebook/fresco/issues/2585
   }
 }
 
