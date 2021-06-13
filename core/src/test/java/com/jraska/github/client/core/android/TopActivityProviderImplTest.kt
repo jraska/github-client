@@ -3,13 +3,12 @@ package com.jraska.github.client.core.android
 import android.app.Activity
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import org.mockito.Mockito.mock
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 class TopActivityProviderImplTest {
 
-  val activity = mock(Activity::class.java)
+  val activity = Activity()
 
   @Test
   fun handlesMultiThreading() {
