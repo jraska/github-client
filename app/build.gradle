@@ -25,8 +25,8 @@ android {
     applicationId "com.jraska.github.client"
     minSdkVersion 24
     targetSdkVersion 30
-    versionName '0.31.3'
-    versionCode 114
+    versionName '0.31.4'
+    versionCode 115
     multiDexEnabled true
 
     testInstrumentationRunner "com.jraska.github.client.TestRunner"
@@ -132,7 +132,7 @@ dependencies {
 
   implementation rootProject.ext.fresco
 
-  implementation 'com.airbnb.android:epoxy:4.6.1'
+  implementation 'com.airbnb.android:epoxy:4.6.2'
 
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
