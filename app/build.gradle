@@ -149,7 +149,7 @@ dependencies {
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
   androidTestImplementation 'androidx.test:runner:1.3.0'
   androidTestImplementation 'androidx.test:rules:1.3.0'
-  androidTestImplementation 'org.assertj:assertj-core:3.19.0'
+  androidTestImplementation 'org.assertj:assertj-core:3.20.2'
   androidTestImplementation 'com.squareup.rx.idler:rx3-idler:0.11.0'
   androidTestImplementation project(':core-testing')
   androidTestImplementation project(':core-android-testing')
