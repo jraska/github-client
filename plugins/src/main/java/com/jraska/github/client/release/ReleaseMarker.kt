@@ -8,7 +8,7 @@ class ReleaseMarker(
   private val leadTimeReporter: LeadTimeReporter
 ) {
   fun markPrsWithMilestone(release: Release) {
-    val pullRequests = gitHubApi.listPrsWithoutMilestone()
+    val pullRequests = gitHubApi.listMergedPrsWithoutMilestone()
 
     val milestoneNumber = gitHubApi.createMilestone(release.releaseName)
 

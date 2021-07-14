@@ -11,7 +11,7 @@ interface GitHubApi {
 
   fun setReleaseBody(release: String, body: String)
 
-  fun listPrsWithoutMilestone(): List<PullRequest>
+  fun listMergedPrsWithoutMilestone(): List<PullRequest>
 
   fun createRelease(version: String)
 

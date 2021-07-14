@@ -51,6 +51,16 @@ class GitHubApiImplTest {
     )
     assertThat(prCommits[1]).usingRecursiveComparison().isEqualTo(expectedCommit)
   }
+
+  @Test
+  fun filtersNotMergedPRs() {
+    mockWebServer.enqueue("response/pulls_with_not_merged.json")
+    mockWebServer.enqueue("response/pulls_empty.json")
+
+    val pulls = gitHubApi.listMergedPrsWithoutMilestone()
+
+    assertThat(pulls.size).isEqualTo(2)
+  }
 }
 
 fun MockWebServer.enqueue(path: String) {
