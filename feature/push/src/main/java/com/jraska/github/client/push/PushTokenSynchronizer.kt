@@ -13,7 +13,7 @@ internal class PushTokenSynchronizer @Inject constructor(
   private val dateTimeProvider: DateTimeProvider
 ) {
 
-  fun onTokenRefresh(token: String) {
+  fun synchronizeToken(token: String) {
     val installationIdTask = FirebaseInstallations.getInstance().id
 
     installationIdTask.addOnSuccessListener { saveToken(it, token) }

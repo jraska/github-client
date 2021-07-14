@@ -70,11 +70,16 @@ object PushModule {
     @Binds
     @IntoMap
     @StringKey("launch_deep_link")
-    internal abstract fun deepLinkCommand(command: LaunchDeepLinkCommand): PushActionCommand 
+    internal abstract fun deepLinkCommand(command: LaunchDeepLinkCommand): PushActionCommand
 
     @Binds
     @IntoMap
     @StringKey("press_back")
     internal abstract fun pressBackCommand(command: PressBackButtonCommand): PushActionCommand
+
+    @Binds
+    @IntoMap
+    @StringKey("send_push_token")
+    internal abstract fun resendPushToken(command: SendPushTokenCommand): PushActionCommand
   }
 }

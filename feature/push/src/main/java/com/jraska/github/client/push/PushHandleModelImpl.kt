@@ -19,6 +19,6 @@ internal class PushHandleModelImpl @Inject constructor(
 
   override fun onNewToken(token: String) {
     analytics.onTokenRefresh()
-    tokenSynchronizer.onTokenRefresh(token)
+    tokenSynchronizer.synchronizeToken(token)
   }
 }
