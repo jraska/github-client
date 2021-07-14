@@ -53,6 +53,6 @@ internal class FirebaseConfigProxy(private val config: FirebaseRemoteConfig) : C
 
   companion object {
     private const val TWELVE_HOURS = (12 * 60 * 60).toLong()
-    private const val IGNORE_CACHE: Long = 1 // don't ever put zero! That is ignored and cache is used
+    private const val IGNORE_CACHE: Long = 0
   }
 }
