@@ -48,6 +48,9 @@ class PullRequestDto {
 
   @SerializedName("milestone")
   var milestone: MilestoneDto? = null
+
+  @SerializedName("merged_at")
+  var mergedAt: String? = null
 }
 
 class ReleaseBodyDto(

@@ -31,7 +31,7 @@ class GitHubApiImpl(
     api.setReleseBody(releaseId, ReleaseBodyDto(body)).execute()
   }
 
-  override fun listPrsWithoutMilestone(): List<PullRequest> {
+  override fun listMergedPrsWithoutMilestone(): List<PullRequest> {
     val pulls = mutableListOf<PullRequest>()
 
     var page = 1
@@ -42,6 +42,7 @@ class GitHubApiImpl(
         .execute()
         .body()!!
         .filter { it.milestone == null }
+        .filter { it.mergedAt != null }
         .map { PullRequest(it.number, it.title) }
         .also { pulls.addAll(it) }
       page++
