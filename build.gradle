@@ -46,12 +46,11 @@ subprojects {
         enabled = false
       }
     }
-
-  // https://github.com/JakeWharton/timber/issues/408
-  } else if(it.plugins.hasPlugin('kotlin-android')){
-    tasks.configureEach {
-      if (name.startsWith("lint")) {
-        android.lintOptions.disable = ["LogNotTimber", "StringFormatInTimber", "ThrowableNotAtBeginning", "BinaryOperationInTimber", "TimberArgCount", "TimberArgTypes", "TimberTagLength", "TimberExceptionLogging"]
+  } else {
+    // https://github.com/JakeWharton/timber/issues/408
+    it.afterEvaluate {
+      if (it.plugins.hasPlugin("com.android.application") || it.plugins.hasPlugin("com.android.library")) {
+        it.android.lintOptions.disable = ["LogNotTimber", "StringFormatInTimber", "ThrowableNotAtBeginning", "BinaryOperationInTimber", "TimberArgCount", "TimberArgTypes", "TimberTagLength", "TimberExceptionLogging"]
       }
     }
   }
