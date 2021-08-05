@@ -46,6 +46,14 @@ subprojects {
         enabled = false
       }
     }
+
+  // https://github.com/JakeWharton/timber/issues/408
+  } else if(it.plugins.hasPlugin('kotlin-android')){
+    tasks.configureEach {
+      if (name.startsWith("lint")) {
+        android.lintOptions.disable = ["LogNotTimber", "StringFormatInTimber", "ThrowableNotAtBeginning", "BinaryOperationInTimber", "TimberArgCount", "TimberArgTypes", "TimberTagLength", "TimberExceptionLogging"]
+      }
+    }
   }
 }
 
