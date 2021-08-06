@@ -13,7 +13,7 @@ class FirebaseResultExtractorTest {
 
   @Before
   fun setUp() {
-    extractor = FirebaseResultExtractor("someUrl", GitInfo("exampleBrach", "123", false, ""), null, Device.Pixel4)
+    extractor = FirebaseResultExtractor("someUrl", GitInfo("exampleBrach", "123", false, ""), null, Device.Pixel5)
   }
 
   @Test

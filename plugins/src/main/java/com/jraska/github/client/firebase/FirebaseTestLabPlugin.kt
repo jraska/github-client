@@ -29,7 +29,7 @@ class FirebaseTestLabPlugin : Plugin<Project> {
 
         val appApk = "${project.buildDir}/outputs/apk/debug/app-debug.apk"
         val testApk = "${project.buildDir}/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
-        val firstDevice = Device.Pixel4
+        val firstDevice = Device.Pixel5
         val secondDevice = Device.Pixel2
         val resultDir = DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())
 
