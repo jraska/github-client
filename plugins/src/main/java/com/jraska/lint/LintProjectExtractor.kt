@@ -40,12 +40,12 @@ class LintProjectExtractor {
 
   private fun locateLintFile(project: Project): File {
     val buildDir = project.buildDir
-    val androidModuleCase = File(buildDir, "reports/lint-results.xml")
+    val androidModuleCase = File(buildDir, "reports/lint-results-debug.xml")
     if (androidModuleCase.exists()) {
       return androidModuleCase
     }
 
-    val jvmModuleCase = File(buildDir, "test-results/lint-results.xml")
+    val jvmModuleCase = File(buildDir, "reports/lint-results.xml")
     if (jvmModuleCase.exists()) {
       return jvmModuleCase
     }
