@@ -13,8 +13,7 @@ jobs:
         uses: actions/cache@v2.1.4
         with:
           path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
+            ~/gradle\caches\modules-2
           key: build-${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
       - name: Get Dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -36,8 +35,7 @@ jobs:
         uses: actions/cache@v2.1.4
         with:
           path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
+            ~/gradle\caches\modules-2
           key: lint-${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
       - name: Lint
         run: ./gradlew lint --stacktrace
