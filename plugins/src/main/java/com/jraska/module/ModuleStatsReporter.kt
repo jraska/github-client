@@ -24,7 +24,7 @@ class ModuleStatsReporter(
 
     analyticsReporter.report(*events.toTypedArray())
 
-    println("$GRAPH_ICON Module stats reported to Mixpanel $GRAPH_ICON")
+    println("$GRAPH_ICON Module stats reported to ${analyticsReporter.name} $GRAPH_ICON")
   }
 
   private fun convertModules(stats: ProjectStatistics): Map<String, Any?> {

@@ -2,7 +2,6 @@ package com.jraska.gradle.buildtime
 
 import com.jraska.analytics.AnalyticsEvent
 import com.jraska.analytics.AnalyticsReporter
-import com.mixpanel.mixpanelapi.ClientDelivery
 import java.util.concurrent.TimeUnit
 
 class BuildReporter(
@@ -10,19 +9,19 @@ class BuildReporter(
 ) {
   fun report(buildData: BuildData) {
     try {
-      reportToMixpanel(buildData)
+      reportMeasured(buildData)
     } catch (ex: Exception) {
       println("Build time reporting failed: $ex")
     }
   }
 
-  private fun reportToMixpanel(buildData: BuildData) {
+  private fun reportMeasured(buildData: BuildData) {
     val start = nowMillis()
 
     reportInternal(buildData)
 
     val reportingOverhead = nowMillis() - start
-    println("$STOPWATCH_ICON Build time '${buildData.buildTime} ms' reported to Mixpanel in $reportingOverhead ms.$STOPWATCH_ICON")
+    println("$STOPWATCH_ICON Build time '${buildData.buildTime} ms' reported to ${analyticsReporter.name} in $reportingOverhead ms.$STOPWATCH_ICON")
   }
 
   private fun reportInternal(buildData: BuildData) {

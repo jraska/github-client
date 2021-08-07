@@ -10,6 +10,8 @@ class MixpanelAnalyticsReporter(
   private val api: MixpanelAPI,
   private val distinctId: String
 ) : AnalyticsReporter {
+  override val name = "Mixpanel"
+
   override fun report(vararg events: AnalyticsEvent) {
     val delivery = ClientDelivery()
 

@@ -70,6 +70,8 @@ class RecordingAnalyticsReporter : AnalyticsReporter {
 
   fun events(): List<AnalyticsEvent> = recorder
 
+  override val name = "Test Recorder"
+
   override fun report(vararg events: AnalyticsEvent) {
     recorder.addAll(events)
   }
