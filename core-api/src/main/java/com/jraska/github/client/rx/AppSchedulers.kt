@@ -6,4 +6,8 @@ class AppSchedulers(
   val mainThread: Scheduler,
   val io: Scheduler,
   val computation: Scheduler
-)
+) {
+  fun changePublicApi() {
+
+  }
+}
