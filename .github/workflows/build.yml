@@ -20,13 +20,12 @@ jobs:
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: ./gradlew androidDependencies --stacktrace
       - name: Run Tests
-        run: ./gradlew check --stacktrace --scan
-        # FIXME: Only for testing purposes
-#      - name: Run Tests Firebase
-#        env:
-#          GCLOUD_CREDENTIALS: ${{ secrets.GCLOUD_CREDENTIALS }}
-#          FCM_API_KEY: ${{ secrets.FCM_API_KEY }}
-#        run: ./gradlew runInstrumentedTestsOnFirebase  --stacktrace
+        run: ./gradlew check --stacktrace
+      - name: Run Tests Firebase
+        env:
+          GCLOUD_CREDENTIALS: ${{ secrets.GCLOUD_CREDENTIALS }}
+          FCM_API_KEY: ${{ secrets.FCM_API_KEY }}
+        run: ./gradlew runInstrumentedTestsOnFirebase  --stacktrace
   lint:
     runs-on: ubuntu-latest
     steps:
