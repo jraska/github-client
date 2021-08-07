@@ -9,7 +9,7 @@ interface AnalyticsReporter {
 
   companion object {
     fun create(reporterName: String): AnalyticsReporter {
-      val mixpanelToken: String? = System.getenv("GITUB_CLIENT_MIXPANEL_API_KEY")
+      val mixpanelToken: String? = System.getenv("GITHUB_CLIENT_MIXPANEL_API_KEY")
       if (mixpanelToken != null) {
         return MixpanelAnalyticsReporter(mixpanelToken, MixpanelAPI(), reporterName)
       } else {
