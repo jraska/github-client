@@ -19,7 +19,7 @@ jobs:
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: ./gradlew androidDependencies --stacktrace
       - name: Run Tests
-        run: ./gradlew check --stacktrace
+        run: ./gradlew check --stacktrace --scan
         # FIXME: Only for testing purposes
 #      - name: Run Tests Firebase
 #        env:
