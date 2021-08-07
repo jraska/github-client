@@ -20,11 +20,12 @@ jobs:
         run: ./gradlew androidDependencies --stacktrace
       - name: Run Tests
         run: ./gradlew check --stacktrace
-      - name: Run Tests Firebase
-        env:
-          GCLOUD_CREDENTIALS: ${{ secrets.GCLOUD_CREDENTIALS }}
-          FCM_API_KEY: ${{ secrets.FCM_API_KEY }}
-        run: ./gradlew runInstrumentedTestsOnFirebase  --stacktrace
+        # FIXME: Only for testing purposes
+#      - name: Run Tests Firebase
+#        env:
+#          GCLOUD_CREDENTIALS: ${{ secrets.GCLOUD_CREDENTIALS }}
+#          FCM_API_KEY: ${{ secrets.FCM_API_KEY }}
+#        run: ./gradlew runInstrumentedTestsOnFirebase  --stacktrace
   lint:
     runs-on: ubuntu-latest
     steps:
