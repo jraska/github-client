@@ -49,6 +49,12 @@ buildCache {
   }
 
   local {
-    push = (System.getenv("CI") != "true")
+
+    // The rationale behind disabling local cache on CI
+    // is that the large local cache packing and unpacking
+    // is unnecessary overhead and take tens of seconds for larger entries.
+    // Storing all local outputs is ineffective
+    // and leads to archive of Gigabyte in size and yields only low cache hits.
+    enabled = (System.getenv("CI") != "true")
   }
 }
