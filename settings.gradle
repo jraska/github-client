@@ -25,3 +25,13 @@ include ':app',
   ':feature:about',
   ':feature:shortcuts',
   ':feature:chrome-custom-tabs'
+
+
+buildCache {
+  remote(HttpBuildCache) {
+    url = 'http://34.85.222.61:5071/cache/'
+    allowUntrustedServer = true
+    allowInsecureProtocol = true
+    push = (System.getenv("CI") == "true")
+  }
+}
