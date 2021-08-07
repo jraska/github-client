@@ -47,4 +47,8 @@ buildCache {
     allowInsecureProtocol = true
     push = (System.getenv("CI") == "true")
   }
+
+  local {
+    push = (System.getenv("CI") != "true")
+  }
 }
