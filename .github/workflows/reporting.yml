@@ -10,14 +10,6 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-      - name: Cache Dependencies
-        id: cache-dependencies
-        uses: actions/cache@v2.1.4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: build-${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
       - name: Run Module Statistics Report
         run: ./gradlew reportModuleStatistics --stacktrace --no-configure-on-demand
   lintReport:
@@ -25,13 +17,5 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-      - name: Cache Dependencies
-        id: cache-dependencies
-        uses: actions/cache@v2.1.4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: lint-${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
       - name: Run Lint Report
         run: ./gradlew lintStatisticsReport --stacktrace
