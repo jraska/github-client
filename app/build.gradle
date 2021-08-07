@@ -24,8 +24,8 @@ android {
   defaultConfig {
     applicationId "com.jraska.github.client"
     targetSdkVersion 30
-    versionName '0.33.2'
     minSdkVersion 24
+    versionName '0.33.2'
     multiDexEnabled true
     versionCode 123
 
