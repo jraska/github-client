@@ -74,6 +74,6 @@ class LintXmlParser(
   }
 
   companion object {
-    private val MAX_TEXT_LENGTH = 200
+    private const val MAX_TEXT_LENGTH = 200
   }
 }

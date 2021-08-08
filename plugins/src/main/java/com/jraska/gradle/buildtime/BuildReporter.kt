@@ -60,6 +60,6 @@ class BuildReporter(
   }
 
   companion object {
-    private val STOPWATCH_ICON = "\u23F1"
+    private const val STOPWATCH_ICON = "\u23F1"
   }
 }

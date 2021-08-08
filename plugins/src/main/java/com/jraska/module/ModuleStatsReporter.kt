@@ -81,6 +81,6 @@ class ModuleStatsReporter(
   }
 
   companion object {
-    private val GRAPH_ICON = "\uD83D\uDCC9"
+    private const val GRAPH_ICON = "\uD83D\uDCC9"
   }
 }

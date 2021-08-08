@@ -24,7 +24,7 @@ interface RetrofitGitHubApi {
   fun getRelease(@Path("tag") tag: String): Call<ReleaseDto>
 
   @PATCH("releases/{release_id}")
-  fun setReleseBody(@Path("release_id") id: Int, @Body relaseBody: ReleaseBodyDto): Call<ResponseBody>
+  fun setReleaseBody(@Path("release_id") id: Int, @Body releaseBody: ReleaseBodyDto): Call<ResponseBody>
 
   @PATCH("issues/{issue_number}")
   fun assignMilestone(@Path("issue_number") prNumber: Int, @Body dto: AssignMilestoneDto): Call<ResponseBody>

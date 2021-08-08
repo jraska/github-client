@@ -5,8 +5,8 @@ import org.gradle.api.Project
 
 class LintReporterPlugin : Plugin<Project> {
   override fun apply(project: Project) {
-    project.afterEvaluate {
-      it.tasks.register("lintStatisticsReport") { lintReportTask ->
+    project.afterEvaluate { theProject ->
+      theProject.tasks.register("lintStatisticsReport") { lintReportTask ->
         lintReportTask.doLast {
           LintReportProcess.create().executeReport(lintReportTask.project)
         }

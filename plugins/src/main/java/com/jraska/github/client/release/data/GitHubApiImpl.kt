@@ -28,7 +28,7 @@ class GitHubApiImpl(
     val releaseId = api.getRelease(release).execute().body()!!.id
     println(releaseId)
 
-    api.setReleseBody(releaseId, ReleaseBodyDto(body)).execute()
+    api.setReleaseBody(releaseId, ReleaseBodyDto(body)).execute()
   }
 
   override fun listMergedPrsWithoutMilestone(): List<PullRequest> {
