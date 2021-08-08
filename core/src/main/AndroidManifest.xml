@@ -2,7 +2,8 @@
   package="com.jraska.github.client.core">
 
   <application>
-    <activity android:name=".android.UriHandlerActivity">
+    <activity android:name=".android.UriHandlerActivity"
+      android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
 

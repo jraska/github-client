@@ -3,7 +3,8 @@
   package="com.jraska.github.client.shortcuts">
 
   <application>
-    <activity android:name=".ShortcutHandlerActivity">
+    <activity android:name=".ShortcutHandlerActivity"
+      android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
 

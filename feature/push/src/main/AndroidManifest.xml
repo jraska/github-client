@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.jraska.github.client.push">
   <application>
-    <service android:name=".PushHandleService">
+    <service android:name=".PushHandleService"
+      android:exported="false">
       <intent-filter>
         <action android:name="com.google.firebase.MESSAGING_EVENT"/>
       </intent-filter>
