@@ -14,7 +14,7 @@ internal class ConfigAsPropertyCommand @Inject constructor(
   override fun execute(action: PushAction): BooleanResult {
     val key = action.parameters["config_key"] ?: return FAILURE
 
-    val value = config.getString(Config.Key(key, Owner.UNKNOWN))
+    val value = config.getString(Config.Key(key, Owner.UNKNOWN_STALE))
     analyticsProperty.setUserProperty(key, value)
     return BooleanResult.SUCCESS
   }

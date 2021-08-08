@@ -21,7 +21,7 @@ class MapDispatcher : Dispatcher() {
       1 -> return matchingEntries.single().responseFactory(request)
 
       0 -> throw IllegalStateException("No mocked response found for request: $request")
-      else -> throw IllegalStateException("Multiple matched mocked responses for request: $request,\nmatches: ${matchingEntries}")
+      else -> throw IllegalStateException("Multiple matched mocked responses for request: $request,\nmatches: $matchingEntries")
     }
   }
 

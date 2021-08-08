@@ -2,7 +2,6 @@ package com.jraska.github.client.config.debug.ui
 
 import android.view.View
 import android.widget.CompoundButton
-import android.widget.Switch
 import com.airbnb.epoxy.EpoxyModel
 import com.jraska.github.client.config.MutableConfigDef
 import com.jraska.github.client.config.debug.MutableConfig

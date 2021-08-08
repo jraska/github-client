@@ -3,9 +3,9 @@ package com.jraska.github.client.users.test
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.jraska.github.client.android.test.http.assetJson
+import com.jraska.github.client.android.test.usingLinkRecording
 import com.jraska.github.client.http.MockWebServerInterceptorRule
 import com.jraska.github.client.users.ui.UsersActivity
 import okhttp3.mockwebserver.MockResponse

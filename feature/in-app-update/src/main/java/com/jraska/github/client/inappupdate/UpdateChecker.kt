@@ -1,6 +1,5 @@
 package com.jraska.github.client.inappupdate
 
-import android.view.View
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus

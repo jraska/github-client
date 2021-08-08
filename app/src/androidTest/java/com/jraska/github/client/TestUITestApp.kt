@@ -5,8 +5,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.jraska.github.client.core.android.BaseApp
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.FakeHttpModule
-import com.jraska.github.client.users.test.DeepLinkRecordingComponent
-import com.jraska.github.client.users.test.FakeDeepLinkRecordingModule
+import com.jraska.github.client.android.test.DeepLinkRecordingComponent
+import com.jraska.github.client.android.test.FakeDeepLinkRecordingModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

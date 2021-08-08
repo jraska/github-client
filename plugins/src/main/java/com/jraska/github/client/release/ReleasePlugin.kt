@@ -3,7 +3,6 @@ package com.jraska.github.client.release
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import java.io.ByteArrayOutputStream
-import java.io.File
 
 class ReleasePlugin : Plugin<Project> {
   override fun apply(project: Project) {

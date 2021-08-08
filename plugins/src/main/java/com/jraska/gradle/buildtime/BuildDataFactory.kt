@@ -67,12 +67,10 @@ object BuildDataFactory {
   }
 
   private fun Gradle.environment(): Environment {
-    return if (rootProject.hasProperty("android.injected.invoked.from.ide")) {
-      Environment.IDE
-    } else if (System.getenv("CI") != null) {
-      Environment.CI
-    } else {
-      Environment.CMD
+    return when {
+      rootProject.hasProperty("android.injected.invoked.from.ide") -> Environment.IDE
+      System.getenv("CI") != null -> Environment.CI
+      else -> Environment.CMD
     }
   }
 

@@ -54,7 +54,8 @@ class StatisticsGradleExtractor {
 
   private fun extractDependencies(module: Project): List<ModuleArtifactDependency> {
     val metadata = module.moduleMetadata()
-    val dependencies = module.configurations
+
+    return module.configurations
       .filter { CONFIGURATION_TO_LOOK.containsKey(it.name) }
       .flatMap { configuration ->
         val projectDependencies = configuration.allDependencies.filterIsInstance(ProjectDependency::class.java)
@@ -72,8 +73,6 @@ class StatisticsGradleExtractor {
             )
           }
       }.distinct()
-
-    return dependencies
   }
 
   private fun traverseAndAddChildren(firstLevelDependency: ResolvedDependency): Set<ResolvedDependency> {
@@ -121,11 +120,8 @@ class StatisticsGradleExtractor {
   private fun countLines(file: File): Int {
     var lines = 0
     val reader = BufferedReader(FileReader(file))
-    try {
-      while (reader.readLine() != null) lines++
-      reader.close()
-    } finally {
-      reader.close()
+    reader.use {
+      while (it.readLine() != null) lines++
     }
     return lines
   }

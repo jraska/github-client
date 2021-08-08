@@ -3,6 +3,5 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.jraska.github.client">
 
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <application android:networkSecurityConfig="@xml/network_security_config"/>
 </manifest>

@@ -63,7 +63,6 @@ class TestResultsReporter(
   }
 
   companion object {
-    private val FLAG_ICON = "\uD83C\uDFC1"
-    private val SINGLE_NAME_FOR_TEST_REPORTS_USER = "Test Reporter"
+    private const val FLAG_ICON = "\uD83C\uDFC1"
   }
 }

@@ -1,7 +1,6 @@
-package com.jraska.github.client.users.test
+package com.jraska.github.client.android.test
 
 import androidx.test.platform.app.InstrumentationRegistry
-import com.jraska.github.client.android.test.DeepLinksRecorder
 import com.jraska.github.client.core.android.BaseApp
 import com.jraska.github.client.core.android.LinkLauncher
 import dagger.Module

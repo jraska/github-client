@@ -16,5 +16,5 @@ package com.jraska.github.client
 enum class Owner {
   CORE_TEAM,
   USERS_TEAM,
-  UNKNOWN // Stale! Can be deleted at any moment during resource key audit.
+  UNKNOWN_STALE // Stale! Can be deleted at any moment during resource key audit.
 }

@@ -32,7 +32,7 @@ internal class AboutActivity : BaseActivity() {
     aboutRecycler.adapter = epoxyAdapter
   }
 
-  private fun createModels(): List<EpoxyModel<*>>? {
+  private fun createModels(): List<EpoxyModel<*>> {
     return listOf(
       DescriptionModel(viewModel::onProjectDescriptionClick),
       VersionInfoModel(),
