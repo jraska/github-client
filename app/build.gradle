@@ -117,7 +117,7 @@ dependencies {
   implementation 'androidx.cardview:cardview:1.0.0'
   implementation 'androidx.core:core:1.6.0'
   implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
-  implementation 'androidx.media:media:1.4.0'
+  implementation 'androidx.media:media:1.4.1'
 
   implementation platform('com.google.firebase:firebase-bom:28.3.1')
   implementation 'com.google.firebase:firebase-core'
