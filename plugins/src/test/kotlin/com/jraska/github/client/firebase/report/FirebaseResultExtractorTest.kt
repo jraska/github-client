@@ -76,6 +76,7 @@ class FirebaseResultExtractorTest {
   companion object {
     val SUCCESS_RESULT =
       """
+        <testsuites>
         <testsuite name="" tests="14" failures="0" errors="0" skipped="0" time="15.511" timestamp="2020-11-14T19:39:23" hostname="localhost">
         <properties/>
         <testcase name="appCreateEventFired" classname="com.jraska.github.client.AppSetupTest" time="0.026"/>
@@ -93,9 +94,11 @@ class FirebaseResultExtractorTest {
         <testcase name="testPushIntegration_fromSettingsToAbout" classname="com.jraska.github.client.xpush.PushIntegrationTest" time="4.497"/>
         <testcase name="testPushIntegration_fromAboutToSettings" classname="com.jraska.github.client.xpush.PushIntegrationTest" time="0.628"/>
         </testsuite>
+        </testsuites>
       """.trimIndent()
 
     val ERROR_RESULT = """
+      <testsuites>
       <testsuite name="" tests="14" failures="1" errors="0" skipped="0" time="13.846" timestamp="2020-11-14T00:30:59" hostname="localhost">
       <properties/>
       <testcase name="appCreateEventFired" classname="com.jraska.github.client.AppSetupTest" time="0.0"/>
@@ -115,6 +118,7 @@ class FirebaseResultExtractorTest {
       <testcase name="testPushIntegration_fromSettingsToAbout" classname="com.jraska.github.client.xpush.PushIntegrationTest" time="3.308"/>
       <testcase name="testPushIntegration_fromAboutToSettings" classname="com.jraska.github.client.xpush.PushIntegrationTest" time="1.104"/>
       </testsuite>
+      </testsuites>
     """.trimIndent()
   }
 }
