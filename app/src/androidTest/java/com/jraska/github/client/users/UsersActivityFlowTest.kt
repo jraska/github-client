@@ -15,6 +15,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.jraska.github.client.EnableConfigRule
 import com.jraska.github.client.R
 import com.jraska.github.client.android.test.http.assetJson
+import com.jraska.github.client.espressox.LongClickPatch
 import com.jraska.github.client.http.MockWebServerInterceptorRule
 import com.jraska.github.client.http.onUrlPartReturn
 import com.jraska.github.client.http.onUrlReturn
@@ -57,7 +58,7 @@ class UsersActivityFlowTest {
     rule.launchActivity(null)
     mockWebServer.enqueue(assetJson("response/users.json"))
 
-    onView(withId(R.id.action_settings)).perform(click())
+    onView(withId(R.id.action_settings)).perform(click(LongClickPatch))
     onView(withHint("Value")).perform(ViewActions.typeText("0.01"))
     onView(withText("Purchase")).perform(click())
 
@@ -71,7 +72,7 @@ class UsersActivityFlowTest {
     rule.launchActivity(null)
     mockWebServer.enqueue(assetJson("response/users.json"))
 
-    onView(withId(R.id.action_about)).perform(click())
+    onView(withId(R.id.action_about)).perform(click(LongClickPatch))
 
     onView(withText("by Josef Raska")).check(matches(isDisplayed()))
   }
