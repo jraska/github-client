@@ -63,5 +63,5 @@ dependencies {
   androidTestImplementation project(':core-android-testing')
   androidTestImplementation project(':core')
   androidTestImplementation okHttpMockWebServer
-  androidTestImplementation 'com.jakewharton.timber:timber:4.7.1'
+  androidTestImplementation 'com.jakewharton.timber:timber:5.0.1'
 }
