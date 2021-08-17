@@ -17,7 +17,12 @@ class FirebaseResultExtractor(
   private val device: Device
 ) {
   fun extract(xml: String): TestSuiteResult {
-    val testSuiteNode = (XmlParser().parseText(xml).get("testsuite") as NodeList).first() as Node
+    val rootNode = XmlParser().parseText(xml)
+    val testSuiteNode = if(rootNode.name() == "testsuite") {
+      rootNode
+    } else {
+      (rootNode.get("testsuite") as NodeList).first() as Node
+    }
 
     val testsCount = testSuiteNode.attributeInt("tests")
     val flakyTests = testSuiteNode.attributeInt("flakes")
