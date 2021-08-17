@@ -46,13 +46,6 @@ subprojects {
         enabled = false
       }
     }
-  } else {
-    // https://github.com/JakeWharton/timber/issues/408
-    it.afterEvaluate {
-      if (it.plugins.hasPlugin("com.android.application") || it.plugins.hasPlugin("com.android.library")) {
-        it.android.lintOptions.disable = ["LogNotTimber", "StringFormatInTimber", "ThrowableNotAtBeginning", "BinaryOperationInTimber", "TimberArgCount", "TimberArgTypes", "TimberTagLength", "TimberExceptionLogging"]
-      }
-    }
   }
 }
 
