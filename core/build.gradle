@@ -45,7 +45,7 @@ dependencies {
   implementation rootProject.ext.retrofit
   implementation rootProject.ext.retrofitGsonConverter
   implementation rootProject.ext.retrofitRxJavaAdapter
-  implementation 'com.google.code.gson:gson:2.8.7'
+  implementation 'com.google.code.gson:gson:2.8.8'
   implementation rootProject.ext.okHttpLoggingInterceptor
 
   testImplementation 'junit:junit:4.13.2'

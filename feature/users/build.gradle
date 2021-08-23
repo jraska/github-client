@@ -33,7 +33,7 @@ dependencies {
   implementation rootProject.ext.retrofit
   implementation rootProject.ext.retrofitGsonConverter
   implementation rootProject.ext.retrofitRxJavaAdapter
-  implementation 'com.google.code.gson:gson:2.8.7'
+  implementation 'com.google.code.gson:gson:2.8.8'
 
   implementation 'com.google.android.material:material:1.4.0'
   implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'

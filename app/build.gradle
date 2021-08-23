@@ -144,7 +144,7 @@ dependencies {
 
   implementation 'com.jakewharton.timber:timber:5.0.1'
 
-  implementation 'com.google.code.gson:gson:2.8.7'
+  implementation 'com.google.code.gson:gson:2.8.8'
 
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
   androidTestImplementation 'androidx.test:runner:1.4.0'
