@@ -27,7 +27,7 @@ dependencies {
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
 
-  implementation 'com.airbnb.android:epoxy:4.6.2'
+  implementation 'com.airbnb.android:epoxy:4.6.3-vinay-compose'
   implementation rootProject.ext.okHttp
   implementation rootProject.ext.frescoDrawee
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
