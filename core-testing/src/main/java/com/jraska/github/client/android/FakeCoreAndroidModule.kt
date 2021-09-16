@@ -2,11 +2,14 @@ package com.jraska.github.client.android
 
 import com.jraska.github.client.DeepLinkLauncher
 import com.jraska.github.client.Fakes
+import com.jraska.github.client.coroutines.AppDispatchers
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.ui.SnackbarDisplay
 import dagger.Module
 import dagger.Provides
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.setMain
 import javax.inject.Singleton
 
 @Module
@@ -17,6 +20,14 @@ object FakeCoreAndroidModule {
     RxJavaPlugins.setErrorHandler { /* empty for now */ } // TODO: 09/04/2021 Better test implementation https://github.com/jraska/github-client/pull/467/checks?check_run_id=2301305103
 
     return Fakes.trampoline()
+  }
+
+  @Provides
+  @Singleton
+  fun dispatchers(): AppDispatchers {
+    Dispatchers.setMain(Dispatchers.Unconfined)
+
+    return AppDispatchers(Dispatchers.Unconfined, Dispatchers.Unconfined)
   }
 
   @Provides

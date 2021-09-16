@@ -2,27 +2,28 @@ package com.jraska.github.client.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.toLiveData
+import androidx.lifecycle.asLiveData
 import com.google.android.material.snackbar.Snackbar
 import com.jraska.github.client.Owner
 import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.lazyMap
-import com.jraska.github.client.ui.SnackbarData
-import com.jraska.github.client.ui.SnackbarDisplay
+import com.jraska.github.client.coroutines.AppDispatchers
 import com.jraska.github.client.navigation.Urls
 import com.jraska.github.client.repo.model.RepoDetail
 import com.jraska.github.client.repo.model.RepoHeader
 import com.jraska.github.client.repo.model.RepoRepository
-import com.jraska.github.client.rx.AppSchedulers
-import io.reactivex.rxjava3.core.BackpressureStrategy
-import io.reactivex.rxjava3.core.Single
+import com.jraska.github.client.ui.SnackbarData
+import com.jraska.github.client.ui.SnackbarDisplay
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 internal class RepoDetailViewModel @Inject constructor(
   private val repoRepository: RepoRepository,
-  private val appSchedulers: AppSchedulers,
+  private val appDispatchers: AppDispatchers,
   private val webLinkLauncher: WebLinkLauncher,
   private val eventAnalytics: EventAnalytics,
   private val snackbarDisplay: SnackbarDisplay
@@ -36,14 +37,12 @@ internal class RepoDetailViewModel @Inject constructor(
 
   private fun createRepoDetailLiveData(fullRepoName: String): LiveData<ViewState> {
     val parts = fullRepoName.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-    return repoRepository.getRepoDetail(parts[0], parts[1])
-      .subscribeOn(appSchedulers.io)
-      .observeOn(appSchedulers.mainThread)
-      .map<ViewState> { detail -> ViewState.ShowRepo(detail) }
-      .onErrorReturn { ViewState.Error(it) }
-      .startWith(Single.just(ViewState.Loading))
-      .toFlowable(BackpressureStrategy.MISSING)
-      .toLiveData()
+
+    return repoRepository.getRepoDetailFlow(parts[0], parts[1])
+      .map { ViewState.ShowRepo(it) as ViewState }
+      .onStart { emit(ViewState.Loading) }
+      .catch { emit(ViewState.Error(it)) }
+      .asLiveData(appDispatchers.io)
   }
 
   fun onGitHubIconClicked(fullRepoName: String) {

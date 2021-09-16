@@ -1,4 +1,9 @@
 ext {
+  coroutinesVersion = "1.5.2"
+  coroutinesJvm = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion"
+  coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+  coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
   retrofitVersion = '2.9.0'
   retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
   retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"

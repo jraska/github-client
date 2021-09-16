@@ -41,6 +41,11 @@ object HttpModule {
       builder.addInterceptor(loggingInterceptor)
     }
 
+    builder.addInterceptor {
+      Timber.d("Network thread %s", Thread.currentThread().name)
+      it.proceed(it.request())
+    }
+
     val cacheDir = File(context.cacheDir, "network")
     val cache = Cache(cacheDir, 1024 * 1024 * 4)
     builder.cache(cache)

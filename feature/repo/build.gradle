@@ -27,6 +27,10 @@ dependencies {
   kapt rootProject.ext.daggerAnnotationProcessor
   implementation rootProject.ext.dagger
 
+  implementation coroutinesAndroid
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+
   implementation rootProject.ext.retrofit
   implementation rootProject.ext.retrofitGsonConverter
   implementation rootProject.ext.retrofitRxJavaAdapter
@@ -47,5 +51,6 @@ dependencies {
   testImplementation project(':core-testing')
   testImplementation 'androidx.arch.core:core-testing:2.1.0'
   testImplementation 'com.jraska.livedata:testing-ktx:1.2.0'
+  testImplementation coroutinesTest
   kaptTest rootProject.ext.daggerAnnotationProcessor
 }
