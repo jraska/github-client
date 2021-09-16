@@ -13,6 +13,7 @@ import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.logging.SetupLogging
 import com.jraska.github.client.coroutines.AppDispatchers
+import com.jraska.github.client.coroutines.exchangeDispatcher
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
@@ -105,7 +106,7 @@ object CoreAndroidModule {
   fun dispatchers(): AppDispatchers {
     return AppDispatchers(
       Dispatchers.Main,
-      Dispatchers.IO
+      exchangeDispatcher ?: Dispatchers.IO
     )
   }
 

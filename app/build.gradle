@@ -76,6 +76,8 @@ android {
 
   packagingOptions {
     exclude 'META-INF/licenses/ASM'
+    exclude 'META-INF/AL2.0'
+    exclude 'META-INF/LGPL2.1'
   }
 
   if (gradle.startParameter.taskNames.any { it.contains("Firebase") }) {
@@ -153,6 +155,7 @@ dependencies {
   androidTestImplementation 'com.squareup.rx.idler:rx3-idler:0.11.0'
   androidTestImplementation project(':core-testing')
   androidTestImplementation project(':core-android-testing')
+  androidTestImplementation coroutinesJvm
 
   androidTestImplementation rootProject.ext.retrofit
   androidTestImplementation rootProject.ext.retrofitGsonConverter
