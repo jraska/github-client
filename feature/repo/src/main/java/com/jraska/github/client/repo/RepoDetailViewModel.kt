@@ -38,7 +38,7 @@ internal class RepoDetailViewModel @Inject constructor(
   private fun createRepoDetailLiveData(fullRepoName: String): LiveData<ViewState> {
     val parts = fullRepoName.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
-    return repoRepository.getRepoDetailFlow(parts[0], parts[1])
+    return repoRepository.getRepoDetail(parts[0], parts[1])
       .map { ViewState.ShowRepo(it) as ViewState }
       .onStart { emit(ViewState.Loading) }
       .catch { emit(ViewState.Error(it)) }

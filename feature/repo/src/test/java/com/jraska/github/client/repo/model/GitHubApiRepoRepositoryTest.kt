@@ -16,28 +16,13 @@ internal class GitHubApiRepoRepositoryTest {
   val mockWebServer = MockWebServer()
 
   @Test
-  fun getsTheDetailProperly() {
-    val gitHubApiRepoRepository = GitHubApiRepoRepository(repoGitHubApi())
-    mockWebServer.enqueue("response/repo_detail.json")
-    mockWebServer.enqueue("response/repo_pulls.json")
-
-    val repoDetail = gitHubApiRepoRepository.getRepoDetail("jraska", "github-client")
-      .test()
-      .assertValueCount(2)
-      .values()
-      .last()
-
-    assertThat(repoDetail).usingRecursiveComparison().isEqualTo(expectedRepoDetail())
-  }
-
-  @Test
   fun getsTheDetailProperlyCoroutines() {
     runBlocking {
       val gitHubApiRepoRepository = GitHubApiRepoRepository(repoGitHubApi())
       mockWebServer.enqueue("response/repo_detail.json")
       mockWebServer.enqueue("response/repo_pulls.json")
 
-      val repoDetail = gitHubApiRepoRepository.getRepoDetailFlow("jraska", "github-client").toCollection(mutableListOf())
+      val repoDetail = gitHubApiRepoRepository.getRepoDetail("jraska", "github-client").toCollection(mutableListOf())
 
       assertThat(repoDetail[1]).usingRecursiveComparison().isEqualTo(expectedRepoDetail())
     }
