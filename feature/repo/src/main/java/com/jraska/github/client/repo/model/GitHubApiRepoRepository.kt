@@ -13,6 +13,7 @@ internal class GitHubApiRepoRepository(
       val repo = gitHubRepoApi.getRepo(owner, repoName).result()
       val firstDetail = RepoConverter.convertToDetail(repo)
 
+      kotlinx.coroutines.delay(500)
       emit(firstDetail)
 
       try {

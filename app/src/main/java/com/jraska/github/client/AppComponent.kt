@@ -49,5 +49,5 @@ interface AppComponent : AppBaseComponent {
 )
 object SharedModules
 
-@Module(includes = [FirebaseCoreModule::class, HttpModule::class])
+@Module(includes = [FirebaseCoreModule::class, HttpModule::class, CoroutinesModule::class])
 object ToExchange

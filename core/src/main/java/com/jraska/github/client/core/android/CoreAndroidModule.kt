@@ -12,8 +12,6 @@ import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.logging.SetupLogging
-import com.jraska.github.client.coroutines.AppDispatchers
-import com.jraska.github.client.coroutines.exchangeDispatcher
 import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
@@ -28,7 +26,6 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.Dispatchers
 import javax.inject.Provider
 import javax.inject.Singleton
 
@@ -98,15 +95,6 @@ object CoreAndroidModule {
     return AppSchedulers(
       AndroidSchedulers.mainThread(),
       Schedulers.io(), Schedulers.computation()
-    )
-  }
-
-  @Provides
-  @Singleton
-  fun dispatchers(): AppDispatchers {
-    return AppDispatchers(
-      Dispatchers.Main,
-      exchangeDispatcher ?: Dispatchers.IO
     )
   }
 

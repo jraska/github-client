@@ -6,6 +6,7 @@ import com.jraska.github.client.core.android.BaseApp
 import com.jraska.github.client.core.android.ServiceModel
 import com.jraska.github.client.http.FakeHttpModule
 import com.jraska.github.client.android.test.DeepLinkRecordingComponent
+import com.jraska.github.client.android.test.FakeAndroidCoreModule
 import com.jraska.github.client.android.test.FakeDeepLinkRecordingModule
 import dagger.BindsInstance
 import dagger.Component
@@ -37,6 +38,7 @@ class TestUITestApp : BaseApp() {
     SharedModules::class,
     FakeCoreModule::class,
     FakeHttpModule::class,
+    FakeAndroidCoreModule::class,
     FakeDeepLinkRecordingModule::class
   ]
 )
