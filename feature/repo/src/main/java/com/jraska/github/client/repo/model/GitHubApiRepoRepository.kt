@@ -1,8 +1,11 @@
 package com.jraska.github.client.repo.model
 
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import retrofit2.Call
+import java.util.concurrent.Executors
 
 internal class GitHubApiRepoRepository(
   private val gitHubRepoApi: RepoGitHubApi
@@ -12,7 +15,9 @@ internal class GitHubApiRepoRepository(
     return flow {
       val repo = gitHubRepoApi.getRepo(owner, repoName).result()
       val firstDetail = RepoConverter.convertToDetail(repo)
-      val longSuspendFun = longSuspendFun()
+      val longSuspendFun = withContext(Executors.newSingleThreadExecutor().asCoroutineDispatcher()) {
+        longSuspendFun()
+      }
       emit(firstDetail)
 
       try {
