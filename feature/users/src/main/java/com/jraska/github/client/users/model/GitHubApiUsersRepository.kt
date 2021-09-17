@@ -2,8 +2,11 @@ package com.jraska.github.client.users.model
 
 import com.jraska.github.client.coroutines.AppDispatchers
 import com.jraska.github.client.coroutines.result
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import java.util.Collections
 
 internal class GitHubApiUsersRepository(
@@ -26,10 +29,14 @@ internal class GitHubApiUsersRepository(
         emit(it)
       }
 
-      val detailDto = gitHubUsersApi.getUserDetail(login).result()
-      val repos = gitHubUsersApi.getRepos(login).result()
+      val userDetail = withContext(appDispatchers.io) {
+        val asyncDetail = async { gitHubUsersApi.getUserDetail(login).result() }
+        val asyncRepo = async { gitHubUsersApi.getRepos(login).result() }
+        awaitAll(asyncDetail, asyncRepo)
 
-      val userDetail = converter.translateUserDetail(detailDto, repos, reposInSection)
+        converter.translateUserDetail(asyncDetail.await(), asyncRepo.await(), reposInSection)
+      }
+
       emit(userDetail)
     }
   }
