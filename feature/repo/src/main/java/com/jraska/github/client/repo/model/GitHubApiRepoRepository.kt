@@ -15,9 +15,6 @@ internal class GitHubApiRepoRepository(
     return flow {
       val repo = gitHubRepoApi.getRepo(owner, repoName).result()
       val firstDetail = RepoConverter.convertToDetail(repo)
-      val longSuspendFun = withContext(Executors.newSingleThreadExecutor().asCoroutineDispatcher()) {
-        longSuspendFun()
-      }
       emit(firstDetail)
 
       try {
