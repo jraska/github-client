@@ -10,13 +10,13 @@ internal class GitHubApiRepoRepository(
 
   override fun getRepoDetail(owner: String, repoName: String): Flow<RepoDetail> {
     return flow {
-      val repo = gitHubRepoApi.getRepo(owner, repoName)
+      val repo = gitHubRepoApi.getRepo(owner, repoName).result()
       val firstDetail = RepoConverter.convertToDetail(repo)
 
       emit(firstDetail)
 
       try {
-        val pulls = gitHubRepoApi.getPulls(owner, repoName)
+        val pulls = gitHubRepoApi.getPulls(owner, repoName).result()
         val secondDetail = RepoConverter.convertRepos(firstDetail, pulls)
 
         emit(secondDetail)

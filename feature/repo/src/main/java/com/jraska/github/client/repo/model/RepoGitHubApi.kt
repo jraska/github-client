@@ -6,8 +6,8 @@ import retrofit2.http.Path
 
 internal interface RepoGitHubApi {
   @GET("/repos/{owner}/{name}")
-  suspend fun getRepo(@Path("owner") path: String, @Path("name") name: String): GitHubRepo
+  fun getRepo(@Path("owner") path: String, @Path("name") name: String): Call<GitHubRepo>
 
   @GET("/repos/{owner}/{name}/pulls?state=all")
-  suspend fun getPulls(@Path("owner") path: String, @Path("name") name: String): List<GitHubPullRequest>
+  fun getPulls(@Path("owner") path: String, @Path("name") name: String): Call<List<GitHubPullRequest>>
 }
