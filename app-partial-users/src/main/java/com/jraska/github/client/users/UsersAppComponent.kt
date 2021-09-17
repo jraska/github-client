@@ -2,6 +2,7 @@ package com.jraska.github.client.users
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
+import com.jraska.github.client.CoroutinesModule
 import com.jraska.github.client.FakeCoreModule
 import com.jraska.github.client.FakeWebLinkModule
 import com.jraska.github.client.core.android.CoreAndroidModule
@@ -18,6 +19,7 @@ import javax.inject.Singleton
     FakeCoreModule::class,
     HttpModule::class,
     FakeWebLinkModule::class,
+    CoroutinesModule::class,
     UsersModule::class]
 )
 interface UsersAppComponent {
