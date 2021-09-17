@@ -1,40 +1,44 @@
 package com.jraska.github.client.users.model
 
-import com.jraska.github.client.rx.AppSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
+import com.jraska.github.client.coroutines.AppDispatchers
+import com.jraska.github.client.coroutines.result
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import java.util.Collections
 
 internal class GitHubApiUsersRepository(
   private val gitHubUsersApi: GitHubUsersApi,
-  private val appSchedulers: AppSchedulers
+  private val appDispatchers: AppDispatchers
 ) : UsersRepository {
   private val converter: UserDetailWithReposConverter =
     UserDetailWithReposConverter.INSTANCE
 
   private var lastUsers: List<User>? = null
 
-  override fun getUsers(since: Int): Single<List<User>> {
-    return gitHubUsersApi.getUsers(since)
-      .map { this.translateUsers(it) }
-      .doOnSuccess { users -> lastUsers = users }
+  override suspend fun getUsers(since: Int): List<User> {
+    val userDtos = gitHubUsersApi.getUsers(since).result()
+    return translateUsers(userDtos).also { lastUsers = it }
   }
 
-  override fun getUserDetail(login: String, reposInSection: Int): Observable<UserDetail> {
-    return gitHubUsersApi.getUserDetail(login)
-      .subscribeOn(appSchedulers.io) // this has to be here now to run requests in parallel
-      .zipWith(gitHubUsersApi.getRepos(login), { a: GitHubUserDetail, b: List<GitHubUserRepo> -> Pair(a, b) })
-      .map { result -> converter.translateUserDetail(result.component1(), result.component2(), reposInSection) }
-      .toObservable()
-      .startWith(cachedUser(login))
+  override fun getUserDetail(login: String, reposInSection: Int): Flow<UserDetail> {
+    return flow {
+      cachedUser(login)?.let {
+        emit(it)
+      }
+
+      val detailDto = gitHubUsersApi.getUserDetail(login).result()
+      val repos = gitHubUsersApi.getRepos(login).result()
+
+      val userDetail = converter.translateUserDetail(detailDto, repos, reposInSection)
+      emit(userDetail)
+    }
   }
 
-  private fun cachedUser(login: String): Observable<UserDetail> {
-    val lastUsers = this.lastUsers ?: return Observable.empty()
+  private fun cachedUser(login: String): UserDetail? {
+    val lastUsers = this.lastUsers ?: return null
 
     return lastUsers.firstOrNull { login == it.login }
-      ?.let { Observable.just(UserDetail(it, null, emptyList(), emptyList())) }
-      ?: Observable.empty()
+      ?.let { UserDetail(it, null, emptyList(), emptyList()) }
   }
 
   private fun translateUsers(gitHubUsers: List<GitHubUser>): List<User> {

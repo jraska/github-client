@@ -5,8 +5,8 @@ import com.jraska.github.client.http.HttpTest
 import com.jraska.github.client.http.enqueue
 import com.jraska.github.client.http.onUrlPartReturn
 import com.jraska.github.client.http.onUrlReturn
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.flow.toCollection
+import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -22,17 +22,14 @@ class GitHubApiUsersRepositoryTest {
 
   @Before
   fun setUp() {
-    repository = GitHubApiUsersRepository(HttpTest.retrofit(mockWebServer).create(GitHubUsersApi::class.java), Fakes.trampoline())
+    repository = GitHubApiUsersRepository(HttpTest.retrofit(mockWebServer).create(GitHubUsersApi::class.java), Fakes.unconfined())
   }
 
   @Test
   fun getsUsersProperly() {
     mockWebServer.enqueue("response/users.json")
 
-    val users = repository.getUsers(0)
-      .test()
-      .values()
-      .first()
+    val users = runBlocking { repository.getUsers(0) }
 
     assertThat(users).hasSize(30)
     assertThat(users.first()).usingRecursiveComparison().isEqualTo(testFirstUser())
@@ -44,18 +41,16 @@ class GitHubApiUsersRepositoryTest {
     mockWebServer.onUrlReturn(".*/users.mojombo".toRegex(), "response/mojombo.json")
     mockWebServer.onUrlPartReturn("users/mojombo/repos", "response/mojombo_repos.json")
 
-    repository.getUserDetail("mojombo", 1)
-      .test()
-      .awaitCount(1)
-      .assertComplete()
+    val values = runBlocking {
+      val userDetails = repository.getUserDetail("mojombo", 1).toCollection(mutableListOf())
+      assertThat(userDetails.size).isEqualTo(1)
 
-    repository.getUsers(0).test() // this line simulates the list request to cache
-    val values = repository.getUserDetail("mojombo", 1)
-      .test()
-      .awaitCount(2)
-      .assertComplete()
-      .values()
+      repository.getUsers(0)
 
+      repository.getUserDetail("mojombo", 1).toCollection(mutableListOf())
+    }
+
+    assertThat(values.size).isEqualTo(2)
     assertThat(values.first().user).usingRecursiveComparison().isEqualTo(testFirstUser())
     assertThat(values.last().user).usingRecursiveComparison().isEqualTo(testFirstUser())
   }

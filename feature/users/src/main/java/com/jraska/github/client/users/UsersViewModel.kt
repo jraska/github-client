@@ -1,43 +1,34 @@
 package com.jraska.github.client.users
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.jraska.github.client.DeepLinkLauncher
 import com.jraska.github.client.Owner
 import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.users.rx.toLiveData
+import com.jraska.github.client.coroutines.AppDispatchers
 import com.jraska.github.client.navigation.Urls
-import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.User
 import com.jraska.github.client.users.model.UsersRepository
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.subjects.PublishSubject
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 internal class UsersViewModel @Inject constructor(
-  usersRepository: UsersRepository,
-  appSchedulers: AppSchedulers,
+  private val usersRepository: UsersRepository,
+  private val appDispatchers: AppDispatchers,
   private val deepLinkLauncher: DeepLinkLauncher,
   private val webLinkLauncher: WebLinkLauncher,
   private val eventAnalytics: EventAnalytics
 ) : ViewModel() {
 
-  private val users: LiveData<ViewState>
-  private val refreshSignal = PublishSubject.create<Any>()
+  private val users = MediatorLiveData<ViewState>()
+  private lateinit var currentData: LiveData<ViewState>
 
   init {
-    users = usersRepository.getUsers(0)
-      .map<ViewState> { users -> ViewState.ShowUsers(users) }
-      .onErrorReturn { ViewState.Error(it) }
-      .toObservable()
-      .subscribeOn(appSchedulers.io)
-      .startWith(Single.just(ViewState.Loading))
-      .repeatWhen { refreshSignal }
-      .cache()
-      .observeOn(appSchedulers.mainThread)
-      .toLiveData()
+    setupLiveData()
   }
 
   fun users(): LiveData<ViewState> {
@@ -45,7 +36,9 @@ internal class UsersViewModel @Inject constructor(
   }
 
   fun onRefresh() {
-    refreshSignal.onNext(Unit)
+    users.removeSource(currentData)
+
+    setupLiveData()
   }
 
   fun onUserClicked(user: User) {
@@ -79,6 +72,21 @@ internal class UsersViewModel @Inject constructor(
 
     deepLinkLauncher.launch(Urls.about())
   }
+
+  private fun setupLiveData() {
+    currentData = newUsersLiveData()
+    users.addSource(currentData) { users.value = it }
+  }
+
+  private fun newUsersLiveData() = flow {
+    this.emit(ViewState.Loading)
+    try {
+      val users = usersRepository.getUsers(0)
+      this.emit(ViewState.ShowUsers(users))
+    } catch (ex: Exception) {
+      this.emit(ViewState.Error(ex))
+    }
+  }.asLiveData(appDispatchers.io)
 
   sealed class ViewState {
     object Loading : ViewState()

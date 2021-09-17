@@ -2,6 +2,7 @@ package com.jraska.github.client.users
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.jraska.github.client.Config
 import com.jraska.github.client.DeepLinkLauncher
 import com.jraska.github.client.Owner
@@ -9,18 +10,19 @@ import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.common.lazyMap
-import com.jraska.github.client.users.rx.toLiveData
+import com.jraska.github.client.coroutines.AppDispatchers
 import com.jraska.github.client.navigation.Urls
-import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.users.model.RepoHeader
 import com.jraska.github.client.users.model.UserDetail
 import com.jraska.github.client.users.model.UsersRepository
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 internal class UserDetailViewModel @Inject constructor(
   private val usersRepository: UsersRepository,
-  private val schedulers: AppSchedulers,
+  private val dispatchers: AppDispatchers,
   private val deepLinkLauncher: DeepLinkLauncher,
   private val webLinkLauncher: WebLinkLauncher,
   private val eventAnalytics: EventAnalytics,
@@ -40,12 +42,10 @@ internal class UserDetailViewModel @Inject constructor(
     }
 
     return usersRepository.getUserDetail(login, reposInSection)
-      .subscribeOn(schedulers.io)
-      .observeOn(schedulers.mainThread)
-      .map<ViewState> { userDetail -> ViewState.DisplayUser(userDetail) }
-      .onErrorReturn { ViewState.Error(it) }
-      .startWith(Single.just(ViewState.Loading))
-      .toLiveData()
+      .map { userDetail -> ViewState.DisplayUser(userDetail) as ViewState }
+      .onStart { emit(ViewState.Loading) }
+      .catch { emit(ViewState.Error(it)) }
+      .asLiveData(dispatchers.io)
   }
 
   fun onUserGitHubIconClick(login: String) {

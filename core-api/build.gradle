@@ -7,6 +7,7 @@ dependencies {
 
   implementation 'io.reactivex.rxjava3:rxjava:3.1.1'
   implementation coroutinesJvm
+  implementation retrofit
   implementation rootProject.ext.okHttp
   implementation 'com.squareup.okio:okio:2.10.0'
 

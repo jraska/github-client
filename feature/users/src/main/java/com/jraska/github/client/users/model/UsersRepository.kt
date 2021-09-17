@@ -1,10 +1,9 @@
 package com.jraska.github.client.users.model
 
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 
 internal interface UsersRepository {
-  fun getUsers(since: Int): Single<List<User>>
+  suspend fun getUsers(since: Int): List<User>
 
-  fun getUserDetail(login: String, reposInSection: Int): Observable<UserDetail>
+  fun getUserDetail(login: String, reposInSection: Int): Flow<UserDetail>
 }

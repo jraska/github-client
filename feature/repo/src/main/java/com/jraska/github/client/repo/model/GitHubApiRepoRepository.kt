@@ -1,8 +1,8 @@
 package com.jraska.github.client.repo.model
 
+import com.jraska.github.client.coroutines.result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.Call
 
 internal class GitHubApiRepoRepository(
   private val gitHubRepoApi: RepoGitHubApi
@@ -22,15 +22,6 @@ internal class GitHubApiRepoRepository(
       } catch (ex: Exception) {
         emit(RepoConverter.convertRepos(firstDetail, ex))
       }
-    }
-  }
-
-  fun <T> Call<T>.result(): T {
-    val response = execute()
-    if (response.isSuccessful) {
-      return response.body()!!
-    } else {
-      throw retrofit2.HttpException(response)
     }
   }
 }
