@@ -48,18 +48,6 @@ internal class RepoDetailViewModelTest {
   }
 
   @Test
-  fun whenLoadThenLoadsProperRepoDetailStateFLow() {
-    mockWebServer.enqueue("response/repo_detail.json")
-    mockWebServer.enqueue("response/repo_pulls.json")
-
-    val showRepo = runBlocking {
-      repoDetailViewModel.stateFlow("hello/vole").toCollection(mutableListOf())
-    }[1] as RepoDetailViewModel.ViewState.ShowRepo
-
-    assertThat(showRepo.repo).usingRecursiveComparison().isEqualTo(GitHubApiRepoRepositoryTest.expectedRepoDetail())
-  }
-
-  @Test
   fun whenClicksThenOpensGitHub() {
     repoDetailViewModel.onGitHubIconClicked("jraska/github-client")
 
@@ -74,18 +62,6 @@ internal class RepoDetailViewModelTest {
     val state = repoDetailViewModel.repoDetail("jraska/github-client")
       .test()
       .value()
-
-    assertThat(state).isInstanceOf(RepoDetailViewModel.ViewState.Error::class.java)
-  }
-
-  @Test
-  fun whenErrorThenLoadsErrorStateFlow() {
-    mockWebServer.enqueue("response/error.json")
-    mockWebServer.enqueue("response/error.json")
-
-    val state = runBlocking {
-      repoDetailViewModel.stateFlow("jraska/github-client").toCollection(mutableListOf())[1]
-    }
 
     assertThat(state).isInstanceOf(RepoDetailViewModel.ViewState.Error::class.java)
   }
