@@ -6,7 +6,8 @@ import com.jraska.github.client.http.enqueue
 import com.jraska.github.client.repo.di.DaggerTestRepoComponent
 import com.jraska.github.client.repo.di.TestRepoComponent
 import com.jraska.github.client.repo.model.GitHubApiRepoRepositoryTest
-import com.jraska.livedata.test
+import kotlinx.coroutines.flow.toCollection
+import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -36,11 +37,19 @@ internal class RepoDetailViewModelTest {
     mockWebServer.enqueue("response/repo_detail.json")
     mockWebServer.enqueue("response/repo_pulls.json")
 
-    val showRepo = repoDetailViewModel.repoDetail("jraska/github-client")
-      .test()
-      .value() as RepoDetailViewModel.ViewState.ShowRepo
+    val showRepo = runBlocking {
+      repoDetailViewModel.stateFlow("hello/vole").toCollection(mutableListOf())
+    }[1] as RepoDetailViewModel.ViewState.ShowRepo
 
     assertThat(showRepo.repo).usingRecursiveComparison().isEqualTo(GitHubApiRepoRepositoryTest.expectedRepoDetail())
+
+//    runBlocking {
+//      val showRepo = repoDetailViewModel.repoDetail("jraska/github-client")
+//        .test()
+//        .value() as RepoDetailViewModel.ViewState.ShowRepo
+//
+//      assertThat(showRepo.repo).usingRecursiveComparison().isEqualTo(GitHubApiRepoRepositoryTest.expectedRepoDetail())
+//    }
   }
 
   @Test
@@ -55,9 +64,13 @@ internal class RepoDetailViewModelTest {
     mockWebServer.enqueue("response/error.json")
     mockWebServer.enqueue("response/error.json")
 
-    val state = repoDetailViewModel.repoDetail("jraska/github-client")
-      .test()
-      .value()
+    val state = runBlocking {
+      repoDetailViewModel.stateFlow("jraska/github-client").toCollection(mutableListOf())[1]
+    }
+
+//    val state = repoDetailViewModel.repoDetail("jraska/github-client")
+//      .test()
+//      .value()
 
     assertThat(state).isInstanceOf(RepoDetailViewModel.ViewState.Error::class.java)
   }

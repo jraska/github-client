@@ -16,6 +16,7 @@ import com.jraska.github.client.repo.model.RepoHeader
 import com.jraska.github.client.repo.model.RepoRepository
 import com.jraska.github.client.ui.SnackbarData
 import com.jraska.github.client.ui.SnackbarDisplay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
@@ -36,13 +37,16 @@ internal class RepoDetailViewModel @Inject constructor(
   }
 
   private fun createRepoDetailLiveData(fullRepoName: String): LiveData<ViewState> {
-    val parts = fullRepoName.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+    return stateFlow(fullRepoName)
+      .asLiveData(appDispatchers.io)
+  }
 
+  fun stateFlow(fullRepoName: String): Flow<ViewState> {
+    val parts = fullRepoName.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
     return repoRepository.getRepoDetail(parts[0], parts[1])
       .map { ViewState.ShowRepo(it) as ViewState }
       .onStart { emit(ViewState.Loading) }
       .catch { emit(ViewState.Error(it)) }
-      .asLiveData(appDispatchers.io)
   }
 
   fun onGitHubIconClicked(fullRepoName: String) {
