@@ -10,13 +10,13 @@ internal class GitHubApiRepoRepository(
 
   override fun getRepoDetail(owner: String, repoName: String): Flow<RepoDetail> {
     return flow {
-      val repo = gitHubRepoApi.getRepo(owner, repoName)
+      val repo = gitHubRepoApi.getRepo(owner, repoName).result()
       val firstDetail = RepoConverter.convertToDetail(repo)
-
+      val longSuspendFun = longSuspendFun()
       emit(firstDetail)
 
       try {
-        val pulls = gitHubRepoApi.getPulls(owner, repoName)
+        val pulls = gitHubRepoApi.getPulls(owner, repoName).result()
         val secondDetail = RepoConverter.convertRepos(firstDetail, pulls)
 
         emit(secondDetail)
@@ -24,6 +24,11 @@ internal class GitHubApiRepoRepository(
         emit(RepoConverter.convertRepos(firstDetail, ex))
       }
     }
+  }
+
+  suspend fun longSuspendFun(): Boolean {
+    Thread.sleep(500)
+    return true
   }
 
   fun <T> Call<T>.result(): T {
