@@ -148,6 +148,7 @@ dependencies {
   implementation 'com.google.code.gson:gson:2.8.8'
 
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+  androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
   androidTestImplementation 'androidx.test:runner:1.4.0'
   androidTestImplementation 'androidx.test:rules:1.4.0'
   androidTestImplementation 'org.assertj:assertj-core:3.20.2'

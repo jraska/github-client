@@ -28,6 +28,7 @@ dependencies {
   implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
   implementation coroutinesJvm
 
+  implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
   implementation okHttpMockWebServer
   implementation rootProject.ext.okHttp
   implementation 'com.squareup.okio:okio:2.10.0'
