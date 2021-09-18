@@ -22,12 +22,10 @@ dependencies {
   implementation rootProject.ext.dagger
 
   implementation 'junit:junit:4.13.2'
-  implementation 'io.reactivex.rxjava3:rxjava:3.1.1'
   implementation coroutinesTest
 
   implementation rootProject.ext.retrofit
   implementation rootProject.ext.retrofitGsonConverter
-  implementation rootProject.ext.retrofitRxJavaAdapter
   implementation okHttp
   implementation okHttpMockWebServer
   implementation okHttpLoggingInterceptor

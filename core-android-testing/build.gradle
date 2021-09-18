@@ -31,6 +31,4 @@ dependencies {
   implementation okHttpMockWebServer
   implementation rootProject.ext.okHttp
   implementation 'com.squareup.okio:okio:2.10.0'
-
-  implementation 'com.squareup.rx.idler:rx3-idler:0.11.0'
 }

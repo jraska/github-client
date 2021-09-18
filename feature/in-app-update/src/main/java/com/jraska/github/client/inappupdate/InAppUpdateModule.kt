@@ -15,10 +15,10 @@ import javax.inject.Provider
 object InAppUpdateModule {
   @Provides
   @IntoSet
-  internal fun checkOnAppCreate(checkScheduler: Provider<UpdateCheckScheduler>): OnAppCreateAsync {
+  internal fun checkOnAppCreate(checkScheduler: Provider<UpdateChecker>): OnAppCreateAsync {
     return object : OnAppCreateAsync {
-      override fun onCreateAsync(app: Application) {
-        checkScheduler.get().startNonBlockingCheck()
+      override suspend fun onCreateAsync(app: Application) {
+        checkScheduler.get().checkForUpdates()
       }
     }
   }

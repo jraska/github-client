@@ -35,7 +35,7 @@ Experimental architecture app with example usage intended to be a showcase, test
 - Deep Link navigation used across the app - [Article](https://proandroiddev.com/in-app-deep-link-navigation-because-deep-links-matter-17f0c91f2658)
 - All core services have its lightweight fake implementation. See `Fakes`
 - Dependency replacement in test is done by Dagger components in `TestUITestApp`
-- RxJava is used for threading everywhere, allowing proper idling of UI tests. Also `AppSchedulers` dependency makes all threading testable.
+- Coroutines is used for threading everywhere, allowing proper idling of UI tests. Also `AppDispatchers` dependency makes all threading testable.
 - Push is implemented by using Firebase Cloud Messaging. See `PushActionCommand`. Thanks to deep link navigation app can be controlled remotely by executing deep links - `LaunchDeepLinkCommand : PushActionCommand`
 - `TopActivityProvider` to avoid having `Context` dependencie everywhere and to be able to have cleaner pure Kotlin interfaces
 - Enforced ownership of remote configuration and analytics events - [Details on PR](https://github.com/jraska/github-client/pull/230). More on why these need to be explicitly owned on [this article](https://proandroiddev.com/remote-feature-flags-do-not-always-come-for-free-a372f1768a70).

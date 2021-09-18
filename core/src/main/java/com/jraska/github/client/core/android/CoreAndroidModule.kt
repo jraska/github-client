@@ -12,7 +12,6 @@ import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.logging.SetupLogging
-import com.jraska.github.client.rx.AppSchedulers
 import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
 import com.jraska.github.client.time.RealTimeProvider
@@ -24,8 +23,6 @@ import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Provider
 import javax.inject.Singleton
 
@@ -90,15 +87,6 @@ object CoreAndroidModule {
   internal fun deepLinkHandler(implementation: DeepLinkHandlerImpl): DeepLinkHandler = implementation
 
   @Provides
-  @Singleton
-  fun schedulers(): AppSchedulers {
-    return AppSchedulers(
-      AndroidSchedulers.mainThread(),
-      Schedulers.io(), Schedulers.computation()
-    )
-  }
-
-  @Provides
   @IntoSet
   internal fun setupLoggingOnCreate(setupLogging: SetupLogging): OnAppCreate {
     return setupLogging
@@ -108,7 +96,7 @@ object CoreAndroidModule {
   @IntoSet
   fun reportAppCreateEvent(eventAnalytics: Provider<EventAnalytics>): OnAppCreateAsync {
     return object : OnAppCreateAsync {
-      override fun onCreateAsync(app: Application) {
+      override suspend fun onCreateAsync(app: Application) {
         val createEvent = AnalyticsEvent.create(AnalyticsEvent.Key("app_create", Owner.CORE_TEAM))
         eventAnalytics.get().report(createEvent)
       }
@@ -130,7 +118,7 @@ object CoreAndroidModule {
   @IntoSet
   fun setupFresco(): OnAppCreateAsync {
     return object : OnAppCreateAsync {
-      override fun onCreateAsync(app: Application) = Fresco.initialize(app)
+      override suspend fun onCreateAsync(app: Application) = Fresco.initialize(app)
     }
   }
 

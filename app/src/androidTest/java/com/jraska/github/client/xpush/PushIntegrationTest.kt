@@ -57,7 +57,7 @@ class PushIntegrationTest {
       data["deepLink"] = deepLink
     }
 
-    pushClient.sendPush(messageToThisDevice).blockingAwait()
+    pushClient.sendPush(messageToThisDevice).execute()
   }
 
   private fun apiKey(): String {

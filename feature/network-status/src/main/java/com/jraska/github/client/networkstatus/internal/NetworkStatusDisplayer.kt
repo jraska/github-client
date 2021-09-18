@@ -3,33 +3,39 @@ package com.jraska.github.client.networkstatus.internal
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.snackbar.Snackbar
 import com.jraska.github.client.core.android.DefaultActivityCallbacks
+import com.jraska.github.client.coroutines.AppDispatchers
 import com.jraska.github.client.networkstatus.R
-import com.jraska.github.client.rx.AppSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
 import timber.log.Timber
 import javax.inject.Inject
 
 internal class NetworkStatusDisplayer @Inject constructor(
-  private val networkObservable: NetworkObservable,
-  private val appSchedulers: AppSchedulers
+  private val networkChannel: NetworkChannel,
+  private val appDispatchers: AppDispatchers
 ) {
 
-  private val compositeDisposable = CompositeDisposable()
+  private val job: Job? = null
   private var offlineSnackbar: Snackbar? = null
 
   fun onActivityResumed(activity: Activity) {
-    networkObservable.connectedObservable()
-      .observeOn(appSchedulers.mainThread)
-      .subscribe { showState(activity, it) }
-      .also { compositeDisposable.add(it) }
+    if (activity is AppCompatActivity) {
+
+    }
+//    networkChannel.connectedFlow()
+//      .collect(showState())
+//      .observeOn(appSchedulers.mainThread)
+//      .subscribe { showState(activity, it) }
+//      .also { compositeDisposable.add(it) }
   }
 
   fun onActivityPaused() {
     dismissAnySnackbar()
-    compositeDisposable.clear()
+    job?.cancel()
   }
 
   private fun dismissAnySnackbar() {

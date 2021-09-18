@@ -1,20 +1,28 @@
 package com.jraska.github.client.core.android
 
 import android.app.Application
-import com.jraska.github.client.rx.AppSchedulers
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.internal.functions.Functions
+import com.jraska.github.client.coroutines.AppDispatchers
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OnAppCreateAsyncExecutor @Inject constructor(
   private val asyncActions: @JvmSuppressWildcards Set<OnAppCreateAsync>,
-  private val appSchedulers: AppSchedulers
+  private val appDispatchers: AppDispatchers
 ) : OnAppCreate {
+
+  @DelicateCoroutinesApi // this is app init
   override fun onCreate(app: Application) {
-    asyncActions.forEach { appCreateAsync ->
-      Completable.fromAction { appCreateAsync.onCreateAsync(app) }
-        .subscribeOn(appSchedulers.computation)
-        .subscribe(Functions.EMPTY_ACTION, { crashTheApp(it) })
+    GlobalScope.launch(appDispatchers.io) {
+      // FIXME: 18/9/21 run in parallel
+      asyncActions.forEach { appCreateAsync ->
+        try {
+          appCreateAsync.onCreateAsync(app)
+        } catch (ex: Exception) {
+          crashTheApp(ex)
+        }
+      }
     }
   }
 

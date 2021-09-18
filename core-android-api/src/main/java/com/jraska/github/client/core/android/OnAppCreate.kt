@@ -12,5 +12,5 @@ interface OnAppCreate {
  * Initialisations which are not necessarily critical and don't have to block should happen here.
  */
 interface OnAppCreateAsync {
-  fun onCreateAsync(app: Application)
+  suspend fun onCreateAsync(app: Application)
 }

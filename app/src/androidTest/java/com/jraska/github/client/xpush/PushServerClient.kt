@@ -1,12 +1,12 @@
 package com.jraska.github.client.xpush
 
-import io.reactivex.rxjava3.core.Completable
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -14,14 +14,13 @@ import timber.log.Timber
 
 interface PushServerClient {
   @POST("/fcm/send")
-  fun sendPush(@Body message: PushServerDto): Completable
+  fun sendPush(@Body message: PushServerDto): Call<ResponseBody>
 
   companion object {
     fun create(authorizationToken: String): PushServerClient {
       return Retrofit.Builder()
         .baseUrl("https://fcm.googleapis.com")
         .client(pushClient(authorizationToken))
-        .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(PushServerClient::class.java)

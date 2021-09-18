@@ -81,7 +81,7 @@ object UsersModule {
   @IntoSet
   internal fun prepareHttpClient(usersRepositoryProvider: Provider<UsersRepository>): OnAppCreateAsync {
     return object : OnAppCreateAsync {
-      override fun onCreateAsync(app: Application) {
+      override suspend fun onCreateAsync(app: Application) {
         usersRepositoryProvider.get() // setups asynchronously the rest client
       }
     }

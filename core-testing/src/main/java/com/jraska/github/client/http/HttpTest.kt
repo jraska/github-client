@@ -9,7 +9,6 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.rules.ExternalResource
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 
@@ -21,7 +20,6 @@ object HttpTest {
       .baseUrl(mockWebServer?.url("/") ?: DEFAULT_BASE_URL)
       .client(client(mockWebServer))
       .addConverterFactory(GsonConverterFactory.create())
-      .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
       .build()
   }
 
