@@ -3,14 +3,14 @@ package com.jraska.github.client.settings
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
-import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 
-internal class SettingsActivity : BaseActivity() {
+internal class SettingsActivity : AppCompatActivity() {
   private val viewModel: SettingsViewModel by lazy { viewModel(SettingsViewModel::class.java) }
 
   override fun onCreate(savedInstanceState: Bundle?) {

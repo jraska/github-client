@@ -113,12 +113,19 @@ dependencies {
   implementation project(':feature:config-debug-api')
 
   implementation 'androidx.appcompat:appcompat:1.3.1'
-  implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-  implementation 'com.google.android.material:material:1.4.0'
+  implementation 'androidx.browser:browser:1.3.0'
   implementation 'androidx.cardview:cardview:1.0.0'
   implementation 'androidx.core:core:1.6.0'
-  implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
+  implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+  implementation 'androidx.lifecycle:lifecycle-runtime:2.3.1'
   implementation 'androidx.media:media:1.4.1'
+  implementation 'androidx.recyclerview:recyclerview:1.2.1'
+  implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+  implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
+
+  implementation 'com.airbnb.android:epoxy:4.6.2'
+
+  implementation 'com.google.android.material:material:1.4.0'
 
   implementation platform('com.google.firebase:firebase-bom:28.4.0')
   implementation 'com.google.firebase:firebase-core'
@@ -129,11 +136,7 @@ dependencies {
   implementation 'com.google.firebase:firebase-inappmessaging-display'
   implementation 'com.google.firebase:firebase-database'
 
-  implementation 'androidx.lifecycle:lifecycle-runtime:2.3.1'
-
   implementation fresco
-
-  implementation 'com.airbnb.android:epoxy:4.6.2'
 
   kapt daggerAnnotationProcessor
   implementation dagger

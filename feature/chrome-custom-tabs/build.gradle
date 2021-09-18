@@ -22,6 +22,6 @@ dependencies {
   implementation dagger
   kapt daggerAnnotationProcessor
   implementation 'androidx.browser:browser:1.3.0'
-
+  implementation 'androidx.core:core:1.6.0'
   testImplementation 'junit:junit:4.13.2'
 }

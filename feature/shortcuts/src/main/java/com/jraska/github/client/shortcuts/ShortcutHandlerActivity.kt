@@ -1,11 +1,11 @@
 package com.jraska.github.client.shortcuts
 
 import android.os.Bundle
-import com.jraska.github.client.core.android.BaseActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.jraska.github.client.core.android.inputUrl
 import com.jraska.github.client.core.android.viewModel
 
-internal class ShortcutHandlerActivity : BaseActivity() {
+internal class ShortcutHandlerActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

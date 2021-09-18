@@ -28,6 +28,8 @@ dependencies {
   implementation dagger
 
   implementation coroutinesAndroid
+  implementation coroutinesCore
+  implementation coroutinesJvm
   implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
   implementation retrofit
@@ -35,6 +37,7 @@ dependencies {
   implementation 'com.google.code.gson:gson:2.8.8'
 
   implementation 'com.google.android.material:material:1.4.0'
+  implementation 'androidx.appcompat:appcompat:1.3.1'
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
   implementation 'com.airbnb.android:epoxy:4.6.2'
   implementation fresco

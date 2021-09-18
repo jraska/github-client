@@ -29,4 +29,5 @@ dependencies {
   implementation okHttp
   implementation okHttpMockWebServer
   implementation okHttpLoggingInterceptor
+  implementation 'com.squareup.okio:okio:2.10.0'
 }

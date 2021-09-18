@@ -3,10 +3,10 @@ package com.jraska.github.client.settings
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.jraska.console.Console
-import com.jraska.github.client.core.android.BaseActivity
 
-internal class ConsoleActivity : BaseActivity() {
+internal class ConsoleActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(Console(this))

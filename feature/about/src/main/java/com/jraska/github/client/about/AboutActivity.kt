@@ -3,14 +3,14 @@ package com.jraska.github.client.about
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.SimpleEpoxyAdapter
-import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 
-internal class AboutActivity : BaseActivity() {
+internal class AboutActivity : AppCompatActivity() {
 
   private val viewModel: AboutViewModel by lazy { viewModel(AboutViewModel::class.java) }
 

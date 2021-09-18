@@ -5,17 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.epoxy.SimpleEpoxyAdapter
-import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 import com.jraska.github.client.users.R
 import com.jraska.github.client.users.UsersViewModel
 import com.jraska.github.client.users.model.User
 
-class UsersActivity : BaseActivity(), UserModel.UserListener {
+class UsersActivity : AppCompatActivity(), UserModel.UserListener {
   private val usersViewModel: UsersViewModel by lazy { viewModel(UsersViewModel::class.java) }
 
   private val usersRecycler: RecyclerView get() = findViewById(R.id.users_recycler)

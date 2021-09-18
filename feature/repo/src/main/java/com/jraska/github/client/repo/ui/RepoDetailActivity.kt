@@ -3,12 +3,12 @@ package com.jraska.github.client.repo.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.SimpleEpoxyAdapter
 import com.airbnb.epoxy.SimpleEpoxyModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.jraska.github.client.core.android.BaseActivity
 import com.jraska.github.client.core.android.viewModel
 import com.jraska.github.client.repo.R
 import com.jraska.github.client.repo.RepoDetailViewModel
@@ -16,7 +16,7 @@ import com.jraska.github.client.repo.model.RepoDetail
 import com.jraska.github.client.users.ui.ErrorHandler
 import com.jraska.github.client.users.ui.SimpleTextModel
 
-internal class RepoDetailActivity : BaseActivity() {
+internal class RepoDetailActivity : AppCompatActivity() {
 
   private val viewModel: RepoDetailViewModel by lazy { viewModel(RepoDetailViewModel::class.java) }
 
