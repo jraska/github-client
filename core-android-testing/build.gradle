@@ -29,6 +29,7 @@ dependencies {
   implementation coroutinesJvm
 
   implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
+  implementation 'androidx.test:monitor:1.4.0'
   implementation okHttpMockWebServer
   implementation rootProject.ext.okHttp
   implementation 'com.squareup.okio:okio:2.10.0'
