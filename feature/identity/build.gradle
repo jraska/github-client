@@ -10,8 +10,8 @@ dependencies {
 
   implementation 'org.threeten:threetenbp:1.4.4:no-tzdb'
 
-  kapt rootProject.ext.daggerAnnotationProcessor
-  implementation rootProject.ext.dagger
+  kapt daggerAnnotationProcessor
+  implementation dagger
 
   testImplementation 'junit:junit:4.13.2'
   testImplementation 'org.assertj:assertj-core:3.20.2'

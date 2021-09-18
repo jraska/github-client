@@ -18,8 +18,8 @@ dependencies {
   implementation project(':core-api')
   implementation project(':core-android-api')
 
-  kapt rootProject.ext.daggerAnnotationProcessor
-  implementation rootProject.ext.dagger
+  kapt daggerAnnotationProcessor
+  implementation dagger
 
   implementation 'com.google.android.material:material:1.4.0'
   implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'

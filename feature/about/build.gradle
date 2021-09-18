@@ -24,16 +24,16 @@ dependencies {
   implementation project(':feature:identity-api')
   implementation project(':feature:ui-common-api')
 
-  kapt rootProject.ext.daggerAnnotationProcessor
-  implementation rootProject.ext.dagger
+  kapt daggerAnnotationProcessor
+  implementation dagger
 
   implementation 'com.airbnb.android:epoxy:4.6.2'
-  implementation rootProject.ext.okHttp
-  implementation rootProject.ext.frescoDrawee
+  implementation okHttp
+  implementation frescoDrawee
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
   implementation 'com.google.android.material:material:1.4.0'
 
   androidTestImplementation 'junit:junit:4.13.2'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+  androidTestImplementation espressoCore
   androidTestImplementation 'org.assertj:assertj-core:3.20.2'
 }

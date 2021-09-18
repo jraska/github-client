@@ -24,20 +24,20 @@ dependencies {
   implementation project(':feature:ui-common-api')
   implementation project(':navigation-api')
 
-  kapt rootProject.ext.daggerAnnotationProcessor
-  implementation rootProject.ext.dagger
+  kapt daggerAnnotationProcessor
+  implementation dagger
 
   implementation coroutinesAndroid
   implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
-  implementation rootProject.ext.retrofit
-  implementation rootProject.ext.retrofitGsonConverter
+  implementation retrofit
+  implementation retrofitGsonConverter
   implementation 'com.google.code.gson:gson:2.8.8'
 
   implementation 'com.google.android.material:material:1.4.0'
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
   implementation 'com.airbnb.android:epoxy:4.6.2'
-  implementation rootProject.ext.fresco
+  implementation fresco
   implementation 'org.threeten:threetenbp:1.4.4:no-tzdb'
 
   testImplementation okHttpMockWebServer
@@ -48,5 +48,5 @@ dependencies {
   testImplementation 'androidx.arch.core:core-testing:2.1.0'
   testImplementation 'com.jraska.livedata:testing-ktx:1.2.0'
   testImplementation coroutinesTest
-  kaptTest rootProject.ext.daggerAnnotationProcessor
+  kaptTest daggerAnnotationProcessor
 }

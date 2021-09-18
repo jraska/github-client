@@ -33,21 +33,20 @@ dependencies {
   implementation project(':feature:config-debug-api')
   implementation project(':feature:ui-common-api')
 
-  kapt rootProject.ext.daggerAnnotationProcessor
-  implementation rootProject.ext.dagger
+  kapt daggerAnnotationProcessor
+  implementation dagger
 
-  implementation rootProject.ext.retrofit
-  implementation rootProject.ext.retrofitGsonConverter
+  implementation retrofit
+  implementation retrofitGsonConverter
   implementation 'com.google.code.gson:gson:2.8.8'
   implementation coroutinesJvm
-
 
   implementation 'com.google.android.material:material:1.4.0'
   implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
   implementation 'com.airbnb.android:epoxy:4.6.2'
   implementation 'com.jakewharton.timber:timber:5.0.1'
-  implementation rootProject.ext.fresco
+  implementation fresco
   implementation 'org.threeten:threetenbp:1.4.4:no-tzdb'
 
   implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
@@ -58,15 +57,15 @@ dependencies {
   testImplementation 'androidx.arch.core:core-testing:2.1.0'
   testImplementation okHttpMockWebServer
   testImplementation project(':core-testing')
-  kaptTest rootProject.ext.daggerAnnotationProcessor
+  kaptTest daggerAnnotationProcessor
 
   androidTestImplementation 'junit:junit:4.13.2'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+  androidTestImplementation espressoCore
   androidTestImplementation 'org.assertj:assertj-core:3.20.2'
-  androidTestImplementation 'androidx.test:runner:1.4.0'
-  androidTestImplementation 'androidx.test:rules:1.4.0'
+  androidTestImplementation androidTestRunner
+  androidTestImplementation androidTestRules
 
-  kaptAndroidTest rootProject.ext.daggerAnnotationProcessor
+  kaptAndroidTest daggerAnnotationProcessor
   androidTestImplementation project(':core-testing')
   androidTestImplementation project(':core-android-testing')
   androidTestImplementation project(':core')

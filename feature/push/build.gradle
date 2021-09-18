@@ -23,11 +23,11 @@ dependencies {
   implementation 'com.google.firebase:firebase-messaging'
   implementation 'com.google.firebase:firebase-database'
 
-  implementation rootProject.ext.dagger
-  kapt rootProject.ext.daggerAnnotationProcessor
+  implementation dagger
+  kapt daggerAnnotationProcessor
 
   implementation 'com.jakewharton.timber:timber:5.0.1'
-  implementation rootProject.ext.okHttp
+  implementation okHttp
   implementation 'org.threeten:threetenbp:1.4.4:no-tzdb'
 
   testImplementation 'junit:junit:4.13.2'

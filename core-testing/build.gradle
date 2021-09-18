@@ -18,14 +18,14 @@ dependencies {
   implementation project(':core-api')
   implementation project(':navigation-api')
 
-  kapt rootProject.ext.daggerAnnotationProcessor
-  implementation rootProject.ext.dagger
+  kapt daggerAnnotationProcessor
+  implementation dagger
 
   implementation 'junit:junit:4.13.2'
   implementation coroutinesTest
 
-  implementation rootProject.ext.retrofit
-  implementation rootProject.ext.retrofitGsonConverter
+  implementation retrofit
+  implementation retrofitGsonConverter
   implementation okHttp
   implementation okHttpMockWebServer
   implementation okHttpLoggingInterceptor

@@ -7,8 +7,6 @@ import com.jraska.github.client.repo.di.DaggerTestRepoComponent
 import com.jraska.github.client.repo.di.TestRepoComponent
 import com.jraska.github.client.repo.model.GitHubApiRepoRepositoryTest
 import com.jraska.livedata.test
-import kotlinx.coroutines.flow.toCollection
-import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before

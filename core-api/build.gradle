@@ -7,7 +7,7 @@ dependencies {
 
   implementation coroutinesJvm
   implementation retrofit
-  implementation rootProject.ext.okHttp
+  implementation okHttp
   implementation 'com.squareup.okio:okio:2.10.0'
 
   implementation 'org.threeten:threetenbp:1.4.4:no-tzdb'

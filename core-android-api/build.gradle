@@ -22,6 +22,6 @@ dependencies {
   implementation 'androidx.annotation:annotation:1.2.0'
   implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
-  implementation rootProject.ext.okHttp
+  implementation okHttp
   implementation 'com.squareup.okio:okio:2.10.0'
 }
