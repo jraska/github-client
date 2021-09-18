@@ -5,17 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.jraska.github.client.core.android.DefaultActivityCallbacks
 import com.jraska.github.client.coroutines.AppDispatchers
 import com.jraska.github.client.networkstatus.R
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
 internal class NetworkStatusDisplayer @Inject constructor(
-  private val networkChannel: NetworkChannel,
+  private val networkFlow: NetworkFlow,
   private val appDispatchers: AppDispatchers
 ) {
 
@@ -24,13 +26,15 @@ internal class NetworkStatusDisplayer @Inject constructor(
 
   fun onActivityResumed(activity: Activity) {
     if (activity is AppCompatActivity) {
-
+      activity.lifecycleScope.launchWhenResumed {
+        networkFlow.connectedFlow()
+          .collect {
+            withContext(appDispatchers.main) {
+              showState(activity, it)
+            }
+          }
+      }
     }
-//    networkChannel.connectedFlow()
-//      .collect(showState())
-//      .observeOn(appSchedulers.mainThread)
-//      .subscribe { showState(activity, it) }
-//      .also { compositeDisposable.add(it) }
   }
 
   fun onActivityPaused() {
