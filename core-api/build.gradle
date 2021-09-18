@@ -10,7 +10,7 @@ dependencies {
   implementation okHttp
   implementation 'com.squareup.okio:okio:2.10.0'
 
-  implementation 'org.threeten:threetenbp:1.4.4:no-tzdb'
+  implementation 'org.threeten:threetenbp:1.5.1:no-tzdb'
   implementation 'javax.inject:javax.inject:1'
 
   testImplementation 'junit:junit:4.13.2'

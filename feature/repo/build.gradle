@@ -38,7 +38,7 @@ dependencies {
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
   implementation 'com.airbnb.android:epoxy:4.6.2'
   implementation fresco
-  implementation 'org.threeten:threetenbp:1.4.4:no-tzdb'
+  implementation 'org.threeten:threetenbp:1.5.1:no-tzdb'
 
   testImplementation okHttpMockWebServer
   testImplementation okHttpLoggingInterceptor
