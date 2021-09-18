@@ -4,6 +4,8 @@ import android.app.Application
 import com.jraska.github.client.coroutines.AppDispatchers
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,14 +17,17 @@ class OnAppCreateAsyncExecutor @Inject constructor(
   @DelicateCoroutinesApi // this is app init
   override fun onCreate(app: Application) {
     GlobalScope.launch(appDispatchers.io) {
-      // FIXME: 18/9/21 run in parallel
-      asyncActions.forEach { appCreateAsync ->
-        try {
-          appCreateAsync.onCreateAsync(app)
-        } catch (ex: Exception) {
-          crashTheApp(ex)
-        }
-      }
+      asyncActions.map {
+        async { it.execute(app) }
+      }.awaitAll()
+    }
+  }
+
+  private suspend fun OnAppCreateAsync.execute(app: Application) {
+    try {
+      onCreateAsync(app)
+    } catch (ex: Exception) {
+      crashTheApp(ex)
     }
   }
 

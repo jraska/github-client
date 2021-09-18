@@ -10,7 +10,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.jraska.github.client.core.android.DefaultActivityCallbacks
 import com.jraska.github.client.coroutines.AppDispatchers
 import com.jraska.github.client.networkstatus.R
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -21,7 +20,6 @@ internal class NetworkStatusDisplayer @Inject constructor(
   private val appDispatchers: AppDispatchers
 ) {
 
-  private val job: Job? = null
   private var offlineSnackbar: Snackbar? = null
 
   fun onActivityResumed(activity: Activity) {
@@ -39,7 +37,6 @@ internal class NetworkStatusDisplayer @Inject constructor(
 
   fun onActivityPaused() {
     dismissAnySnackbar()
-    job?.cancel()
   }
 
   private fun dismissAnySnackbar() {
