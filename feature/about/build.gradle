@@ -27,7 +27,7 @@ dependencies {
   kapt daggerAnnotationProcessor
   implementation dagger
 
-  implementation 'com.airbnb.android:epoxy:4.6.2'
+  implementation 'com.airbnb.android:epoxy:4.6.4'
   implementation okHttp
   implementation frescoDrawee
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
