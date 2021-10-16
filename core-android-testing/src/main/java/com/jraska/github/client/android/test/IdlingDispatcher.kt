@@ -18,8 +18,10 @@ class IdlingDispatcher(
   override fun getName() = "Coroutines IdlingDispatcher"
 
   override fun isIdleNow(): Boolean {
-    jobs.removeAll { !it.isActive }
-    return jobs.isEmpty()
+    synchronized(jobs) {
+      jobs.removeAll { !it.isActive }
+      return jobs.isEmpty()
+    }
   }
 
   override fun registerIdleTransitionCallback(callback: IdlingResource.ResourceCallback?) {
@@ -44,7 +46,10 @@ class IdlingDispatcher(
 
   private fun addNewJob(job: Job) {
     job.invokeOnCompletion { onJobComplete() }
-    jobs.add(job)
+
+    synchronized(jobs) {
+      jobs.add(job)
+    }
   }
 
   private fun onJobComplete() {
