@@ -27,7 +27,7 @@ dependencies {
   kapt daggerAnnotationProcessor
   implementation dagger
 
-  implementation 'com.airbnb.android:epoxy:4.6.2'
+  implementation 'com.airbnb.android:epoxy:4.6.4'
   implementation okHttp
   implementation frescoDrawee
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
@@ -36,5 +36,5 @@ dependencies {
 
   androidTestImplementation 'junit:junit:4.13.2'
   androidTestImplementation espressoCore
-  androidTestImplementation 'org.assertj:assertj-core:3.20.2'
+  androidTestImplementation 'org.assertj:assertj-core:3.21.0'
 }
