@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 object BuildDataFactory {
 
   @Suppress("UnstableApiUsage")
-  fun buildData(result: BuildResult, statistics: TaskExecutionStatistics): BuildData {
+  fun buildData(result: BuildResult, statistics: TaskExecutionStatistics, configuredTimestamp: Long): BuildData {
     val start = nowMillis()
 
     val gradle = result.gradle as DefaultGradle
@@ -24,6 +24,8 @@ object BuildDataFactory {
 
     val startTime = services[BuildStartedTime::class.java].startTime
     val totalTime = services[Clock::class.java].currentTime - startTime
+    val configurationTime = configuredTimestamp - startTime
+    val executionTime = totalTime - configurationTime
 
     val daemonInfo = services[DaemonScanInfo::class.java]
     val startParameter = gradle.startParameter
@@ -46,7 +48,9 @@ object BuildDataFactory {
         "isConfigureOnDemand" to startParameter.isConfigureOnDemand,
         "isConfigurationCache" to startParameter.isConfigurationCache,
         "isBuildCacheEnabled" to startParameter.isBuildCacheEnabled,
-        "maxWorkers" to startParameter.maxWorkerCount
+        "maxWorkers" to startParameter.maxWorkerCount,
+        "configurationTime" to configurationTime,
+        "executionTime" to executionTime
       ).apply { putAll(startParameter.systemPropertiesArgs) },
       gitInfo = GitInfoProvider.gitInfo(gradle.rootProject),
       ciInfo = ciInfo,
