@@ -189,10 +189,10 @@ project.afterEvaluate {
     }
     buildDir.mkdir()
     new File("$buildDir/play-publish-key.json").write(credentials)
-  }
 
-  // https://github.com/Triple-T/gradle-play-publisher/issues/859
-  tasks.named("publishBundle").configure {
-    it.dependsOn("uploadCrashlyticsMappingFileRelease")
+    // https://github.com/Triple-T/gradle-play-publisher/issues/859
+    tasks.named("publishBundle").configure {
+      it.dependsOn("uploadCrashlyticsMappingFileRelease")
+    }
   }
 }
