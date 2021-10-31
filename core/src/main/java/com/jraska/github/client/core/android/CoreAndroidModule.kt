@@ -12,6 +12,7 @@ import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.logging.SetupLogging
+import com.jraska.github.client.startup.AppStartupModule
 import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
 import com.jraska.github.client.time.RealTimeProvider
@@ -26,7 +27,7 @@ import dagger.multibindings.IntoSet
 import javax.inject.Provider
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [AppStartupModule::class])
 object CoreAndroidModule {
   @Provides
   @Singleton
