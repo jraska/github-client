@@ -43,7 +43,7 @@ class StartupAnalyticsReporter @Inject constructor(
 
   companion object {
     val ANALYTICS_COLD_START = AnalyticsEvent.Key("start_cold", Owner.PERFORMANCE_TEAM)
-    val ANALYTICS_AFTER_KILL_START = AnalyticsEvent.Key("start_cold_after_kill", Owner.PERFORMANCE_TEAM)
+    val ANALYTICS_AFTER_KILL_START = AnalyticsEvent.Key("start_warm_after_kill", Owner.PERFORMANCE_TEAM)
     val ANALYTICS_BACKGROUND_START = AnalyticsEvent.Key("start_background", Owner.PERFORMANCE_TEAM)
     val ANALYTICS_UNDEFINED = AnalyticsEvent.Key("start_foreground_undefined", Owner.PERFORMANCE_TEAM)
   }
