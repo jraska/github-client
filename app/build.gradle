@@ -11,6 +11,7 @@ plugins {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 if (System.getenv("CI") == "true") {
   println("Applying 'com.google.firebase.firebase-perf'")
   apply plugin: 'com.google.firebase.firebase-perf'
@@ -173,8 +174,6 @@ moduleGraphAssert {
   moduleLayersExclude = [":app -> [\\S:]*"]
   restricted = [":feature:\\S* -X> :not-wanted-module-example"]
 }
-
-apply plugin: 'com.google.gms.google-services'
 
 play {
   track = 'internal'
