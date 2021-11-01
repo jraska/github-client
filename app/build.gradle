@@ -127,7 +127,7 @@ dependencies {
 
   implementation 'com.google.android.material:material:1.4.0'
 
-  implementation platform('com.google.firebase:firebase-bom:28.4.2')
+  implementation platform('com.google.firebase:firebase-bom:29.0.0')
   implementation 'com.google.firebase:firebase-core'
   implementation 'com.google.firebase:firebase-config'
   implementation 'com.google.firebase:firebase-perf'
@@ -147,7 +147,7 @@ dependencies {
 
   implementation 'com.jakewharton.timber:timber:5.0.1'
 
-  implementation 'com.google.code.gson:gson:2.8.8'
+  implementation 'com.google.code.gson:gson:2.8.9'
 
   androidTestImplementation espressoCore
   androidTestImplementation espressoIdlingResource
