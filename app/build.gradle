@@ -147,7 +147,7 @@ dependencies {
 
   implementation 'com.jakewharton.timber:timber:5.0.1'
 
-  implementation 'com.google.code.gson:gson:2.8.8'
+  implementation 'com.google.code.gson:gson:2.8.9'
 
   androidTestImplementation espressoCore
   androidTestImplementation espressoIdlingResource

@@ -47,7 +47,7 @@ dependencies {
 
   implementation retrofit
   implementation retrofitGsonConverter
-  implementation 'com.google.code.gson:gson:2.8.8'
+  implementation 'com.google.code.gson:gson:2.8.9'
   implementation okHttpLoggingInterceptor
 
   testImplementation 'junit:junit:4.13.2'
