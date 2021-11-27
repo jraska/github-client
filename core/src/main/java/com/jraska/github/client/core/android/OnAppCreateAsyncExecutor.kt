@@ -14,8 +14,12 @@ class OnAppCreateAsyncExecutor @Inject constructor(
   private val appDispatchers: AppDispatchers
 ) : OnAppCreate {
 
-  @DelicateCoroutinesApi // this is app init
   override fun onCreate(app: Application) {
+    startInGlobalScope(app)
+  }
+
+  @DelicateCoroutinesApi // this is app init
+  private fun startInGlobalScope(app: Application) {
     GlobalScope.launch(appDispatchers.io) {
       asyncActions.map {
         async { it.execute(app) }
