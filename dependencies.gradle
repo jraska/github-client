@@ -9,11 +9,11 @@ ext {
   retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
   retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
-  daggerVersion = '2.40.1'
+  daggerVersion = '2.40.2'
   daggerAnnotationProcessor = "com.google.dagger:dagger-compiler:$daggerVersion"
   dagger = "com.google.dagger:dagger:$daggerVersion"
 
-  okHttpVersion = '4.9.2'
+  okHttpVersion = '4.9.3'
   okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
   okHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
