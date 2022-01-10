@@ -14,5 +14,5 @@ dependencies {
   implementation dagger
 
   testImplementation 'junit:junit:4.13.2'
-  testImplementation 'org.assertj:assertj-core:3.21.0'
+  testImplementation 'org.assertj:assertj-core:3.22.0'
 }

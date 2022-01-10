@@ -55,7 +55,7 @@ dependencies {
 
   testImplementation 'com.jraska.livedata:testing-ktx:1.2.0'
   testImplementation 'junit:junit:4.13.2'
-  testImplementation 'org.assertj:assertj-core:3.21.0'
+  testImplementation 'org.assertj:assertj-core:3.22.0'
   testImplementation 'androidx.arch.core:core-testing:2.1.0'
   testImplementation okHttpMockWebServer
   testImplementation project(':core-testing')
@@ -63,7 +63,7 @@ dependencies {
 
   androidTestImplementation 'junit:junit:4.13.2'
   androidTestImplementation espressoCore
-  androidTestImplementation 'org.assertj:assertj-core:3.20.2'
+  androidTestImplementation 'org.assertj:assertj-core:3.22.0'
   androidTestImplementation androidTestRunner
   androidTestImplementation androidTestRules
 
