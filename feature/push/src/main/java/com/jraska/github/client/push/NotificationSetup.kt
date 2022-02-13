@@ -19,10 +19,6 @@ internal class NotificationSetup @Inject constructor(
   }
 
   private fun setupChannels() {
-    if (Build.VERSION.SDK_INT < 26) {
-      return
-    }
-
     val name = context.getString(R.string.channel_name_push)
     val description = context.getString(R.string.channel_description_push)
     val channel = NotificationChannel(PUSH_CHANNEL_ID, name,
