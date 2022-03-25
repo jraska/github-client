@@ -13,13 +13,13 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.rule.ActivityTestRule
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.jraska.github.client.EnableConfigRule
-import com.jraska.github.client.R
 import com.jraska.github.client.android.test.http.assetJson
 import com.jraska.github.client.espressox.LongClickPatch
 import com.jraska.github.client.http.MockWebServerInterceptorRule
 import com.jraska.github.client.http.onUrlPartReturn
 import com.jraska.github.client.http.onUrlReturn
 import com.jraska.github.client.recordedEvents
+import com.jraska.github.client.users.R
 import com.jraska.github.client.users.ui.UsersActivity
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat

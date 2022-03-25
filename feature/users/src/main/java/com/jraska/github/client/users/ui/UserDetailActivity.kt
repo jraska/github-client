@@ -82,7 +82,8 @@ internal class UserDetailActivity : AppCompatActivity() {
   }
 
   private fun showLoading() {
-    findViewById<RecyclerView>(R.id.user_detail_recycler).adapter = SimpleEpoxyAdapter().apply { addModels(SimpleEpoxyModel(R.layout.item_loading)) }
+    findViewById<RecyclerView>(R.id.user_detail_recycler).adapter = SimpleEpoxyAdapter().apply { addModels(SimpleEpoxyModel(
+        com.jraska.github.client.ui.R.layout.item_loading)) }
   }
 
   private fun showError(error: Throwable) {

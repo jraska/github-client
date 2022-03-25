@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import com.jraska.github.client.repo.R as RepoR
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -54,7 +55,7 @@ class DeepLinkLaunchTest {
     onView(withText(Matchers.containsString("Language: Java")))
       .check(matches(isDisplayed()))
 
-    onView(withId(R.id.repo_detail_github_fab)).perform(click())
+    onView(withId(RepoR.id.repo_detail_github_fab)).perform(click())
     onView(withText("Open"))
       .check(matches(isDisplayed()))
   }
