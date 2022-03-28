@@ -14,7 +14,7 @@ internal class BuildTimeListener(
   private val buildReporter: BuildReporter
 ) : BuildListener {
   private val taskExecutionStatisticsEventAdapter = TaskExecutionStatisticsEventAdapter()
-  private var configuredTime: Long = 0
+  private var configuredTime: Long? = null
 
   override fun settingsEvaluated(gradle: Settings) = Unit
   override fun projectsLoaded(gradle: Gradle) = Unit
@@ -26,7 +26,13 @@ internal class BuildTimeListener(
   }
 
   override fun buildFinished(result: BuildResult) {
-    val buildData = buildDataFactory.buildData(result, taskExecutionStatisticsEventAdapter.statistics, configuredTime)
+    if (configuredTime == null) {
+      val gradle = result.gradle as DefaultGradle
+      val services = gradle.services
+
+      configuredTime = services[Clock::class.java].currentTime
+    }
+    val buildData = buildDataFactory.buildData(result, taskExecutionStatisticsEventAdapter.statistics, configuredTime!!)
 
     println("Build data collected in ${buildData.buildDataCollectionOverhead} ms")
 
