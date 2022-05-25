@@ -62,7 +62,7 @@ class UsersActivityFlowTest {
     onView(withHint("Value")).perform(ViewActions.typeText("0.01"))
     onView(withText("Purchase")).perform(click())
 
-    val event = recordedEvents().findLast { event -> event.name == FirebaseAnalytics.Event.ECOMMERCE_PURCHASE }
+    val event = recordedEvents().findLast { event -> event.name == FirebaseAnalytics.Event.PURCHASE }
     assertThat(event).isNotNull
     assertThat(event!!.properties[FirebaseAnalytics.Param.VALUE]).isEqualTo(0.01)
   }

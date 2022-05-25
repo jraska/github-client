@@ -32,6 +32,6 @@ internal class SettingsViewModel @Inject constructor(
   }
 
   companion object {
-    val ANALYTICS_ECOMMERCE_PURCHASE = AnalyticsEvent.Key("ecommerce_purchase", Owner.USERS_TEAM)
+    val ANALYTICS_ECOMMERCE_PURCHASE = AnalyticsEvent.Key("purchase", Owner.USERS_TEAM)
   }
 }
