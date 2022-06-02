@@ -1,5 +1,5 @@
 ext {
-  coroutinesVersion = "1.6.1"
+  coroutinesVersion = "1.6.2"
   coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
   coroutinesJvm = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion"
   coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
