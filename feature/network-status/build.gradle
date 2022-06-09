@@ -21,7 +21,7 @@ dependencies {
   kapt daggerAnnotationProcessor
   implementation dagger
 
-  implementation 'androidx.appcompat:appcompat:1.4.1'
+  implementation 'androidx.appcompat:appcompat:1.4.2'
   implementation 'androidx.core:core:1.8.0'
   implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
