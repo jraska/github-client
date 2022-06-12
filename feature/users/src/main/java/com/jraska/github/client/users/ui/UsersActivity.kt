@@ -31,7 +31,7 @@ class UsersActivity : AppCompatActivity(), UserModel.UserListener {
 
     showProgressIndicator()
 
-    usersViewModel.users().observe(this, { this.setState(it) })
+    usersViewModel.users().observe(this) { this.setState(it) }
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -72,6 +72,7 @@ class UsersActivity : AppCompatActivity(), UserModel.UserListener {
     when (state) {
       is UsersViewModel.ViewState.Error -> showError(state.error)
       is UsersViewModel.ViewState.ShowUsers -> setUsers(state.users)
+      else -> return
     }
   }
 
