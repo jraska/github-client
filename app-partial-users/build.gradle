@@ -43,7 +43,7 @@ dependencies {
   implementation 'androidx.cardview:cardview:1.0.0'
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
   implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
-  implementation 'androidx.lifecycle:lifecycle-runtime:2.4.1'
+  implementation 'androidx.lifecycle:lifecycle-runtime:2.5.0'
   implementation 'androidx.media:media:1.6.0'
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
   implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
