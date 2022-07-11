@@ -24,5 +24,5 @@ dependencies {
   implementation 'androidx.fragment:fragment:1.5.0'
 
   implementation okHttp
-  implementation 'com.squareup.okio:okio:3.1.0'
+  implementation 'com.squareup.okio:okio:3.2.0'
 }
