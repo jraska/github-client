@@ -51,7 +51,7 @@ dependencies {
   implementation fresco
   implementation 'org.threeten:threetenbp:1.5.1:no-tzdb'
 
-  implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
 
   testImplementation 'com.jraska.livedata:testing-ktx:1.2.0'
   testImplementation 'junit:junit:4.13.2'
