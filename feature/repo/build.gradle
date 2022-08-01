@@ -30,7 +30,7 @@ dependencies {
   implementation coroutinesAndroid
   implementation coroutinesCore
   implementation coroutinesJvm
-  implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
   implementation retrofit
   implementation retrofitGsonConverter
