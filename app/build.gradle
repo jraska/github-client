@@ -20,12 +20,12 @@ if (System.getenv("CI") == "true") {
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-  compileSdkVersion 31
+  compileSdkVersion 32
 
   defaultConfig {
     applicationId "com.jraska.github.client"
     minSdkVersion 26
-    targetSdkVersion 31
+    targetSdkVersion 32
     versionName '0.40.3'
     versionCode 150
     multiDexEnabled true

@@ -33,6 +33,7 @@ buildCache {
     allowUntrustedServer = true
     allowInsecureProtocol = true
     push = (System.getenv("CI") == "true")
+    enabled = (System.getenv("CI") == "true") // the pulls on different networks are so problematic and project so small that we keep CI only
   }
 
   local {
