@@ -12,7 +12,6 @@ import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.logging.SetupLogging
-import com.jraska.github.client.startup.AppStartupModule
 import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
 import com.jraska.github.client.time.RealTimeProvider
@@ -27,7 +26,7 @@ import dagger.multibindings.IntoSet
 import javax.inject.Provider
 import javax.inject.Singleton
 
-@Module(includes = [AppStartupModule::class])
+@Module
 object CoreAndroidModule {
   @Provides
   @Singleton
@@ -63,7 +62,8 @@ object CoreAndroidModule {
   }
 
   @Provides
-  internal fun topActivityProvider(implementation: TopActivityProviderImpl): TopActivityProvider = implementation
+  internal fun topActivityProvider(implementation: TopActivityProviderImpl): TopActivityProvider =
+    implementation
 
   @Provides
   @IntoSet
@@ -85,7 +85,8 @@ object CoreAndroidModule {
 
   @Provides
   @Singleton
-  internal fun deepLinkHandler(implementation: DeepLinkHandlerImpl): DeepLinkHandler = implementation
+  internal fun deepLinkHandler(implementation: DeepLinkHandlerImpl): DeepLinkHandler =
+    implementation
 
   @Provides
   @IntoSet

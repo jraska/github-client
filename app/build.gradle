@@ -102,6 +102,7 @@ dependencies {
   implementation project(':feature:identity')
   implementation project(':feature:identity-api')
   implementation project(':feature:network-status')
+  implementation project(':feature:performance')
   implementation project(':feature:push')
   implementation project(':feature:users')
   implementation project(':feature:repo')

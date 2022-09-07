@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion 32
+  defaultConfig {
+    minSdkVersion 26
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
+  }
+
+  testOptions {
+    unitTests.returnDefaultValues = true
+  }
+}
+
+dependencies {
+  implementation project(':core-api')
+  implementation project(':core-android-api')
+
+  kapt daggerAnnotationProcessor
+  implementation dagger
+
+  implementation 'com.jakewharton.timber:timber:5.0.1'
+
+  testImplementation 'junit:junit:4.13.2'
+  testImplementation 'org.assertj:assertj-core:3.23.1'
+}

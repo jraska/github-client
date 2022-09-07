@@ -1,13 +1,15 @@
-package com.jraska.github.client.startup
+package com.jraska.github.client.performance
 
 import com.jraska.github.client.core.android.OnAppCreate
+import com.jraska.github.client.performance.startup.StartupAnalyticsReporter
+import com.jraska.github.client.performance.startup.StartupTimeMetric
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoSet
 import javax.inject.Singleton
 
 @Module
-object AppStartupModule {
+object PerformanceModule {
   @Provides
   @IntoSet
   internal fun registerStartupCallbacks(create: StartupTimeMetric.RegisterStartupCallbacks): OnAppCreate = create

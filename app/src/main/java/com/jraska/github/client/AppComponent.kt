@@ -10,6 +10,7 @@ import com.jraska.github.client.http.HttpModule
 import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.inappupdate.InAppUpdateModule
 import com.jraska.github.client.networkstatus.NetworkStatusModule
+import com.jraska.github.client.performance.PerformanceModule
 import com.jraska.github.client.push.PushModule
 import com.jraska.github.client.repo.RepoModule
 import com.jraska.github.client.settings.SettingsModule
@@ -40,6 +41,7 @@ interface AppComponent : AppBaseComponent {
     IdentityModule::class,
     NetworkStatusModule::class,
     InAppUpdateModule::class,
+    PerformanceModule::class,
     UsersModule::class,
     RepoModule::class,
     PushModule::class,

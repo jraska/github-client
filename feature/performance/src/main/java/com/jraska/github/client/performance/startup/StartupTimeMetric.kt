@@ -1,4 +1,4 @@
-package com.jraska.github.client.startup
+package com.jraska.github.client.performance.startup
 
 import android.app.Activity
 import android.app.ActivityManager
