@@ -1,6 +1,7 @@
 package com.jraska.github.client.performance
 
 import com.jraska.github.client.core.android.OnAppCreate
+import com.jraska.github.client.performance.jank.JankMetric
 import com.jraska.github.client.performance.startup.StartupAnalyticsReporter
 import com.jraska.github.client.performance.startup.StartupTimeMetric
 import dagger.Module
@@ -19,4 +20,8 @@ object PerformanceModule {
   internal fun startupTimeMetric(reporter: StartupAnalyticsReporter): StartupTimeMetric {
     return StartupTimeMetric(reporter)
   }
+
+  @Provides
+  @IntoSet
+  internal fun startupJank(create: JankMetric.StartupOnCreate): OnAppCreate = create
 }
