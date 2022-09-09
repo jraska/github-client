@@ -9,7 +9,7 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 
 @Module
-abstract class AboutModule {
+abstract class AboutBreakingMasterModule {
 
   @Binds
   @IntoMap
