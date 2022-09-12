@@ -26,7 +26,7 @@ dependencies {
   implementation project(':core-api')
   implementation project(':core-android-api')
 
-  implementation 'androidx.appcompat:appcompat:1.5.0'
+  implementation 'androidx.appcompat:appcompat:1.5.1'
   implementation 'androidx.core:core:1.8.0'
   implementation 'androidx.annotation:annotation:1.4.0'
   implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
@@ -42,7 +42,7 @@ dependencies {
 
   implementation 'com.jakewharton.timber:timber:5.0.1'
   implementation 'com.google.android.material:material:1.6.1'
-  implementation 'androidx.appcompat:appcompat:1.5.0'
+  implementation 'androidx.appcompat:appcompat:1.5.1'
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
   implementation retrofit
