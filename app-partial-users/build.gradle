@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion 32
+  compileSdkVersion 33
 
   defaultConfig {
     applicationId "com.jraska.github.client.users"
     minSdkVersion 26
-    targetSdkVersion 32
+    targetSdkVersion 33
     versionName '0.1.0'
     versionCode 1
 
