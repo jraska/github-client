@@ -117,7 +117,7 @@ dependencies {
   implementation 'androidx.appcompat:appcompat:1.5.1'
   implementation 'androidx.browser:browser:1.4.0'
   implementation 'androidx.cardview:cardview:1.0.0'
-  implementation 'androidx.core:core:1.8.0'
+  implementation 'androidx.core:core:1.9.0'
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
   implementation 'androidx.lifecycle:lifecycle-runtime:2.5.1'
   implementation 'androidx.media:media:1.6.0'
