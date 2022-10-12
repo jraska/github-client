@@ -6,6 +6,7 @@ import com.jraska.github.client.chrome.ChromeCustomTabsModule
 import com.jraska.github.client.config.debug.ConfigDebugModule
 import com.jraska.github.client.core.android.AppBaseComponent
 import com.jraska.github.client.core.android.CoreAndroidModule
+import com.jraska.github.client.core.android.firebase.FirebaseCoreModule
 import com.jraska.github.client.http.HttpModule
 import com.jraska.github.client.identity.IdentityModule
 import com.jraska.github.client.inappupdate.InAppUpdateModule

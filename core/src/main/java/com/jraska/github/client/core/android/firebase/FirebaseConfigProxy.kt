@@ -1,18 +1,20 @@
-package com.jraska.github.client
+package com.jraska.github.client.core.android.firebase
 
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.jraska.github.client.Config
+import com.jraska.github.client.core.R
 import timber.log.Timber
-import java.util.Date
+import java.util.*
 
 internal class FirebaseConfigProxy(private val config: FirebaseRemoteConfig) : Config {
   private val onFetchCompleteListener: OnCompleteListener<Void> = OnCompleteListener {
     config.activate()
-    Timber.d(
-      "Config fetch complete. last fetch: %s",
-      Date(config.info.fetchTimeMillis)
-    )
+      Timber.d(
+          "Config fetch complete. last fetch: %s",
+          Date(config.info.fetchTimeMillis)
+      )
     configsToCrashlytics()
   }
 

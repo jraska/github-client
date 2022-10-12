@@ -1,4 +1,4 @@
-package com.jraska.github.client.logging
+package com.jraska.github.client.core.android.firebase
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 

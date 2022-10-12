@@ -1,12 +1,13 @@
-package com.jraska.github.client
+package com.jraska.github.client.core.android.firebase
 
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.jraska.github.client.Config
+import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.logging.CrashReporter
-import com.jraska.github.client.logging.FirebaseCrashlyticsReporter
 import dagger.Module
 import dagger.Provides
 import timber.log.Timber
@@ -18,25 +19,28 @@ object FirebaseCoreModule {
   private val ANALYTICS_DISABLED_KEY = Config.Key("analytics_disabled", Owner.CORE_TEAM)
 
   @Provides
-  @Singleton internal fun firebaseAnalytics(config: Config): FirebaseEventAnalytics {
+  @Singleton
+  internal fun firebaseAnalytics(config: Config): FirebaseEventAnalytics {
     val firebaseAnalytics = FirebaseAnalytics.getInstance(FirebaseApp.getInstance().applicationContext)
 
     if (config.getBoolean(ANALYTICS_DISABLED_KEY)) {
       firebaseAnalytics.setAnalyticsCollectionEnabled(false)
-      Timber.d("Analytics disabled")
+        Timber.d("Analytics disabled")
     } else {
       firebaseAnalytics.setAnalyticsCollectionEnabled(true)
-      Timber.d("Analytics enabled")
+        Timber.d("Analytics enabled")
     }
 
     return FirebaseEventAnalytics(firebaseAnalytics)
   }
 
-  @Provides internal fun eventAnalytics(analytics: FirebaseEventAnalytics): EventAnalytics {
+  @Provides
+  internal fun eventAnalytics(analytics: FirebaseEventAnalytics): EventAnalytics {
     return analytics
   }
 
-  @Provides internal fun analyticsProperty(analytics: FirebaseEventAnalytics): AnalyticsProperty {
+  @Provides
+  internal fun analyticsProperty(analytics: FirebaseEventAnalytics): AnalyticsProperty {
     return analytics
   }
 

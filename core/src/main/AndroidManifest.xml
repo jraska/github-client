@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.jraska.github.client.core">
 
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
+
   <application>
     <activity android:name=".android.UriHandlerActivity"
       android:exported="true">
@@ -16,5 +19,6 @@
           android:scheme="https"/>
       </intent-filter>
     </activity>
+
   </application>
 </manifest>

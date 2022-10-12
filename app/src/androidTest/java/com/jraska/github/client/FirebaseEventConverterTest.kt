@@ -1,6 +1,7 @@
 package com.jraska.github.client
 
 import com.jraska.github.client.analytics.AnalyticsEvent
+import com.jraska.github.client.core.android.firebase.FirebaseEventConverter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

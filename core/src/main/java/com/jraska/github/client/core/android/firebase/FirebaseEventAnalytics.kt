@@ -1,11 +1,12 @@
-package com.jraska.github.client
+package com.jraska.github.client.core.android.firebase
 
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.AnalyticsProperty
 import com.jraska.github.client.analytics.EventAnalytics
 
-internal class FirebaseEventAnalytics(private val analytics: FirebaseAnalytics) : EventAnalytics, AnalyticsProperty {
+internal class FirebaseEventAnalytics(private val analytics: FirebaseAnalytics) : EventAnalytics,
+    AnalyticsProperty {
 
   override fun setUserProperty(key: String, value: String) {
     analytics.setUserProperty(key, value)
