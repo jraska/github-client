@@ -55,7 +55,7 @@ dependencies {
 
   implementation fresco
 
-  implementation 'com.airbnb.android:epoxy:5.0.0'
+  implementation 'com.airbnb.android:epoxy:5.1.0'
 
   kapt daggerAnnotationProcessor
   implementation dagger
