@@ -46,7 +46,7 @@ dependencies {
 
   implementation retrofit
   implementation retrofitGsonConverter
-  implementation 'com.google.code.gson:gson:2.9.1'
+  implementation 'com.google.code.gson:gson:2.10'
   implementation okHttpLoggingInterceptor
 
   implementation platform('com.google.firebase:firebase-bom:31.0.2')
