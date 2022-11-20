@@ -1,7 +1,6 @@
 package com.jraska.github.client.analytics
 
 import com.jraska.github.client.Owner
-import java.util.Collections
 
 class AnalyticsEvent private constructor(
   val key: Key,
@@ -41,7 +40,7 @@ class AnalyticsEvent private constructor(
     }
 
     fun build(): AnalyticsEvent {
-      return AnalyticsEvent(key, Collections.unmodifiableMap(properties))
+      return AnalyticsEvent(key, properties)
     }
   }
 

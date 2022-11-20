@@ -1,7 +1,5 @@
 package com.jraska.github.client.push
 
-import java.util.Collections
-
 class PushAction private constructor(val name: String, val parameters: Map<String, String>) {
   companion object {
     const val KEY_ACTION = "action"
@@ -11,7 +9,7 @@ class PushAction private constructor(val name: String, val parameters: Map<Strin
 
     @JvmOverloads
     fun create(name: String, properties: Map<String, String> = emptyMap()): PushAction {
-      return PushAction(name, Collections.unmodifiableMap(properties))
+      return PushAction(name, properties)
     }
   }
 }

@@ -7,7 +7,6 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
-import java.util.Collections
 
 internal class GitHubApiUsersRepository(
   private val gitHubUsersApi: GitHubUsersApi,
@@ -20,7 +19,7 @@ internal class GitHubApiUsersRepository(
 
   override suspend fun getUsers(since: Int): List<User> {
     val userDtos = gitHubUsersApi.getUsers(since).result()
-    return translateUsers(userDtos).also { lastUsers = it }
+    return convertUsers(userDtos).also { lastUsers = it }
   }
 
   override fun getUserDetail(login: String, reposInSection: Int): Flow<UserDetail> {
@@ -48,10 +47,8 @@ internal class GitHubApiUsersRepository(
       ?.let { UserDetail(it, null, emptyList(), emptyList()) }
   }
 
-  private fun translateUsers(gitHubUsers: List<GitHubUser>): List<User> {
-    val users = gitHubUsers.map { convert(it) }
-
-    return Collections.unmodifiableList(users)
+  private fun convertUsers(gitHubUsers: List<GitHubUser>): List<User> {
+    return gitHubUsers.map { convert(it) }
   }
 
   private fun convert(gitHubUser: GitHubUser): User {

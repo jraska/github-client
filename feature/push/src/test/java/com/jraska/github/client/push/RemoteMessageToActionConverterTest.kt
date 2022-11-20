@@ -2,13 +2,12 @@ package com.jraska.github.client.push
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import java.util.Collections
 
 class RemoteMessageToActionConverterTest {
   @Test
   fun whenRemoteMessageWithoutActionThenDefaultReturned() {
     val action =
-      RemoteMessageToActionConverter.convert(Collections.emptyMap<String, String>())
+      RemoteMessageToActionConverter.convert(emptyMap())
 
     assertThat(action.name).isEqualTo(PushAction.DEFAULT.name)
   }
