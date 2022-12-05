@@ -3,7 +3,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.21"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.22"
   }
 }
 
@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
   implementation gradleApi()
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.21"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.22"
   implementation 'com.mixpanel:mixpanel-java:1.5.1'
 
   implementation retrofit
