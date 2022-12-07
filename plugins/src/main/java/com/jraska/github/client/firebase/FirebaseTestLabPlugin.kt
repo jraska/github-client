@@ -38,10 +38,9 @@ class FirebaseTestLabPlugin : Plugin<Project> {
         firebaseTask.doLast {
           val firebaseUrl = FirebaseUrlParser.parse(decorativeStream.toString())
 
-          val firstResult =
-            testSuiteResult(project, testConfiguration.firstDevice, testConfiguration.resultDir)
-          val secondResult =
-            testSuiteResult(project, testConfiguration.secondDevice, testConfiguration.resultDir)
+          val testSuiteResults = testConfiguration.devices.map {
+            testSuiteResult(project, it, testConfiguration.resultDir)
+          }
 
           val reporter = TestResultsReporter(
             AnalyticsReporter.create("Test Reporter"),
@@ -50,8 +49,10 @@ class FirebaseTestLabPlugin : Plugin<Project> {
             CiInfo.collectGitHubActions()
           )
 
-          reporter.report(firstResult)
-          reporter.report(secondResult)
+          testSuiteResults.forEach {
+            reporter.report(it)
+          }
+
           firebaseTask.executionResult.get().assertNormalExitValue()
         }
 

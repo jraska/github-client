@@ -9,8 +9,7 @@ class GCloudCommandsTest {
     val testConfiguration = TestConfiguration(
       "/hey/hou/app.apk",
       "hey/hou/test-app.apk",
-      Device.Pixel6a,
-      Device.Pixel7Pro,
+      listOf(Device.Pixel6a, Device.Pixel7Pro),
       "result-path-123.456"
     )
 

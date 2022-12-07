@@ -7,19 +7,17 @@ import java.time.format.DateTimeFormatter
 class TestConfiguration(
   val appApkPath: String,
   val testApkPath: String,
-  val firstDevice: Device,
-  val secondDevice: Device,
+  val devices: List<Device>,
   val resultDir: String
 ) {
   companion object {
     fun create(project: Project): TestConfiguration {
       val appApk = "${project.buildDir}/outputs/apk/debug/app-debug.apk"
       val testApk = "${project.buildDir}/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
-      val firstDevice = Device.Pixel7Pro
-      val secondDevice = Device.Pixel6a
+
       val resultDir = DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())
 
-      return TestConfiguration(appApk, testApk, firstDevice, secondDevice, resultDir)
+      return TestConfiguration(appApk, testApk, listOf(Device.Pixel7Pro, Device.Pixel6a), resultDir)
     }
   }
 }
