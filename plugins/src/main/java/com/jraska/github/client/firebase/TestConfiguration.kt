@@ -18,7 +18,7 @@ class TestConfiguration(
       val testApk = "${project.buildDir}/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
 
       val resultDir = DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())
-      val devices = listOf(Device.Pixel7Pro)
+      val devices = listOf(Pixel7Pro, Pixel6a, Device.Pixel2)
 
       return TestConfiguration(appApk, testApk, devices, resultDir)
     }
