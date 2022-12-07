@@ -27,20 +27,8 @@ class FirebaseTestLabPlugin : Plugin<Project> {
 
         val testConfiguration = TestConfiguration.create(project)
 
-        val fcmKey = System.getenv("FCM_API_KEY")
-
-        firebaseTask.commandLine =
-          ("gcloud " +
-            "firebase test android run " +
-            "--app ${testConfiguration.appApkPath} " +
-            "--test ${testConfiguration.testApkPath} " +
-            "--device ${testConfiguration.firstDevice.firebaseCommandString()} " +
-            "--device ${testConfiguration.secondDevice.firebaseCommandString()} " +
-            "--results-dir ${testConfiguration.resultDir} " +
-            "--no-performance-metrics " +
-            "--timeout 3m " +
-            "--environment-variables FCM_API_KEY=$fcmKey")
-            .split(' ')
+        val envVars = mapOf("FCM_API_KEY" to System.getenv("FCM_API_KEY"))
+        firebaseTask.commandLine = GCloudCommands.firebaseRunCommand(testConfiguration, envVars)
         firebaseTask.isIgnoreExitValue = true
 
         val decorativeStream = ByteArrayOutputStream()
