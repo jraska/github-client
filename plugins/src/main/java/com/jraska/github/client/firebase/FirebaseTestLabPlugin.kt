@@ -40,6 +40,8 @@ class FirebaseTestLabPlugin : Plugin<Project> {
           val firebaseOutput = decorativeStream.toString()
           val firebaseUrl = FirebaseOutputParser.parseUrl(firebaseOutput)
 
+          println("Recorded output is $firebaseOutput")
+
           val deviceResults =
             FirebaseOutputParser.deviceResults(testConfiguration.devices, firebaseOutput)
 
