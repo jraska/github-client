@@ -35,18 +35,10 @@ class FirebaseTestLabPlugin : Plugin<Project> {
         firebaseTask.errorOutput = TeeOutputStream(decorativeStream, System.err)
 
         firebaseTask.doLast {
-          val firstOutputFile = "${project.buildDir}/test-results/${testConfiguration.firstDevice.cloudStoragePath()}/firebase-tests-results.xml"
-          val firstResultsFileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/${testConfiguration.resultDir}/${testConfiguration.firstDevice.cloudStoragePath()}/test_result_1.xml"
-          project.exec("gsutil cp $firstResultsFileToPull $firstOutputFile")
-
           val firebaseUrl = FirebaseUrlParser.parse(decorativeStream.toString())
-          val firstResult = FirebaseResultExtractor(firebaseUrl, GitInfoProvider.gitInfo(project), CiInfo.collectGitHubActions(), testConfiguration.firstDevice).extract(File(firstOutputFile).readText())
 
-          val secondOutputFile = "${project.buildDir}/test-results/${testConfiguration.secondDevice.cloudStoragePath()}/firebase-tests-results.xml"
-          val secondResultsFileToPull = "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/${testConfiguration.resultDir}/${testConfiguration.secondDevice.cloudStoragePath()}/test_result_1.xml"
-          project.exec("gsutil cp $secondResultsFileToPull $secondOutputFile")
-
-          val secondResult = FirebaseResultExtractor(firebaseUrl, GitInfoProvider.gitInfo(project), CiInfo.collectGitHubActions(), testConfiguration.secondDevice).extract(File(secondOutputFile).readText())
+          val firstResult = testSuiteResult(project, testConfiguration.firstDevice, firebaseUrl, testConfiguration.resultDir)
+          val secondResult = testSuiteResult(project, testConfiguration.secondDevice, firebaseUrl, testConfiguration.resultDir)
 
           val reporter = TestResultsReporter(AnalyticsReporter.create("Test Reporter"))
 
@@ -59,6 +51,26 @@ class FirebaseTestLabPlugin : Plugin<Project> {
         firebaseTask.dependsOn(project.tasks.named("assembleDebug"))
       }
     }
+  }
+
+  private fun testSuiteResult(
+    project: Project,
+    device: Device,
+    firebaseUrl: String,
+    resultDir: String
+  ): TestSuiteResult {
+    val firstOutputFile =
+      "${project.buildDir}/test-results/${device.cloudStoragePath()}/firebase-tests-results.xml"
+    val firstResultsFileToPull =
+      "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/${device.cloudStoragePath()}/test_result_1.xml"
+    project.exec("gsutil cp $firstResultsFileToPull $firstOutputFile")
+
+    return FirebaseResultExtractor(
+      firebaseUrl,
+      GitInfoProvider.gitInfo(project),
+      CiInfo.collectGitHubActions(),
+      device,
+    ).extract(File(firstOutputFile).readText())
   }
 
   private fun Project.exec(command: String): ExecResult {
