@@ -40,16 +40,10 @@ class FirebaseTestLabPlugin : Plugin<Project> {
         firebaseTask.standardOutput = TeeOutputStream(decorativeStdStream, System.out)
 
         firebaseTask.doLast {
-          val firebaseErrorOutput = decorativeErrorStream.toString()
-          val firebaseUrl = FirebaseOutputParser.parseUrl(firebaseErrorOutput)
-
-          println("Recorded error output is $firebaseErrorOutput")
-
-          val firebaseStdOutput = decorativeStdStream.toString()
-          println("Recorded standard output is $firebaseStdOutput")
+          val firebaseUrl = FirebaseOutputParser.parseUrl(decorativeErrorStream.toString())
 
           val deviceResults =
-            FirebaseOutputParser.deviceResults(testConfiguration.devices, firebaseStdOutput)
+            FirebaseOutputParser.deviceResults(testConfiguration.devices, decorativeStdStream.toString())
 
           val testSuiteResults = deviceResults.map {
             testSuiteResult(project, it, testConfiguration.resultDir)
