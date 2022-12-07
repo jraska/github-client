@@ -1,8 +1,9 @@
 package com.jraska.github.client.firebase
 
 import com.jraska.analytics.AnalyticsReporter
+import com.jraska.github.client.firebase.report.DeviceRunOutcome
+import com.jraska.github.client.firebase.report.FirebaseOutputParser
 import com.jraska.github.client.firebase.report.FirebaseResultExtractor
-import com.jraska.github.client.firebase.report.FirebaseUrlParser
 import com.jraska.github.client.firebase.report.TestResultsReporter
 import com.jraska.gradle.CiInfo
 import com.jraska.gradle.git.GitInfoProvider
@@ -36,9 +37,13 @@ class FirebaseTestLabPlugin : Plugin<Project> {
         firebaseTask.errorOutput = TeeOutputStream(decorativeStream, System.err)
 
         firebaseTask.doLast {
-          val firebaseUrl = FirebaseUrlParser.parse(decorativeStream.toString())
+          val firebaseOutput = decorativeStream.toString()
+          val firebaseUrl = FirebaseOutputParser.parseUrl(firebaseOutput)
 
-          val testSuiteResults = testConfiguration.devices.map {
+          val deviceResults =
+            FirebaseOutputParser.deviceResults(testConfiguration.devices, firebaseOutput)
+
+          val testSuiteResults = deviceResults.map {
             testSuiteResult(project, it, testConfiguration.resultDir)
           }
 
@@ -64,13 +69,20 @@ class FirebaseTestLabPlugin : Plugin<Project> {
 
   private fun testSuiteResult(
     project: Project,
-    device: Device,
+    deviceOutcome: DeviceRunOutcome,
     resultDir: String
   ): TestSuiteResult {
+    val device = deviceOutcome.device
+
     val outputFile =
       "${project.buildDir}/test-results/${device.cloudStoragePath()}/firebase-tests-results.xml"
-    val resultsFileToPull =
+
+    val resultsFileToPull = if (deviceOutcome.outcome == TestOutcome.FLAKY) {
+      "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/${device.cloudStoragePath()}-test_results_merged.xml"
+    } else {
       "gs://test-lab-twsawhz0hy5am-h35y3vymzadax/$resultDir/${device.cloudStoragePath()}/test_result_1.xml"
+    }
+
     project.exec("gsutil cp $resultsFileToPull $outputFile")
 
     return FirebaseResultExtractor(device).extract(File(outputFile).readText())
@@ -90,4 +102,6 @@ class FirebaseTestLabPlugin : Plugin<Project> {
     }
     return credentialsPath
   }
+
+  // ./gsutil cp gs://test-lab-twsawhz0hy5am-h35y3vymzadax/2022-12-07T09:08:49.257735/cheetah-33-en-portrait/test_result_1.xml file.xml
 }

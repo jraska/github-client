@@ -1,21 +1,54 @@
 package com.jraska.github.client.firebase.report
 
+import com.jraska.github.client.firebase.Device
+import com.jraska.github.client.firebase.TestOutcome
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class FirebaseUrlParserTest {
+class FirebaseOutputParserTest {
   @Test
   fun findsUrlProperly() {
-    val url = FirebaseUrlParser.parse(EXAMPLE_OUTPUT)
+    val url = FirebaseOutputParser.parseUrl(EXAMPLE_OUTPUT)
 
     assertThat(url).isEqualTo("https://console.firebase.google.com/project/github-client-25b47/testlab/histories/bh.45e06288a93d3fad/matrices/4937539158600939569")
   }
 
   @Test
   fun findsNewUrlProperly() {
-    val url = FirebaseUrlParser.parse(EXAMPLE_OUTPUT_2)
+    val url = FirebaseOutputParser.parseUrl(EXAMPLE_OUTPUT_2)
 
     assertThat(url).isEqualTo("https://console.firebase.google.com/project/github-client-25b47/testlab/histories/bh.45e06288a93d3fad/matrices/4992084868422917621")
+  }
+
+  @Test
+  fun parsesFailedResultProperly() {
+    val deviceResults = FirebaseOutputParser.deviceResults(listOf(Device.Pixel6a), EXAMPLE_OUTPUT)
+
+    assertThat(deviceResults).hasSize(1)
+    assertThat(deviceResults[0].outcome).isEqualTo(TestOutcome.FAILED)
+  }
+
+  @Test
+  fun parsesSuccessResultProperly() {
+    val deviceResults =
+      FirebaseOutputParser.deviceResults(listOf(Device.Pixel6a, Device.Pixel7), EXAMPLE_OUTPUT_2)
+
+    assertThat(deviceResults).hasSize(2)
+    assertThat(deviceResults[0].outcome).isEqualTo(TestOutcome.PASSED)
+    assertThat(deviceResults[1].outcome).isEqualTo(TestOutcome.PASSED)
+  }
+
+  @Test
+  fun parsesFlakyResultProperly() {
+    val deviceResults = FirebaseOutputParser.deviceResults(
+      listOf(Device.Pixel6a, Device.Pixel2, Device.Pixel7),
+      FLAKY_OUTPUT
+    )
+
+    assertThat(deviceResults).hasSize(3)
+    assertThat(deviceResults[0].outcome).isEqualTo(TestOutcome.FAILED)
+    assertThat(deviceResults[1].outcome).isEqualTo(TestOutcome.FLAKY)
+    assertThat(deviceResults[2].outcome).isEqualTo(TestOutcome.PASSED)
   }
 
   companion object {
@@ -61,11 +94,11 @@ class FirebaseUrlParserTest {
       Instrumentation testing complete.
 
       More details are available at [https://console.firebase.google.com/project/github-client-25b47/testlab/histories/bh.45e06288a93d3fad/matrices/4937539158600939569].
-      ┌─────────┬──────────────────────┬────────────────────────────────┐
-      │ OUTCOME │   TEST_AXIS_VALUE    │          TEST_DETAILS          │
-      ├─────────┼──────────────────────┼────────────────────────────────┤
-      │ Failed  │ flame-29-en-portrait │ 1 test cases failed, 13 passed │
-      └─────────┴──────────────────────┴────────────────────────────────┘
+      ┌─────────┬────────────────────────┬────────────────────────────────┐
+      │ OUTCOME │   TEST_AXIS_VALUE      │          TEST_DETAILS          │
+      ├─────────┼────────────────────────┼────────────────────────────────┤
+      │ Failed  │ bluejay-32-en-portrait │ 1 test cases failed, 13 passed │
+      └─────────┴────────────────────────┴────────────────────────────────┘
     """.trimIndent()
 
     val EXAMPLE_OUTPUT_2 = """
@@ -98,8 +131,35 @@ class FirebaseUrlParserTest {
       │ OUTCOME │    TEST_AXIS_VALUE     │     TEST_DETAILS     │
       ├─────────┼────────────────────────┼──────────────────────┤
       │ Passed  │ bluejay-32-en-portrait │ 16 test cases passed │
-      │ Passed  │ cheetah-33-en-portrait │ 16 test cases passed │
+      │ Passed  │ panther-33-en-portrait │ 16 test cases passed │
       └─────────┴────────────────────────┴──────────────────────┘
     """.trimIndent()
   }
+
+  val FLAKY_OUTPUT = """
+    Test results will be streamed to [ https://console.firebase.google.com/project/github-client-25b47/testlab/histories/bh.45e06288a93d3fad/matrices/7826067465486884652 ].
+
+    17:54:09 Test matrix status: Pending:1 
+    17:54:22 Test matrix status: Running:1 
+    17:54:34 Test matrix status: Running:1 
+    17:54:46 Test matrix status: Running:1 
+    17:54:58 Test matrix status: Running:1 
+    17:55:10 Test matrix status: Finished:1 Pending:1 
+    17:55:22 Test matrix status: Finished:1 Pending:1 
+    17:55:34 Test matrix status: Finished:1 Running:1 
+    17:55:47 Test matrix status: Finished:1 Running:1 
+    17:55:59 Test matrix status: Finished:1 Running:1 
+    17:56:11 Test matrix status: Finished:1 Running:1 
+    17:56:23 Test matrix status: Finished:2           
+    Instrumentation testing complete.
+
+    More details are available at [ https://console.firebase.google.com/project/github-client-25b47/testlab/histories/bh.45e06288a93d3fad/matrices/7826067465486884652 ].
+    ┌─────────┬────────────────────────┬───────────────────────────────┐
+    │ OUTCOME │    TEST_AXIS_VALUE     │          TEST_DETAILS         │
+    ├─────────┼────────────────────────┼───────────────────────────────┤
+    │ Failed  │ bluejay-32-en-portrait │ 16 test cases passed          │ 
+    │ Flaky   │ walleye-27-en-portrait │ 1 test cases flaky, 15 passed │
+    | Passed  │ panther-33-en-portrait │ 16 test cases passed          │
+    └─────────┴────────────────────────┴───────────────────────────────┘
+  """.trimIndent()
 }
