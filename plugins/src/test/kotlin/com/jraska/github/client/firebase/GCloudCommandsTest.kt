@@ -9,7 +9,7 @@ class GCloudCommandsTest {
     val testConfiguration = TestConfiguration(
       "/hey/hou/app.apk",
       "hey/hou/test-app.apk",
-      listOf(Device.Pixel6a, Device.Pixel7Pro),
+      listOf(Device.Pixel6a, Device.Pixel7),
       "result-path-123.456"
     )
 
@@ -25,7 +25,7 @@ class GCloudCommandsTest {
         "--app /hey/hou/app.apk " +
         "--test hey/hou/test-app.apk " +
         "--device model=bluejay,version=32,locale=en,orientation=portrait " +
-        "--device model=cheetah,version=33,locale=en,orientation=portrait " +
+        "--device model=panther,version=33,locale=en,orientation=portrait " +
         "--results-dir result-path-123.456 --no-performance-metrics --num-flaky-test-attempts=1 --timeout 3m " +
         "--environment-variables FCM_API_KEY=35327abc123"
   }
