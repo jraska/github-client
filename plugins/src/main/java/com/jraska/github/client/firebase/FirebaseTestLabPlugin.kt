@@ -28,7 +28,7 @@ class FirebaseTestLabPlugin : Plugin<Project> {
         val testConfiguration = TestConfiguration.create(project)
 
         val envVars = mapOf("FCM_API_KEY" to System.getenv("FCM_API_KEY"))
-        firebaseTask.commandLine = GCloudCommands.firebaseRunCommand(testConfiguration, envVars)
+        firebaseTask.commandLine = GCloudCommands.firebaseRunCommand(testConfiguration, envVars).split(' ')
         firebaseTask.isIgnoreExitValue = true
 
         val decorativeStream = ByteArrayOutputStream()

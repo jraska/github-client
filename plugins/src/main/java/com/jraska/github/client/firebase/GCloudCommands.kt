@@ -4,7 +4,7 @@ object GCloudCommands {
   fun firebaseRunCommand(
     testConfiguration: TestConfiguration,
     envVars: Map<String, String>
-  ): List<String> {
+  ): String {
     if(envVars.isEmpty()) {
       throw IllegalArgumentException("Version without env vars not supported for simplicity now")
     }
@@ -21,6 +21,5 @@ object GCloudCommands {
       "--no-performance-metrics " +
       "--timeout 3m " +
       "--environment-variables $envVarsString")
-      .split(' ')
   }
 }
