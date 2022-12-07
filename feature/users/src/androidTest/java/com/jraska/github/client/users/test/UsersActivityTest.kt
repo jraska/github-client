@@ -39,9 +39,6 @@ class UsersActivityTest {
       onView(withText("mojombo")).perform(click())
       val nextScreen = it.linksLaunched.last()
 
-      if (Random.nextDouble() < 0.3) {
-        assertThat(nextScreen.toString()).isEqualTo("https://github.com/mojmbo")
-      }
       assertThat(nextScreen.toString()).isEqualTo("https://github.com/mojombo")
     }
   }
