@@ -33,17 +33,23 @@ class FirebaseTestLabPlugin : Plugin<Project> {
           GCloudCommands.firebaseRunCommand(testConfiguration, envVars).split(' ')
         firebaseTask.isIgnoreExitValue = true
 
-        val decorativeStream = ByteArrayOutputStream()
-        firebaseTask.errorOutput = TeeOutputStream(decorativeStream, System.err)
+        val decorativeErrorStream = ByteArrayOutputStream()
+        firebaseTask.errorOutput = TeeOutputStream(decorativeErrorStream, System.err)
+
+        val decorativeStdStream = ByteArrayOutputStream()
+        firebaseTask.standardOutput = TeeOutputStream(decorativeStdStream, System.out)
 
         firebaseTask.doLast {
-          val firebaseOutput = decorativeStream.toString()
-          val firebaseUrl = FirebaseOutputParser.parseUrl(firebaseOutput)
+          val firebaseErrorOutput = decorativeErrorStream.toString()
+          val firebaseUrl = FirebaseOutputParser.parseUrl(firebaseErrorOutput)
 
-          println("Recorded output is $firebaseOutput")
+          println("Recorded error output is $firebaseErrorOutput")
+
+          val firebaseStdOutput = decorativeStdStream.toString()
+          println("Recorded standard output is $firebaseStdOutput")
 
           val deviceResults =
-            FirebaseOutputParser.deviceResults(testConfiguration.devices, firebaseOutput)
+            FirebaseOutputParser.deviceResults(testConfiguration.devices, firebaseStdOutput)
 
           val testSuiteResults = deviceResults.map {
             testSuiteResult(project, it, testConfiguration.resultDir)
