@@ -12,7 +12,7 @@ class FirebaseResultExtractorTest {
 
   @Before
   fun setUp() {
-    extractor = FirebaseResultExtractor(Device.Pixel5)
+    extractor = FirebaseResultExtractor(Device.Pixel6a)
   }
 
   @Test
