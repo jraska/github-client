@@ -4,16 +4,11 @@ import com.jraska.github.client.firebase.Device
 import com.jraska.github.client.firebase.TestOutcome
 import com.jraska.github.client.firebase.TestResult
 import com.jraska.github.client.firebase.TestSuiteResult
-import com.jraska.gradle.CiInfo
-import com.jraska.gradle.git.GitInfo
 import groovy.util.Node
 import groovy.util.NodeList
 import groovy.util.XmlParser
 
 class FirebaseResultExtractor(
-  private val firebaseUrl: String,
-  private val gitInfo: GitInfo,
-  private val ciInfo: CiInfo?,
   private val device: Device
 ) {
   fun extract(xml: String): TestSuiteResult {
@@ -44,9 +39,6 @@ class FirebaseResultExtractor(
       time = time,
       testsCount = testsCount,
       device = device.firebaseCommandString(),
-      gitInfo = gitInfo,
-      ciInfo = ciInfo,
-      firebaseUrl = firebaseUrl,
       errorsCount = errorsCount,
       passedCount = passedCount,
       failedCount = failedCount,
@@ -74,9 +66,6 @@ class FirebaseResultExtractor(
       time = testNode.attributeDouble("time"),
       failure = failure,
       outcome = outcome,
-      firebaseUrl = firebaseUrl,
-      gitInfo = gitInfo,
-      ciInfo = ciInfo,
       device = device.firebaseCommandString(),
       fullName = "$className#$methodName"
     )

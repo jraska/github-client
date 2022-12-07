@@ -4,9 +4,14 @@ import com.jraska.analytics.AnalyticsEvent
 import com.jraska.analytics.AnalyticsReporter
 import com.jraska.github.client.firebase.TestResult
 import com.jraska.github.client.firebase.TestSuiteResult
+import com.jraska.gradle.CiInfo
+import com.jraska.gradle.git.GitInfo
 
 class TestResultsReporter(
-  private val analyticsReporter: AnalyticsReporter
+  private val analyticsReporter: AnalyticsReporter,
+  private val firebaseUrl: String,
+  private val gitInfo: GitInfo,
+  private val ciInfo: CiInfo?,
 ) {
   fun report(results: TestSuiteResult) {
     val delivery = mutableListOf<AnalyticsEvent>()
@@ -29,15 +34,15 @@ class TestResultsReporter(
       "className" to testResult.className,
       "methodName" to testResult.methodName,
       "device" to testResult.device,
-      "firebaseUrl" to testResult.firebaseUrl,
+      "firebaseUrl" to firebaseUrl,
       "fullName" to testResult.fullName,
       "failure" to testResult.failure,
       "outcome" to testResult.outcome,
       "testTime" to testResult.time
     ).apply {
-      putAll(testResult.gitInfo.asAnalyticsProperties())
-      if(testResult.ciInfo != null) {
-        putAll(testResult.ciInfo.asAnalyticsProperties())
+      putAll(gitInfo.asAnalyticsProperties())
+      if (ciInfo != null) {
+        putAll(ciInfo.asAnalyticsProperties())
       }
     }
   }
@@ -47,7 +52,7 @@ class TestResultsReporter(
       "passed" to results.suitePassed,
       "suiteTime" to results.time,
       "device" to results.device,
-      "firebaseUrl" to results.firebaseUrl,
+      "firebaseUrl" to firebaseUrl,
       "passedCount" to results.passedCount,
       "testsCount" to results.testsCount,
       "ignoredCount" to results.ignoredCount,
@@ -55,9 +60,9 @@ class TestResultsReporter(
       "failedCount" to results.failedCount,
       "errorsCount" to results.errorsCount
     ).apply {
-      putAll(results.gitInfo.asAnalyticsProperties())
-      if(results.ciInfo != null) {
-        putAll(results.ciInfo.asAnalyticsProperties())
+      putAll(gitInfo.asAnalyticsProperties())
+      if (ciInfo != null) {
+        putAll(ciInfo.asAnalyticsProperties())
       }
     }
   }

@@ -1,8 +1,5 @@
 package com.jraska.github.client.firebase
 
-import com.jraska.gradle.CiInfo
-import com.jraska.gradle.git.GitInfo
-
 data class TestSuiteResult(
   val testResults: List<TestResult>,
   val time: Double,
@@ -13,9 +10,6 @@ data class TestSuiteResult(
   val passedCount: Int,
   val ignoredCount: Int,
   val flakyCount: Int,
-  val firebaseUrl: String,
-  val gitInfo: GitInfo,
-  val ciInfo: CiInfo?,
   val device: String
 )
 
@@ -25,9 +19,6 @@ data class TestResult(
   val methodName: String,
   val time: Double,
   val fullName: String,
-  val gitInfo: GitInfo,
-  val ciInfo: CiInfo?,
-  val firebaseUrl: String,
   val failure: String?,
   val device: String
 )

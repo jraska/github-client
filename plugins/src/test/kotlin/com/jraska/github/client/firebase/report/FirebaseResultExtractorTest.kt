@@ -2,7 +2,6 @@ package com.jraska.github.client.firebase.report
 
 import com.jraska.github.client.firebase.Device
 import com.jraska.github.client.firebase.TestOutcome
-import com.jraska.gradle.git.GitInfo
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -13,7 +12,7 @@ class FirebaseResultExtractorTest {
 
   @Before
   fun setUp() {
-    extractor = FirebaseResultExtractor("someUrl", GitInfo("exampleBrach", "123", false, ""), null, Device.Pixel5)
+    extractor = FirebaseResultExtractor(Device.Pixel5)
   }
 
   @Test
