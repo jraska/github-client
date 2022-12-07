@@ -26,7 +26,7 @@ class GCloudCommandsTest {
         "--test hey/hou/test-app.apk " +
         "--device model=bluejay,version=32,locale=en,orientation=portrait " +
         "--device model=cheetah,version=33,locale=en,orientation=portrait " +
-        "--results-dir result-path-123.456 --no-performance-metrics --timeout 3m " +
+        "--results-dir result-path-123.456 --no-performance-metrics --num-flaky-test-attempts=1 --timeout 3m " +
         "--environment-variables FCM_API_KEY=35327abc123"
   }
 }
