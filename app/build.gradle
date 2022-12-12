@@ -144,7 +144,7 @@ dependencies {
   implementation dagger
 
   implementation retrofit
-  implementation 'com.jakewharton.threetenabp:threetenabp:1.4.3'
+  implementation 'com.jakewharton.threetenabp:threetenabp:1.4.4'
   implementation okHttpLoggingInterceptor
 
   implementation 'com.jakewharton.timber:timber:5.0.1'
