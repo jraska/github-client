@@ -1,6 +1,8 @@
 package com.jraska.github.client.http
 
 import android.content.Context
+import com.jraska.github.client.AndroidAppVersion
+import com.jraska.github.client.AppVersion
 import com.jraska.github.client.core.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -30,19 +32,37 @@ object HttpModule {
 
   @Provides
   @Singleton
-  internal fun provideOkHttpClient(context: Context): OkHttpClient {
+  internal fun provideOkHttpClient(
+    context: Context,
+    appHeadersInterceptor: AppCommonHeadersInterceptor
+  ): OkHttpClient {
     val builder = OkHttpClient.Builder()
 
+    builder.addInterceptor(appHeadersInterceptor)
+
     if (BuildConfig.DEBUG) {
-      val loggingInterceptor = HttpLoggingInterceptor { message -> Timber.tag("Network").v(message) }
+      val loggingInterceptor =
+        HttpLoggingInterceptor { message -> Timber.tag("Network").v(message) }
       loggingInterceptor.level = Level.BASIC
-      builder.addInterceptor(loggingInterceptor)
+      builder.addNetworkInterceptor(loggingInterceptor)
     }
+
 
     val cacheDir = File(context.cacheDir, "network")
     val cache = Cache(cacheDir, 1024 * 1024 * 4)
     builder.cache(cache)
 
     return builder.build()
+  }
+
+  @Provides
+  @Singleton
+  internal fun appHeadersInterceptor(appVersion: AppVersion): AppCommonHeadersInterceptor {
+    return AppCommonHeadersInterceptor(appVersion)
+  }
+
+  @Provides
+  internal fun appVersion(context: Context): AppVersion {
+    return AndroidAppVersion(context)
   }
 }
