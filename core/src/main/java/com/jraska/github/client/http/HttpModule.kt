@@ -6,7 +6,9 @@ import com.jraska.github.client.AppVersion
 import com.jraska.github.client.core.BuildConfig
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoSet
 import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
@@ -34,11 +36,11 @@ object HttpModule {
   @Singleton
   internal fun provideOkHttpClient(
     context: Context,
-    appHeadersInterceptor: AppCommonHeadersInterceptor
+    interceptors: @JvmSuppressWildcards Set<Interceptor>
   ): OkHttpClient {
     val builder = OkHttpClient.Builder()
 
-    builder.addInterceptor(appHeadersInterceptor)
+    interceptors.forEach { builder.addInterceptor(it) }
 
     if (BuildConfig.DEBUG) {
       val loggingInterceptor =
@@ -57,7 +59,8 @@ object HttpModule {
 
   @Provides
   @Singleton
-  internal fun appHeadersInterceptor(appVersion: AppVersion): AppCommonHeadersInterceptor {
+  @IntoSet
+  internal fun appHeadersInterceptor(appVersion: AppVersion): Interceptor {
     return AppCommonHeadersInterceptor(appVersion)
   }
 

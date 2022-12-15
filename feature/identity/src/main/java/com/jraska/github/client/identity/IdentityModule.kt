@@ -1,10 +1,13 @@
 package com.jraska.github.client.identity
 
+import com.jraska.github.client.identity.internal.AddSessionIdInterceptor
 import com.jraska.github.client.identity.internal.AnonymousIdentity
 import com.jraska.github.client.identity.internal.SessionIdProvider
 import com.jraska.github.client.time.TimeProvider
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoSet
+import okhttp3.Interceptor
 import javax.inject.Singleton
 
 @Module
@@ -23,5 +26,11 @@ object IdentityModule {
   }
 
   @Provides
-  internal fun identityProvider(implementation: IdentityProviderImpl): IdentityProvider = implementation
+  internal fun identityProvider(impl: IdentityProviderImpl): IdentityProvider = impl
+
+  @Provides
+  @IntoSet
+  internal fun addSessionIdInterceptor(identityProvider: IdentityProvider): Interceptor {
+    return AddSessionIdInterceptor(identityProvider)
+  }
 }
