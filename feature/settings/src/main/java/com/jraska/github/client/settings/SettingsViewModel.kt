@@ -12,7 +12,8 @@ import javax.inject.Inject
 internal class SettingsViewModel @Inject constructor(
   private val eventAnalytics: EventAnalytics,
   private val deepLinkLauncher: DeepLinkLauncher,
-  private val rowModelProvider: ConfigRowModelProvider
+  private val rowModelProvider: ConfigRowModelProvider,
+  private val integrityCheck: IntegrityCheck
 ) : ViewModel() {
   fun onPurchaseSubmitted(value: String) {
     val money = value.toDoubleOrNull() ?: return
@@ -29,6 +30,10 @@ internal class SettingsViewModel @Inject constructor(
 
   fun onConsoleClick() {
     deepLinkLauncher.launch(Urls.console())
+  }
+
+  fun onIntegrityCheckClicked() {
+    integrityCheck.run()
   }
 
   companion object {

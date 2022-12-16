@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/user_container"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/list_item_height"
+  android:orientation="horizontal"
+  android:weightSum="10"
+  tools:background="#bbbbbb">
+
+  <TextView
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="7"
+    android:maxLines="1"
+    android:text="@string/integrity_check"
+    android:textColor="@color/textMain"
+    android:textSize="@dimen/textTitle"
+    tools:text="34.4" />
+
+  <Button
+    android:id="@+id/settings_integrity_run_button"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:layout_weight="3"
+    android:text="@string/settings_button_integrity" />
+
+</LinearLayout>

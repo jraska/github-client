@@ -30,6 +30,8 @@ dependencies {
   implementation 'com.jakewharton.timber:timber:5.0.1'
   implementation okHttp
 
+  implementation 'com.google.android.play:integrity:1.0.2'
+
   implementation dagger
   kapt daggerAnnotationProcessor
 
