@@ -4,7 +4,7 @@ import com.google.firebase.messaging.RemoteMessage
 
 internal object RemoteMessageToActionConverter {
   private const val KEY_ACTION = "action"
-  private const val DEFAULT_ACTION = "message_without_data"
+  const val DEFAULT_ACTION = "message_without_data"
 
   fun convert(remoteMessage: RemoteMessage): PushAction {
     return convert(remoteMessage.data)

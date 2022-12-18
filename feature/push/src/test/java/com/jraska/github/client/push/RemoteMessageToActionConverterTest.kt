@@ -9,7 +9,7 @@ class RemoteMessageToActionConverterTest {
     val action =
       RemoteMessageToActionConverter.convert(emptyMap())
 
-    assertThat(action.name).isEqualTo(PushAction.DEFAULT.name)
+    assertThat(action.name).isEqualTo(RemoteMessageToActionConverter.DEFAULT_ACTION)
   }
 
   @Test
