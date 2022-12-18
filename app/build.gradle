@@ -104,6 +104,7 @@ dependencies {
   implementation project(':feature:network-status')
   implementation project(':feature:performance')
   implementation project(':feature:push')
+  implementation project(':feature:push-api')
   implementation project(':feature:users')
   implementation project(':feature:repo')
   implementation project(':feature:settings')

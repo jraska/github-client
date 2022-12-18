@@ -1,6 +1,5 @@
 package com.jraska.github.client.push
 
-import com.jraska.github.client.common.BooleanResult
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Provider
@@ -9,7 +8,7 @@ class PushHandler @Inject internal constructor(
   private val pushCommands: Map<String, @JvmSuppressWildcards Provider<PushActionCommand>>
 ) {
 
-  internal fun handlePush(action: PushAction): BooleanResult {
+  internal fun handlePush(action: PushAction): PushExecuteResult {
     Timber.d("Push received action: %s", action.name)
 
     val result = handleInternal(action)
@@ -19,8 +18,8 @@ class PushHandler @Inject internal constructor(
     return result
   }
 
-  private fun handleInternal(action: PushAction): BooleanResult {
-    val actionCommand = pushCommands[action.name] ?: return BooleanResult.FAILURE
+  private fun handleInternal(action: PushAction): PushExecuteResult {
+    val actionCommand = pushCommands[action.name] ?: return PushExecuteResult.FAILURE
 
     return actionCommand.get().execute(action)
   }

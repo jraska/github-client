@@ -1,0 +1,6 @@
+apply plugin: 'java-library'
+apply plugin: 'com.android.lint'
+apply plugin: 'kotlin'
+
+dependencies {
+}

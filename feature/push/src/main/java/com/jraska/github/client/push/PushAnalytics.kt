@@ -3,7 +3,6 @@ package com.jraska.github.client.push
 import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-import com.jraska.github.client.common.BooleanResult
 import com.jraska.github.client.identity.IdentityProvider
 import javax.inject.Inject
 
@@ -18,8 +17,8 @@ internal class PushAnalytics @Inject constructor(
     eventAnalytics.report(tokenEvent)
   }
 
-  fun onPushHandled(action: PushAction, result: BooleanResult) {
-    if (result == BooleanResult.SUCCESS) {
+  fun onPushHandled(action: PushAction, result: PushExecuteResult) {
+    if (result == PushExecuteResult.SUCCESS) {
       val pushHandled = AnalyticsEvent.builder(ANALYTICS_PUSH_HANDLED)
         .addProperty("push_action", action.name)
         .build()
