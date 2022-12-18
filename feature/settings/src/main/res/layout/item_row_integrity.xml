@@ -4,8 +4,9 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/user_container"
   android:layout_width="match_parent"
-  android:layout_height="@dimen/list_item_height"
+  android:layout_height="wrap_content"
   android:orientation="horizontal"
+  android:padding="8dp"
   android:weightSum="10"
   tools:background="#bbbbbb">
 
@@ -13,17 +14,14 @@
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="7"
-    android:maxLines="1"
     android:text="@string/integrity_check"
     android:textColor="@color/textMain"
-    android:textSize="@dimen/textTitle"
-    tools:text="34.4" />
+    android:textSize="@dimen/textTitle" />
 
   <Button
     android:id="@+id/settings_integrity_run_button"
     android:layout_width="0dp"
-    android:layout_height="match_parent"
-    android:layout_margin="8dp"
+    android:layout_height="wrap_content"
     android:layout_weight="3"
     android:text="@string/settings_button_integrity" />
 

@@ -21,14 +21,14 @@ internal class SettingsActivity : AppCompatActivity() {
     val settingsRecycler = findViewById<RecyclerView>(R.id.settings_recycler)
     settingsRecycler.layoutManager = LinearLayoutManager(this)
     val adapter = SimpleEpoxyAdapter()
+
+    adapter.addModels(IntegrityCheckModel(viewModel::onIntegrityCheckClicked))
     adapter.addModels(PurchaseReportModel(this::onPurchaseButtonClicked))
     adapter.addModels(ConsoleModel(viewModel::onConsoleClick))
 
     viewModel.configRows().forEach {
       adapter.addModels(it as EpoxyModel<*>)
     }
-
-    adapter.addModels(IntegrityCheckModel(viewModel::onIntegrityCheckClicked))
 
     settingsRecycler.adapter = adapter
   }
