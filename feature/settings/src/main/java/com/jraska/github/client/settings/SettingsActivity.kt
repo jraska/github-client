@@ -23,11 +23,13 @@ internal class SettingsActivity : AppCompatActivity() {
     val adapter = SimpleEpoxyAdapter()
     adapter.addModels(PurchaseReportModel(this::onPurchaseButtonClicked))
     adapter.addModels(ConsoleModel(viewModel::onConsoleClick))
-//    adapter.addModels(IntegrityCheckModel(viewModel::onIntegrityCheckClicked))
 
     viewModel.configRows().forEach {
       adapter.addModels(it as EpoxyModel<*>)
     }
+
+    adapter.addModels(IntegrityCheckModel(viewModel::onIntegrityCheckClicked))
+
     settingsRecycler.adapter = adapter
   }
 
