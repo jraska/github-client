@@ -1,10 +1,11 @@
-package com.jraska.github.client.settings
+package com.jraska.github.client.identity.integrity
 
 import android.content.Context
 import com.google.android.gms.tasks.Tasks
 import com.google.android.play.core.integrity.IntegrityManagerFactory
 import com.google.android.play.core.integrity.IntegrityTokenRequest
 import com.jraska.github.client.coroutines.AppDispatchers
+import com.jraska.github.client.identity.IntegrityTrigger
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -15,9 +16,10 @@ import javax.inject.Inject
 class IntegrityCheck @Inject constructor(
   private val appDispatchers: AppDispatchers,
   private val context: Context
-) {
+) : IntegrityTrigger {
+
   @OptIn(DelicateCoroutinesApi::class)
-  fun run() {
+  override fun executeIntegrityCheck() {
     GlobalScope.launch(appDispatchers.io) {
       runInternal()
     }

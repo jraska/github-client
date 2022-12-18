@@ -1,15 +1,24 @@
-apply plugin: 'java-library'
-apply plugin: 'com.android.lint'
-apply plugin: 'kotlin'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
+android {
+  compileSdkVersion 33
+  defaultConfig {
+    minSdkVersion 26
+  }
+}
 
 dependencies {
   implementation project(':core-api')
   implementation project(':feature:identity-api')
 
   implementation 'org.threeten:threetenbp:1.5.1:no-tzdb'
+  implementation 'com.jakewharton.timber:timber:5.0.1'
   implementation okHttp
+  implementation coroutinesJvm
+
+  implementation 'com.google.android.play:integrity:1.0.2'
 
   kapt daggerAnnotationProcessor
   implementation dagger
