@@ -10,15 +10,6 @@ android {
     testInstrumentationRunner "com.jraska.github.client.users.test.TestRunner"
   }
 
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_1_8.toString()
-  }
-
   packagingOptions {
     exclude 'META-INF/licenses/ASM'
     exclude 'META-INF/AL2.0'
