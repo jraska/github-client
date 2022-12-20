@@ -1,14 +1,18 @@
 package com.jraska.github.client.identity
 
 import com.jraska.github.client.identity.integrity.IntegrityCheck
+import com.jraska.github.client.identity.integrity.IntegrityCheckPushCommand
 import com.jraska.github.client.identity.internal.AddSessionIdInterceptor
 import com.jraska.github.client.identity.internal.AnonymousIdentity
 import com.jraska.github.client.identity.internal.SessionIdProvider
+import com.jraska.github.client.push.PushActionCommand
 import com.jraska.github.client.time.TimeProvider
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
+import dagger.multibindings.StringKey
 import okhttp3.Interceptor
 import javax.inject.Singleton
 
@@ -37,8 +41,13 @@ object IdentityModule {
   }
 
   @Module
-  interface Declarations {
+  abstract class Declarations {
     @Binds
-    fun bindIntegrityCheckTrigger(integrityCheck: IntegrityCheck): IntegrityTrigger
+    abstract fun bindIntegrityCheckTrigger(integrityCheck: IntegrityCheck): IntegrityTrigger
+
+    @Binds
+    @IntoMap
+    @StringKey("integrity_check")
+    abstract fun bindIntegrityCheckCommand(integrityCheckTriggerCommand: IntegrityCheckPushCommand): PushActionCommand
   }
 }
