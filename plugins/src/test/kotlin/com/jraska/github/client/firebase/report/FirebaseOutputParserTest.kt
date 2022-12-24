@@ -41,7 +41,7 @@ class FirebaseOutputParserTest {
   @Test
   fun parsesFlakyResultProperly() {
     val deviceResults = FirebaseOutputParser.deviceResults(
-      listOf(Device.Pixel6a, Device.Pixel2, Device.Pixel7),
+      listOf(Device.Pixel6a, Pixel2, Device.Pixel7),
       FLAKY_OUTPUT
     )
 
@@ -52,6 +52,7 @@ class FirebaseOutputParserTest {
   }
 
   companion object {
+    val Pixel2 = Device("walleye", 27, "en", "portrait")
     val EXAMPLE_OUTPUT = """
       Have questions, feedback, or issues? Get support by visiting:
         https://firebase.google.com/support/
