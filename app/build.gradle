@@ -166,7 +166,7 @@ apply plugin: 'com.jraska.module.graph.assertion'
 moduleGraphAssert {
   maxHeight = 2
   allowed = [":app -> .*", ".* -> [\\S:]*-api"]
-  restricted = [":feature:\\S* -X> :not-wanted-module-example"]
+  restricted = ["[\\S:]*-api -X> [\\S:]*-api"]
   assertOnAnyBuild = true
 }
 
