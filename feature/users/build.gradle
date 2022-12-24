@@ -56,7 +56,6 @@ dependencies {
   androidTestImplementation espressoCore
   androidTestImplementation 'org.assertj:assertj-core:3.22.0'
   androidTestImplementation androidTestRunner
-  androidTestImplementation androidTestRules
 
   kaptAndroidTest daggerAnnotationProcessor
   androidTestImplementation project(':core-testing')

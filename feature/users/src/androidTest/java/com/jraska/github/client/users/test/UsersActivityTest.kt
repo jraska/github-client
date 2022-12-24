@@ -3,7 +3,7 @@ package com.jraska.github.client.users.test
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.rule.ActivityTestRule
+import com.jraska.github.client.android.test.LateLaunchActivityRule
 import com.jraska.github.client.android.test.http.assetJson
 import com.jraska.github.client.android.test.usingLinkRecording
 import com.jraska.github.client.http.MockWebServerInterceptorRule
@@ -13,7 +13,6 @@ import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
-import kotlin.random.Random
 
 class UsersActivityTest {
 
@@ -24,11 +23,13 @@ class UsersActivityTest {
   val mockWebServerInterceptorRule = MockWebServerInterceptorRule(mockWebServer)
 
   @get:Rule
-  val rule = ActivityTestRule(UsersActivity::class.java)
+  val rule = LateLaunchActivityRule()
 
   @Test
   fun testLaunches() {
     mockWebServer.enqueue(twoUsersResponse())
+
+    rule.launch(UsersActivity::class.java)
 
     usingLinkRecording {
       onView(withText("defunkt")).perform(click())

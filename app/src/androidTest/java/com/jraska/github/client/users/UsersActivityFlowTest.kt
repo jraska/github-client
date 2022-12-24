@@ -6,20 +6,16 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.swipeDown
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withHint
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.rule.ActivityTestRule
+import androidx.test.espresso.matcher.ViewMatchers.*
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.jraska.github.client.EnableConfigRule
+import com.jraska.github.client.android.test.LateLaunchActivityRule
 import com.jraska.github.client.android.test.http.assetJson
 import com.jraska.github.client.espressox.LongClickPatch
 import com.jraska.github.client.http.MockWebServerInterceptorRule
 import com.jraska.github.client.http.onUrlPartReturn
 import com.jraska.github.client.http.onUrlReturn
 import com.jraska.github.client.recordedEvents
-import com.jraska.github.client.users.R
 import com.jraska.github.client.users.ui.UsersActivity
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
@@ -28,15 +24,17 @@ import org.junit.Test
 
 class UsersActivityFlowTest {
 
-  @get:Rule val mockWebServer = MockWebServer()
-
-  @get:Rule val mockWebServerInterceptorRule = MockWebServerInterceptorRule(mockWebServer)
+  @get:Rule
+  val mockWebServer = MockWebServer()
 
   @get:Rule
-  val rule = ActivityTestRule(UsersActivity::class.java, false, false)
+  val mockWebServerInterceptorRule = MockWebServerInterceptorRule(mockWebServer)
 
   @get:Rule
   val enableConfigRule = EnableConfigRule("user_detail_section_size", 4L)
+
+  @get:Rule
+  val activityRule = LateLaunchActivityRule()
 
   @Test
   fun whenStartsThenDisplaysUsers() {
@@ -45,7 +43,7 @@ class UsersActivityFlowTest {
     mockWebServer.onUrlPartReturn("users/mojombo/repos", assetJson("response/defunkt_repos.json"))
     mockWebServer.onUrlPartReturn("repos/defunkt/hurl", assetJson("response/repo_hurl.json"))
 
-    rule.launchActivity(null)
+    activityRule.launch(UsersActivity::class.java)
 
     onView(withText("mojombo")).perform(click())
     onView(withText("charlock_holmes")).check(matches(isDisplayed()))
@@ -55,22 +53,25 @@ class UsersActivityFlowTest {
 
   @Test
   fun whenSettingsThenReportsEvent() {
-    rule.launchActivity(null)
     mockWebServer.enqueue(assetJson("response/users.json"))
+
+    activityRule.launch(UsersActivity::class.java)
 
     onView(withId(R.id.action_settings)).perform(click(LongClickPatch))
     onView(withHint("Value")).perform(ViewActions.typeText("0.01"))
     onView(withText("Purchase")).perform(click())
 
-    val event = recordedEvents().findLast { event -> event.name == FirebaseAnalytics.Event.PURCHASE }
+    val event =
+      recordedEvents().findLast { event -> event.name == FirebaseAnalytics.Event.PURCHASE }
     assertThat(event).isNotNull
     assertThat(event!!.properties[FirebaseAnalytics.Param.VALUE]).isEqualTo(0.01)
   }
 
   @Test
   fun whenAboutThenOpensAbout() {
-    rule.launchActivity(null)
     mockWebServer.enqueue(assetJson("response/users.json"))
+
+    activityRule.launch(UsersActivity::class.java)
 
     onView(withId(R.id.action_about)).perform(click(LongClickPatch))
 
@@ -79,9 +80,10 @@ class UsersActivityFlowTest {
 
   @Test
   fun whenRefreshesThenDisplaysOtherUsers() {
-    rule.launchActivity(null)
     mockWebServer.enqueue(assetJson("response/users.json"))
     mockWebServer.enqueue(assetJson("response/users_no_defunkt.json"))
+
+    activityRule.launch(UsersActivity::class.java)
 
     onView(withText("defunkt")).check(matches(isDisplayed()))
     onView(withId(R.id.users_refresh_swipe_layout)).perform(swipeDown())
