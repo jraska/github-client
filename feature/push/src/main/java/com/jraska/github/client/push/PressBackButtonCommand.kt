@@ -7,9 +7,14 @@ internal class PressBackButtonCommand @Inject constructor(
   private val topActivityProvider: TopActivityProvider
 ) : PushActionCommand {
   override fun execute(action: PushAction): PushExecuteResult {
-    val activity =
-      topActivityProvider.topActivity ?: return PushExecuteResult.SUCCESS // no-op if in background
-    activity.onBackPressed()
+    if (topActivityProvider.topActivity == null) {
+      return PushExecuteResult.SUCCESS // no-op if in background
+    }
+
+    topActivityProvider.onTopActivity {
+      it.onBackPressed()
+    }
+
     return PushExecuteResult.SUCCESS
   }
 }

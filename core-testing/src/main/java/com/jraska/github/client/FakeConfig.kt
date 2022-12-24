@@ -2,8 +2,11 @@ package com.jraska.github.client
 
 class FakeConfig private constructor(private val values: MutableMap<String, Any>) : Config {
 
+  var configRefreshTriggered = false
+    private set
+
   override fun triggerRefresh() {
-    // do nothing
+    configRefreshTriggered = true
   }
 
   override fun getBoolean(key: Config.Key): Boolean {
@@ -25,6 +28,10 @@ class FakeConfig private constructor(private val values: MutableMap<String, Any>
     values[key] = value
 
     return revertSet
+  }
+
+  fun resetRefreshTracking() {
+    configRefreshTriggered = false
   }
 
   class RevertSet(

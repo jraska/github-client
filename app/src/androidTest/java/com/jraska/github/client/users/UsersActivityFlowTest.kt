@@ -31,7 +31,7 @@ class UsersActivityFlowTest {
   val mockWebServerInterceptorRule = MockWebServerInterceptorRule(mockWebServer)
 
   @get:Rule
-  val enableConfigRule = EnableConfigRule("user_detail_section_size", 4L)
+  val enableConfigRule = EnableConfigRule("user_detail_section_size" to 4L)
 
   @get:Rule
   val activityRule = LateLaunchActivityRule()

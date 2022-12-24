@@ -3,17 +3,23 @@ package com.jraska.github.client
 import org.junit.rules.ExternalResource
 
 class EnableConfigRule(
-  private val key: String,
-  private val value: Any
+  private val entry: Pair<String, Any>? = null
 ) : ExternalResource() {
 
-  lateinit var revert: FakeConfig.RevertSet
+  private val reverts = mutableSetOf<FakeConfig.RevertSet>()
+  private val config get() = TestUITestApp.get().appComponent.config
+
+  fun set(entry: Pair<String, Any>) {
+    reverts.add(config.set(entry.first, entry.second))
+  }
 
   override fun before() {
-    revert = TestUITestApp.get().appComponent.config.set(key, value)
+    if (entry != null) {
+      set(entry)
+    }
   }
 
   override fun after() {
-    revert.revert()
+    reverts.forEach { it.revert() }
   }
 }
