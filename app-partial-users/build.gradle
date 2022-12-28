@@ -30,6 +30,7 @@ dependencies {
   implementation project(':core-api')
   implementation project(':core-android-api')
   implementation project(':core')
+  implementation project(':feature:push-api')
   implementation project(':navigation-api')
   implementation project(':core-testing')
   implementation project(':feature:users')
