@@ -49,28 +49,8 @@ object PushModule {
 
     @Binds
     @IntoMap
-    @StringKey("refresh_config")
-    internal abstract fun refreshConfigCommand(command: RefreshConfigCommand): PushActionCommand
-
-    @Binds
-    @IntoMap
-    @StringKey("set_config_as_property")
-    internal abstract fun configAsPropertyCommand(command: ConfigAsPropertyCommand): PushActionCommand
-
-    @Binds
-    @IntoMap
-    @StringKey("set_analytics_property")
-    internal abstract fun setAnalyticsProperty(command: SetAnalyticsPropertyCommand): PushActionCommand 
-
-    @Binds
-    @IntoMap
     @StringKey("notification")
-    internal abstract fun notificationCommand(command: ShowNotificationCommand): PushActionCommand 
-
-    @Binds
-    @IntoMap
-    @StringKey("launch_deep_link")
-    internal abstract fun deepLinkCommand(command: LaunchDeepLinkCommand): PushActionCommand
+    internal abstract fun notificationCommand(command: ShowNotificationCommand): PushActionCommand
 
     @Binds
     @IntoMap

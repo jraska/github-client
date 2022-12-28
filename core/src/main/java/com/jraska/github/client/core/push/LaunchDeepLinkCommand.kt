@@ -1,7 +1,10 @@
-package com.jraska.github.client.push
+package com.jraska.github.client.core.push
 
 import com.jraska.github.client.DeepLinkHandler
 import com.jraska.github.client.logging.CrashReporter
+import com.jraska.github.client.push.PushAction
+import com.jraska.github.client.push.PushActionCommand
+import com.jraska.github.client.push.PushExecuteResult
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import javax.inject.Inject

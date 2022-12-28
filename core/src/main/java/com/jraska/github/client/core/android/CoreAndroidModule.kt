@@ -12,21 +12,28 @@ import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.core.android.logging.SetupLogging
+import com.jraska.github.client.core.push.ConfigAsPropertyCommand
+import com.jraska.github.client.core.push.LaunchDeepLinkCommand
+import com.jraska.github.client.core.push.RefreshConfigCommand
+import com.jraska.github.client.core.push.SetAnalyticsPropertyCommand
+import com.jraska.github.client.push.PushActionCommand
 import com.jraska.github.client.time.DateTimeProvider
 import com.jraska.github.client.time.RealDateTimeProvider
 import com.jraska.github.client.time.RealTimeProvider
 import com.jraska.github.client.time.TimeProvider
 import com.jraska.github.client.ui.SnackbarDisplay
 import com.jraska.github.client.users.widget.TopSnackbarDisplay
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
+import dagger.multibindings.StringKey
 import javax.inject.Provider
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [CoreAndroidModule.Declarations::class])
 object CoreAndroidModule {
   @Provides
   @Singleton
@@ -127,4 +134,28 @@ object CoreAndroidModule {
   @Provides
   @IntoSet
   fun bindAppAsync(executor: OnAppCreateAsyncExecutor): OnAppCreate = executor
+
+  @Module
+  abstract class Declarations {
+
+    @Binds
+    @IntoMap
+    @StringKey("launch_deep_link")
+    internal abstract fun deepLinkCommand(command: LaunchDeepLinkCommand): PushActionCommand
+
+    @Binds
+    @IntoMap
+    @StringKey("refresh_config")
+    internal abstract fun refreshConfigCommand(command: RefreshConfigCommand): PushActionCommand
+
+    @Binds
+    @IntoMap
+    @StringKey("set_config_as_property")
+    internal abstract fun configAsPropertyCommand(command: ConfigAsPropertyCommand): PushActionCommand
+
+    @Binds
+    @IntoMap
+    @StringKey("set_analytics_property")
+    internal abstract fun setAnalyticsProperty(command: SetAnalyticsPropertyCommand): PushActionCommand
+  }
 }

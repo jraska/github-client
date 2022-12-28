@@ -1,6 +1,9 @@
-package com.jraska.github.client.push
+package com.jraska.github.client.core.push
 
 import com.jraska.github.client.analytics.AnalyticsProperty
+import com.jraska.github.client.push.PushAction
+import com.jraska.github.client.push.PushActionCommand
+import com.jraska.github.client.push.PushExecuteResult
 import javax.inject.Inject
 
 internal class SetAnalyticsPropertyCommand @Inject constructor(
