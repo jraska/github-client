@@ -2,11 +2,11 @@ package com.jraska.github.client.core.android
 
 import androidx.lifecycle.ViewModel
 import com.jraska.github.client.DeepLinkHandler
+import com.jraska.github.client.DeeplinkResult
 import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.analytics.toAnalyticsString
-import com.jraska.github.client.common.toBoolean
 import okhttp3.HttpUrl
 import javax.inject.Inject
 
@@ -19,7 +19,7 @@ class UriHandlerViewModel @Inject constructor(
 
     val event = AnalyticsEvent.builder(ANALYTICS_DEEP_LINK_KEY)
       .addProperty("deep_link", deepLink.toAnalyticsString())
-      .addProperty("success", success.toBoolean())
+      .addProperty("success", success == DeeplinkResult.SUCCESS)
       .build()
     eventAnalytics.report(event)
   }
