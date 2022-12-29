@@ -26,8 +26,8 @@ android {
     applicationId "com.jraska.github.client"
     minSdkVersion 26
     targetSdkVersion 33
-    versionName '0.46.0'
-    versionCode 159
+    versionName '0.47.0'
+    versionCode 160
     multiDexEnabled true
 
     testInstrumentationRunner "com.jraska.github.client.TestRunner"
