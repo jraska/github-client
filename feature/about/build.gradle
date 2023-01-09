@@ -31,5 +31,5 @@ dependencies {
 
   androidTestImplementation 'junit:junit:4.13.2'
   androidTestImplementation espressoCore
-  androidTestImplementation 'org.assertj:assertj-core:3.23.1'
+  androidTestImplementation 'org.assertj:assertj-core:3.24.1'
 }

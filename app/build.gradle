@@ -148,7 +148,7 @@ dependencies {
   androidTestImplementation espressoCore
   androidTestImplementation espressoIdlingResource
   androidTestImplementation androidTestRunner
-  androidTestImplementation 'org.assertj:assertj-core:3.23.1'
+  androidTestImplementation 'org.assertj:assertj-core:3.24.1'
   androidTestImplementation project(':core-testing')
   androidTestImplementation project(':core-android-testing')
   androidTestImplementation coroutinesJvm

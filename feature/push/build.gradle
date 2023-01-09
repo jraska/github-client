@@ -31,5 +31,5 @@ dependencies {
   implementation 'org.threeten:threetenbp:1.5.1:no-tzdb'
 
   testImplementation 'junit:junit:4.13.2'
-  testImplementation 'org.assertj:assertj-core:3.23.1'
+  testImplementation 'org.assertj:assertj-core:3.24.1'
 }
