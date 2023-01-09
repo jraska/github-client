@@ -22,7 +22,7 @@ ext {
   fresco = "com.facebook.fresco:fresco:$frescoVesion"
   frescoDrawee = "com.facebook.fresco:drawee:$frescoVesion"
 
-  espressoVersion = '3.5.0'
+  espressoVersion = '3.5.1'
   espressoCore = "androidx.test.espresso:espresso-core:$espressoVersion"
   espressoIdlingResource = "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
