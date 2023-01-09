@@ -25,7 +25,7 @@ dependencies {
   implementation androidTestCore
   implementation okHttpMockWebServer
   implementation okHttp
-  implementation 'com.squareup.okio:okio:3.2.0'
+  implementation 'com.squareup.okio:okio:3.3.0'
 
   implementation 'junit:junit:4.13.2'
 }
