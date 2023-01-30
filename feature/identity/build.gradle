@@ -19,7 +19,7 @@ dependencies {
   implementation okHttp
   implementation coroutinesJvm
 
-  implementation 'com.google.android.play:integrity:1.0.2'
+  implementation 'com.google.android.play:integrity:1.1.0'
 
   kapt daggerAnnotationProcessor
   implementation dagger
