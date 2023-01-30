@@ -43,7 +43,7 @@ dependencies {
   implementation 'androidx.media:media:1.6.0'
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
   implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-  implementation 'com.google.android.material:material:1.7.0'
+  implementation 'com.google.android.material:material:1.8.0'
 
 
   implementation retrofit
