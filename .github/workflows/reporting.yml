@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Run Module Statistics Report
         run: ./gradlew reportModuleStatistics --stacktrace --no-configure-on-demand
   lintReport:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Run Lint Report
         run: ./gradlew lintStatisticsReport --stacktrace
