@@ -27,13 +27,13 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
       - name: Cache Dependencies
-          id: cache-dependencies
-          uses: actions/cache@v2.1.4
-          with:
-            path: |
-              ~/.gradle/caches/modules-2
-              ~/.gradle/caches/transforms-2
-            key: build-${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
+        id: cache-dependencies
+        uses: actions/cache@v2.1.4
+        with:
+          path: |
+            ~/.gradle/caches/modules-2
+            ~/.gradle/caches/transforms-2
+          key: build-${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
       - name: Get Dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: ./gradlew androidDependencies --stacktrace
