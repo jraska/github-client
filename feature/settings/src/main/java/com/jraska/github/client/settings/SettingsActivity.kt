@@ -18,6 +18,13 @@ internal class SettingsActivity : AppCompatActivity() {
     setContentView(R.layout.activity_settings)
     setSupportActionBar(findViewById(R.id.toolbar))
 
+    val fragment = supportFragmentManager.findFragmentById(R.id.settings_fragment_google_login)
+    if (fragment == null) {
+      supportFragmentManager.beginTransaction()
+        .add(R.id.settings_fragment_google_login, viewModel.signInFactory.signInFragment())
+        .commitNow()
+    }
+
     val settingsRecycler = findViewById<RecyclerView>(R.id.settings_recycler)
     settingsRecycler.layoutManager = LinearLayoutManager(this)
     val adapter = SimpleEpoxyAdapter()

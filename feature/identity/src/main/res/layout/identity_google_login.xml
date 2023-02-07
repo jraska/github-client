@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal"
+  android:padding="@dimen/padding_medium">
+
+  <com.google.android.gms.common.SignInButton
+    android:id="@+id/google_sign_in_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+  <Button
+    android:id="@+id/google_sign_out_button"
+    android:text="@string/google_logout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+  <Button
+    android:id="@+id/google_disconnect_button"
+    android:text="@string/google_disconnect"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+</LinearLayout>

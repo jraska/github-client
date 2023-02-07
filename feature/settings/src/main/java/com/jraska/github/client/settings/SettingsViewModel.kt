@@ -7,14 +7,15 @@ import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
 import com.jraska.github.client.config.debug.ui.ConfigRowModelProvider
 import com.jraska.github.client.identity.IntegrityTrigger
+import com.jraska.github.client.identity.google.GoogleSignInFactory
 import com.jraska.github.client.navigation.Urls
 import javax.inject.Inject
-
 internal class SettingsViewModel @Inject constructor(
   private val eventAnalytics: EventAnalytics,
   private val deepLinkLauncher: DeepLinkLauncher,
   private val rowModelProvider: ConfigRowModelProvider,
-  private val integrityTrigger: IntegrityTrigger
+  private val integrityTrigger: IntegrityTrigger,
+  val signInFactory: GoogleSignInFactory
 ) : ViewModel() {
   fun onPurchaseSubmitted(value: String) {
     val money = value.toDoubleOrNull() ?: return

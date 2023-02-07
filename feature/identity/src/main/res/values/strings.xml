@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="google_logout">Google Sign Out</string>
+  <string name="google_disconnect">Disconnect Google</string>
+</resources>

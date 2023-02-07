@@ -11,15 +11,20 @@ android {
 
 dependencies {
   implementation project(':core-api')
+  implementation project(':core-android-api')
   implementation project(':feature:identity-api')
   implementation project(':feature:push-api')
+  implementation project(':feature:ui-common-api')
 
   implementation 'org.threeten:threetenbp:1.5.1:no-tzdb'
   implementation 'com.jakewharton.timber:timber:5.0.1'
   implementation okHttp
   implementation coroutinesJvm
 
+  implementation 'com.google.android.gms:play-services-auth:20.4.1'
+
   implementation 'com.google.android.play:integrity:1.1.0'
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
   kapt daggerAnnotationProcessor
   implementation dagger
