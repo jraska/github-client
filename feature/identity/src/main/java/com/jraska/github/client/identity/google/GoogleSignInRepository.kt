@@ -52,18 +52,8 @@ class GoogleSignInRepository @Inject constructor(
 
     val toStatus = currentStatus()
     stateFlow.tryEmit(toStatus)
-    reportEventsOnChange(stateFlow)
 
     return stateFlow
-  }
-
-  private fun reportEventsOnChange(stateFlow: MutableSharedFlow<GoogleSignInStatus>) {
-    stateFlow.drop(1)
-      .onEach {
-        if(it.loggedIn) {
-
-        }
-      }
   }
 
   private fun currentStatus() = toStatus(GoogleSignIn.getLastSignedInAccount(context))
