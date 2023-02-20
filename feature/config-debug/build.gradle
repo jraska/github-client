@@ -18,7 +18,7 @@ dependencies {
   kapt daggerAnnotationProcessor
   implementation dagger
 
-  implementation 'androidx.appcompat:appcompat:1.6.0'
+  implementation 'androidx.appcompat:appcompat:1.6.1'
   implementation 'androidx.recyclerview:recyclerview:1.2.1'
   implementation 'com.airbnb.android:epoxy:5.1.1'
 
