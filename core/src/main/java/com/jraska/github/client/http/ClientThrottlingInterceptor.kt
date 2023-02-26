@@ -1,5 +1,6 @@
 package com.jraska.github.client.http
 
+import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Protocol
 import okhttp3.Request
@@ -15,36 +16,30 @@ const val K_ACCEPTS_MULTIPLIER = 2.0
 class ClientThrottlingInterceptor(
   private val random: Random = Random()
 ) : Interceptor {
-
-  private val requestsCount = AtomicInteger()
-  private val accepts = AtomicInteger()
+  private val registry = RequestRejectionRegistry()
 
   override fun intercept(chain: Interceptor.Chain): Response {
     val request = chain.request()
 
-    val clientRejectionNeverReachingServer = nextClientRejectionResponse(request)
-    if (clientRejectionNeverReachingServer != null) {
-
+    if (random.nextDouble() < registry.rejectionProbability(request.url)) {
       Timber.v("Client rejecting url: %s", request.url)
-      return clientRejectionNeverReachingServer
+      return clientRejectionResponse(request)
     }
 
     val response = chain.proceed(request)
-
-    requestsCount.incrementAndGet()
-    if (isAccepted(response)) {
-      accepts.incrementAndGet()
-    }
+    registry.onNextResponse(response.request.url, isAccepted(response))
 
     return response
   }
 
-  private fun nextClientRejectionResponse(request: Request): Response? {
-    if (shouldRejectRequest(request)) {
-      return clientRejectionResponse(request)
-    }
-
-    return null
+  /**
+   * We will use GitHub rate limiting as an example. Real throttling would use a more explicit way based on backend.
+   *
+   * GitHub returns 403 with x-ratelimit-remaining = "0":
+   *
+   */
+  private fun isAccepted(response: Response): Boolean {
+    return !(response.code == 403 && response.headers["x-ratelimit-remaining"] == "0")
   }
 
   private fun clientRejectionResponse(request: Request): Response {
@@ -58,25 +53,34 @@ class ClientThrottlingInterceptor(
       .receivedResponseAtMillis(System.currentTimeMillis())
       .build()
   }
+}
 
-  private fun shouldRejectRequest(request: Request): Boolean {
-    return random.nextDouble() < rejectionProbability(request)
+internal class RequestRejectionRegistry {
+
+  private val requestsRegistry = mutableMapOf<String, RequestData>()
+
+  fun rejectionProbability(url: HttpUrl): Double {
+    val data = requestsRegistry[url.host] ?: return 0.0
+
+    val value =
+      (data.count.get() - (K_ACCEPTS_MULTIPLIER * data.accepts.get())) / (data.count.get() + 1)
+    return maxOf(value, 0.0)
   }
 
-  private fun rejectionProbability(request: Request): Double {
-    // we don't synchronize between accepts and requests count - since we count probability,
-    // they don't need to be necessarily in sync and small diffs are fine
+  fun onNextResponse(url: HttpUrl, accepted: Boolean) {
+    val host = url.host
 
-    return (requestsCount.get() - (K_ACCEPTS_MULTIPLIER * accepts.get())) / (requestsCount.get() + 1)
+    val requestData = requestsRegistry[url.host]
+      ?: RequestData().also { requestsRegistry[host] = it }
+
+    requestData.count.incrementAndGet()
+    if (accepted) {
+      requestData.accepts.incrementAndGet()
+    }
   }
 
-  /**
-   * We will use GitHub rate limiting as an example. Real throttling would use a more explicit way based on backend.
-   *
-   * GitHub returns 403 with x-ratelimit-remaining = "0":
-   *
-   */
-  private fun isAccepted(response: Response): Boolean {
-    return !(response.code == 403 && response.headers["x-ratelimit-remaining"] == "0")
+  private class RequestData {
+    val count = AtomicInteger()
+    val accepts = AtomicInteger()
   }
 }
