@@ -70,8 +70,11 @@ internal class RequestRejectionRegistry {
   fun onNextResponse(url: HttpUrl, accepted: Boolean) {
     val host = url.host
 
-    val requestData = requestsRegistry[url.host]
-      ?: RequestData().also { requestsRegistry[host] = it }
+
+    val requestData = synchronized(requestsRegistry) {
+      requestsRegistry[url.host]
+        ?: RequestData().also { requestsRegistry[host] = it }
+    }
 
     requestData.count.incrementAndGet()
     if (accepted) {
