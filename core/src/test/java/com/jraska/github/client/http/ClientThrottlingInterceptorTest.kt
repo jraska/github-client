@@ -9,7 +9,7 @@ import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
-import java.util.*
+import kotlin.random.Random
 
 class ClientThrottlingInterceptorTest {
   private lateinit var client: OkHttpClient
@@ -101,11 +101,10 @@ class ClientThrottlingInterceptorTest {
   private fun rateLimitedResponse() =
     MockResponse().setResponseCode(403).addHeader("x-ratelimit-remaining:0")
 
-  class FakeProbabilityRandom : Random() {
+  class FakeProbabilityRandom() : Random() {
     var nextRejectionProbability = 0.9
+    override fun nextBits(bitCount: Int) = Default.nextBits(bitCount)
 
-    override fun nextDouble(): Double {
-      return nextRejectionProbability
-    }
+    override fun nextDouble() = nextRejectionProbability
   }
 }

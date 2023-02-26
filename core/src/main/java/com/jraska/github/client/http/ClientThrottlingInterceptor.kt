@@ -7,14 +7,14 @@ import okhttp3.Request
 import okhttp3.Response
 import okhttp3.internal.EMPTY_RESPONSE
 import timber.log.Timber
-import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.random.Random
 
 const val K_ACCEPTS_MULTIPLIER = 2.0
 
 // https://sre.google/sre-book/handling-overload/
 class ClientThrottlingInterceptor(
-  private val random: Random = Random()
+  private val random: Random = Random.Default
 ) : Interceptor {
   private val registry = RequestRejectionRegistry()
 
