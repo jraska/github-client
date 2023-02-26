@@ -23,12 +23,17 @@ import javax.inject.Singleton
 object HttpModule {
   @Provides
   @Singleton
-  fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+  fun provideRetrofit(okHttpClient: OkHttpClient, jsonErrorHandler: ConvertErrorHandler): Retrofit {
     return Retrofit.Builder()
       .baseUrl("https://api.github.com")
       .validateEagerly(BuildConfig.DEBUG)
       .client(okHttpClient)
-      .addConverterFactory(GsonConverterFactory.create())
+      .addConverterFactory(
+        ErrorLoggingConverterFactory(
+          GsonConverterFactory.create(),
+          jsonErrorHandler
+        )
+      )
       .build()
   }
 
@@ -68,5 +73,18 @@ object HttpModule {
   @Provides
   internal fun appVersion(context: Context): AppVersion {
     return AndroidAppVersion(context)
+  }
+
+  @Provides
+  internal fun convertErrorHandler(): ConvertErrorHandler {
+    return object : ConvertErrorHandler {
+      override fun onConvertRequestBodyError(exception: Exception) {
+        Timber.e(exception, "Error serializing body")
+      }
+
+      override fun onConvertResponseError(exception: Exception) {
+        Timber.e(exception, "Error deserializing response body")
+      }
+    }
   }
 }
