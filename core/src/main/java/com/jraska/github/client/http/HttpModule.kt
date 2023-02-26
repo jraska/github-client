@@ -49,6 +49,7 @@ object HttpModule {
       builder.addNetworkInterceptor(loggingInterceptor)
     }
 
+    builder.addInterceptor(ClientThrottlingInterceptor())
 
     val cacheDir = File(context.cacheDir, "network")
     val cache = Cache(cacheDir, 1024 * 1024 * 4)
