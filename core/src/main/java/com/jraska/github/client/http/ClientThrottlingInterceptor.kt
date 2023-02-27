@@ -1,5 +1,7 @@
 package com.jraska.github.client.http
 
+import com.jraska.github.client.time.RealTimeProvider
+import com.jraska.github.client.time.TimeProvider
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Protocol
@@ -7,10 +9,13 @@ import okhttp3.Request
 import okhttp3.Response
 import okhttp3.internal.EMPTY_RESPONSE
 import timber.log.Timber
+import java.util.*
+import java.util.concurrent.ConcurrentLinkedQueue
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.random.Random
 
 const val K_ACCEPTS_MULTIPLIER = 2.0
+const val STALE_REQUEST_RECORD_TIME = 2 * 60 * 1000L
 
 // https://sre.google/sre-book/handling-overload/
 class ClientThrottlingInterceptor(
@@ -55,16 +60,38 @@ class ClientThrottlingInterceptor(
   }
 }
 
-internal class RequestRejectionRegistry {
+internal class RequestRejectionRegistry(
+  private val timeProvider: TimeProvider = RealTimeProvider.INSTANCE
+) {
 
   private val requestsRegistry = mutableMapOf<String, RequestData>()
 
   fun rejectionProbability(url: HttpUrl): Double {
-    val data = requestsRegistry[url.host] ?: return 0.0
+    val requestData = requestsRegistry[url.host] ?: return 0.0
 
-    val value =
-      (data.count.get() - (K_ACCEPTS_MULTIPLIER * data.accepts.get())) / (data.count.get() + 1)
-    return maxOf(value, 0.0)
+    removeStaleRequestsRecords(requestData)
+
+    return requestData.rejectionProbability()
+  }
+
+  private fun removeStaleRequestsRecords(requestData: RequestData) {
+    val now = timeProvider.elapsed()
+    while (true) {
+      val peek = requestData.timeStamps.peek() ?: break
+
+      if (now - peek.timeStamp < STALE_REQUEST_RECORD_TIME) {
+        break
+      }
+
+      // remove is used for concurrency case when multiple threads detect same stale record
+      val removed = requestData.timeStamps.remove(peek)
+      if (removed) {
+        requestData.count.decrementAndGet()
+        if (peek.accepted) {
+          requestData.accepts.decrementAndGet()
+        }
+      }
+    }
   }
 
   fun onNextResponse(url: HttpUrl, accepted: Boolean) {
@@ -74,6 +101,9 @@ internal class RequestRejectionRegistry {
     if (accepted) {
       requestData.accepts.incrementAndGet()
     }
+
+    val requestRecord = RequestRecord(timeProvider.elapsed(), accepted)
+    requestData.timeStamps.offer(requestRecord)
   }
 
   private fun requestData(host: String): RequestData {
@@ -91,5 +121,17 @@ internal class RequestRejectionRegistry {
   private class RequestData {
     val count = AtomicInteger()
     val accepts = AtomicInteger()
+    val timeStamps: Queue<RequestRecord> = ConcurrentLinkedQueue()
+
+    fun rejectionProbability(): Double {
+      val value =
+        (count.get() - (K_ACCEPTS_MULTIPLIER * accepts.get())) / (count.get() + 1)
+      return maxOf(value, 0.0)
+    }
   }
+
+  private class RequestRecord(
+    val timeStamp: Long,
+    val accepted: Boolean
+  )
 }
