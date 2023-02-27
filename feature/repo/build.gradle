@@ -39,7 +39,7 @@ dependencies {
   testImplementation 'junit:junit:4.13.2'
   testImplementation 'org.assertj:assertj-core:3.24.2'
   testImplementation project(':core-testing')
-  testImplementation 'androidx.arch.core:core-testing:2.1.0'
+  testImplementation 'androidx.arch.core:core-testing:2.2.0'
   testImplementation 'com.jraska.livedata:testing-ktx:1.3.0'
   testImplementation coroutinesTest
   kaptTest daggerAnnotationProcessor
