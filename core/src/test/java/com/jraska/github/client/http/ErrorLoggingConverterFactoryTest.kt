@@ -43,6 +43,20 @@ class ErrorLoggingConverterFactoryTest {
   }
 
   @Test
+  fun whenDeserializingWrongType_thenLogsError() {
+    mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody("""{"name": []}"""))
+
+    try {
+      testApi().get().execute()
+      throw IllegalStateException("Test shouldn't reach this point")
+    } catch (exception: Exception) {
+      exception.printStackTrace(System.out)
+    }
+
+    assertThat(memoizeErrorHandler.lastError).isNotNull
+  }
+
+  @Test
   fun whenSerializing_thenLogsError() {
     val cannotBeJson = ErrorLoggingConverterFactoryTest::class
 
