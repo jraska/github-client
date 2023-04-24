@@ -13,7 +13,7 @@ ext {
   daggerAnnotationProcessor = "com.google.dagger:dagger-compiler:$daggerVersion"
   dagger = "com.google.dagger:dagger:$daggerVersion"
 
-  okHttpVersion = '4.10.0'
+  okHttpVersion = '4.11.0'
   okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
   okHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
