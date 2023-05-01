@@ -11,6 +11,7 @@ android {
   testOptions {
     unitTests.returnDefaultValues = true
   }
+  namespace 'com.jraska.github.client.core'
 }
 
 dependencies {

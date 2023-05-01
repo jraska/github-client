@@ -7,6 +7,7 @@ android {
   defaultConfig {
     minSdkVersion 26
   }
+    namespace 'com.jraska.github.client.identity'
 }
 
 dependencies {

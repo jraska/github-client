@@ -20,6 +20,8 @@ if (System.getenv("CI") == "true") {
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
+  namespace 'com.jraska.github.client'
+
   compileSdkVersion 33
 
   defaultConfig {
@@ -68,9 +70,9 @@ android {
   }
 
   packagingOptions {
-    exclude 'META-INF/licenses/ASM'
-    exclude 'META-INF/AL2.0'
-    exclude 'META-INF/LGPL2.1'
+    resources {
+      excludes += ['META-INF/licenses/ASM', 'META-INF/AL2.0', 'META-INF/LGPL2.1']
+    }
   }
 
   if (gradle.startParameter.taskNames.any { it.contains("Firebase") }) {

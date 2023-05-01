@@ -9,12 +9,13 @@ android {
 
     testInstrumentationRunner "com.jraska.github.client.users.test.TestRunner"
   }
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/licenses/ASM', 'META-INF/AL2.0', 'META-INF/LGPL2.1']
+        }
+    }
 
-  packagingOptions {
-    exclude 'META-INF/licenses/ASM'
-    exclude 'META-INF/AL2.0'
-    exclude 'META-INF/LGPL2.1'
-  }
+    namespace 'com.jraska.github.client.users'
 }
 
 dependencies {

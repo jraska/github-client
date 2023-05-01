@@ -22,6 +22,7 @@ android {
       versionNameSuffix '-dev'
     }
   }
+  namespace 'com.jraska.github.client.users.app'
 }
 
 dependencies {
