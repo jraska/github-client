@@ -2,7 +2,7 @@ name: Build
 on: [push]
 env:
   GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
-  - include: ../.github/workflow-templates/java-env-vars.yml
+- include: ../.github/workflow-templates/java-env-vars.yml
 jobs:
   build-check-unit-tests:
     runs-on: ubuntu-latest
