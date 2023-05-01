@@ -11,7 +11,7 @@ android {
   testOptions {
     unitTests.returnDefaultValues = true
   }
-    namespace 'com.jraska.github.client.performance'
+  namespace 'com.jraska.github.client.performance'
 }
 
 dependencies {

@@ -7,7 +7,7 @@ android {
   defaultConfig {
     minSdkVersion 26
   }
-    namespace 'com.jraska.github.client.inappupdate'
+  namespace 'com.jraska.github.client.inappupdate'
 }
 
 dependencies {

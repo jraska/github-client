@@ -8,9 +8,12 @@ android {
     minSdkVersion 26
   }
 
+  buildFeatures.buildConfig = true
+
   testOptions {
     unitTests.returnDefaultValues = true
   }
+
   namespace 'com.jraska.github.client.core'
 }
 

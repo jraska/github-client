@@ -7,7 +7,7 @@ android {
   defaultConfig {
     minSdkVersion 26
   }
-    namespace 'com.jraska.github.client.chrome'
+  namespace 'com.jraska.github.client.chrome'
 }
 
 dependencies {

@@ -15,7 +15,7 @@ android {
         }
     }
 
-    namespace 'com.jraska.github.client.users'
+  namespace 'com.jraska.github.client.users'
 }
 
 dependencies {
