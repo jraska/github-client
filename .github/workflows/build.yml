@@ -17,9 +17,6 @@ jobs:
             ~/.gradle/caches/modules-2
             ~/.gradle/caches/transforms-2
           key: build-${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
-      - name: Get Dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: ./gradlew androidDependencies --stacktrace
       - name: Run Tests
         run: ./gradlew check --stacktrace
   build-release:
@@ -35,9 +32,6 @@ jobs:
             ~/.gradle/caches/modules-2
             ~/.gradle/caches/transforms-2
           key: build-${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
-      - name: Get Dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: ./gradlew androidDependencies --stacktrace
       - name: Build Release Bundle - .aab
         env:
           CLIENT_GITHUB_KEY_PASS: ${{ secrets.CLIENT_GITHUB_KEY_PASS }}
@@ -56,9 +50,6 @@ jobs:
             ~/.gradle/caches/modules-2
             ~/.gradle/caches/transforms-2
           key: build-${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
-      - name: Get Dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: ./gradlew androidDependencies --stacktrace
       - name: Run Tests Firebase
         env:
           GCLOUD_CREDENTIALS: ${{ secrets.GCLOUD_CREDENTIALS }}
