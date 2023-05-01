@@ -2,7 +2,6 @@ name: Build
 on: [push]
 env:
   GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
-  JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
 jobs:
   build-check-unit-tests:
     runs-on: ubuntu-latest
@@ -66,6 +65,8 @@ jobs:
         run: ./gradlew runInstrumentedTestsOnFirebase --stacktrace
   lint:
     runs-on: ubuntu-latest
+    env:
+      JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
