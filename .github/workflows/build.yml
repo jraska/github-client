@@ -78,4 +78,4 @@ jobs:
             ~/.gradle/caches/transforms-2
           key: lint--${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
       - name: Lint
-        run: echo $JAVA_HOME_17_X64
+        run: ./gradlew lint --stacktrace

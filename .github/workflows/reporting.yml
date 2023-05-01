@@ -4,6 +4,7 @@ on:
     - cron: "0 8 * * *" # Every Day at 8:00 UTC
 env:
   GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
+  JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
 jobs:
   moduleStatisticsReport:
     runs-on: ubuntu-latest
