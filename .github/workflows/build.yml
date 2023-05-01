@@ -65,6 +65,8 @@ jobs:
         run: ./gradlew runInstrumentedTestsOnFirebase --stacktrace
   lint:
     runs-on: ubuntu-latest
+    env:
+      ${{ env:JAVA_HOME_17_X64 }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
