@@ -37,10 +37,10 @@ class UpdateChecker @Inject constructor(
     appUpdateInfoTask.addOnSuccessListener {
       val updateAvailability = it.updateAvailability()
       if (updateAvailability == UpdateAvailability.UPDATE_AVAILABLE || updateAvailability == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-        Timber.d("Update available: %s", it)
+        Timber.d("Update available.")
         onUpdateAvailable(it)
       } else {
-        Timber.d("Update not available: %s", it)
+        Timber.d("Update not available.", it)
       }
     }.addOnFailureListener {
       Timber.w(it, "Checking for update failed")
