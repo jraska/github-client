@@ -13,3 +13,6 @@
 # hide the original source file name.
 -renamesourcefileattribute SourceFile
 #-dontobfuscate
+
+# https://github.com/square/retrofit/issues/3005#issuecomment-1523948650
+-keep,allowobfuscation,allowshrinking interface retrofit2.Call
