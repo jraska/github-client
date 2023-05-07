@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.jraska.github.client.DeepLinkHandler
 import com.jraska.github.client.DeepLinkHandlerImpl
@@ -30,6 +31,7 @@ import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import dagger.multibindings.StringKey
+import okhttp3.OkHttpClient
 import javax.inject.Provider
 import javax.inject.Singleton
 
@@ -125,9 +127,15 @@ object CoreAndroidModule {
 
   @Provides
   @IntoSet
-  fun setupFresco(): OnAppCreateAsync {
+  fun setupFresco(okHttpClient: Provider<OkHttpClient>): OnAppCreateAsync {
     return object : OnAppCreateAsync {
-      override suspend fun onCreateAsync(app: Application) = Fresco.initialize(app)
+      override suspend fun onCreateAsync(app: Application) {
+        val config = OkHttpImagePipelineConfigFactory
+          .newBuilder(app, okHttpClient.get())
+          .build()
+
+        Fresco.initialize(app, config);
+      }
     }
   }
 

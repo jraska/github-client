@@ -25,6 +25,7 @@ object HttpTest {
 
   private fun client(mockWebServer: MockWebServer?): OkHttpClient {
     return OkHttpClient.Builder()
+      .addInterceptor(FakeImagesInterceptor())
       .also { if (mockWebServer == null) it.addInterceptor(MockWebServerInterceptor) }
       .addInterceptor(HttpLoggingInterceptor { println(it) }.apply {
         level = HttpLoggingInterceptor.Level.BASIC
