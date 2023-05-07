@@ -41,7 +41,8 @@ object HttpModule {
   @Singleton
   internal fun provideOkHttpClient(
     context: Context,
-    interceptors: @JvmSuppressWildcards Set<Interceptor>
+    interceptors: @JvmSuppressWildcards Set<Interceptor>,
+    httpTrackingInterceptor: HttpTrackingInterceptor
   ): OkHttpClient {
     val builder = OkHttpClient.Builder()
 
@@ -53,6 +54,8 @@ object HttpModule {
       loggingInterceptor.level = Level.BASIC
       builder.addNetworkInterceptor(loggingInterceptor)
     }
+
+    builder.addNetworkInterceptor(httpTrackingInterceptor)
 
     builder.addInterceptor(ClientThrottlingInterceptor())
 
