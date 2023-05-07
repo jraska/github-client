@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import java.lang.reflect.Type
 
 interface ConvertErrorHandler {
-  fun onConvertRequestBodyError(exception: Exception, type: Type)
+  fun onConvertRequestBodyError(value: Any, exception: Exception, type: Type)
   fun onConvertResponseError(exception: Exception, type: Type)
 }
 
@@ -78,7 +78,7 @@ class ErrorLoggingConverterFactory(
       try {
         return delegate.convert(value)
       } catch (exception: Exception) {
-        jsonErrorHandler.onConvertRequestBodyError(exception, type)
+        jsonErrorHandler.onConvertRequestBodyError(value as Any, exception, type)
 
         throw exception
       }

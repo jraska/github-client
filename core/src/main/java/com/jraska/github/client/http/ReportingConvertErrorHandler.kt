@@ -10,9 +10,10 @@ class ReportingConvertErrorHandler @Inject constructor(
   private val eventAnalytics: EventAnalytics
 ) : ConvertErrorHandler {
 
-  override fun onConvertRequestBodyError(exception: Exception, type: Type) {
+  override fun onConvertRequestBodyError(value: Any, exception: Exception, type: Type) {
     val requestBodyError = AnalyticsEvent.builder(REQUEST_CONVERT_ERROR)
       .addExceptionProperties(exception, type)
+      .addProperty("value_type", value::class.qualifiedName.max100End())
       .build()
 
     eventAnalytics.report(requestBodyError)
@@ -30,7 +31,13 @@ class ReportingConvertErrorHandler @Inject constructor(
     exception: Exception,
     type: Type
   ): AnalyticsEvent.Builder {
-    addProperty("dto_type", type.toString().max100End())
+    val dtoType = if(type is Class<*>) {
+      type.name
+    } else {
+      type.toString()
+    }
+
+    addProperty("dto_type", dtoType.max100End())
     addProperty("message", exception.message.max100End())
     addProperty("error_type", exception::class.simpleName.max100End())
 

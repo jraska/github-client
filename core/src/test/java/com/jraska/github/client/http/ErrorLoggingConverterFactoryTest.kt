@@ -52,7 +52,7 @@ class ErrorLoggingConverterFactoryTest {
     assertThat(event.name).isEqualTo("error_parsing")
     assertThat(event.properties["error_type"]).isEqualTo("JsonSyntaxException")
     assertThat(event.properties["dto_type"])
-      .isEqualTo("class com.jraska.github.client.http.ErrorLoggingConverterFactoryTest\$ResponseDto")
+      .isEqualTo("com.jraska.github.client.http.ErrorLoggingConverterFactoryTest\$ResponseDto")
   }
 
   @Test
@@ -69,8 +69,9 @@ class ErrorLoggingConverterFactoryTest {
     val event = eventAnalytics.events().single()
     assertThat(event.name).isEqualTo("error_serializing")
     assertThat(event.properties["dto_type"])
-      .isEqualTo("class com.jraska.github.client.http.ErrorLoggingConverterFactoryTest\$ErrorBodyDto")
+      .isEqualTo("com.jraska.github.client.http.ErrorLoggingConverterFactoryTest\$ErrorBodyDto")
     assertThat(event.properties["message"] as String).endsWith("Forgot to register a type adapter?")
+    assertThat(event.properties["value_type"]).isEqualTo("com.jraska.github.client.http.ErrorLoggingConverterFactoryTest.ErrorBodyDto")
   }
 
   @Test
