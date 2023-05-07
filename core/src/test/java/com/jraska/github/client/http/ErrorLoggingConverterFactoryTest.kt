@@ -1,6 +1,7 @@
 package com.jraska.github.client.http
 
 import com.google.gson.annotations.SerializedName
+import com.jraska.github.client.Fakes
 import okhttp3.ResponseBody
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -16,17 +17,7 @@ import retrofit2.http.POST
 class ErrorLoggingConverterFactoryTest {
   private val mockWebServer = MockWebServer()
 
-  private val memoizeErrorHandler = object : ConvertErrorHandler {
-    var lastError: Exception? = null
-
-    override fun onConvertRequestBodyError(exception: Exception) {
-      lastError = exception
-    }
-
-    override fun onConvertResponseError(exception: Exception) {
-      lastError = exception
-    }
-  }
+  private val eventAnalytics = Fakes.recordingAnalytics()
 
   @Test
   fun whenDeserializing_thenLogsError() {
@@ -39,7 +30,11 @@ class ErrorLoggingConverterFactoryTest {
       exception.printStackTrace(System.out)
     }
 
-    assertThat(memoizeErrorHandler.lastError).isNotNull
+    val event = eventAnalytics.events().single()
+    assertThat(event.name).isEqualTo("error_parsing")
+    assertThat(event.properties["error_type"]).isEqualTo("MalformedJsonException")
+    assertThat(event.properties["top_frame_method"]).isEqualTo("syntaxError")
+    assertThat(event.properties["message"]).isEqualTo("Use JsonReader.setLenient(true) to accept malformed JSON at line 1 column 3 path \$.")
   }
 
   @Test
@@ -53,7 +48,11 @@ class ErrorLoggingConverterFactoryTest {
       exception.printStackTrace(System.out)
     }
 
-    assertThat(memoizeErrorHandler.lastError).isNotNull
+    val event = eventAnalytics.events().single()
+    assertThat(event.name).isEqualTo("error_parsing")
+    assertThat(event.properties["error_type"]).isEqualTo("JsonSyntaxException")
+    assertThat(event.properties["dto_type"])
+      .isEqualTo("class com.jraska.github.client.http.ErrorLoggingConverterFactoryTest\$ResponseDto")
   }
 
   @Test
@@ -67,7 +66,11 @@ class ErrorLoggingConverterFactoryTest {
       exception.printStackTrace(System.out)
     }
 
-    assertThat(memoizeErrorHandler.lastError).isNotNull
+    val event = eventAnalytics.events().single()
+    assertThat(event.name).isEqualTo("error_serializing")
+    assertThat(event.properties["dto_type"])
+      .isEqualTo("class com.jraska.github.client.http.ErrorLoggingConverterFactoryTest\$ErrorBodyDto")
+    assertThat(event.properties["message"] as String).endsWith("Forgot to register a type adapter?")
   }
 
   @Test
@@ -75,12 +78,12 @@ class ErrorLoggingConverterFactoryTest {
     mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody("""{"name": "someName"}"""))
     testApi().get().execute()
 
-    assertThat(memoizeErrorHandler.lastError).isNull()
+    assertThat(eventAnalytics.events()).isEmpty()
 
     mockWebServer.enqueue(MockResponse().setResponseCode(200))
     testApi().post(ErrorBodyDto("hey")).execute()
 
-    assertThat(memoizeErrorHandler.lastError).isNull()
+    assertThat(eventAnalytics.events()).isEmpty()
   }
 
   private fun testApi() = Retrofit.Builder()
@@ -88,7 +91,7 @@ class ErrorLoggingConverterFactoryTest {
     .addConverterFactory(
       ErrorLoggingConverterFactory(
         GsonConverterFactory.create(),
-        memoizeErrorHandler
+        ReportingConvertErrorHandler(eventAnalytics)
       )
     )
     .build()

@@ -7,8 +7,8 @@ import retrofit2.Retrofit
 import java.lang.reflect.Type
 
 interface ConvertErrorHandler {
-  fun onConvertRequestBodyError(exception: Exception)
-  fun onConvertResponseError(exception: Exception)
+  fun onConvertRequestBodyError(exception: Exception, type: Type)
+  fun onConvertResponseError(exception: Exception, type: Type)
 }
 
 class ErrorLoggingConverterFactory(
@@ -23,7 +23,7 @@ class ErrorLoggingConverterFactory(
     val delegateConverter = delegate.responseBodyConverter(type, annotations, retrofit)
 
     if (delegateConverter != null) {
-      return ResponseBodyErrorConverter(delegateConverter, jsonErrorHandler)
+      return ResponseBodyErrorConverter(delegateConverter, jsonErrorHandler, type)
     } else {
       return null
     }
@@ -39,7 +39,7 @@ class ErrorLoggingConverterFactory(
       delegate.requestBodyConverter(type, parameterAnnotations, methodAnnotations, retrofit)
 
     if (delegateConverter != null) {
-      return RequestBodyErrorConverter(delegateConverter, jsonErrorHandler)
+      return RequestBodyErrorConverter(delegateConverter, jsonErrorHandler, type)
     } else {
       return null
     }
@@ -56,12 +56,13 @@ class ErrorLoggingConverterFactory(
   private class ResponseBodyErrorConverter<T>(
     private val delegate: Converter<ResponseBody, T>,
     private val jsonErrorHandler: ConvertErrorHandler,
+    private val type: Type
   ) : Converter<ResponseBody, T> {
     override fun convert(value: ResponseBody): T? {
       try {
         return delegate.convert(value)
       } catch (exception: Exception) {
-        jsonErrorHandler.onConvertResponseError(exception)
+        jsonErrorHandler.onConvertResponseError(exception, type)
 
         throw exception
       }
@@ -71,12 +72,13 @@ class ErrorLoggingConverterFactory(
   private class RequestBodyErrorConverter<T>(
     private val delegate: Converter<T, RequestBody>,
     private val jsonErrorHandler: ConvertErrorHandler,
+    private val type: Type
   ) : Converter<T, RequestBody> {
     override fun convert(value: T): RequestBody? {
       try {
         return delegate.convert(value)
       } catch (exception: Exception) {
-        jsonErrorHandler.onConvertRequestBodyError(exception)
+        jsonErrorHandler.onConvertRequestBodyError(exception, type)
 
         throw exception
       }

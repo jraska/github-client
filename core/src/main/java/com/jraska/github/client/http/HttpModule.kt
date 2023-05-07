@@ -13,7 +13,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
-
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import java.io.File
@@ -79,15 +78,5 @@ object HttpModule {
   }
 
   @Provides
-  internal fun convertErrorHandler(): ConvertErrorHandler {
-    return object : ConvertErrorHandler {
-      override fun onConvertRequestBodyError(exception: Exception) {
-        Timber.e(exception, "Error serializing body")
-      }
-
-      override fun onConvertResponseError(exception: Exception) {
-        Timber.e(exception, "Error deserializing response body")
-      }
-    }
-  }
+  fun convertErrorHandler(handler: ReportingConvertErrorHandler): ConvertErrorHandler = handler
 }
