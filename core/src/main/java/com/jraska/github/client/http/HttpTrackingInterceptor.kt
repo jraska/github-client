@@ -38,7 +38,7 @@ class HttpTrackingInterceptor @Inject constructor(
       method = request.method,
       durationMs = duration,
       requestId = requestId,
-      responseCode = response.code,
+      statusCode = response.code,
       responseContentLength = responseContentLength,
       message = response.message,
       requestContentLength = requestContentLength,

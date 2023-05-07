@@ -1,10 +1,9 @@
 package com.jraska.github.client.http
 
 import okhttp3.HttpUrl
-
-data class NetworkResource(
+class NetworkResource(
   val url: HttpUrl,
-  val responseCode: Int,
+  val statusCode: Int,
   val method: String,
   val durationMs: Long,
   val requestId: String,

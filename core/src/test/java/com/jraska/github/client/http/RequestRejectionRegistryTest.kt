@@ -1,6 +1,6 @@
 package com.jraska.github.client.http
 
-import com.jraska.github.client.time.TimeProvider
+import com.jraska.github.client.TestTimeProvider
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.data.Offset
@@ -103,13 +103,5 @@ class RequestRejectionRegistryTest {
 
     testTimeProvider.advanceTime(Int.MAX_VALUE.toLong())
     assertThat(registry.rejectionProbability(url)).isEqualTo(0.0)
-  }
-
-  class TestTimeProvider(var elapsed: Long = 0) : TimeProvider {
-    override fun elapsed() = elapsed
-
-    fun advanceTime(difference: Long) {
-      elapsed += difference
-    }
   }
 }
