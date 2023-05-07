@@ -11,13 +11,13 @@ class NetworkResourceReporter @Inject constructor(
 ) {
   fun report(resource: NetworkResource) {
     val analyticsEvent = AnalyticsEvent.builder(NETWORK_RESOURCE_EVENT)
-      .addProperty("http.method", resource.method)
-      .addProperty("http.status_code", resource.statusCode)
-      .addProperty("http.request_content_length", resource.requestContentLength)
-      .addProperty("http.response_content_length", resource.responseContentLength)
-      .addProperty("http.url", resource.url.toAnalyticsString())
-      .addProperty("resource.duration", resource.durationMs)
-      .addProperty("http.request_id", resource.requestId)
+      .addProperty("http_method", resource.method)
+      .addProperty("http_status_code", resource.statusCode)
+      .addProperty("http_request_length", resource.requestContentLength)
+      .addProperty("http_response_length", resource.responseContentLength)
+      .addProperty("http_url", resource.url.toAnalyticsString())
+      .addProperty("resource_duration", resource.durationMs)
+      .addProperty("http_request_id", resource.requestId)
       .build()
 
     eventAnalytics.report(analyticsEvent)

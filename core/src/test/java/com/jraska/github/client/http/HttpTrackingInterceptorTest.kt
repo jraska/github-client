@@ -44,13 +44,13 @@ class HttpTrackingInterceptorTest {
 
     val analyticsEvent = recordingAnalytics.events().single()
     assertThat(analyticsEvent.key.name).isEqualTo("http_request")
-    assertThat(analyticsEvent.properties["resource.duration"]).isEqualTo(123L)
-    assertThat(analyticsEvent.properties["http.method"]).isEqualTo("GET")
-    assertThat(analyticsEvent.properties["http.request_content_length"]).isEqualTo(0L)
-    assertThat(analyticsEvent.properties["http.response_content_length"]).isEqualTo(0L)
-    assertThat(analyticsEvent.properties["http.status_code"]).isEqualTo(201)
-    assertThat(analyticsEvent.properties["http.request_id"]).isEqualTo("testId")
-    assertThat(analyticsEvent.properties["http.url"] as String)
+    assertThat(analyticsEvent.properties["resource_duration"]).isEqualTo(123L)
+    assertThat(analyticsEvent.properties["http_method"]).isEqualTo("GET")
+    assertThat(analyticsEvent.properties["http_request_length"]).isEqualTo(0L)
+    assertThat(analyticsEvent.properties["http_response_length"]).isEqualTo(0L)
+    assertThat(analyticsEvent.properties["http_status_code"]).isEqualTo(201)
+    assertThat(analyticsEvent.properties["http_request_id"]).isEqualTo("testId")
+    assertThat(analyticsEvent.properties["http_url"] as String)
       .doesNotContain("sensitive").doesNotContain("info").contains("http://localhost:")
   }
 
@@ -70,10 +70,10 @@ class HttpTrackingInterceptorTest {
       .execute()
 
     val analyticsEvent = recordingAnalytics.events().single()
-    assertThat(analyticsEvent.properties["http.method"]).isEqualTo("POST")
-    assertThat(analyticsEvent.properties["http.status_code"]).isEqualTo(200)
-    assertThat(analyticsEvent.properties["http.request_content_length"]).isEqualTo(5L)
-    assertThat(analyticsEvent.properties["http.response_content_length"]).isEqualTo(231L)
+    assertThat(analyticsEvent.properties["http_method"]).isEqualTo("POST")
+    assertThat(analyticsEvent.properties["http_status_code"]).isEqualTo(200)
+    assertThat(analyticsEvent.properties["http_request_length"]).isEqualTo(5L)
+    assertThat(analyticsEvent.properties["http_response_length"]).isEqualTo(231L)
 
     mockWebServer.enqueue(
       MockResponse()
@@ -89,10 +89,10 @@ class HttpTrackingInterceptorTest {
     ).execute()
 
     val secondEvent = recordingAnalytics.events().last()
-    assertThat(secondEvent.properties["http.method"]).isEqualTo("PUT")
-    assertThat(secondEvent.properties["http.status_code"]).isEqualTo(200)
-    assertThat(secondEvent.properties["http.request_content_length"]).isEqualTo(10L)
-    assertThat(secondEvent.properties["http.response_content_length"]).isEqualTo(9L)
+    assertThat(secondEvent.properties["http_method"]).isEqualTo("PUT")
+    assertThat(secondEvent.properties["http_status_code"]).isEqualTo(200)
+    assertThat(secondEvent.properties["http_request_length"]).isEqualTo(10L)
+    assertThat(secondEvent.properties["http_response_length"]).isEqualTo(9L)
   }
 
   private fun builder(): Request.Builder {
