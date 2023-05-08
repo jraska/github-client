@@ -1,6 +1,5 @@
 package com.jraska.github.client.http
 
-import android.os.Build.VERSION_CODES.P
 import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
