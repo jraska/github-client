@@ -15,14 +15,9 @@ import retrofit2.http.PUT
 import java.lang.IllegalArgumentException
 import java.lang.reflect.Type
 
-interface ConvertErrorHandler {
-  fun onConvertRequestBodyError(value: Any, exception: Exception, methodInfo: MethodInfo)
-  fun onConvertResponseError(exception: Exception, methodInfo: MethodInfo)
-}
-
 class ErrorLoggingConverterFactory(
   private val delegate: Converter.Factory,
-  private val jsonErrorHandler: ConvertErrorHandler,
+  private val errorHandler: ReportingConvertErrorHandler,
 ) : Converter.Factory() {
   override fun responseBodyConverter(
     type: Type,
@@ -33,7 +28,7 @@ class ErrorLoggingConverterFactory(
 
     if (delegateConverter != null) {
       val methodInfo = methodInfo(annotations, type)
-      return ResponseBodyErrorConverter(delegateConverter, jsonErrorHandler, methodInfo)
+      return ResponseBodyErrorConverter(delegateConverter, errorHandler, methodInfo)
     } else {
       return null
     }
@@ -50,7 +45,7 @@ class ErrorLoggingConverterFactory(
 
     if (delegateConverter != null) {
       val methodInfo = methodInfo(methodAnnotations, type)
-      return RequestBodyErrorConverter(delegateConverter, jsonErrorHandler, methodInfo)
+      return RequestBodyErrorConverter(delegateConverter, errorHandler, methodInfo)
     } else {
       return null
     }
@@ -91,7 +86,7 @@ class ErrorLoggingConverterFactory(
 
   private class ResponseBodyErrorConverter<T>(
     private val delegate: Converter<ResponseBody, T>,
-    private val jsonErrorHandler: ConvertErrorHandler,
+    private val jsonErrorHandler: ReportingConvertErrorHandler,
     private val methodInfo: MethodInfo
   ) : Converter<ResponseBody, T> {
     override fun convert(value: ResponseBody): T? {
@@ -107,7 +102,7 @@ class ErrorLoggingConverterFactory(
 
   private class RequestBodyErrorConverter<T>(
     private val delegate: Converter<T, RequestBody>,
-    private val jsonErrorHandler: ConvertErrorHandler,
+    private val jsonErrorHandler: ReportingConvertErrorHandler,
     private val methodInfo: MethodInfo
   ) : Converter<T, RequestBody> {
     override fun convert(value: T): RequestBody? {

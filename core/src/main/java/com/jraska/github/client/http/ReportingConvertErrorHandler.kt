@@ -7,9 +7,9 @@ import javax.inject.Inject
 
 class ReportingConvertErrorHandler @Inject constructor(
   private val eventAnalytics: EventAnalytics
-) : ConvertErrorHandler {
+) {
 
-  override fun onConvertRequestBodyError(value: Any, exception: Exception, methodInfo: MethodInfo) {
+  fun onConvertRequestBodyError(value: Any, exception: Exception, methodInfo: MethodInfo) {
     val requestBodyError = AnalyticsEvent.builder(REQUEST_CONVERT_ERROR)
       .addExceptionProperties(exception, methodInfo)
       .addProperty("value_type", value::class.qualifiedName.max100End())
@@ -18,7 +18,7 @@ class ReportingConvertErrorHandler @Inject constructor(
     eventAnalytics.report(requestBodyError)
   }
 
-  override fun onConvertResponseError(exception: Exception, methodInfo: MethodInfo) {
+  fun onConvertResponseError(exception: Exception, methodInfo: MethodInfo) {
     val responseBodyError = AnalyticsEvent.builder(RESPONSE_CONVERT_ERROR)
       .addExceptionProperties(exception, methodInfo)
       .build()
@@ -30,7 +30,7 @@ class ReportingConvertErrorHandler @Inject constructor(
     exception: Exception,
     methodInfo: MethodInfo,
   ): AnalyticsEvent.Builder {
-    val dtoType = if(methodInfo.dtoType is Class<*>) {
+    val dtoType = if (methodInfo.dtoType is Class<*>) {
       methodInfo.dtoType.name
     } else {
       methodInfo.dtoType.toString()
@@ -62,7 +62,7 @@ class ReportingConvertErrorHandler @Inject constructor(
   private fun String.omitQueryParams(): String {
     val questionIndex: Int = indexOf('?')
 
-    if(questionIndex > 0) {
+    if (questionIndex > 0) {
       return substring(0, questionIndex)
     } else {
       return this
