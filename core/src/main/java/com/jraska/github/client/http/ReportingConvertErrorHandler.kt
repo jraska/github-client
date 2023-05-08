@@ -1,27 +1,27 @@
 package com.jraska.github.client.http
 
+import android.os.Build.VERSION_CODES.P
 import com.jraska.github.client.Owner
 import com.jraska.github.client.analytics.AnalyticsEvent
 import com.jraska.github.client.analytics.EventAnalytics
-import java.lang.reflect.Type
 import javax.inject.Inject
 
 class ReportingConvertErrorHandler @Inject constructor(
   private val eventAnalytics: EventAnalytics
 ) : ConvertErrorHandler {
 
-  override fun onConvertRequestBodyError(value: Any, exception: Exception, type: Type) {
+  override fun onConvertRequestBodyError(value: Any, exception: Exception, methodInfo: MethodInfo) {
     val requestBodyError = AnalyticsEvent.builder(REQUEST_CONVERT_ERROR)
-      .addExceptionProperties(exception, type)
+      .addExceptionProperties(exception, methodInfo)
       .addProperty("value_type", value::class.qualifiedName.max100End())
       .build()
 
     eventAnalytics.report(requestBodyError)
   }
 
-  override fun onConvertResponseError(exception: Exception, type: Type) {
+  override fun onConvertResponseError(exception: Exception, methodInfo: MethodInfo) {
     val responseBodyError = AnalyticsEvent.builder(RESPONSE_CONVERT_ERROR)
-      .addExceptionProperties(exception, type)
+      .addExceptionProperties(exception, methodInfo)
       .build()
 
     eventAnalytics.report(responseBodyError)
@@ -29,15 +29,17 @@ class ReportingConvertErrorHandler @Inject constructor(
 
   private fun AnalyticsEvent.Builder.addExceptionProperties(
     exception: Exception,
-    type: Type
+    methodInfo: MethodInfo,
   ): AnalyticsEvent.Builder {
-    val dtoType = if(type is Class<*>) {
-      type.name
+    val dtoType = if(methodInfo.dtoType is Class<*>) {
+      methodInfo.dtoType.name
     } else {
-      type.toString()
+      methodInfo.dtoType.toString()
     }
 
     addProperty("dto_type", dtoType.max100End())
+    addProperty("http_method", methodInfo.method)
+    addProperty("http_path", methodInfo.httpPath.omitQueryParams().max100End())
     addProperty("message", exception.message.max100End())
     addProperty("error_type", exception::class.simpleName.max100End())
 
@@ -56,6 +58,16 @@ class ReportingConvertErrorHandler @Inject constructor(
     if (length <= 100) return this
 
     return substring(length - 100)
+  }
+
+  private fun String.omitQueryParams(): String {
+    val questionIndex: Int = indexOf('?')
+
+    if(questionIndex > 0) {
+      return substring(0, questionIndex)
+    } else {
+      return this
+    }
   }
 
   companion object {

@@ -32,6 +32,8 @@ class ErrorLoggingConverterFactoryTest {
 
     val event = eventAnalytics.events().single()
     assertThat(event.name).isEqualTo("error_parsing")
+    assertThat(event.properties["http_method"]).isEqualTo("GET")
+    assertThat(event.properties["http_path"]).isEqualTo("get/some/long/path")
     assertThat(event.properties["error_type"]).isEqualTo("MalformedJsonException")
     assertThat(event.properties["top_frame_method"]).isEqualTo("syntaxError")
     assertThat(event.properties["message"]).isEqualTo("Use JsonReader.setLenient(true) to accept malformed JSON at line 1 column 3 path \$.")
@@ -68,6 +70,8 @@ class ErrorLoggingConverterFactoryTest {
 
     val event = eventAnalytics.events().single()
     assertThat(event.name).isEqualTo("error_serializing")
+    assertThat(event.properties["http_method"]).isEqualTo("POST")
+    assertThat(event.properties["http_path"]).isEqualTo("errorPost/path")
     assertThat(event.properties["dto_type"])
       .isEqualTo("com.jraska.github.client.http.ErrorLoggingConverterFactoryTest\$ErrorBodyDto")
     assertThat(event.properties["message"] as String).endsWith("Forgot to register a type adapter?")
@@ -99,10 +103,10 @@ class ErrorLoggingConverterFactoryTest {
     .create(TestApi::class.java)
 
   interface TestApi {
-    @GET("get")
+    @GET("get/some/long/path?queryParam=3")
     fun get(): Call<ResponseDto>
 
-    @POST("errorPost")
+    @POST("errorPost/path")
     fun post(@Body body: ErrorBodyDto): Call<ResponseBody>
   }
 
