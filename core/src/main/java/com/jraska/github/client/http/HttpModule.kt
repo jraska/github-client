@@ -22,7 +22,7 @@ import javax.inject.Singleton
 object HttpModule {
   @Provides
   @Singleton
-  fun provideRetrofit(okHttpClient: OkHttpClient, jsonErrorHandler: ReportingConvertErrorHandler): Retrofit {
+  fun provideRetrofit(okHttpClient: OkHttpClient, errorHandler: ReportingConvertErrorHandler): Retrofit {
     return Retrofit.Builder()
       .baseUrl("https://api.github.com")
       .validateEagerly(BuildConfig.DEBUG)
@@ -30,7 +30,7 @@ object HttpModule {
       .addConverterFactory(
         ErrorLoggingConverterFactory(
           GsonConverterFactory.create(),
-          jsonErrorHandler
+          errorHandler
         )
       )
       .build()

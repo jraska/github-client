@@ -86,14 +86,14 @@ class ErrorLoggingConverterFactory(
 
   private class ResponseBodyErrorConverter<T>(
     private val delegate: Converter<ResponseBody, T>,
-    private val jsonErrorHandler: ReportingConvertErrorHandler,
+    private val errorHandler: ReportingConvertErrorHandler,
     private val methodInfo: MethodInfo
   ) : Converter<ResponseBody, T> {
     override fun convert(value: ResponseBody): T? {
       try {
         return delegate.convert(value)
       } catch (exception: Exception) {
-        jsonErrorHandler.onConvertResponseError(exception, methodInfo)
+        errorHandler.onConvertResponseError(exception, methodInfo)
 
         throw exception
       }
@@ -102,14 +102,14 @@ class ErrorLoggingConverterFactory(
 
   private class RequestBodyErrorConverter<T>(
     private val delegate: Converter<T, RequestBody>,
-    private val jsonErrorHandler: ReportingConvertErrorHandler,
+    private val errorHandler: ReportingConvertErrorHandler,
     private val methodInfo: MethodInfo
   ) : Converter<T, RequestBody> {
     override fun convert(value: T): RequestBody? {
       try {
         return delegate.convert(value)
       } catch (exception: Exception) {
-        jsonErrorHandler.onConvertRequestBodyError(value as Any, exception, methodInfo)
+        errorHandler.onConvertRequestBodyError(value as Any, exception, methodInfo)
 
         throw exception
       }
