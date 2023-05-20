@@ -12,11 +12,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
-if (System.getenv("CI") == "true") {
-  println("Applying 'com.google.firebase.firebase-perf'")
-  apply plugin: 'com.google.firebase.firebase-perf'
-}
-
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
@@ -128,7 +123,6 @@ dependencies {
   implementation platform('com.google.firebase:firebase-bom:32.0.0')
   implementation 'com.google.firebase:firebase-analytics'
   implementation 'com.google.firebase:firebase-config'
-  implementation 'com.google.firebase:firebase-perf'
   implementation 'com.google.firebase:firebase-crashlytics'
   implementation 'com.google.firebase:firebase-messaging'
   implementation 'com.google.firebase:firebase-inappmessaging-display'
