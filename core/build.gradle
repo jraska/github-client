@@ -50,7 +50,7 @@ dependencies {
   implementation 'com.google.firebase:firebase-config'
   implementation 'com.google.firebase:firebase-crashlytics'
 
-  implementation "com.facebook.fresco:imagepipeline-okhttp3:2.6.0"
+  implementation frescoOkHttp
 
   testImplementation 'junit:junit:4.13.2'
   testImplementation 'org.assertj:assertj-core:3.24.2'
