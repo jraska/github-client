@@ -18,6 +18,8 @@ class NetworkResourceReporter @Inject constructor(
       .addProperty("http_url", resource.url.toAnalyticsString())
       .addProperty("resource_duration", resource.durationMs)
       .addProperty("http_request_id", resource.requestId)
+      .addProperty("http_request_content_type", resource.requestContentType)
+      .addProperty("http_response_content_type", resource.responseContentType)
       .build()
 
     eventAnalytics.report(analyticsEvent)

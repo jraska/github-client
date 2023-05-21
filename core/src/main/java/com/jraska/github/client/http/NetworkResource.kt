@@ -8,6 +8,8 @@ class NetworkResource(
   val durationMs: Long,
   val requestId: String,
   val responseContentLength: Long,
+  val responseContentType: String,
   val message: String,
-  val requestContentLength: Long
+  val requestContentLength: Long,
+  val requestContentType: String,
 )

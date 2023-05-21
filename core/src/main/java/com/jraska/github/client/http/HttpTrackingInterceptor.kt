@@ -29,9 +29,13 @@ class HttpTrackingInterceptor @Inject constructor(
       ?: request.body?.contentLength()
       ?: 0
 
+    val requestContentType = request.headers["Content-Type"] ?: "*"
+
     val responseContentLength = response.headers["Content-Length"]?.toLongOrNull()
       ?: response.body?.contentLength()
       ?: 0
+
+    val responseContentType = response.headers["Content-Type"] ?: "*"
 
     return NetworkResource(
       url = request.url,
@@ -40,8 +44,10 @@ class HttpTrackingInterceptor @Inject constructor(
       requestId = requestId,
       statusCode = response.code,
       responseContentLength = responseContentLength,
+      responseContentType = responseContentType,
       message = response.message,
       requestContentLength = requestContentLength,
+      requestContentType = requestContentType
     )
   }
 }

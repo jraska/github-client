@@ -38,7 +38,7 @@ class HttpTrackingInterceptorTest {
 
   @Test
   fun reportsEventProperly() {
-    mockWebServer.enqueue(MockResponse().setResponseCode(201))
+    mockWebServer.enqueue(MockResponse().setResponseCode(201).addHeader("Content-Type:application/json"))
 
     client.newCall(builder().build()).execute()
 
@@ -48,6 +48,8 @@ class HttpTrackingInterceptorTest {
     assertThat(analyticsEvent.properties["http_method"]).isEqualTo("GET")
     assertThat(analyticsEvent.properties["http_request_length"]).isEqualTo(0L)
     assertThat(analyticsEvent.properties["http_response_length"]).isEqualTo(0L)
+    assertThat(analyticsEvent.properties["http_request_content_type"]).isEqualTo("*")
+    assertThat(analyticsEvent.properties["http_response_content_type"]).isEqualTo("application/json")
     assertThat(analyticsEvent.properties["http_status_code"]).isEqualTo(201)
     assertThat(analyticsEvent.properties["http_request_id"]).isEqualTo("testId")
     assertThat(analyticsEvent.properties["http_url"] as String)
