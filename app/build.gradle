@@ -1,6 +1,6 @@
 plugins {
   id "com.jraska.module.graph.assertion" version "2.4.1"
-  id "com.github.triplet.play" version "3.8.3"
+  id "com.github.triplet.play" version "3.8.4"
   id "com.jraska.github.client.firebase"
   id 'com.jraska.gradle.buildtime'
   id 'com.jraska.github.client.release'
