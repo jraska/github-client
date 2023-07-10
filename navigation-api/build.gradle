@@ -5,5 +5,5 @@ apply plugin: 'kotlin'
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation okHttp
-  implementation 'com.squareup.okio:okio:3.3.0'
+  implementation 'com.squareup.okio:okio:3.4.0'
 }
