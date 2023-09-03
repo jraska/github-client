@@ -17,7 +17,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 android {
   namespace 'com.jraska.github.client'
 
-  compileSdkVersion 33
+  compileSdk 33
 
   defaultConfig {
     applicationId "com.jraska.github.client"
