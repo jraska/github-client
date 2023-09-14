@@ -3,6 +3,8 @@ on: [push]
 env:
   GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
   JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
+  CLIENT_GITHUB_KEY_PASS: ${{ secrets.CLIENT_GITHUB_KEY_PASS }}
+  CLIENT_GITHUB_STORE_PASS: ${{ secrets.CLIENT_GITHUB_STORE_PASS }}
 jobs:
   app-size:
     name: Report Release App Size
