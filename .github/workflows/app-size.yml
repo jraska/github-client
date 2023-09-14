@@ -1,0 +1,18 @@
+name: "App Size Measurement"
+on: [push]
+env:
+  GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
+  JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
+jobs:
+  app-size:
+    name: Report Release App Size
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Analyze by Ruler
+        run: ./gradlew -s :app:analyzeReleaseBundle
+      - name: Upload Ruler reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: ruler-reports
+          path: app/build/reports/ruler/release
