@@ -7,6 +7,7 @@ plugins {
   id 'com.jraska.module.stats'
   id 'com.jraska.module.lint.report'
   id 'com.spotify.ruler'
+  id 'com.jraska.appsize.report'
 }
 
 apply plugin: 'com.android.application'
@@ -55,7 +56,7 @@ android {
     }
 
     release {
-      signingConfig signingConfigs.release
+      signingConfig signingConfigs.debug
       minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
@@ -177,6 +178,8 @@ ruler {
   screenDensity.set(480)
   sdkVersion.set(27)
 }
+
+ext.referenceDevice = "arm64-v8a-en-480dpi-api27"
 
 project.afterEvaluate {
   if (gradle.startParameter.taskNames.any { it.startsWith("publishBundle") }) {

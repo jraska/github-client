@@ -52,5 +52,9 @@ gradlePlugin {
       id = 'com.jraska.module.lint.report'
       implementationClass = 'com.jraska.lint.LintReporterPlugin'
     }
+    appSizeReportPlugin {
+      id = "com.jraska.appsize.report"
+      implementationClass = 'com.jraska.appsize.AppSizePlugin'
+    }
   }
 }

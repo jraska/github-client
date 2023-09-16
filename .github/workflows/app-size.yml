@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Analyze by Ruler
-        run: ./gradlew -s :app:analyzeReleaseBundle
+        run: ./gradlew -s :app:reportAppSize
       - name: Upload Ruler reports
         uses: actions/upload-artifact@v3
         with:
