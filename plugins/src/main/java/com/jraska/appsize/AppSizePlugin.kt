@@ -17,6 +17,6 @@ class AppSizePlugin : Plugin<Project> {
   }
 
   companion object {
-    val REFERENCE_DEVICE_PROPERTY_NAME = "referenceDevice"
+    const val REFERENCE_DEVICE_PROPERTY_NAME = "referenceDevice"
   }
 }

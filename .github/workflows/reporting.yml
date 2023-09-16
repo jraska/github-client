@@ -20,3 +20,19 @@ jobs:
         uses: actions/checkout@v3
       - name: Run Lint Report
         run: ./gradlew lintStatisticsReport --stacktrace
+  app-size:
+    name: Report Release App Size
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Analyze by Ruler and Report
+        env:
+          CLIENT_GITHUB_KEY_PASS: ${{ secrets.CLIENT_GITHUB_KEY_PASS }}
+          CLIENT_GITHUB_STORE_PASS: ${{ secrets.CLIENT_GITHUB_STORE_PASS }}
+        run: ./gradlew -s reportAppSize
+      - name: Upload Ruler reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: ruler-reports
+          path: app/build/reports/ruler/release
