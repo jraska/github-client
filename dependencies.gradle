@@ -18,7 +18,7 @@ ext {
   okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
   okHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 
-  frescoVesion = '2.6.0'
+  frescoVesion = '3.1.1'
   fresco = "com.facebook.fresco:fresco:$frescoVesion"
   frescoDrawee = "com.facebook.fresco:drawee:$frescoVesion"
   frescoOkHttp = "com.facebook.fresco:imagepipeline-okhttp3:$frescoVesion"
