@@ -30,6 +30,7 @@ dependencies {
 
   implementation 'com.jakewharton.threetenabp:threetenabp:1.4.6'
   implementation fresco
+  implementation frescoTranscoder
 
   kapt daggerAnnotationProcessor
   implementation dagger
