@@ -1,5 +1,5 @@
 name: Build
-on: [push]
+on: [ push ]
 env:
   GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
   JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
@@ -55,29 +55,28 @@ jobs:
           GCLOUD_CREDENTIALS: ${{ secrets.GCLOUD_CREDENTIALS }}
           FCM_API_KEY: ${{ secrets.FCM_API_KEY }}
         run: ./gradlew runInstrumentedTestsOnFirebase --stacktrace
-    ui-tests-emulator:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout the code
-          uses: actions/checkout@v3
-        - name: Cache Dependencies
-          id: cache-dependencies
-          uses: actions/cache@v3.3.1
-          with:
-            path: |
-              ~/.gradle/caches/modules-2
-              ~/.gradle/caches/transforms-2
-            key: build-${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
-        - name: Run instrumentation tests
-          uses: reactivecircus/android-emulator-runner@v2
-          with:
-            api-level: 33
-            arch: x86_64
-            disable-animations: true
-            disk-size: 6000M
-            heap-size: 600M
-            script: ./gradlew connectedDebugAndroidTest --stacktrace
-
+  ui-tests-emulator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+      - name: Cache Dependencies
+        id: cache-dependencies
+        uses: actions/cache@v3.3.1
+        with:
+          path: |
+            ~/.gradle/caches/modules-2
+            ~/.gradle/caches/transforms-2
+          key: build-${{ hashFiles('build.gradle') }}-${{ hashFiles('dependencies.gradle') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/build.gradle') }}
+      - name: Run instrumentation tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 33
+          arch: x86_64
+          disable-animations: true
+          disk-size: 6000M
+          heap-size: 600M
+          script: ./gradlew connectedDebugAndroidTest --stacktrace
   lint:
     runs-on: ubuntu-latest
     steps:
