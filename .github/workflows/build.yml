@@ -56,7 +56,7 @@ jobs:
           FCM_API_KEY: ${{ secrets.FCM_API_KEY }}
         run: ./gradlew runInstrumentedTestsOnFirebase --stacktrace
   ui-tests-emulator:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest # enables hardware acceleration in the virtual machine
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
@@ -71,7 +71,7 @@ jobs:
       - name: Run instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: [32, 33]
+          api-level: 33
           arch: x86_64
           disable-animations: true
           disk-size: 6000M
