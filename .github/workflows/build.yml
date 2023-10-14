@@ -2,7 +2,6 @@ name: Build
 on: [push]
 env:
   GITHUB_CLIENT_MIXPANEL_API_KEY: ${{ secrets.MIXPANEL_KEY }}
-  JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
 jobs:
   build-check-unit-tests:
     runs-on: macos-latest
