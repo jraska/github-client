@@ -39,9 +39,10 @@ class RulerJsonParserTest {
   }
 
   companion object {
-    fun reporterFile(): File {
-      val uri = RulerJsonParserTest::class.java
-        .classLoader.getResource("appsize/ruler_report_short.json")
+    fun reporterFile() = reporterFile("appsize/ruler_report_short.json")
+
+    fun reporterFile(path: String): File {
+      val uri = RulerJsonParserTest::class.java.classLoader.getResource(path)
       return File(uri?.path!!)
     }
   }
