@@ -5,7 +5,7 @@ env:
   JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
 jobs:
   build-check-unit-tests:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
@@ -20,7 +20,7 @@ jobs:
       - name: Run Tests
         run: ./gradlew check --stacktrace
   build-release:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
@@ -38,7 +38,7 @@ jobs:
           CLIENT_GITHUB_STORE_PASS: ${{ secrets.CLIENT_GITHUB_STORE_PASS }}
         run: ./gradlew bundleRelease --stacktrace
   ui-tests:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
@@ -56,7 +56,7 @@ jobs:
           FCM_API_KEY: ${{ secrets.FCM_API_KEY }}
         run: ./gradlew runInstrumentedTestsOnFirebase --stacktrace
   lint:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v3
