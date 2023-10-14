@@ -16,7 +16,11 @@ object AppSizeDiffPrinter {
     builder.addDivider("Removed")
     builder.addDifferentComponents(appSizeDiff.removedComponents, "- ")
     builder.addDivider("Modified")
-    builder.addComponentDiffs(appSizeDiff.componentDiffs)
+
+    val skippedDiffs = builder.addComponentDiffs(appSizeDiff.componentDiffs)
+    builder.appendLine()
+    builder.append("$skippedDiffs components diffs were not printed as the difference is < 100 bytes")
+    builder.appendLine()
 
     return builder.toString()
   }
@@ -49,9 +53,15 @@ object AppSizeDiffPrinter {
     }
   }
 
-  private fun StringBuilder.addComponentDiffs(componentDiffs: List<ComponentDiff>) {
-    componentDiffs.sortedByDescending { it.sizeDiff.downloadSizeBytes.absoluteValue }.forEach {
-      append(it.base.name).append(" ").append(it.sizeDiff).appendLine()
-    }
+  private fun StringBuilder.addComponentDiffs(componentDiffs: List<ComponentDiff>): Int {
+    val moreThan100BytesDiffs =
+      componentDiffs.filter { it.sizeDiff.downloadSizeBytes.absoluteValue >= 100 }
+
+    moreThan100BytesDiffs.sortedByDescending { it.sizeDiff.downloadSizeBytes.absoluteValue }
+      .forEach {
+        append(it.diffName()).append(" ").append(it.sizeDiff).appendLine()
+      }
+
+    return componentDiffs.size - moreThan100BytesDiffs.size
   }
 }

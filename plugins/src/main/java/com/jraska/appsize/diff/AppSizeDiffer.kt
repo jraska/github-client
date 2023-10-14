@@ -16,13 +16,13 @@ object AppSizeDiffer {
   private fun diff(base: AppSizeReport, branch: AppSizeReport): AppSizeDiff {
     val sizeDiff = branch.size - base.size
 
-    val branchComponents = branch.components.associateBy { it.name }.toMutableMap()
+    val branchComponents = branch.components.associateBy { it.key }.toMutableMap()
 
     val componentDiffs = mutableListOf<ComponentDiff>()
     val removedComponents = mutableListOf<Component>()
 
     base.components.forEach { baseComponent ->
-      val branchComponent = branchComponents.remove(baseComponent.name)
+      val branchComponent = branchComponents.remove(baseComponent.key)
 
       if (branchComponent == null) {
         removedComponents.add(baseComponent)

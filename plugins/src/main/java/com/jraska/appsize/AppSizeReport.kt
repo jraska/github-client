@@ -2,6 +2,8 @@ package com.jraska.appsize
 
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.util.regex.Pattern
+import kotlin.math.absoluteValue
 
 class AppSizeReport(
   val name: String,
@@ -29,9 +31,9 @@ class AppSize(
   private fun sizeString(size: Long): String {
 
 
-    if (size < 1_000) {
+    if (size.absoluteValue < 1_000) {
       return "$size B"
-    } else if (size < 1_000_000) {
+    } else if (size.absoluteValue < 1_000_000) {
       val kBytes = size / 1000.0
       val sizeText = FORMATTER.format(kBytes)
 
@@ -54,8 +56,25 @@ enum class ComponentType {
   EXTERNAL
 }
 
+// com.google.android.material:material:1.9.1
+
+
+
 class Component(
   val name: String,
   val type: ComponentType,
   val size: AppSize
-)
+) {
+  val key: String by lazy {
+    val matcher = ARTIFACT_PATTERN.matcher(name)
+    if (matcher.find()) {
+      matcher.group(1)
+    } else {
+      name
+    }
+  }
+
+  companion object {
+    private val ARTIFACT_PATTERN: Pattern = Pattern.compile("""(.*\..*:.*:)(.*)""")
+  }
+}

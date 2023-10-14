@@ -6,7 +6,7 @@
   "installSize": 5153314,
   "components": [
     {
-      "name": "com.google.android.material:material:1.9.0",
+      "name": "com.google.android.material:material:1.9.1",
       "type": "EXTERNAL",
       "downloadSize": 260879,
       "installSize": 261426,
