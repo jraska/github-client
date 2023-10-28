@@ -6,12 +6,12 @@ import androidx.browser.customtabs.CustomTabsIntent
 import com.jraska.github.client.WebLinkLauncher
 import com.jraska.github.client.core.android.TopActivityProvider
 import okhttp3.HttpUrl
+import timber.log.Timber
 
 private const val CHROME_BROWSER_PACKAGE = "com.android.chrome"
 
 internal class ChromeCustomTabsLauncher(
-  private val provider: TopActivityProvider,
-  private val packageManager: PackageManager
+  private val provider: TopActivityProvider, private val packageManager: PackageManager
 ) : WebLinkLauncher {
   override fun launchOnWeb(url: HttpUrl) {
     val uri = Uri.parse(url.toString())
@@ -26,10 +26,15 @@ internal class ChromeCustomTabsLauncher(
 
     val browsersToHandler = packageManager.queryIntentActivities(customTabsIntent.intent, 0)
     return when (browsersToHandler.size) {
-      0 -> throw IllegalStateException("No app to launch deep link $uri")
+      0 -> {
+        Timber.e("No apps found for uri: %s", uri)
+        customTabsIntent
+      }
+
       1 -> customTabsIntent
       else -> {
-        val chromeAvailable = null != browsersToHandler.find { it.activityInfo?.packageName == CHROME_BROWSER_PACKAGE }
+        val chromeAvailable =
+          null != browsersToHandler.find { it.activityInfo?.packageName == CHROME_BROWSER_PACKAGE }
         if (chromeAvailable) {
           customTabsIntent.intent.`package` = CHROME_BROWSER_PACKAGE
         }
