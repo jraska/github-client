@@ -6,10 +6,10 @@ Experimental architecture app with example usage intended to be a showcase, test
 # Topics demonstrated
 - If you are interested in any of these topics, feel free to reach out by creating an issue or [contact me on Twitter](https://twitter.com/josef_raska) - I'm happy to chat, exchange opinions or development stories.
 
-## Modularisation
+## Modularization
 - Modularised app with flat structure: `:app -> :feature* -> *-api` with a graph height of 2.
 - Example usage of [module graph assertion](https://proandroiddev.com/module-rules-protect-your-build-time-and-architecture-d1194c7cc6bc) - see [here](https://github.com/jraska/github-client/blob/be3b06558118721968547de9237e9b48d1a8833d/app/build.gradle#L141).
-- Modularisation statistics reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/334).
+- Modularization statistics reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/334).
 - Core features (Analytics, Configuration, Crash reporting, Networking, Logging, Deep Linking) are behing simple pure Kotlin interfaces to achieve convenient core interfaces.
 - Features are composed together within `AppComponent` in plugin based manner. Each feature contributes by Dagger module. To add a feature only module and Gradle dependency lines are needed.
 - Plugin based composition of features and modules contributing to collection of "plugins" - see: `OnAppCreate`, or `LinkLauncher`
@@ -43,7 +43,7 @@ Experimental architecture app with example usage intended to be a showcase, test
 ## Metrics
 In case you want to copy and use any of metrics with your analytics platform, the only adjustment could be your own [`AnalyticsReporter` implementation](https://github.com/jraska/github-client/blob/master/plugins/src/main/java/com/jraska/analytics/AnalyticsReporter.kt#L6).
 - Build time tracking with reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/303).
-- Modularisation statistics reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/334).
+- Modularization statistics reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/334).
 - Dependencies reporting to see which modules depend on too much - see [this PR](https://github.com/jraska/github-client/pull/371)
 - Lint issues tracking to see the health of modules - see [this PR](https://github.com/jraska/github-client/pull/372)
 - UI tests on Firebase Test Lab results reporting to Mixpanel - see [this PR](https://github.com/jraska/github-client/pull/342).
