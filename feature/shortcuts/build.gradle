@@ -15,7 +15,7 @@ dependencies {
   implementation project(':core-android-api')
 
   implementation 'androidx.appcompat:appcompat:1.6.1'
-  implementation 'androidx.core:core:1.10.1'
+  implementation 'androidx.core:core:1.12.0'
 
   kapt daggerAnnotationProcessor
   implementation dagger
