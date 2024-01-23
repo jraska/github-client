@@ -21,7 +21,6 @@ object GCloudCommands {
       "$devicesString " +
       "--results-dir ${testConfiguration.resultDir} " +
       "--no-performance-metrics " +
-      "--num-flaky-test-attempts=1 " +
       "--timeout 3m " +
       "--environment-variables $envVarsString")
   }
