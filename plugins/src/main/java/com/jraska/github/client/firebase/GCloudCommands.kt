@@ -14,7 +14,7 @@ object GCloudCommands {
     val devicesString = testConfiguration.devices
       .joinToString(" ") { "--device " + it.firebaseCommandString() }
 
-    return ("gcloud " +
+    return ("gcloud beta " +
       "firebase test android run " +
       "--app ${testConfiguration.appApkPath} " +
       "--test ${testConfiguration.testApkPath} " +
