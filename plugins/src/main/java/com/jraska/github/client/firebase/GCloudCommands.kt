@@ -19,9 +19,7 @@ object GCloudCommands {
       "--app ${testConfiguration.appApkPath} " +
       "--test ${testConfiguration.testApkPath} " +
       "$devicesString " +
-      "--results-dir ${testConfiguration.resultDir} " +
       "--no-performance-metrics " +
-      "--timeout 3m " +
       "--environment-variables $envVarsString")
   }
 }
