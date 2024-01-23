@@ -18,6 +18,7 @@ object GCloudCommands {
       "firebase test android run " +
       "--app ${testConfiguration.appApkPath} " +
       "--test ${testConfiguration.testApkPath} " +
-      devicesString)
+      "$devicesString " +
+      "--num-flaky-test-attempts=1")
   }
 }
