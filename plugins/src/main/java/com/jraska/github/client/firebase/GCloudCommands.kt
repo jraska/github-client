@@ -19,6 +19,6 @@ object GCloudCommands {
       "--app ${testConfiguration.appApkPath} " +
       "--test ${testConfiguration.testApkPath} " +
       "$devicesString " +
-      "--num-flaky-test-attempts=0")
+      "--num-uniform-shards=2")
   }
 }
