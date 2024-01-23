@@ -18,8 +18,6 @@ object GCloudCommands {
       "firebase test android run " +
       "--app ${testConfiguration.appApkPath} " +
       "--test ${testConfiguration.testApkPath} " +
-      "$devicesString " +
-      "--no-performance-metrics " +
-      "--environment-variables $envVarsString")
+      devicesString)
   }
 }
