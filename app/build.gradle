@@ -119,7 +119,7 @@ dependencies {
   implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
   implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
 
-  implementation 'com.airbnb.android:epoxy:5.1.3'
+  implementation 'com.airbnb.android:epoxy:5.1.4'
 
   implementation 'com.google.android.material:material:1.11.0'
 
