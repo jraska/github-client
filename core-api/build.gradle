@@ -8,7 +8,7 @@ dependencies {
   implementation coroutinesJvm
   implementation retrofit
   implementation okHttp
-  implementation 'com.squareup.okio:okio:3.7.0'
+  implementation 'com.squareup.okio:okio:3.8.0'
 
   implementation 'org.threeten:threetenbp:1.5.1:no-tzdb'
   implementation 'javax.inject:javax.inject:1'
