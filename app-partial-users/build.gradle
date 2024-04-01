@@ -59,7 +59,7 @@ dependencies {
 
   implementation coroutinesCore
 
-  implementation 'com.jakewharton.threetenabp:threetenabp:1.4.6'
+  implementation 'com.jakewharton.threetenabp:threetenabp:1.4.7'
   implementation okHttpLoggingInterceptor
   implementation 'com.squareup.okio:okio:3.9.0'
 
