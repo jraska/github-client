@@ -24,7 +24,7 @@ ext {
   frescoDrawee = "com.facebook.fresco:drawee:$frescoVesion"
   frescoOkHttp = "com.facebook.fresco:imagepipeline-okhttp3:$frescoVesion"
 
-  espressoVersion = '3.5.1'
+  espressoVersion = '3.6.1'
   espressoCore = "androidx.test.espresso:espresso-core:$espressoVersion"
   espressoIdlingResource = "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
