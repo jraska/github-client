@@ -13,7 +13,7 @@ android {
 dependencies {
   implementation project(':core-api')
   implementation project(':core-android-api')
-  implementatiseon project(':feature:config-debug-api')
+    implementation project(':feature:config-debug-api')
 
   kapt daggerAnnotationProcessor
   implementation dagger
