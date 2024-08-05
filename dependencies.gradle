@@ -28,7 +28,7 @@ ext {
   espressoCore = "androidx.test.espresso:espresso-core:$espressoVersion"
   espressoIdlingResource = "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
-  androidTestVersion = '1.5.0'
+  androidTestVersion = '1.6.1'
   androidTestCore = "androidx.test:core:$androidTestVersion"
   androidTestRunner = "androidx.test:runner:$androidTestVersion"
   androidTestMonitor = "androidx.test:monitor:$androidTestVersion"
