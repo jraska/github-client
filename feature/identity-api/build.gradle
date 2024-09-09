@@ -10,5 +10,5 @@ android {
 }
 
 dependencies {
-  implementation 'androidx.fragment:fragment:1.6.2'
+  implementation 'androidx.fragment:fragment:1.8.3'
 }
