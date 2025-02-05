@@ -32,7 +32,7 @@ jobs:
           CLIENT_GITHUB_STORE_PASS: ${{ secrets.CLIENT_GITHUB_STORE_PASS }}
         run: ./gradlew -s reportAppSize
       - name: Upload Ruler reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ruler-reports
           path: app/build/reports/ruler/release
