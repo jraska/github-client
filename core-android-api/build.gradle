@@ -13,7 +13,7 @@ dependencies {
   implementation 'androidx.annotation:annotation:1.7.1'
   implementation 'androidx.core:core:1.13.1'
   implementation 'androidx.lifecycle:lifecycle-viewmodel:2.7.0'
-  implementation 'androidx.fragment:fragment:1.6.2'
+  implementation 'androidx.fragment:fragment:1.8.5'
 
   implementation okHttp
   implementation 'com.squareup.okio:okio:3.9.0'
